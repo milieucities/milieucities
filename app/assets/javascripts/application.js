@@ -12,10 +12,11 @@
 //
 //
 //
+//= require leaflet
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//
+
 //  Bower packages
 //= require jquery-comments/js/jquery-comments.min.js
 //
