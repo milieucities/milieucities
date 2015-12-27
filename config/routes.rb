@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
   resources :dev_sites
+
+
+  scope module: 'maps' do
+    get 'ottawamap', to: 'ottawa_map#map'
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -7,8 +7,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  
-<%= yield %>
+
+<div class="site-wrapper">
+  <div class="site-wrapper-inner">
+    <div class="cover-container">
+      <div class="masthead clearfix">
+        <div class="inner">
+          <h3 class="masthead-brand">MILIEU.IO</h3>
+          <nav class="nav nav-masthead">
+            <a class="nav-link active" href="/">MILIEU | OTTAWA</a>
+            <a class="nav-link" href="/events">EVENTS</a>
+            <a class="nav-link" href="/ottawamap">MAP</a>
+            <a class="nav-link" href="/signup">SIGN UP</a>
+            <a class="nav-link" href="/signin">SIGN IN</a>
+          </nav>
+        </div>
+      </div>
+      <%= yield %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
