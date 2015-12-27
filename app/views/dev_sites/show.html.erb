@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Devid:</strong>
+  <%= @dev_site.devID %>
+</p>
+
+<p>
+  <strong>Application type:</strong>
+  <%= @dev_site.application_type %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @dev_site.title %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @dev_site.address %>
+</p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @dev_site.lat %>
+</p>
+
+<p>
+  <strong>Long:</strong>
+  <%= @dev_site.long %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @dev_site.description %>
+</p>
+
+<p>
+  <strong>Ward name:</strong>
+  <%= @dev_site.ward_name %>
+</p>
+
+<p>
+  <strong>Ward num:</strong>
+  <%= @dev_site.ward_num %>
+</p>
+
+<%= link_to 'Edit', edit_dev_site_path(@dev_site) %> |
+<%= link_to 'Back', dev_sites_path %>

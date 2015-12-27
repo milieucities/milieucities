@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Dev Sites</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Devid</th>
+      <th>Application type</th>
+      <th>Title</th>
+      <th>Address</th>
+      <th>Lat</th>
+      <th>Long</th>
+      <th>Description</th>
+      <th>Ward name</th>
+      <th>Ward num</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dev_sites.each do |dev_site| %>
+      <tr>
+        <td><%= dev_site.devID %></td>
+        <td><%= dev_site.application_type %></td>
+        <td><%= dev_site.title %></td>
+        <td><%= dev_site.address %></td>
+        <td><%= dev_site.lat %></td>
+        <td><%= dev_site.long %></td>
+        <td><%= dev_site.description %></td>
+        <td><%= dev_site.ward_name %></td>
+        <td><%= dev_site.ward_num %></td>
+        <td><%= link_to 'Show', dev_site %></td>
+        <td><%= link_to 'Edit', edit_dev_site_path(dev_site) %></td>
+        <td><%= link_to 'Destroy', dev_site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dev site', new_dev_site_path %>

@@ -1,0 +1,53 @@
+<%= form_for(@dev_site) do |f| %>
+  <% if @dev_site.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dev_site.errors.count, "error") %> prohibited this dev_site from being saved:</h2>
+
+      <ul>
+      <% @dev_site.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :devID %><br>
+    <%= f.text_field :devID %>
+  </div>
+  <div class="field">
+    <%= f.label :application_type %><br>
+    <%= f.text_field :application_type %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_area :address %>
+  </div>
+  <div class="field">
+    <%= f.label :lat %><br>
+    <%= f.text_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.label :long %><br>
+    <%= f.text_field :long %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :ward_name %><br>
+    <%= f.text_field :ward_name %>
+  </div>
+  <div class="field">
+    <%= f.label :ward_num %><br>
+    <%= f.number_field :ward_num %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

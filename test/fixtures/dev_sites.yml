@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  devID: MyString
+  application_type: MyString
+  title: MyString
+  address: MyText
+  lat: 1.5
+  long: 1.5
+  description: MyText
+  ward_name: MyString
+  ward_num: 1
+
+two:
+  devID: MyString
+  application_type: MyString
+  title: MyString
+  address: MyText
+  lat: 1.5
+  long: 1.5
+  description: MyText
+  ward_name: MyString
+  ward_num: 1
