@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  resources :dev_sites
-  get 'static_pages/home'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -9,10 +6,28 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   resources :dev_sites
 
+  scope module: :api do
+    scope module: :v1 do
+      scope module: :maps do
+        # Ottawa Map
+        get 'ottawamap', to: 'ottawa_map#map'
+        get 'loadWards', to: 'ottawa_map#loadGeoJsonData'
 
-  scope module: 'maps' do
-    get 'ottawamap', to: 'ottawa_map#map'
+      end
+    end
   end
+
+
+
+  ##############################
+  ### INTERNAL API ENDPOINTS ###
+  ##############################
+  namespace :api do
+    namespace :v1 do
+
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

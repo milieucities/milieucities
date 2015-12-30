@@ -12,14 +12,13 @@
 //
 //
 //
-//= require leaflet
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-
-//  Bower packages
-//= require jquery-comments/js/jquery-comments.min.js
 //
+//  VENDOR PACKAGES
+//= require jquery-comments/js/jquery-comments.min.js
+//= require leaflet-google
 //= require_tree .
 
 $(document).on("page:change", function() {

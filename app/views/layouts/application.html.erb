@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MilieuServer</title>
+  <title>DEV | MILIEU</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<div class="site-wrapper">
-  <div class="site-wrapper-inner">
-    <div class="cover-container">
-      <div class="masthead clearfix">
-        <div class="inner">
-          <h3 class="masthead-brand">MILIEU.IO</h3>
-          <nav class="nav nav-masthead">
-            <a class="nav-link active" href="/">MILIEU | OTTAWA</a>
-            <a class="nav-link" href="/events">EVENTS</a>
-            <a class="nav-link" href="/ottawamap">MAP</a>
-            <a class="nav-link" href="/signup">SIGN UP</a>
-            <a class="nav-link" href="/signin">SIGN IN</a>
-          </nav>
+  <div class="site-wrapper">
+    <div class="site-wrapper-inner">
+      <div class="cover-container">
+        <div class="masthead clearfix">
+          <div class="inner">
+            <h3 class="masthead-brand">MILIEU.IO</h3>
+            <nav class="nav nav-masthead">
+              <a class="nav-link active" href="/">MILIEU | OTTAWA</a>
+              <a class="nav-link" href="/events">EVENTS</a>
+              <a class="nav-link" href="/ottawamap">MAP</a>
+              <a class="nav-link" href="/signup">SIGN UP</a>
+              <a class="nav-link" href="/signin">SIGN IN</a>
+            </nav>
+          </div>
         </div>
+        <%= yield %>
       </div>
-      <%= yield %>
     </div>
   </div>
-</div>
-
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
