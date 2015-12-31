@@ -33,7 +33,7 @@ module Api
             'lon': data_json['allInfo']['lon']
           }
           respond_to do |format|
-            format.json { render :json => latLon }
+            format.json { render :json => response.body }
           end
         end
 

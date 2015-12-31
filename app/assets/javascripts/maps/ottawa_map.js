@@ -15,7 +15,19 @@ ready = function() {
   }).addTo(map);
 
   markers = $.getJSON('/loadMarkers').done(function(data) {
-      L.marker([data.lat, data.lon]).addTo(map);
+      console.log(data);
+      data.forEach(function(site) {
+        if (site != null) {
+          if ((site['allInfo'].hasOwnProperty("lat")) && (site['allInfo'].hasOwnProperty("lon"))) {
+            marker = L.marker([site['allInfo'].lat, site['allInfo'].lon]);
+            marker.bindPopup(site['allInfo']['description']);
+            marker.addTo(map);
+          }
+        }
+      });
+
+
+
   });
 
 
