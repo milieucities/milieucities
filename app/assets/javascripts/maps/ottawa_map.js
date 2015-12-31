@@ -14,25 +14,60 @@ ready = function() {
     accessToken: 'pk.eyJ1IjoiYXNoZGFyamkiLCJhIjoiYXhOTVZrUSJ9.Ht0vEm6aRtd6nOm8ty9QuQ'
   }).addTo(map);
 
+  // Add all the markers to the map
   markers = $.getJSON('/loadMarkers').done(function(data) {
-      console.log(data);
-      data.forEach(function(site) {
-        if (site != null) {
-          if ((site['allInfo'].hasOwnProperty("lat")) && (site['allInfo'].hasOwnProperty("lon"))) {
-            marker = L.marker([site['allInfo'].lat, site['allInfo'].lon]);
-            marker.bindPopup(site['allInfo']['description']);
-            marker.addTo(map);
-          }
+    data.forEach(function(site) {
+      if (site != null) {
+        if ((site['allInfo'].hasOwnProperty("lat")) && (site['allInfo'].hasOwnProperty("lon"))) {
+          marker = L.marker([site['allInfo'].lat, site['allInfo'].lon],{
+              opacity: 1,
+              riseOnHover: true
+          });
+          marker.bindPopup(site['allInfo']['description']);
+          marker.addTo(map);
         }
-      });
-
-
-
+      }
+    });
   });
 
-
-
   // Add Wards Overlay with GeoJSON
+  colors = [  "#a6cee3",
+              "#1f78b4",
+              "#b2df8a",
+              "#33a02c",
+              "#fb9a99",
+              "#e31a1c",
+              "#fdbf6f",
+              "#ff7f00",
+              "#cab2d6",
+              "#6a3d9a",
+              "#ffff99",
+              "#b15928",
+              "#8dd3c7",
+              "#ffffb3",
+              "#bebada",
+              "#fb8072",
+              "#80b1d3",
+              "#fdb462",
+              "#b3de69",
+              "#fccde5",
+              "#d9d9d9",
+              "#bc80bd",
+              "#ccebc5",
+              "#ffed6f"
+          ];
+
+    function style(feature) {
+      return {
+          fillColor: feature.properties.color,
+          weight: 2,
+          opacity: 1,
+          color: 'black',
+          dashArray: '3',
+          fillOpacity: 0.7
+      };
+  }
+
   function onEachFeature(feature, layer) {
       // does this feature have a property named popupContent?
       if (feature.properties && feature.properties.DESCRIPTIO) {
@@ -42,44 +77,22 @@ ready = function() {
 
   $.getJSON("/loadWards", function(response) {
     // L.geoJson(response).addTo(map);
-
-    var geojsonMarkerOptions = {
-        radius: 8,
-        fillColor: "#ff7800",
-        color: "#fff",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-    };
-
+    counter = 0;
     response.features.forEach(function(feat) {
+
+
+      feat['properties']['color'] = colors[counter];
+      counter++;
+      console.log(feat);
       L.geoJson(feat, {
-          onEachFeature: onEachFeature
+          onEachFeature: onEachFeature,
+          style: style
       }).addTo(map);
     });
 
 
   });
 
-
-
-
-  // map.locate({setView: true, maxZoom: 16});
-  // map.on('locationfound', onLocationFound);
-  // map.on('locationerror', onLocationError);
-  //
-  // function onLocationFound(e) {
-  //     var radius = e.accuracy / 2;
-  //
-  //     L.marker(e.latlng).addTo(map)
-  //         .bindPopup("You are within " + radius + " meters from this point").openPopup();
-  //
-  //     L.circle(e.latlng, radius).addTo(map);
-  // }
-  //
-  // function onLocationError(e) {
-  //     alert(e.message);
-  // }
 };
 
 
