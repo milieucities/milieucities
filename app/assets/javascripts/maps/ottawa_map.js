@@ -14,21 +14,30 @@ ready = function() {
     accessToken: 'pk.eyJ1IjoiYXNoZGFyamkiLCJhIjoiYXhOTVZrUSJ9.Ht0vEm6aRtd6nOm8ty9QuQ'
   }).addTo(map);
 
+
   // Add all the markers to the map
-  markers = $.getJSON('/loadMarkers').done(function(data) {
-    data.forEach(function(site) {
-      if (site != null) {
-        if ((site['allInfo'].hasOwnProperty("lat")) && (site['allInfo'].hasOwnProperty("lon"))) {
-          marker = L.marker([site['allInfo'].lat, site['allInfo'].lon],{
-              opacity: 1,
-              riseOnHover: true
-          });
-          marker.bindPopup(site['allInfo']['description']);
-          marker.addTo(map);
-        }
-      }
+
+  function loadSitesOnWardClick(wardName) {
+    $.getJSON('/loadMarkers').done(function(data) {
+
+        data.forEach(function(site) {
+          if (site != null) {
+            if (site['allInfo']['wardName'] == wardName){
+              if ((site['allInfo'].hasOwnProperty("lat")) && (site['allInfo'].hasOwnProperty("lon"))) {
+                marker = L.marker([site['allInfo'].lat, site['allInfo'].lon],{
+                    opacity: 1,
+                    riseOnHover: true
+                });
+                marker.bindPopup(site['allInfo']['description']);
+                marker.addTo(map);
+              }
+            }
+
+          }
+        });
     });
-  });
+  }
+
 
   // Add Wards Overlay with GeoJSON
   colors = [  "#a6cee3",
@@ -68,11 +77,29 @@ ready = function() {
       };
   }
 
+  function highlightFeature(e) {
+      var layer = e.target;
+
+      layer.setStyle({
+          weight: 5,
+          color: '#666',
+          dashArray: '',
+          fillOpacity: 0.7
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera) {
+          layer.bringToFront();
+      }
+  }
+
   function onEachFeature(feature, layer) {
       // does this feature have a property named popupContent?
       if (feature.properties && feature.properties.DESCRIPTIO) {
-          layer.bindPopup(feature.properties.WARDNUMTEX+': '+feature.properties.DESCRIPTIO);
+          // layer.bindPopup(feature.properties.WARDNUMTEX+': '+feature.properties.DESCRIPTIO);
       }
+      layer.on('click', function() {
+        loadSitesOnWardClick(feature.properties.DESCRIPTIO)
+      });
   }
 
   $.getJSON("/loadWards", function(response) {
@@ -83,7 +110,7 @@ ready = function() {
 
       feat['properties']['color'] = colors[counter];
       counter++;
-      console.log(feat);
+      // console.log(feat);
       L.geoJson(feat, {
           onEachFeature: onEachFeature,
           style: style
