@@ -3,16 +3,17 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'static_pages#home'
+
   resources :dev_sites
 
   scope module: :api do
     scope module: :v1 do
+      root 'static_pages#home'
       scope module: :maps do
         # Ottawa Map
         get 'ottawamap', to: 'ottawa_map#map'
         get 'loadWards', to: 'ottawa_map#loadGeoJsonData'
-
+        get 'loadMarkers', to: 'ottawa_map#loadMarkers'
       end
     end
   end

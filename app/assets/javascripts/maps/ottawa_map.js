@@ -1,5 +1,6 @@
-$(document).on("page:change", function() {
-  var map = L.map('ottawa-map').setView([45.4214, -75.6919], 13);
+var ready;
+ready = function() {
+  var map = L.map('ottawa-map').setView([45.4214, -75.6919], 10);
 
 
   /////// Google maps works ///////////////
@@ -8,17 +9,45 @@ $(document).on("page:change", function() {
 
   L.tileLayer('https://api.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 13,
+    maxZoom: 20,
     id: 'mapbox.emerald',
     accessToken: 'pk.eyJ1IjoiYXNoZGFyamkiLCJhIjoiYXhOTVZrUSJ9.Ht0vEm6aRtd6nOm8ty9QuQ'
   }).addTo(map);
 
-  // Add Wards Overlay with GeoJSON
-  wards2010URL = "http://data.ottawa.ca/dataset/13deeed4-1cd5-4a68-a10d-9839d3677446/resource/39333199-c9b5-4dc8-bb59-0a9422c23f63/download/wards-2010-2.json";
-  $.getJSON("/loadWards", function(response) {
-    L.geoJson(response).addTo(map);
+  markers = $.getJSON('/loadMarkers').done(function(data) {
+      L.marker([data.lat, data.lon]).addTo(map);
   });
 
+
+
+  // Add Wards Overlay with GeoJSON
+  function onEachFeature(feature, layer) {
+      // does this feature have a property named popupContent?
+      if (feature.properties && feature.properties.DESCRIPTIO) {
+          layer.bindPopup(feature.properties.WARDNUMTEX+': '+feature.properties.DESCRIPTIO);
+      }
+  }
+
+  $.getJSON("/loadWards", function(response) {
+    // L.geoJson(response).addTo(map);
+
+    var geojsonMarkerOptions = {
+        radius: 8,
+        fillColor: "#ff7800",
+        color: "#fff",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    };
+
+    response.features.forEach(function(feat) {
+      L.geoJson(feat, {
+          onEachFeature: onEachFeature
+      }).addTo(map);
+    });
+
+
+  });
 
 
 
@@ -39,5 +68,10 @@ $(document).on("page:change", function() {
   // function onLocationError(e) {
   //     alert(e.message);
   // }
+};
 
-});
+
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+$(document).on('page:change',ready);

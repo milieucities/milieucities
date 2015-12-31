@@ -15,6 +15,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.turbolinks
 //
 //  VENDOR PACKAGES
 //= require jquery-comments/js/jquery-comments.min.js
