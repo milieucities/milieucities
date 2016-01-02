@@ -7,6 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if notice || alert %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  <% end %>
   <%= yield %>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw">

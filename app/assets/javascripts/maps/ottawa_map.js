@@ -2,7 +2,6 @@ var ready;
 ready = function() {
   var map = L.map('ottawa-map').setView([45.4214, -75.6919], 10);
 
-
   /////// Google maps works ///////////////
   // googleLayer = new L.Google("ROADMAP");
   // map.addLayer(googleLayer);
@@ -121,8 +120,6 @@ ready = function() {
   });
 
 };
-
-
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
