@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   scope module: :api do
     scope module: :v1 do
       root 'static_pages#home'
+      get 'events', to: 'static_pages#events'
       scope module: :maps do
         # Ottawa Map
         get 'ottawamap', to: 'ottawa_map#map'

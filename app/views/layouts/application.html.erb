@@ -13,8 +13,8 @@
           <div class="inner">
             <a href="/"><h3 class="masthead-brand">MILIEU.IO</h3></a>
             <nav class="nav nav-masthead">
-              <a class="nav-link active" href="/">MILIEU | OTTAWA</a>
-              <a class="nav-link" href="/events">EVENTS</a>
+              <a class="nav-link active" id='landingTitle' href="/">MILIEU | OTTAWA</a>
+              <a class="nav-link" id='eventsTitle' href="/events">EVENTS</a>
               <a class="nav-link" href="/ottawamap">MAP</a>
               <% if user_signed_in? %>
                 <a class="nav-link" href="users/sign_out" data-method="DELETE">SIGN OUT</a>
@@ -36,3 +36,17 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  if (window.location.href == 'http://localhost:3000/') {
+    $('#eventsTitle').addClass('active');
+    $('#landingTitle').removeClass('active');
+  }
+  if (window.location.href == 'http://localhost:3000/events') {
+    $('#eventsTitle').addClass('active');
+    $('#landingTitle').removeClass('active');
+  }
+});
+
+</script>
