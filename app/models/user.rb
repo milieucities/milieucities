@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  # ASSOCIATIONS
+  has_many :comments, as: :commentable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -13,5 +16,5 @@ class User < ActiveRecord::Base
          user.password = Devise.friendly_token[0,20]
        end
    end
-   
+
 end

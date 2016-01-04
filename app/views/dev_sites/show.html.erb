@@ -45,5 +45,8 @@
   <%= @dev_site.ward_num %>
 </p>
 
+<%= render partial: "comments/comments", locals: { commentable: @dev_site } %>
+<%= render partial: "comments/form", locals: { commentable: @dev_site } %>
+
 <%= link_to 'Edit', edit_dev_site_path(@dev_site) %> |
 <%= link_to 'Back', dev_sites_path %>

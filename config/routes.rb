@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
 
-  resources :dev_sites
+  resources :dev_sites do
+    resources :comments, module: :dev_sites
+  end
+
 
   scope module: :api do
     scope module: :v1 do

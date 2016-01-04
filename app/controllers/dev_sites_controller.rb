@@ -10,6 +10,11 @@ class DevSitesController < ApplicationController
   # GET /dev_sites/1
   # GET /dev_sites/1.json
   def show
+    @dev_site = DevSite.find(params[:id])
+
+    if current_user
+      @comments = @dev_site.comments.build
+    end
   end
 
   # GET /dev_sites/new
