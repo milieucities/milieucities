@@ -140,6 +140,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    ratyrate (1.2.2.alpha)
     rdoc (4.2.1)
       json (~> 1.4)
     responders (2.1.0)
@@ -196,6 +197,7 @@ DEPENDENCIES
   omniauth-digitalocean
   omniauth-facebook
   rails (= 4.2.4)
+  ratyrate
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

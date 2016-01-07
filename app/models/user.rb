@@ -17,4 +17,7 @@ class User < ActiveRecord::Base
        end
    end
 
+   # Rating
+   ratyrate_rater
+
 end

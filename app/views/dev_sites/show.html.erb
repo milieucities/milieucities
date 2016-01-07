@@ -1,5 +1,19 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-info alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong><%= notice %></strong>
+  </div>
 
+<% elsif alert %>
+  <div class="alert alert-info alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong><%= alert %></strong>
+  </div>
+<% end %>
 <p>
   <strong>Devid:</strong>
   <%= @dev_site.devID %>
@@ -44,6 +58,8 @@
   <strong>Ward num:</strong>
   <%= @dev_site.ward_num %>
 </p>
+
+<%= rating_for @dev_site, "overall", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
 
 <%= render partial: "comments/comments", locals: { commentable: @dev_site } %>
 <%= render partial: "comments/form", locals: { commentable: @dev_site } %>

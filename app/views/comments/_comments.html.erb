@@ -1,6 +1,8 @@
 <h3>COMMENTS</h3>
-<% commentable.comments.each do |comment| %>
-  <div class="well">
-      <%= comment.body %>
-  </div>
-<% end %>
+<div class="alert alert-success" style="overflow-y: scroll; max-height: 80px;">
+  <% commentable.comments.each do |comment| %>
+    <div class="well ">
+        <%= comment.body %>
+    </div>
+  <% end %>
+</div>
