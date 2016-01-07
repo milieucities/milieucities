@@ -3,5 +3,5 @@ class DevSite < ActiveRecord::Base
   has_many :comments, as: :commentable
 
   # Rating
-  ratyrate_rateable "overall"
+  ratyrate_rateable "location", "app_type"
 end

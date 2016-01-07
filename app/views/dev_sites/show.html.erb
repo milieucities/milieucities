@@ -59,7 +59,9 @@
   <%= @dev_site.ward_num %>
 </p>
 
-<%= rating_for @dev_site, "overall", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
+<h2>Please Rate</h2>
+Location: <%= rating_for @dev_site, "location", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
+Application Type: <%= rating_for @dev_site, "app_type", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
 
 <%= render partial: "comments/comments", locals: { commentable: @dev_site } %>
 <%= render partial: "comments/form", locals: { commentable: @dev_site } %>
