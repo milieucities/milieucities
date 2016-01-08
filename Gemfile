@@ -29,6 +29,7 @@ gem 'omniauth'
 gem 'omniauth-digitalocean'
 gem 'omniauth-facebook'
 gem 'ratyrate'
+gem 'unirest'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
