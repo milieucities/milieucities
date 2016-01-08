@@ -35,15 +35,39 @@ def get_data(endpoints_list)
 
   counter = 0
   endpoints.each_line do |url|
+
     dev = DevSite.new
     response = Unirest.get(url)
+    dev.appID = response.body["appid"]
     dev.devID = response.body["devid"]
+    dev.received_date = response.body["receiveddate"]
+    dev.updated = response.body["updated"]
     dev.application_type = response.body["apptype"]
     dev.ward_num = response.body["ward"]
     dev.description = response.body["description"]
+    addresses = response.body["address"]
+
+    ## Save addresses of the dev site ##
+    if addresses
+      addresses.each do |address|
+        puts address
+        dev.addresses.create(lat: address["lat"], lon: address["lon"], addr: address["addr"])
+      end
+    end
+
+    ## Save Statuses of the dev site ##
+    statuses = response.body["statuses"]
+    if statuses
+      statuses.each do |status|
+        dev.statuses.create(status_date: status["statusdate"], status: status["status"], created: status["created"])
+      end
+    end
+
+
+
+    dev.save
     counter += 1
     puts counter
-    dev.save
   end
 
 end

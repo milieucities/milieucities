@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160107025048) do
+ActiveRecord::Schema.define(version: 20160108043117) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.float    "lat"
+    t.float    "lon"
+    t.string   "street"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "dev_site_id"
+  end
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -47,6 +56,9 @@ ActiveRecord::Schema.define(version: 20160107025048) do
     t.integer  "ward_num"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "appID"
+    t.datetime "received_date"
+    t.datetime "updated"
   end
 
   create_table "overall_averages", force: :cascade do |t|
@@ -81,6 +93,15 @@ ActiveRecord::Schema.define(version: 20160107025048) do
   end
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type"
+
+  create_table "statuses", force: :cascade do |t|
+    t.datetime "status_date"
+    t.string   "status"
+    t.datetime "created"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "dev_site_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
