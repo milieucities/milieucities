@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108043117) do
+ActiveRecord::Schema.define(version: 20160109223849) do
 
   create_table "addresses", force: :cascade do |t|
     t.float    "lat"
@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 20160108043117) do
     t.string   "devID"
     t.string   "application_type"
     t.string   "title"
-    t.text     "address"
     t.float    "lat"
     t.float    "long"
     t.text     "description"

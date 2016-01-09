@@ -51,7 +51,7 @@ def get_data(endpoints_list)
     if addresses
       addresses.each do |address|
         puts address
-        dev.addresses.create(lat: address["lat"], lon: address["lon"], addr: address["addr"])
+        dev.addresses.build(lat: address["lat"], lon: address["lon"], street: address["addr"])
       end
     end
 
@@ -59,7 +59,7 @@ def get_data(endpoints_list)
     statuses = response.body["statuses"]
     if statuses
       statuses.each do |status|
-        dev.statuses.create(status_date: status["statusdate"], status: status["status"], created: status["created"])
+        dev.statuses.build(status_date: status["statusdate"], status: status["status"], created: status["created"])
       end
     end
 
