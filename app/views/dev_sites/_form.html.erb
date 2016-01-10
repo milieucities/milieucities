@@ -23,18 +23,23 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+
+  <h4>Addresses</h4>
   <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_area :address %>
+    <% f.fields_for :addresses do |address| %>
+      <%= render 'address_fields', :f => address %>
+    <% end %>
+    <%= link_to_add_association 'add address', f, :addresses %>
   </div>
+
+  <h4>Statuses</h4>
   <div class="field">
-    <%= f.label :lat %><br>
-    <%= f.text_field :lat %>
+    <% f.fields_for :statuses do |status| %>
+      <%= render 'status_fields', :f => status %>
+    <% end %>
+    <%= link_to_add_association 'add status', f, :statuses %>
   </div>
-  <div class="field">
-    <%= f.label :long %><br>
-    <%= f.text_field :long %>
-  </div>
+
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>

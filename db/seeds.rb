@@ -50,7 +50,6 @@ def get_data(endpoints_list)
     ## Save addresses of the dev site ##
     if addresses
       addresses.each do |address|
-        puts address
         dev.addresses.build(lat: address["lat"], lon: address["lon"], street: address["addr"])
       end
     end
@@ -62,8 +61,6 @@ def get_data(endpoints_list)
         dev.statuses.build(status_date: status["statusdate"], status: status["status"], created: status["created"])
       end
     end
-
-
 
     dev.save
     counter += 1

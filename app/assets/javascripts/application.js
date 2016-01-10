@@ -18,6 +18,7 @@
 //= require jquery.turbolinks
 //= require jquery.raty
 //= require ratyrate
+//= require cocoon
 //
 //  VENDOR PACKAGES
 //= require jquery-comments/js/jquery-comments.min.js

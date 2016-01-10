@@ -4,6 +4,7 @@ class DevSite < ActiveRecord::Base
   has_many :addresses, dependent: :destroy
   has_many :statuses, dependent: :destroy
 
+  accepts_nested_attributes_for :addresses, :statuses
   # Rating
   ratyrate_rateable "location", "app_type"
 end

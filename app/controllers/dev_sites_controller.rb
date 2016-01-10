@@ -20,6 +20,8 @@ class DevSitesController < ApplicationController
   # GET /dev_sites/new
   def new
     @dev_site = DevSite.new
+    @dev_site.addresses.build
+    @dev_site.statuses.build
   end
 
   # GET /dev_sites/1/edit
@@ -74,6 +76,9 @@ class DevSitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dev_site_params
-      params.require(:dev_site).permit(:devID, :application_type, :title, :address, :lat, :long, :description, :ward_name, :ward_num)
+      params.require(:dev_site).permit(:devID, :application_type, :title,
+      :address, :lat, :long, :description, :ward_name, :ward_num,
+      addresses_attributes: [:lat, :lon, :street],
+      statuses_attributes: [:status, :statusdate] )
     end
 end
