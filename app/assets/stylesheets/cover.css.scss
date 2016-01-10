@@ -7,43 +7,43 @@
 */
 @font-face {
     font-family: 'RobotoBlack';
-    src: url('Roboto-Black.ttf') format('truetype');
+    src: asset-url('Roboto-Black.ttf') format('truetype');
 }
 @font-face {
     font-family: 'RobotoBlackItalic';
-    src: url('Roboto-BlackItalic.ttf') format('truetype');
+    src: asset-url('Roboto-BlackItalic.ttf') format('truetype');
 }
 @font-face {
     font-family: 'RobotoBold';
-    src: url('Roboto-Bold.ttf') format('truetype');
+    src: asset-url('Roboto-Bold.ttf') format('truetype');
 }
 @font-face {
     font-family: 'RobotoBoldItalic';
-    src: url('Roboto-BoldItalic.ttf') format('truetype');
+    src: asset-url('Roboto-BoldItalic.ttf') format('truetype');
 }
 @font-face {
     font-family: 'RobotoThin';
-    src: url('Roboto-Thin.ttf') format('truetype');
+    src: asset-url('Roboto-Thin.ttf') format('truetype');
 }
 @font-face {
     font-family: 'RobotoThin';
-    src: url('Roboto-Thin.ttf') format('truetype');
+    src: asset-url('Roboto-Thin.ttf') format('truetype');
 }
 @font-face {
     font-family: 'RobotoRegular';
-    src: url('Roboto-Regular.ttf') format('truetype');
+    src: asset-url('Roboto-Regular.ttf') format('truetype');
 }
 @font-face {
     font-family: 'RobotoLight';
-    src: url('Roboto-Light.ttf') format('truetype');
+    src: asset-url('Roboto-Light.ttf') format('truetype');
 }
 @font-face {
     font-family: 'RobotoMedium';
-    src: url('Roboto-Medium.ttf') format('truetype');
+    src: asset-url('Roboto-Medium.ttf') format('truetype');
 }
 @font-face {
     font-family: 'RobotoCondensedRegular';
-    src: url('RobotoCondensed-Regular.ttf') format('truetype');
+    src: asset-url('RobotoCondensed-Regular.ttf') format('truetype');
 }
 
 /* Links */
@@ -61,7 +61,7 @@ html,
 body {
   height: 100%;
   /*background-color: #333333;*/
-  background:url(mainbg.jpg) bottom no-repeat;
+  background:image-url("mainbg.jpg") bottom no-repeat;
   font-family: RobotoRegular;
 
 }

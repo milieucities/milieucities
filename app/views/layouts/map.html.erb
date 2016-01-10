@@ -3,7 +3,14 @@
 <head>
   <title>MAP | MILIEU</title>
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <!-- GOOGLE MAPS -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw">
+  </script>
+  <!-- LEAFLET MAPS -->
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -12,10 +19,5 @@
     <p class="alert"><%= alert %></p>
   <% end %>
   <%= yield %>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw">
-  </script>
-  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
