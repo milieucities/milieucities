@@ -25,4 +25,6 @@ test:
 
 production:
   <<: *default
+  username: rails
+  password: ym4wTc73f9
   port: 5432
