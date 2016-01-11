@@ -33,6 +33,7 @@ gem 'unirest'
 gem 'pg'
 gem 'lunchy'
 gem 'cocoon'
+gem 'geocoder'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
