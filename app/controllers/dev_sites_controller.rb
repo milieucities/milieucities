@@ -77,7 +77,7 @@ class DevSitesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def dev_site_params
       params.require(:dev_site).permit(:devID, :application_type, :title,
-      :address, :lat, :long, :description, :ward_name, :ward_num,
+      :description, :ward_name, :ward_num,
       addresses_attributes: [:lat, :lon, :street],
       statuses_attributes: [:status, :statusdate] )
     end
