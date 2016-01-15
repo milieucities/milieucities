@@ -5,6 +5,29 @@ class DevSitesController < ApplicationController
   # GET /dev_sites.json
   def index
     @dev_sites = DevSite.all
+
+    client_data = {}
+
+    @dev_sites.each do |site|
+        client_data[site.id] = {}
+        client_data[site.id]['id'] = site.id
+        client_data[site.id]['development_id'] = site.devID
+        client_data[site.id]['application_id'] = site.appID
+        client_data[site.id]['application_type'] = site.application_type
+        client_data[site.id]['title'] = site.title
+        client_data[site.id]['description'] = site.description
+        client_data[site.id]['ward_num'] = site.ward_num
+        client_data[site.id]['addresses'] = site.addresses
+        client_data[site.id]['statuses'] = site.statuses
+        client_data[site.id]['comments'] = site.comments
+    end
+
+    respond_to do |format|
+        format.html
+        format.json {
+                      render :json => ['siteApps' => client_data]
+                    }
+    end
   end
 
   # GET /dev_sites/1

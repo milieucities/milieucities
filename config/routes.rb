@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
-  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "callbacks", registrations: "users/registrations" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+
+  get 'all_user_comments', to: 'comments#all_user_comments'
+  get 'all_devsite_comments', to: 'comments#all_devsite_comments'
 
   resources :dev_sites do
     resources :comments, module: :dev_sites
