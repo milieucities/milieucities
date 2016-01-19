@@ -228,7 +228,8 @@ Devise.setup do |config|
   #
   # The "*/*" below is required to match Internet Explorer requests.
   # config.navigational_formats = ['*/*', :html]
-
+  config.navigational_formats = ["/", :json]
+  
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
   config.omniauth :facebook, "953425448060864", "fea49b23ef78cc5669ed7937914b5d4e"

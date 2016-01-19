@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
-
+  # before_action :authenticate_user!
+  acts_as_token_authentication_handler_for User
   def new
       @comment = @commentable.comments.new
   end
@@ -23,16 +23,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.json {
                     render :json => ['all_comments_by_user' => @comments]
-                  }
-    end
-  end
-
-  def all_devsite_comments
-    sid = params[:dev_site_id]
-    @comments = Comment.where(dev_site_id: sid)
-    respond_to do |format|
-      format.json {
-                    render :json => ['all_comments_of_devsite' => @comments]
                   }
     end
   end

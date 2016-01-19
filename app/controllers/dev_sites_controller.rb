@@ -91,6 +91,16 @@ class DevSitesController < ApplicationController
     end
   end
 
+  def all_devsite_comments
+    sid = params[:dev_site_id]
+    @comments = Comment.where(dev_site_id: sid)
+    respond_to do |format|
+      format.json {
+                    render :json => ['all_comments_of_devsite' => @comments]
+                  }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dev_site
