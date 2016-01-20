@@ -1,0 +1,16 @@
+EVENTS HERE
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  if (window.location.href == 'http://localhost:3000/') {
+    $('#eventsTitle').removeClass('active');
+    $('#landingTitle').addClass('active');
+  }
+  if (window.location.href == 'http://localhost:3000/events') {
+    $('#eventsTitle').addClass('active');
+    $('#landingTitle').removeClass('active');
+  }
+});
+
+</script>

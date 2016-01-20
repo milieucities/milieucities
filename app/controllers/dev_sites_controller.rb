@@ -5,6 +5,29 @@ class DevSitesController < ApplicationController
   # GET /dev_sites.json
   def index
     @dev_sites = DevSite.all
+
+    client_data = {}
+
+    @dev_sites.each do |site|
+        client_data[site.id] = {}
+        client_data[site.id]['id'] = site.id
+        client_data[site.id]['development_id'] = site.devID
+        client_data[site.id]['application_id'] = site.appID
+        client_data[site.id]['application_type'] = site.application_type
+        client_data[site.id]['title'] = site.title
+        client_data[site.id]['description'] = site.description
+        client_data[site.id]['ward_num'] = site.ward_num
+        client_data[site.id]['addresses'] = site.addresses
+        client_data[site.id]['statuses'] = site.statuses
+        client_data[site.id]['comments'] = site.comments
+    end
+
+    respond_to do |format|
+        format.html
+        format.json {
+                      render :json => ['siteApps' => client_data]
+                    }
+    end
   end
 
   # GET /dev_sites/1
@@ -68,6 +91,16 @@ class DevSitesController < ApplicationController
     end
   end
 
+  def all_devsite_comments
+    sid = params[:dev_site_id]
+    @comments = Comment.where(dev_site_id: sid)
+    respond_to do |format|
+      format.json {
+                    render :json => ['all_comments_of_devsite' => @comments]
+                  }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dev_site
@@ -77,7 +110,7 @@ class DevSitesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def dev_site_params
       params.require(:dev_site).permit(:devID, :application_type, :title,
-      :address, :lat, :long, :description, :ward_name, :ward_num,
+      :description, :ward_name, :ward_num,
       addresses_attributes: [:lat, :lon, :street],
       statuses_attributes: [:status, :statusdate] )
     end
