@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119015058) do
+ActiveRecord::Schema.define(version: 20160121042439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160119015058) do
     t.string   "appID"
     t.datetime "received_date"
     t.datetime "updated"
+    t.string   "image_url"
   end
 
   create_table "overall_averages", force: :cascade do |t|
