@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121042439) do
+ActiveRecord::Schema.define(version: 20160124013336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160121042439) do
     t.datetime "received_date"
     t.datetime "updated"
     t.string   "image_url"
+    t.integer  "hearts"
   end
 
   create_table "overall_averages", force: :cascade do |t|
