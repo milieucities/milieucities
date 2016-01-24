@@ -10,8 +10,6 @@ class DevSitesController < ApplicationController
     cutoff_date = DateTime.new(2015,01,01)
 
     @dev_sites.each do |site|
-        client_data[site.id] = {}
-        unless site.statuses.empty?
           client_data[site.id]['id'] = site.id
           client_data[site.id]['development_id'] = site.devID
           client_data[site.id]['application_id'] = site.appID
@@ -22,7 +20,6 @@ class DevSitesController < ApplicationController
           client_data[site.id]['addresses'] = site.addresses
           client_data[site.id]['statuses'] = site.statuses
           client_data[site.id]['comments'] = site.comments
-        end
     end
 
     respond_to do |format|
