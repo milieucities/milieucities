@@ -14,12 +14,12 @@
 def set_all_hearts_to_zero
 	sites = DevSite.all
 	sites.each do |site|
-		sites.hearts = 0
-		sites.save!
+		site.hearts = 0
+		site.save!
 	end
 end
 
-set_all_hearts_to_zero()
+#set_all_hearts_to_zero()
 
 
 def get_dev_site_image_urls()
@@ -58,7 +58,7 @@ def get_dev_site_image_urls()
 end
 
 
-get_dev_site_image_urls()
+#get_dev_site_image_urls()
 
 # def get_dev_ids(url)
 #   response = Unirest.get(url)
