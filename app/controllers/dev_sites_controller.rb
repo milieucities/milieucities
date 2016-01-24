@@ -1,5 +1,6 @@
 class DevSitesController < ApplicationController
   before_action :set_dev_site, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_signed_out_user, if: :json_request?
 
   # GET /dev_sites
   # GET /dev_sites.json
@@ -13,6 +14,7 @@ class DevSitesController < ApplicationController
         client_data[site.id]['id'] = site.id
         client_data[site.id]['development_id'] = site.devID
         client_data[site.id]['application_id'] = site.appID
+        client_data[site.id]['image_url'] = site.image_url
         client_data[site.id]['application_type'] = site.application_type
         client_data[site.id]['title'] = site.title
         client_data[site.id]['description'] = site.description
@@ -110,7 +112,7 @@ class DevSitesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def dev_site_params
       params.require(:dev_site).permit(:devID, :application_type, :title,
-      :description, :ward_name, :ward_num,
+      :description, :ward_name, :ward_num, :image_url,
       addresses_attributes: [:lat, :lon, :street],
       statuses_attributes: [:status, :statusdate] )
     end
