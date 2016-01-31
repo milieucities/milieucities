@@ -23,4 +23,8 @@
 //  VENDOR PACKAGES
 //= require jquery-comments/js/jquery-comments.min.js
 //= require leaflet-google
+//= require_tree ./button-morph
+//= require demo_button
+
 //= require_tree .
+//= require_self

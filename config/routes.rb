@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'all_devsite_comments', to: 'dev_sites#all_devsite_comments'
   get 'heart', to: 'dev_sites#heart'
   get 'break_heart', to: 'dev_sites#break_heart'
+  get 'demo', to: 'static_pages#demo'
 
   root 'static_pages#home'
   get 'events', to: 'static_pages#events'

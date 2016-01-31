@@ -28,5 +28,9 @@ module MilieuServer
 
     # Custom Font - Roboto
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts', 'Roboto')
+
+    # Custom Icons - IcoMoon
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts', 'icomoon')
+
   end
 end

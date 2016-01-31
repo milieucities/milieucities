@@ -61,19 +61,26 @@ html,
 body {
   height: 100%;
   /*background-color: #333333;*/
-  background:image-url("mainbg.jpg") bottom no-repeat;
-  font-family: RobotoRegular;
-
-}
-body {
-  color: #000;
+  // background:image-url("mainbg.jpg") bottom no-repeat;
+  background-color: #fff;
+  color: #333;
+  font-family: RobotoRegular, verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
   text-align: center;
-  text-shadow: 0 .05rem .1rem rgba(0,0,0,.5);
+  // text-shadow: 0 0.15rem .1rem rgba(0,0,0,.5);
+  // color: #000;
+  background: image-url("mainbg.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow-y: hidden;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
-  display: table;
+  // display: table;
   width: 100%;
   height: 100%; /* For at least Firefox */
   min-height: 100%;
@@ -82,8 +89,7 @@ body {
 }
 
 .site-wrapper-inner {
-  display: table-cell;
-  vertical-align: top;
+  padding-top: 3rem;
 }
 
 .cover-container {
@@ -93,16 +99,56 @@ body {
 
 /* Padding for spacing */
 .inner {
-  padding: 2rem;
+  padding: 1rem;
+}
+
+.morph-button-inflow-1 {
+  max-width: 50%;
+  min-width: 150px;
+  width: auto;
+  font-family: RobotoThin;
+  // text-shadow: 0 0.15rem .1rem rgba(0,0,0,.5);
+}
+
+.morph-button-inflow {
+  // background-color: #000;
+  // text-shadow: 0 0.15rem .1rem rgba(0,0,0,.5);
 }
 
 
+.morph-button > button {
+  background-color: rgba(232,86,87,0.9);
+}
+
+.content-style-form label, .content-style-form input {
+  color: #CE9D72;
+  font-size: 1.2rem;
+}
+
+.content-style-form-4 form {
+  background: rgba(0,0,0,0.7);
+  p {
+    button {
+      background: rgba(49,176,213, 0.6);
+    }
+    button:hover {
+      background: rgba(49,176,213, 1);
+    }
+  }
+}
+
+.content-style-form-4 input[type="text"] {
+  font-size: 1.4rem;
+}
 /*
  * Header
  */
 
 .masthead {
   margin-bottom: 2rem;
+  font-size: 1.4rem;
+  // width: 100%;
+  text-align: center;
 }
 
 .masthead-brand {
@@ -136,7 +182,7 @@ body {
     float: left;
   }
   .nav-masthead {
-    float: right;
+    // float: right;
   }
 }
 
@@ -146,19 +192,21 @@ body {
  */
 
 .cover {
-  padding: 0 1.5rem;
+  padding: 1rem 1.5rem;
 }
 
 .cover-heading {
-  font-size: 3.5em;
-  letter-spacing: 5px;
+  font-size: 6em;
+  letter-spacing: 10px;
   text-shadow: 2px 2px 4px #fff;
   margin-bottom: 0.5em;
+  text-shadow: 0 0.15rem .1rem rgba(0,0,0,.5);
 }
 
 .slogan {
   font-family: RobotoThin;
-  font-size: 1.3em;
+  font-size: 1.6em;
+  text-shadow: 0 0.15rem .1rem rgba(0,0,0,.5);
 }
 
 /*
@@ -180,18 +228,6 @@ body {
   background-color: rgba(0,0,0,0.7);
 }
 
-#neighbourhoods {
-  background-color: rgba(0,0,0,0);
-  color: #000;
-  border: 2px solid #000;
-  width: 300px;
-}
-
-.dropdown-menu {
-  max-height: 150px;
-  overflow-y: auto;
-  width: 300px;
-}
 /*
  * Footer
  */
@@ -199,9 +235,11 @@ body {
 .mastfoot {
   color: #fff;
   width: 100%;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
+  border-top-right-radius: 1px;
+  border-top-left-radius: 1px;
   background-color: rgba(60,60,60,0.8);
+  bottom: 0;
+  position: fixed;
 }
 
 .mastfoot .inner h2 {
@@ -219,10 +257,48 @@ body {
  * Affix and center
  */
 
-@media (min-width: 40em) {
+ @media (max-width: 25em) {
+   /* Pull out the header and footer */
+   .morph-button-inflow-1 {
+     max-width: 99%;
+   }
+
+   .morph-button-inflow .morph-content .morph-clone {
+     font-size: 1.6rem;
+   }
+
+   .cover {
+     padding: 8rem 1.5rem;
+   }
+
+   .cover-heading {
+     font-size: 4em;
+     letter-spacing: 10px;
+     text-shadow: 2px 2px 4px #fff;
+     margin-bottom: 0.5em;
+     text-shadow: 0 0.15rem .1rem rgba(0,0,0,.5);
+   }
+
+   .slogan {
+     font-family: RobotoThin;
+     font-size: 1.3em;
+     text-shadow: 0 0.15rem .1rem rgba(0,0,0,.5);
+   }
+
+ }
+
+@media (max-width: 30em) {
   /* Pull out the header and footer */
+
+  .morph-button-inflow-1 {
+    max-width: 70%;
+  }
+
+  .morph-button-inflow .morph-content .morph-clone {
+    font-size: 1.5rem;
+  }
+
   .masthead {
-    position: fixed;
     top: 0;
   }
   .mastfoot {
@@ -230,9 +306,9 @@ body {
     bottom: 0;
   }
   /* Start the vertical centering */
-  .site-wrapper-inner {
-    vertical-align: middle;
-  }
+  // .site-wrapper-inner {
+  //   vertical-align: middle;
+  // }
   /* Handle the widths */
   .masthead,
   .mastfoot,
@@ -241,8 +317,43 @@ body {
   }
 }
 
-@media (min-width: 62em) {
+@media (max-width: 45em) {
+  /* Pull out the header and footer */
+
+  .morph-button-inflow-1 {
+    max-width: 70%;
+  }
+
+  .morph-button-inflow .morph-content .morph-clone {
+    font-size: 1.5rem;
+  }
+
+  .masthead {
+    top: 0;
+  }
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+  /* Start the vertical centering */
+  // .site-wrapper-inner {
+  //   vertical-align: middle;
+  // }
+  /* Handle the widths */
   .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+
+@media (min-width: 62em) {
+  .masthead {
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+  }
   .mastfoot,
   .cover-container {
     width: 55rem;
