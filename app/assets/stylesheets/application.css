@@ -10,10 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *  Bower Sheets
- *= require jquery-comments/css/jquery-comments
- *= require jquery-comments/css/font-awesome.min.css
+ *= require normalize
  *= require bootstrap.min.css
+ *= require button-morph/content
+ *= require button-morph/component
  *= require cover
  *= require_tree .
  *= require_self
- */
+*/
