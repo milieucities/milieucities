@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   post '/rate' => 'rater#create', :as => 'rate'
   devise_for :users, controllers: { omniauth_callbacks: "callbacks" }
 
