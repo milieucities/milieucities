@@ -31,7 +31,14 @@ class DevSitesController < ApplicationController
         format.json {
                       render :json => ['siteApps' => client_data]
                     }
+        format.xml
     end
+  end
+
+  def xml_data
+    @dev_sites = DevSite.all
+
+
   end
 
   # GET /dev_sites/1

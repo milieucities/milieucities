@@ -14,12 +14,14 @@ Rails.application.routes.draw do
   get 'heart', to: 'dev_sites#heart'
   get 'break_heart', to: 'dev_sites#break_heart'
   get 'demo', to: 'static_pages#demo'
+  get 'xml_data', to: 'dev_sites#xml_data'
 
   root 'static_pages#home'
   get 'events', to: 'static_pages#events'
 
   resources :dev_sites do
     resources :comments, module: :dev_sites
+
   end
 
 

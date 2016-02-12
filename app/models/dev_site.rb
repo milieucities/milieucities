@@ -7,4 +7,5 @@ class DevSite < ActiveRecord::Base
   accepts_nested_attributes_for :addresses, :statuses
   # Rating
   ratyrate_rateable "location", "app_type"
+
 end
