@@ -6,25 +6,28 @@
 #
 default: &default
   adapter: postgresql
-  database: milieuV2
-  host: localhost
-  username: ash
-  password:
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-  timeout: 5000
+  host: localhost
+  username: rails
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
 
 development:
   <<: *default
-  port: 5432
+  database: milieu_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  database: milieu_test
 
 production:
   <<: *default
+  database: milieu_production
   username: rails
-  password: ym4wTc73f9
-  port: 5432
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
+
