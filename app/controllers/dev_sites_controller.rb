@@ -1,6 +1,8 @@
 class DevSitesController < ApplicationController
+  establish_connection DB_OTTAWA
   before_action :set_dev_site, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_signed_out_user, if: :json_request?
+
 
   # GET /dev_sites
   # GET /dev_sites.json
