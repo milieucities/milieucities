@@ -1,40 +1,77 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Dev Sites</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Devid</th>
-      <th>Application type</th>
-      <th>Title</th>
-      <th>Address</th>
-      <th>Lat</th>
-      <th>Long</th>
-      <th>Description</th>
-      <th>Ward name</th>
-      <th>Ward num</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card blue-grey lighten-2">
+      <div class="card-content white-text">
+        <span class="card-title">Card Title</span>
+        <p>I am a very simple card. I am good at containing small bits of information.
+        I am convenient because I require little markup to use effectively.</p>
+      </div>
+      <div class="card-action">
+        <a href="#">This is a link</a>
+        <a href="#">This is a link</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @dev_sites.each do |dev_site| %>
-      <tr>
-        <td><%= dev_site.devID %></td>
-        <td><%= dev_site.application_type %></td>
-        <td><%= dev_site.title %></td>
-        <td><%= dev_site.description %></td>
-        <td><%= dev_site.ward_name %></td>
-        <td><%= dev_site.ward_num %></td>
-        <td><%= link_to 'Show', dev_site %></td>
-        <td><%= link_to 'Edit', edit_dev_site_path(dev_site) %></td>
-        <td><%= link_to 'Destroy', dev_site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @dev_sites.in_groups_of(3, false).each do |group| %>
+  <div class="row">
+      <% group.each do |dev_site| %>
+        <div class="col s12 m4 l4">
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="<%= dev_site.image_url %>">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4"><%= dev_site.devID %><i class="material-icons right">more_vert</i></span>
+              <p><%= link_to 'Show', dev_site %></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">
+              <% if dev_site.addresses.first %>
+                <%= dev_site.addresses.first.street %>
+              <% else %>
+                Address
+              <% end %>
+              <i class="material-icons right">close</i></span>
+              <%= dev_site.application_type %>
+              <%= dev_site.title %>
+              <%= dev_site.description %>
+              <%= dev_site.ward_name %>
+              <%= dev_site.ward_num %>
 
-<br>
+              <%= link_to 'Edit', edit_dev_site_path(dev_site) %>
+              <%= link_to 'Destroy', dev_site, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+  </div>
+<% end %>
+
+<!-- <div class="row">
+    <div class="col s12 m4 l4">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="http://travelchannel.sndimg.com/content/dam/images/travel/fullset/2012/03/30/86/belize_ss_001">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">Address<i class="material-icons right">more_vert</i></span>
+
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">
+            Address
+          <i class="material-icons right">close</i></span>
+          <p>
+            inside text
+          </p>
+        </div>
+      </div>
+    </div>
+</div> -->
 
 <%= link_to 'New Dev site', new_dev_site_path %>

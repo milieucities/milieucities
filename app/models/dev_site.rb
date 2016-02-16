@@ -1,4 +1,5 @@
 class DevSite < ActiveRecord::Base
+  # establish_connection DB_OTTAWA
   # ASSOCIATIONS
   has_many :comments, as: :commentable
   has_many :addresses, dependent: :destroy

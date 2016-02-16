@@ -22,7 +22,7 @@ gem 'cocoon'
 gem 'geocoder'
 gem 'simple_token_authentication'
 gem 'unicorn'
-
+gem 'materialize-sass'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
