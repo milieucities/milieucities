@@ -30,3 +30,14 @@
 
 //= require_tree .
 //= require_self
+
+$(document).ready(function() {
+  $('.parallax').parallax();
+
+
+  /*** Animate word ***/
+
+    //set animation timing
+	
+
+});
