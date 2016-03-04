@@ -21,9 +21,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def password=(secret)
-    write_attribute(:password, BCrypt::Password.create(secret))
-  end
+
 
 
 end
