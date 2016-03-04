@@ -26,9 +26,7 @@ Rails.application.routes.draw do
   scope module: :api do
     scope module: :v1 do
       devise_scope :user do
-        post 'registrations' => 'registrations#create', :as => 'register'
-        post 'sessions' => 'sessions#create', :as => 'login'
-        delete 'sessions' => 'sessions#destroy', :as => 'logout'
+
       end
       scope module: :maps do
         # Ottawa Map
