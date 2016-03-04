@@ -208,10 +208,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   byebug
   cocoon
   coffee-rails (~> 4.1.0)
-  devise
   firebase
   geocoder
   jbuilder (~> 2.0)

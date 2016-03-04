@@ -10,7 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'firebase'
-gem 'devise'
+gem 'bcrypt'
 gem 'omniauth'
 gem 'omniauth-digitalocean'
 gem 'omniauth-facebook'
