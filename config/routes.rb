@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       resource :sessions, only: [:create, :show, :destroy]
+      
       scope module: :maps do
         # Ottawa Map
         get 'ottawamap', to: 'ottawa_map#map'
