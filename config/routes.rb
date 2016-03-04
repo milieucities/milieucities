@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :events
   post '/rate' => 'rater#create', :as => 'rate'
-  devise_for :users, controllers: { omniauth_callbacks: "callbacks" }
 
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -23,11 +22,9 @@ Rails.application.routes.draw do
   end
 
 
-  scope module: :api do
-    scope module: :v1 do
-      devise_scope :user do
-
-      end
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resource :sessions, only: [:create, :show, :destroy]
       scope module: :maps do
         # Ottawa Map
         get 'ottawamap', to: 'ottawa_map#map'

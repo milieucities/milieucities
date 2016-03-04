@@ -1,4 +1,4 @@
-class Api::V1::SessionsController < ApiController
+class Api::V1::SessionsController < Api::ApiController
 
   def show
   end
