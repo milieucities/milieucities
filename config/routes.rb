@@ -32,8 +32,6 @@ Rails.application.routes.draw do
       ## SESSIONS ##
       namespace :sessions, path: '/', as: nil do
         post :login_authentication
-        get  :access_student
-        get  :access_admin
         get  :login
         get  :logout
       end

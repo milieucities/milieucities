@@ -10,10 +10,11 @@ class Api::V1::RegistrationsController < Api::ApiController
         message: "Successfully created a user"
       }
     else
-      render :json => {
+      render :json => [{
         status: 500,
-        message: "Could not create a user, try again!"
-      }
+        message: "Could not create a user, try again!",
+        errors: @user.errors.full_messages
+      }]
     end
   end
 
@@ -25,10 +26,11 @@ class Api::V1::RegistrationsController < Api::ApiController
         message: "Successfully removed the user"
       }
     else
-      render :json => {
+      render :json => [{
         status: 500,
-        message: "Could not remove the user, try again!"
-      }
+        message: "Could not remove the user, try again!",
+        errors: @user.errors.full_messages
+      }]
     end
   end
 

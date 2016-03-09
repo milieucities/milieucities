@@ -2,32 +2,36 @@ class Api::V1::SessionsController < Api::ApiController
   before_action :session_expiry, except: [:login_authentication]
   before_action :update_activity_time
   before_action :current_user
+  include BCrypt
 
   def login_authentication
 
     email = params[:user][:email]
     password = params[:user][:password]
 
-    @user = User.authenticate(email, password)
+    user = User.find_by_email(email)
 
-    if @user
-      session[:user_id] = @user.id
-      @user.admin? ? redirect_to(admin_dashboard_path) : redirect_to(projects_path)
+    if user && user.authenticate(password)
+      session[:user_id] = user.id
+      render :json => [{
+          "status": 200,
+          "message": "Successfully Logged In."
+      }]
     else
-      flash[:alert] = "Your email or password were incorrect."
-      redirect_to root_path
+      render :json => [{
+        status: 500,
+        message: "Could not login, try again!",
+        errors: user.errors.full_messages
+      }]
     end
-
-    rescue
-      flash[:alert] = "Oops, something went wrong. Try again."
-      redirect_to root_path
   end
 
   def login
     if signed_in?
-      return @user.admin? ? redirect_to(admin_dashboard_path) : redirect_to(projects_path)
+      render :json => [{
+          "user": @user
+      }]
     end
-    render layout: "public"
   end
 
   def signed_in
@@ -64,6 +68,15 @@ private
   def get_session_time_left
     expire_time = session[:expires_at] || Time.now
     @session_time_left = (expire_time.to_time - Time.now).to_i
+  end
+
+  def current_user
+    @user = User.find(session[:user_id]) if signed_in?
+    @user ||= User.new
+  end
+
+  def signed_in?
+    session[:user_id].present?
   end
 
 end
