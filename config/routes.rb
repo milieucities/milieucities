@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       ## USER REGISTRATIONS ##
-      resources :registrations, only: [:create, :destroy]
+      resources :registrations, only: [:create, :destroy, :index, :show]
 
       ## SESSIONS ##
       namespace :sessions, path: '/', as: nil do

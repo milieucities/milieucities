@@ -9,42 +9,53 @@ class Api::V1::SessionsController < Api::ApiController
     email = params[:user][:email]
     password = params[:user][:password]
 
-    user = User.find_by_email(email)
+    @user = User.find_by_email(email)
 
-    if user && user.authenticate(password)
-      session[:user_id] = user.id
+    if @user && @user.authenticate(password)
+      session[:user_id] = @user.id
       render :json => [{
           "status": 200,
-          "message": "Successfully Logged In."
+          "message": "Successfully Logged In.",
+          "cookies": request.cookies
       }]
     else
       render :json => [{
         status: 500,
         message: "Could not login, try again!",
-        errors: user.errors.full_messages
+        errors: @user.errors.full_messages
       }]
     end
   end
 
   def login
-    if signed_in?
-      render :json => [{
-          "user": @user
-      }]
-    end
-  end
+    puts session[:user_id].present?
+    puts session[:user_id]
+    require 'pry'
+    binding.pry
 
-  def signed_in
-    return redirect_to root_path unless signed_in?
+    render :json => [{
+        "user": @user
+    }]
+
   end
 
   def logout
     disconnect_user
-    redirect_to root_path
   end
 
   def disconnect_user
     session[:user_id] = nil
+    if session[:user_id] == nil
+      render :json => [{
+          "status": 200,
+          "message": "Logged out successfully!"
+      }]
+    else
+      render :json => [{
+          "status": 500,
+          "message": "Could not log out, try again!"
+      }]
+    end
   end
 
   def session_expiry
@@ -54,13 +65,6 @@ class Api::V1::SessionsController < Api::ApiController
 
   def update_activity_time
     session[:expires_at] = 24.hours.from_now
-  end
-
-  def admin_only
-    if current_user.student?
-      return redirect_to projects_path,
-        flash: { alert: "Admin accounts only, restricted area!" }
-    end
   end
 
 private
