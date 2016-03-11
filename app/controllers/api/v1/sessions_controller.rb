@@ -13,14 +13,14 @@ class Api::V1::SessionsController < Api::ApiController
 
     if @user && @user.authenticate(password)
       session[:user_id] = @user.id
-      render :json => [{
+      render status: 200, :json => [{
           "status": 200,
           "message": "Successfully Logged In.",
           "cookies": request.cookies
       }]
     else
-      render :json => [{
-        status: 500,
+      render status: 422, :json => [{
+        status: 422,
         message: "Could not login, try again!",
         errors: @user.errors.full_messages
       }]
@@ -28,8 +28,7 @@ class Api::V1::SessionsController < Api::ApiController
   end
 
   def login
-    puts session[:user_id].present?
-    puts session[:user_id]
+
     require 'pry'
     binding.pry
 

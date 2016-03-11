@@ -21,6 +21,14 @@ gem 'simple_token_authentication'
 gem 'unicorn'
 gem 'materialize-sass'
 gem 'pry'
+gem 'micro_token'
+gem 'redis'
+gem 'hiredis'
+
+## For APIs ##
+gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
+gem 'font-awesome-rails'
+gem 'simple_form'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
