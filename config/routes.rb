@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :comments, module: :dev_sites
   end
 
-  resources :events
+  resources :events, only: [:index, :show, :destroy, :create]
 
 
   ##############################
@@ -35,6 +35,12 @@ Rails.application.routes.draw do
         get  :login
         get  :logout
       end
+
+      ## EVENTS ##
+      resources :events
+
+      ## DEV SITES ##
+      resources :dev_sites
 
       scope module: :maps do
         # Ottawa Map

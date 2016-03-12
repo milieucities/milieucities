@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   has_secure_password
-  # before_save :ensure_authentication_token
+
+  before_create do |doc|
+    doc.api_key = doc.generate_api_key
+  end
 
   # ASSOCIATIONS
   has_many :comments, as: :commentable
@@ -24,6 +27,13 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def generate_api_key
+    loop do
+      token = SecureRandom.base64.tr('+/=', 'Qrt')
+      break token unless User.exists?(api_key: token)
+    end
   end
 
 
