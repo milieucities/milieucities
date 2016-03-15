@@ -12,6 +12,12 @@ class DevSitesController < ApplicationController
     end
   end
 
+  def xml_data
+    @dev_sites = DevSite.all
+
+
+  end
+
   # GET /dev_sites/1
   # GET /dev_sites/1.json
   def show
