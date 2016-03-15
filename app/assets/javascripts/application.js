@@ -19,6 +19,8 @@
 //= require jquery.raty
 //= require ratyrate
 //= require cocoon
+//= require materialize-sprockets
+//= require materialize/extras/nouislider
 //
 //  VENDOR PACKAGES
 //= require jquery-comments/js/jquery-comments.min.js
@@ -28,3 +30,14 @@
 
 //= require_tree .
 //= require_self
+
+$(document).ready(function() {
+  $('.parallax').parallax();
+
+
+  /*** Animate word ***/
+
+    //set animation timing
+	
+
+});

@@ -53,3 +53,16 @@ Application Type: <%= rating_for @dev_site, "app_type", :disable_after_rate => f
 
 <%= link_to 'Edit', edit_dev_site_path(@dev_site) %> |
 <%= link_to 'Back', dev_sites_path %>
+
+
+<div class="fixed-action-btn" style="bottom: 24px; right: 48px;">
+    <a class="action-towernav-toggle btn-floating btn-large green">
+        <i class="large mdi-navigation-menu"></i>
+    </a>
+    <ul class="action-towernav-container">
+        <li><a class="action-towernav-toggle btn-floating yellow black-text action-geolocation-go" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-action-face-unlock black-text"></i></a></li>
+        <li><a class="action-towernav-toggle action-deal-on btn-floating orange" onclick="Materialize.toast('Showing Latest Updates', 4000)" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="material-icons white-text">announcement</i></a></li>
+        <li><a class="action-towernav-toggle action-notification-on btn-floating blue" onclick="Materialize.toast('Showing Announcements', 4000)" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-action-event"></i></a></li>
+        <li><a class="action-towernav-toggle btn-floating pink action-favourites-showmodal"onclick="Materialize.toast('Liked site', 4000)" data-force="1" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-action-favorite-outline"></i></a></li>
+    </ul>
+</div>

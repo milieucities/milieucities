@@ -2,36 +2,14 @@
 <html>
 <head>
   <title>MILIEU</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="masthead clearfix">
-    <div class="inner clearfix">
-      <!-- <a href="/"><h3 class="masthead-brand">MILIEU.IO</h3></a> -->
-      <nav class="nav nav-masthead">
-        <%= link_to "TORONTO | OTTAWA", root_path, id: "landingTitle", class: "nav-link active" %>
-        <!-- <%= link_to "EVENTS", root_path, id: "eventsTitle", class: "nav-link" %> -->
 
-        <!-- <a class="nav-link" href="/ottawamap">MAP</a> -->
-        <!-- <% if user_signed_in? %>
-          <a class="nav-link" href="users/sign_out" data-method="DELETE">SIGN OUT</a>
-        <% else %>
-          <a class="nav-link" href="users/sign_up">SIGN UP</a>
-          <a class="nav-link" href="users/sign_in">SIGN IN</a>
-        <% end %> -->
-      </nav>
-    </div>
-  </div>
-  <div class="site-wrapper">
+<%= yield %>
 
-    <div class="site-wrapper-inner">
-      <div class="cover-container">
-
-        <%= yield %>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
