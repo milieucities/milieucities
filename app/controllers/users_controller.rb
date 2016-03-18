@@ -1,1 +1,9 @@
-users_controller.rb
+class UsersController < ApplicationController
+
+
+
+
+
+  private
+
+end
