@@ -1,7 +1,7 @@
 module Api
   module V1
     module Maps
-      class OttawaMapController < Api::V1::ApiController
+      class OttawaMapController < Api::ApiController
         layout "map"
 
         def map
