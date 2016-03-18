@@ -1,5 +1,5 @@
 
-<nav class="blue light-blue-3">
+<!-- <nav class="blue light-blue-3">
   <ul class="right hide-on-med-and-down">
     <li><a href="#!">First Sidebar Link</a></li>
     <li><a href="#!">Second Sidebar Link</a></li>
@@ -9,13 +9,145 @@
     <li><a href="#!">Second Sidebar Link</a></li>
   </ul>
   <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
-</nav>
+</nav> -->
 
-<section class="full-bg-img">
+<!-- <section class="full-bg-img">
 
-</section>
+</section> -->
+
+<style>
+.ui-button {
+  background:#3887BE;
+  color:#FFF;
+  display:block;
+  position:absolute;
+  top:50%;left:30%;
+  width:160px;
+  margin:-20px 0 0 -80px;
+  z-index:100;
+  text-align:center;
+  padding:10px;
+  border:1px solid rgba(0,0,0,0.4);
+  border-radius:3px;
+  }
+  .ui-button:hover {
+    background:#3074a4;
+    color:#fff;
+    }
+</style>
+
+<div class="row">
+  <div class="col s12 m8 l8" style="padding: 0;">
+    <div id="map" style="width: 100%; height: 100vh;"></div>
+    <a href='#' id='geolocate' class='ui-button'>Find me</a>
+  </div>
+  <div class="col s4 m4 l4" style="padding: 0;">
+    <div id="main-page-form" style="width: 90%; height: 100vh; margin: 0 auto;">
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="user">I am a</label>
+          <input id="user" type="text" >
+        </div>
+      </div>
 
 
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="city">City</label>
+          <input id="city" type="text">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="hood">Neighbourhood</label>
+          <input id="hood" type="text">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="user">Things I would like to see in my neighbourhood</label>
+          <input id="user" type="text" placeholder="A park, less buses, bike paths ... ">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <p>
+            <input type="checkbox" id="test5" />
+            <label for="test5">I agree to the terms of service</label>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <a class="waves-effect waves-light btn-large"><i class="material-icons right">send</i>Proceed</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+           <p class="flow-text"><h3>Start participating in your neighbourhood today.</h3></p>
+        </div>
+      </div>
+
+    </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  $(document).ready(function() {
+
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYXNoZGFyamkiLCJhIjoiYXhOTVZrUSJ9.Ht0vEm6aRtd6nOm8ty9QuQ';
+
+    var map = L.mapbox.map('map', 'mapbox.streets');
+
+    var myLayer = L.mapbox.featureLayer().addTo(map);
+
+    var geolocate = document.getElementById('geolocate');
+
+
+    if (!navigator.geolocation) {
+        geolocate.innerHTML = 'Geolocation is not available';
+    } else {
+        geolocate.onclick = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            map.locate();
+        };
+    }
+
+    map.on('locationfound', function(e) {
+      map.fitBounds(e.bounds);
+
+      myLayer.setGeoJSON({
+          type: 'Feature',
+          geometry: {
+              type: 'Point',
+              coordinates: [e.latlng.lng, e.latlng.lat]
+          },
+          properties: {
+              'title': 'Here I am!',
+              'marker-color': '#ff8888',
+              'marker-symbol': 'star'
+          }
+      });
+
+      // And hide the geolocation button
+      geolocate.parentNode.removeChild(geolocate);
+    });
+
+    map.on('locationerror', function() {
+      geolocate.innerHTML = 'Position could not be found';
+    });
+
+
+  });
+</script>
 
 
 
@@ -41,50 +173,4 @@
     });
 
 
-</script>
-<script type="text/javascript">
-  var subscribeButton = function() {
-
-    new UIMorphingButton( document.querySelector( '.morph-button' ) );
-
-    [].slice.call( document.querySelectorAll( '.morph-button' ) ).forEach( function( bttn ) {
-      new UIMorphingButton( bttn, {
-        closeEl: '.icon-close',
-        closeEl: '.subscribe'
-      } );
-    } );
-
-    function checkEmail() {
-
-      var email = document.getElementById('email');
-      var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-      if (!filter.test(email.value)) {
-        alert('Please provide a valid email address');
-        email.focus;
-        return false;
-      } else {
-        return true;
-      }
-    };
-
-    [].slice.call( document.querySelectorAll( 'form button' ) ).forEach( function( bttn ) {
-      bttn.addEventListener( 'click', function( ev ) { ev.preventDefault();
-        if (checkEmail()) {
-          var emailText = $('#email').val();
-
-          $.getJSON('/demo?email='+emailText, function(success) {
-            // Do something on successful email sent
-            alert('Thank you. We will get in touch shortly.');
-          }).fail(function(error) {
-            // Do something on error
-            alert('This email already exists, try another email address');
-          });
-        }
-      } );
-    } );
-  }
-
-  // Init
-  subscribeButton();
 </script>

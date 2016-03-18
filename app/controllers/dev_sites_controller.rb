@@ -7,15 +7,20 @@ class DevSitesController < ApplicationController
   def index
     @dev_sites = DevSite.all
 
+    @geojson = Array.new
+    build_geojson(@dev_sites, @geojson)
+
     respond_to do |format|
         format.html
     end
   end
 
+  def build_geojson(dev_sites, geojson)
+
+  end
+
   def xml_data
     @dev_sites = DevSite.all
-
-
   end
 
   # GET /dev_sites/1
