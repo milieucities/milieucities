@@ -1,0 +1,66 @@
+<%= form_for @user do |f| %>
+
+  <%= f.hidden_field :role, value: params[:role] %>
+
+  <div class="row">
+    <div class="input-field col m6 s12">
+      <%= f.text_field :first_name %>
+      <%= f.label :first_name, "FIRST NAME" %>
+    </div>
+
+    <div class="input-field col m6 s12">
+      <%= f.text_field :last_name %>
+      <%= f.label :last_name, "LAST NAME" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.email_field :email %>
+      <%= f.label :email  %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.text_field :username %>
+      <%= f.label :user_name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.text_field :bio %>
+      <%= f.label :bio  %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <h6>Role: </h6>
+      <%= f.radio_button :role, 'user', :checked => true %>
+      <%= f.label :role_user, 'User'  %>
+      <br />
+      <%= f.radio_button :role, 'planner' %>
+      <%= f.label :role_planner, 'City Planner'  %>
+      <br />
+      <%= f.radio_button :role, 'developer' %>
+      <%= f.label :role_developer, 'Developer'  %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col m6 s12">
+    <%= f.password_field :password %>
+    <%= f.label :password %>
+    </div>
+
+    <div class="input-field col m6 s12">
+    <%= f.password_field :password_confirmation %>
+    <%= f.label :password_confirmation %>
+    </div>
+  </div>
+
+  <%= content_tag :button, "Save", type: :submit, class: "waves-effect waves-light btn teal" %>
+
+<% end %>

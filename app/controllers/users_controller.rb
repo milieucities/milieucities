@@ -1,4 +1,4 @@
-class UsersController < CommentsController
+class UsersController < ApplicationController
 
   def new
     @user = User.new
@@ -24,6 +24,10 @@ class UsersController < CommentsController
 
   def index
     @users = User.all
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
 
