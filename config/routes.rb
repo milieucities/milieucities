@@ -1,35 +1,50 @@
 Rails.application.routes.draw do
-  resources :events
+
+  ## MAIN APP PAGE ##
+  root 'static_pages#home'
+
   post '/rate' => 'rater#create', :as => 'rate'
-  devise_for :users, controllers: { omniauth_callbacks: "callbacks" }
-
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
 
   get 'all_user_comments', to: 'comments#all_user_comments'
   get 'all_devsite_comments', to: 'dev_sites#all_devsite_comments'
   get 'heart', to: 'dev_sites#heart'
   get 'break_heart', to: 'dev_sites#break_heart'
   get 'demo', to: 'static_pages#demo'
+  get 'xml_data', to: 'dev_sites#xml_data'
 
-  root 'static_pages#home'
   get 'events', to: 'static_pages#events'
 
   resources :dev_sites do
     resources :comments, module: :dev_sites
+
   end
 
+  resources :events, only: [:index, :show, :destroy, :create]
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
-  scope module: :api do
-    scope module: :v1 do
-      devise_scope :user do
-        post 'registrations' => 'registrations#create', :as => 'register'
-        post 'sessions' => 'sessions#create', :as => 'login'
-        delete 'sessions' => 'sessions#destroy', :as => 'logout'
+  ##############################
+  ### INTERNAL API ENDPOINTS ###
+  ##############################
+
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      ## USER REGISTRATIONS ##
+      resources :registrations, only: [:create, :destroy, :index, :show]
+
+      ## SESSIONS ##
+      namespace :sessions, path: '/', as: nil do
+        post :login_authentication
+        get  :login
+        get  :logout
       end
+
+      ## EVENTS ##
+      resources :events
+
+      ## DEV SITES ##
+      resources :dev_sites
+
       scope module: :maps do
         # Ottawa Map
         get 'ottawamap', to: 'ottawa_map#map'
@@ -39,9 +54,7 @@ Rails.application.routes.draw do
     end
   end
 
-  ##############################
-  ### INTERNAL API ENDPOINTS ###
-  ##############################
+
 
 
 

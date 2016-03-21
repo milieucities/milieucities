@@ -1,42 +1,40 @@
 class User < ActiveRecord::Base
-  before_save :ensure_authentication_token
+  has_secure_password
+
+  before_create do |doc|
+    doc.api_key = doc.generate_api_key
+  end
 
   # ASSOCIATIONS
   has_many :comments, as: :commentable
-  acts_as_token_authenticatable
+
+  # Rating
+  ratyrate_rater
+
+  # VALIDATIONS
+
+  validates               :username, presence: { message: "User name is required"}
+  validates_uniqueness_of :username, on: :create
+  validates               :first_name, presence: {message: "First name is required"}
+  validates               :last_name, presence: {message: "Last name is required"}
+  validates               :email,
+                          presence: {message: "Email is required"},
+                          :uniqueness => true
+  validates               :password, on: :create, presence: {message: "Password is required"}
+  validates_length_of     :password, :in => 6..20, :on => :create
+  validates               :bio, length: {maximum: 140, message: "140 characters max"}
 
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
-
-  def self.from_omniauth(auth)
-     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-       user.provider = auth.provider
-       user.uid = auth.uid
-       user.email = auth.info.email
-       user.password = Devise.friendly_token[0,20]
-     end
+  def full_name
+    "#{self.first_name} #{self.last_name}"
   end
 
-  def ensure_authentication_token
-    if authentication_token.blank?
-      self.authentication_token = generate_authentication_token
-    end
-  end
-
-  private
-
-  def generate_authentication_token
+  def generate_api_key
     loop do
-      token = Devise.friendly_token
-      break token unless User.where(authentication_token: token).first
+      token = SecureRandom.base64.tr('+/=', 'Qrt')
+      break token unless User.exists?(api_key: token)
     end
   end
 
-   # Rating
-   ratyrate_rater
 
 end

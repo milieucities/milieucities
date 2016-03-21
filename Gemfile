@@ -10,10 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'firebase'
-gem 'devise'
-gem 'omniauth'
-gem 'omniauth-digitalocean'
-gem 'omniauth-facebook'
+gem 'bcrypt'
 gem 'ratyrate'
 gem 'unirest'
 gem 'pg'
@@ -23,6 +20,15 @@ gem 'geocoder'
 gem 'simple_token_authentication'
 gem 'unicorn'
 gem 'materialize-sass'
+gem 'pry'
+gem 'micro_token'
+gem 'redis'
+gem 'hiredis'
+
+## For APIs ##
+gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
+gem 'font-awesome-rails'
+gem 'simple_form'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,28 +1,74 @@
-class Api::V1::RegistrationsController < Devise::RegistrationsController
-  skip_before_filter :verify_authenticity_token,
-                     :if => Proc.new { |c| c.request.format == 'application/json' }
+class Api::V1::RegistrationsController < Api::ApiController
 
-  respond_to :json
+  def index
+    render :json => User.all
+  end
+
+  def show
+    render json: @user
+  end
 
   def create
-    user_params = {
-                    "email": params[:email],
-                    "password": params[:password],
-                    "password_confirmation": params[:password_confirmation]
-                  }
-    user = User.create(user_params)
-    if user.save
-      sign_in user
-      render :status => 200,
-           :json => { :success => true,
-                      :info => "Registered",
-                      :data => { :user => resource,
-                                 :auth_token => current_user.authentication_token } }
+    @user = User.new(user_params)
+
+    if @user.save
+      render status: 200, :json => {
+        status: 200,
+        message: "Successfully created a user",
+        user: @user
+      }
     else
-      render :status => :unprocessable_entity,
-             :json => { :success => false,
-                        :info => resource.errors,
-                        :data => {} }
+      render status: 422, :json => [{
+        status: 422,
+        message: "Could not create a user, try again!",
+        errors: @user.errors.full_messages
+      }]
     end
   end
+
+  def update
+    if @user.update(user_params)
+      render status: 200, :json => {
+        status: 200,
+        message: "Successfully updated user",
+        user: @user
+      }
+    else
+      render status: 422, :json => [{
+        status: 422,
+        message: "Could not update user, try again!",
+        errors: @user.errors.full_messages
+      }]
+    end
+  end
+
+  def destroy
+    if @user.destroy
+      render status: 200, :json => {
+        status: 200,
+        message: "Successfully removed the user"
+      }
+    else
+      render status: 422, :json => [{
+        status: 422,
+        message: "Could not remove the user, try again!",
+        errors: @user.errors.full_messages
+      }]
+    end
+  end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:first_name,:last_name,:username,:email,
+        :password, :password_confirmation, :bio, :role
+      )
+    end
+
+    def find_user
+      @user = User.find(params[:id])
+    end
+
+
+
 end

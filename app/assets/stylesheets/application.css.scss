@@ -12,9 +12,6 @@
  *
  *
  *  Bower Sheets
-
- *= require button-morph/content
- *= require button-morph/component
  *= require cover
  *= require_tree .
  *= require_self
@@ -28,13 +25,13 @@ section {
   display: block;
 }
 
-.full-bg-img {
-  background: asset-url("mainbg.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-}
+// .full-bg-img {
+//   background: asset-url("mainbg.jpg") no-repeat center center fixed;
+//     -webkit-background-size: cover;
+//     -moz-background-size: cover;
+//     -o-background-size: cover;
+//     background-size: cover;
+//     height: 100vh;
+//     margin: 0;
+//     padding: 0;
+// }
