@@ -1,1 +1,18 @@
-<%= render 'form' %>
+<h1 class="center">Sign In</h1>
+
+
+<%= form_tag sessions_path, class: "login-form" do %>
+
+  <div class="input-field">
+    <%= text_field_tag :email, params[:email], placeholder: "Email" %>
+  </div>
+
+  <div class="input-field">
+    <%= password_field_tag :password, placeholder: "Password" %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Sign In", class: 'waves-effect btn' %>
+  </div>
+
+<% end %>

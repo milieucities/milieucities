@@ -1,0 +1,16 @@
+@import "font-awesome";
+@import "materialize/components/color";
+$secondary-color: #5d9bc0 !default;
+@import "materialize";
+@import "static_pages";
+@import "nav";
+@import "session";
+
+
+.no-pad{
+  padding: 0 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}

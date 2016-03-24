@@ -24,9 +24,10 @@ gem 'pry'
 gem 'micro_token'
 gem 'redis'
 gem 'hiredis'
+gem 'react-rails'
 
 ## For APIs ##
-gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
+# gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
 gem 'font-awesome-rails'
 gem 'simple_form'
 

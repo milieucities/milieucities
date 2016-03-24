@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(password)
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to dev_sites_path
     else
       render :new, notice: "Could not sign in, try again"
     end
