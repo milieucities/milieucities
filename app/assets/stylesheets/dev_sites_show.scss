@@ -1,7 +1,14 @@
 section#dev-site-show{
 
+  position: relative;
   padding: 40px 0;
   color: #555;
+
+  .btn-floating{
+    position: absolute;
+    top: 50px;
+    right: 10px;
+  }
 
   .display-image{
     height: 400px;

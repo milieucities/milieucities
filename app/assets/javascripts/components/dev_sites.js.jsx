@@ -22,7 +22,7 @@ var DevSites = React.createClass({
     return <section id="dev-sites-index">
              <div className="header">
                All Developing Sites <span className="count">| {this.state.devSites.length} Sites</span>
-               <a href="/dev_sites/new" className="waves-effect waves-light right btn">Add New Development Site</a>
+               <a href="/dev_sites/new" className="waves-effect waves-light right btn hide-on-small-only">Add New Development Site</a>
              </div> 
              <DevSites.Show {...this.props} devSite={this.state.selectedDevSite} />
              <div className="dev-sites row">
@@ -46,7 +46,7 @@ DevSites.Show = React.createClass({
       return false;
     }
 
-    return  <div className="dev-site-profile">
+    return  <div className="dev-site-profile hide-on-med-and-down">
 
               <div className="label title">Preview</div>
               <img src={this.state.devSite.image_url ? this.state.devSite.image_url : this.props.defaultImage } className="display-image"/>

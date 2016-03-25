@@ -13,39 +13,39 @@
      </div>
 
       <form>
-          <div class="input-field col s12">
-            <label for="user">Name</label>
-            <input id="user" type="text">
-          </div>
-
-          <div class="input-field col s12">
-            <label for="city">City</label>
-            <input id="city" type="text">
-          </div>
-
-          <div class="input-field col s12">
-            <label for="hood">Neighbourhood</label>
-            <input id="hood" type="text">
-          </div>
-
-          <div class="input-field col s12">
-            <label for="user">Things I would like to see in my neighbourhood</label>
-            <input id="user" type="text" placeholder="A park, less buses, bike paths ... ">
-          </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-            <input type="checkbox" id="test5" />
-            <label for="test5">I agree to the terms of service</label>
-          </div>
+        <div class="input-field col s12">
+          <input id="user" type="text">
+          <label for="user">Name</label>
         </div>
 
-        <div class="row">
-          <div class="input-field col s12">
-            <%= link_to "Proceed", dev_sites_path, class: "waves-effect waves-light btn" %>
-            <%= link_to "Skip", dev_sites_path, class: "waves-effect btn btn-flat" %>
-          </div>
+        <div class="input-field col s12">
+          <input id="city" type="text">
+          <label for="city">City</label>
         </div>
+
+        <div class="input-field col s12">
+          <input id="hood" type="text">
+          <label for="hood">Neighbourhood</label>
+        </div>
+
+        <div class="input-field col s12">
+          <input id="user" type="text" placeholder="A park, less buses, bike paths ... ">
+          <label for="user">Things I would like to see in my neighbourhood</label>
+        </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="checkbox" id="test5" />
+          <label for="test5">I agree to the terms of service</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= link_to "Proceed", dev_sites_path, class: "waves-effect waves-light btn" %>
+          <%= link_to "Skip", dev_sites_path, class: "waves-effect btn btn-flat" %>
+        </div>
+      </div>
 
      </form>
 

@@ -113,3 +113,13 @@ section#dev-sites-index{
 
   }
 }
+
+@media #{$medium-and-down} {
+
+  .dev-sites{
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+
+}
