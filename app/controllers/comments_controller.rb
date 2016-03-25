@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
-  # acts_as_token_authentication_handler_for User
+  before_action :signed_in?
+
   def new
       @comment = @commentable.comments.new
   end

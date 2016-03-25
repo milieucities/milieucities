@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 
   resources :dev_sites do
     resources :comments, module: :dev_sites
-
   end
 
   resources :events, only: [:index, :show, :destroy, :create]
@@ -53,9 +52,5 @@ Rails.application.routes.draw do
       end
     end
   end
-
-
-
-
 
 end

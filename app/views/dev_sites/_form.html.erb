@@ -24,6 +24,15 @@
     <%= f.text_field :title %>
   </div>
 
+  <div class="field">
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :remote_image_url, "or image URL" %><br />
+    <%= f.text_field :remote_image_url %>
+  </div>
+
   <h4>Addresses</h4>
   <div class="field">
     <% f.fields_for :addresses do |address| %>

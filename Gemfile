@@ -24,6 +24,10 @@ gem 'pry'
 gem 'micro_token'
 gem 'redis'
 gem 'hiredis'
+gem 'carrierwave'
+gem 'fog'
+gem 'rmagick', :require => 'RMagick'
+gem 'figaro'
 
 ## For APIs ##
 gem 'compass-rails', github: "Compass/compass-rails", branch: "master"

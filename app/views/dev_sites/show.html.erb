@@ -14,6 +14,9 @@
     <strong><%= alert %></strong>
   </div>
 <% end %>
+
+<%= image_tag @dev_site.image_url(:web, :full) if @dev_site.image? %>
+
 <p>
   <strong>Devid:</strong>
   <%= @dev_site.devID %>
