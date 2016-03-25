@@ -7,11 +7,16 @@ $secondary-color: #5d9bc0 !default;
 @import "nav";
 @import "session";
 @import "dev_sites_index";
+@import "dev_sites_show";
 @import "forms";
 
 
 .no-pad{
   padding: 0 !important;
+}
+
+.no-marg{
+  margin: 0 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {

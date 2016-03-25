@@ -68,6 +68,7 @@ section#dev-sites-index{
     left: 300px;
     min-height: calc(100vh - 114px);
     padding: 20px 20px 0;
+    margin: 0;
 
     .card{
       background-color: rgba(255,255,255,1);
@@ -82,6 +83,14 @@ section#dev-sites-index{
         font-weight: 400;
         font-size: 16px;
         line-height: 16px;
+
+        a{
+          color: #555;
+
+          &:hover{
+            text-decoration: underline;
+          }
+        }
       }
 
       .type{

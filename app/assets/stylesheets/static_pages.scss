@@ -1,7 +1,8 @@
 section#home{
-
+  margin: 0;
+  
   #map{
-    height: 100vh;
+    height: calc(100vh - 64px);
     width: 100%;
   }
 

@@ -27,22 +27,23 @@ $(document).on('page:change', function(){
 
     map.locate();
 
-
     map.on('locationfound', function(e) {
-      map.fitBounds(e.bounds);
 
-      myLayer.setGeoJSON({
-          type: 'Feature',
-          geometry: {
-              type: 'Point',
-              coordinates: [e.latlng.lng, e.latlng.lat]
-          },
-          properties: {
-              'title': 'Here I am!',
-              'marker-color': '#ff8888',
-              'marker-symbol': 'star'
-          }
-      });
+      map.setView([e.latlng.lat, e.latlng.lng], 16);
+      // map.fitBounds(e.bounds);
+
+      // myLayer.setGeoJSON({
+      //     type: 'Feature',
+      //     geometry: {
+      //         type: 'Point',
+      //         coordinates: [e.latlng.lng, e.latlng.lat]
+      //     },
+      //     properties: {
+      //         'title': 'Here I am!',
+      //         'marker-color': '#ff8888',
+      //         'marker-symbol': 'star'
+      //     }
+      // });
 
     });
 

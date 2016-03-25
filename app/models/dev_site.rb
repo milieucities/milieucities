@@ -1,5 +1,7 @@
 class DevSite < ActiveRecord::Base
 
+  default_scope { order(updated_at: :desc ) }
+
   VALID_APPLICATION_TYPES = [ "Beginning", "In Progress", "Complete"]
   # establish_connection DB_OTTAWA
   # ASSOCIATIONS

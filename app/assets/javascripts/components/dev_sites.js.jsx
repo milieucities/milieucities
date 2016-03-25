@@ -71,7 +71,7 @@ DevSites.Show = React.createClass({
 
               </div>
 
-              <a href={"/dev_site/" + this.state.devSite.id} className="waves-effect waves-light btn">View Development</a>
+              <a href={"/dev_sites/" + this.state.devSite.id} className="waves-effect waves-light btn">View Development</a>
             </div>;
   }
 
@@ -96,7 +96,7 @@ DevSites.Item = React.createClass({
                 <img src={this.state.devSite.image_url ? this.state.devSite.image_url : this.props.defaultImage } />
               </div>
               <div className="card-content">
-                <span className="card-title grey-text text-darken-4 truncate">{this.state.devSite.title}</span>
+                <span className="card-title grey-text text-darken-4 truncate"><a href={"/dev_sites/" + this.state.devSite.id}>{this.state.devSite.title}</a></span>
                 <span className="type">{this.state.devSite.application_type ? this.state.devSite.application_type : "N/A"}</span>
               </div>
             </div>

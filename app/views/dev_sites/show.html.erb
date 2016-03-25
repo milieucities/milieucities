@@ -1,54 +1,58 @@
+<section id="dev-site-show" class="container">
+  <%= link_to fa_icon("pencil"), edit_dev_site_path(@dev_site), class: "btn-floating right" %>
+  <div class="row">
+    <div class="col s12 m7">
+      <%= image_tag (@dev_site.image_url.present? ? @dev_site.image_url : "mainbg.jpg" ), class: "display-image materialboxed" %>
+    </div>
+    <div class="col s12 m5">
+      <h2><%= @dev_site.title%></h2>
+
+      <div class="row info">
+
+        <div class="col s6 label">Development Id:</div>
+        <div class="col s6"><%= @dev_site.devID.present? ? @dev_site.devID : "N/A" %></div>
+
+        <div class="col s6 label">Application Type:</div>
+        <div class="col s6"><%= @dev_site.application_type.present? ? @dev_site.application_type : "N/A" %></div>
+
+        <div class="col s6 label">Ward Name:</div>
+        <div class="col s6"><%= @dev_site.ward_name.present? ? @dev_site.ward_name : "N/A" %></div>
+
+        <div class="col s6 label">Ward Number:</div>
+        <div class="col s6"><%= @dev_site.ward_num.present? ? @dev_site.ward_num : "N/A" %></div>
+
+        <% if @dev_site.statuses.present? %>
+        <div class="col s6 label">Status:</div>
+        <div class="col s6"><%= @dev_site.statuses.last.status || "N/A" %></div>
+
+        <div class="col s6 label">Status Date:</div>
+        <div class="col s6"><%= @dev_site.statuses.last.status_date || "N/A" %></div>
+        <% end %>
+
+        <div class="col s12">
+          <h5>Rate</h5>
+          Location: <%= rating_for @dev_site, "location", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
+          Application Type: <%= rating_for @dev_site, "app_type", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <h5>Description</h5>
+      <p><%= @dev_site.description.present? ? @dev_site.description : "No description present." %></p>
+    </div>
+  </div>
 
 
-<p>
-  <strong>Devid:</strong>
-  <%= @dev_site.devID %>
-</p>
-
-<p>
-  <strong>Application type:</strong>
-  <%= @dev_site.application_type %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @dev_site.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @dev_site.description %>
-</p>
-
-<p>
-  <strong>Ward name:</strong>
-  <%= @dev_site.ward_name %>
-</p>
-
-<p>
-  <strong>Ward num:</strong>
-  <%= @dev_site.ward_num %>
-</p>
-
-<h2>Please Rate</h2>
-Location: <%= rating_for @dev_site, "location", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
-Application Type: <%= rating_for @dev_site, "app_type", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
-
-<%= render partial: "comments/comments", locals: { commentable: @dev_site } %>
-<%= render partial: "comments/form", locals: { commentable: @dev_site } %>
-
-<%= link_to 'Edit', edit_dev_site_path(@dev_site) %> |
-<%= link_to 'Back', dev_sites_path %>
+  <div style="max-width: 500px">
+  <%= render partial: "comments/comments", locals: { commentable: @dev_site } %>
+  <%= render partial: "comments/form", locals: { commentable: @dev_site } %>
+  </div>
+</section>
 
 
-<div class="fixed-action-btn" style="bottom: 24px; right: 48px;">
-    <a class="action-towernav-toggle btn-floating btn-large green">
-        <i class="large mdi-navigation-menu"></i>
-    </a>
-    <ul class="action-towernav-container">
-        <li><a class="action-towernav-toggle btn-floating yellow black-text action-geolocation-go" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-action-face-unlock black-text"></i></a></li>
-        <li><a class="action-towernav-toggle action-deal-on btn-floating orange" onclick="Materialize.toast('Showing Latest Updates', 4000)" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="material-icons white-text">announcement</i></a></li>
-        <li><a class="action-towernav-toggle action-notification-on btn-floating blue" onclick="Materialize.toast('Showing Announcements', 4000)" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-action-event"></i></a></li>
-        <li><a class="action-towernav-toggle btn-floating pink action-favourites-showmodal"onclick="Materialize.toast('Liked site', 4000)" data-force="1" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px); opacity: 0;"><i class="large mdi-action-favorite-outline"></i></a></li>
-    </ul>
-</div>
+
+

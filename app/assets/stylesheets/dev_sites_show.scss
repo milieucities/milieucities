@@ -1,0 +1,20 @@
+section#dev-site-show{
+
+  padding: 40px 0;
+  color: #555;
+
+  .display-image{
+    height: 400px;
+    width: 100%;
+    border-radius: 3px;
+    object-fit: cover;
+  }
+
+  .info{
+    font-size: 14px;
+  }
+
+  .label{
+    color: #999;
+  }
+}
