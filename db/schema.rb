@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325222754) do
+ActiveRecord::Schema.define(version: 20160325232218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20160325222754) do
     t.integer  "hearts"
     t.string   "image"
     t.string   "remote_image_url"
+    t.string   "file"
   end
 
   create_table "events", force: :cascade do |t|
