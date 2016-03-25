@@ -18,8 +18,8 @@
 
 <body>
   <%= render "layouts/nav" %>
+  <%= render "layouts/flash", :flash => flash %>
   <%= yield %>
-
   <%= javascript_include_tag "vendor", :debug => false %>
 </body>
 

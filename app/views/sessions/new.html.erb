@@ -3,14 +3,15 @@
 
 <%= form_tag sessions_path, class: "login-form" do %>
 
-  <div class="input-field">
+  <div class="row">
+  <div class="input-field col s12 no-pad">
     <%= text_field_tag :email, params[:email], placeholder: "Email" %>
   </div>
 
-  <div class="input-field">
+  <div class="input-field col s12 no-pad">
     <%= password_field_tag :password, placeholder: "Password" %>
   </div>
-
+  </div>
   <div class="actions">
     <%= submit_tag "Sign In", class: 'waves-effect btn' %>
   </div>

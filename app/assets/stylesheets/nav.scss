@@ -10,6 +10,7 @@ section#nav{
     float: left;
     display: inline-block;
     height: 100%;
+    padding: 10px;
   }
 
   ul{
@@ -26,6 +27,7 @@ section#nav{
 
       a{
         color: #fff;
+        font-weight: 300;
       }
     }
   }

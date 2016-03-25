@@ -1,9 +1,19 @@
-<div class="nested-fields">
-  <%= f.label :street %><br>
-  <%= f.text_field :street %>
-  <%= f.label :latitude %><br>
-  <%= f.text_field :lat %>
-  <%= f.label :longitude %><br>
-  <%= f.text_field :lon %>
-  <%= link_to_remove_association 'remove address', f %>
+<div class="nested-fields row">
+
+  <div class="input-field col s12">
+    <%= f.text_field :street %>
+    <%= f.label :street, "Street" %>
+  </div>
+
+  <div class="input-field col s12 m6">
+    <%= f.text_field :lat %>
+    <%= f.label :lat, "Latitude" %>
+  </div>
+
+  <div class="input-field col s12 m6">
+    <%= f.text_field :lon %>
+    <%= f.label :lon, "Longitude" %>
+  </div>
+
+  <%= link_to_remove_association 'Remove address...', f %>
 </div>

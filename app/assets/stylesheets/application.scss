@@ -1,10 +1,13 @@
 @import "font-awesome";
 @import "materialize/components/color";
+$primary-color: #92c7c6 !default;
 $secondary-color: #5d9bc0 !default;
 @import "materialize";
 @import "static_pages";
 @import "nav";
 @import "session";
+@import "dev_sites_index";
+@import "forms";
 
 
 .no-pad{
@@ -12,5 +15,12 @@ $secondary-color: #5d9bc0 !default;
 }
 
 h1, h2, h3, h4, h5, h6 {
+  color: $primary-color;
   font-weight: 300;
+}
+
+.clear{
+  clear: both;
+  display: table;
+  content: "";
 }

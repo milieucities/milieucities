@@ -18,7 +18,8 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to dev_sites_path
     else
-      render :new, notice: "Could not sign in, try again"
+      flash.now[:alert] = "Could not sign in, try again"
+      render :new
     end
 
   end

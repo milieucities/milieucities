@@ -103,6 +103,8 @@ GEM
     mime-types (1.25.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
+    momentjs-rails (2.10.6)
+      railties (>= 3.1)
     multi_json (1.11.2)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -112,6 +114,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    rabl (0.11.7)
+      activesupport (>= 2.3.14)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -226,8 +230,10 @@ DEPENDENCIES
   lunchy
   materialize-sass
   micro_token
+  momentjs-rails
   pg
   pry
+  rabl
   rails (= 4.2.4)
   ratyrate
   react-rails

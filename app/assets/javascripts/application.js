@@ -22,6 +22,7 @@
 //= require_tree ./components
 //= require ratyrate
 //= require cocoon
+//= require moment
 //  VENDOR PACKAGES
 //= require jquery-comments/js/jquery-comments.min.js
 

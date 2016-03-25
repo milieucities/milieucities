@@ -1,4 +1,6 @@
 class DevSite < ActiveRecord::Base
+
+  VALID_APPLICATION_TYPES = [ "Beginning", "In Progress", "Complete"]
   # establish_connection DB_OTTAWA
   # ASSOCIATIONS
   has_many :comments, as: :commentable
@@ -10,3 +12,4 @@ class DevSite < ActiveRecord::Base
   ratyrate_rateable "location", "app_type"
 
 end
+

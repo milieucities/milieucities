@@ -5,5 +5,17 @@ section#home{
     width: 100%;
   }
 
+  h3{
+    color: $secondary-color;
+  }
+
+  .btn-flat{
+    transition: 200ms;
+
+    &:hover{
+      color: #fff;
+    }
+  }
+
 }
 
