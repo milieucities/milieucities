@@ -15,7 +15,7 @@
   </div>
 <% end %>
 
-<%= image_tag painting.image_url(:thumb) if painting.image? %>
+<%= image_tag @dev_site.image_url(:profile) if @dev_site.image? %>
 
 <p>
   <strong>Devid:</strong>

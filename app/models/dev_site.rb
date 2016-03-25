@@ -1,5 +1,5 @@
 class DevSite < ActiveRecord::Base
-  attr_accessible :image, :remote_image_url
+  attr_accessor :image, :remote_image_url
 
   # establish_connection DB_OTTAWA
   # ASSOCIATIONS
