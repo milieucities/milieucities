@@ -1,9 +1,10 @@
 class DevSite < ActiveRecord::Base
+  attr_accessor :images, :files
 
   default_scope { order(updated_at: :desc ) }
 
   VALID_APPLICATION_TYPES = [ "Beginning", "In Progress", "Complete"]
-  
+
   # establish_connection DB_OTTAWA
   # ASSOCIATIONS
   has_many :comments, as: :commentable
@@ -33,6 +34,14 @@ class DevSite < ActiveRecord::Base
   def longitude
     self.addresses.first.geocode_lon
   end
+  
+  # CarrierWave - Images
+  mount_uploaders :images, ImagesUploader
+
+  # CarrierWave - Files
+  mount_uploaders :files, FilesUploader
+
+
 
 end
 

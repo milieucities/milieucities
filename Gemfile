@@ -27,7 +27,12 @@ gem 'micro_token'
 gem 'redis'
 gem 'handlebars_assets', '~> 0.23.0'
 gem 'hiredis'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'fog'
+gem 'rmagick', :require => 'RMagick'
+gem 'figaro'
 gem 'react-rails'
+
 
 ## For APIs ##
 # gem 'compass-rails', github: "Compass/compass-rails", branch: "master"

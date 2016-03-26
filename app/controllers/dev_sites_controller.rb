@@ -60,6 +60,8 @@ class DevSitesController < ApplicationController
   end
 
   def create
+    # require 'pry'
+    # binding.pry
     @dev_site = DevSite.new(dev_site_params)
 
     respond_to do |format|
@@ -134,8 +136,8 @@ class DevSitesController < ApplicationController
 
     def dev_site_params
       params.require(:dev_site).permit(:devID, :application_type, :title,
-      :description, :ward_name, :ward_num, :image_url, :hearts,
+      :description, :ward_name, :ward_num, :image_url, :hearts, {images: []}, {files: []},
       addresses_attributes: [:lat, :lon, :street],
-      statuses_attributes: [:status, :statusdate] )
+      statuses_attributes: [:status, :status_date] )
     end
 end

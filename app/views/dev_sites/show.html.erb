@@ -46,13 +46,20 @@
     </div>
   </div>
 
+  <% @dev_site.images.each do |img| %>
+    <%= image_tag img.web.preview if @dev_site.images? %>
+  <% end %>
+
+
+  <% @dev_site.files.each do |file| %>
+    <%= link_to "File", file.url if @dev_site.files? %>
+  <% end %>
 
   <div style="max-width: 500px">
   <%= render partial: "comments/comments", locals: { commentable: @dev_site } %>
   <%= render partial: "comments/form", locals: { commentable: @dev_site } %>
   </div>
+
 </section>
-
-
 
 
