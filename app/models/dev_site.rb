@@ -36,6 +36,10 @@ class DevSite < ActiveRecord::Base
   def longitude
     self.addresses.first.geocode_lon
   end
+
+  def image
+    self.image_url || ActionController::Base.helpers.asset_path("mainbg.jpg")
+  end
   
   # CarrierWave - Images
   mount_uploaders :images, ImagesUploader

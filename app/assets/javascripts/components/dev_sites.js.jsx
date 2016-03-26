@@ -71,10 +71,10 @@ DevSites.Show = React.createClass({
                 <div className="no-pad col s6 label">Address:</div>
                 <div className="no-pad col s6">{this.state.devSite.addresses[0] ? this.state.devSite.addresses[0].address.street : "N/A"}</div>
 
-                <div className="no-pad col s6 label">Status:</div>
+                <div className="no-pad col s6 label">Latest Status:</div>
                 <div className="no-pad col s6">{this.state.devSite.statuses[0] ? this.state.devSite.statuses[0].status.status : "N/A"}</div>
 
-                <div className="no-pad col s6 label">Status Date:</div>
+                <div className="no-pad col s6 label">Latest Status Date:</div>
                 <div className="no-pad col s6">{ (this.state.devSite.statuses[0] && this.state.devSite.statuses[0].status.status_date) ? moment(this.state.devSite.statuses[0].status.status_date).format("MMMM D, YYYY") : moment(this.state.devSite.updated_at).format("MMMM D, YYYY") }</div>
 
               </div>

@@ -1,4 +1,58 @@
-#home-map{
-  height: calc(100vh - 64px);
-  width: 100%;
+.map-container{
+
+  position: relative;
+
+  &:after {
+      content: "";
+      display: table;
+      clear: both;
+  }
+
+  #home-map{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100vh - 64px);
+    width: 100%;
+  }
+
+  .overlay-info{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100vh - 64px);
+    width: 100%;
+    z-index: 1;
+
+    .info-box{
+      transition: 200ms;
+      display: block;
+      background-color: #f4f4f4;
+      padding: 10px 20px;
+      margin-top: 10vh;
+      border-radius: 3px;
+
+      img{
+        float: left;
+        height: 50px;
+        width: 50px;
+      }
+
+      .text{
+        width: calc(100% - 50px);
+        float: left;
+        padding-left: 20px;
+        color: #777;
+        font-size: 16px;
+      }
+
+      &:after {
+          content: "";
+          display: table;
+          clear: both;
+      }
+
+    }
+  }
+
 }

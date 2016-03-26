@@ -6,6 +6,11 @@ section#home{
     width: 100%;
   }
 
+  .join{
+    min-height: calc(100vh - 64px);
+    background-color: #fff;
+  }
+
   h3{
     color: $secondary-color;
   }

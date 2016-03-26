@@ -60,8 +60,6 @@ class DevSitesController < ApplicationController
   end
 
   def create
-    # require 'pry'
-    # binding.pry
     @dev_site = DevSite.new(dev_site_params)
 
     respond_to do |format|

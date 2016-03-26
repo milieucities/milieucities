@@ -12,6 +12,10 @@ $secondary-color: #5d9bc0 !default;
 @import "maps/home";
 @import "maps/main";
 
+body{
+  background-color: #f4f4f4;
+}
+
 a{
   color: #333;
 }
@@ -37,4 +41,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .dropdown-content li > a, .dropdown-content li > span{
   color: #333;
+}
+
+.small-container{
+  min-height: calc(100vh - 64px);
+  background-color: #fff;
+
+  h1, h3{
+    margin: 0;
+    padding: 2rem 0;
+  }
 }

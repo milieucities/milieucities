@@ -1,19 +1,21 @@
-<h1 class="center">Sign In</h1>
+<div class="small-container container">
+
+  <h1 class="center">Sign In</h1>
+
+  <%= form_tag sessions_path, class: "login-form" do %>
 
 
-<%= form_tag sessions_path, class: "login-form" do %>
+    <div class="row">
+    <div class="input-field col s12">
+      <%= text_field_tag :email, params[:email], placeholder: "Email" %>
 
-  <div class="row">
-  <div class="input-field col s12 no-pad">
-    <%= text_field_tag :email, params[:email], placeholder: "Email" %>
-  </div>
+      <%= password_field_tag :password, placeholder: "Password" %>
+    </div>
+    </div>
+    <div class="actions">
+      <%= submit_tag "Sign In", class: 'waves-effect btn' %>
+    </div>
 
-  <div class="input-field col s12 no-pad">
-    <%= password_field_tag :password, placeholder: "Password" %>
-  </div>
-  </div>
-  <div class="actions">
-    <%= submit_tag "Sign In", class: 'waves-effect btn' %>
-  </div>
+  <% end %>
 
-<% end %>
+</div>

@@ -97,6 +97,7 @@ $(document).on('ready page:load', function(){
     });
 
   window.onscroll = function() {
+    if($("#main-map").length > 0) {
       for (var i = 0; i < geojsonData.length; i++) {
           var id = geojsonData[i].dev_site.id;
           if (isElementOnScreen(id)) {
@@ -104,6 +105,7 @@ $(document).on('ready page:load', function(){
               break;
           }
       }
+    }
   };
 
   var activeDataPoint;
