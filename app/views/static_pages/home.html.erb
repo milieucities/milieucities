@@ -35,42 +35,42 @@
        </div>
      </div>
 
-      <form>
+      <%= form_tag("/survey", method: "post") do %>
         <div class="input-field col s12">
-          <input id="user" type="text">
-          <label for="user">Name</label>
+          <%= text_field_tag :name %>
+          <%= label_tag :name %>
         </div>
 
         <div class="input-field col s12">
-          <input id="city" type="text">
-          <label for="city">City</label>
+          <%= text_field_tag :city %>
+          <%= label_tag :city %>
         </div>
 
         <div class="input-field col s12">
-          <input id="hood" type="text">
-          <label for="hood">Neighbourhood</label>
+          <%= text_field_tag :hood %>
+          <%= label_tag :hood %>
         </div>
 
         <div class="input-field col s12">
-          <input id="user" type="text" placeholder="A park, less buses, bike paths ... ">
-          <label for="user">Things I would like to see in my neighbourhood</label>
+          <%= text_field_tag :suggestion, nil, :placeholder => "A park, less buses, bike paths ... " %>
+          <%= label_tag :suggestion, "Things I would like to see in my neighbourhood" %>
         </div>
 
-      <div class="row">
-        <div class="input-field col s12">
-          <input type="checkbox" id="test5" />
-          <label for="test5">I agree to the terms of service</label>
-        </div>
-      </div>
+        <div class="row">
+          <div class="input-field col s12">
 
-      <div class="row">
-        <div class="input-field col s12">
-          <%= link_to "Proceed", dev_sites_path, class: "waves-effect waves-light btn" %>
-          <%= link_to "Skip", dev_sites_path, class: "waves-effect btn btn-flat" %>
+            <%= check_box_tag :terms %>
+            <%= label_tag :terms, "I agree to the terms of service" %>
+          </div>
         </div>
-      </div>
 
-     </form>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= submit_tag("Proceed", class: "waves-effect waves-light btn") %>
+            <%= link_to "Skip", dev_sites_path, class: "waves-effect btn btn-flat" %>
+          </div>
+        </div>
+     <% end %>
 
    </div>
  </div>

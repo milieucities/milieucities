@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
- 
+
   def home
   end
 
@@ -9,16 +9,43 @@ class StaticPagesController < ApplicationController
   def map
   end
 
-  def demo
-    @demo = Demo.new(:email => params[:email])
-    respond_to do |format|
-      if @demo.save
-        format.html { render action: "home", notice: "Thank you. You'll be contacted shortly!" }
-        format.json { render json: @demo, status: :created, location: @demo }
-      else
-        format.html { render action: "home", notice: "Email not added, try again" }
-        format.json { render json: @demo.errors, status: :unprocessable_entity }
-      end
-    end
+  def submitSurvey
+    name = params[:name].to_s if params[:name]
+    city = params[:city].to_s if params[:city]
+    hood = params[:hood].to_s if params[:hood]
+    suggestion = params[:suggestion].to_s if params[:suggestion]
+    terms = params[:terms] if params[:terms]
+
+    saveToFirebase(name, city, hood, suggestion, terms)
   end
+
+
+  private
+
+    def saveToFirebase(name, city, hood, suggestion, terms)
+      base_uri = 'https://milieu.firebaseio.com/'
+      firebase = Firebase::Client.new(base_uri, ENV['FIREBASE_SECRET'])
+      firebase.request.connect_timeout = 30
+
+      if name && city && hood && suggestion && terms
+
+        response = firebase.set("visits/"+name, {
+          :fullName => name,
+          :city => city,
+          :neighbourhood => hood,
+          :suggestion => suggestion,
+          :created => Firebase::ServerValue::TIMESTAMP
+        })
+
+        if response
+          redirect_to dev_sites_path, notice: "Thank you " + name + ". Welcome to Milieu."
+        end
+
+
+      else
+        redirect_to root_path, notice: "Fill out the form first"
+      end
+
+
+    end
 end
