@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>MILIEU</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,300' rel='stylesheet' type='text/css'>
   <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
 
   <!-- Marker Clustering -->
@@ -15,9 +16,12 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body class="blue lighten-5">
 
-<%= yield %>
-
+<body>
+  <%= render "layouts/nav" %>
+  <%= render "layouts/flash", :flash => flash %>
+  <%= yield %>
+  <%= javascript_include_tag "vendor", :debug => false %>
 </body>
+
 </html>

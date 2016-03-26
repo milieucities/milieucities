@@ -13,10 +13,12 @@ gem 'firebase'
 gem 'bcrypt'
 gem 'ratyrate'
 gem 'unirest'
+gem 'rabl'
 gem 'pg'
 gem 'lunchy'
 gem 'cocoon'
 gem 'geocoder'
+gem 'momentjs-rails'
 gem 'simple_token_authentication'
 gem 'unicorn'
 gem 'materialize-sass'
@@ -28,9 +30,11 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'fog'
 gem 'rmagick', :require => 'RMagick'
 gem 'figaro'
+gem 'react-rails'
+
 
 ## For APIs ##
-gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
+# gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
 gem 'font-awesome-rails'
 gem 'simple_form'
 
