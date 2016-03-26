@@ -56,7 +56,7 @@ DevSites.Show = React.createClass({
 
               <div className="label title">Preview</div>
               <a href={"/dev_sites/" + this.state.devSite.id}>
-                <img src={this.state.devSite.image_url ? this.state.devSite.image_url : this.props.defaultImage } className="display-image"/>
+                <img src={this.state.devSite.image} className="display-image"/>
               </a>
               <div className="title">{this.state.devSite.title}</div>
               <div className="label title">Info</div>
@@ -101,7 +101,7 @@ DevSites.Item = React.createClass({
     return <div className="col s12 m6 l4">
             <div className={ (this.state.selectedDevSite.id === this.state.devSite.id ) ? "card selected" : "card" } onClick={this.changeSelectedDevSite}>
               <div className="card-image waves-effect waves-block waves-light">
-                <img src={this.state.devSite.image_url ? this.state.devSite.image_url : this.props.defaultImage } />
+                <img src={this.state.devSite.image } />
               </div>
               <div className="card-content">
                 <span className="card-title grey-text text-darken-4 truncate"><a href={"/dev_sites/" + this.state.devSite.id}>{this.state.devSite.title}</a></span>

@@ -3,7 +3,9 @@
   <div class="container">
   <div class="row">
     <div class="col s12 m7">
-      <%= image_tag (@dev_site.image_url.present? ? @dev_site.image_url : "mainbg.jpg" ), class: "display-image materialboxed" %>
+      <div id="slides">
+      </div>
+       <%= image_tag (@dev_site.images.present? ? @dev_site.images.last.url : "mainbg.jpg" ), class: "display-image materialboxed" %>
     </div>
     <div class="col s12 m5">
       <h3><%= @dev_site.title%></h3>
@@ -51,21 +53,21 @@
           </div>
         </div>
 
-        <div class="col s12">
-          <h5>Rate</h5>
-          <div class="row">
-            <div class="col s12 m6">
-            Location: <%= rating_for @dev_site, "location", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
-            Application Type: <%= rating_for @dev_site, "app_type", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
 
   <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? %>
+
+  <div class="col s12">
+    <h5>Rate</h5>
+    <div class="row">
+      <div class="col s12 m6">
+      Location: <%= rating_for @dev_site, "location", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
+      Application Type: <%= rating_for @dev_site, "app_type", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
+      </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col s12" style="max-width: 750px">
@@ -74,13 +76,13 @@
     </div>
   </div>
 
-  <% @dev_site.images.each do |img| %>
-    <%= image_tag img.web.preview if @dev_site.images? %>
-  <% end %>
-
-
-  <% @dev_site.files.each do |file| %>
-    <%= link_to "File", file.url if @dev_site.files? %>
+  <% if @dev_site.files.present? %>
+  <h5>Files</h5>
+  <ul class="files">
+    <% @dev_site.files.each do |file| %>
+      <li><%= fa_icon("file-o") %><%= link_to File.basename(file.path), file.url %></li>
+    <% end %>
+  </ul>
   <% end %>
 
   <div style="max-width: 750px">

@@ -27,18 +27,8 @@
       <%= f.hidden_field :images_cache %>
     </div>
     <div class="file-path-wrapper">
-      <input type="text" class="file-path">
-    </div>
-  </div>
-
-  <div class="file-field input-field col s12">
-    <div class="btn">
-      <span>File</span>
-      <%= f.file_field :files, multiple: true %>
-      <%= f.hidden_field :files_cache %>
-    </div>
-    <div class="file-path-wrapper">
-      <input type="text" class="file-path">
+    <% img_str = @dev_site.images.map { |img| File.basename(img.path) }.join(", ") %>
+      <input type="text" class="file-path" value="<%= img_str %>" >
     </div>
   </div>
 
@@ -65,6 +55,18 @@
   <div class="input-field col s12">
     <%= f.text_area :description, class: "materialize-textarea" %>
     <%= f.label :description %>
+  </div>
+
+  <div class="file-field input-field col s12">
+    <div class="btn">
+      <span>Files</span>
+      <%= f.file_field :files, multiple: true %>
+      <%= f.hidden_field :files_cache %>
+    </div>
+    <div class="file-path-wrapper">
+    <% file_str = @dev_site.files.map { |file| File.basename(file.path) }.join(", ") %>
+      <input type="text" class="file-path" value="<%= file_str %>">
+    </div>
   </div>
 
   </div>

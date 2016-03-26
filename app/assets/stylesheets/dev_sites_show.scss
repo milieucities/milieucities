@@ -46,7 +46,6 @@ section#dev-site-show{
     background-color: #f4f4f4;
     margin-bottom: 5px;
 
-
     .user{
       font-weight: bold;
       font-size: 18px;
@@ -63,4 +62,25 @@ section#dev-site-show{
     }
 
   }
+
+  .files{
+    li{
+      font-size: 14px;
+      font-weight: 300px;
+
+      i{
+        padding-right: 15px;
+      }
+
+      a:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+
+  textarea{
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+  }
+
 }

@@ -38,7 +38,8 @@ class DevSite < ActiveRecord::Base
   end
 
   def image
-    self.image_url || ActionController::Base.helpers.asset_path("mainbg.jpg")
+    return ActionController::Base.helpers.asset_path("mainbg.jpg") if self.images.empty?
+    self.images.last.url
   end
   
   # CarrierWave - Images
