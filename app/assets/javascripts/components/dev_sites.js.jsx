@@ -13,11 +13,16 @@ var DevSites = React.createClass({
   },
   render: function(){
 
+    var noDevSites;
     var devSitesNodes = this.state.devSites.map(function(devSite, i){
       return (
         <DevSites.Item {...this.props} devSite={devSite.dev_site} selectedDevSite={this.state.selectedDevSite} key={i} reactKey={i} changeSelectedDevSite={this.changeSelectedDevSite} />
       );
     }.bind(this));
+
+    if(this.state.devSites.length === 0){
+      noDevSites = <div className="flow-text center">No developments sites loaded.</div>;
+    }
 
     return <section id="dev-sites-index">
              <div className="header">
@@ -27,6 +32,7 @@ var DevSites = React.createClass({
              <DevSites.Show {...this.props} devSite={this.state.selectedDevSite} />
              <div className="dev-sites row">
                {devSitesNodes} 
+               {noDevSites}
              </div>
            </section>
   }
@@ -49,7 +55,9 @@ DevSites.Show = React.createClass({
     return  <div className="dev-site-profile hide-on-med-and-down">
 
               <div className="label title">Preview</div>
-              <img src={this.state.devSite.image_url ? this.state.devSite.image_url : this.props.defaultImage } className="display-image"/>
+              <a href={"/dev_sites/" + this.state.devSite.id}>
+                <img src={this.state.devSite.image_url ? this.state.devSite.image_url : this.props.defaultImage } className="display-image"/>
+              </a>
               <div className="title">{this.state.devSite.title}</div>
               <div className="label title">Info</div>
               <div className="row">

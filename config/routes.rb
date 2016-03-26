@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'all_user_comments', to: 'comments#all_user_comments'
   get 'all_devsite_comments', to: 'dev_sites#all_devsite_comments'
   get 'heart', to: 'dev_sites#heart'
+  get 'map', to: 'static_pages#map'
   get 'break_heart', to: 'dev_sites#break_heart'
   get 'demo', to: 'static_pages#demo'
   get 'xml_data', to: 'dev_sites#xml_data'
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :dev_sites do
     resources :comments, module: :dev_sites
-
+    get :geojson, on: :collection
   end
 
   resources :events, only: [:index, :show, :destroy, :create]

@@ -25,6 +25,7 @@ gem 'materialize-sass'
 gem 'pry'
 gem 'micro_token'
 gem 'redis'
+gem 'handlebars_assets', '~> 0.23.0'
 gem 'hiredis'
 gem 'react-rails'
 

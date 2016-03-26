@@ -23,6 +23,8 @@
 //= require ratyrate
 //= require cocoon
 //= require moment
+//= require handlebars.runtime
+//= require_tree ./templates
 //  VENDOR PACKAGES
 //= require jquery-comments/js/jquery-comments.min.js
 

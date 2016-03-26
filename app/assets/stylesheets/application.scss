@@ -9,7 +9,12 @@ $secondary-color: #5d9bc0 !default;
 @import "dev_sites_index";
 @import "dev_sites_show";
 @import "forms";
+@import "maps/home";
+@import "maps/main";
 
+a{
+  color: #333;
+}
 
 .no-pad{
   padding: 0 !important;
@@ -28,4 +33,8 @@ h1, h2, h3, h4, h5, h6 {
   clear: both;
   display: table;
   content: "";
+}
+
+.dropdown-content li > a, .dropdown-content li > span{
+  color: #333;
 }

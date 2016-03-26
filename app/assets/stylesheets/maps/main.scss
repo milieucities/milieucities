@@ -1,0 +1,86 @@
+section#map{
+  #dev-site-profile{
+    width: 300px;
+    min-height: calc(100vh - 64px);
+    display: inline-block;
+    float: left;
+
+    .dev-site{
+      min-height: calc(100vh - 64px);
+      padding: 20px 20px 50px;
+    }
+
+    .display-image{
+      width: 100%;
+      height: 200px;
+      border-radius: 3px;
+      object-fit: cover;
+    }
+
+    .info{
+      font-size: 13px;
+
+      .col{
+        padding: 0;
+      }
+    }
+
+    .title{
+      padding: 20px 0;
+      font-size: 20px;
+    }
+
+    .cat-label{
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 16px;
+      padding: 5px 0;
+    }
+
+    .label{
+      color: #999;
+    }
+
+    a.btn{
+      width: 100%;
+    }
+
+  }
+
+  #main-map{
+    float: left;
+    position: fixed;
+    top: 0;
+    left: 300px;
+    display: inline-block;
+    height: 100vh;
+    width: calc(100vw - 300px);
+
+    .marker-title{
+      font-weight: 700;
+
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+
+  #geocoder-container {
+      position: fixed;
+      z-index: 1;
+      top: 5px;
+      left: 150px;
+      width: 100%;
+      margin-top: 10px;
+  }
+
+  #geocoder-container > div {
+    margin: 0 auto;
+    min-width:400px;
+
+    input{
+      box-sizing: border-box;
+    }
+  }
+
+}

@@ -9,12 +9,14 @@
   </form> -->
 
   <ul>
+    <li><%= link_to "Map", map_path %></li>
     <% if signed_in? %>
       <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete %></li>
     <% else %>
       <li><%= link_to "Sign In", new_session_path %></li>
       <li><%= link_to "Sign Up", new_user_path %></li>
     <% end %>
+    
 <!--     <li><%= link_to "Settings", "#" %></li>
     <li><%= link_to "Notifications", "#" %></li>
     <li><%= link_to "Community", "#" %></li> -->
