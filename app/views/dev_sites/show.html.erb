@@ -47,7 +47,7 @@
   </div>
 
   <% @dev_site.images.each do |img| %>
-    <%= image_tag img.web.full if @dev_site.images? %>
+    <%= image_tag img.web.preview if @dev_site.images? %>
   <% end %>
 
 
