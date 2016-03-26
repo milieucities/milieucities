@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   ## MAIN APP PAGE ##
   root 'static_pages#home'
 
+  post '/survey', to: 'static_pages#submitSurvey'
+
   post '/rate' => 'rater#create', :as => 'rate'
 
   get 'all_user_comments', to: 'comments#all_user_comments'
@@ -10,7 +12,6 @@ Rails.application.routes.draw do
   get 'heart', to: 'dev_sites#heart'
   get 'map', to: 'static_pages#map'
   get 'break_heart', to: 'dev_sites#break_heart'
-  get 'demo', to: 'static_pages#demo'
   get 'xml_data', to: 'dev_sites#xml_data'
 
   get 'events', to: 'static_pages#events'
