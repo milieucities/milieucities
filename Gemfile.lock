@@ -1,14 +1,4 @@
 GIT
-  remote: git://github.com/Compass/compass-rails.git
-  revision: 62e37c73e8c8470b094e8d7f2cbb98356b591e57
-  branch: master
-  specs:
-    compass-rails (3.0.2)
-      compass (~> 1.0.0)
-      sass-rails (< 5.1)
-      sprockets (< 4.0)
-
-GIT
   remote: git://github.com/carrierwaveuploader/carrierwave.git
   revision: a2c93fe1a9d3a3f60d1662e5ec34fdba7bf2b304
   specs:
@@ -16,6 +6,7 @@ GIT
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -88,7 +79,6 @@ GEM
     erubis (2.7.0)
     excon (0.48.0)
     execjs (2.6.0)
-    ffi (1.9.10)
     figaro (1.1.1)
       thor (~> 0.14)
     firebase (0.2.6)
@@ -283,9 +273,6 @@ GEM
     raindrops (0.15.0)
     rake (11.1.1)
     ratyrate (1.2.2.alpha)
-    rb-fsevent (0.9.7)
-    rb-inotify (0.9.7)
-      ffi (>= 0.5.0)
     rbvmomi (1.8.2)
       builder
       nokogiri (>= 1.4.1)
@@ -368,7 +355,6 @@ DEPENDENCIES
   carrierwave!
   cocoon
   coffee-rails (~> 4.1.0)
-  compass-rails!
   figaro
   firebase
   fog
