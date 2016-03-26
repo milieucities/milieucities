@@ -1,0 +1,22 @@
+section#home{
+  margin: 0;
+  
+  #map{
+    height: calc(100vh - 64px);
+    width: 100%;
+  }
+
+  h3{
+    color: $secondary-color;
+  }
+
+  .btn-flat{
+    transition: 200ms;
+
+    &:hover{
+      color: #fff;
+    }
+  }
+
+}
+

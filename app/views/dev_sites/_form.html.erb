@@ -1,4 +1,7 @@
-<%= form_for @dev_site, html: { multipart: true } do |f| %>
+<%= form_for @dev_site, html: { class: "one-page-form", multipart: true } do |f| %>
+
+  <div class="row">
+
   <% if @dev_site.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@dev_site.errors.count, "error") %> prohibited this dev_site from being saved:</h2>
@@ -11,60 +14,77 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :devID %><br>
-    <%= f.text_field :devID %>
-  </div>
-  <div class="field">
-    <%= f.label :application_type %><br>
-    <%= f.text_field :application_type %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br>
+  <div class="input-field col s12">
     <%= f.text_field :title %>
+    <%= f.label :title %>
   </div>
 
-  <div class="field">
+
+  <div class="input-field col s12">
     <%= f.label :images %>
     <%= f.file_field :images, multiple: true %>
     <%= f.hidden_field :images_cache %>
   </div>
 
-  <div class="field">
+  <div class="input-field col s12">
     <%= f.label :files %>
     <%= f.file_field :files, multiple: true %>
     <%= f.hidden_field :files_cache %>
   </div>
 
-  <h4>Addresses</h4>
-  <div class="field">
+  <div class="input-field col s12 m6">
+    <%= f.text_field :devID %>
+    <%= f.label :devID, "Development Id" %>
+  </div>
+
+  <div class="input-field col s12 m6">
+   <%= f.select :application_type, options_for_select(DevSite::VALID_APPLICATION_TYPES, selected: @dev_site.application_type ) %>
+    <%= f.label :application_type, "Application Type" %>
+  </div>
+
+  <div class="input-field col s12 m6">
+    <%= f.text_field :ward_name %>
+    <%= f.label :ward_name, "Ward Name" %>
+  </div>
+
+  <div class="input-field col s12 m6">
+    <%= f.number_field :ward_num %>
+    <%= f.label :ward_num, "Ward Number"%>
+  </div>
+
+  <div class="input-field col s12">
+    <%= f.text_area :description, class: "materialize-textarea" %>
+    <%= f.label :description %>
+  </div>
+
+  </div>
+
+  <div class="row">
+
+  <h5>Addresses</h5>
+  <div class="input-field col s12">
     <% f.fields_for :addresses do |address| %>
       <%= render 'address_fields', :f => address %>
     <% end %>
-    <%= link_to_add_association 'add address', f, :addresses %>
+    <%= link_to_add_association 'Add address', f, :addresses %>
+  </div>
   </div>
 
-  <h4>Statuses</h4>
-  <div class="field">
+  <div class="row">
+
+  <h5>Statuses</h5>
+
+  <div class="input-field col s12">
     <% f.fields_for :statuses do |status| %>
       <%= render 'status_fields', :f => status %>
     <% end %>
-    <%= link_to_add_association 'add status', f, :statuses %>
+    <%= link_to_add_association 'Add status', f, :statuses %>
   </div>
 
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :ward_name %><br>
-    <%= f.text_field :ward_name %>
-  </div>
-  <div class="field">
-    <%= f.label :ward_num %><br>
-    <%= f.number_field :ward_num %>
-  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", class: "btn" %>
   </div>
+
 <% end %>

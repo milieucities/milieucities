@@ -1,6 +1,10 @@
 class DevSite < ActiveRecord::Base
   attr_accessor :images, :files
 
+  default_scope { order(updated_at: :desc ) }
+
+  VALID_APPLICATION_TYPES = [ "Beginning", "In Progress", "Complete"]
+
   # establish_connection DB_OTTAWA
   # ASSOCIATIONS
   has_many :comments, as: :commentable
@@ -20,3 +24,4 @@ class DevSite < ActiveRecord::Base
 
 
 end
+

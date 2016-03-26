@@ -1,0 +1,31 @@
+@import "font-awesome";
+@import "materialize/components/color";
+$primary-color: #92c7c6 !default;
+$secondary-color: #5d9bc0 !default;
+@import "materialize";
+@import "static_pages";
+@import "nav";
+@import "session";
+@import "dev_sites_index";
+@import "dev_sites_show";
+@import "forms";
+
+
+.no-pad{
+  padding: 0 !important;
+}
+
+.no-marg{
+  margin: 0 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $primary-color;
+  font-weight: 300;
+}
+
+.clear{
+  clear: both;
+  display: table;
+  content: "";
+}

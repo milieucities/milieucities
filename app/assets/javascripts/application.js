@@ -17,11 +17,12 @@
 //= require turbolinks
 //= require jquery.turbolinks
 //= require jquery.raty
+//= require react
+//= require react_ujs
+//= require_tree ./components
 //= require ratyrate
 //= require cocoon
-//= require materialize-sprockets
-//= require materialize/extras/nouislider
-//
+//= require moment
 //  VENDOR PACKAGES
 //= require jquery-comments/js/jquery-comments.min.js
 
