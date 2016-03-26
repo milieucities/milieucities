@@ -1,5 +1,5 @@
 <section id="nav">
-  <%= link_to image_tag("white-logo.png"), dev_sites_path, class: "nav-logo" %>
+  <%= link_to image_tag("white-logo.png"), root_path, class: "nav-logo" %>
 <!-- 
   <form>
     <div class="input-field">
@@ -9,6 +9,7 @@
   </form> -->
 
   <ul>
+    <li><%= link_to "Map Index", dev_sites_path %></li>
     <li><%= link_to "Map", map_path %></li>
     <% if signed_in? %>
       <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete %></li>

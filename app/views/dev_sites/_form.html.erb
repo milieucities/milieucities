@@ -19,17 +19,26 @@
     <%= f.label :title %>
   </div>
 
-
-  <div class="input-field col s12">
-    <%= f.label :images %>
-    <%= f.file_field :images, multiple: true %>
-    <%= f.hidden_field :images_cache %>
+  <div class="file-field input-field col s12">
+    <div class="btn">
+      <span>Images</span>
+      <%= f.file_field :images, multiple: true %>
+      <%= f.hidden_field :images_cache %>
+    </div>
+    <div class="file-path-wrapper">
+      <input type="text" class="file-path">
+    </div>
   </div>
 
-  <div class="input-field col s12">
-    <%= f.label :files %>
-    <%= f.file_field :files, multiple: true %>
-    <%= f.hidden_field :files_cache %>
+  <div class="file-field input-field col s12">
+    <div class="btn">
+      <span>File</span>
+      <%= f.file_field :files, multiple: true %>
+      <%= f.hidden_field :files_cache %>
+    </div>
+    <div class="file-path-wrapper">
+      <input type="text" class="file-path">
+    </div>
   </div>
 
   <div class="input-field col s12 m6">
@@ -63,7 +72,7 @@
 
   <h5>Addresses</h5>
   <div class="input-field col s12">
-    <% f.fields_for :addresses do |address| %>
+    <%= f.fields_for :addresses do |address| %>
       <%= render 'address_fields', :f => address %>
     <% end %>
     <%= link_to_add_association 'Add address', f, :addresses %>
@@ -75,7 +84,7 @@
   <h5>Statuses</h5>
 
   <div class="input-field col s12">
-    <% f.fields_for :statuses do |status| %>
+    <%= f.fields_for :statuses do |status| %>
       <%= render 'status_fields', :f => status %>
     <% end %>
     <%= link_to_add_association 'Add status', f, :statuses %>
@@ -84,7 +93,8 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Submit", class: "btn" %>
+    <%= f.submit "Submit", class: "btn submit" %>
   </div>
 
 <% end %>
+

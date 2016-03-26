@@ -64,10 +64,9 @@ $(document).on('ready page:load', function(){
     map.on('click', function (e) {
       var features = map.queryRenderedFeatures(e.point, { layers: ['devSites'] });
       if (features.length) {
-      console.log(features[0]);
 
-          map.flyTo({center: features[0].geometry.coordinates});
-          $("html, body").animate({ scrollTop: $("#dev-site-" + features[0].properties.id).offset().top }, 1000);
+        map.flyTo({center: features[0].geometry.coordinates});
+        $("html, body").animate({ scrollTop: $("#dev-site-" + features[0].properties.id).offset().top }, 1000);
       }
     });
 
@@ -97,8 +96,6 @@ $(document).on('ready page:load', function(){
             .addTo(map);
     });
 
-  }
-
   window.onscroll = function() {
       for (var i = 0; i < geojsonData.length; i++) {
           var id = geojsonData[i].dev_site.id;
@@ -114,9 +111,6 @@ $(document).on('ready page:load', function(){
       if (dataPoint === activeDataPoint) return;
 
       map.flyTo({center: [dataPoint.longitude, dataPoint.latitude], zoom: 15 });
-
-      // document.getElementById(dataPoint.id).setAttribute('class', 'active');
-      // document.getElementById(activeDataPoint.id).setAttribute('class', '');
 
       activeDataPoint = dataPoint;
   }
@@ -134,6 +128,7 @@ $(document).on('ready page:load', function(){
 
   map.addControl(geocoder);
 
+  }
 
 
 });

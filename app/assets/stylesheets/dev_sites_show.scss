@@ -1,8 +1,17 @@
 section#dev-site-show{
 
   position: relative;
-  padding: 40px 0;
   color: #555;
+  background-color: #f4f4f4;
+
+  .container{
+    background-color: #fff;
+    padding: 40px;
+  }
+
+  h3{
+    margin-top: 0;
+  }
 
   .btn-floating{
     position: absolute;
@@ -13,8 +22,15 @@ section#dev-site-show{
   .display-image{
     height: 400px;
     width: 100%;
+    max-height: 50vh;
     border-radius: 3px;
+    padding-bottom: 30px;
     object-fit: cover;
+  }
+
+  .like-button:hover{
+    transition: 200ms;
+    color: red;
   }
 
   .info{
@@ -23,5 +39,28 @@ section#dev-site-show{
 
   .label{
     color: #999;
+  }
+
+  .comment{
+    padding: 10px;
+    background-color: #f4f4f4;
+    margin-bottom: 5px;
+
+
+    .user{
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .role{
+      color: #999;
+      font-weight: 300;
+    }
+
+    .body{
+      padding-top: 10px;
+      font-size: 14px;
+    }
+
   }
 }

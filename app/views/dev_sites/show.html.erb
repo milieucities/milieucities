@@ -1,11 +1,12 @@
-<section id="dev-site-show" class="container">
-  <%= link_to fa_icon("pencil"), edit_dev_site_path(@dev_site), class: "btn-floating right" %>
+<section id="dev-site-show">
+
+  <div class="container">
   <div class="row">
     <div class="col s12 m7">
       <%= image_tag (@dev_site.image_url.present? ? @dev_site.image_url : "mainbg.jpg" ), class: "display-image materialboxed" %>
     </div>
     <div class="col s12 m5">
-      <h2><%= @dev_site.title%></h2>
+      <h3><%= @dev_site.title%></h3>
 
       <div class="row info">
 
@@ -21,26 +22,53 @@
         <div class="col s6 label">Ward Number:</div>
         <div class="col s6"><%= @dev_site.ward_num.present? ? @dev_site.ward_num : "N/A" %></div>
 
-        <% if @dev_site.statuses.present? %>
-        <div class="col s6 label">Status:</div>
-        <div class="col s6"><%= @dev_site.statuses.last.status || "N/A" %></div>
+        <div class="col s6 label">Likes:</div>
+        <div class="col s6">
+          <%= link_to fa_icon("heart", text: @dev_site.hearts || "0"), "#", class: "like-button" %>
+        </div>
 
-        <div class="col s6 label">Status Date:</div>
-        <div class="col s6"><%= @dev_site.statuses.last.status_date || "N/A" %></div>
-        <% end %>
+        <div class="row" style="max-width: 400px;">
+          <div class="col s12">
+              <% if @dev_site.statuses.present? %>
+                <table class="striped">
+                  <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Status Date</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  <% @dev_site.statuses.each do |status| %>
+                    <tr>
+                      <td><%= status.status || "N/A" %></td>
+                      <td><%= status.status_date.present? ? status.status_date.strftime("%B %e, %Y") : "N/A" %></td>
+                    </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              <% end %>
+          </div>
+        </div>
 
         <div class="col s12">
           <h5>Rate</h5>
-          Location: <%= rating_for @dev_site, "location", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
-          Application Type: <%= rating_for @dev_site, "app_type", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
+          <div class="row">
+            <div class="col s12 m6">
+            Location: <%= rating_for @dev_site, "location", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
+            Application Type: <%= rating_for @dev_site, "app_type", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
+            </div>
+          </div>
         </div>
 
       </div>
     </div>
   </div>
 
+  <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? %>
+
   <div class="row">
-    <div class="col s12">
+    <div class="col s12" style="max-width: 750px">
       <h5>Description</h5>
       <p><%= @dev_site.description.present? ? @dev_site.description : "No description present." %></p>
     </div>
@@ -55,11 +83,29 @@
     <%= link_to "File", file.url if @dev_site.files? %>
   <% end %>
 
-  <div style="max-width: 500px">
-  <%= render partial: "comments/comments", locals: { commentable: @dev_site } %>
-  <%= render partial: "comments/form", locals: { commentable: @dev_site } %>
+  <div style="max-width: 750px">
+    <h5>Comment</h5>
+
+    <%if @dev_site.comments.count  < 1 %>
+      <i>Be the first to comment</i>
+    <% end %>
+
+    <% @dev_site.comments.each do |comment| %>
+      <% next if comment.new_record? %>
+      <div class="comment">
+        <div class="user"><%= comment.user ? comment.user.full_name : "Anonymous" %>
+        <span class="role">| <%= comment.user ? comment.user.role.capitalize : "User" %> </span>
+        </div>
+        <div class="body">
+          <%= comment.body %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= render partial: "comments/form", locals: { commentable: @dev_site } %>
   </div>
 
+</div>
 </section>
 
 

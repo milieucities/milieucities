@@ -28,7 +28,7 @@ class DevSitesController < ApplicationController
           id: ds.id,
           zoom: 9,
           title: ds.title,
-          address: address.street,
+          address: address,
           :'marker-symbol' => "marker",
           description: "<div class=\"marker-title\"><a href=\"/dev_sites/#{ds.id}\">#{ds.title}</a></div>Status: #{ds.status}"
         }
@@ -135,9 +135,9 @@ class DevSitesController < ApplicationController
     end
 
     def dev_site_params
-      params.require(:dev_site).permit(:devID, :application_type, :title,
+      params.require(:dev_site).permit(:devID, :application_type, :title, :images_cache, :files_cache,
       :description, :ward_name, :ward_num, :image_url, :hearts, {images: []}, {files: []},
-      addresses_attributes: [:lat, :lon, :street],
-      statuses_attributes: [:status, :status_date] )
+      addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
+      statuses_attributes: [:id, :status, :status_date, :_destroy] )
     end
 end

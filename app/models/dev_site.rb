@@ -7,11 +7,13 @@ class DevSite < ActiveRecord::Base
 
   # establish_connection DB_OTTAWA
   # ASSOCIATIONS
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :statuses, dependent: :destroy
 
-  accepts_nested_attributes_for :addresses, :statuses
+  accepts_nested_attributes_for :addresses
+  accepts_nested_attributes_for :statuses
+
   # Rating
   ratyrate_rateable "location", "app_type"
 
@@ -20,7 +22,7 @@ class DevSite < ActiveRecord::Base
   end
 
   def status_date
-    self.statuses.last.status_date
+    self.statuses.last.status_date ? self.statuses.last.status_date.strftime("%B %e, %Y") : nil
   end
 
   def address
