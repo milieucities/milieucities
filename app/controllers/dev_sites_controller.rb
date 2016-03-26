@@ -47,6 +47,8 @@ class DevSitesController < ApplicationController
   # POST /dev_sites
   # POST /dev_sites.json
   def create
+    # require 'pry'
+    # binding.pry
     @dev_site = DevSite.new(dev_site_params)
 
     respond_to do |format|
@@ -127,8 +129,8 @@ class DevSitesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def dev_site_params
       params.require(:dev_site).permit(:devID, :application_type, :title,
-      :description, :ward_name, :ward_num, :image_url, :hearts, :image, :file,
+      :description, :ward_name, :ward_num, :image_url, :hearts, {images: []}, {files: []},
       addresses_attributes: [:lat, :lon, :street],
-      statuses_attributes: [:status, :statusdate] )
+      statuses_attributes: [:status, :status_date] )
     end
 end

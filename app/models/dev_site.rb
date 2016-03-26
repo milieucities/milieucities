@@ -1,5 +1,5 @@
 class DevSite < ActiveRecord::Base
-  attr_accessor :image, :file
+  attr_accessor :images, :files
 
   # establish_connection DB_OTTAWA
   # ASSOCIATIONS
@@ -12,10 +12,11 @@ class DevSite < ActiveRecord::Base
   ratyrate_rateable "location", "app_type"
 
   # CarrierWave - Images
-  mount_uploader :image, ImageUploader
+  mount_uploaders :images, ImagesUploader
 
   # CarrierWave - Files
-  mount_uploader :file, FileUploader
+  mount_uploaders :files, FilesUploader
+
 
 
 end

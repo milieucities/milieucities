@@ -15,8 +15,9 @@
   </div>
 <% end %>
 
-<%= image_tag @dev_site.image_url(:web, :full) if @dev_site.image? %>
-
+<% @dev_site.images.each do |img| %>
+  <%= image_tag img.web.full if @dev_site.images? %>
+<% end %>
 <p>
   <strong>Devid:</strong>
   <%= @dev_site.devID %>
@@ -46,6 +47,10 @@
   <strong>Ward num:</strong>
   <%= @dev_site.ward_num %>
 </p>
+
+<% @dev_site.files.each do |file| %>
+  <%= link_to "File", file.url if @dev_site.files? %>
+<% end %>
 
 <h2>Please Rate</h2>
 Location: <%= rating_for @dev_site, "location", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
