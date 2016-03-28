@@ -25,7 +25,7 @@ class StaticPagesController < ApplicationController
     def saveToFirebase(name, city, hood, suggestion, terms)
       base_uri = 'https://milieu.firebaseio.com/'
       firebase = Firebase::Client.new(base_uri, ENV['FIREBASE_SECRET'])
-      firebase.request.connect_timeout = 30
+      firebase.request.connect_timeout = 150
 
       if name && city && hood && suggestion && terms
 
