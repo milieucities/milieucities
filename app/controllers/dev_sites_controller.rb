@@ -3,43 +3,12 @@ class DevSitesController < ApplicationController
   skip_before_filter :verify_signed_out_user, if: :json_request?
 
   def index
-    @dev_sites = DevSite.all
+    @dev_sites = DevSite.first(9)
 
     respond_to do |format|
         format.html
         format.json
     end
-  end
-
-  def geojson
-    @dev_sites = DevSite.all
-    @geojson = []
-
-    @dev_sites.each do |ds|
-      address = ds.addresses.first
-      next unless address
-      @geojson << {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [address.geocode_lon, address.geocode_lat]
-        },
-        properties: {
-          id: ds.id,
-          zoom: 9,
-          title: ds.title,
-          address: address,
-          :'marker-symbol' => "marker",
-          description: "<div class=\"marker-title\"><a href=\"/dev_sites/#{ds.id}\">#{ds.title}</a></div>Status: #{ds.status}"
-        }
-      }
-    end
-
-    render json: @geojson
-  end
-
-  def xml_data
-    @dev_sites = DevSite.all
   end
 
   def show

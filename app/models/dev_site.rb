@@ -29,19 +29,19 @@ class DevSite < ActiveRecord::Base
     self.addresses.first.street
   end
 
-  def latitude
-    self.addresses.first.geocode_lat
-  end
+  # def latitude
+  #   self.addresses.first.geocode_lat
+  # end
 
-  def longitude
-    self.addresses.first.geocode_lon
-  end
+  # def longitude
+  #   self.addresses.first.geocode_lon
+  # end
 
   def image
     return ActionController::Base.helpers.asset_path("mainbg.jpg") if self.images.empty?
     self.images.last.url
   end
-  
+
   # CarrierWave - Images
   mount_uploaders :images, ImagesUploader
 

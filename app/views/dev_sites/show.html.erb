@@ -57,7 +57,9 @@
     </div>
   </div>
 
-  <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? %>
+  <% if current_user.role == 'planner' %>
+    <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? %>
+  <% end %>
 
   <div class="col s12">
     <h5>Rate</h5>

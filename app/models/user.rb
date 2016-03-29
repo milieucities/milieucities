@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   validates               :password, on: :create, presence: {message: "Password is required"}
   validates_length_of     :password, :in => 6..20, :on => :create
   validates               :bio, length: {maximum: 140, message: "140 characters max"}
+  validates               :role, presence: { message: "A user role is required" }
 
 
   def full_name
