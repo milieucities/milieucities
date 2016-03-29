@@ -22,8 +22,7 @@ class CommentsController < ApplicationController
                     }
       else
         format.html {
-                      render :new
-                      flash[:notice] = "Failed to add comment. Try again"
+                      redirect_to dev_site_path(@comment.dev_site_id), notice: "Failed to add comment. Try again"
                     }
         format.json {
                       render :json => ['status': 401]
