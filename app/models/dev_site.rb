@@ -17,25 +17,38 @@ class DevSite < ActiveRecord::Base
   # Rating
   ratyrate_rateable "location", "app_type"
 
+  ## Validations
+  validates     :title, presence: { message: "Title is required" }
+  validates     :images, presence: { message: "At least one image is required" }
+  validates     :application_type, presence: { message: "Application type is required" }
+  validates     :description, presence: { message: "Description is required" }
+  validates     :ward_name, presence: { message: "Ward name is required" }
+  validates     :ward_num, presence: { message: "Ward number is required" }, numericality: true
+
   def status
+    return if self.statuses.empty?
     self.statuses.last.status
   end
 
   def status_date
+    return if self.statuses.empty?
     self.statuses.last.status_date ? self.statuses.last.status_date.strftime("%B %e, %Y") : nil
   end
 
   def address
+    return if self.addresses.empty?
     self.addresses.first.street
   end
 
-  # def latitude
-  #   self.addresses.first.geocode_lat
-  # end
+  def latitude
+    return if self.addresses.empty?
+    self.addresses.first.geocode_lat
+  end
 
-  # def longitude
-  #   self.addresses.first.geocode_lon
-  # end
+  def longitude
+    return if self.addresses.empty?
+    self.addresses.first.geocode_lon
+  end
 
   def image
     return ActionController::Base.helpers.asset_path("mainbg.jpg") if self.images.empty?

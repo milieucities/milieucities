@@ -11,6 +11,38 @@ class DevSitesController < ApplicationController
     end
   end
 
+  def geojson
+    @dev_sites = DevSite.first(9)
+    @geojson = []
+
+    @dev_sites.each do |ds|
+      address = ds.addresses.first
+      next unless address
+
+      if !address.geocode_lat.nil? && !address.geocode_lon.nil?
+        address.lat = address.geocode_lat
+        address.lon = address.geocode_lon
+      end
+      @geojson << {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [address.lat, address.lon]
+        },
+        properties: {
+          id: ds.id,
+          zoom: 9,
+          title: ds.title,
+          address: address,
+          :'marker-symbol' => "marker",
+          description: "<div class=\"marker-title\"><a href=\"/dev_sites/#{ds.id}\">#{ds.title}</a></div>Status: #{ds.status}"
+        }
+      }
+    end
+
+    render json: @geojson
+  end
+
   def show
     @dev_site = DevSite.find(params[:id])
 
