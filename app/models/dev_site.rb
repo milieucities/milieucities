@@ -18,22 +18,27 @@ class DevSite < ActiveRecord::Base
   ratyrate_rateable "location", "app_type"
 
   def status
+    return if self.statuses.empty?
     self.statuses.last.status
   end
 
   def status_date
+    return if self.statuses.empty?
     self.statuses.last.status_date ? self.statuses.last.status_date.strftime("%B %e, %Y") : nil
   end
 
   def address
+    return if self.addresses.empty?
     self.addresses.first.street
   end
 
   def latitude
+    return if self.addresses.empty?
     self.addresses.first.geocode_lat
   end
 
   def longitude
+    return if self.addresses.empty?
     self.addresses.first.geocode_lon
   end
 
