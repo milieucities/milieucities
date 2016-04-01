@@ -187,81 +187,80 @@ wards = {
 }
 
 scraper = Scrape.new
-
 devIDs = scraper.getAppIDs()
 
-binding.pry
-
+## Insert DevIds into DB ##
 counter = 1
-
-## Insert DevIds into DB
-
 devIDs.each do |id|
   one = scraper.getDetailedInfo(id)
-  dev_site = DevSite.new
 
-  ## Insert into db for regular params
-  dev_site.description = one['description'] if one['description']
-  dev_site.appID = one["appid"] if one["appid"]
-  dev_site.devID = one["devid"] if one["devid"]
-  dev_site.received_date = one["receiveddate"] if one["receiveddate"]
-  dev_site.updated = one["updated"] if one["updated"]
-  dev_site.application_type = one["apptype"] if one["apptype"]
+  if one.code == 200
+
+    ## Insert into db for regular params
+    dev_site.description = one['description'] if one['description']
+    dev_site.appID = one["appid"] if one["appid"]
+    dev_site.devID = one["devid"] if one["devid"]
+    dev_site.received_date = one["receiveddate"] if one["receiveddate"]
+    dev_site.updated = one["updated"] if one["updated"]
+    dev_site.application_type = one["apptype"] if one["apptype"]
 
 
-  ## Insert Ward Names (from ward numbers)
-  if one["ward"]
-    dev_site.ward_num = one["ward"]
-    dev_site.ward_name = wards[one["ward"]]
-  end
-
-  ## Insert Addresses
-  addresses = one["address"]
-  if addresses
-    addresses.each do |address|
-      dev_site.addresses.build(
-        lat: address["lat"],
-        lon: address["lon"],
-        street: address["addr"]
-      )
+    ## Insert Ward Names (from ward numbers)
+    if one["ward"]
+      dev_site.ward_num = one["ward"]
+      dev_site.ward_name = wards[one["ward"]]
     end
-  end
 
-  ## Insert Statuses
-  statuses = one["statuses"]
-  if statuses
-    statuses.each do |status|
-      dev_site.statuses.build(
-        status_date: status["statusdate"],
-        status: status["status"],
-        created: status["created"]
-      )
+    ## Insert Addresses
+    addresses = one["address"]
+    if addresses
+      addresses.each do |address|
+        dev_site.addresses.build(
+          lat: address["lat"],
+          lon: address["lon"],
+          street: address["addr"]
+        )
+      end
     end
-  end
 
-  ## Insert Files
-  files = one["files"]
-  if files
-    files.each do |file|
-      dev_site.city_files.build(
-        name: file["title"],
-        link: file["href"],
-        orig_created: file["created"],
-        orig_updated: file["updated"]
-      )
+    ## Insert Statuses
+    statuses = one["statuses"]
+    if statuses
+      statuses.each do |status|
+        dev_site.statuses.build(
+          status_date: status["statusdate"],
+          status: status["status"],
+          created: status["created"]
+        )
+      end
     end
-  end
 
-  if dev_site.save
-    puts "Saved application - #{one['devid']}"
-    puts counter
-  else
-    puts "Did not save - #{one['devid']}"
+    ## Insert Files
+    files = one["files"]
+    if files
+      files.each do |file|
+        dev_site.city_files.build(
+          name: file["title"],
+          link: file["href"],
+          orig_created: file["created"],
+          orig_updated: file["updated"]
+        )
+      end
+    end
+
+    ## Save to database
+    if dev_site.save
+      puts "Saved application - #{one['devid']}"
+      puts counter
+    else
+      puts "Did not save - #{one['devid']}"
+    end
+
+    counter += 1
+
   end
-  counter += 1
 
 end
-
 
 wards_councillor = [
     {"ward_name": "Orleans", "councillor": "Bob Monette"},
@@ -289,16 +288,14 @@ wards_councillor = [
     {"ward_name": "Kanata South", "councillor": "Allan Hubley"},
   ]
 
-
-
 ## Insert Councillors
 counter = 1
 wards_councillor.each do |p|
-  councillor = Councillor.new
 
   counc = scraper.getCouncillorInfo(p)
 
   if counc.code == 200
+    councillor = Councillor.new
     councillor.ward_name = counc["ward"]
     councillor.ward_num = counc["wardnum"]
     councillor.office = counc["office"]
