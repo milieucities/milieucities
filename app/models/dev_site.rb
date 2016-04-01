@@ -19,8 +19,6 @@ class DevSite < ActiveRecord::Base
   ratyrate_rateable "location", "app_type"
 
   ## Validations
-  validates     :title, presence: { message: "Title is required" }
-  validates     :images, presence: { message: "At least one image is required" }
   validates     :application_type, presence: { message: "Application type is required" }
   validates     :description, presence: { message: "Description is required" }
   validates     :ward_name, presence: { message: "Ward name is required" }
