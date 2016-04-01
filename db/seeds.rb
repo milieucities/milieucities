@@ -153,6 +153,32 @@ class Scrape
 
 end
 
+wards_councillor = [
+  {"ward_name": "Orleans", "councillor": "Bob Monette"},
+  {"ward_name": "Innes", "councillor": "Jody Mitic"},
+  {"ward_name": "Barrhaven", "councillor": "Jan Harder"},
+  {"ward_name": "Kanata North", "councillor": "Marianne Wilkinson"},
+  {"ward_name": "West Carleton-March", "councillor": "Eli El-Chantiry"},
+  {"ward_name": "Stittsville", "councillor": "Shad Qadri"},
+  {"ward_name": "Bay", "councillor": "Mark Taylor"},
+  {"ward_name": "College", "councillor": "Rick Chiarelli"},
+  {"ward_name": "Knoxdale-Merivale", "councillor": "Keith Egli"},
+  {"ward_name": "Gloucester-Southgate", "councillor": "Diane Deans"},
+  {"ward_name": "Beacon Hill-Cyrville", "councillor": "Tim Tierney"},
+  {"ward_name": "Rideau-Vanier", "councillor": "Mathieu Fleury"},
+  {"ward_name": "Rideau-Rockcliffe", "councillor": "Tobi Nussbaum"},
+  {"ward_name": "Somerset", "councillor": "Catherine McKenney"},
+  {"ward_name": "Kitchissippi", "councillor": "Jeff Leiper"},
+  {"ward_name": "River", "councillor": "Riley Brockington"},
+  {"ward_name": "Capital", "councillor": "David Chernushenko"},
+  {"ward_name": "Alta Vista", "councillor": "Jean Cloutier"},
+  {"ward_name": "Cumberland", "councillor": "Stephen Blais"},
+  {"ward_name": "Osgoode", "councillor": "George Darouze"},
+  {"ward_name": "Rideau-Goulbourn", "councillor": "Scott Moffat"},
+  {"ward_name": "Gloucester-South Nepean", "councillor": "Micahel Qaqish"},
+  {"ward_name": "Kanata South", "councillor": "Allan Hubley"},
+]
+
 
 scraper = Scrape.new
 

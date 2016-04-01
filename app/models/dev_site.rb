@@ -10,6 +10,7 @@ class DevSite < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :statuses, dependent: :destroy
+  has_many :city_files, dependent: :destroy
 
   accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :statuses
