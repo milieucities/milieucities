@@ -22,40 +22,40 @@ end
 #set_all_hearts_to_zero()
 
 
-def get_dev_site_image_urls()
+# def get_dev_site_image_urls()
 
-  all_dev_sites = DevSite.all
-  puts "Total DevSites: #{all_dev_sites.length}"
-  url_counter = 0
+#   all_dev_sites = DevSite.all
+#   puts "Total DevSites: #{all_dev_sites.length}"
+#   url_counter = 0
 
-  all_dev_sites.each do |dev_site|
-    addresses = dev_site.addresses
-    if (addresses)
-      url_counter += 1
-      addresses.each do |address|
-        url = "https://maps.googleapis.com/maps/api/streetview?size=600x600&location=" + address["street"].to_s + "&key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw"
-        begin
-          response = Unirest.get(url)
-        rescue Exception => e
-          puts "#{e.inspect}"
-          puts "Trying lat and long coords"
-          url = "https://maps.googleapis.com/maps/api/streetview?size=600x600&location=" + address["lat"].to_s + "," + address['lon'].to_s + "&key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw"
-          response = Unirest.get(url)
-        end
-        if (response.code == 200)
-          dev_site.image_url = url
-        end
-        puts "dev_site ID: #{dev_site.id}"
-        puts "Url Counter: #{url_counter}"
-        puts "status: #{response.code}"
-        puts url
-        puts "=================\n"
-      end
-    end
-    dev_site.save!
-  end
+#   all_dev_sites.each do |dev_site|
+#     addresses = dev_site.addresses
+#     if (addresses)
+#       url_counter += 1
+#       addresses.each do |address|
+#         url = "https://maps.googleapis.com/maps/api/streetview?size=600x600&location=" + address["street"].to_s + "&key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw"
+#         begin
+#           response = Unirest.get(url)
+#         rescue Exception => e
+#           puts "#{e.inspect}"
+#           puts "Trying lat and long coords"
+#           url = "https://maps.googleapis.com/maps/api/streetview?size=600x600&location=" + address["lat"].to_s + "," + address['lon'].to_s + "&key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw"
+#           response = Unirest.get(url)
+#         end
+#         if (response.code == 200)
+#           dev_site.image_url = url
+#         end
+#         puts "dev_site ID: #{dev_site.id}"
+#         puts "Url Counter: #{url_counter}"
+#         puts "status: #{response.code}"
+#         puts url
+#         puts "=================\n"
+#       end
+#     end
+#     dev_site.save!
+#   end
 
-end
+# end
 
 
 #get_dev_site_image_urls()
@@ -124,3 +124,77 @@ end
 # get_dev_ids(url)
 # create_dev_apps_file("dev_ids_Jan_7_2015")
 # get_data("db/devapp_endpoints_Jan_7_2015")
+
+
+
+require 'net/http'
+require 'pry'
+require 'json'
+
+class Scrape
+
+  def getAppIDs
+    uri = URI('http://ottwatch.ca/api/devapps/all')
+    res = Net::HTTP.get_response(uri)
+    allApps = JSON.parse(res.body)
+
+    devIDs = []
+    allApps.each do |app|
+      devIDs.push(app['devid'])
+    end
+    devIDs
+  end
+
+  def getDetailedInfo(id)
+    uri = URI('http://ottwatch.ca/api/devapps/' + id.to_s)
+    res = Net::HTTP.get_response(uri)
+    app = JSON.parse(res.body)
+  end
+
+end
+
+
+scraper = Scrape.new
+
+devIDs = scraper.getAppIDs()
+
+binding.pry
+
+devIDs.each do |id|
+  one = scraper.getDetailedInfo(id)
+  dev_site = DevSite.new
+
+  ## Insert into db for regular params
+  dev_site.description = one['description'] if one['description']
+  dev_site.appID = one["appid"] if one["appid"]
+  dev_site.devID = one["devid"] if one["devid"]
+  dev_site.received_date = one["receiveddate"] if one["receiveddate"]
+  dev_site.updated = one["updated"] if one["updated"]
+  dev_site.application_type = one["apptype"] if one["apptype"]
+  dev_site.ward_num = one["ward"] if one["ward"]
+
+  ## Insert Addresses
+  addresses = one["address"]
+  if addresses
+    addresses.each do |address|
+      dev_site.addresses.build(lat: address["lat"], lon: address["lon"], street: address["addr"])
+    end
+  end
+
+  ## Insert Statuses
+  statuses = one["statuses"]
+  if statuses
+    statuses.each do |status|
+      dev_site.statuses.build(status_date: status["statusdate"], status: status["status"], created: status["created"])
+    end
+  end
+
+  ## Insert File Urls
+  files = one["files"]
+  if files
+    files.each do |file|
+
+    end
+  end
+
+end
