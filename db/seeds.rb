@@ -151,40 +151,50 @@ class Scrape
     app = JSON.parse(res.body)
   end
 
+  def getCouncillorInfo(p)
+    name = p["councillor"].split(" ")
+    uri = URI('http://ottwatch.ca/api/councillors/#{name[1]}/#{name[0]}')
+    res = Net::HTTP.get_response(uri)
+    counc = JSON.parse(res.body)
+  end
+
 end
 
-wards_councillor = [
-  {"ward_name": "Orleans", "councillor": "Bob Monette"},
-  {"ward_name": "Innes", "councillor": "Jody Mitic"},
-  {"ward_name": "Barrhaven", "councillor": "Jan Harder"},
-  {"ward_name": "Kanata North", "councillor": "Marianne Wilkinson"},
-  {"ward_name": "West Carleton-March", "councillor": "Eli El-Chantiry"},
-  {"ward_name": "Stittsville", "councillor": "Shad Qadri"},
-  {"ward_name": "Bay", "councillor": "Mark Taylor"},
-  {"ward_name": "College", "councillor": "Rick Chiarelli"},
-  {"ward_name": "Knoxdale-Merivale", "councillor": "Keith Egli"},
-  {"ward_name": "Gloucester-Southgate", "councillor": "Diane Deans"},
-  {"ward_name": "Beacon Hill-Cyrville", "councillor": "Tim Tierney"},
-  {"ward_name": "Rideau-Vanier", "councillor": "Mathieu Fleury"},
-  {"ward_name": "Rideau-Rockcliffe", "councillor": "Tobi Nussbaum"},
-  {"ward_name": "Somerset", "councillor": "Catherine McKenney"},
-  {"ward_name": "Kitchissippi", "councillor": "Jeff Leiper"},
-  {"ward_name": "River", "councillor": "Riley Brockington"},
-  {"ward_name": "Capital", "councillor": "David Chernushenko"},
-  {"ward_name": "Alta Vista", "councillor": "Jean Cloutier"},
-  {"ward_name": "Cumberland", "councillor": "Stephen Blais"},
-  {"ward_name": "Osgoode", "councillor": "George Darouze"},
-  {"ward_name": "Rideau-Goulbourn", "councillor": "Scott Moffat"},
-  {"ward_name": "Gloucester-South Nepean", "councillor": "Micahel Qaqish"},
-  {"ward_name": "Kanata South", "councillor": "Allan Hubley"},
-]
-
+wards = {
+  1: "ORLEANS",
+  2: "INNES",
+  3: "BARRHAVEN",
+  4: "KANATA NORTH",
+  5: "WEST CARLETON-MARCH",
+  6: "STITTSVILLE",
+  7: "BAY",
+  8: "COLLEGE",
+  9: "KNOXDALE-MERIVALE",
+  10: "GLOUCESTER-SOUTHGATE",
+  11: "BEACON HILL-CYRVILLE",
+  12: "RIDEAU-VANIER",
+  13: "RIDEAU-ROCKCLIFFE",
+  14: "SOMERSET",
+  15: "KITCHISSIPPI",
+  16: "RIVER",
+  17: "CAPITAL",
+  18: "ALTA VISTA",
+  19: "CUMBERLAND",
+  20: "OSGOODE",
+  21: "RIDEAU-GOULBOURN",
+  22: "GLOUCESTER-SOUTH NEPEAN",
+  23: "KANATA SOUTH"
+}
 
 scraper = Scrape.new
 
 devIDs = scraper.getAppIDs()
 
 binding.pry
+
+counter = 1
+
+## Insert DevIds into DB
 
 devIDs.each do |id|
   one = scraper.getDetailedInfo(id)
@@ -197,13 +207,23 @@ devIDs.each do |id|
   dev_site.received_date = one["receiveddate"] if one["receiveddate"]
   dev_site.updated = one["updated"] if one["updated"]
   dev_site.application_type = one["apptype"] if one["apptype"]
-  dev_site.ward_num = one["ward"] if one["ward"]
+
+
+  ## Insert Ward Names (from ward numbers)
+  if one["ward"]
+    dev_site.ward_num = one["ward"]
+    dev_site.ward_name = wards[one["ward"]]
+  end
 
   ## Insert Addresses
   addresses = one["address"]
   if addresses
     addresses.each do |address|
-      dev_site.addresses.build(lat: address["lat"], lon: address["lon"], street: address["addr"])
+      dev_site.addresses.build(
+        lat: address["lat"],
+        lon: address["lon"],
+        street: address["addr"]
+      )
     end
   end
 
@@ -211,16 +231,92 @@ devIDs.each do |id|
   statuses = one["statuses"]
   if statuses
     statuses.each do |status|
-      dev_site.statuses.build(status_date: status["statusdate"], status: status["status"], created: status["created"])
+      dev_site.statuses.build(
+        status_date: status["statusdate"],
+        status: status["status"],
+        created: status["created"]
+      )
     end
   end
 
-  ## Insert File Urls
+  ## Insert Files
   files = one["files"]
   if files
     files.each do |file|
-
+      dev_site.city_files.build(
+        name: file["title"],
+        link: file["href"],
+        orig_created: file["created"],
+        orig_updated: file["updated"]
+      )
     end
   end
+
+  if dev_site.save
+    puts "Saved application - #{one['devid']}"
+    puts counter
+  else
+    puts "Did not save - #{one['devid']}"
+  end
+  counter += 1
+
+end
+
+
+wards_councillor = [
+    {"ward_name": "Orleans", "councillor": "Bob Monette"},
+    {"ward_name": "Innes", "councillor": "Jody Mitic"},
+    {"ward_name": "Barrhaven", "councillor": "Jan Harder"},
+    {"ward_name": "Kanata North", "councillor": "Marianne Wilkinson"},
+    {"ward_name": "West Carleton-March", "councillor": "Eli El-Chantiry"},
+    {"ward_name": "Stittsville", "councillor": "Shad Qadri"},
+    {"ward_name": "Bay", "councillor": "Mark Taylor"},
+    {"ward_name": "College", "councillor": "Rick Chiarelli"},
+    {"ward_name": "Knoxdale-Merivale", "councillor": "Keith Egli"},
+    {"ward_name": "Gloucester-Southgate", "councillor": "Diane Deans"},
+    {"ward_name": "Beacon Hill-Cyrville", "councillor": "Tim Tierney"},
+    {"ward_name": "Rideau-Vanier", "councillor": "Mathieu Fleury"},
+    {"ward_name": "Rideau-Rockcliffe", "councillor": "Tobi Nussbaum"},
+    {"ward_name": "Somerset", "councillor": "Catherine McKenney"},
+    {"ward_name": "Kitchissippi", "councillor": "Jeff Leiper"},
+    {"ward_name": "River", "councillor": "Riley Brockington"},
+    {"ward_name": "Capital", "councillor": "David Chernushenko"},
+    {"ward_name": "Alta Vista", "councillor": "Jean Cloutier"},
+    {"ward_name": "Cumberland", "councillor": "Stephen Blais"},
+    {"ward_name": "Osgoode", "councillor": "George Darouze"},
+    {"ward_name": "Rideau-Goulbourn", "councillor": "Scott Moffat"},
+    {"ward_name": "Gloucester-South Nepean", "councillor": "Micahel Qaqish"},
+    {"ward_name": "Kanata South", "councillor": "Allan Hubley"},
+  ]
+
+
+
+## Insert Councillors
+counter = 1
+wards_councillor.each do |p|
+  councillor = Councillor.new
+
+  counc = scraper.getCouncillorInfo(p)
+
+  if counc.code == 200
+    councillor.ward_name = counc["ward"]
+    councillor.ward_num = counc["wardnum"]
+    councillor.office = counc["office"]
+    councillor.first_name = counc["first_name"]
+    councillor.last_name = counc["last_name"]
+    councillor.email = counc["email"]
+    councillor.link = counc["url"]
+    councillor.photo_link = counc["photourl"]
+    councillor.phone = counc["phone"]
+  end
+
+  if councillor.save
+    puts "Saved #{counc['first_name']}"
+    puts counter
+  else
+    puts "Did not save #{counc['first_name']}"
+  end
+
+  counter += 1
 
 end

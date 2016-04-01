@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401033236) do
+ActiveRecord::Schema.define(version: 20160401034554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,20 @@ ActiveRecord::Schema.define(version: 20160401033236) do
   end
 
   add_index "comments", ["dev_site_id"], name: "index_comments_on_dev_site_id", using: :btree
+
+  create_table "councillors", force: :cascade do |t|
+    t.integer  "ward_num"
+    t.string   "ward_name"
+    t.string   "office"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "link"
+    t.string   "photo_link"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "demos", force: :cascade do |t|
     t.string   "email"
