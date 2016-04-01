@@ -151,8 +151,8 @@ class Scrape
   end
 
   def getCouncillorInfo(p)
-    name = p["councillor"].split(" ")
-    uri = URI('http://ottwatch.ca/api/councillors/#{name[1]}/#{name[0]}')
+    name = p[:councillor].split(" ")
+    uri = URI('http://ottwatch.ca/api/councillors/'+ name[1].to_s + '/' + name[0].to_s)
     res = Net::HTTP.get_response(uri)
   end
 
@@ -185,87 +185,87 @@ wards = {
 }
 
 scraper = Scrape.new
-devIDs = scraper.getAppIDs()
+# devIDs = scraper.getAppIDs()
 
 ## Insert DevIds into DB ##
-counter = 1
-devIDs.each do |id|
-  one = scraper.getDetailedInfo(id)
+# counter = 1
+# devIDs.each do |id|
+#   one = scraper.getDetailedInfo(id)
 
-  if one.code == "200"
-    two = JSON.parse(one.body)
+#   if one.code == "200"
+#     two = JSON.parse(one.body)
 
-    dev_site = DevSite.new
+#     dev_site = DevSite.new
 
-    ## Insert into db for regular params
-    dev_site.description = two['description'] if two['description']
-    dev_site.appID = two["appid"] if two["appid"]
-    dev_site.devID = two["devid"] if two["devid"]
-    dev_site.received_date = two["receiveddate"] if two["receiveddate"]
-    dev_site.updated = two["updated"] if two["updated"]
-    dev_site.application_type = two["apptype"] if two["apptype"]
+#     ## Insert into db for regular params
+#     dev_site.description = two['description'] if two['description']
+#     dev_site.appID = two["appid"] if two["appid"]
+#     dev_site.devID = two["devid"] if two["devid"]
+#     dev_site.received_date = two["receiveddate"] if two["receiveddate"]
+#     dev_site.updated = two["updated"] if two["updated"]
+#     dev_site.application_type = two["apptype"] if two["apptype"]
 
 
-    ## Insert Ward Names (from ward numbers)
-    if two["ward"]
-      dev_site.ward_num = two["ward"]
-      dev_site.ward_name = wards[two["ward"]]
-    end
+#     ## Insert Ward Names (from ward numbers)
+#     if two["ward"]
+#       dev_site.ward_num = two["ward"]
+#       dev_site.ward_name = wards[two["ward"]]
+#     end
 
-    ## Insert Addresses
-    addresses = two["address"]
-    if addresses
-      addresses.each do |address|
-        dev_site.addresses.build(
-          lat: address["lat"],
-          lon: address["lon"],
-          street: address["addr"]
-        )
-      end
-    end
+#     ## Insert Addresses
+#     addresses = two["address"]
+#     if addresses
+#       addresses.each do |address|
+#         dev_site.addresses.build(
+#           lat: address["lat"],
+#           lon: address["lon"],
+#           street: address["addr"]
+#         )
+#       end
+#     end
 
-    ## Insert Statuses
-    statuses = two["statuses"]
-    if statuses
-      statuses.each do |status|
-        dev_site.statuses.build(
-          status_date: status["statusdate"],
-          status: status["status"],
-          created: status["created"]
-        )
-      end
-    end
+#     ## Insert Statuses
+#     statuses = two["statuses"]
+#     if statuses
+#       statuses.each do |status|
+#         dev_site.statuses.build(
+#           status_date: status["statusdate"],
+#           status: status["status"],
+#           created: status["created"]
+#         )
+#       end
+#     end
 
-    ## Insert Files
-    files = two["files"]
-    if files
-      files.each do |file|
-        dev_site.city_files.build(
-          name: file["title"],
-          link: file["href"],
-          orig_created: file["created"],
-          orig_update: file["updated"]
-        )
-      end
-    end
+#     ## Insert Files
+#     files = two["files"]
+#     if files
+#       files.each do |file|
+#         dev_site.city_files.build(
+#           name: file["title"],
+#           link: file["href"],
+#           orig_created: file["created"],
+#           orig_update: file["updated"]
+#         )
+#       end
+#     end
 
-    ## Save to database
-    begin
-      if dev_site.save
-        puts counter
-        puts "Saved application - #{two['devid']}"
-      else
-        puts "Did not save - #{two['devid']}"
-      end
-    rescue Exception => msg
-      puts msg.inspect
-    end
+#     ## Save to database
+#     begin
+#       if dev_site.save
+#         puts counter
+#         puts "Saved application - #{two['devid']}"
+#       else
+#         puts "Did not save - #{two['devid']}"
+#       end
+#     rescue Exception => msg
+#       puts msg.inspect
+#     end
 
-    counter += 1
+#     counter += 1
 
-  end
+#   end
 
-end
+# end
 
 wards_councillor = [
     {"ward_name": "Orleans", "councillor": "Bob Monette"},
@@ -294,32 +294,32 @@ wards_councillor = [
   ]
 
 ## Insert Councillors
-# counter = 1
-# wards_councillor.each do |p|
+counter = 1
+wards_councillor.each do |p|
 
-#   counc = scraper.getCouncillorInfo(p)
+  counc = scraper.getCouncillorInfo(p)
 
-#   if counc.code == "200"
-#     cc = JSON.parse(counc.body)
-#     councillor = Councillor.new
-#     councillor.ward_name = cc["ward"]
-#     councillor.ward_num = cc["wardnum"]
-#     councillor.office = cc["office"]
-#     councillor.first_name = cc["first_name"]
-#     councillor.last_name = cc["last_name"]
-#     councillor.email = cc["email"]
-#     councillor.link = cc["url"]
-#     councillor.photo_link = cc["photourl"]
-#     councillor.phone = cc["phone"]
-#   end
+  if counc.code == "200"
+    cc = JSON.parse(counc.body)
+    councillor = Councillor.new
+    councillor.ward_name = cc["ward"]
+    councillor.ward_num = cc["wardnum"]
+    councillor.office = cc["office"]
+    councillor.first_name = cc["first_name"]
+    councillor.last_name = cc["last_name"]
+    councillor.email = cc["email"]
+    councillor.link = cc["url"]
+    councillor.photo_link = cc["photourl"]
+    councillor.phone = cc["phone"]
+  end
 
-#   if councillor.save
-#     puts "Saved #{cc['first_name']}"
-#     puts counter
-#   else
-#     puts "Did not save #{cc['first_name']}"
-#   end
+  if councillor.save
+    puts "Saved #{cc['first_name']}"
+    puts counter
+  else
+    puts "Did not save #{cc['first_name']}"
+  end
 
-#   counter += 1
+  counter += 1
 
-# end
+end
