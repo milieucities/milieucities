@@ -148,7 +148,6 @@ class Scrape
   def getDetailedInfo(id)
     uri = URI('http://ottwatch.ca/api/devapps/' + id.to_s)
     res = Net::HTTP.get_response(uri)
-
   end
 
   def getCouncillorInfo(p)
