@@ -10,6 +10,7 @@ class DevSite < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :statuses, dependent: :destroy
+  has_many :city_files, dependent: :destroy
 
   accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :statuses
@@ -18,8 +19,6 @@ class DevSite < ActiveRecord::Base
   ratyrate_rateable "location", "app_type"
 
   ## Validations
-  validates     :title, presence: { message: "Title is required" }
-  validates     :images, presence: { message: "At least one image is required" }
   validates     :application_type, presence: { message: "Application type is required" }
   validates     :description, presence: { message: "Description is required" }
   validates     :ward_name, presence: { message: "Ward name is required" }

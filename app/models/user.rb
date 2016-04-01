@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   ratyrate_rater
 
   # VALIDATIONS
-
   validates               :username, presence: { message: "User name is required"}
   validates_uniqueness_of :username, on: :create
   validates               :first_name, presence: {message: "First name is required"}
