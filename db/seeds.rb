@@ -288,38 +288,45 @@ wards_councillor = [
     {"ward_name": "Alta Vista", "councillor": "Jean Cloutier"},
     {"ward_name": "Cumberland", "councillor": "Stephen Blais"},
     {"ward_name": "Osgoode", "councillor": "George Darouze"},
-    {"ward_name": "Rideau-Goulbourn", "councillor": "Scott Moffat"},
-    {"ward_name": "Gloucester-South Nepean", "councillor": "Micahel Qaqish"},
+    {"ward_name": "Rideau-Goulbourn", "councillor": "Scott Moffatt"},
+    {"ward_name": "Gloucester-South Nepean", "councillor": "Michael Qaqish"},
     {"ward_name": "Kanata South", "councillor": "Allan Hubley"},
   ]
 
 ## Insert Councillors
-counter = 1
-wards_councillor.each do |p|
+# counter = 1
+# wards_councillor.each do |p|
 
-  counc = scraper.getCouncillorInfo(p)
+#   counc = scraper.getCouncillorInfo(p)
 
-  if counc.code == "200"
-    cc = JSON.parse(counc.body)
-    councillor = Councillor.new
-    councillor.ward_name = cc["ward"]
-    councillor.ward_num = cc["wardnum"]
-    councillor.office = cc["office"]
-    councillor.first_name = cc["first_name"]
-    councillor.last_name = cc["last_name"]
-    councillor.email = cc["email"]
-    councillor.link = cc["url"]
-    councillor.photo_link = cc["photourl"]
-    councillor.phone = cc["phone"]
-  end
+#   if counc.code == "200"
+#     begin
+#       cc = JSON.parse(counc.body)
+#       councillor = Councillor.new
+#       councillor.ward_name = cc["ward"]
+#       councillor.ward_num = cc["wardnum"]
+#       councillor.office = cc["office"]
+#       councillor.first_name = cc["first_name"]
+#       councillor.last_name = cc["last_name"]
+#       councillor.email = cc["email"]
+#       councillor.link = cc["url"]
+#       councillor.photo_link = cc["photourl"]
+#       councillor.phone = cc["phone"]
 
-  if councillor.save
-    puts "Saved #{cc['first_name']}"
-    puts counter
-  else
-    puts "Did not save #{cc['first_name']}"
-  end
+#       if councillor.save
+#         puts "Saved #{cc['first_name']}"
+#         puts counter
+#       else
+#         puts "Did not save #{cc['first_name']}"
+#       end
 
-  counter += 1
+#       counter += 1
 
-end
+#     rescue Exception => e
+#       puts "not a valid JSON"
+#       puts e.backtrace.join("\n")
+#       puts "================="
+#     end
+#   end
+
+# end
