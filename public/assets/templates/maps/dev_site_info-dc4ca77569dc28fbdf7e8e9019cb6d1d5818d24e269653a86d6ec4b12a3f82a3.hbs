@@ -1,0 +1,62 @@
+{{#each this}}
+
+  <div class="dev-site" id="dev-site-{{this.dev_site.id}}">
+  <div>
+    <a href="/dev_sites/{{this.dev_site.id}}">
+    <img src="{{this.dev_site.image}}" class="display-image">
+    </a>
+  </div>
+
+  <div class="title">
+    {{#check_existence this.dev_site.title}}{{/check_existence}}
+  </div>
+
+  <div class="cat-label">INFO</div>
+
+  <div class="row info">
+
+    <div class="col s6 label">Development Id:</div>
+    <div class="col s6">{{#check_existence this.dev_site.devID}}{{/check_existence}}</div>
+
+    <div class="col s6 label">Application Type:</div>
+    <div class="col s6">{{#check_existence this.dev_site.application_type}}{{/check_existence}}</div>
+
+    <div class="col s6 label">Ward Name:</div>
+    <div class="col s6">{{#check_existence this.dev_site.ward_name}}{{/check_existence}}</div>
+
+    <div class="col s6 label">Ward Number:</div>
+    <div class="col s6">{{#check_existence this.dev_site.ward_num}}{{/check_existence}}</div>
+
+  </div>
+
+  <div class="cat-label">Latest Status</div>
+
+  <div class="row info">
+
+    <div class="col s6 label">Status:</div>
+    <div class="col s6">{{#check_existence this.dev_site.status}}{{/check_existence}}</div>
+
+    <div class="col s6 label">Status Date:</div>
+    <div class="col s6">{{#check_existence this.dev_site.status_date}}{{/check_existence}}</div>
+
+  </div>
+
+  <div class="cat-label">Address</div>
+
+  <div class="row info">
+
+    <div class="col s6 label">Address:</div>
+    <div class="col s6">{{#check_existence this.dev_site.address}}{{/check_existence}}</div>
+
+    <div class="col s6 label">Latitude:</div>
+    <div class="col s6">{{#check_existence this.dev_site.latitude}}{{/check_existence}}</div>
+
+    <div class="col s6 label">Longitude:</div>
+    <div class="col s6">{{#check_existence this.dev_site.longitude}}{{/check_existence}}</div>
+
+  </div>
+
+  <a href="/dev_sites/{{this.dev_site.id}}" class="waves-effect waves-light btn">View Development</a>
+  </div>
+
+{{/each}}
