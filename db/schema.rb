@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325235730) do
+ActiveRecord::Schema.define(version: 20160401041601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 20160325235730) do
     t.datetime "updated_at"
   end
 
+  create_table "city_files", force: :cascade do |t|
+    t.string   "name"
+    t.string   "link"
+    t.datetime "orig_created"
+    t.datetime "orig_update"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "dev_site_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "dev_site_id"
@@ -48,6 +58,20 @@ ActiveRecord::Schema.define(version: 20160325235730) do
   end
 
   add_index "comments", ["dev_site_id"], name: "index_comments_on_dev_site_id", using: :btree
+
+  create_table "councillors", force: :cascade do |t|
+    t.integer  "ward_num"
+    t.string   "ward_name"
+    t.string   "office"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "link"
+    t.string   "photo_link"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "demos", force: :cascade do |t|
     t.string   "email"
