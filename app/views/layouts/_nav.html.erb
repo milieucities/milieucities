@@ -1,0 +1,15 @@
+<section id="nav">
+  <%= link_to image_tag("white-logo.png"), root_path, class: "nav-logo" %>
+
+  <ul>
+    <li><%= link_to "Map", map_path %></li>
+    <li><%= link_to "About", "#" %></li>
+    <% if signed_in? %>
+      <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete %></li>
+    <% else %>
+      <li><%= link_to "Sign In", new_session_path %></li>
+    <% end %>
+    <li><%= mail_to "info@milieu.io", "Contact" %></li>
+  </ul>
+  
+</section>

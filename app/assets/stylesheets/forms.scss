@@ -1,0 +1,25 @@
+.one-page-form{
+  max-width: 700px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+
+  h5{
+    text-align: center;
+  }
+
+  a{
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+    display: table;
+    margin: 0 auto;
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+
+  .btn.submit{
+    width: 100%;
+  }
+}

@@ -1,0 +1,20 @@
+#home{
+  #home-map{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+  }
+
+  .survey_logo{
+    height: 40px;
+    width: 40px;
+  }
+
+  .check_box_label{
+    font-size: 0.9rem;
+    color: #000;
+    line-height: 1rem;
+  }
+}

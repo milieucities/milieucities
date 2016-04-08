@@ -1,0 +1,104 @@
+<section id="dev-site-show">
+
+  <div class="container">
+
+  <div class="title">
+    <%= @dev_site.addresses.empty? ? @dev_site.title : @dev_site.addresses.first.street %>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m12 l7">
+      <div id="slides">
+      </div>
+       <%= image_tag (@dev_site.images.present? ? @dev_site.images.last.url : "mainbg.jpg" ), class: "display-image" %>
+    </div>
+    <div class="col s12 m12 l5">
+      <div class="row info">
+
+        <div class="col s6 label">Development Id:</div>
+        <div class="col s6"><%= @dev_site.devID.present? ? @dev_site.devID : "N/A" %></div>
+
+        <div class="col s6 label">Application Type:</div>
+        <div class="col s6"><%= @dev_site.application_type.present? ? @dev_site.application_type : "N/A" %></div>
+
+        <div class="col s6 label">Ward Name:</div>
+        <div class="col s6"><%= @dev_site.ward_name.present? ? @dev_site.ward_name : "N/A" %></div>
+
+        <div class="col s6 label">Ward Number:</div>
+        <div class="col s6"><%= @dev_site.ward_num.present? ? @dev_site.ward_num : "N/A" %></div>
+
+
+        <div class="row" style="max-width: 400px;">
+          <div class="col s12">
+              <% if @dev_site.statuses.present? %>
+                <table class="striped">
+                  <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Status Date</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  <% @dev_site.statuses.each do |status| %>
+                    <tr>
+                      <td><%= status.status || "N/A" %></td>
+                      <td><%= status.status_date.present? ? status.status_date.strftime("%B %e, %Y") : "N/A" %></td>
+                    </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              <% end %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? %>
+
+  <div class="row">
+    <div class="col s12 m12 l6" style="max-width: 750px">
+      <h5>Description</h5>
+      <p><%= @dev_site.description.present? ? @dev_site.description : "No description present." %></p>
+
+      <% if @dev_site.files.present? %>
+      <h5>Files</h5>
+      <ul class="files">
+        <% @dev_site.files.each do |file| %>
+          <li><%= fa_icon("file-o") %><%= link_to File.basename(file.path), file.url %></li>
+        <% end %>
+      </ul>
+      <% end %>
+    </div>
+
+    <div  class="col s12 m12 l6">
+      <h5>Comment</h5>
+
+      <%if @dev_site.comments.count  < 1 %>
+        <i>Be the first to comment</i>
+      <% end %>
+
+      <% @dev_site.comments.each do |comment| %>
+        <% next if comment.new_record? %>
+        <div class="comment">
+          <div class="user"><%= comment.user ? comment.user.full_name : "Anonymous" %>
+          <span class="role">| <%= comment.user ? comment.user.role.capitalize : "User" %> </span>
+          </div>
+          <div class="body">
+            <%= comment.body %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= render partial: "comments/form", locals: { commentable: @dev_site } %>
+    </div>
+
+  </div>
+
+
+</div>
+</section>
+
+

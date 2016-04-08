@@ -1,0 +1,92 @@
+section#dev-site-show{
+
+  position: relative;
+  color: #555;
+  background-color: #f4f4f4;
+
+  .container{
+    background-color: #fff;
+    padding: 40px;
+  }
+
+  .title{
+    font-size: 4rem;
+    font-weight: 300;
+    padding-bottom: 30px;
+  }
+
+  h3{
+    margin-top: 0;
+  }
+
+  .btn-floating{
+    position: absolute;
+    top: 50px;
+    right: 10px;
+  }
+
+  .display-image{
+    height: 400px;
+    width: 100%;
+    max-height: 50vh;
+    border-radius: 3px;
+    padding-bottom: 30px;
+    object-fit: cover;
+  }
+
+  .like-button:hover{
+    transition: 200ms;
+    color: red;
+  }
+
+  .info{
+    font-size: 14px;
+  }
+
+  .label{
+    color: #999;
+  }
+
+  .comment{
+    padding: 10px;
+    background-color: #f4f4f4;
+    margin-bottom: 5px;
+
+    .user{
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .role{
+      color: #999;
+      font-weight: 300;
+    }
+
+    .body{
+      padding-top: 10px;
+      font-size: 14px;
+    }
+
+  }
+
+  .files{
+    li{
+      font-size: 14px;
+      font-weight: 300px;
+
+      i{
+        padding-right: 15px;
+      }
+
+      a:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+
+  textarea{
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+  }
+
+}

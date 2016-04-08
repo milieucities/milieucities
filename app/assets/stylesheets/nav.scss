@@ -1,0 +1,54 @@
+section#nav{
+  background: linear-gradient(90deg, #5d9bc0 0%, #92c7c6 85%);
+  height: 64px;
+  line-height: 64px;
+  width: 100vw;
+  position: relative;
+  padding: 0 20px;
+  z-index: 1;
+
+  .nav-logo img{
+    float: left;
+    display: inline-block;
+    height: 100%;
+    padding: 10px;
+  }
+
+  ul{
+    padding: 0;
+    margin: 0;
+    float: right;
+
+    li{
+      float: left;
+      height: 64px;
+      line-height: 64px;
+      display: inline-block;
+      padding: 0 10px;
+
+      a{
+        color: #fff;
+        font-weight: 300;
+      }
+    }
+  }
+
+  form{
+    float: right;
+    color: #fff;
+    padding-left: 20px;
+  }
+
+  input{
+    display: block;
+    border-color: #fff;
+    height: 2rem;
+    width: 150px;
+
+    &:focus{
+      border-color: $secondary-color;
+    }
+  }
+
+
+}
