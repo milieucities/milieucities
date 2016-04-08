@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160408004149) do
+=======
+ActiveRecord::Schema.define(version: 20160401041601) do
+>>>>>>> f13435781105d3600de43f76a50ebe09054e5dde
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +40,19 @@ ActiveRecord::Schema.define(version: 20160408004149) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
+=======
+  create_table "city_files", force: :cascade do |t|
+    t.string   "name"
+    t.string   "link"
+    t.datetime "orig_created"
+    t.datetime "orig_update"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "dev_site_id"
+  end
+
+>>>>>>> f13435781105d3600de43f76a50ebe09054e5dde
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "dev_site_id"
@@ -49,6 +66,23 @@ ActiveRecord::Schema.define(version: 20160408004149) do
 
   add_index "comments", ["dev_site_id"], name: "index_comments_on_dev_site_id", using: :btree
 
+<<<<<<< HEAD
+=======
+  create_table "councillors", force: :cascade do |t|
+    t.integer  "ward_num"
+    t.string   "ward_name"
+    t.string   "office"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "link"
+    t.string   "photo_link"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+>>>>>>> f13435781105d3600de43f76a50ebe09054e5dde
   create_table "demos", force: :cascade do |t|
     t.string   "email"
     t.datetime "created_at", null: false
@@ -71,7 +105,10 @@ ActiveRecord::Schema.define(version: 20160408004149) do
     t.integer  "hearts"
     t.json     "files"
     t.json     "images"
+<<<<<<< HEAD
     t.string   "build_type"
+=======
+>>>>>>> f13435781105d3600de43f76a50ebe09054e5dde
   end
 
   create_table "events", force: :cascade do |t|

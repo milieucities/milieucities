@@ -31,6 +31,7 @@ var DevSites = React.createClass({
              <DevSites.Show {...this.props} devSite={this.state.selectedDevSite} />
              <div className="dev-sites row">
                {devSitesNodes} 
+
                {noDevSites}
              </div>
            </section>
@@ -68,7 +69,7 @@ DevSites.Show = React.createClass({
                 <div className="no-pad col s6">{this.state.devSite.application_type ? this.state.devSite.application_type : "N/A"}</div>
 
                 <div className="no-pad col s6 label">Address:</div>
-                <div className="no-pad col s6">{this.state.devSite.addresses[0] ? this.state.devSite.addresses[0].address.street : "N/A"}</div>
+                <div className="no-pad col s6">{this.state.devSite.addresses[0] ? this.state.devSite.addresses[0].street : "N/A"}</div>
 
                 <div className="no-pad col s6 label">Latest Status:</div>
                 <div className="no-pad col s6">{this.state.devSite.statuses[0] ? this.state.devSite.statuses[0].status.status : "N/A"}</div>

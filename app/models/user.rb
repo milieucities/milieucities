@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   ratyrate_rater
 
   # VALIDATIONS
-
   validates               :username, presence: { message: "User name is required"}
   validates_uniqueness_of :username, on: :create
   validates               :first_name, presence: {message: "First name is required"}
@@ -23,6 +22,7 @@ class User < ActiveRecord::Base
   validates               :password, on: :create, presence: {message: "Password is required"}
   validates_length_of     :password, :in => 6..20, :on => :create
   validates               :bio, length: {maximum: 140, message: "140 characters max"}
+  validates               :role, presence: { message: "A user role is required" }
 
 
   def full_name
