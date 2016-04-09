@@ -1,5 +1,5 @@
 section#dev-site-show{
-
+  padding-top: 64px;
   position: relative;
   color: #555;
   background-color: #f4f4f4;
@@ -10,7 +10,7 @@ section#dev-site-show{
   }
 
   .title{
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 300;
     padding-bottom: 30px;
   }
@@ -31,6 +31,7 @@ section#dev-site-show{
     max-height: 50vh;
     border-radius: 3px;
     padding-bottom: 30px;
+    cursor: pointer;
     object-fit: cover;
   }
 

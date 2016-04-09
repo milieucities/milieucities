@@ -1,9 +1,13 @@
 class DevSitesController < ApplicationController
-  before_action :set_dev_site, only: [:show, :edit, :update, :destroy]
+  before_action :set_dev_site, only: [:show, :edit, :images, :update, :destroy]
   skip_before_filter :verify_signed_out_user, if: :json_request?
 
   def index
-    @dev_sites = DevSite.first(9)
+    if params[:filter].present?
+      @dev_sites = DevSite.filter(params[:filter])
+    else
+      @dev_sites = DevSite.first(9)
+    end
 
     respond_to do |format|
         format.html
@@ -11,8 +15,17 @@ class DevSitesController < ApplicationController
     end
   end
 
+  def images
+    render json: { images: @dev_site.image_hash }
+  end
+
   def geojson
-    @dev_sites = DevSite.first(9)
+    if params[:filter].present?
+      @dev_sites = DevSite.filter(params[:filter])
+    else
+      @dev_sites = DevSite.first(9)
+    end
+
     @geojson = []
 
     @dev_sites.each do |ds|
@@ -36,7 +49,7 @@ class DevSitesController < ApplicationController
           zoom: 9,
           title: ds.title,
           address: address,
-          :'marker-symbol' => "marker",
+          :'marker-symbol' => ds.marker,
           description: "<div class=\"marker-title\"><a href=\"/dev_sites/#{ds.id}\">#{ds.title}</a></div>Status: #{ds.status}"
         }
       }

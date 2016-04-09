@@ -1,17 +1,26 @@
+{{#empty_array this}}
+  <div class="dev-site">
+    <div class="title">
+      No development sites found
+    </div>
+  </div>
+{{/empty_array}}
+
 {{#each this}}
 
   <div class="dev-site" id="dev-site-{{this.dev_site.id}}">
+
+  <div class="title">
+    {{#check_existence this.dev_site.address}}{{/check_existence}}
+  </div>
+
   <div>
     <a href="/dev_sites/{{this.dev_site.id}}">
-    <img src="{{this.dev_site.image}}" class="display-image">
+    <img src="{{this.dev_site.image_url}}" class="display-image">
     </a>
   </div>
 
-  <div class="title">
-    {{#check_existence this.dev_site.title}}{{/check_existence}}
-  </div>
-
-  <div class="cat-label">INFO</div>
+  <div class="cat-label">{{#check_existence this.dev_site.title}}{{/check_existence}}</div>
 
   <div class="row info">
 
@@ -29,6 +38,13 @@
 
   </div>
 
+  <div class="cat-label">Description</div>
+
+  <div class="row info">
+    <div class="col s12">{{#check_existence this.dev_site.description}}{{/check_existence}}</div>
+  </div>
+
+
   <div class="cat-label">Latest Status</div>
 
   <div class="row info">
@@ -41,20 +57,6 @@
 
   </div>
 
-  <div class="cat-label">Address</div>
-
-  <div class="row info">
-
-    <div class="col s6 label">Address:</div>
-    <div class="col s6">{{#check_existence this.dev_site.address}}{{/check_existence}}</div>
-
-    <div class="col s6 label">Latitude:</div>
-    <div class="col s6">{{#check_existence this.dev_site.latitude}}{{/check_existence}}</div>
-
-    <div class="col s6 label">Longitude:</div>
-    <div class="col s6">{{#check_existence this.dev_site.longitude}}{{/check_existence}}</div>
-
-  </div>
 
   <a href="/dev_sites/{{this.dev_site.id}}" class="waves-effect waves-light btn">View Development</a>
   </div>

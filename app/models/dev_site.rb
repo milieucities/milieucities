@@ -30,6 +30,35 @@ class DevSite < ActiveRecord::Base
   validates     :ward_name, presence: { message: "Ward name is required" }
   validates     :ward_num, presence: { message: "Ward number is required" }, numericality: true
 
+  def self.filter(filter_by)
+    @dev_sites = DevSite.all
+    if filter_by == "consultation" then
+      @dev_sites = @dev_sites.joins(:statuses).where( statuses: { status: ["Comment Period in Progress", "Community Information and Comment Session Open"] } )
+    elsif filter_by == "new-development" then
+      @dev_sites = @dev_sites.where( application_type: VALID_APPLICATION_TYPES.reject { |at| ["Derelict", "Vacant"].include?(at) } )
+      @dev_sites = @dev_sites.joins(:statuses).where( statuses: { status: Status::VALID_STATUS_TYPES.reject { |st| ["Unknown", "Comment Period in Progress", "Community Information and Comment Session Open"].include?(st) } } )
+    elsif filter_by == "vacant-derelict" then
+      @dev_sites = @dev_sites.where( application_type: ["Derelict", "Vacant"] )
+      @dev_sites = @dev_sites.joins(:statuses).where( statuses: { status: ["Unknown"] })
+    elsif filter_by == "events" then
+      @dev_sites = @dev_sites.joins(:statuses).where( statuses: { status: ["Event"] })
+    end
+    @dev_sites
+  end
+
+  def marker
+    if ["Comment Period in Progress", "Community Information and Comment Session Open"].include?(self.statuses.last.status)
+      marker = "consultation"
+    elsif ["Event"].include?(self.statuses.last.status)
+      marker = "event"
+    elsif ["Unknown"].include?(self.statuses.last.status)
+      marker = "vacant"
+    else
+      marker = "comment"
+    end
+    marker
+  end
+
   def status
     return if self.statuses.empty?
     self.statuses.last.status
@@ -55,9 +84,15 @@ class DevSite < ActiveRecord::Base
     self.addresses.first.geocode_lon
   end
 
-  def image
-    return ActionController::Base.helpers.asset_path("mainbg.jpg") if self.images.empty?
-    self.images.last.url
+  def image_hash
+    self.images.map do |img|
+      dimensions = FastImage.size(img.url)
+      { src: img.url, w: dimensions.first, h: dimensions.last }
+    end
+  end
+
+  def image_url
+    self.images.first.web.url
   end
 
   # CarrierWave - Images
@@ -65,8 +100,6 @@ class DevSite < ActiveRecord::Base
 
   # CarrierWave - Files
   mount_uploaders :files, FilesUploader
-
-
 
 end
 

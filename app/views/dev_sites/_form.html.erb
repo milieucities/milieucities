@@ -3,18 +3,6 @@
 
   <div class="row">
 
-  <% if @dev_site.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@dev_site.errors.count, "error") %> prohibited this dev_site from being saved:</h2>
-
-      <ul>
-      <% @dev_site.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="input-field col s12">
     <%= f.text_field :title %>
     <%= f.label :title, "Project Name" %>
@@ -105,4 +93,3 @@
   </div>
 
 <% end %>
-

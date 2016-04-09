@@ -23,18 +23,35 @@ $(document).on('ready page:load', function(){
 
     map.scrollZoom.disable();
 
-    map.on('style.load', function () {
+    $(".filter-item").click(function(){
+      var $filter = $(this);
+      var filter_by = $filter.data("filter");
 
-      $.getJSON("/dev_sites/geojson", function(data){
+      if($filter.hasClass("selected")){
+        $filter.removeClass("selected");
+        filter_by = "nothing";
+      }else{
+        $(".filter-item").removeClass("selected");
+        $filter.addClass("selected");
+      }
 
-        if(data.length === 0){
-          return false;
+      $.getJSON("/dev_sites?filter=" + filter_by, function(data){
+        geojsonData = data;
+        html = HandlebarsTemplates['maps/dev_site_info'](data);
+        $("#dev-site-profile").html(html); 
+      });
+
+
+      $.getJSON("/dev_sites/geojson?filter=" + filter_by, function(data){
+
+
+        map.removeSource("devSites");
+        map.removeLayer("devSites");
+
+        if(data.length !== 0){
+          var firstPoint = data[0];
+          map.flyTo({center: [firstPoint.geometry.coordinates[0], firstPoint.geometry.coordinates[1]], zoom: 15 });
         }
-
-
-        var firstPoint = data[0];
-
-        map.setCenter([firstPoint.geometry.coordinates[0], firstPoint.geometry.coordinates[1]]);
 
         map.addSource("devSites", {
             "type": "geojson",
@@ -48,7 +65,44 @@ $(document).on('ready page:load', function(){
             "type": "symbol",
             "source": "devSites",
             "layout": {
-                "icon-image": "{marker-symbol}-15",
+                "icon-image": "{marker-symbol}",
+                "icon-size": 0.5,
+                "icon-offset": [20,-70],
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-size": 12,
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+            }
+        });
+
+      });
+
+    });
+
+    map.on('style.load', function () {
+
+      $.getJSON("/dev_sites/geojson", function(data){
+
+        if(data.length !== 0){
+          var firstPoint = data[0];
+          map.flyTo({center: [firstPoint.geometry.coordinates[0], firstPoint.geometry.coordinates[1]], zoom: 15 });
+        }
+
+        map.addSource("devSites", {
+            "type": "geojson",
+            "data": { "type": "FeatureCollection",
+                      "features": data
+                    }
+        });
+
+        map.addLayer({
+            "id": "devSites",
+            "type": "symbol",
+            "source": "devSites",
+            "layout": {
+                "icon-image": "{marker-symbol}",
+                "icon-size": 0.5,
+                "icon-offset": [20,-70],
                 "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
                 "text-size": 12,
                 "text-offset": [0, 0.6],
