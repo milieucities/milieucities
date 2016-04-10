@@ -77,23 +77,9 @@
     <div  class="col s12 m12 l6">
       <h5>Comment</h5>
 
-      <%if @dev_site.comments.count  < 1 %>
-        <i>Be the first to comment</i>
-      <% end %>
+      <%= react_component "Comments", { devSiteId: @dev_site.id, userId: @user.id,
+        authenticityToken: form_authenticity_token } %>
 
-      <% @dev_site.comments.each do |comment| %>
-        <% next if comment.new_record? %>
-        <div class="comment">
-          <div class="user"><%= comment.user ? comment.user.full_name : "Anonymous" %>
-          <span class="role">| <%= comment.user ? comment.user.role.capitalize : "User" %> </span>
-          </div>
-          <div class="body">
-            <%= comment.body %>
-          </div>
-        </div>
-      <% end %>
-
-      <%= render partial: "comments/form", locals: { commentable: @dev_site } %>
     </div>
 
   </div>

@@ -1,5 +1,4 @@
 var DevSites = React.createClass({
-
   getInitialState: function() {
     return { devSites: [], selectedDevSite: null };
   },
