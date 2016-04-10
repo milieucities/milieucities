@@ -6,7 +6,7 @@ class DevSitesController < ApplicationController
     if params[:filter].present?
       @dev_sites = DevSite.filter(params[:filter])
     else
-      @dev_sites = DevSite.first(9)
+      @dev_sites = DevSite.all
     end
 
     respond_to do |format|
@@ -23,7 +23,7 @@ class DevSitesController < ApplicationController
     if params[:filter].present?
       @dev_sites = DevSite.filter(params[:filter])
     else
-      @dev_sites = DevSite.first(9)
+      @dev_sites = DevSite.all
     end
 
     @geojson = []

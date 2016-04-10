@@ -33,15 +33,15 @@ class DevSite < ActiveRecord::Base
   def self.filter(filter_by)
     @dev_sites = DevSite.all
     if filter_by == "consultation" then
-      @dev_sites = @dev_sites.joins(:statuses).where( statuses: { status: ["Comment Period in Progress", "Community Information and Comment Session Open"] } )
+      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Comment Period in Progress", "Community Information and Comment Session Open"] } ).group('dev_sites.id')
     elsif filter_by == "new-development" then
       @dev_sites = @dev_sites.where( application_type: VALID_APPLICATION_TYPES.reject { |at| ["Derelict", "Vacant"].include?(at) } )
-      @dev_sites = @dev_sites.joins(:statuses).where( statuses: { status: Status::VALID_STATUS_TYPES.reject { |st| ["Unknown", "Comment Period in Progress", "Community Information and Comment Session Open"].include?(st) } } )
+      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: Status::VALID_STATUS_TYPES.reject { |st| ["Unknown", "Comment Period in Progress", "Community Information and Comment Session Open"].include?(st) } } )
     elsif filter_by == "vacant-derelict" then
       @dev_sites = @dev_sites.where( application_type: ["Derelict", "Vacant"] )
-      @dev_sites = @dev_sites.joins(:statuses).where( statuses: { status: ["Unknown"] })
+      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Unknown"] })
     elsif filter_by == "events" then
-      @dev_sites = @dev_sites.joins(:statuses).where( statuses: { status: ["Event"] })
+      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Event"] })
     end
     @dev_sites
   end
@@ -92,7 +92,12 @@ class DevSite < ActiveRecord::Base
   end
 
   def image_url
-    self.images.first.web.url
+    if self.images.present?
+      self.images.first.web.url
+    else
+      return "https://maps.googleapis.com/maps/api/streetview?size=600x600&location=" + self.addresses.first.street + "&key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw" unless self.addresses.empty?
+      ActionController::Base.helpers.image_path("mainbg.jpg");
+    end
   end
 
   # CarrierWave - Images

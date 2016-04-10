@@ -14,8 +14,10 @@ $(document).on('ready page:load', function(){
 });
 
 $(document).on('click', "#slides .display-image",function(){
-  gallery = photoSwipe(imageArray);
-  gallery.init();
+  if(imageArray.length > 0){
+    gallery = photoSwipe(imageArray);
+    gallery.init();
+  }
 });
 
 function photoSwipe(images){

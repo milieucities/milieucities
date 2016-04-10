@@ -3,7 +3,11 @@
 
   <div class="legend hide-on-small-only">
 
-    <div class="title">Legend</div>
+    <div class="title">
+    <b>How can you use Milieu?</b>
+    </div>
+
+
 
     <div class="item">
       <%= image_tag "consultation.png", class: "icon" %>
@@ -31,36 +35,41 @@
 <div class="survey">
 
   <div class="title">
-  <%= image_tag "mi_logo.png", class: "survey_logo" %> let milieu know a little about you
+  <%= image_tag "mi_logo.png", class: "survey_logo" %> Share what gets you excited about ottawa
   </div>
   <%= form_tag("/survey", method: "post") do %>
+
+  <div class="row">
     <div class="input-field col s12">
-      <%= text_field_tag :name %>
-      <%= label_tag :name, "I am" %>
+      <%= text_area_tag :name, nil, class: "materialize-textarea" %>
+      <%= label_tag :name, "My Ottawa includes" %>
     </div>
 
     <div class="input-field col s12">
-      <%= text_field_tag :hood %>
+      <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
       <%= label_tag :hood, "Neighboorhood I Live in" %>
     </div>
-
+<!-- 
     <div class="input-field col s12">
       <%= text_area_tag :suggestion, nil, class: "materialize-textarea" %>
       <%= label_tag :suggestion, "Changes I want in my neighbourhood" %>
+    </div> -->
+
+    </div>
+
+    <div class="row" style="margin-top: 15px;">
+      <%= link_to "Enter Map", map_path, class: "waves-effect btn btn-flat", style: "width: 100%;" %>
+    </div>
+
+
+    <div class="row center-align">
+      OR
     </div>
 
     <div class="input-field col s12 social-links">
       <div class="col s4"><%= link_to fa_icon("facebook"), "#" %></div>
       <div class="col s4"><%= link_to fa_icon("twitter"), "#" %></div>
       <div class="col s4"><%= link_to fa_icon("google"), "#" %></div>
-    </div>
-
-    <div class="row center-align">
-      OR
-    </div>
-
-    <div class="row">
-      <%= link_to "Enter Map", map_path, class: "waves-effect btn btn-flat", style: "width: 100%;" %>
     </div>
 
    <% end %>

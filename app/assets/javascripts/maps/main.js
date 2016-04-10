@@ -66,7 +66,7 @@ $(document).on('ready page:load', function(){
             "source": "devSites",
             "layout": {
                 "icon-image": "{marker-symbol}",
-                "icon-size": 0.5,
+                "icon-size": 1,
                 "icon-offset": [20,-70],
                 "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
                 "text-size": 12,
@@ -101,7 +101,7 @@ $(document).on('ready page:load', function(){
             "source": "devSites",
             "layout": {
                 "icon-image": "{marker-symbol}",
-                "icon-size": 0.5,
+                "icon-size": 1,
                 "icon-offset": [20,-70],
                 "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
                 "text-size": 12,
