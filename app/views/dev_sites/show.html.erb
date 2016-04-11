@@ -64,12 +64,16 @@
       <h5>Description</h5>
       <p><%= @dev_site.description.present? ? @dev_site.description : "No description present." %></p>
 
-      <% if @dev_site.files.present? %>
+      <% if @dev_site.files.present? || @dev_site.city_files.present? %>
       <h5>Files</h5>
       <ul class="files">
         <% @dev_site.files.each do |file| %>
           <li><%= fa_icon("file-o") %><%= link_to File.basename(file.path), file.url %></li>
         <% end %>
+
+        <% @dev_site.city_files.each do |file| %>
+          <li><%= fa_icon("file-o") %><%= link_to file.name, file.link %></li>
+        <% end %>  
       </ul>
       <% end %>
     </div>

@@ -224,7 +224,7 @@ devIDs = scraper.getAppIDs()
 
 # Insert DevIds into DB ##
 counter = 1
-devIDs.first(30).each do |id|
+devIDs.first(150).each do |id|
   one = scraper.getDetailedInfo(id)
 
   if one.code == "200"
