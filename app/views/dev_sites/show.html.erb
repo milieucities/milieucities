@@ -43,7 +43,7 @@
                   <tbody>
                   <% @dev_site.statuses.each do |status| %>
                     <tr>
-                      <td><%= status.status || "N/A" %></td>
+                      <td><%= status.status.html_safe || "N/A" %></td>
                       <td><%= status.status_date.present? ? status.status_date.strftime("%B %e, %Y") : "N/A" %></td>
                     </tr>
                   <% end %>

@@ -72,6 +72,11 @@ section#map{
       .col{
         padding: 0;
       }
+
+      a{
+        text-decoration: underline;
+        color: $secondary-color;
+      }
     }
 
     .title{
