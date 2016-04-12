@@ -1,7 +1,7 @@
 class DevSite < ActiveRecord::Base
   attr_accessor :images, :files
 
-  default_scope { order(updated_at: :desc ) }
+  default_scope { order(ward_num: :asc ) }
 
   VALID_APPLICATION_TYPES = [ "Site Plan Control", "Official Plan Amendment", "Zoning By-law Amendment", 
     "Demolition Control", "Cash-in-lieu of Parking", "Plan of Subdivision", 
@@ -20,9 +20,6 @@ class DevSite < ActiveRecord::Base
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :statuses, allow_destroy: true
-
-  # Rating
-  ratyrate_rateable "location", "app_type"
 
   ## Validations
   validates     :application_type, presence: { message: "Application type is required" }
