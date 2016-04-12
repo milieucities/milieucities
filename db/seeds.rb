@@ -249,14 +249,17 @@ devIDs.first(150).each do |id|
 
     ## Insert Addresses
     addresses = two["address"]
-    if addresses
+    unless addresses.empty?
       addresses.each do |address|
+        next unless address["addr"].present?
         dev_site.addresses.build(
           lat: address["lat"],
           lon: address["lon"],
           street: address["addr"] + ", Ottawa"
         )
       end
+    else
+      next
     end
 
     # next if addresses.first.street.nil?
@@ -264,7 +267,7 @@ devIDs.first(150).each do |id|
 
     ## Insert Statuses
     statuses = two["statuses"]
-    if statuses
+    unless statuses.empty?
       statuses.each do |status|
         dev_site.statuses.build(
           status_date: status["statusdate"],
@@ -276,7 +279,7 @@ devIDs.first(150).each do |id|
 
     ## Insert Files
     files = two["files"]
-    if files
+    unless files.empty?
       files.each do |file|
         dev_site.city_files.build(
           name: file["title"],
