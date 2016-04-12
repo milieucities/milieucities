@@ -4,9 +4,9 @@ class DevSitesController < ApplicationController
 
   def index
     if params[:filter].present?
-      @dev_sites = DevSite.filter(params[:filter])
+      @dev_sites = DevSite.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
     else
-      @dev_sites = DevSite.all
+      @dev_sites = DevSite.all.joins(:addresses).where.not( addresses: [] )
     end
 
     respond_to do |format|
@@ -21,9 +21,9 @@ class DevSitesController < ApplicationController
 
   def geojson
     if params[:filter].present?
-      @dev_sites = DevSite.filter(params[:filter])
+      @dev_sites = DevSite.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
     else
-      @dev_sites = DevSite.all
+      @dev_sites = DevSite.all.joins(:addresses).where.not( addresses: [] )
     end
 
     @geojson = []

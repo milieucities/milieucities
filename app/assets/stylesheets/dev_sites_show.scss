@@ -42,6 +42,10 @@ section#dev-site-show{
 
   .info{
     font-size: 14px;
+
+    table a{
+      color: $secondary-color;
+    }
   }
 
   .label{

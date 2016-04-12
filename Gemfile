@@ -35,6 +35,7 @@ gem 'fog', '~> 1.38'
 gem 'rmagick', '~> 2.15.4', :require => 'RMagick'
 gem 'figaro', '~> 1.1.1'
 gem 'react-rails', '~> 1.6.2'
+gem 'acts_as_votable', '~> 0.10.0'
 
 
 ## For APIs ##
