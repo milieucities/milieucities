@@ -18,8 +18,8 @@ class DevSite < ActiveRecord::Base
   has_many :statuses, dependent: :destroy
   has_many :city_files, dependent: :destroy
 
-  accepts_nested_attributes_for :addresses
-  accepts_nested_attributes_for :statuses
+  accepts_nested_attributes_for :addresses, allow_destroy: true
+  accepts_nested_attributes_for :statuses, allow_destroy: true
 
   # Rating
   ratyrate_rateable "location", "app_type"
