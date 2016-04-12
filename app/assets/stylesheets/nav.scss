@@ -3,9 +3,9 @@ section#nav{
   height: 64px;
   line-height: 64px;
   width: 100vw;
-  position: relative;
+  position: fixed;
   padding: 0 20px;
-  z-index: 1;
+  z-index: 100;
 
   .nav-logo img{
     float: left;

@@ -1,14 +1,18 @@
 <section id="dev-site-show">
 
   <div class="container">
+
+  <div class="title">
+    <%= @dev_site.addresses.empty? ? @dev_site.title : @dev_site.addresses.first.street %>
+  </div>
+
   <div class="row">
-    <div class="col s12 m7">
+    <div class="col s12 m12 l7">
       <div id="slides">
+       <%= image_tag (@dev_site.image_url), class: "display-image" %>
       </div>
-       <%= image_tag (@dev_site.images.present? ? @dev_site.images.last.url : "mainbg.jpg" ), class: "display-image materialboxed" %>
     </div>
-    <div class="col s12 m5">
-      <h3><%= @dev_site.title%></h3>
+    <div class="col s12 m12 l5">
 
       <div class="row info">
 
@@ -24,32 +28,6 @@
         <div class="col s6 label">Ward Number:</div>
         <div class="col s6"><%= @dev_site.ward_num.present? ? @dev_site.ward_num : "N/A" %></div>
 
-        <div class="col s6 label">Likes:</div>
-        <div class="col s6">
-          <%= link_to fa_icon("heart", text: @dev_site.hearts || "0"), "#", class: "like-button" %>
-        </div>
-
-        <div class="row" style="max-width: 400px;">
-          <div class="col s12">
-              <% if @dev_site.addresses.present? %>
-                <table class="striped">
-                  <thead>
-                    <tr>
-                        <th>Address</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                  <% @dev_site.addresses.each do |address| %>
-                    <tr>
-                      <td><%= address.street || "N/A" %></td>
-                    </tr>
-                  <% end %>
-                  </tbody>
-                </table>
-              <% end %>
-          </div>
-        </div>
 
         <div class="row" style="max-width: 400px;">
           <div class="col s12">
@@ -79,60 +57,111 @@
     </div>
   </div>
 
-  <% if current_user.role == 'planner' %>
-    <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? %>
-    <%= link_to fa_icon("trash", text: "Delete"), dev_site_path(@dev_site), method: "DELETE", data: "Are you sure?",class: "btn" if signed_in? %>
-  <% end %>
-
-  <div class="col s12">
-    <h5>Rate</h5>
-    <div class="row">
-      <div class="col s12 m6">
-      Location: <%= rating_for @dev_site, "location", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
-      Application Type: <%= rating_for @dev_site, "app_type", :disable_after_rate => false, :star => 5, :enable_half => false, :half_show => false, :cancel => true, :cancel_hint => "Cancel this rating!" %>
-      </div>
-    </div>
-  </div>
 
   <div class="row">
-    <div class="col s12" style="max-width: 750px">
+    <div class="col s12 m12 l6" style="max-width: 750px">
       <h5>Description</h5>
       <p><%= @dev_site.description.present? ? @dev_site.description : "No description present." %></p>
+
+      <% if @dev_site.files.present? || @dev_site.city_files.present? %>
+      <h5>Files</h5>
+      <ul class="files">
+        <% @dev_site.files.each do |file| %>
+          <li><%= fa_icon("file-o") %><%= link_to File.basename(file.path), file.url %></li>
+        <% end %>
+
+        <% @dev_site.city_files.each do |file| %>
+          <li><%= fa_icon("file-o") %><%= link_to file.name, file.link %></li>
+        <% end %>  
+      </ul>
+      <% end %>
     </div>
+
+    <div  class="col s12 m12 l6">
+      <h5>Comment</h5>
+
+      <%= react_component "Comments", { devSiteId: @dev_site.id, userId: @user.id,
+        authenticityToken: form_authenticity_token } %>
+
+    </div>
+
   </div>
 
-  <% if @dev_site.files.present? %>
-  <h5>Files</h5>
-  <ul class="files">
-    <% @dev_site.files.each do |file| %>
-      <li><%= fa_icon("file-o") %><%= link_to File.basename(file.path), file.url %></li>
-    <% end %>
-  </ul>
-  <% end %>
+  <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? %>
+  <%= link_to "Delete", dev_site_path(@dev_site), data: {:confirm => 'Are you sure you want to delete this application?'}, class: "red btn", method: :delete if signed_in? %>
 
-  <div style="max-width: 750px">
-    <h5>Comment</h5>
-
-    <%if @dev_site.comments.count  < 1 %>
-      <i>Be the first to comment</i>
-    <% end %>
-
-    <% @dev_site.comments.each do |comment| %>
-      <% next if comment.new_record? %>
-      <div class="comment">
-        <div class="user"><%= comment.user ? comment.user.full_name : "Anonymous" %>
-        <span class="role">| <%= comment.user ? comment.user.role.capitalize : "User" %> </span>
-        </div>
-        <div class="body">
-          <%= comment.body %>
-        </div>
-      </div>
-    <% end %>
-
-    <%= render partial: "comments/form", locals: { commentable: @dev_site } %>
-  </div>
 
 </div>
+
+
 </section>
 
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
 

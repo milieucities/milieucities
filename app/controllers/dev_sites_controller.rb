@@ -1,9 +1,13 @@
 class DevSitesController < ApplicationController
-  before_action :set_dev_site, only: [:show, :edit, :update, :destroy]
+  before_action :set_dev_site, only: [:show, :edit, :images, :update, :destroy]
   skip_before_filter :verify_signed_out_user, if: :json_request?
 
   def index
-    @dev_sites = DevSite.first(9)
+    if params[:filter].present?
+      @dev_sites = DevSite.filter(params[:filter])
+    else
+      @dev_sites = DevSite.all
+    end
 
     respond_to do |format|
         format.html
@@ -11,8 +15,17 @@ class DevSitesController < ApplicationController
     end
   end
 
+  def images
+    render json: { images: @dev_site.image_hash }
+  end
+
   def geojson
-    @dev_sites = DevSite.first(9)
+    if params[:filter].present?
+      @dev_sites = DevSite.filter(params[:filter])
+    else
+      @dev_sites = DevSite.all
+    end
+
     @geojson = []
 
     @dev_sites.each do |ds|
@@ -24,18 +37,19 @@ class DevSitesController < ApplicationController
         address.lon = address.geocode_lon
         address.save
       end
+
       @geojson << {
         type: 'Feature',
         geometry: {
           type: 'Point',
-          coordinates: [address.lat, address.lon]
+          coordinates: [address.lon, address.lat]
         },
         properties: {
           id: ds.id,
           zoom: 9,
           title: ds.title,
           address: address,
-          :'marker-symbol' => "marker",
+          :'marker-symbol' => ds.marker,
           description: "<div class=\"marker-title\"><a href=\"/dev_sites/#{ds.id}\">#{ds.title}</a></div>Status: #{ds.status}"
         }
       }
@@ -90,7 +104,7 @@ class DevSitesController < ApplicationController
   def destroy
     @dev_site.destroy
     respond_to do |format|
-      format.html { redirect_to dev_sites_url, notice: 'Dev site was successfully destroyed.' }
+      format.html { redirect_to map_path, notice: 'Dev site was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -135,7 +149,7 @@ class DevSitesController < ApplicationController
     end
 
     def dev_site_params
-      params.require(:dev_site).permit(:devID, :application_type, :title, :images_cache, :files_cache,
+      params.require(:dev_site).permit(:devID, :application_type, :title, :images_cache, :files_cache, :build_type,
       :description, :ward_name, :ward_num, :image_url, :hearts, {images: []}, {files: []},
       addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
       statuses_attributes: [:id, :status, :status_date, :_destroy] )

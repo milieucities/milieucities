@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401041601) do
+ActiveRecord::Schema.define(version: 20160408004149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20160401041601) do
     t.integer  "hearts"
     t.json     "files"
     t.json     "images"
+    t.string   "build_type"
   end
 
   create_table "events", force: :cascade do |t|

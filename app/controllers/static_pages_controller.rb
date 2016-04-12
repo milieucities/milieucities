@@ -27,7 +27,7 @@ class StaticPagesController < ApplicationController
       firebase = Firebase::Client.new(base_uri, ENV['FIREBASE_SECRET'])
       firebase.request.connect_timeout = 150
 
-      if name && city && hood && suggestion && terms
+      if name && hood && suggestion && terms
 
         response = firebase.set("visits/"+name, {
           :fullName => name,
@@ -38,7 +38,7 @@ class StaticPagesController < ApplicationController
         })
 
         if response
-          redirect_to dev_sites_path, notice: "Thank you " + name + ". Welcome to Milieu."
+          redirect_to map_path, notice: "Thank you " + name + ". Welcome to Milieu."
         end
 
 

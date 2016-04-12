@@ -1,78 +1,84 @@
 <section id="home" class="row no-pad">
-  <div class="row no-marg">
-    <div class="col s12 m8 no-pad map-container">
-      <div id="home-map"></div>
-      <div class="overlay-info">
-        <div class="row">
-          <div class="col s10 push-s1 m8 push-m3 l5 push-l5">
-            <a href="#" class="info-box z-depth-1 hoverable">
-              <%= image_tag "consultation.png" %><div class="text">Participate in current public consultations</div>
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s10 push-s1 m8 push-m1 l5 push-l1">
-            <a href="#" class="info-box z-depth-1 hoverable">
-              <%= image_tag "comment.png" %><div class="text">Learn more about new urban developments</div>
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s10 push-s1 m8 push-m3 l5 push-l7">
-            <a href="#" class="info-box z-depth-1 hoverable">
-              <%= image_tag "vacant.png" %><div class="text">Start a discussion around vacant derelict sites</div>
-            </a>
-          </div>
-        </div>
-      </div>
+  <div id="home-map"></div>
+
+  <div class="legend hide-on-small-only">
+
+    <div class="title">
+    <b>How can you use Milieu?</b>
     </div>
 
-    <div class="col s12 m4 push-m8 hide-on-small-only join">
 
-      <div class="row">
-        <div class="col s12">
-         <h3>Start participating in your neighbourhood today.</h3>
-       </div>
-     </div>
 
-      <%= form_tag("/survey", method: "post") do %>
-        <div class="input-field col s12">
-          <%= text_field_tag :name %>
-          <%= label_tag :name %>
-        </div>
+    <div class="item">
+      <%= image_tag "consultation.png", class: "icon" %>
+      <div class="text">Participate in current public consultations</div>
+    </div>
 
-        <div class="input-field col s12">
-          <%= text_field_tag :city %>
-          <%= label_tag :city %>
-        </div>
+    <div class="item">
+      <%= image_tag "comment.png", class: "icon" %>
+      <div class="text">Learn more about new urban developments</div>
+    </div>
 
-        <div class="input-field col s12">
-          <%= text_field_tag :hood %>
-          <%= label_tag :neighbourhood %>
-        </div>
+    <div class="item">
+      <%= image_tag "vacant.png", class: "icon" %>
+      <div class="text">Start a discussion around vacant and derelict sites</div>
+    </div>
 
-        <div class="input-field col s12">
-          <%= text_field_tag :suggestion, nil, :placeholder => "A park, less buses, bike paths ... " %>
-          <%= label_tag :suggestion, "Things I would like to see in my neighbourhood" %>
-        </div>
+    <div class="item">
+      <%= image_tag "event.png", class: "icon" %>
+      <div class="text">Explore community events</div>
+    </div>
+  </div>
 
-        <div class="row">
-          <div class="input-field col s12">
+  <%= link_to "VIEW MAP", map_path, class: "view-map z-depth-1 hoverable hide-on-small-only" %>
 
-            <%= check_box_tag :terms %>
-            <%= label_tag :terms, "I agree to the terms of service" %>
-          </div>
-        </div>
+<div class="survey">
 
-        <div class="row">
-          <div class="input-field col s12">
-            <%= submit_tag("Proceed", class: "waves-effect waves-light btn") %>
-            <%= link_to "Skip", dev_sites_path, class: "waves-effect btn btn-flat" %>
-          </div>
-        </div>
-     <% end %>
+  <div class="title">
+  <%= image_tag "mi_logo.png", class: "survey_logo" %> Share what gets you excited about ottawa
+  </div>
+  <%= form_tag("/survey", method: "post") do %>
 
-   </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <%= text_area_tag :name, nil, class: "materialize-textarea" %>
+      <%= label_tag :name, "My Ottawa includes" %>
+    </div>
+
+    <div class="input-field col s12">
+      <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
+      <%= label_tag :hood, "Neighboorhood I Live in" %>
+    </div>
+<!-- 
+    <div class="input-field col s12">
+      <%= text_area_tag :suggestion, nil, class: "materialize-textarea" %>
+      <%= label_tag :suggestion, "Changes I want in my neighbourhood" %>
+    </div> -->
+
+    </div>
+
+    <div class="row" style="margin-top: 15px;">
+      <%= link_to "Enter Map", map_path, class: "waves-effect btn btn-flat", style: "width: 100%;" %>
+    </div>
+
+
+    <div class="row center-align">
+      OR
+    </div>
+
+    <div class="input-field col s12 social-links">
+      <div class="col s4"><%= link_to fa_icon("facebook"), "#" %></div>
+      <div class="col s4"><%= link_to fa_icon("twitter"), "#" %></div>
+      <div class="col s4"><%= link_to fa_icon("google"), "#" %></div>
+    </div>
+
+   <% end %>
+
+    <div class="terms">
+      By using Milieu, I agree to the <%= link_to "terms of service", "#" %>
+    </div>
+
+
  </div>
 </section>
 

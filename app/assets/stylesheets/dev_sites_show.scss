@@ -1,5 +1,5 @@
 section#dev-site-show{
-
+  padding-top: 64px;
   position: relative;
   color: #555;
   background-color: #f4f4f4;
@@ -7,6 +7,12 @@ section#dev-site-show{
   .container{
     background-color: #fff;
     padding: 40px;
+  }
+
+  .title{
+    font-size: 3rem;
+    font-weight: 300;
+    padding-bottom: 30px;
   }
 
   h3{
@@ -25,6 +31,7 @@ section#dev-site-show{
     max-height: 50vh;
     border-radius: 3px;
     padding-bottom: 30px;
+    cursor: pointer;
     object-fit: cover;
   }
 
@@ -49,6 +56,11 @@ section#dev-site-show{
     .user{
       font-weight: bold;
       font-size: 18px;
+    }
+
+    .time{
+      font-size: 0.8rem;
+      color: #999;
     }
 
     .role{
@@ -78,9 +90,12 @@ section#dev-site-show{
     }
   }
 
-  textarea{
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
+  #new_comment textarea{
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    padding: 10px;
+    height: auto;
+    outline: none;
   }
 
 }

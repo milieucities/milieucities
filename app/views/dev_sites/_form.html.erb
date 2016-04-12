@@ -3,21 +3,9 @@
 
   <div class="row">
 
-  <% if @dev_site.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@dev_site.errors.count, "error") %> prohibited this dev_site from being saved:</h2>
-
-      <ul>
-      <% @dev_site.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="input-field col s12">
     <%= f.text_field :title %>
-    <%= f.label :title %>
+    <%= f.label :title, "Project Name" %>
   </div>
 
   <div class="file-field input-field col s12">
@@ -40,6 +28,11 @@
   <div class="input-field col s12 m6">
    <%= f.select :application_type, options_for_select(DevSite::VALID_APPLICATION_TYPES, selected: @dev_site.application_type ) %>
     <%= f.label :application_type, "Application Type" %>
+  </div>
+
+  <div class="input-field col s12">
+   <%= f.select :build_type, options_for_select(DevSite::VALID_BUILDING_TYPES, selected: @dev_site.build_type ) %>
+    <%= f.label :build_type, "Building Type" %>
   </div>
 
   <div class="input-field col s12 m6">
@@ -73,7 +66,7 @@
 
   <div class="row">
 
-  <h5>Addresses</h5>
+  <h5>Address</h5>
   <div class="input-field col s12">
     <%= f.fields_for :addresses do |address| %>
       <%= render 'address_fields', :f => address %>
@@ -84,7 +77,7 @@
 
   <div class="row">
 
-  <h5>Statuses</h5>
+  <h5>Status</h5>
 
   <div class="input-field col s12">
     <%= f.fields_for :statuses do |status| %>
@@ -100,4 +93,3 @@
   </div>
 
 <% end %>
-

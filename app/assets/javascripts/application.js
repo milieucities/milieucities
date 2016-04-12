@@ -23,6 +23,7 @@
 //= require ratyrate
 //= require cocoon
 //= require moment
+//= require photoswipe
 //= require handlebars.runtime
 //= require_tree ./templates
 //  VENDOR PACKAGES

@@ -1,26 +1,61 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# # This file should contain all the record creation needed to seed the database with its default values.
+# # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# #
+# # Examples:
+# #
+# #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+# #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-#require 'unirest'
+# #require 'unirest'
 
-## Scripts ##
+# ## Scripts ##
 
-def set_all_hearts_to_zero
-	sites = DevSite.all
-	sites.each do |site|
-		site.hearts = 0
-		site.save!
-	end
-end
+# def set_all_hearts_to_zero
+# 	sites = DevSite.all
+# 	sites.each do |site|
+# 		site.hearts = 0
+# 		site.save!
+# 	end
+# end
 
-#set_all_hearts_to_zero()
+# #set_all_hearts_to_zero()
 
+
+# def get_dev_site_image_urls()
+
+#   all_dev_sites = DevSite.all
+#   puts "Total DevSites: #{all_dev_sites.length}"
+#   url_counter = 0
+
+#   all_dev_sites.each do |dev_site|
+#     addresses = dev_site.addresses
+#     if (addresses)
+#       url_counter += 1
+#       addresses.each do |address|
+#         url = "https://maps.googleapis.com/maps/api/streetview?size=600x600&location=" + address["street"].to_s + "&key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw"
+#         begin
+#           response = Unirest.get(url)
+#         rescue Exception => e
+#           puts "#{e.inspect}"
+#           puts "Trying lat and long coords"
+#           url = "https://maps.googleapis.com/maps/api/streetview?size=600x600&location=" + address["lat"].to_s + "," + address['lon'].to_s + "&key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw"
+#           response = Unirest.get(url)
+#         end
+#         if (response.code == 200)
+#           dev_site.image_url = url
+#         end
+#         puts "dev_site ID: #{dev_site.id}"
+#         puts "Url Counter: #{url_counter}"
+#         puts "status: #{response.code}"
+#         puts url
+#         puts "=================\n"
+#       end
+#     end
+#     dev_site.save!
+#   end
+
+# end
 
 # def get_dev_site_image_urls()
 
@@ -120,10 +155,10 @@ end
 #
 # end
 
-# url = "http://ottwatch.ca/api/devapps/all"
-# get_dev_ids(url)
-# create_dev_apps_file("dev_ids_Jan_7_2015")
-# get_data("db/devapp_endpoints_Jan_7_2015")
+# # url = "http://ottwatch.ca/api/devapps/all"
+# # get_dev_ids(url)
+# # create_dev_apps_file("dev_ids_Jan_7_2015")
+# # get_data("db/devapp_endpoints_Jan_7_2015")
 
 
 
@@ -159,113 +194,116 @@ class Scrape
 end
 
 wards = {
-  "1": "ORLEANS",
-  "2": "INNES",
-  "3": "BARRHAVEN",
-  "4": "KANATA NORTH",
-  "5": "WEST CARLETON-MARCH",
-  "6": "STITTSVILLE",
-  "7": "BAY",
-  "8": "COLLEGE",
-  "9": "KNOXDALE-MERIVALE",
-  "10": "GLOUCESTER-SOUTHGATE",
-  "11": "BEACON HILL-CYRVILLE",
-  "12": "RIDEAU-VANIER",
-  "13": "RIDEAU-ROCKCLIFFE",
-  "14": "SOMERSET",
-  "15": "KITCHISSIPPI",
-  "16": "RIVER",
-  "17": "CAPITAL",
-  "18": "ALTA VISTA",
-  "19": "CUMBERLAND",
-  "20": "OSGOODE",
-  "21": "RIDEAU-GOULBOURN",
-  "22": "GLOUCESTER-SOUTH NEPEAN",
-  "23": "KANATA SOUTH"
+  "1" => "ORLEANS",
+  "2" => "INNES",
+  "3" => "BARRHAVEN",
+  "4" => "KANATA NORTH",
+  "5" => "WEST CARLETON-MARCH",
+  "6" => "STITTSVILLE",
+  "7" => "BAY",
+  "8" => "COLLEGE",
+  "9" => "KNOXDALE-MERIVALE",
+  "10" => "GLOUCESTER-SOUTHGATE",
+  "11" => "BEACON HILL-CYRVILLE",
+  "12" => "RIDEAU-VANIER",
+  "13" => "RIDEAU-ROCKCLIFFE",
+  "14" => "SOMERSET",
+  "15" => "KITCHISSIPPI",
+  "16" => "RIVER",
+  "17" => "CAPITAL",
+  "18" => "ALTA VISTA",
+  "19" => "CUMBERLAND",
+  "20" => "OSGOODE",
+  "21" => "RIDEAU-GOULBOURN",
+  "22" => "GLOUCESTER-SOUTH NEPEAN",
+  "23" => "KANATA SOUTH"
 }
 
 scraper = Scrape.new
-# devIDs = scraper.getAppIDs()
+devIDs = scraper.getAppIDs()
 
-## Insert DevIds into DB ##
-# counter = 1
-# devIDs.each do |id|
-#   one = scraper.getDetailedInfo(id)
+# Insert DevIds into DB ##
+counter = 1
+devIDs.first(150).each do |id|
+  one = scraper.getDetailedInfo(id)
 
-#   if one.code == "200"
-#     two = JSON.parse(one.body)
+  if one.code == "200"
+    two = JSON.parse(one.body)
 
-#     dev_site = DevSite.new
+    dev_site = DevSite.new
 
-#     ## Insert into db for regular params
-#     dev_site.description = two['description'] if two['description']
-#     dev_site.appID = two["appid"] if two["appid"]
-#     dev_site.devID = two["devid"] if two["devid"]
-#     dev_site.received_date = two["receiveddate"] if two["receiveddate"]
-#     dev_site.updated = two["updated"] if two["updated"]
-#     dev_site.application_type = two["apptype"] if two["apptype"]
+    ## Insert into db for regular params
+    dev_site.description = two['description'] if two['description']
+    dev_site.appID = two["appid"] if two["appid"]
+    dev_site.devID = two["devid"] if two["devid"]
+    dev_site.received_date = two["receiveddate"] if two["receiveddate"]
+    dev_site.updated = two["updated"] if two["updated"]
+    dev_site.application_type = two["apptype"] if two["apptype"]
 
 
-#     ## Insert Ward Names (from ward numbers)
-#     if two["ward"]
-#       dev_site.ward_num = two["ward"]
-#       dev_site.ward_name = wards[two["ward"]]
-#     end
+    ## Insert Ward Names (from ward numbers)
+    if two["ward"]
+      dev_site.ward_num = two["ward"]
+      dev_site.ward_name = wards[two["ward"]]
+    end
 
-#     ## Insert Addresses
-#     addresses = two["address"]
-#     if addresses
-#       addresses.each do |address|
-#         dev_site.addresses.build(
-#           lat: address["lat"],
-#           lon: address["lon"],
-#           street: address["addr"]
-#         )
-#       end
-#     end
+    ## Insert Addresses
+    addresses = two["address"]
+    if addresses
+      addresses.each do |address|
+        dev_site.addresses.build(
+          lat: address["lat"],
+          lon: address["lon"],
+          street: address["addr"] + ", Ottawa"
+        )
+      end
+    end
 
-#     ## Insert Statuses
-#     statuses = two["statuses"]
-#     if statuses
-#       statuses.each do |status|
-#         dev_site.statuses.build(
-#           status_date: status["statusdate"],
-#           status: status["status"],
-#           created: status["created"]
-#         )
-#       end
-#     end
+    # next if addresses.first.street.nil?
 
-#     ## Insert Files
-#     files = two["files"]
-#     if files
-#       files.each do |file|
-#         dev_site.city_files.build(
-#           name: file["title"],
-#           link: file["href"],
-#           orig_created: file["created"],
-#           orig_update: file["updated"]
-#         )
-#       end
-#     end
 
-#     ## Save to database
-#     begin
-#       if dev_site.save
-#         puts counter
-#         puts "Saved application - #{two['devid']}"
-#       else
-#         puts "Did not save - #{two['devid']}"
-#       end
-#     rescue Exception => msg
-#       puts msg.inspect
-#     end
+    ## Insert Statuses
+    statuses = two["statuses"]
+    if statuses
+      statuses.each do |status|
+        dev_site.statuses.build(
+          status_date: status["statusdate"],
+          status: status["status"],
+          created: status["created"]
+        )
+      end
+    end
 
-#     counter += 1
+    ## Insert Files
+    files = two["files"]
+    if files
+      files.each do |file|
+        dev_site.city_files.build(
+          name: file["title"],
+          link: file["href"],
+          orig_created: file["created"],
+          orig_update: file["updated"]
+        )
+      end
+    end
 
-#   end
+    ## Save to database
+    begin
+      if dev_site.save
+        puts counter
+        puts "Saved application - #{two['devid']}"
+      else
+        puts "Did not save - #{two['devid']}"
+      end
+    rescue Exception => msg
+      puts msg.inspect
+    end
 
-# end
+    counter += 1
+
+  end
+
+end
 
 wards_councillor = [
     {"ward_name": "Orleans", "councillor": "Bob Monette"},
@@ -293,40 +331,41 @@ wards_councillor = [
     {"ward_name": "Kanata South", "councillor": "Allan Hubley"},
   ]
 
-## Insert Councillors
-# counter = 1
-# wards_councillor.each do |p|
+# ## Insert Councillors
+# # counter = 1
+# # wards_councillor.each do |p|
 
-#   counc = scraper.getCouncillorInfo(p)
+# #   counc = scraper.getCouncillorInfo(p)
 
-#   if counc.code == "200"
-#     begin
-#       cc = JSON.parse(counc.body)
-#       councillor = Councillor.new
-#       councillor.ward_name = cc["ward"]
-#       councillor.ward_num = cc["wardnum"]
-#       councillor.office = cc["office"]
-#       councillor.first_name = cc["first_name"]
-#       councillor.last_name = cc["last_name"]
-#       councillor.email = cc["email"]
-#       councillor.link = cc["url"]
-#       councillor.photo_link = cc["photourl"]
-#       councillor.phone = cc["phone"]
+# #   if counc.code == "200"
+# #     begin
+# #       cc = JSON.parse(counc.body)
+# #       councillor = Councillor.new
+# #       councillor.ward_name = cc["ward"]
+# #       councillor.ward_num = cc["wardnum"]
+# #       councillor.office = cc["office"]
+# #       councillor.first_name = cc["first_name"]
+# #       councillor.last_name = cc["last_name"]
+# #       councillor.email = cc["email"]
+# #       councillor.link = cc["url"]
+# #       councillor.photo_link = cc["photourl"]
+# #       councillor.phone = cc["phone"]
 
-#       if councillor.save
-#         puts "Saved #{cc['first_name']}"
-#         puts counter
-#       else
-#         puts "Did not save #{cc['first_name']}"
-#       end
+# #       if councillor.save
+# #         puts "Saved #{cc['first_name']}"
+# #         puts counter
+# #       else
+# #         puts "Did not save #{cc['first_name']}"
+# #       end
 
-#       counter += 1
+# #       counter += 1
 
-#     rescue Exception => e
-#       puts "not a valid JSON"
-#       puts e.backtrace.join("\n")
-#       puts "================="
-#     end
-#   end
+# #     rescue Exception => e
+# #       puts "not a valid JSON"
+# #       puts e.backtrace.join("\n")
+# #       puts "================="
+# #     end
+# #   end
 
-# end
+# # end
+# >>>>>>> f13435781105d3600de43f76a50ebe09054e5dde

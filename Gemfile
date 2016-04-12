@@ -18,6 +18,8 @@ gem 'pg', '~> 0.18.4'
 gem 'lunchy', '~> 0.10.4'
 gem 'cocoon', '~> 1.2.9'
 gem 'geocoder', '~> 1.3.1'
+gem 'fastimage'
+gem 'photoswipe-rails'
 gem 'momentjs-rails', '~> 2.11.0'
 gem 'simple_token_authentication', '~> 1.12.0'
 gem 'unicorn', '~> 5.0'
@@ -37,6 +39,7 @@ gem 'react-rails', '~> 1.6.2'
 
 ## For APIs ##
 # gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
+
 gem 'font-awesome-rails', '~> 4.5'
 gem 'simple_form', '~> 3.2.1'
 
@@ -45,12 +48,14 @@ gem 'simple_form', '~> 3.2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+
   gem 'byebug', '~> 8.2'
   gem 'pry-byebug'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
+
   gem 'web-console', '~> 3.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

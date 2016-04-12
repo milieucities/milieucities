@@ -3,7 +3,13 @@ class DevSite < ActiveRecord::Base
 
   default_scope { order(updated_at: :desc ) }
 
-  VALID_APPLICATION_TYPES = [ "Beginning", "In Progress", "Complete"]
+  VALID_APPLICATION_TYPES = [ "Site Plan Control", "Official Plan Amendment", "Zoning By-law Amendment", 
+    "Demolition Control", "Cash-in-lieu of Parking", "Plan of Subdivision", 
+    "Plan of Condominium", "Derelict", "Vacant" ,"Master Plan"]
+
+  VALID_BUILDING_TYPES = [ "Not Applicable", "Derelict", "Demolition", "Residential Apartment", 
+    "Low-rise Residential", "Mid-rise Residential", "Hi-rise Residential", "Mixed-use Residential/Community", 
+    "Commercial", "Commercial/Hotel","Mixed-use", "Additions"]
 
   # establish_connection DB_OTTAWA
   # ASSOCIATIONS
@@ -23,6 +29,35 @@ class DevSite < ActiveRecord::Base
   validates     :description, presence: { message: "Description is required" }
   validates     :ward_name, presence: { message: "Ward name is required" }
   validates     :ward_num, presence: { message: "Ward number is required" }, numericality: true
+
+  def self.filter(filter_by)
+    @dev_sites = DevSite.all
+    if filter_by == "consultation" then
+      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Comment Period in Progress", "Community Information and Comment Session Open"] } ).group('dev_sites.id')
+    elsif filter_by == "new-development" then
+      @dev_sites = @dev_sites.where( application_type: VALID_APPLICATION_TYPES.reject { |at| ["Derelict", "Vacant"].include?(at) } )
+      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: Status::VALID_STATUS_TYPES.reject { |st| ["Unknown", "Comment Period in Progress", "Community Information and Comment Session Open"].include?(st) } } )
+    elsif filter_by == "vacant-derelict" then
+      @dev_sites = @dev_sites.where( application_type: ["Derelict", "Vacant"] )
+      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Unknown"] })
+    elsif filter_by == "events" then
+      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Event"] })
+    end
+    @dev_sites
+  end
+
+  def marker
+    if ["Comment Period in Progress", "Community Information and Comment Session Open"].include?(self.statuses.last.status)
+      marker = "consultation"
+    elsif ["Event"].include?(self.statuses.last.status)
+      marker = "event"
+    elsif ["Unknown"].include?(self.statuses.last.status)
+      marker = "vacant"
+    else
+      marker = "comment"
+    end
+    marker
+  end
 
   def status
     return if self.statuses.empty?
@@ -49,9 +84,20 @@ class DevSite < ActiveRecord::Base
     self.addresses.first.geocode_lon
   end
 
-  def image
-    return ActionController::Base.helpers.asset_path("mainbg.jpg") if self.images.empty?
-    self.images.last.url
+  def image_hash
+    self.images.map do |img|
+      dimensions = FastImage.size(img.url)
+      { src: img.url, w: dimensions.first, h: dimensions.last }
+    end
+  end
+
+  def image_url
+    if self.images.present?
+      self.images.first.web.url
+    else
+      return "https://maps.googleapis.com/maps/api/streetview?size=600x600&location=" + self.addresses.first.street + "&key=AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw" unless self.addresses.empty?
+      ActionController::Base.helpers.image_path("mainbg.jpg");
+    end
   end
 
   # CarrierWave - Images
@@ -59,8 +105,6 @@ class DevSite < ActiveRecord::Base
 
   # CarrierWave - Files
   mount_uploaders :files, FilesUploader
-
-
 
 end
 

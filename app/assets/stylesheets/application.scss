@@ -11,9 +11,19 @@ $secondary-color: #5d9bc0 !default;
 @import "forms";
 @import "maps/home";
 @import "maps/main";
+@import "photoswipe/photoswipe";
+@import "photoswipe/index";
+@import "photoswipe/default-skin/default-skin";
 
 body{
   background-color: #f4f4f4;
+  font-family: "Lato";
+}
+
+.signup-link{
+  text-align: center;
+  display: block;
+  color: $secondary-color;
 }
 
 a{
@@ -43,8 +53,18 @@ h1, h2, h3, h4, h5, h6 {
   color: #333;
 }
 
+input, textarea{
+  margin-bottom: 0px !important;
+}
+
+.error-message{
+  color: #f44336;
+  font-size: 0.75rem;
+}
+
 .small-container{
-  min-height: calc(100vh - 64px);
+  min-height: 100vh;
+  padding-top: 64px;
   background-color: #fff;
 
   h1, h3{
