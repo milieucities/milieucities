@@ -41,10 +41,13 @@
     <div class="input-field col s12">
       <h4>Role</h4>
       <%= f.radio_button :role, 'Public', :checked => true %>
-      <%= f.label :role_user, 'Public'  %>
+      <%= f.label :role_public, 'Public'  %>
       <br />
       <%= f.radio_button :role, 'City Planner' %>
       <%= f.label :role_planner, 'City Planner'  %>
+      <br />
+      <%= f.radio_button :role, 'Organization' %>
+      <%= f.label :role_organization, 'Organization'  %>
       <br />
       <%= f.radio_button :role, 'Developer' %>
       <%= f.label :role_developer, 'Developer'  %>

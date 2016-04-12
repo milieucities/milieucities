@@ -42,12 +42,15 @@ Comments.CommentsIndex = React.createClass({
 
 Comments.Comment = React.createClass({
   render: function(){
+  console.log(this.props.comment);
+
     var user = this.props.comment.user;
     return (
       <div className="comment">
         <div className="user">{ user ? user.first_name + " " + user.last_name : "Anonymous"}
         <span className="role"> | { user ? user.role : "User" } </span>
         </div>
+        <div className="time"> {moment(this.props.comment.created_at).format("MM-DD-YYYY")}</div>
         <div className="body">
           {this.props.comment.body}
         </div>
