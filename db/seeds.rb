@@ -224,7 +224,7 @@ devIDs = scraper.getAppIDs()
 
 # Insert DevIds into DB ##
 counter = 1
-devIDs.first(100).each do |id|
+devIDs.first(35).each do |id|
   one = scraper.getDetailedInfo(id)
 
   if one.code == "200"
@@ -255,7 +255,7 @@ devIDs.first(100).each do |id|
         dev_site.addresses.build(
           lat: address["lat"],
           lon: address["lon"],
-          street: address["addr"] + ", Ottawa"
+          street: address["addr"] + ", Ottawa, Ontario, Canada"
         )
       end
     else
