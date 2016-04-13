@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   post '/rate' => 'rater#create', :as => 'rate'
 
-
   get 'map', to: 'static_pages#map'
 
   get 'events', to: 'static_pages#events'
