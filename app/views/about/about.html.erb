@@ -1,5 +1,21 @@
-<div class="small-container container">
-   <h1 class="center">Building Better Cities with People</h1>
-   <h1 class="center">Building Better Cities with People</h1>
-   <h1 class="center">Building Better Cities with People</h1>
-</div>
+<section id="about">
+	<div id="graywrapper">
+		<%= image_tag("mainbg.jpg", class: "aboutbg") %>
+	</div>
+	
+	<div class="slogan"><strong>Building Better Cities with People</strong></div>
+	<div id="about-content"></div>
+</section>
+
+<script>
+	var ypos,image;
+	function parallex(){
+		ypos = window.pageYOffset;
+		// image = document.getElementsByClassName("aboutbg");
+		var wrapper = document.getElementById('graywrapper');
+		image = wrapper.firstChild;
+		image.style.top = ypos * .4 + 'px';
+	}
+	window.addEventListener('scroll', parallex);
+
+</script>
