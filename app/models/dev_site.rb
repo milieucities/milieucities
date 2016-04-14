@@ -1,14 +1,17 @@
 class DevSite < ActiveRecord::Base
   attr_accessor :images, :files
 
+  # Voting
+  acts_as_votable
+
   default_scope { order(ward_num: :asc ) }
 
-  VALID_APPLICATION_TYPES = [ "Site Plan Control", "Official Plan Amendment", "Zoning By-law Amendment", 
-    "Demolition Control", "Cash-in-lieu of Parking", "Plan of Subdivision", 
+  VALID_APPLICATION_TYPES = [ "Site Plan Control", "Official Plan Amendment", "Zoning By-law Amendment",
+    "Demolition Control", "Cash-in-lieu of Parking", "Plan of Subdivision",
     "Plan of Condominium", "Derelict", "Vacant" ,"Master Plan"]
 
-  VALID_BUILDING_TYPES = [ "Not Applicable", "Derelict", "Demolition", "Residential Apartment", 
-    "Low-rise Residential", "Mid-rise Residential", "Hi-rise Residential", "Mixed-use Residential/Community", 
+  VALID_BUILDING_TYPES = [ "Not Applicable", "Derelict", "Demolition", "Residential Apartment",
+    "Low-rise Residential", "Mid-rise Residential", "Hi-rise Residential", "Mixed-use Residential/Community",
     "Commercial", "Commercial/Hotel","Mixed-use", "Additions"]
 
   # establish_connection DB_OTTAWA

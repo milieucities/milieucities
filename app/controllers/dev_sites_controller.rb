@@ -119,28 +119,16 @@ class DevSitesController < ApplicationController
     end
   end
 
-  def heart
-    DevSite.increment_counter(:hearts, params[:dev_site_id])
-    respond_to do |format|
-      format.json {
-        render :json => [
-          'dev_site_id' => params[:dev_site_id],
-          'total_hearts' => DevSite.find(params[:dev_site_id]).hearts
-        ]
-      }
-    end
+  def upvote
+    @dev_site = DevSite.find(params[:id])
+    @dev_site.upvote_by current_user
+    redirect_to :back
   end
 
-  def break_heart
-    DevSite.decrement_counter(:hearts, params[:dev_site_id])
-    respond_to do |format|
-      format.json {
-        render :json => [
-          'dev_site_id' => params[:dev_site_id],
-          'total_hearts' => DevSite.find(params[:dev_site_id]).hearts
-        ]
-      }
-    end
+  def downvote
+    @dev_site = DevSite.find(params[:id])
+    @dev_site.downvote_by current_user
+    redirect_to :back
   end
 
   private

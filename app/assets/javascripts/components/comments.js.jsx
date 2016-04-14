@@ -42,11 +42,13 @@ Comments.CommentsIndex = React.createClass({
 
 Comments.Comment = React.createClass({
   render: function(){
-  console.log(this.props.comment);
-
     var user = this.props.comment.user;
     return (
       <div className="comment">
+        <div className="voting">
+          <i className="fa fa-angle-up fa-2x"></i><br/>
+          <i className="fa fa-angle-down fa-2x"></i>
+        </div>
         <div className="user">{ user ? user.first_name + " " + user.last_name : "Anonymous"}
         <span className="role"> | { user ? user.role : "User" } </span>
         </div>
@@ -99,7 +101,7 @@ Comments.CommentsForm = React.createClass({
           <input type="hidden" name="comment[dev_site_id]" id="comment_dev_site_id" value={this.props.devSiteId} />
           <input type="hidden" name="comment[user_id]" id="comment_user_id" value={this.props.userId} />
 
-          <textarea valueLink={this.linkState('body')}  placeholder="There used to be a good park here, now all I see is tall buildings..." name="comment[body]" id="comment_body"></textarea>
+          <textarea valueLink={this.linkState('body')}  placeholder="I can't wait to see this in our neighbourhood!" name="comment[body]" id="comment_body"></textarea>
           <input type="submit" name="commit" value="Comment" className="btn"/>
         </form>
       </div>
