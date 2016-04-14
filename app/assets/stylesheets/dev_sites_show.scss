@@ -19,6 +19,19 @@ section#dev-site-show{
     margin-top: 0;
   }
 
+  .upvote {
+    &:hover {
+      color: #8c8c8c;
+    }
+  }
+
+  .downvote {
+    padding-left: 20px;
+    &:hover {
+      color: #8c8c8c;
+    }
+  }
+
   .btn-floating{
     position: absolute;
     top: 50px;
