@@ -4,16 +4,42 @@
 	</div>
 	
 	<div class="slogan"><strong>Building Better Cities with People</strong></div>
-	<div id="about-content"></div>
+	<div id="about-content">
+		<div>
+			<div id="short-description">Milieu is a platform for people to stay informed, discuss, and submit ideas about urban planning and development projects in the city </div>
+			<div>
+				<ul>
+				<li>Team</li>
+				<li>LUISA JI</li>
+				<li>COFOUNDER & PRODUCT DESIGNER</li>
+				<li>LEE-MICHAEL PRONKO</li>
+				<li>COFOUNDER & BUSINESS ANALYST</li>
+				<li>VICTORIA HO</li>
+				<li>CITIZEN ENGAGEMENT COORDINATOR TORONTO</li>
+				<li>MONIQUE ST-PIERRE</li>
+				<li>DESIGNER & CITIZEN ENGAGEMENT SPECIALIST</li>
+				<li>XIAOXI PANG</li>
+				<li>IOS DEVELOPER</li>
+				<li>ASH DARJI</li>
+				<li>SOFTWARE DEVELOPER</li>
+				<li>LANA LODGE</li>
+				<li>SOFTWARE DEVELOPER</li>
+				<li>UZAYR ABDULLAH</li>
+				<li>GEOGRAPHIC INFORMATION SYSTEMS</li>
+				</ul>
+			</div>
+			<div>
+				<iframe src="https://vimeo.com/"></iframe>
+			</div>
+		</div>
+	</div>
 </section>
 
 <script>
 	var ypos,image;
 	function parallex(){
 		ypos = window.pageYOffset;
-		// image = document.getElementsByClassName("aboutbg");
-		var wrapper = document.getElementById('graywrapper');
-		image = wrapper.firstChild;
+		image = document.getElementsByClassName("aboutbg");
 		image.style.top = ypos * .4 + 'px';
 	}
 	window.addEventListener('scroll', parallex);
