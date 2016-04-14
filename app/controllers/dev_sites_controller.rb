@@ -143,6 +143,18 @@ class DevSitesController < ApplicationController
     end
   end
 
+  def upvote
+    @dev_site = DevSite.find(params[:id])
+    @dev_site.upvote_by current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @dev_site = DevSite.find(params[:id])
+    @dev_site.downvote_by current_user
+    redirect_to :back
+  end
+
   private
     def set_dev_site
       @dev_site = DevSite.find(params[:id])

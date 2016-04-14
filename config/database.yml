@@ -3,8 +3,8 @@ default: &default
   adapter: postgresql
   database: milieuV2
   host: localhost
-  username: postgres
-  password: postgres
+  username: ash
+  password:
   pool: 5
   timeout: 5000
 
