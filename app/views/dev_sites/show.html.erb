@@ -29,6 +29,7 @@
         <div class="col s6"><%= @dev_site.ward_num.present? ? @dev_site.ward_num : "N/A" %></div>
 
         <div class="col s6 label">Votes:</div>
+
         <div class="col s6">
           <%= link_to upvote_dev_site_path(@dev_site), method: :put do %>
             <i class="fa fa-thumbs-o-up fa-2x upvote"></i>
