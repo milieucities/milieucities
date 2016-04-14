@@ -100,11 +100,11 @@
 
   </div>
 
-  <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? %>
-  <%= link_to "Delete", dev_site_path(@dev_site), data: {:confirm => 'Are you sure you want to delete this application?'}, class: "red btn", method: :delete if signed_in? %>
 
+    <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? && current_user.role == 'City Planner' %>
+    <%= link_to "Delete", dev_site_path(@dev_site), data: {:confirm => 'Are you sure you want to delete this application?'}, class: "red btn", method: :delete if signed_in? && current_user.role == 'City Planner' %>
 
-</div>
+  </div>
 
 
 </section>
