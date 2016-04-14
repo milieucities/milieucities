@@ -9,9 +9,7 @@ Rails.application.routes.draw do
 
   get 'all_user_comments', to: 'comments#all_user_comments'
   get 'all_devsite_comments', to: 'dev_sites#all_devsite_comments'
-  get 'heart', to: 'dev_sites#heart'
   get 'map', to: 'static_pages#map'
-  get 'break_heart', to: 'dev_sites#break_heart'
   get 'xml_data', to: 'dev_sites#xml_data'
 
   get 'events', to: 'static_pages#events'
@@ -20,6 +18,13 @@ Rails.application.routes.draw do
     resources :comments, module: :dev_sites
     get :geojson, on: :collection
     get :images, on: :member
+
+    # Voting
+    member do
+      put "upvote", to: "dev_sites#upvote"
+      put "downvote", to: "dev_sites#downvote"
+    end
+
   end
 
   resources :events, only: [:index, :show, :destroy, :create]
