@@ -42,8 +42,6 @@ Comments.CommentsIndex = React.createClass({
 
 Comments.Comment = React.createClass({
   render: function(){
-  console.log(this.props.comment);
-
     var user = this.props.comment.user;
     return (
       <div className="comment">

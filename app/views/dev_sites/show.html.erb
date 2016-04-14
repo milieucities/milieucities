@@ -31,12 +31,12 @@
         <div class="col s6 label">Votes:</div>
         <div class="col s6">
           <%= link_to upvote_dev_site_path(@dev_site), method: :put do %>
-            Upvote
+            <i class="fa fa-thumbs-up"></i>
             <%= @dev_site.get_upvotes.size %>
           <% end %>
 
           <%= link_to downvote_dev_site_path(@dev_site), method: :put do %>
-            Downvote
+            <i class="fa fa-thumbs-down"></i>
             <%= @dev_site.get_downvotes.size %>
           <% end %>
         </div>
