@@ -43,7 +43,7 @@ class DevSite < ActiveRecord::Base
     elsif filter_by == "events" then
       @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Event"] })
     end
-    @dev_sites
+    @dev_sites.limit(150)
   end
 
   def marker
