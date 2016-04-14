@@ -1,6 +1,7 @@
 class DevSite < ActiveRecord::Base
   attr_accessor :images, :files
 
+  # Voting
   acts_as_votable
 
   default_scope { order(ward_num: :asc ) }
