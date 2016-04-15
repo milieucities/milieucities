@@ -32,11 +32,11 @@ class DevSitesController < ApplicationController
       address = ds.addresses.first
       next unless address
 
-      if !address.geocode_lat.nil? && !address.geocode_lon.nil?
-        address.lat = address.geocode_lat
-        address.lon = address.geocode_lon
-        address.save
-      end
+      # if !address.geocode_lat.nil? && !address.geocode_lon.nil?
+      #   address.lat = address.geocode_lat
+      #   address.lon = address.geocode_lon
+      #   address.save
+      # end
 
       @geojson << {
         type: 'Feature',
