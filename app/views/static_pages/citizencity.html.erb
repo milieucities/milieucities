@@ -1,0 +1,75 @@
+<section id="home" class="row no-pad">
+  <div id="home-map">
+    <div class="white-overlay"></div>
+  </div>
+
+  <div class="citizencity">
+    <div class="title">Citizen City:</div>
+    <div class="sub-title">Redefining place in ottawa 2016</div>
+
+    <div class="info-tags row">
+      <div class="col s12"><%= image_tag "placemaking" %></div>
+      <div class="col s12"><%= image_tag "citizenled_collaboration", class: "right" %></div>
+      <div class="col s12"><%= image_tag "urban_understanding" %></div>
+      <div class="col s12"><%= image_tag "civic_technology", class: "right" %></div>
+    </div>
+
+    <div class="text">
+      Citizen-led teams will come together to imagine and co-design shared spaces. Using new tools and
+      particiatory processes, Citizen Academy and Milieu are conducting a city wide real-time, place making
+      exercise.
+    </div>
+
+    <div class="sponsors row">
+      <div class="col s4"><%= image_tag "archcan-logo" %></div>
+      <div class="col s4">Milieu</div>
+      <div class="col s4"><%= image_tag "citizen_academy" %></div>
+    </div>
+    
+  </div>
+
+  <div class="survey">
+
+    <div class="title">
+    <%= image_tag "mi_logo.png", class: "survey_logo" %> Share what gets you excited about ottawa
+    </div>
+    <%= form_tag("/survey", method: "post") do %>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <%= text_area_tag :name, nil, class: "materialize-textarea" %>
+        <%= label_tag :name, "My Ottawa includes" %>
+      </div>
+
+      <div class="input-field col s12">
+        <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
+        <%= label_tag :hood, "Neighboorhood I Live in" %>
+      </div>
+
+      </div>
+
+      <div class="terms">
+        By using Milieu, I agree to the <%= link_to "terms of service", "#" %>
+      </div>
+
+      <div class="row" style="margin-top: 15px;">
+        <%= link_to "Enter Map", map_path, class: "waves-effect btn btn-flat enter-map", style: "width: 100%;" %>
+      </div>
+
+
+      <div class="row center-align">
+        OR
+      </div>
+
+      <div class="input-field col s12 social-links">
+        <div class="col s4"><%= link_to fa_icon("facebook"), "#" %></div>
+        <div class="col s4"><%= link_to fa_icon("twitter"), "#" %></div>
+        <div class="col s4"><%= link_to fa_icon("google"), "#" %></div>
+      </div>
+
+     <% end %>
+
+  </div>
+</section>
+
+

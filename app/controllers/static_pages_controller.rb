@@ -9,6 +9,9 @@ class StaticPagesController < ApplicationController
   def map
   end
 
+  def citizencity
+  end
+
   def submitSurvey
     name = params[:name].to_s if params[:name]
     city = params[:city].to_s if params[:city]

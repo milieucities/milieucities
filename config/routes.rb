@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   post '/survey', to: 'static_pages#submitSurvey'
 
+  get '/citizencity', to: 'static_pages#citizencity'
+
   post '/rate' => 'rater#create', :as => 'rate'
 
   get 'all_user_comments', to: 'comments#all_user_comments'
