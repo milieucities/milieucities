@@ -57,9 +57,10 @@ section#home{
   }
 
   .citizencity{
+    color: #3c3c3c;
     width: calc(100% - 360px);
     position: absolute;
-    top: 84px;
+    top: 20px;
     left: 20px;
     z-index: 2;
 
@@ -94,7 +95,7 @@ section#home{
       max-width: 700px;
       margin: 0 auto;
       font-size: 1.25rem;
-      padding: 20px 0;
+      padding: 20px 0 40px;
     }
 
     .sponsors{

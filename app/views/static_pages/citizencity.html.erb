@@ -8,10 +8,10 @@
     <div class="sub-title">Redefining place in ottawa 2016</div>
 
     <div class="info-tags row">
-      <div class="col s12"><%= image_tag "placemaking.png" %></div>
-      <div class="col s12"><%= image_tag "citizenled_collaboration.png", class: "right" %></div>
-      <div class="col s12"><%= image_tag "urban_understanding.png" %></div>
-      <div class="col s12"><%= image_tag "civic_technology.png", class: "right" %></div>
+      <div class="col s12"><%= image_tag "placemaking.png", title: "Placemaking, actions to create new urban activities" %></div>
+      <div class="col s12"><%= image_tag "citizenled_collaboration.png", class: "right", title: "Citizen led collaboration, co-creating with your neighbors" %></div>
+      <div class="col s12"><%= image_tag "urban_understanding.png", title: "Urban Understanding, simplifying involvment in urbanism" %></div>
+      <div class="col s12"><%= image_tag "civic_technology.png", class: "right", title: "Civic technology, leveraging new digital tools" %></div>
     </div>
 
     <div class="text">
@@ -21,9 +21,9 @@
     </div>
 
     <div class="sponsors row">
-      <div class="col s4"><%= image_tag "archcan-logo.png" %></div>
-      <div class="col s4">Milieu</div>
-      <div class="col s4"><%= image_tag "citizen_academy.png" %></div>
+      <div class="col s4"><%= link_to image_tag("citizen_academy.png"), "http://www.citizensacademy.ca/", title: "Citizen Academy", target: "_blank" %></div>
+      <div class="col s4"><%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %></div>
+      <div class="col s4"><%= link_to image_tag("archcan-logo.png"), "https://raic.org/", title: "RAIC Architecture Canada", target: "_blank" %></div>
     </div>
     
   </div>
@@ -31,7 +31,7 @@
   <div class="survey">
 
     <div class="title">
-    <%= image_tag "mi_logo.png", class: "survey_logo" %> Share what gets you excited about ottawa
+    Share what gets you excited about ottawa
     </div>
     <%= form_tag("/survey", method: "post") do %>
 
@@ -53,18 +53,12 @@
       </div>
 
       <div class="row" style="margin-top: 15px;">
-        <%= link_to "Enter Map", map_path, class: "waves-effect btn btn-flat enter-map", style: "width: 100%;" %>
-      </div>
-
-
-      <div class="row center-align">
-        OR
+        <%= link_to "Enter Map", map_path, class: "waves-effect btn enter-map", style: "width: 100%;" %>
       </div>
 
       <div class="input-field col s12 social-links">
-        <div class="col s4"><%= link_to fa_icon("facebook"), "#" %></div>
-        <div class="col s4"><%= link_to fa_icon("twitter"), "#" %></div>
-        <div class="col s4"><%= link_to fa_icon("google"), "#" %></div>
+        <div class="col s6"><%= link_to fa_icon("facebook"), "#", title: "find us on facebook" %></div>
+        <div class="col s6"><%= link_to fa_icon("twitter"), "#", title: "find us on twitter" %></div>
       </div>
 
      <% end %>

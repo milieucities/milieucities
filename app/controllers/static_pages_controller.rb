@@ -10,6 +10,7 @@ class StaticPagesController < ApplicationController
   end
 
   def citizencity
+    @no_header = true
   end
 
   def submitSurvey
