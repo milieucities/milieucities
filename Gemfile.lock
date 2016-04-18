@@ -422,6 +422,3 @@ DEPENDENCIES
   unicorn (~> 5.0)
   unirest (~> 1.1.2)
   web-console (~> 3.0)
-
-BUNDLED WITH
-   1.11.2
