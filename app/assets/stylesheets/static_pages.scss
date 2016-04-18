@@ -141,14 +141,21 @@ section#home{
       color: #fff;
     }
 
+    .find{
+      text-align: center;
+    }
+
     .social-links{
       text-align: center;
       padding: 10px 0 20px;
+      font-size: 0.8rem;
+      color: $secondary-color;
 
       i{
         height: 30px;
         width: 30px;
         line-height: 30px;
+        font-size: 1rem;
         color: #fff;
         border-radius: 30px;
         background-color: $secondary-color;

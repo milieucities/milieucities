@@ -16,13 +16,13 @@
 
     <div class="text">
       Citizen-led teams will come together to imagine and co-design shared spaces. Using new tools and
-      particiatory processes, Citizen Academy and Milieu are conducting a city wide real-time, place making
+      participatory processes, Citizen Academy and Milieu are conducting a city wide real-time, place making
       exercise.
     </div>
 
     <div class="sponsors row">
       <div class="col s4"><%= link_to image_tag("citizen_academy.png"), "http://www.citizensacademy.ca/", title: "Citizen Academy", target: "_blank" %></div>
-      <div class="col s4"><%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %></div>
+      <div class="col s4"><%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %> Milieu</div>
       <div class="col s4"><%= link_to image_tag("archcan-logo.png"), "https://raic.org/", title: "RAIC Architecture Canada", target: "_blank" %></div>
     </div>
     
@@ -56,9 +56,13 @@
         <%= link_to "Enter Map", map_path, class: "waves-effect btn enter-map", style: "width: 100%;" %>
       </div>
 
+      <div class="find">
+        Find us on
+      </div>
+
       <div class="input-field col s12 social-links">
-        <div class="col s6"><%= link_to fa_icon("facebook"), "#", title: "find us on facebook" %></div>
-        <div class="col s6"><%= link_to fa_icon("twitter"), "#", title: "find us on twitter" %></div>
+        <div class="col s6"><%= link_to fa_icon("facebook"), "#", title: "Find us on Facebook" %><br/>Facebook</div>
+        <div class="col s6"><%= link_to fa_icon("twitter"), "#", title: "Find us on Twitter" %><br/>Twitter</div>
       </div>
 
      <% end %>
