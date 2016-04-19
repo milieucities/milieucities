@@ -1,18 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'projects/index'
 
-  get 'projects/show'
-
-  get 'projects/new'
-
-  get 'projects/edit'
-
-  get 'projects/update'
-
-  get 'projects/destroy'
-
-  get 'projects/create'
 
   ## MAIN APP PAGE ##
   root 'static_pages#home'
@@ -44,6 +32,7 @@ Rails.application.routes.draw do
 
   end
 
+  resources :projects
   resources :events, only: [:index, :show, :destroy, :create]
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
