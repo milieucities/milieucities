@@ -56,13 +56,47 @@ section#home{
     }
   }
 
-  .citizencity{
-    color: #3c3c3c;
-    width: calc(100% - 360px);
+  .row-container{
     position: absolute;
     top: 20px;
     left: 20px;
+    width: calc(100% - 40px);
     z-index: 2;
+    padding-bottom: 20px;
+
+    @media #{$small-and-down} {
+      left: 10px;
+      width: calc(100% - 20px);
+    }
+
+    .sponsors{
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 20px;
+      font-size: 1.5rem;
+      color: $secondary-color;
+
+      img{
+        height: 40px;
+      }
+    }
+
+  }
+
+  .citizencity{
+    color: #3c3c3c;
+    width: calc(100% - 360px);
+    float: left;
+    // position: absolute;
+    // top: 20px;
+    // left: 20px;
+    z-index: 2;
+
+    @media #{$small-and-down} {
+      width: calc(100%);
+    }
+
 
     .title{
       color: #f7931e;
@@ -85,8 +119,13 @@ section#home{
       max-width: 700px;
       margin: 0 auto;
       padding-top: 30px;
+
+      .col{
+        padding: 0;
+      }
       img{
         height: 105px;
+        max-width: 100%;
         display: block;
       }
     }
@@ -98,32 +137,22 @@ section#home{
       padding: 20px 0 40px;
     }
 
-    .sponsors{
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-      font-size: 1.5rem;
-      color: $secondary-color;
-
-      img{
-        height: 40px;
-      }
-    }
-
   }
 
   .survey{
     width: 300px;
-    top: 84px;
-    right: 20px;
-    position: absolute;
+    float: right;
+    // top: 84px;
+    // right: 20px;
+    // position: absolute;
+    // margin-bottom: 20px;
     padding: 20px;
     z-index: 2;
     background-color: rgba(255,255,255,0.8);
     overflow-y: scroll; 
 
     @media #{$small-and-down} {
-      width: calc(100% - 40px);
+      width: calc(100%);
     }
 
     .terms{

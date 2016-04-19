@@ -3,69 +3,77 @@
     <div class="white-overlay"></div>
   </div>
 
-  <div class="citizencity hide-on-small-only">
-    <div class="title">Citizen City:</div>
-    <div class="sub-title">Redefining place in ottawa 2016</div>
+  <div class="row-container">
 
-    <div class="info-tags row">
-      <div class="col s12"><%= image_tag "placemaking.png", title: "Placemaking, actions to create new urban activities" %></div>
-      <div class="col s12"><%= image_tag "citizenled_collaboration.png", class: "right", title: "Citizen led collaboration, co-creating with your neighbors" %></div>
-      <div class="col s12"><%= image_tag "urban_understanding.png", title: "Urban Understanding, simplifying involvment in urbanism" %></div>
-      <div class="col s12"><%= image_tag "civic_technology.png", class: "right", title: "Civic technology, leveraging new digital tools" %></div>
+    <div class="citizencity">
+      <div class="title">Citizen City:</div>
+      <div class="sub-title">Redefining place in ottawa 2016</div>
+
+      <div class="info-tags row">
+        <div class="col s12"><%= image_tag "placemaking.png", title: "Placemaking, actions to create new urban activities" %></div>
+        <div class="col s12"><%= image_tag "citizenled_collaboration.png", class: "right", title: "Citizen led collaboration, co-creating with your neighbors" %></div>
+        <div class="col s12"><%= image_tag "urban_understanding.png", title: "Urban Understanding, simplifying involvment in urbanism" %></div>
+        <div class="col s12"><%= image_tag "civic_technology.png", class: "right", title: "Civic technology, leveraging new digital tools" %></div>
+      </div>
+
+      <div class="text">
+        Citizen-led teams will come together to imagine and co-design shared spaces. Using new tools and
+        participatory processes, Citizen Academy and Milieu are conducting a city wide real-time, place making
+        exercise.
+      </div>
+
+      <div class="sponsors row hide-on-small-only">
+        <div class="col s4"><%= link_to image_tag("citizen_academy.png"), "http://www.citizensacademy.ca/", title: "Citizen Academy", target: "_blank" %></div>
+        <div class="col s4"><%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %> Milieu</div>
+        <div class="col s4"><%= link_to image_tag("archcan-logo.png"), "https://raic.org/", title: "RAIC Architecture Canada", target: "_blank" %></div>
+      </div>
+      
     </div>
 
-    <div class="text">
-      Citizen-led teams will come together to imagine and co-design shared spaces. Using new tools and
-      participatory processes, Citizen Academy and Milieu are conducting a city wide real-time, place making
-      exercise.
+    <div class="survey">
+
+      <div class="title">
+      Share what gets you excited about ottawa
+      </div>
+      <%= form_tag("/survey", method: "post") do %>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= text_area_tag :name, nil, class: "materialize-textarea" %>
+          <%= label_tag :name, "My Ottawa includes" %>
+        </div>
+
+        <div class="input-field col s12">
+          <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
+          <%= label_tag :hood, "Neighboorhood I Live in" %>
+        </div>
+
+        </div>
+
+        <div class="terms">
+          By using Milieu, I agree to the <%= link_to "terms of service", "#" %>
+        </div>
+
+        <div class="row" style="margin-top: 15px;">
+          <%= link_to "Enter Map", map_path, class: "waves-effect btn enter-map", style: "width: 100%;" %>
+        </div>
+
+        <div class="find">
+          Find us on
+        </div>
+
+        <div class="input-field col s12 social-links">
+          <div class="col s6"><%= link_to fa_icon("facebook"), "#", title: "Find us on Facebook" %><br/>Facebook</div>
+          <div class="col s6"><%= link_to fa_icon("twitter"), "#", title: "Find us on Twitter" %><br/>Twitter</div>
+        </div>
+       <% end %>
     </div>
 
-    <div class="sponsors row">
-      <div class="col s4"><%= link_to image_tag("citizen_academy.png"), "http://www.citizensacademy.ca/", title: "Citizen Academy", target: "_blank" %></div>
-      <div class="col s4"><%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %> Milieu</div>
-      <div class="col s4"><%= link_to image_tag("archcan-logo.png"), "https://raic.org/", title: "RAIC Architecture Canada", target: "_blank" %></div>
+    <div class="sponsors hide-on-med-and-up">
+      <div class="col s12"><%= link_to image_tag("citizen_academy.png"), "http://www.citizensacademy.ca/", title: "Citizen Academy", target: "_blank" %></div>
+      <div class="col s12"><%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %> Milieu</div>
+      <div class="col s12"><%= link_to image_tag("archcan-logo.png"), "https://raic.org/", title: "RAIC Architecture Canada", target: "_blank" %></div>
     </div>
-    
-  </div>
-
-  <div class="survey">
-
-    <div class="title">
-    Share what gets you excited about ottawa
-    </div>
-    <%= form_tag("/survey", method: "post") do %>
-
-    <div class="row">
-      <div class="input-field col s12">
-        <%= text_area_tag :name, nil, class: "materialize-textarea" %>
-        <%= label_tag :name, "My Ottawa includes" %>
-      </div>
-
-      <div class="input-field col s12">
-        <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
-        <%= label_tag :hood, "Neighboorhood I Live in" %>
-      </div>
-
-      </div>
-
-      <div class="terms">
-        By using Milieu, I agree to the <%= link_to "terms of service", "#" %>
-      </div>
-
-      <div class="row" style="margin-top: 15px;">
-        <%= link_to "Enter Map", map_path, class: "waves-effect btn enter-map", style: "width: 100%;" %>
-      </div>
-
-      <div class="find">
-        Find us on
-      </div>
-
-      <div class="input-field col s12 social-links">
-        <div class="col s6"><%= link_to fa_icon("facebook"), "#", title: "Find us on Facebook" %><br/>Facebook</div>
-        <div class="col s6"><%= link_to fa_icon("twitter"), "#", title: "Find us on Twitter" %><br/>Twitter</div>
-      </div>
-
-     <% end %>
 
   </div>
 </section>
