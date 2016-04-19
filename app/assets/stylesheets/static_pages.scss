@@ -5,8 +5,8 @@ section#home{
     font-size: 2rem;
     position: absolute;
     width: 200px;
-    height: 70px;
-    line-height: 70px;
+    height: 60px;
+    line-height: 60px;
     text-align: center;
     z-index: 15;
     top: 60%;
@@ -14,17 +14,34 @@ section#home{
     border-radius: 4px;
     left: 50%;
     margin: -100px 0 0 -150px;
-    background: linear-gradient(90deg, #5d9bc0 0%, #92c7c6 85%);
+    background: $primary-color;
+  }
+
+  .mobile-view-map{
+    font-size: 1.5rem;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+    z-index: 15;
+    color: #fff;
+    border-radius: 4px;
+    margin: 0 auto;
+    background: $primary-color;
   }
 
   .legend{
-    position: absolute;
+    float: left;
     z-index: 2;
-    top: 84px;
-    left: 20px;
     padding: 25px 5px 25px;
     width: 280px;
     background-color: rgba(255, 255, 255, 0.75);
+
+    @media #{$small-and-down} {
+      width: calc(100%);
+      margin-bottom: 20px;
+    }
 
     .title{
       font-size: 1.5rem;
@@ -56,13 +73,44 @@ section#home{
     }
   }
 
-  .citizencity{
-    color: #3c3c3c;
-    width: calc(100% - 360px);
+  .row-container{
     position: absolute;
     top: 20px;
     left: 20px;
+    width: calc(100% - 40px);
     z-index: 2;
+    padding-bottom: 20px;
+
+    @media #{$small-and-down} {
+      left: 10px;
+      width: calc(100% - 20px);
+    }
+
+    .sponsors{
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 20px;
+      font-size: 1.5rem;
+      color: $secondary-color;
+
+      img{
+        height: 40px;
+      }
+    }
+
+  }
+
+  .citizencity{
+    color: #3c3c3c;
+    width: calc(100% - 360px);
+    float: left;
+    z-index: 2;
+
+    @media #{$small-and-down} {
+      width: calc(100%);
+    }
+
 
     .title{
       color: #f7931e;
@@ -85,8 +133,13 @@ section#home{
       max-width: 700px;
       margin: 0 auto;
       padding-top: 30px;
+
+      .col{
+        padding: 0;
+      }
       img{
         height: 105px;
+        max-width: 100%;
         display: block;
       }
     }
@@ -98,32 +151,18 @@ section#home{
       padding: 20px 0 40px;
     }
 
-    .sponsors{
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-      font-size: 1.5rem;
-      color: $secondary-color;
-
-      img{
-        height: 40px;
-      }
-    }
-
   }
 
   .survey{
-    width: 300px;
-    top: 84px;
-    right: 20px;
-    position: absolute;
+    width: 290px;
+    float: right;
     padding: 20px;
     z-index: 2;
     background-color: rgba(255,255,255,0.8);
     overflow-y: scroll; 
 
     @media #{$small-and-down} {
-      width: calc(100% - 40px);
+      width: calc(100%);
     }
 
     .terms{
