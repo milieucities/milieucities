@@ -5,8 +5,8 @@ section#home{
     font-size: 2rem;
     position: absolute;
     width: 200px;
-    height: 70px;
-    line-height: 70px;
+    height: 60px;
+    line-height: 60px;
     text-align: center;
     z-index: 15;
     top: 60%;
@@ -14,17 +14,34 @@ section#home{
     border-radius: 4px;
     left: 50%;
     margin: -100px 0 0 -150px;
-    background: linear-gradient(90deg, #5d9bc0 0%, #92c7c6 85%);
+    background: $primary-color;
+  }
+
+  .mobile-view-map{
+    font-size: 1.5rem;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+    z-index: 15;
+    color: #fff;
+    border-radius: 4px;
+    margin: 0 auto;
+    background: $primary-color;
   }
 
   .legend{
-    position: absolute;
+    float: left;
     z-index: 2;
-    top: 84px;
-    left: 20px;
     padding: 25px 5px 25px;
     width: 280px;
     background-color: rgba(255, 255, 255, 0.75);
+
+    @media #{$small-and-down} {
+      width: calc(100%);
+      margin-bottom: 20px;
+    }
 
     .title{
       font-size: 1.5rem;
@@ -88,9 +105,6 @@ section#home{
     color: #3c3c3c;
     width: calc(100% - 360px);
     float: left;
-    // position: absolute;
-    // top: 20px;
-    // left: 20px;
     z-index: 2;
 
     @media #{$small-and-down} {
@@ -140,12 +154,8 @@ section#home{
   }
 
   .survey{
-    width: 300px;
+    width: 290px;
     float: right;
-    // top: 84px;
-    // right: 20px;
-    // position: absolute;
-    // margin-bottom: 20px;
     padding: 20px;
     z-index: 2;
     background-color: rgba(255,255,255,0.8);

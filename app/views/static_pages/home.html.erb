@@ -3,13 +3,11 @@
 
   <div class="row-container" style="top: 84px;">
 
-  <div class="legend hide-on-small-only">
+  <div class="legend">
 
     <div class="title">
-    <b>How can you use Milieu?</b>
+      <b>How can you use Milieu?</b>
     </div>
-
-
 
     <div class="item">
       <%= image_tag "consultation.png", class: "icon" %>
@@ -30,9 +28,12 @@
       <%= image_tag "event.png", class: "icon" %>
       <div class="text">Explore community events</div>
     </div>
+
+    <%= link_to "VIEW MAP", map_path, class: "mobile-view-map z-depth-1 hoverable hide-on-large-only" %>
+
   </div>
 
-  <%= link_to "VIEW MAP", map_path, class: "view-map z-depth-1 hoverable hide-on-small-only" %>
+  <%= link_to "VIEW MAP", map_path, class: "view-map z-depth-1 hoverable hide-on-med-and-down" %>
 
 <div class="survey">
 
@@ -51,11 +52,6 @@
       <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
       <%= label_tag :hood, "Neighboorhood I Live in" %>
     </div>
-<!-- 
-    <div class="input-field col s12">
-      <%= text_area_tag :suggestion, nil, class: "materialize-textarea" %>
-      <%= label_tag :suggestion, "Changes I want in my neighbourhood" %>
-    </div> -->
 
     </div>
 
