@@ -27,7 +27,7 @@
         <div class="col s4"><%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %> Milieu</div>
         <div class="col s4"><%= link_to image_tag("archcan-logo.png"), "https://raic.org/", title: "RAIC Architecture Canada", target: "_blank" %></div>
       </div>
-      
+
     </div>
 
     <div class="survey">
@@ -35,12 +35,12 @@
       <div class="title">
       Share what gets you excited about ottawa
       </div>
-      <%= form_tag("/survey", method: "post") do %>
+      <%= form_tag("/citizensurvey", method: "post") do %>
 
       <div class="row">
         <div class="input-field col s12">
-          <%= text_area_tag :name, nil, class: "materialize-textarea" %>
-          <%= label_tag :name, "My Ottawa includes" %>
+          <%= text_area_tag :ottawa, nil, class: "materialize-textarea" %>
+          <%= label_tag :ottawa, "My Ottawa includes" %>
         </div>
 
         <div class="input-field col s12">
@@ -55,7 +55,7 @@
         </div>
 
         <div class="row" style="margin-top: 15px;">
-          <%= link_to "Enter Map", map_path, class: "waves-effect btn enter-map", style: "width: 100%;" %>
+          <%= submit_tag "Submit", class: "waves-effect btn enter-map", style: "width: 100%;" %>
         </div>
 
         <div class="find">
