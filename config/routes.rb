@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   post '/survey', to: 'static_pages#submitSurvey'
+  post '/citizensurvey', to: 'static_pages#submitSurveyCitizen'
 
   get '/citizencity', to: 'static_pages#citizencity'
 
