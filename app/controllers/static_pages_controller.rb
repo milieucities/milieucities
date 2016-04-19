@@ -35,7 +35,7 @@ class StaticPagesController < ApplicationController
 
       if ottawa && hood
 
-        response = firebase.set("visits/", {
+        response = firebase.push("visits/", {
           :ottawa => ottawa,
           :neighbourhood => hood,
           :created => Firebase::ServerValue::TIMESTAMP
@@ -58,7 +58,7 @@ class StaticPagesController < ApplicationController
 
       if ottawa && hood
 
-        response = firebase.set("visits/", {
+        response = firebase.push("visits/", {
           :ottawa => ottawa,
           :neighbourhood => hood,
           :created => Firebase::ServerValue::TIMESTAMP
