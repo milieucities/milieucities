@@ -14,42 +14,64 @@ class StaticPagesController < ApplicationController
   end
 
   def submitSurvey
-    name = params[:name].to_s if params[:name]
-    city = params[:city].to_s if params[:city]
+    name = params[:ottawa].to_s if params[:ottawa]
     hood = params[:hood].to_s if params[:hood]
-    suggestion = params[:suggestion].to_s if params[:suggestion]
-    terms = params[:terms] if params[:terms]
+    saveToFirebase(name, hood)
+  end
 
-    saveToFirebase(name, city, hood, suggestion, terms)
+  def submitSurveyCitizen
+    name = params[:ottawa].to_s if params[:ottawa]
+    hood = params[:hood].to_s if params[:hood]
+    saveToFirebaseCitizen(name, hood)
   end
 
 
   private
 
-    def saveToFirebase(name, city, hood, suggestion, terms)
+    def saveToFirebase(ottawa, hood)
       base_uri = 'https://milieu.firebaseio.com/'
       firebase = Firebase::Client.new(base_uri, ENV['FIREBASE_SECRET'])
       firebase.request.connect_timeout = 150
 
-      if name && hood && suggestion && terms
+      if ottawa && hood
 
-        response = firebase.set("visits/"+name, {
-          :fullName => name,
-          :city => city,
+        response = firebase.set("visits/", {
+          :ottawa => ottawa,
           :neighbourhood => hood,
-          :suggestion => suggestion,
           :created => Firebase::ServerValue::TIMESTAMP
         })
 
         if response
-          redirect_to map_path, notice: "Thank you " + name + ". Welcome to Milieu."
+          redirect_to map_path, notice: "Thank you. Welcome to Milieu."
         end
 
 
       else
         redirect_to root_path, notice: "Fill out the form first"
       end
-
-
     end
+
+    def saveToFirebaseCitizen(ottawa, hood)
+      base_uri = 'https://milieu.firebaseio.com/'
+      firebase = Firebase::Client.new(base_uri, ENV['FIREBASE_SECRET'])
+      firebase.request.connect_timeout = 30
+
+      if ottawa && hood
+
+        response = firebase.set("visits/", {
+          :ottawa => ottawa,
+          :neighbourhood => hood,
+          :created => Firebase::ServerValue::TIMESTAMP
+        })
+
+        if response
+          redirect_to citizencity_path, notice: "Thank you. Welcome to Milieu."
+        end
+
+
+      else
+        redirect_to citizencity_path, notice: "Fill out the form first"
+      end
+    end
+
 end
