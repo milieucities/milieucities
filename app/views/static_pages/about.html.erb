@@ -5,15 +5,18 @@
     </div>
     <div class="parallax__layer parallax__layer--back semi-layer">s
     </div>
-    <div class="parallax__layer parallax__layer--base about_slogan">
+    <div class="parallax__layer parallax__layer--base about_slogan pullUp">
       BUILDING BETTER CITIES WITH PEOPLE
     </div>
-    <div class="parallax__layer parallax__layer--base about_title">
+    <div class="parallax__layer parallax__layer--base about_subtitle pullUp">
       Milieu is a platform for people to stay informed, discuss and submit ideas about urban planning and development projects in the city
     </div>
     <div class="parallax__layer parrallax__layer--base about_container">
       <div class="about_section">
-        <div class="crew_list">
+        <div class="app_demo stretchLeft">
+          <iframe src="https://player.vimeo.com/video/161182045" align="right" width="366" height="650" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+        <div class="crew_list stretchRight">
             <h3 class="header">TEAM</h3>
             <ul>
               <li class="name">LUISA JI</li>
@@ -34,10 +37,29 @@
               <li class="position">COMMUNICATIONS</li>
             </ul>
         </div>
-        <div class="app_demo">
-          <iframe src="https://player.vimeo.com/video/161182045" align="right" width="366" height="650" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </div>
       </div>
     </div>
 
 </div>
+
+<script>
+  $(window).scroll(function() {
+    $('.about_section').each(function(){
+    var imagePos = $(this).offset().top;
+
+    var topOfWindow = $(window).scrollTop();
+      if (imagePos < topOfWindow+100) {
+        $('.app_demo').addClass("stretchLeft");
+      }
+    });
+
+    $('.about_section').each(function(){
+    var imagePos = $(this).offset().top;
+
+    var topOfWindow = $(window).scrollTop();
+      if (imagePos < topOfWindow+100) {
+        $('.crew_list').addClass("stretchRight");
+      }
+    });
+  });
+</script>
