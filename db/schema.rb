@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160414025406) do
+ActiveRecord::Schema.define(version: 20160423012906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20160414025406) do
     t.float    "geocode_lat"
     t.float    "geocode_lon"
   end
+
+  add_index "addresses", ["lat", "lon", "geocode_lat", "geocode_lon"], name: "index_addresses_on_lat_and_lon_and_geocode_lat_and_geocode_lon", using: :btree
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
