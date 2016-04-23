@@ -219,6 +219,8 @@ wards = {
   "23" => "KANATA SOUTH"
 }
 
+## MAKE SURE TO TURN OFF GEOCODER WHEN RUNNING SEEDS FILE
+
 scraper = Scrape.new
 devIDs = scraper.getAppIDs()
 
@@ -255,15 +257,14 @@ devIDs.first(150).each do |id|
         dev_site.addresses.build(
           lat: address["lat"],
           lon: address["lon"],
+          geocode_lat: address["lat"],
+          geocode_lon: address["lon"],
           street: address["addr"] + ", Ottawa, Ontario, Canada"
         )
       end
     else
       next
     end
-
-    # next if addresses.first.street.nil?
-
 
     ## Insert Statuses
     statuses = two["statuses"]

@@ -3,9 +3,9 @@ class Address < ActiveRecord::Base
   belongs_to :event, foreign_key: "event_id"
 
   # GEOCODER
-  geocoded_by :street,
-    :latitude => :geocode_lat, :longitude => :geocode_lon
-  after_validation :geocode, if: -> (obj){ obj.address.present? and obj.address_changed? }
+  # geocoded_by :street,
+  #   :latitude => :geocode_lat, :longitude => :geocode_lon
+  # after_validation :geocode, if: -> (obj){ obj.address.present? and obj.address_changed? }
 
   # Validations
   validates     :street, presence: { message: "Street is required" }
