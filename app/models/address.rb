@@ -5,7 +5,7 @@ class Address < ActiveRecord::Base
   # GEOCODER
   geocoded_by :street,
     :latitude => :geocode_lat, :longitude => :geocode_lon
-  after_validation :geocode
+  after_validation :geocode, if: -> (obj){ obj.address.present? and obj.address_changed? }
 
   # Validations
   validates     :street, presence: { message: "Street is required" }
