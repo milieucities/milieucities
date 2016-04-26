@@ -13,6 +13,11 @@ class StaticPagesController < ApplicationController
     @no_header = true
   end
 
+  def contact_citizencity
+    ContactMailer.contact_citizencity(params[:name], params[:email], params[:message]).deliver_now
+    render nothing: true
+  end
+
   def submitSurvey
     name = params[:ottawa].to_s if params[:ottawa]
     hood = params[:hood].to_s if params[:hood]

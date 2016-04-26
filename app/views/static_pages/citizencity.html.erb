@@ -8,24 +8,35 @@
     <div class="citizencity">
       <div class="title">Citizen City:</div>
       <div class="sub-title">Redefining place in ottawa 2016</div>
-
-      <div class="info-tags row">
-        <div class="col s12"><%= image_tag "placemaking.png", title: "Placemaking, actions to create new urban activities" %></div>
-        <div class="col s12"><%= image_tag "citizenled_collaboration.png", class: "right", title: "Citizen led collaboration, co-creating with your neighbors" %></div>
-        <div class="col s12"><%= image_tag "urban_understanding.png", title: "Urban Understanding, simplifying involvment in urbanism" %></div>
-        <div class="col s12"><%= image_tag "civic_technology.png", class: "right", title: "Civic technology, leveraging new digital tools" %></div>
+      <div class="join-text">
+        Join Citizens Academy and Milieu to learn how you can create places for people. Placemaking is the transformative practice of creating public spaces that attract action and inspire stories. Your ideas, experiences, and passion for your city and your neighbourhood can put the wheels in motion to transform underused spaces into neighbourhood places!
       </div>
 
-      <div class="text">
-        Citizen-led teams will come together to imagine and co-design shared spaces. Using new tools and
-        participatory processes, Citizen Academy and Milieu are conducting a city wide real-time, place making
-        exercise.
+      <div class="info-tags row">
+        <div class="col s12 push-l1"><%= image_tag "placemaking.png", title: "Placemaking, actions to create new urban activities" %></div>
+        <div class="col s12"><%= image_tag "citizenled_collaboration.png", class: "right", title: "Citizen led collaboration, co-creating with your neighbors" %></div>
+        <div class="col s12"><%= image_tag "urban_understanding.png", title: "Urban Understanding, simplifying involvment in urbanism" %></div>
+        <div class="col s12 pull-l1"><%= image_tag "civic_technology.png", class: "right", title: "Civic technology, leveraging new digital tools" %></div>
+      </div>
+
+      <div class="rsvp">
+        <%= link_to image_tag("citizencity-rsvp.svg",class: "hoverable z-depth-1"), "https://www.eventbrite.com/e/citizen-city-2016-tickets-24396121456" %>
+        <div class="save">Save the Date:</div>
+        <div class="title">Citizen City 2016</div>
+        <div class="where-and-when">May 15, 12:30 - 14:30 @ Mostly Danish Boutique<br/>
+        1000 Wellington Street West, Ottawa
+        </div>
       </div>
 
       <div class="sponsors row hide-on-small-only">
-        <div class="col s4"><%= link_to image_tag("citizen_academy.png"), "http://www.citizensacademy.ca/", title: "Citizen Academy", target: "_blank" %></div>
-        <div class="col s4"><%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %> Milieu</div>
-        <div class="col s4"><%= link_to image_tag("archcan-logo.png"), "https://raic.org/", title: "RAIC Architecture Canada", target: "_blank" %></div>
+        <div class="col s4">
+          <%= link_to image_tag("citizen_academy.png"), "http://www.citizensacademy.ca/", title: "Citizen Academy", target: "_blank" %>
+        </div>
+        <div class="col s4">
+        <%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %> Milieu</div>
+        <div class="col s4">
+          <%= link_to image_tag("archcan-logo.png"), "https://raic.org/", title: "RAIC Architecture Canada", target: "_blank" %>
+        </div>
       </div>
 
     </div>
@@ -47,8 +58,7 @@
           <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
           <%= label_tag :hood, "Neighboorhood I Live in" %>
         </div>
-
-        </div>
+      </div>
 
         <div class="terms">
           By using Milieu, I agree to the <%= link_to "terms of service", "#" %>
@@ -63,13 +73,23 @@
         </div>
 
         <div class="input-field col s12 social-links">
-          <div class="col s6"><%= link_to fa_icon("facebook"), "#", title: "Find us on Facebook" %><br/>Facebook</div>
-          <div class="col s6"><%= link_to fa_icon("twitter"), "#", title: "Find us on Twitter" %><br/>Twitter</div>
+          <div class="col s3">
+            <%= link_to fa_icon("facebook"), "https://www.facebook.com/Citizen-City-969528913166479/", title: "Find us on Facebook" %><br/>Facebook
+          </div>
+          <div class="col s3">
+            <%= link_to fa_icon("twitter"), "https://twitter.com/citizencityott", title: "Find us on Twitter" %><br/>Twitter
+          </div>
+          <div class="col s3">
+            <%= link_to fa_icon("instagram"), "https://www.instagram.com/citizencityott/", title: "Find us on Instagram" %><br/>Instagram
+          </div>
+          <div class="col s3">
+            <%= link_to fa_icon("envelope-o"), "#contact-modal", title: "Email Citizen City", class: "modal-trigger" %><br/>Email
+          </div>
         </div>
        <% end %>
     </div>
 
-    <div class="sponsors hide-on-med-and-up">
+    <div class="sponsors row hide-on-med-and-up">
       <div class="col s12"><%= link_to image_tag("citizen_academy.png"), "http://www.citizensacademy.ca/", title: "Citizen Academy", target: "_blank" %></div>
       <div class="col s12"><%= link_to image_tag("mi_logo.png"), "http://milieu.io/", title: "Milieu", target: "_blank" %> Milieu</div>
       <div class="col s12"><%= link_to image_tag("archcan-logo.png"), "https://raic.org/", title: "RAIC Architecture Canada", target: "_blank" %></div>
@@ -78,4 +98,31 @@
   </div>
 </section>
 
-
+<div id="contact-modal" class="modal">
+  <div class="modal-content">
+    <%= form_tag "/contact_citizencity", id: "contact-citizencity", remote: :true do %>
+      <h4>Contact Citizen City</h4>
+      <div class="row">
+        <div class="col input-field s12 m6">
+          <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
+          <%= label_tag :name %>
+        </div>
+        <div class="col input-field s12 m6">
+          <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
+          <%= label_tag :email %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col input-field s12">
+          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: 'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' %>
+          <%= label_tag :message %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col input-field s12">
+          <%= submit_tag "Send", class: "waves-effect waves-light btn modal-action modal-close right" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

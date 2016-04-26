@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/citizensurvey', to: 'static_pages#submitSurveyCitizen'
 
   get '/citizencity', to: 'static_pages#citizencity'
+  post '/contact_citizencity', to: 'static_pages#contact_citizencity'
 
   post '/rate' => 'rater#create', :as => 'rate'
 

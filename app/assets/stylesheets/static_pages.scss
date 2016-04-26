@@ -75,24 +75,32 @@ section#home{
 
   .row-container{
     position: absolute;
-    top: 20px;
-    left: 20px;
-    width: calc(100% - 40px);
+    top: 50px;
+    left: 50px;
+    width: calc(100% - 100px);
     z-index: 2;
     padding-bottom: 20px;
 
     @media #{$small-and-down} {
-      left: 10px;
-      width: calc(100% - 20px);
+      left: 20px;
+      top: 20px;
+      width: calc(100% - 40px);
     }
 
     .sponsors{
       max-width: 700px;
       margin: 0 auto;
       text-align: center;
-      padding-top: 20px;
       font-size: 1.5rem;
       color: $secondary-color;
+
+      .col{
+        padding: 15px 0.75rem;
+      }
+
+      @media #{$small-and-down} {
+        float: left;
+      }
 
       img{
         height: 40px;
@@ -111,7 +119,6 @@ section#home{
       width: calc(100%);
     }
 
-
     .title{
       color: #f7931e;
       text-transform: uppercase;
@@ -129,28 +136,67 @@ section#home{
       color: $secondary-color;
     }
 
+    .join-text{
+      max-width: 750px;
+      font-size: 1.2rem;
+      font-weight: 500;
+      padding: 10px 0 0;
+    }
+
     .info-tags{
       max-width: 700px;
       margin: 0 auto;
-      padding-top: 30px;
+      padding: 30px 0;
 
       .col{
         padding: 0;
+        @media #{$medium-and-down} {
+          padding: 10px 0;
+        }
       }
       img{
-        height: 105px;
+        height: 70px;
         max-width: 100%;
         display: block;
       }
     }
 
-    .text{
-      max-width: 700px;
+  }
+
+  .rsvp{
+    text-align: center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding-bottom: 30px;
+
+    a{
+      display: block;
       margin: 0 auto;
-      font-size: 1.25rem;
-      padding: 20px 0 40px;
+      width: 80px;
+      height: 80px;
+      border-radius: 80px;
+    }
+    img{
+      display: block;
+      width: 80px;
+      height: 80px;
+      border-radius: 80px;
     }
 
+    .save{
+      padding-top: 15px;
+      font-size: 1.25rem;
+    }
+
+    .title{
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #f7931e;
+    }
+
+    .where-and-when{
+      font-size: 1.25rem;
+    }
   }
 
   .survey{
@@ -158,7 +204,7 @@ section#home{
     float: right;
     padding: 20px;
     z-index: 2;
-    background-color: rgba(255,255,255,0.8);
+    background-color: #fff;
     overflow-y: scroll; 
 
     @media #{$small-and-down} {
@@ -187,7 +233,7 @@ section#home{
     .social-links{
       text-align: center;
       padding: 10px 0 20px;
-      font-size: 0.8rem;
+      font-size: 0.6rem;
       color: $secondary-color;
 
       i{
@@ -196,6 +242,7 @@ section#home{
         line-height: 30px;
         font-size: 1rem;
         color: #fff;
+        margin-bottom: 5px;
         border-radius: 30px;
         background-color: $secondary-color;
       }
