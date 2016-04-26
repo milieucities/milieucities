@@ -12,15 +12,19 @@ Rails.application.routes.draw do
 
   post '/rate' => 'rater#create', :as => 'rate'
 
-  get 'all_user_comments', to: 'comments#all_user_comments'
-  get 'all_devsite_comments', to: 'dev_sites#all_devsite_comments'
+
   get 'map', to: 'static_pages#map'
-  get 'xml_data', to: 'dev_sites#xml_data'
 
   get 'events', to: 'static_pages#events'
 
   resources :dev_sites do
-    resources :comments, module: :dev_sites
+    resources :comments, module: :dev_sites do
+      member do
+        put "upvote", to: "comments#upvote"
+        put "downvote", to: "comments#downvote"
+      end
+    end
+
     get :geojson, on: :collection
     get :images, on: :member
 
@@ -31,6 +35,8 @@ Rails.application.routes.draw do
     end
 
   end
+
+
 
   resources :projects
   resources :events, only: [:index, :show, :destroy, :create]

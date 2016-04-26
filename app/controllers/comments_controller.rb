@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :signed_in?
 
+  # Voting
+  acts_as_votable
 
   def index
     @dev_site = DevSite.find(params[:dev_site_id])
@@ -8,7 +10,7 @@ class CommentsController < ApplicationController
   end
 
   def new
-      @comment = @commentable.comments.new
+    @comment = @commentable.comments.new
   end
 
   def create
@@ -27,13 +29,16 @@ class CommentsController < ApplicationController
     end
   end
 
-  def all_user_comments
-    auth_token = params[:auth_token]
-    uid = User.where(authentication_token: auth_token).first.id
-    @comments = Comment.where(user_id: uid)
-    respond_to do |format|
-      format.json { render :json => ['all_comments_by_user' => @comments] }
-    end
+  def upvote
+    @comment = Comment.find(params[:id])
+    @comment.upvote_by current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @comment = Comment.find(params[:id])
+    @comment.downvote_by current_user
+    redirect_to :back
   end
 
   private
