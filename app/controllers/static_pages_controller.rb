@@ -16,6 +16,8 @@ class StaticPagesController < ApplicationController
   def contact_citizencity
     ContactMailer.contact_citizencity(params[:name], params[:email], params[:message]).deliver_now
     render nothing: true
+  end
+
   def about
 
   end
