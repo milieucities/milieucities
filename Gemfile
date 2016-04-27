@@ -63,6 +63,13 @@ group :development do
   gem 'spring', '~> 1.6.4'
 end
 
+group :test do
+
+  # Add color for the test results
+  gem 'minitest-reporters', '~> 1.1.8'
+  gem 'mini_backtrace', '0.1.3'
+end
+
 group :production do
 
 end

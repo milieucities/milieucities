@@ -13,10 +13,12 @@ Rails.application.routes.draw do
 
   post '/rate' => 'rater#create', :as => 'rate'
 
-
   get 'map', to: 'static_pages#map'
 
   get 'events', to: 'static_pages#events'
+
+  # Add about page route
+  get 'about', to: 'static_pages#about'
 
   resources :dev_sites do
     resources :comments, module: :dev_sites do

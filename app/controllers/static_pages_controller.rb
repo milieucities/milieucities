@@ -18,6 +18,10 @@ class StaticPagesController < ApplicationController
     render nothing: true
   end
 
+  def about
+
+  end
+
   def submitSurvey
     name = params[:ottawa].to_s if params[:ottawa]
     hood = params[:hood].to_s if params[:hood]
