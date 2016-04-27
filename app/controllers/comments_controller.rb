@@ -1,9 +1,6 @@
 class CommentsController < ApplicationController
   before_action :signed_in?
 
-  # Voting
-  acts_as_votable
-
   def index
     @dev_site = DevSite.find(params[:dev_site_id])
     render json: @dev_site.comments.to_json(include: :user)

@@ -20,12 +20,14 @@
       </div>
 
       <div class="rsvp">
-        <%= link_to image_tag("citizencity-rsvp.svg",class: "hoverable z-depth-1"), "https://www.eventbrite.com/e/citizen-city-2016-tickets-24396121456" %>
+      <%= link_to "https://www.eventbrite.com/e/citizen-city-2016-tickets-24396121456", class: "rsvp" do %>
+        <%= image_tag "citizencity-rsvp.svg", class: "hoverable z-depth-1" %>
         <div class="save">Save the Date:</div>
         <div class="title">Citizen City 2016</div>
         <div class="where-and-when">May 15, 12:30 - 14:30 @ Mostly Danish Boutique<br/>
         1000 Wellington Street West, Ottawa
         </div>
+      <% end %>
       </div>
 
       <div class="sponsors row hide-on-small-only">
@@ -83,7 +85,7 @@
             <%= link_to fa_icon("instagram"), "https://www.instagram.com/citizencityott/", title: "Find us on Instagram", target: "_blank" %><br/>Instagram
           </div>
           <div class="col s3">
-            <%= link_to fa_icon("envelope-o"), "#contact-modal", title: "Email Citizen City", class: "modal-trigger", target: "_blank" %><br/>Email
+            <%= link_to fa_icon("envelope-o"), "#contact-citizencity-modal", title: "Email Citizen City", class: "modal-trigger", target: "_blank" %><br/>Email
           </div>
         </div>
        <% end %>
@@ -98,7 +100,7 @@
   </div>
 </section>
 
-<div id="contact-modal" class="modal">
+<div id="contact-citizencity-modal" class="modal">
   <div class="modal-content">
     <%= form_tag "/contact_citizencity", id: "contact-citizencity", remote: :true do %>
       <h4>Contact Citizen City</h4>

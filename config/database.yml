@@ -28,7 +28,7 @@ test:
 production:
   <<: *default
   database: milieu_production
-  username: railsgit
+  username: rails
   password: <%= ENV['APP_DATABASE_PASSWORD'] %>
 
 # SQLite version 3.x

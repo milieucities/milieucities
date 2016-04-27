@@ -53,21 +53,29 @@
       <%= label_tag :hood, "Neighboorhood I Live in" %>
     </div>
 
+    <div class="input-field col s12">
+      <%= submit_tag "Enter Map", class: "waves-effect btn enter-map", style: "width: 100%;" %>
     </div>
 
-    <div class="row" style="margin-top: 15px;">
-      <%= link_to "Enter Map", map_path, class: "waves-effect btn btn-flat", style: "width: 100%;" %>
-    </div>
-
-
-    <div class="row center-align">
-      OR
+    <div class="input-field col s12 find">
+      Find us on
     </div>
 
     <div class="input-field col s12 social-links">
-      <div class="col s4"><%= link_to fa_icon("facebook"), "#" %></div>
-      <div class="col s4"><%= link_to fa_icon("twitter"), "#" %></div>
-      <div class="col s4"><%= link_to fa_icon("google"), "#" %></div>
+          <div class="col s3">
+            <%= link_to fa_icon("facebook"), "https://m.facebook.com/milieuapp/", title: "Find us on Facebook" %><br/>Facebook
+          </div>
+          <div class="col s3">
+            <%= link_to fa_icon("twitter"), "https://twitter.com/milieucities", title: "Find us on Twitter" %><br/>Twitter
+          </div>
+          <div class="col s3">
+            <%= link_to fa_icon("medium"), "https://medium.com/@milieucities", title: "Find us on Medium" %><br/>Medium
+          </div>
+          <div class="col s3">
+            <%= link_to fa_icon("instagram"), "https://www.instagram.com/milieucities/", title: "Find us on Instagram" %><br/>Instagram
+          </div>
+
+        </div>
     </div>
 
    <% end %>
@@ -79,5 +87,3 @@
 
  </div>
 </section>
-
-

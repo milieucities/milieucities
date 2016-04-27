@@ -1,3 +1,4 @@
 class Event < ActiveRecord::Base
-  has_one :address
+  attr_accessor :images
+  mount_uploaders :images, ImagesUploader
 end
