@@ -74,16 +74,16 @@
 
         <div class="input-field col s12 social-links">
           <div class="col s3">
-            <%= link_to fa_icon("facebook"), "https://www.facebook.com/Citizen-City-969528913166479/", title: "Find us on Facebook" %><br/>Facebook
+            <%= link_to fa_icon("facebook"), "https://www.facebook.com/Citizen-City-969528913166479/", title: "Find us on Facebook", target: "_blank" %><br/>Facebook
           </div>
           <div class="col s3">
-            <%= link_to fa_icon("twitter"), "https://twitter.com/citizencityott", title: "Find us on Twitter" %><br/>Twitter
+            <%= link_to fa_icon("twitter"), "https://twitter.com/citizencityott", title: "Find us on Twitter", target: "_blank" %><br/>Twitter
           </div>
           <div class="col s3">
-            <%= link_to fa_icon("instagram"), "https://www.instagram.com/citizencityott/", title: "Find us on Instagram" %><br/>Instagram
+            <%= link_to fa_icon("instagram"), "https://www.instagram.com/citizencityott/", title: "Find us on Instagram", target: "_blank" %><br/>Instagram
           </div>
           <div class="col s3">
-            <%= link_to fa_icon("envelope-o"), "#contact-modal", title: "Email Citizen City", class: "modal-trigger" %><br/>Email
+            <%= link_to fa_icon("envelope-o"), "#contact-citizencity-modal", title: "Email Citizen City", class: "modal-trigger", target: "_blank" %><br/>Email
           </div>
         </div>
        <% end %>
@@ -98,7 +98,7 @@
   </div>
 </section>
 
-<div id="contact-modal" class="modal">
+<div id="contact-citizencity-modal" class="modal">
   <div class="modal-content">
     <%= form_tag "/contact_citizencity", id: "contact-citizencity", remote: :true do %>
       <h4>Contact Citizen City</h4>

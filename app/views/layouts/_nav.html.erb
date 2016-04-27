@@ -3,8 +3,8 @@
   <%= link_to image_tag("white-logo.png"), root_path, class: "nav-logo" %>
 
   <ul>
-    <li><%= link_to "Map", map_path %></li>
-    <li><%= link_to "About", "https://leemichael-pronko-hlty.squarespace.com/#milieu", title: "About" %></li>
+    <li><%= link_to "Map", map_path, title: "Map" %></li>
+    <li><%= link_to "About", about_path, title: "About" %></li>
     <% if signed_in? %>
       <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
     <% else %>

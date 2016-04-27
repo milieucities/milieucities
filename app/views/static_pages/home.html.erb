@@ -87,32 +87,3 @@
 
  </div>
 </section>
-
-<div id="contact-milieu-modal" class="modal">
-  <div class="modal-content">
-    <%= form_tag "/contact_milieu", id: "contact-milieu", remote: :true do %>
-      <h4>Contact Milieu</h4>
-      <div class="row">
-        <div class="col input-field s12 m6">
-          <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
-          <%= label_tag :name %>
-        </div>
-        <div class="col input-field s12 m6">
-          <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
-          <%= label_tag :email %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col input-field s12">
-          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: 'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' %>
-          <%= label_tag :message %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col input-field s12">
-          <%= submit_tag "Send", class: "waves-effect waves-light btn modal-action modal-close right" %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>

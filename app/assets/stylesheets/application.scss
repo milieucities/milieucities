@@ -14,6 +14,8 @@ $secondary-color: #5d9bc0 !default;
 @import "photoswipe/photoswipe";
 @import "photoswipe/index";
 @import "photoswipe/default-skin/default-skin";
+@import "about";
+@import "animations";
 
 body{
   background-color: #f4f4f4;

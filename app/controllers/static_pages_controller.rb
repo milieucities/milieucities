@@ -18,6 +18,15 @@ class StaticPagesController < ApplicationController
     render nothing: true
   end
 
+  def contact_milieu
+    ContactMailer.contact_milieu(params[:name], params[:email], params[:message]).deliver_now
+    render nothing: true
+  end
+
+  def about
+
+  end
+
   def submitSurvey
     name = params[:ottawa].to_s if params[:ottawa]
     hood = params[:hood].to_s if params[:hood]

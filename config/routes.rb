@@ -10,13 +10,16 @@ Rails.application.routes.draw do
 
   get '/citizencity', to: 'static_pages#citizencity'
   post '/contact_citizencity', to: 'static_pages#contact_citizencity'
+  post '/contact_milieu', to: 'static_pages#contact_milieu'
 
   post '/rate' => 'rater#create', :as => 'rate'
-
 
   get 'map', to: 'static_pages#map'
 
   get 'events', to: 'static_pages#events'
+
+  # Add about page route
+  get 'about', to: 'static_pages#about'
 
   resources :dev_sites do
     resources :comments, module: :dev_sites do
