@@ -164,19 +164,13 @@ section#home{
   }
 
   .rsvp{
+    display: block;
     text-align: center;
-    font-family: 'Open Sans Condensed', sans-serif;
     padding-bottom: 30px;
 
-    a{
-      display: block;
-      margin: 0 auto;
-      width: 80px;
-      height: 80px;
-      border-radius: 80px;
-    }
     img{
       display: block;
+      margin: 0 auto;
       width: 80px;
       height: 80px;
       border-radius: 80px;

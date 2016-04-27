@@ -1,29 +1,67 @@
-<%= form_for(@event) do |f| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<%= form_for @event, html: { class: "one-page-form", multipart: true } do |f| %>
 
-      <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <div class="row">
+    <div class="input-field col s12 m6">
+      <%= f.text_field :title, placeholder: "WildlifeSpeaker's Series – Engaging Citizens in Science" %>
+      <%= f.label :title, "Title" %>
     </div>
-  <% end %>
+    <div class="input-field col s12 m6">
+      <%= f.text_field :location, placeholder: "101 Centrepointe Drive" %>
+      <%= f.label :location %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="row">
+    <div class="file-field input-field col s12">
+      <div class="btn">
+        <span>Images</span>
+        <%= f.file_field :images, multiple: true %>
+        <%= f.hidden_field :images_cache %>
+      </div>
+      <div class="file-path-wrapper">
+      <% img_str = @event.images.map { |img| File.basename(img.path) }.join(", ") %>
+        <input type="text" class="file-path" value="<%= img_str %>" >
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+
+  <div class="row">
+    <div class="input-field col s12 m6">
+      <%= f.text_field :date, placeholder: Date.today.strftime("%B %e, %Y"), class: "datepicker" %>
+      <%= f.label :date %>
+    </div>
+
+    <div class="input-field col s12 m6">
+      <%= f.text_field :time, placeholder: "6:00PM - 8:00PM" %>
+      <%= f.label :time %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :time %><br>
-    <%= f.datetime_select :time %>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.text_area :description, placeholder: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo tempor incididunt ut labore et dolore magna aliqua.", class: "materialize-textarea" %>
+      <%= f.label :description %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="row">
+    <h5>Contact Info</h5>
+
+    <div class="input-field col s12 m6">
+      <%= f.email_field :contact_email, placeholder: "lise.guevremont@ottawa.ca" %>
+      <%= f.label :contact_email, "Email" %>
+    </div>
+
+    <div class="input-field col s12 m6">
+      <%= f.text_field :contact_tel, placeholder: "613-580-2424 ext.27784" %>
+      <%= f.label :contact_tel, "Telephone" %>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.submit "Submit", class: "btn submit" %>
+    </div>
+  </div>
+
 <% end %>

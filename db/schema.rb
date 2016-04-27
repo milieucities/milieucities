@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423012906) do
+ActiveRecord::Schema.define(version: 20160427111440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,8 +104,13 @@ ActiveRecord::Schema.define(version: 20160423012906) do
     t.string   "title"
     t.text     "description"
     t.datetime "time"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.date     "date"
+    t.string   "location"
+    t.json     "images"
+    t.string   "contact_tel"
+    t.string   "contact_email"
   end
 
   create_table "overall_averages", force: :cascade do |t|

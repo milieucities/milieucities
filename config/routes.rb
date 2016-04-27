@@ -10,12 +10,11 @@ Rails.application.routes.draw do
 
   get '/citizencity', to: 'static_pages#citizencity'
   post '/contact_citizencity', to: 'static_pages#contact_citizencity'
+  post '/contact_milieu', to: 'static_pages#contact_milieu'
 
   post '/rate' => 'rater#create', :as => 'rate'
 
   get 'map', to: 'static_pages#map'
-
-  get 'events', to: 'static_pages#events'
 
   # Add about page route
   get 'about', to: 'static_pages#about'
@@ -42,7 +41,7 @@ Rails.application.routes.draw do
 
 
   resources :projects
-  resources :events, only: [:index, :show, :destroy, :create]
+  resources :events
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
