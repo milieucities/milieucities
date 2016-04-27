@@ -4,13 +4,13 @@
 
   <ul>
     <li><%= link_to "Map", map_path %></li>
-    <li><%= link_to "About", "https://leemichael-pronko-hlty.squarespace.com/#milieu" %></li>
+    <li><%= link_to "About", "https://leemichael-pronko-hlty.squarespace.com/#milieu", title: "About" %></li>
     <% if signed_in? %>
-      <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete %></li>
+      <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
     <% else %>
-      <li><%= link_to "Sign In", new_session_path %></li>
+      <li><%= link_to "Sign In", new_session_path, title: "Sign In" %></li>
     <% end %>
-    <li><%= mail_to "info@milieu.io", "Contact" %></li>
+    <li><%= link_to "Contact", "#contact-milieu-modal", title: "Contact Milieu", class: "modal-trigger" %></li>
 
   </ul>
   

@@ -47,12 +47,12 @@ class StaticPagesController < ApplicationController
         })
 
         if response
-          redirect_to map_path, notice: "Thank you. Welcome to Milieu."
+          redirect_to map_path, notice: "Thank you for sharing your ideas with us!"
         end
 
 
       else
-        redirect_to root_path, notice: "Fill out the form first"
+        redirect_to root_path, notice: "Fill out the form first."
       end
     end
 
@@ -70,7 +70,7 @@ class StaticPagesController < ApplicationController
         })
 
         if response
-          redirect_to citizencity_path, notice: "Thank you. Welcome to Milieu."
+          redirect_to citizencity_path, notice: "Thank you for sharing your ideas with Citizen City 2016."
         end
 
 

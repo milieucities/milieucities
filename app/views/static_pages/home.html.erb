@@ -53,21 +53,29 @@
       <%= label_tag :hood, "Neighboorhood I Live in" %>
     </div>
 
+    <div class="input-field col s12">
+      <%= submit_tag "Enter Map", class: "waves-effect btn enter-map", style: "width: 100%;" %>
     </div>
 
-    <div class="row" style="margin-top: 15px;">
-      <%= link_to "Enter Map", map_path, class: "waves-effect btn btn-flat", style: "width: 100%;" %>
-    </div>
-
-
-    <div class="row center-align">
-      OR
+    <div class="input-field col s12 find">
+      Find us on
     </div>
 
     <div class="input-field col s12 social-links">
-      <div class="col s4"><%= link_to fa_icon("facebook"), "#" %></div>
-      <div class="col s4"><%= link_to fa_icon("twitter"), "#" %></div>
-      <div class="col s4"><%= link_to fa_icon("google"), "#" %></div>
+          <div class="col s3">
+            <%= link_to fa_icon("facebook"), "https://m.facebook.com/milieuapp/", title: "Find us on Facebook" %><br/>Facebook
+          </div>
+          <div class="col s3">
+            <%= link_to fa_icon("twitter"), "https://twitter.com/milieucities", title: "Find us on Twitter" %><br/>Twitter
+          </div>
+          <div class="col s3">
+            <%= link_to fa_icon("medium"), "https://medium.com/@milieucities", title: "Find us on Medium" %><br/>Medium
+          </div>
+          <div class="col s3">
+            <%= link_to fa_icon("instagram"), "https://www.instagram.com/milieucities/", title: "Find us on Instagram" %><br/>Instagram
+          </div>
+
+        </div>
     </div>
 
    <% end %>
@@ -80,4 +88,31 @@
  </div>
 </section>
 
-
+<div id="contact-milieu-modal" class="modal">
+  <div class="modal-content">
+    <%= form_tag "/contact_milieu", id: "contact-milieu", remote: :true do %>
+      <h4>Contact Milieu</h4>
+      <div class="row">
+        <div class="col input-field s12 m6">
+          <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
+          <%= label_tag :name %>
+        </div>
+        <div class="col input-field s12 m6">
+          <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
+          <%= label_tag :email %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col input-field s12">
+          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: 'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' %>
+          <%= label_tag :message %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col input-field s12">
+          <%= submit_tag "Send", class: "waves-effect waves-light btn modal-action modal-close right" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
