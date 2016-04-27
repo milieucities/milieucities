@@ -16,8 +16,6 @@ Rails.application.routes.draw do
 
   get 'map', to: 'static_pages#map'
 
-  get 'events', to: 'static_pages#events'
-
   # Add about page route
   get 'about', to: 'static_pages#about'
 
@@ -43,7 +41,7 @@ Rails.application.routes.draw do
 
 
   resources :projects
-  resources :events, only: [:index, :show, :destroy, :create]
+  resources :events
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
