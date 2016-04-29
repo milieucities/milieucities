@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :images]
 
   def index
     @events = Event.all
@@ -15,6 +15,10 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def images
+    render json: { images: @event.image_hash }
+  end
+
   def create
     @event = Event.new(event_params)
 
@@ -23,6 +27,7 @@ class EventsController < ApplicationController
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
+        flash.now[:alert] = 'All required fields must be submitted.'
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
@@ -35,6 +40,7 @@ class EventsController < ApplicationController
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
+        flash.now[:alert] = 'All required fields must be submitted.'
         format.html { render :edit }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
@@ -55,6 +61,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:title, :description, :time, :date, :location, :contact_email, :contact_tel, images: [])
+      params.require(:event).permit(:title, :description, :time, :date, :images_cache, :location, :contact_email, :contact_tel, images: [])
     end
 end

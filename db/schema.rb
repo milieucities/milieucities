@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427111440) do
+ActiveRecord::Schema.define(version: 20160428121121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,7 +103,6 @@ ActiveRecord::Schema.define(version: 20160427111440) do
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "time"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.date     "date"
@@ -111,6 +110,9 @@ ActiveRecord::Schema.define(version: 20160427111440) do
     t.json     "images"
     t.string   "contact_tel"
     t.string   "contact_email"
+    t.string   "time"
+    t.float    "geocode_lat"
+    t.float    "geocode_lon"
   end
 
   create_table "overall_averages", force: :cascade do |t|
