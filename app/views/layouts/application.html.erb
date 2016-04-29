@@ -59,7 +59,7 @@
       <div class="row">
         <div class="input-field col s12">
           <%= text_field_tag :email, params[:email], placeholder: "Email" %>
-          <%= password_field_tag :password, placeholder: "Password" %>
+          <%= password_field_tag :password, nil, placeholder: "Password" %>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
           <%= submit_tag "Sign In", class: 'waves-effect btn' %>
         </div>
       </div>
-      
+
     <% end %>
 
     <%= link_to "Sign Up", new_user_path, class: "signup-link" %>
