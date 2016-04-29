@@ -1,6 +1,0 @@
-<%= form_for [commentable, Comment.new] do |f| %>
-  <div class="input-field">
-    <%= f.text_area :body, class: "materialize-textarea", placeholder: "There used to be a good park here, now all I see is tall buildings..." %>
-  </div>
-  <%= f.submit "Comment", class: "btn" %>
-<% end %>

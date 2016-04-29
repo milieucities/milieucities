@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(password)
       session[:user_id] = @user.id
-      redirect_to dev_sites_path
+      (request.referrer == new_session_path) ? redirect_to(root_path) : redirect_to(request.referrer)
     else
       flash.now[:alert] = "Could not sign in, try again"
       render :new

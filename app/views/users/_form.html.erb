@@ -1,6 +1,6 @@
 <%= form_for @user, html: { class: "one-page-form" } do |f| %>
 
-  <%= f.hidden_field :role, value: params[:role] %>
+  <%= f.hidden_field :role, value: params[:role], id: "role" %>
 
   <div class="row">
     <div class="input-field col m6 s12">
@@ -12,45 +12,57 @@
       <%= f.text_field :last_name %>
       <%= f.label :last_name, "Last Name" %>
     </div>
+  </div>
 
-    <div class="input-field col s12">
+  <div class="row">
+    <div class="input-field col m6 s12">
       <%= f.email_field :email %>
       <%= f.label :email  %>
     </div>
+    <div class="input-field col m6 s12">
+        <%= f.text_field :username %>
+        <%= f.label :username %>
+    </div>
+  </div>
 
-    <div class="input-field col s12">
-      <%= f.text_field :username %>
-      <%= f.label :user_name, "Username" %>
+  <div class="row">
+    <div class="input-field col m6 s12">
+      <%= f.password_field :password %>
+      <%= f.label :password %>
     </div>
 
     <div class="input-field col m6 s12">
-    <%= f.password_field :password %>
-    <%= f.label :password %>
+      <%= f.password_field :password_confirmation %>
+      <%= f.label :password_confirmation %>
     </div>
+  </div>
 
+  <div class="row">
     <div class="input-field col m6 s12">
-    <%= f.password_field :password_confirmation %>
-    <%= f.label :password_confirmation %>
+      <%= f.text_field :address %>
+      <%= f.label :address %>
     </div>
+    <div class="input-field col m6 s12">
+      <%= f.select :neighbourhood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES, selected: @user.neighbourhood) %>
+      <%= f.label :neighbourhood %>
+    </div>
+  </div>
 
+  <div class="row">  
     <div class="input-field col s12">
       <%= f.text_area :bio, class: "materialize-textarea" %>
       <%= f.label :bio  %>
     </div>
+  </div>
 
-    <div class="input-field col s12">
-      <h4>Role</h4>
-      <%= f.radio_button :role, 'Public', :checked => true %>
-      <%= f.label :role_public, 'Public'  %>
-      <br />
-      <%= f.radio_button :role, 'City Planner' %>
-      <%= f.label :role_planner, 'City Planner'  %>
-      <br />
-      <%= f.radio_button :role, 'Organization' %>
-      <%= f.label :role_organization, 'Organization'  %>
-      <br />
-      <%= f.radio_button :role, 'Developer' %>
-      <%= f.label :role_developer, 'Developer'  %>
+  <div class="row">
+    <div class="input-field col m6 s12">
+      <%= f.select :role, options_for_select(User::VALID_ROLE_TYPES, selected: @user.role), class: "role_field" %>
+      <%= f.label :role %>
+    </div>
+    <div class="input-field col m6 s12 organization">
+      <%= f.text_field :organization %>
+      <%= f.label :organization %>
     </div>
   </div>
 

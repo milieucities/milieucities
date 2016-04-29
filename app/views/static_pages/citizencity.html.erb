@@ -45,22 +45,23 @@
 
     <div class="survey">
 
-      <div class="title">
-      Share what gets you excited about ottawa
-      </div>
+      <div class="title">Share what gets you excited about ottawa</div>
+
       <%= form_tag("/citizensurvey", method: "post") do %>
 
-      <div class="row">
-        <div class="input-field col s12">
-          <%= text_area_tag :ottawa, nil, class: "materialize-textarea" %>
-          <%= label_tag :ottawa, "My Ottawa includes" %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= text_area_tag :ottawa, nil, class: "materialize-textarea" %>
+            <%= label_tag :ottawa, "My Ottawa includes" %>
+          </div>
         </div>
 
-        <div class="input-field col s12">
-          <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
-          <%= label_tag :hood, "Neighboorhood I Live in" %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= select_tag :hood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES) %>
+            <%= label_tag :hood, "Neighboorhood I Live in" %>
+          </div>
         </div>
-      </div>
 
         <div class="terms">
           By using Milieu, I agree to the <%= link_to "terms of service", "#" %>
@@ -74,7 +75,7 @@
           Find us on
         </div>
 
-        <div class="input-field col s12 social-links">
+        <div class="row social-links">
           <div class="col s3">
             <%= link_to fa_icon("facebook"), "https://www.facebook.com/Citizen-City-969528913166479/", title: "Find us on Facebook", target: "_blank" %><br/>Facebook
           </div>
@@ -88,7 +89,7 @@
             <%= link_to fa_icon("envelope-o"), "#contact-citizencity-modal", title: "Email Citizen City", class: "modal-trigger", target: "_blank" %><br/>Email
           </div>
         </div>
-       <% end %>
+      <% end %>
     </div>
 
     <div class="sponsors row hide-on-med-and-up">

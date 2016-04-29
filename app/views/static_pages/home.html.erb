@@ -37,45 +37,47 @@
 
 <div class="survey">
 
-  <div class="title">
-  Share what gets you excited about ottawa
-  </div>
+  <div class="title">Share what gets you excited about ottawa</div>
+
   <%= form_tag("/survey", method: "post") do %>
 
-  <div class="row">
-    <div class="input-field col s12">
-      <%= text_area_tag :ottawa, nil, class: "materialize-textarea" %>
-      <%= label_tag :ottawa, "My Ottawa includes" %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= text_area_tag :ottawa, nil, class: "materialize-textarea" %>
+        <%= label_tag :ottawa, "My Ottawa includes" %>
+      </div>
     </div>
 
-    <div class="input-field col s12">
-      <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
-      <%= label_tag :hood, "Neighboorhood I Live in" %>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= select_tag :hood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES) %>
+        <%= label_tag :hood, "Neighboorhood I Live in" %>
+      </div>
     </div>
 
-    <div class="input-field col s12">
-      <%= submit_tag "Enter Map", class: "waves-effect btn enter-map", style: "width: 100%;" %>
-    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= submit_tag "Enter Map", class: "waves-effect btn enter-map", style: "width: 100%;" %>
+      </div>
 
-    <div class="input-field col s12 find">
-      Find us on
-    </div>
+      <div class="input-field col s12 find">
+        Find us on
+      </div>
 
-    <div class="input-field col s12 social-links">
-          <div class="col s3">
-            <%= link_to fa_icon("facebook"), "https://m.facebook.com/milieuapp/", title: "Find us on Facebook" %><br/>Facebook
-          </div>
-          <div class="col s3">
-            <%= link_to fa_icon("twitter"), "https://twitter.com/milieucities", title: "Find us on Twitter" %><br/>Twitter
-          </div>
-          <div class="col s3">
-            <%= link_to fa_icon("medium"), "https://medium.com/@milieucities", title: "Find us on Medium" %><br/>Medium
-          </div>
-          <div class="col s3">
-            <%= link_to fa_icon("instagram"), "https://www.instagram.com/milieucities/", title: "Find us on Instagram" %><br/>Instagram
-          </div>
-
+      <div class="input-field col s12 social-links">
+        <div class="col s3">
+          <%= link_to fa_icon("facebook"), "https://m.facebook.com/milieuapp/", title: "Find us on Facebook" %><br/>Facebook
         </div>
+        <div class="col s3">
+          <%= link_to fa_icon("twitter"), "https://twitter.com/milieucities", title: "Find us on Twitter" %><br/>Twitter
+        </div>
+        <div class="col s3">
+          <%= link_to fa_icon("medium"), "https://medium.com/@milieucities", title: "Find us on Medium" %><br/>Medium
+        </div>
+        <div class="col s3">
+          <%= link_to fa_icon("instagram"), "https://www.instagram.com/milieucities/", title: "Find us on Instagram" %><br/>Instagram
+        </div>
+      </div>
     </div>
 
    <% end %>

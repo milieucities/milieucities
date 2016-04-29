@@ -50,6 +50,31 @@
 
 </html>
 
+<div id="sign-in-modal" class="modal">
+  <div class="modal-content">
+    <h3 class="center"><b>Sign In</b></h3>
+
+    <%= form_tag sessions_path, class: "login-form" do %>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= text_field_tag :email, params[:email], placeholder: "Email" %>
+          <%= password_field_tag :password, placeholder: "Password" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= submit_tag "Sign In", class: 'waves-effect btn' %>
+        </div>
+      </div>
+      
+    <% end %>
+
+    <%= link_to "Sign Up", new_user_path, class: "signup-link" %>
+  </div>
+</div>
+
 <div id="contact-milieu-modal" class="modal">
   <div class="modal-content">
     <%= form_tag "/contact_milieu", id: "contact-milieu", remote: :true do %>

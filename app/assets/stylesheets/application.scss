@@ -17,6 +17,8 @@ $secondary-color: #5d9bc0 !default;
 @import "photoswipe/default-skin/default-skin";
 @import "about";
 @import "animations";
+@import "users";
+@import "layout";
 
 body{
   background-color: #f4f4f4;
@@ -68,7 +70,7 @@ input, textarea{
 .small-container{
   min-height: 100vh;
   padding-top: 64px;
-  background-color: #fff;
+  background-color: #fafafa;
 
   h1, h3{
     margin: 0;

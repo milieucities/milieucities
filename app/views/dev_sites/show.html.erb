@@ -31,14 +31,26 @@
         <div class="col s6 label">Votes:</div>
 
         <div class="col s6">
-          <%= link_to upvote_dev_site_path(@dev_site), method: :put do %>
-            <i class="fa fa-thumbs-o-up fa-2x upvote"></i>
-            <%= @dev_site.get_upvotes.size %>
-          <% end %>
+          <% if signed_in? %>
+            <%= link_to upvote_dev_site_path(@dev_site), method: :put do %>
+              <i class="fa fa-thumbs-o-up fa-2x upvote"></i>
+              <%= @dev_site.get_upvotes.size %>
+            <% end %>
 
-          <%= link_to downvote_dev_site_path(@dev_site), method: :put do %>
-            <i class="fa fa-thumbs-o-down fa-2x downvote"></i>
-            <%= @dev_site.get_downvotes.size %>
+            <%= link_to downvote_dev_site_path(@dev_site), method: :put do %>
+              <i class="fa fa-thumbs-o-down fa-2x downvote"></i>
+              <%= @dev_site.get_downvotes.size %>
+            <% end %>
+          <% else %>
+            <%= link_to "#sign-in-modal", class: "modal-trigger" do %>
+              <i class="fa fa-thumbs-o-up fa-2x upvote"></i>
+              <%= @dev_site.get_upvotes.size %>
+            <% end %>
+
+            <%= link_to "#sign-in-modal", class: "modal-trigger" do %>
+              <i class="fa fa-thumbs-o-down fa-2x downvote"></i>
+              <%= @dev_site.get_downvotes.size %>
+            <% end %>
           <% end %>
         </div>
 

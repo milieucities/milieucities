@@ -199,7 +199,6 @@ section#home{
     padding: 20px;
     z-index: 2;
     background-color: #fff;
-    overflow-y: auto;
 
     @media #{$small-and-down} {
       width: calc(100%);

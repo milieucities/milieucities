@@ -8,7 +8,7 @@
     <% if signed_in? %>
       <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
     <% else %>
-      <li><%= link_to "Sign In", new_session_path, title: "Sign In" %></li>
+      <li><%= link_to "Sign In", "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>
     <% end %>
     <li><%= link_to "Contact", "#contact-milieu-modal", title: "Contact Milieu", class: "modal-trigger" %></li>
   </ul>
