@@ -17,10 +17,10 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(password)
       session[:user_id] = @user.id
       puts request.referrer
-      (request.referrer == new_session_path) ? redirect_to(root_path, notice: "Welcome to Milieu") : redirect_to(request.referrer, notice: "Welcome to Milieu")
+      redirect_to(root_path, notice: "Welcome to Milieu")
+      # (request.referrer == new_session_path) ? redirect_to(root_path, notice: "Welcome to Milieu") : redirect_to(request.referrer, notice: "Welcome to Milieu")
     else
-      flash.now[:alert] = "Could not sign in, try again"
-      render :new
+      redirect_to new_session_path, alert: "Could not sign in, try again"
     end
 
   end
@@ -47,6 +47,8 @@ class SessionsController < ApplicationController
 
       def disconnect_user
         session[:user_id] = nil
+        cookies.delete(:user_id)
+        @current_user = nil
       end
 
       def get_session_time_left
