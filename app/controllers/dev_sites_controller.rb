@@ -49,6 +49,26 @@ class DevSitesController < ApplicationController
       }
     end
 
+    if !params[:filter].present? || (params[:filter].present? && params[:filter] == "events")
+      Event.all.each do |event|
+        @geojson << {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [event.geocode_lon, event.geocode_lat]
+          },
+          properties: {
+            id: event.id,
+            zoom: 9,
+            title: event.title,
+            address: event.location,
+            :'marker-symbol' => "event",
+            description: "<div class=\"marker-title\"><a href=\"/events/#{event.id}\">#{event.title}</a></div>"
+          }
+        }
+      end
+    end
+
     render json: @geojson
   end
 

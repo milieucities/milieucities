@@ -16,7 +16,8 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(password)
       session[:user_id] = @user.id
-      redirect_to dev_sites_path
+      puts request.referrer
+      (request.referrer == new_session_path) ? redirect_to(root_path, notice: "Welcome to CitizenCity") : redirect_to(request.referrer, notice: "Welcome to CitizenCity")
     else
       flash.now[:alert] = "Could not sign in, try again"
       render :new
@@ -41,7 +42,7 @@ class SessionsController < ApplicationController
 
       def logout
         disconnect_user
-        redirect_to root_path
+        redirect_to root_path, notice: "Logged out"
       end
 
       def disconnect_user

@@ -6,11 +6,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
     if @user.save
       login(@user)
-      redirect_to root_path, notice: "Successfully signed up and logged in"
+      redirect_to root_path, notice: "Welcome to CitizenCity"
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:first_name,:last_name,:username,:email,
-        :password, :password_confirmation, :bio, :role)
+      params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation,
+        :bio, :role, :neighbourhood, :address, :organization)
     end
 end

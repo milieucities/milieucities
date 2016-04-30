@@ -45,25 +45,26 @@
 
     <div class="survey">
 
-      <div class="title">
-      Share what gets you excited about ottawa
-      </div>
+      <div class="title">Share what gets you excited about ottawa</div>
+
       <%= form_tag("/citizensurvey", method: "post") do %>
 
-      <div class="row">
-        <div class="input-field col s12">
-          <%= text_area_tag :ottawa, nil, class: "materialize-textarea" %>
-          <%= label_tag :ottawa, "My Ottawa includes" %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= text_area_tag :ottawa, nil, class: "materialize-textarea" %>
+            <%= label_tag :ottawa, "My Ottawa includes" %>
+          </div>
         </div>
 
-        <div class="input-field col s12">
-          <%= text_area_tag :hood, nil, class: "materialize-textarea" %>
-          <%= label_tag :hood, "Neighboorhood I Live in" %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= select_tag :hood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES) %>
+            <%= label_tag :hood, "Neighboorhood I Live in" %>
+          </div>
         </div>
-      </div>
 
         <div class="terms">
-          By using Milieu, I agree to the <%= link_to "terms of service", "#" %>
+          By using Milieu, I agree to the <%= link_to "terms of service", "#term-modal", class: "modal-trigger" %>
         </div>
 
         <div class="row" style="margin-top: 15px;">
@@ -74,7 +75,7 @@
           Find us on
         </div>
 
-        <div class="input-field col s12 social-links">
+        <div class="row social-links">
           <div class="col s3">
             <%= link_to fa_icon("facebook"), "https://www.facebook.com/Citizen-City-969528913166479/", title: "Find us on Facebook", target: "_blank" %><br/>Facebook
           </div>
@@ -88,7 +89,7 @@
             <%= link_to fa_icon("envelope-o"), "#contact-citizencity-modal", title: "Email Citizen City", class: "modal-trigger", target: "_blank" %><br/>Email
           </div>
         </div>
-       <% end %>
+      <% end %>
     </div>
 
     <div class="sponsors row hide-on-med-and-up">
@@ -126,5 +127,96 @@
         </div>
       </div>
     <% end %>
+  </div>
+</div>
+
+<div id="term-modal" class="modal">
+  <div class="modal-content">
+
+    <b>Mission</b>
+
+    <p>
+      Milieu is a system for connecting citizens, urban developers and city officials to work together to make better planning and development decisions. 
+    </p>
+
+    <p>
+      Our mission is to provide people with a platform for to access, share and discuss urban planning and development in the city. This includes connecting with other people and sharing information through social media. By soliciting citizen feedback and aggregating the data collected from public consultations we aim to facilitate rapid, participatory and effective decision-making in planning and development. 
+    </p>
+
+    <p>
+      By incorporating feedback from all stakeholders involved in the planning and development processes, Milieu creates a platform for ongoing dialogue in the construction of the city. This includes fostering a feedback loop of trust, transparency and accountability between city officials, urban developers and citizens. 
+    </p>
+
+    <b>Milieu Principles</b>
+
+    <p>
+      People should have the freedom to access information on urban planning and development and to connect, discuss and share this information with others. 
+    </p>
+
+    <p>
+      People should have the practical tools to be able to access information on urban planning and development in a simple and efficient way and discuss and share this information. 
+    </p>
+
+    <p>
+      Milieu publicly makes available information about its purpose, plans, policies and operations.
+    </p>
+
+    <b>Milieu Principles</b>
+
+    <p>
+      People should have the freedom to access information on urban planning and development and to connect, discuss and share this information with others.
+    </p>
+
+    <p>
+      People should have the practical tools to be able to access information on urban planning and development in a simple and efficient way and discuss and share this information.
+    </p>
+
+    <p>
+      Milieu publicly makes available information about its purpose, plans, policies and operations.
+    </p>
+
+    <b>Data Policy</b>
+
+    <p>
+      Milieu reserves all intellectual property related to its processes, algorithms, methodologies and collateral materials.
+    </p>
+
+    <p> 
+      Public feedback through the consultation process or participation in the application will result in data collection that is specific to the proposed development under consideration. This data shall be the intellectual property of the Milieu. Any publication by Milieu of data, conclusions or analysis arising from this consultation shall be at the discretion of Milieu. 
+    </p>
+
+    <p>
+      You own all of the content and information you post on Milieu and can control and remove your information from the Milieu service. 
+    </p>
+
+    <b>Community Standards</b>
+
+    <p>
+      Milieu keeps your account and personal information safe. By joining Milieu, you agree to authenticate yourself by using your real name and identity. By connecting with your authentic identity the milieu community is more accountable and transparent. 
+    </p>
+
+    <p>
+      You will not provide any false personal information on Milieu, or create an account for anyone other than yourself without permission. You will not create more than one personal account. 
+    </p>
+
+    <p>
+      We respect other people's rights, and expect you to do the same. You will not post content or take any action on Milieu that infringes or violates someone else's rights or otherwise violates the law.
+    </p>
+
+    <p>
+      We can remove any content or information you post on Milieu if we believe that it violates this Statement or our policies.
+    </p>
+
+    <p>
+      Please contact us at any moment regarding questions, concerns or should you have to report something.
+    </p>
+
+    <p>
+      Thank you
+    </p>
+
+    <p>
+      The Milieu Team
+    </p>
   </div>
 </div>

@@ -180,22 +180,20 @@ $(document).on('ready page:load', function(){
 
   var activeDataPoint;
   function setActiveChapter(dataPoint) {
-      if (dataPoint === activeDataPoint) return;
-
-      map.flyTo({center: [dataPoint.longitude, dataPoint.latitude], zoom: 15 });
-
-      activeDataPoint = dataPoint;
+    if (dataPoint === activeDataPoint) return;
+    map.flyTo({center: [dataPoint.longitude, dataPoint.latitude], zoom: 15 });
+    activeDataPoint = dataPoint;
   }
 
   function isElementOnScreen(id) {
-      var element = document.getElementById("dev-site-" + id);
-      var bounds = element.getBoundingClientRect();
-      return bounds.top < window.innerHeight && bounds.bottom > 400;
+    var element = document.getElementById("dev-site-" + id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 400;
   }
 
 
   var geocoder = new mapboxgl.Geocoder({
-      container: 'geocoder-container'
+    container: 'geocoder-container'
   });
 
   map.addControl(geocoder);

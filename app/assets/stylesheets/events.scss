@@ -1,0 +1,36 @@
+#events-show{
+  padding-top: 64px;
+  position: relative;
+  color: #555;
+  background-color: #f4f4f4;
+
+  .back-to-map{
+    color: $secondary-color;
+  }
+
+  .container{
+    background-color: #fff;
+    padding: 40px;
+  }
+
+  .title{
+    font-size: 3rem;
+    font-weight: 300;
+    padding-bottom: 30px;
+  }
+
+  .display-image{
+    height: 400px;
+    width: 100%;
+    max-height: 50vh;
+    border-radius: 3px;
+    padding-bottom: 30px;
+    cursor: pointer;
+    object-fit: cover;
+  }
+
+  .label{
+    color: #999;
+  }
+  
+}

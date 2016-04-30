@@ -1,8 +1,12 @@
-section#dev-site-show{
+#dev-site-show{
   padding-top: 64px;
   position: relative;
   color: #555;
   background-color: #f4f4f4;
+
+  .back-to-map{
+    color: $secondary-color;
+  }
 
   .container{
     background-color: #fff;

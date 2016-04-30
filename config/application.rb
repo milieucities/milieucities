@@ -32,10 +32,17 @@ module MilieuServer
       if(instance.class.to_s.eql?("ActionView::Helpers::Tags::Label"))
         html_tag << "<span class=\"error-message\">#{instance.error_message.join(" and ")}</span>".html_safe
       else
-        field = html_tag.split(" ")
-        pos = field.count - 1
-        field.insert(pos, "class=\"invalid\"")
-        html_tag = field.join(" ")
+        if instance.class.to_s.eql?("ActionView::Helpers::Tags::TextArea") then
+          field = html_tag.split(" ")
+          pos = field.count - 2
+          field.insert(pos, "class=\"invalid\"")
+          html_tag = field.join(" ")
+        elsif instance.class.to_s.eql?("ActionView::Helpers::Tags::TextField")
+          field = html_tag.split(" ")
+          pos = field.count - 1
+          field.insert(pos, "class=\"invalid\"")
+          html_tag = field.join(" ")
+        end
       end
 
       html_tag.html_safe

@@ -20,7 +20,10 @@
       </div>
       <div class="file-path-wrapper">
       <% img_str = @event.images.map { |img| File.basename(img.path) }.join(", ") %>
-        <input type="text" class="file-path" value="<%= img_str %>" >
+        <input type="text" class="file-path <%= 'invalid' if @event.errors[:images].present? %>" value="<%= img_str %>" >
+        <% if @event.errors[:images].present? %>
+          <span class="error-message"><%= @event.errors[:images].first %></span>
+        <% end %>
       </div>
     </div>
   </div>
