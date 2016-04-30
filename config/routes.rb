@@ -38,10 +38,8 @@ Rails.application.routes.draw do
 
   end
 
-
-
   resources :projects
-  resources :events do 
+  resources :events do
     get :images, on: :member
   end
   resources :users
