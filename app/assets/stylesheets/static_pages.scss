@@ -205,8 +205,12 @@ section#home{
     }
 
     .terms{
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       text-align: center;
+
+      a{
+        color: $secondary-color;
+      }
     }
 
     .title{
@@ -226,7 +230,7 @@ section#home{
     .social-links{
       text-align: center;
       padding: 10px 0 20px;
-      font-size: 0.6rem;
+      font-size: 0.8rem;
       color: $secondary-color;
 
       i{

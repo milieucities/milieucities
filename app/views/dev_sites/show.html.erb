@@ -2,6 +2,8 @@
 
   <div class="container">
 
+  <%= link_to fa_icon("arrow-left", text: "Back to Map"), map_path, class: "back-to-map" %><br/><br/>
+
   <div class="title">
     <%= @dev_site.addresses.empty? ? @dev_site.title : @dev_site.addresses.first.street %>
   </div>

@@ -3,25 +3,9 @@
   <%= f.hidden_field :role, value: params[:role], id: "role" %>
 
   <div class="row">
-    <div class="input-field col m6 s12">
-      <%= f.text_field :first_name %>
-      <%= f.label :first_name, "First Name" %>
-    </div>
-
-    <div class="input-field col m6 s12">
-      <%= f.text_field :last_name %>
-      <%= f.label :last_name, "Last Name" %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="input-field col m6 s12">
+    <div class="input-field col s12">
       <%= f.email_field :email %>
       <%= f.label :email  %>
-    </div>
-    <div class="input-field col m6 s12">
-        <%= f.text_field :username %>
-        <%= f.label :username %>
     </div>
   </div>
 
@@ -40,32 +24,13 @@
   <div class="row">
     <div class="input-field col m6 s12">
       <%= f.text_field :address %>
-      <%= f.label :address %>
+      <%= f.label :address, "Postal Code (optional)" %>
     </div>
     <div class="input-field col m6 s12">
       <%= f.select :neighbourhood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES, selected: @user.neighbourhood) %>
       <%= f.label :neighbourhood %>
     </div>
   </div>
-
-  <div class="row">  
-    <div class="input-field col s12">
-      <%= f.text_area :bio, class: "materialize-textarea" %>
-      <%= f.label :bio  %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="input-field col m6 s12">
-      <%= f.select :role, options_for_select(User::VALID_ROLE_TYPES, selected: @user.role), class: "role_field" %>
-      <%= f.label :role %>
-    </div>
-    <div class="input-field col m6 s12 organization">
-      <%= f.text_field :organization %>
-      <%= f.label :organization %>
-    </div>
-  </div>
-
 
   <%= content_tag :button, "Submit", type: :submit, class: "waves-effect waves-light btn submit" %>
 
