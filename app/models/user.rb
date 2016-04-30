@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
                             presence: {message: "Password is required", on: :create},
                             confirmation: {message: "Passwords do not match."},
                             length: { in: 6..20, message: "Password must be between 6 to 20 characters"}
+  validates               :username,
+                            presence: {message: "Username is required"}
 
 
   def full_name
