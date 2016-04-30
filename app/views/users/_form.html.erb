@@ -27,7 +27,7 @@
       <%= f.label :address, "Postal Code (optional)" %>
     </div>
     <div class="input-field col m6 s12">
-      <%= f.select :neighbourhood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES, selected: @user.neighbourhood) %>
+      <%= f.select :neighbourhood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES, selected: @user.neighbourhood), include_blank: true %>
       <%= f.label :neighbourhood %>
     </div>
   </div>
