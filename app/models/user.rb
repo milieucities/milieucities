@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_secure_password
+  has_secure_password validations: false
 
   VALID_NEIGHBOURHOOD_TYPES = [ "Orleans", "Innes", "Barrhaven", "Kanata North",
     "West Carleton-March", "Stittsville", "Bay", "College", "Rideau-Rockcliffe",
@@ -13,24 +13,18 @@ class User < ActiveRecord::Base
     doc.api_key = doc.generate_api_key
   end
 
-  # ASSOCIATIONS
   has_many :comments, as: :commentable
 
   # Rating
   ratyrate_rater
 
-  # VALIDATIONS
-  validates               :username, presence: { message: "User name is required"}
-  validates_uniqueness_of :username, on: :create
-  # validates               :first_name, presence: {message: "First name is required"}
-  # validates               :last_name, presence: {message: "Last name is required"}
   validates               :email,
-                          presence: {message: "Email is required"},
-                          :uniqueness => true
-  validates               :password, on: :create, presence: {message: "Password is required"}
-  validates_length_of     :password, :in => 6..20, :on => :create
-  # validates               :bio, length: {maximum: 140, message: "140 characters max"}
-  validates               :role, presence: { message: "A user role is required" }
+                            presence: {message: "Email is required"},
+                            uniqueness: {message: "Email already in use"}
+  validates               :password,
+                            presence: {message: "Password is required", on: :create},
+                            confirmation: {message: "Passwords do not match."},
+                            length: { in: 6..20, message: "Password must be between 6 to 20 characters"}
 
 
   def full_name

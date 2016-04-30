@@ -6,13 +6,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    begin
-      @user.save
+
+    if @user.save
       login(@user)
       redirect_to root_path, notice: "Welcome to CitizenCity"
-    rescue Exception => e
-      puts e.backtrace.inspect
-      render 'new'
+    else
+      render :new
     end
   end
 
