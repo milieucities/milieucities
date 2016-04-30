@@ -42,7 +42,7 @@
 .about_container{
   position: relative;
   background-color: #FFF;
-  height: 750px;
+  height: 100%;
   padding: 10px;
   margin: 1000px 0 0 0;
   display: block;
@@ -101,6 +101,26 @@
   width: 45%;
   float: left;
   margin-top: 25px;
+}
+
+.awards_section {
+  text-align: center;
+  ul {
+    font-size: 1.2em;
+  }
+  a {
+    color: #4baaa7;
+    &:hover {
+      color: #92C7C6;
+    }
+  }
+}
+
+.awards_images {
+  text-align: center;
+  img {
+    height: 300px;
+  }
 }
 
 

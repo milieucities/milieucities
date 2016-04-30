@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     if @user.save
       login(@user)
-      redirect_to root_path, notice: "Welcome to CitizenCity"
+      redirect_to root_path, notice: "Welcome to Milieu"
     else
       render :new
     end
