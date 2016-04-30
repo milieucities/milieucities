@@ -49,7 +49,7 @@ Comments.Comment = React.createClass({
           <i className="fa fa-angle-up fa-2x"></i><br/>
           <i className="fa fa-angle-down fa-2x"></i>
         </div>
-        <div className="user">{ user ? user.first_name + " " + user.last_name : "Anonymous"}
+        <div className="user">{ user ? user.username : "Anonymous"}
         <span className="role"> | { user ? user.role : "User" } </span>
         </div>
         <div className="time"> {moment(this.props.comment.created_at).format("MM-DD-YYYY")}</div>
