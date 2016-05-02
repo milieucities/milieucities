@@ -8,6 +8,14 @@ $(document).on('page:change', function(){
     Materialize.toast($('#alert').data("alert"), 3500, "red darken-4");
   }
 
+  $("#contact-file-lead").on("ajax:success", function(){
+    this.reset();
+    Materialize.toast("Message successfully sent!", 3500, "teal");
+  }).on("ajax:error", function(){
+    this.reset();
+    Materialize.toast("Message unsuccessfully sent!", 3500, "red darken-4");
+  });
+
   $("#contact-milieu").on("ajax:success", function(){
     this.reset();
     Materialize.toast("Message successfully sent!", 3500, "teal");

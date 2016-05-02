@@ -42,7 +42,12 @@ class DevSite < ActiveRecord::Base
       @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Unknown"] })
     elsif filter_by == "events" then
       @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Event"] })
+    elsif filter_by == "nothing"
+      # DO NOTHING
+    else
+      @dev_sites = @dev_sites.where(ward_num: (User::VALID_NEIGHBOURHOOD_TYPES.index(filter_by) + 1))
     end
+
     @dev_sites
   end
 

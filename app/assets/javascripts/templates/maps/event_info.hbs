@@ -1,0 +1,41 @@
+{{#empty_array this.dev_sites}}
+  <div class="dev-site">
+    <div class="title">
+      No events found
+    </div>
+  </div>
+{{/empty_array}}
+
+{{#each this.dev_sites}}
+
+  <div class="dev-site" id="dev-site-{{this.dev_site.id}}">
+
+  <div class="title">
+    {{#check_existence this.dev_site.location}}{{/check_existence}}
+  </div>
+
+  <div>
+    <a href="/events/{{this.dev_site.id}}">
+    <img src="{{this.dev_site.image_url}}" class="display-image">
+    </a>
+  </div>
+
+  <div class="cat-label">{{#check_existence this.dev_site.title}}{{/check_existence}}</div>
+
+  <div class="row info">
+
+    <div class="col s12 label">Description:</div>
+    <div class="col s12">{{this.dev_site.description}}</div>
+
+    <div class="col s6 label">When:</div>
+    <div class="col s6">{{this.dev_site.date}}, {{this.dev_site.time}}</div>
+
+    <div class="col s6 label">Contact:</div>
+    <div class="col s6">{{this.dev_site.contact_email}} <br/> {{this.dev_site.contact_tel}}</div>
+
+  </div>
+
+  <a href="/events/{{this.dev_site.id}}" class="waves-effect waves-light btn">View Event</a>
+  </div>
+
+{{/each}}

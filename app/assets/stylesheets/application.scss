@@ -31,6 +31,14 @@ body{
   color: $secondary-color;
 }
 
+.dropdown-content{
+  max-height: 300px;
+
+  li{
+    line-height: 50px;
+  }
+}
+
 a{
   color: #333;
 }

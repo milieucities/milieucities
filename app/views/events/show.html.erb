@@ -1,44 +1,52 @@
 <section id="events-show">
   <div class="container">
 
-  <%= link_to fa_icon("arrow-left", text: "Back to Map"), map_path, class: "back-to-map" %><br/><br/>
+    <%= link_to fa_icon("arrow-left", text: "Back to Map"), map_path, class: "back-to-map" %><br/><br/>
 
-    <div class="title">
-      <%= @event.title %>
-    </div>
-
-  <div class="row">
-    <div class="col s12 m12 l7">
-      <div id="slides">
-       <%= image_tag (@event.images.first.url), class: "display-image" %>
-      </div>
-    </div>
-    <div class="col s12 m12 l5">
-
-      <div class="row info">
-        <div class="col s6 label">Location:</div>
-        <div class="col s6"><%= @event.location.present? ? @event.location : "N/A" %></div>
-
-        <div class="col s6 label">Time:</div>
-        <div class="col s6"><%= @event.time.present? ? @event.time : "N/A" %></div>
-
-        <div class="col s6 label">Date:</div>
-        <div class="col s6"><%= @event.date.present? ? @event.date.strftime("%B %e, %Y") : "N/A" %></div>
-
-        <div class="col s6 label">Telephone:</div>
-        <div class="col s6"><%= @event.contact_tel.present? ? @event.contact_tel : "N/A" %></div>
-
-        <div class="col s6 label">Email:</div>
-        <div class="col s6"><%= @event.contact_email.present? ? @event.contact_email : "N/A" %></div>
-
+      <div class="title">
+        <%= @event.title %>
       </div>
 
-      <div class="row">
-        <div class="col s6 label">Description:</div>
-        <div class="col s12"><%= @event.description.present? ? @event.description : "N/A" %></div>     
+    <div class="row">
+      <div class="col s12 m12 l7">
+        <div id="slides">
+         <%= image_tag (@event.images.first.url), class: "display-image" %>
+        </div>
+      </div>
+      <div class="col s12 m12 l5">
+
+        <div class="row info">
+          <div class="col s6 label">Location:</div>
+          <div class="col s6"><%= @event.location.present? ? @event.location : "N/A" %></div>
+
+          <div class="col s6 label">Time:</div>
+          <div class="col s6"><%= @event.time.present? ? @event.time : "N/A" %></div>
+
+          <div class="col s6 label">Date:</div>
+          <div class="col s6"><%= @event.date.present? ? @event.date.strftime("%B %e, %Y") : "N/A" %></div>
+
+          <div class="col s6 label">Telephone:</div>
+          <div class="col s6"><%= @event.contact_tel.present? ? @event.contact_tel : "N/A" %></div>
+
+          <div class="col s6 label">Email:</div>
+          <div class="col s6"><%= @event.contact_email.present? ? @event.contact_email : "N/A" %></div>
+
+        </div>
+
+        <div class="row">
+          <div class="col s6 label">Description:</div>
+          <div class="col s12"><%= @event.description.present? ? @event.description : "N/A" %></div>     
+        </div>
       </div>
     </div>
-  </div>
+
+    <div  class="col s12">
+      <h5>Comment</h5>
+
+      <%= react_component "EventComments", { eventId: @event.id, userId: @user.id,
+        authenticityToken: form_authenticity_token } %>
+
+    </div>
 
   </div>
 </section>

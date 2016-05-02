@@ -1,11 +1,12 @@
 class User < ActiveRecord::Base
   has_secure_password validations: false
 
+  # THIS ARRAY MUST BE IN ORDER BY EACH WARDS, WARD NUMBER
   VALID_NEIGHBOURHOOD_TYPES = [ "Orleans", "Innes", "Barrhaven", "Kanata North",
-    "West Carleton-March", "Stittsville", "Bay", "College", "Rideau-Rockcliffe",
+    "West Carleton-March", "Stittsville", "Bay", "College", "Knoxdale-Merivale",
+    "Gloucester-Southgate", "Beacon Hill-Cyrville", "Rideau-Vanier", "Rideau-Rockcliffe",
     "Somerset", "Kitchissippi", "River", "Capital", "Alta Vista", "Cumberland", "Osgoode",
-    "Rideau-Goulbourn", "Gloucester-South Nepean", "Kanata South", "Knoxdale-Merivale",
-    "Gloucester-Southgate", "Beacon Hill-Cyrville", "Rideau-Vanier"]
+    "Rideau-Goulbourn", "Gloucester-South Nepean", "Kanata South"]
 
   VALID_ROLE_TYPES = ["Public", "City Official", "Organization", "Urban Developer"]
 

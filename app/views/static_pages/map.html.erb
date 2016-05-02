@@ -1,7 +1,16 @@
 <section id="map">
   <div class="legend hide-on-small-only">
 
-    <div class="title">Filter</div>
+    <div class="title">Filter Neighbourhood</div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <%= select_tag :neighbourhood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES), include_blank: true, id: "neighbourhood-filter" %>
+        <%= label_tag :neighbourhood %>
+      </div>
+    </div>
+
+    <div class="title">Filter Status</div>
 
     <div class="item filter-item" data-filter="consultation">
       <%= image_tag "consultation.png", class: "icon" %>

@@ -32,5 +32,43 @@
   .label{
     color: #999;
   }
-  
+
+  .comment{
+    padding: 10px;
+    background-color: #f4f4f4;
+    margin-bottom: 5px;
+
+    .user{
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .time{
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    .role{
+      color: #999;
+      font-weight: 300;
+    }
+
+    .body{
+      padding-top: 10px;
+      font-size: 14px;
+    }
+
+    .voting {
+      float: right;
+    }
+  }
+
+  #new_comment textarea{
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    padding: 10px;
+    height: auto;
+    outline: none;
+  }
+    
 }
