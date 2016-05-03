@@ -7,6 +7,7 @@ $(document).on('ready page:load', function(){
 
     // function wheel(event) {
     //     var delta = 0;
+    //     console.log(event);
     //     if (event.wheelDelta) {(delta = event.wheelDelta / 60);}
     //     else if (event.detail) {(delta = -event.detail / 3);}
 
@@ -38,7 +39,7 @@ $(document).on('ready page:load', function(){
       var features = map.queryRenderedFeatures(e.point, { layers: ['devSites'] });
       if (features.length) {
         map.flyTo({center: features[0].geometry.coordinates});
-        $("html, body").animate({ scrollTop: $("#dev-site-" + features[0].properties.id).offset().top }, 1000);
+        $("#dev-site-profile").animate({ scrollTop: ($("#dev-site-" + features[0].properties.id).offset().top + $("#dev-site-profile").scrollTop() - 90) }, 1000);
       }
     });
 
@@ -104,7 +105,7 @@ $(document).on('ready page:load', function(){
       }
     });
 
-    window.onscroll = function() {
+    $("#dev-site-profile")[0].onscroll = function() {
       if($("#main-map").length > 0) {
         for (var i = 0; i < geojsonData.length; i++) {
           var id = geojsonData[i].dev_site.id;
@@ -119,14 +120,18 @@ $(document).on('ready page:load', function(){
     var activeDataPoint;
     function setActiveChapter(dataPoint) {
       if (dataPoint === activeDataPoint) return;
-      map.flyTo({center: [dataPoint.longitude, dataPoint.latitude], zoom: 15 });
+      if(map.getZoom() < 11){
+        map.flyTo({center: [dataPoint.longitude, dataPoint.latitude], zoom: 15 });
+      }else{
+        map.flyTo({center: [dataPoint.longitude, dataPoint.latitude] });
+      }
       activeDataPoint = dataPoint;
     }
 
     function isElementOnScreen(id) {
       var element = document.getElementById("dev-site-" + id);
       var bounds = element.getBoundingClientRect();
-      return bounds.top < window.innerHeight && bounds.bottom > 400;
+      return bounds.top < $("#dev-site-profile").innerHeight() && bounds.bottom > 400;
     }
 
 
@@ -150,7 +155,7 @@ function initMap(){
       zoom: 15
   });
 
-  map.scrollZoom.disable();
+  // map.scrollZoom.disable();
 };
 
 function loadEventData(url){
