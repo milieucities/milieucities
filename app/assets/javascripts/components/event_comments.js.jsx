@@ -1,11 +1,11 @@
 var LinkedStateMixin = React.addons.LinkedStateMixin;
 
-var Comments = React.createClass({
+var EventComments = React.createClass({
   getInitialState: function() {
     return { comments: [] };
   },
   componentDidMount: function() {
-    $.getJSON("/dev_sites/"+ this.props.devSiteId + "/comments", function(data){
+    $.getJSON("/events/"+ this.props.eventId +"/comments", function(data){
       this.setState({ comments: data });
     }.bind(this));
   },
@@ -15,18 +15,18 @@ var Comments = React.createClass({
   render: function(){
     return (
       <div>
-        <Comments.CommentsIndex {...this.props} comments={this.state.comments} />
-        <Comments.CommentsForm {...this.props} save={this.save} />
+        <EventComments.CommentsIndex {...this.props} comments={this.state.comments} />
+        <EventComments.CommentsForm {...this.props} save={this.save} />
       </div>
     )
   }
 });
 
-Comments.CommentsIndex = React.createClass({
+EventComments.CommentsIndex = React.createClass({
   comments: function(){
     var commentNodes = this.props.comments.map(function(comment){
       return (
-        <Comments.Comment {...this.props} key={comment.id} comment={comment} />
+        <EventComments.Comment {...this.props} key={comment.id} comment={comment} />
       );
     }.bind(this));
     return commentNodes;
@@ -40,7 +40,7 @@ Comments.CommentsIndex = React.createClass({
   }
 });
 
-Comments.Comment = React.createClass({
+EventComments.Comment = React.createClass({
   render: function(){
     var user = this.props.comment.user;
     return (
@@ -61,7 +61,7 @@ Comments.Comment = React.createClass({
   }
 });
 
-Comments.CommentsForm = React.createClass({
+EventComments.CommentsForm = React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState: function() {
     return { body: "" };
@@ -70,7 +70,7 @@ Comments.CommentsForm = React.createClass({
     e.preventDefault();
 
     $.ajax({
-      url: "/dev_sites/"+ this.props.devSiteId +"/comments",
+      url: "/events/"+ this.props.eventId +"/comments",
       dataType: "JSON",
       type: "POST",
       cache: false,
@@ -98,7 +98,7 @@ Comments.CommentsForm = React.createClass({
         <form id="new_comment" onSubmit={this.submit}>
           <input name="utf8" type="hidden" value="✓" />
           <input type="hidden" name="authenticity_token" value={this.props.authenticityToken} />
-          <input type="hidden" name="comment[dev_site_id]" id="comment_dev_site_id" value={this.props.devSiteId} />
+          <input type="hidden" name="comment[event_id]" id="comment_event_id" value={this.props.eventId} />
           <input type="hidden" name="comment[user_id]" id="comment_user_id" value={this.props.userId} />
 
           <textarea valueLink={this.linkState('body')}  placeholder="I can't wait to see this in our neighbourhood!" name="comment[body]" id="comment_body"></textarea>

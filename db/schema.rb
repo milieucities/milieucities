@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429175604) do
+ActiveRecord::Schema.define(version: 20160501172521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,9 +57,11 @@ ActiveRecord::Schema.define(version: 20160429175604) do
     t.integer  "user_id"
     t.string   "commentable_type"
     t.integer  "commentable_id"
+    t.integer  "event_id"
   end
 
   add_index "comments", ["dev_site_id"], name: "index_comments_on_dev_site_id", using: :btree
+  add_index "comments", ["event_id"], name: "index_comments_on_event_id", using: :btree
 
   create_table "councillors", force: :cascade do |t|
     t.integer  "ward_num"
@@ -198,4 +200,5 @@ ActiveRecord::Schema.define(version: 20160429175604) do
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
   add_foreign_key "comments", "dev_sites"
+  add_foreign_key "comments", "events"
 end

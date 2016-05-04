@@ -10,4 +10,9 @@ class ContactMailer < ApplicationMailer
     mail(:to => 'info@milieu.io', :subject => "Milieu contact form")
   end
 
+  def contact_file_lead(name, email, message)
+    @name, @email, @message = name, email, message
+    mail(:to => 'meneliktucker@hotmail.com', :subject => "Message for File Lead")
+  end
+
 end

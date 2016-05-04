@@ -3,9 +3,42 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+
+    respond_to do |format|
+        format.html
+        format.json
+    end
+  end
+
+  def geojson
+
+    @geojson = []
+
+    Event.all.each do |event|
+      @geojson << {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [event.geocode_lon, event.geocode_lat]
+        },
+        properties: {
+          id: event.id,
+          zoom: 9,
+          title: event.title,
+          address: event.location,
+          :'marker-symbol' => "event",
+          description: "<div class=\"marker-title\"><a href=\"/events/#{event.id}\">#{event.title}</a></div>"
+        }
+      }
+    end
+
+    render json: @geojson
   end
 
   def show
+    if current_user
+      @comments = @event.comments.build
+    end
   end
 
   def new

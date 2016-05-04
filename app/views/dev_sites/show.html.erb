@@ -79,6 +79,13 @@
               <% end %>
           </div>
         </div>
+<!-- 
+        <div class="row">
+          <div class="col s12">
+            <%= link_to fa_icon("envelope-o", text: " Contact Planner"),
+              "#contact-file-lead-modal", class: "modal-trigger" %>
+          </div>
+        </div> -->
 
       </div>
     </div>
@@ -115,14 +122,53 @@
   </div>
 
 
-    <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? && current_user.role == 'City Planner' %>
-    <%= link_to "Delete", dev_site_path(@dev_site), data: {:confirm => 'Are you sure you want to delete this application?'}, class: "red btn", method: :delete if signed_in? && current_user.role == 'City Planner' %>
+    <%= link_to fa_icon("pencil", text: "Edit"), edit_dev_site_path(@dev_site), class: "btn" if signed_in? && current_user.role == 'City Official' %>
+    <%= link_to "Delete", dev_site_path(@dev_site), data: {:confirm => 'Are you sure you want to delete this application?'}, class: "red btn", method: :delete if signed_in? && current_user.role == 'City Official' %>
 
   </div>
 
 
 </section>
 
+
+<div id="contact-file-lead-modal" class="modal">
+  <div class="modal-content">
+    <%= form_tag "/contact_file_lead", id: "contact-file-lead", remote: :true do %>
+      <h4>Contact File Lead</h4>
+
+      <div class="row">
+        <div class="col input-field s12 m6">
+          <h6><i>File Leads Name</i></h6>
+        </div>
+        <div class="col input-field s12 m6">
+          <h6><i>File Leads Email</i></h6>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col input-field s12 m6">
+          <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
+          <%= label_tag :name %>
+        </div>
+        <div class="col input-field s12 m6">
+          <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
+          <%= label_tag :email %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col input-field s12">
+          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: 'Leave a message.' %>
+          <%= label_tag :message %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col input-field s12">
+          <%= submit_tag "Send", class: "waves-effect waves-light btn modal-action modal-close right" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <!-- Root element of PhotoSwipe. Must have class pswp. -->
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">

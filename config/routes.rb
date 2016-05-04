@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/citizencity', to: 'static_pages#citizencity'
   post '/contact_citizencity', to: 'static_pages#contact_citizencity'
   post '/contact_milieu', to: 'static_pages#contact_milieu'
+  post '/contact_file_lead', to: 'static_pages#contact_file_lead'
 
   post '/rate' => 'rater#create', :as => 'rate'
 
@@ -40,7 +41,14 @@ Rails.application.routes.draw do
 
   resources :projects
   resources :events do
+    resources :comments, module: :events do
+      member do
+        put "upvote", to: "comments#upvote"
+        put "downvote", to: "comments#downvote"
+      end
+    end
     get :images, on: :member
+    get :geojson, on: :collection
   end
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
