@@ -30,6 +30,7 @@ class DevSite < ActiveRecord::Base
   validates     :ward_name, presence: { message: "Ward name is required" }
   validates     :ward_num, presence: { message: "Ward number is required" }, numericality: true
 
+
   def self.filter(filter_by)
     @dev_sites = DevSite.all
     if filter_by == "consultation" then
@@ -112,4 +113,3 @@ class DevSite < ActiveRecord::Base
   mount_uploaders :files, FilesUploader
 
 end
-

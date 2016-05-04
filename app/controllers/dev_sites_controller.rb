@@ -36,7 +36,7 @@ class DevSitesController < ApplicationController
         type: 'Feature',
         geometry: {
           type: 'Point',
-          coordinates: [address.lon, address.lat]
+          coordinates: [address.geocode_lon, address.geocode_lat]
         },
         properties: {
           id: ds.id,
