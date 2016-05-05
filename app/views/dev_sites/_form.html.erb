@@ -1,13 +1,14 @@
 
 <%= form_for @dev_site, html: { class: "one-page-form", multipart: true } do |f| %>
 
-  <div class="row">
-
+<div class="row">
   <div class="input-field col s12">
     <%= f.text_field :title %>
     <%= f.label :title, "Project Name" %>
   </div>
+</div>
 
+<div class="row">
   <div class="file-field input-field col s12">
     <div class="btn">
       <span>Images</span>
@@ -15,28 +16,34 @@
       <%= f.hidden_field :images_cache %>
     </div>
     <div class="file-path-wrapper">
-    <% img_str = @dev_site.images.map { |img| File.basename(img.path) }.join(", ") %>
+      <% img_str = @dev_site.images.map { |img| File.basename(img.path) }.join(", ") %>
       <input type="text" class="file-path" value="<%= img_str %>" >
     </div>
   </div>
+</div>
 
+<div class="row">
   <div class="input-field col s12 m6">
     <%= f.text_field :devID %>
     <%= f.label :devID, "Development Id" %>
   </div>
 
   <div class="input-field col s12 m6">
-   <%= f.select :application_type, options_for_select(DevSite::VALID_APPLICATION_TYPES, selected: @dev_site.application_type ) %>
+    <%= f.select :application_type, options_for_select(DevSite::VALID_APPLICATION_TYPES, selected: @dev_site.application_type ) %>
     <%= f.label :application_type, "Application Type" %>
   </div>
+</div>
 
+<div class="row">
   <div class="input-field col s12">
-   <%= f.select :build_type, options_for_select(DevSite::VALID_BUILDING_TYPES, selected: @dev_site.build_type ) %>
+    <%= f.select :build_type, options_for_select(DevSite::VALID_BUILDING_TYPES, selected: @dev_site.build_type ) %>
     <%= f.label :build_type, "Building Type" %>
   </div>
+</div>
 
+<div class="row">
   <div class="input-field col s12 m6">
-    <%= f.text_field :ward_name %>
+    <%= f.select :ward_name, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES) %>
     <%= f.label :ward_name, "Ward Name" %>
   </div>
 
@@ -44,12 +51,16 @@
     <%= f.number_field :ward_num, value: 0 %>
     <%= f.label :ward_num, "Ward Number"%>
   </div>
+</div>
 
+<div class="row">
   <div class="input-field col s12">
     <%= f.text_area :description, class: "materialize-textarea" %>
     <%= f.label :description %>
   </div>
+</div>
 
+<div class="row">
   <div class="file-field input-field col s12">
     <div class="btn">
       <span>Files</span>
@@ -57,39 +68,41 @@
       <%= f.hidden_field :files_cache %>
     </div>
     <div class="file-path-wrapper">
-    <% file_str = @dev_site.files.map { |file| File.basename(file.path) }.join(", ") %>
+      <% file_str = @dev_site.files.map { |file| File.basename(file.path) }.join(", ") %>
       <input type="text" class="file-path" value="<%= file_str %>">
     </div>
   </div>
+</div>
 
-  </div>
 
-  <div class="row">
-
+<div class="row">
   <h5>Address</h5>
   <div class="input-field col s12">
     <%= f.fields_for :addresses do |address| %>
-      <%= render 'address_fields', :f => address %>
+    <%= render 'address_fields', :f => address %>
     <% end %>
     <%= link_to_add_association 'Add address', f, :addresses %>
   </div>
-  </div>
+</div>
 
-  <div class="row">
-
+<div class="row">
   <h5>Status</h5>
-
   <div class="input-field col s12">
     <%= f.fields_for :statuses do |status| %>
-      <%= render 'status_fields', :f => status %>
+    <%= render 'status_fields', :f => status %>
     <% end %>
     <%= link_to_add_association 'Add status', f, :statuses %>
   </div>
+</div>
 
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Submit", class: "btn submit" %>
-  </div>
+
+<div class="actions">
+  <%= f.submit "Submit", class: "btn submit" %>
+</div>
+
+<br/>
+<br/>
+<%= link_to "Delete", dev_site_path(@dev_site), data: {:confirm => 'Are you sure you want to delete this application?'}, class: "red lighten-2 white-text btn", method: :delete unless @dev_site.new_record? %>
 
 <% end %>

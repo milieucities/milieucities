@@ -67,4 +67,6 @@
     </div>
   </div>
 
+  <%= link_to "Delete", event_path(@event), data: {:confirm => 'Are you sure you want to delete this event?'}, class: "red lighten-2 white-text btn", method: :delete unless @event.new_record? %>
+
 <% end %>
