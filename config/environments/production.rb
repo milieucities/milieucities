@@ -80,7 +80,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #SMTP GMail Settings
-  config.action_mailer.default_url_options = { :host => 'milieu.io'}
+  config.action_mailer.default_url_options = { :host => 'milieuv2.herokuapp.com'}
 
   config.action_mailer.delivery_method = :smtp
 
