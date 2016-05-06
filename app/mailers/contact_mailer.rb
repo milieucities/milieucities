@@ -2,12 +2,12 @@ class ContactMailer < ApplicationMailer
 
   def contact_citizencity(name, email, message)
     @name, @email, @message = name, email, message
-    mail(:to => 'info@milieu.io', :subject => "Citizen City contact form")
+    mail(:to => 'meneliktucker@hotmail.com', :subject => "Citizen City contact form")
   end
 
   def contact_milieu(name, email, message)
     @name, @email, @message = name, email, message
-    mail(:to => 'info@milieu.io', :subject => "Milieu contact form")
+    mail(:to => 'meneliktucker@hotmail.com', :subject => "Milieu contact form")
   end
 
   def contact_file_lead(name, email, message)
