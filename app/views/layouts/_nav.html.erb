@@ -1,18 +1,36 @@
 <% unless @no_header %>
-<section id="nav">
-  <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "nav-logo" %>
-  <%= link_to "Building Better Cities with People", root_path, class: "building" %>
 
-  <ul>
-    <li><%= link_to "Map", map_path, title: "Map" %></li>
-    <li><%= link_to "About", about_path, title: "About" %></li>
-    <% if signed_in? %>
+  <nav>
+    <div class="logo hide-on-med-and-down">
+      <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "nav-logo" %>
+      <%= link_to "Building Better Cities with People", root_path, class: "building" %>
+    </div>
+
+    <ul id="slide-out" class="side-nav">
+      <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "nav-logo" %>
+      <li><%= link_to "Map", map_path, title: "Map" %></li>
+      <li><%= link_to "About", about_path, title: "About" %></li>
+      <% if signed_in? %>
       <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
-    <% else %>
+      <% else %>
       <li><%= link_to "Sign In", "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>
-    <% end %>
-    <li><%= link_to "Contact", "#contact-milieu-modal", title: "Contact Milieu", class: "modal-trigger" %></li>
-  </ul>
+      <% end %>
+      <li><%= link_to "Contact", "#contact-milieu-modal", title: "Contact Milieu", class: "modal-trigger" %></li>
+    </ul>
 
-</section>
+    <ul class="right hide-on-med-and-down">
+
+      <li><%= link_to "Map", map_path, title: "Map" %></li>
+      <li><%= link_to "About", about_path, title: "About" %></li>
+      <% if signed_in? %>
+      <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
+      <% else %>
+      <li><%= link_to "Sign In", "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>
+      <% end %>
+      <li><%= link_to "Contact", "#contact-milieu-modal", title: "Contact Milieu", class: "modal-trigger" %></li>
+    </ul>
+
+    <a href="#" data-activates="slide-out" class="button-collapse" style="margin-left: 20px"><i class="mdi-navigation-menu"></i></a>
+  </nav>
+
 <% end %>
