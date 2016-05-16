@@ -40,7 +40,7 @@ Comments.CommentsIndex = React.createClass({
   }
 });
 
-Comments.CommentShow = React.createClass({
+Comments.Comment = React.createClass({
   render: function(){
     var user = this.props.comment.user;
     return (
@@ -73,6 +73,9 @@ Comments.CommentsForm = React.createClass({
       url: "/dev_sites/"+ this.props.devSiteId +"/comments",
       dataType: "JSON",
       type: "POST",
+      cache: false,
+      contentType: false,
+      processData: false,
       data: new FormData(e.currentTarget),
       success: function(data) {
         this.setState({ body: "" });
