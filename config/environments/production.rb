@@ -49,7 +49,7 @@ Rails.application.configure do
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
   config.log_level = :debug
-
+  config.logger = Logger.new(STDOUT)
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
@@ -80,7 +80,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #SMTP GMail Settings
-  config.action_mailer.default_url_options = { :host => 'milieu.io'}
+  config.action_mailer.default_url_options = { :host => 'milieuv2.herokuapp.com'}
 
   config.action_mailer.delivery_method = :smtp
 
@@ -93,7 +93,6 @@ Rails.application.configure do
     :authentication => 'plain',
     :enable_starttls_auto => true,
     :openssl_verify_mode  => 'none'
-    
   }
 
 end
