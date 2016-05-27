@@ -9,7 +9,7 @@
     <ul id="slide-out" class="side-nav">
       <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "nav-logo" %>
       <li><%= link_to "Map", map_path, title: "Map" %></li>
-      <li><%= link_to "About", about_path, title: "About" %></li>
+      <li><%= link_to "About", "http://about.milieu.io", title: "About" %></li>
       <% if signed_in? %>
       <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
       <% else %>
@@ -21,7 +21,7 @@
     <ul class="right hide-on-med-and-down">
 
       <li><%= link_to "Map", map_path, title: "Map" %></li>
-      <li><%= link_to "About", about_path, title: "About" %></li>
+      <li><%= link_to "About", "http://about.milieu.io", title: "About" %></li>
       <% if signed_in? %>
       <li><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
       <% else %>
