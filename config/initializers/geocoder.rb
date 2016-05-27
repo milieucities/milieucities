@@ -7,11 +7,10 @@ Geocoder.configure(
   # :ip_lookup => :maxmind,
 
   # to use an API key:
-  # :api_key => "...",
+  :api_key => ENV['GEOCODER'],
 
   # geocoding service request timeout, in seconds (default 3):
   # :timeout => 5,
-
   # set default units to kilometers:
   :units => :km
 

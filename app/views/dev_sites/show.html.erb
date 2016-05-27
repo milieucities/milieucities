@@ -79,7 +79,7 @@
               <% end %>
           </div>
         </div>
-<!-- 
+<!--
         <div class="row">
           <div class="col s12">
             <%= link_to fa_icon("envelope-o", text: " Contact Planner"),
@@ -95,7 +95,7 @@
   <div class="row">
     <div class="col s12 m12 l6" style="max-width: 750px">
       <h5>Description</h5>
-      <p><%= @dev_site.description.present? ? @dev_site.description : "No description present." %></p>
+      <p><%= @dev_site.description.present? ? markdown(@dev_site.description) : "No description present." %></p>
 
       <% if @dev_site.files.present? || @dev_site.city_files.present? %>
       <h5>Files</h5>
@@ -237,4 +237,3 @@
 
 
 </div>
-
