@@ -78,7 +78,7 @@ $(document).on('ready page:load', function(){
       }else{
         filter_by = "nothing";
       }
-      
+
       loadDevSiteData("/dev_sites?filter=" + filter_by);
       loadGeoJsonData("/dev_sites/geojson?filter=" + filter_by);
 
@@ -98,7 +98,7 @@ $(document).on('ready page:load', function(){
 
       if(filter_by === "events"){
         loadEventData("/events");
-        loadGeoJsonData("/events/geojson");    
+        loadGeoJsonData("/events/geojson");
       }else{
         loadDevSiteData("/dev_sites?filter=" + filter_by);
         loadGeoJsonData("/dev_sites/geojson?filter=" + filter_by);
@@ -146,11 +146,11 @@ $(document).on('ready page:load', function(){
 });
 
 function initMap(){
-  mapboxgl.accessToken = 'pk.eyJ1IjoibXR1Y2swNjMiLCJhIjoiY2ltNXA0OHZhMDFub3RzbTR5b3NmbTR4bCJ9.WDWrgehrJIsDpt1BX5IASQ';
+  mapboxgl.accessToken = 'pk.eyJ1IjoibHVpc2FseWppIiwiYSI6ImNpZWh2NGFvczAwZjVzM20xdTc0OTZleTEifQ.Bm-MoyW0uby7pInuUzbVGw';
 
   map = new mapboxgl.Map({
       container: 'main-map',
-      style: 'mapbox://styles/mtuck063/cim8gs43500449lm1hv082tp2',
+      style: 'mapbox://styles/luisalyji/cioqcmbm30000bpnke827qw3u',
       center: [-75.7, 45.42],
       zoom: 15
   });
@@ -162,7 +162,7 @@ function loadEventData(url){
   $.getJSON(url, function(data){
     geojsonData = data.dev_sites;
     html = HandlebarsTemplates['maps/event_info'](data);
-    $("#dev-site-profile").html(html); 
+    $("#dev-site-profile").html(html);
   });
 }
 
@@ -170,7 +170,7 @@ function loadDevSiteData(url){
   $.getJSON(url, function(data){
     geojsonData = data;
     html = HandlebarsTemplates['maps/dev_site_info'](data);
-    $("#dev-site-profile").html(html); 
+    $("#dev-site-profile").html(html);
   });
 }
 
@@ -210,4 +210,3 @@ function loadGeoJsonData(url){
 
   });
 };
-
