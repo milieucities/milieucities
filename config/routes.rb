@@ -84,4 +84,8 @@ Rails.application.routes.draw do
     end
   end
 
+  if Rails.env.production?
+    get '*path' => redirect('/')
+  end
+
 end
