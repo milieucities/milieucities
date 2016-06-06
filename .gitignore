@@ -15,7 +15,7 @@
 /log/*
 !/log/.keep
 /tmp
-.gitignore
+.byebug_history
 /config/database.yml
 .env
 
