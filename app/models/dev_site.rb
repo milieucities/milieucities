@@ -25,6 +25,7 @@ class DevSite < ActiveRecord::Base
   accepts_nested_attributes_for :statuses, allow_destroy: true
 
   ## Validations
+  validates     :devID, uniqueness: { message: "Dev Id must be unique" }
   validates     :application_type, presence: { message: "Application type is required" }
   validates     :description, presence: { message: "Description is required" }
   validates     :ward_name, presence: { message: "Ward name is required" }
@@ -53,11 +54,11 @@ class DevSite < ActiveRecord::Base
   end
 
   def marker
-    if ["Comment Period in Progress", "Community Information and Comment Session Open"].include?(self.statuses.last.status)
+    if ["Comment Period in Progress", "Community Information and Comment Session Open"].include?(self.statuses.last.try(:status))
       marker = "consultation"
-    elsif ["Event"].include?(self.statuses.last.status)
+    elsif ["Event"].include?(self.statuses.last.try(:status))
       marker = "event"
-    elsif ["Unknown"].include?(self.statuses.last.status)
+    elsif ["Unknown"].include?(self.statuses.last.try(:status))
       marker = "vacant"
     else
       marker = "comment"
