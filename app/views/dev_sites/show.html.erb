@@ -79,13 +79,15 @@
               <% end %>
           </div>
         </div>
-<!--
+
+        <% if @dev_site.urban_planner_email.present? || @dev_site.ward_councillor_email.present? %>
         <div class="row">
           <div class="col s12">
             <%= link_to fa_icon("envelope-o", text: " Contact Planner"),
-              "#contact-file-lead-modal", class: "modal-trigger" %>
+            "#contact-file-lead-modal", class: "modal-trigger btn" %>
           </div>
-        </div> -->
+        </div>
+        <% end %>
 
       </div>
     </div>
@@ -137,13 +139,12 @@
       <h4>Contact File Lead</h4>
 
       <div class="row">
-        <div class="col input-field s12 m6">
-          <h6><i>File Leads Name</i></h6>
-        </div>
-        <div class="col input-field s12 m6">
-          <h6><i>File Leads Email</i></h6>
+        <div class="col input-field s12">
+          <h6><i><%= @dev_site.urban_planner_email %></i></h6>
         </div>
       </div>
+
+      <%= hidden_field_tag 'dev_site_id', @dev_site.id %>
 
       <div class="row">
         <div class="col input-field s12 m6">

@@ -123,11 +123,11 @@ $(document).on('ready page:load', function(){
 });
 
 function initMap(){
-  mapboxgl.accessToken = 'pk.eyJ1IjoibXR1Y2swNjMiLCJhIjoiY2ltNXA0OHZhMDFub3RzbTR5b3NmbTR4bCJ9.WDWrgehrJIsDpt1BX5IASQ';
+  mapboxgl.accessToken = 'pk.eyJ1IjoibHVpc2FseWppIiwiYSI6ImNpZWh2NGFvczAwZjVzM20xdTc0OTZleTEifQ.Bm-MoyW0uby7pInuUzbVGw';
 
   map = new mapboxgl.Map({
       container: 'main-map',
-      style: 'mapbox://styles/mtuck063/cim8gs43500449lm1hv082tp2',
+      style: 'mapbox://styles/luisalyji/cioqcmbm30000bpnke827qw3u',
       center: [-75.7, 45.42],
       zoom: 15
   });

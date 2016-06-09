@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501172521) do
+ActiveRecord::Schema.define(version: 20160608195537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(version: 20160501172521) do
     t.text     "description"
     t.string   "ward_name"
     t.integer  "ward_num"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "appID"
     t.datetime "received_date"
     t.datetime "updated"
@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(version: 20160501172521) do
     t.json     "files"
     t.json     "images"
     t.string   "build_type"
+    t.string   "urban_planner_email"
+    t.string   "ward_councillor_email"
   end
 
   create_table "events", force: :cascade do |t|

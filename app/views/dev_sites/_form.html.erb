@@ -54,6 +54,18 @@
 </div>
 
 <div class="row">
+  <div class="input-field col s12 m6">
+    <%= f.text_field :urban_planner_email %>
+    <%= f.label :urban_planner_email, "Urban Planner Email" %>
+  </div>
+
+  <div class="input-field col s12 m6">
+    <%= f.text_field :ward_councillor_email %>
+    <%= f.label :ward_councillor_email, "Ward Councillor Email" %>
+  </div>
+</div>
+
+<div class="row">
   <div class="input-field col s12">
     <%= f.text_area :description, class: "materialize-textarea" %>
     <%= f.label :description %>
