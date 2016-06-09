@@ -24,7 +24,7 @@ class StaticPagesController < ApplicationController
   end
 
   def contact_file_lead
-    ContactMailer.contact_file_lead(params[:name], params[:email], params[:message]).deliver_now
+    ContactMailer.contact_file_lead(params[:name], params[:email], params[:message], params[:dev_site_id]).deliver_now
     render nothing: true
   end
 

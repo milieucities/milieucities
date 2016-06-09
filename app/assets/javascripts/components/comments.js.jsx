@@ -54,8 +54,7 @@ Comments.Comment = React.createClass({
         <span className="role"> | { user ? user.role : "User" } </span>
         </div>
         <div className="time"> {moment(this.props.comment.created_at).format("MM-DD-YYYY")}</div>
-        <div className="body">
-          {this.props.comment.body.replace(/\n\r?/g, '<br>')}
+        <div className="body" dangerouslySetInnerHTML={{__html: this.props.comment.body.replace(/\n\r?/g, '<br>') }}>
         </div>
       </div>
     );
