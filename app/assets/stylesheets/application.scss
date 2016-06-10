@@ -16,11 +16,12 @@ $secondary-color: #5d9bc0 !default;
 @import "photoswipe/default-skin/default-skin";
 @import "about";
 @import "animations";
+@import "comments";
 @import "users";
 @import "layout";
 
 body{
-  background-color: #f4f4f4;
+  background-color: #fafafa;
   font-family: "Lato";
 }
 
