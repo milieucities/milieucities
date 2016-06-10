@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   # Add about page route
   get 'about', to: 'static_pages#about'
 
+  resources :comments, only: [:index]
+
   resources :dev_sites do
     resources :comments, module: :dev_sites do
       member do
@@ -82,6 +84,10 @@ Rails.application.routes.draw do
         get 'loadMarkers', to: 'ottawa_map#loadMarkers'
       end
     end
+  end
+
+  if Rails.env.production?
+    get '*path' => redirect('/')
   end
 
 end
