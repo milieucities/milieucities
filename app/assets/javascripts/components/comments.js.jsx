@@ -43,7 +43,6 @@ Comments.CommentsIndex = React.createClass({
 Comments.Comment = React.createClass({
   render: function(){
     var user = this.props.comment.user;
-    console.log(this.props.comment);
     return (
       <div className="comment">
         <div className="voting">

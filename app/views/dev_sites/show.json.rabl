@@ -1,4 +1,4 @@
-collection @dev_sites
+object @dev_site
 
 attributes :id, :devID, :application_type, :title, :status, :status_date, :address, :images,
   :description, :ward_name, :ward_num, :image_url, :hearts, :updated_at, :latitude, :longitude

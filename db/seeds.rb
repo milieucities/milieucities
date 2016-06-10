@@ -176,7 +176,7 @@ module MapData
 
   dev_site_ids = dev_sites.map { |dev_site| dev_site['devid'] }
 
-  dev_site_ids.first(200).each do |dev_site_id|
+  dev_site_ids.first(50).each do |dev_site_id|
     dev_site = DevSite.find_by(devID: dev_site_id)
     dev_site.present? ? update_dev_site(dev_site) : create_dev_site(dev_site_id)
   end
