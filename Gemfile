@@ -38,7 +38,6 @@ gem 'figaro', '~> 1.1.1'
 gem 'react-rails', '~> 1.6.2'
 gem 'acts_as_votable', '~> 0.10.0'
 
-
 ## For APIs ##
 # gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
 
@@ -50,22 +49,18 @@ gem 'simple_form', '~> 3.2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-
   gem 'byebug', '~> 8.2'
   gem 'pry-byebug'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-
   gem 'web-console', '~> 3.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 1.6.4'
 end
 
 group :test do
-
   # Add color for the test results
   gem 'minitest-reporters', '~> 1.1.8'
   gem 'mini_backtrace', '0.1.3'
