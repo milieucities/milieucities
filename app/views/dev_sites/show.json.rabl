@@ -7,4 +7,8 @@ child(:addresses) { attributes :id, :street }
 
 child(:statuses) { attributes :id, :status, :status_date }
 
-child(:comments) { attributes :id, :body }
+child(:comments) { attributes :id, :body
+
+  child(:user) { attributes :first_name, :last_name, :email }
+
+}
