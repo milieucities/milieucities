@@ -28,6 +28,11 @@ class StaticPagesController < ApplicationController
     render nothing: true
   end
 
+  def contact_councillor
+    ContactMailer.contact_councillor(params[:name], params[:email], params[:message], params[:dev_site_id]).deliver_now
+    render nothing: true
+  end
+
   def about
 
   end
