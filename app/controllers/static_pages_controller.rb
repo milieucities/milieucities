@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
 
   def home
+    @no_header = true
   end
 
   def events
