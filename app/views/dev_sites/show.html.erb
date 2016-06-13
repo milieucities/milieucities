@@ -80,11 +80,20 @@
           </div>
         </div>
 
-        <% if @dev_site.urban_planner_email.present? || @dev_site.ward_councillor_email.present? %>
+        <% if @dev_site.urban_planner_email.present? %>
         <div class="row">
           <div class="col s12">
             <%= link_to fa_icon("envelope-o", text: " Contact Planner"),
             "#contact-file-lead-modal", class: "modal-trigger btn" %>
+          </div>
+        </div>
+        <% end %>
+
+        <% if @dev_site.ward_councillor_email.present? %>
+        <div class="row">
+          <div class="col s12">
+            <%= link_to fa_icon("envelope-o", text: " Contact Councillor"),
+            "#contact-councillor-modal", class: "modal-trigger btn" %>
           </div>
         </div>
         <% end %>
@@ -141,6 +150,44 @@
       <div class="row">
         <div class="col input-field s12">
           <h6><i><%= @dev_site.urban_planner_email %></i></h6>
+        </div>
+      </div>
+
+      <%= hidden_field_tag 'dev_site_id', @dev_site.id %>
+
+      <div class="row">
+        <div class="col input-field s12 m6">
+          <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
+          <%= label_tag :name %>
+        </div>
+        <div class="col input-field s12 m6">
+          <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
+          <%= label_tag :email %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col input-field s12">
+          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: 'Leave a message.' %>
+          <%= label_tag :message %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col input-field s12">
+          <%= submit_tag "Send", class: "waves-effect waves-light btn modal-action modal-close right" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="contact-councillor-modal" class="modal">
+  <div class="modal-content">
+    <%= form_tag "/contact_councillor", id: "contact-councillor", remote: :true do %>
+      <h4>Contact Councillor</h4>
+
+      <div class="row">
+        <div class="col input-field s12">
+          <h6><i><%= @dev_site.ward_councillor_email %></i></h6>
         </div>
       </div>
 

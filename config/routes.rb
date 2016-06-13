@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/contact_citizencity', to: 'static_pages#contact_citizencity'
   post '/contact_milieu', to: 'static_pages#contact_milieu'
   post '/contact_file_lead', to: 'static_pages#contact_file_lead'
+  post '/contact_councillor', to: 'static_pages#contact_councillor'
 
   post '/rate' => 'rater#create', :as => 'rate'
 
