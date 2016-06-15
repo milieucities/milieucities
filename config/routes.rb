@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     get :geojson, on: :collection
     get :images, on: :member
 
+    collection do
+      post :search
+    end
     # Voting
     member do
       put "upvote", to: "dev_sites#upvote"

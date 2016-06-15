@@ -1,5 +1,17 @@
 $(document).on('page:change', function(){
 
+  $('.search-input').autocomplete({
+    multiple : false,
+    result   : function(v){
+      var googleLocationAutocomplete = new google.maps.places.AutocompleteService();
+      var request = { input: v, types: ['address'], componentRestrictions: {country: 'ca'} };
+      googleLocationAutocomplete.getPlacePredictions(request, function(predictions){
+        data = predictions.map(function(prediction){ return prediction.description; });
+        this.parseData(data);
+      }.bind(this));
+    }
+  });
+
   if($('#notice').length){
     Materialize.toast($('#notice').data("notice"), 3500, "teal");
   }
@@ -31,7 +43,7 @@ $(document).on('page:change', function(){
     this.reset();
     Materialize.toast("Message unsuccessfully sent!", 3500, "red darken-4");
   });
-  
+
   $('.button-collapse').sideNav();
   $('select').material_select();
   $('.modal-trigger').leanModal();

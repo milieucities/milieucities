@@ -3,6 +3,7 @@
   background-size: cover;
   min-height: 100vh;
   width: 100vw;
+  position: relative;
 
   nav{
     background-color: transparent;
@@ -39,7 +40,11 @@
     text-align: center;
     font-size: 48px;
     color: #fff;
-    margin-top: 20px;
+    padding-top: 20px;
+
+    @media #{$small-and-down} {
+      font-size: 28px;
+    }
   }
 
   .subtitle{
@@ -47,11 +52,11 @@
     text-align: center;
     color: #fff;
     letter-spacing: 0.5px;
-    margin-top: 20px;
+    padding-top: 20px;
 
     p{
       margin: 0;
-      margin-top: 10px;
+      padding-top: 10px;
     }
   }
 
@@ -89,7 +94,7 @@
       letter-spacing: 0.5px;
 
       &:hover, &:focus{
-        background-color: darken($secondary-color, 15%);
+        background-color: $dark-secondary-color;
       }
     }
 
@@ -106,7 +111,11 @@
       text-align: center;
       padding: 10px;
       padding-left: 70px;
-      color: $secondary-color;
+      color: $dark-secondary-color;
+
+      @media #{$small-and-down} {
+        padding-left: 35px;
+      }
 
       &::-webkit-input-placeholder {
         color: $primary-color;
@@ -135,13 +144,14 @@
     color: #fff;
     font-size: 20px;
     letter-spacing: 0.5px;
-    margin-top: 30px;
+    padding-top: 30px;
   }
 
   .featured-developments{
-    margin-top: 30px;
+    padding: 30px 0;
     display: flex;
     justify-content: center;
+
 
     .development{
       height: 300px;
@@ -163,7 +173,7 @@
       }
 
       &.d2{
-        background-image: image-url('richmond.png');
+        background-image: image-url('armstrong.png');
       }
 
       &.d3{
