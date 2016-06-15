@@ -15,6 +15,10 @@ class DevSitesController < ApplicationController
     end
   end
 
+  def search
+    redirect_to map_path
+  end
+
   def images
     render json: { images: @dev_site.image_hash }
   end
