@@ -1,0 +1,64 @@
+.lean-overlay{
+  display: none !important;
+}
+
+.modal{
+  overflow-y: scroll;
+  height: 100vh !important;
+  width: 100vw !important;
+  max-height: 100vh !important;
+  max-width: 100vw !important;
+  top: 0 !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  margin: 0;
+  z-index: -1;
+  background-color: rgba(0,128,128,1);
+
+  &#contact-milieu-modal{
+    background-color: rgba(70,130,180,1);
+  }
+
+  &#term-modal{
+    background-color: rgba(70,130,180,1);
+  }
+
+  .close-modal{
+    color: $primary-color;
+    position: fixed;
+    top: 40px;
+    left: 40px;
+  }
+
+  .modal-content{
+    width: 700px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: scroll;
+
+    p{
+      color: #fff;
+      font-weight: 300;
+    }
+
+    form{
+      width: 100%;
+
+      input[type="text"], input[type="password"]{
+        border-bottom: 1px solid #fff;
+        color: #fff;
+      }
+
+      label{
+        color: #fff;
+      }
+
+      textarea.materialize-textarea{
+        border-bottom: 1px solid #fff;
+      }
+
+    }
+  }
+}

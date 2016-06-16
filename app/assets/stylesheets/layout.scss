@@ -22,3 +22,50 @@
     width: 100%;
   }
 }
+
+.nav{
+  position: absolute;
+  z-index: 1000;
+  background: linear-gradient(90deg, #5d9bc0 0%, #92c7c6 85%);
+
+  ul li a:hover{
+    background-color: transparent;
+  }
+
+  .building{
+    color: white;
+    display: inline-block;
+  }
+
+  .logo{
+    float: left;
+    margin-left: 20px;
+  }
+
+  .nav-logo img{
+    float: left;
+    display: inline-block;
+    height: 62px;
+    padding: 15px 5px;
+  }
+
+  @media #{$medium-and-down} {
+    background-color: transparent;
+    background: none;
+    box-shadow: none;
+  }
+
+  .side-nav{
+    background-color: $primary-color;
+    a {
+      color: white;
+      text-align: center;
+
+      img{
+        float: none;
+      }
+    }
+
+
+  }
+}
