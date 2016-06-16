@@ -30,8 +30,8 @@
       <li><%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: t('nav_bar.sign_in_text'), class: "modal-trigger" %></li>
       <% end %>
       <li><%= link_to t('nav_bar.contact_us_text'), "#contact-milieu-modal", title: t('nav_bar.contact_us_text'), class: "modal-trigger" %></li>
-      <li><%= link_to "EN", "/en", class: 'deep-purple accent-1' %></li>
-      <li><%= link_to "FR", "/fr", class: 'deep-purple accent-1' %></li>
+      <li><%= link_to "EN", request.original_url.gsub!(/\/fr|en\//, "en/"), class: 'deep-purple accent-1' %></li>
+      <li><%= link_to "FR", request.original_url.gsub!(/\/fr|en\//, "fr/"), class: 'deep-purple accent-1' %></li>
     </ul>
 
     <a href="#" data-activates="slide-out" class="button-collapse" style="margin-left: 20px"><i class="mdi-navigation-menu"></i></a>
