@@ -3,7 +3,7 @@ var DevSites = React.createClass({
     return { devSites: [], selectedDevSite: null };
   },
   componentDidMount: function() {
-    $.getJSON("/dev_sites", function(data){
+    $.getJSON("/" + this.props.locale + "/dev_sites", function(data){
       this.setState({ devSites: data, selectedDevSite: ((data.length > 0) ? data[0].dev_site : null) });
     }.bind(this));
   },
@@ -26,10 +26,10 @@ var DevSites = React.createClass({
     return <section id="dev-sites-index">
              <div className="header">
                All Developing Sites <span className="count">| {this.state.devSites.length} Sites</span>
-             </div> 
+             </div>
              <DevSites.Show {...this.props} devSite={this.state.selectedDevSite} />
              <div className="dev-sites row">
-               {devSitesNodes} 
+               {devSitesNodes}
 
                {noDevSites}
              </div>
@@ -54,7 +54,7 @@ DevSites.Show = React.createClass({
     return  <div className="dev-site-profile hide-on-med-and-down">
 
               <div className="label title">Preview</div>
-              <a href={"/dev_sites/" + this.state.devSite.id}>
+              <a href={"/" + this.props.locale + "/dev_sites/" + this.state.devSite.id}>
                 <img src={this.state.devSite.image_url} className="display-image"/>
               </a>
               <div className="title">{this.state.devSite.title}</div>
@@ -78,7 +78,7 @@ DevSites.Show = React.createClass({
 
               </div>
 
-              <a href={"/dev_sites/" + this.state.devSite.id} className="waves-effect waves-light btn">View Development</a>
+              <a href={"/" + this.props.locale + "/dev_sites/" + this.state.devSite.id} className="waves-effect waves-light btn">View Development</a>
             </div>;
   }
 
@@ -103,7 +103,7 @@ DevSites.Item = React.createClass({
                 <img src={this.state.devSite.image_url } />
               </div>
               <div className="card-content">
-                <span className="card-title grey-text text-darken-4 truncate"><a href={"/dev_sites/" + this.state.devSite.id}>{this.state.devSite.title}</a></span>
+                <span className="card-title grey-text text-darken-4 truncate"><a href={"/" + this.props.locale + "/dev_sites/" + this.state.devSite.id}>{this.state.devSite.title}</a></span>
                 <span className="type">{this.state.devSite.application_type ? this.state.devSite.application_type : "N/A"}</span>
               </div>
             </div>

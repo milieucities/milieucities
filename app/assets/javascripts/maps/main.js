@@ -1,7 +1,9 @@
 var map, geojsonData;
+var LOCALE;
 
 $(document).on('ready page:load', function(){
 
+  LOCALE = $('body').data('locale');
 
   if($("#main-map").length > 0) {
 
@@ -136,22 +138,27 @@ function initMap(){
 };
 
 function loadEventData(url){
+  url = "/" + LOCALE + url
   $.getJSON(url, function(data){
     geojsonData = data.dev_sites;
+    data.LOCALE = LOCALE
     html = HandlebarsTemplates['maps/event_info'](data);
     $("#dev-site-profile").html(html);
   });
 }
 
 function loadDevSiteData(url){
+  url = "/" + LOCALE + url
   $.getJSON(url, function(data){
     geojsonData = data;
+    data.LOCALE = LOCALE
     html = HandlebarsTemplates['maps/dev_site_info'](data);
     $("#dev-site-profile").html(html);
   });
 }
 
 function loadGeoJsonData(url){
+  url = "/" + LOCALE + url
   $.getJSON(url, function(data){
 
     if(map.getSource("devSites")){
