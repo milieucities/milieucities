@@ -8,13 +8,13 @@
   nav{
     background-color: transparent;
     box-shadow: none;
-    font-weight: 300;
 
     .logo{
       display: inline-block;
 
       a{
         margin-left: 40px;
+
         img{
           height: 20px;
         }
@@ -26,8 +26,9 @@
     }
 
     li a{
-      font-size: 0.9rem;
+      font-size: 16px;
       letter-spacing: 0.75px;
+      font-weight: 300;
 
       &:hover{
         background-color: transparent;
@@ -53,9 +54,11 @@
     color: #fff;
     letter-spacing: 0.5px;
     padding-top: 20px;
+    font-weight: 300;
 
     p{
       margin: 0;
+      font-size: 16px;
       padding-top: 10px;
     }
   }
@@ -196,7 +199,7 @@
       a{
         color: #fff;
         padding: 15px;
-        font-size: 14px;
+        font-size: 16px;
       }
     }
 
@@ -208,9 +211,9 @@
       a{
         color: #fff;
         padding: 15px;
-        font-size: 14px;
-        font-weight: 300;
+        font-size: 16px;
         letter-spacing: 0.5px;
+        font-weight: 300;
       }
     }
   }
