@@ -3,7 +3,6 @@
 }
 
 .modal{
-  overflow-y: scroll;
   height: 100vh !important;
   width: 100vw !important;
   max-height: 100vh !important;
@@ -14,6 +13,7 @@
   align-items: center;
   opacity: 0;
   margin: 0;
+  padding: 24px;
   z-index: -1;
   background-color: rgba(0,128,128,1);
 
@@ -35,8 +35,7 @@
   .modal-content{
     width: 700px;
     max-width: 90vw;
-    max-height: 80vh;
-    overflow-y: scroll;
+    padding: 0;
 
     p{
       color: #fff;
