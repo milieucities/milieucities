@@ -1,13 +1,12 @@
 $(document).on('page:change', function(){
 
   $('.search-input').autocomplete({
-    multiple : false,
-    result   : function(v){
+    data   : function(v){
       var googleLocationAutocomplete = new google.maps.places.AutocompleteService();
       var request = { input: v, types: ['address'], componentRestrictions: {country: 'ca'} };
       googleLocationAutocomplete.getPlacePredictions(request, function(predictions){
         data = predictions.map(function(prediction){ return prediction.description; });
-        this.parseData(data);
+        this.setData(data);
       }.bind(this));
     }
   });
