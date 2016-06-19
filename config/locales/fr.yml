@@ -1,12 +1,18 @@
 fr:
   nav_bar:
     slogan: 'Bâtîr de meilleures villes ensemble'
+    launch: 'Consultation de Lancement'
     map_link_text: 'Carte'
     about_link_text: 'À Propos'
     sign_out_text: 'Déconnexion'
     sign_in_text: 'Connexion'
     contact_us_text: 'Contactez Milieu'
   home:
+    title: "Ce qui est en cours de construction dans mon quartier?"
+    subtitle:
+      p1: 'Façonner la vision de votre quartier en commentant et en votant sur les projets de développement'
+      p2: 'Simplifier la participation du public en lançant votre propre consultation'
+    featured: 'Développements en vedette'
     why_use_milieu:
       how: 'Comment utiliser Milieu?'
       participate: 'Participez aux consultations publiques en court'

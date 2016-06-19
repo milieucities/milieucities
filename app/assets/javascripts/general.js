@@ -1,7 +1,7 @@
 $(document).on('page:change', function(){
 
   $('.search-input').autocomplete({
-    data   : function(v){
+    callback   : function(v){
       var googleLocationAutocomplete = new google.maps.places.AutocompleteService();
       var request = { input: v, types: ['address'], componentRestrictions: {country: 'ca'} };
       googleLocationAutocomplete.getPlacePredictions(request, function(predictions){

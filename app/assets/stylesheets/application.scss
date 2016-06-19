@@ -1,7 +1,7 @@
 @import "font-awesome";
 @import "materialize/components/color";
 $primary-color: #92c7c6 !default;
-$secondary-color: #92c7c6 !default;
+$secondary-color: #5d9bc0 !default;
 $dark-secondary-color: darken($secondary-color, 15%);
 @import "materialize";
 @import "static_pages";
@@ -20,7 +20,6 @@ $dark-secondary-color: darken($secondary-color, 15%);
 @import "comments";
 @import "users";
 @import "home";
-@import "modal";
 @import "autocomplete";
 @import "layout";
 
