@@ -7,11 +7,6 @@ GIT
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
 
-PATH
-  remote: /Users/Mac/Documents/dev/gems/ajax-autocomplete-rails
-  specs:
-    ajax-autocomplete-rails (0.1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -53,6 +48,7 @@ GEM
       tzinfo (~> 1.1)
     acts_as_votable (0.10.0)
     addressable (2.3.8)
+    ajax-autocomplete-rails (0.1.1)
     ansi (1.5.0)
     arel (6.0.3)
     babel-source (5.8.35)
@@ -397,7 +393,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_votable (~> 0.10.0)
-  ajax-autocomplete-rails!
+  ajax-autocomplete-rails
   bcrypt (~> 3.1.11)
   byebug (~> 8.2)
   carrierwave (~> 0.10)!
