@@ -1,33 +1,33 @@
-en:
+fr:
   nav_bar:
-    slogan: 'Building Better Cities with People'
-    map_link_text: 'Map'
-    about_link_text: 'About'
-    sign_out_text: 'Sign Out'
-    sign_in_text: 'Sign In'
-    contact_us_text: 'Contact Milieu'
+    slogan: 'Bâtîr de meilleures villes ensemble'
+    map_link_text: 'Carte'
+    about_link_text: 'À Propos'
+    sign_out_text: 'Déconnexion'
+    sign_in_text: 'Connexion'
+    contact_us_text: 'Contactez Milieu'
   home:
     why_use_milieu:
-      how: 'How can you use Milieu?'
-      participate: 'Participate in current public consultations'
-      learn: 'Learn more about new urban developments'
-      start: 'Start a discussion around vacant and derelict sites'
-      explore: 'Explore community events'
-    view_map_button: 'VIEW MAP'
+      how: 'Comment utiliser Milieu?'
+      participate: 'Participez aux consultations publiques en court'
+      learn: 'Apprenez-en plus sur les nouveaux développments'
+      start: 'Commencez une discussion'
+      explore: 'Découvrez les événements communautaires'
+    view_map_button: 'AFFICHER LA CARTE'
     survey:
       header: 'Share what gets you excited about ottawa'
       my_ottawa_label: 'My Ottawa includes'
-      neighbourhood_label: 'Neighbourhood I Live in'
+      neighbourhood_label: 'Mon Quatier'
       submit_button: 'Enter Map'
-      find_us_on: 'Find us on'
+      find_us_on: 'Suivez-nous sur'
       outlets:
         facebook: 'Facebook'
         twitter: 'Twitter'
         medium: 'Medium'
         instagram: 'Instagram'
       terms:
-        by_using: 'By using Milieu, I agree to the'
-        link_button: 'terms of service'
+        by_using: 'En utilisant Milieu, j’accepte '
+        link_button: 'les conditions'
     term_modal:
       mission: 'Mission'
       text_01: 'Milieu is a system for connecting citizens, urban developers and city officials to work together to make better planning and development decisions.'

@@ -43,7 +43,7 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
+<body data-locale="<%= I18n.locale %>">
   <%= render "layouts/nav" %>
   <%= render "layouts/flash", :flash => flash %>
   <%= yield %>

@@ -126,7 +126,7 @@
       <h5>Comment</h5>
 
       <%= react_component "Comments", { devSiteId: @dev_site.id, userId: @user.id,
-        authenticityToken: form_authenticity_token } %>
+        authenticityToken: form_authenticity_token, locale: @locale } %>
 
     </div>
 

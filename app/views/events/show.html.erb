@@ -35,7 +35,7 @@
 
         <div class="row">
           <div class="col s6 label">Description:</div>
-          <div class="col s12"><%= @event.description.present? ? @event.description : "N/A" %></div>     
+          <div class="col s12"><%= @event.description.present? ? @event.description : "N/A" %></div>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
       <h5>Comment</h5>
 
       <%= react_component "EventComments", { eventId: @event.id, userId: @user.id,
-        authenticityToken: form_authenticity_token } %>
+        authenticityToken: form_authenticity_token, locale: @locale } %>
 
     </div>
 

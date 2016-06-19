@@ -5,7 +5,7 @@ var EventComments = React.createClass({
     return { comments: [] };
   },
   componentDidMount: function() {
-    $.getJSON("/events/"+ this.props.eventId +"/comments", function(data){
+    $.getJSON("/" + this.props.locale + "/events/"+ this.props.eventId +"/comments", function(data){
       this.setState({ comments: data });
     }.bind(this));
   },
@@ -70,7 +70,7 @@ EventComments.CommentsForm = React.createClass({
     e.preventDefault();
 
     $.ajax({
-      url: "/events/"+ this.props.eventId +"/comments",
+      url: "/" + this.props.locale + "/events/"+ this.props.eventId +"/comments",
       dataType: "JSON",
       type: "POST",
       cache: false,

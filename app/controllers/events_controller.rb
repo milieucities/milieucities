@@ -27,7 +27,7 @@ class EventsController < ApplicationController
           title: event.title,
           address: event.location,
           :'marker-symbol' => "event",
-          description: "<div class=\"marker-title\"><a href=\"/events/#{event.id}\">#{event.title}</a></div>"
+          description: "<div class=\"marker-title\"><a href=\"/#{params[:locale]}/events/#{event.id}\">#{event.title}</a></div>"
         }
       }
     end
@@ -36,6 +36,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @locale = params[:locale]
     if current_user
       @comments = @event.comments.build
     end
