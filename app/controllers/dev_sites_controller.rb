@@ -50,7 +50,7 @@ class DevSitesController < ApplicationController
           title: ds.title,
           address: address,
           :'marker-symbol' => ds.marker,
-          description: "<div class=\"marker-title\"><a href=\"#{params[:locale]}/dev_sites/#{ds.id}\">#{ds.title}</a></div>Status: #{ds.status}"
+          description: "<div class=\"marker-title\"><a href=\"/#{params[:locale]}/dev_sites/#{ds.id}\">#{ds.title}</a></div>Status: #{ds.status}"
         }
       }
     end
