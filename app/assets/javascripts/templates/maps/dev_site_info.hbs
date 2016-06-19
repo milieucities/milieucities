@@ -15,7 +15,7 @@
   </div>
 
   <div>
-    <a href="/dev_sites/{{this.dev_site.id}}">
+    <a href="/{{../LOCALE}}/dev_sites/{{this.dev_site.id}}">
     <img src="{{this.dev_site.image_url}}" class="display-image">
     </a>
   </div>
@@ -37,8 +37,7 @@
     <div class="col s6">{{#check_existence this.dev_site.ward_num}}{{/check_existence}}</div>
 
   </div>
-
-  <a href="/dev_sites/{{this.dev_site.id}}" class="waves-effect waves-light btn">View Development</a>
+  <a href="/{{../LOCALE}}/dev_sites/{{this.dev_site.id}}" class="waves-effect waves-light btn">View Development</a>
   </div>
 
 {{/each}}

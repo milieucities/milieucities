@@ -7,7 +7,7 @@ Handlebars.registerHelper('check_existence', function(input, options) {
 });
 
 Handlebars.registerHelper('empty_array', function(array, options) {
-    var fnTrue = options.fn, 
+    var fnTrue = options.fn,
         fnFalse = options.inverse;
 
     return array.length === 0 ? fnTrue(this) : fnFalse(this);

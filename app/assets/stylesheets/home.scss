@@ -54,7 +54,6 @@
     color: #fff;
     letter-spacing: 0.5px;
     padding-top: 20px;
-    font-weight: 300;
 
     p{
       margin: 0;
@@ -191,6 +190,17 @@
     left: 0;
     width: 100vw;
     height: 40px;
+
+    .localization{
+      position: absolute;
+      left: 40px;
+      color: #fff;
+
+      a{
+        color: #fff;
+        font-size: 0.9rem;
+      }
+    }
 
     .social-media{
       position: absolute;

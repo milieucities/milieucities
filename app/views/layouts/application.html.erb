@@ -43,14 +43,13 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
+<body data-locale="<%= I18n.locale %>">
   <%= render "layouts/nav" %>
   <%= render "layouts/flash", :flash => flash %>
   <%= yield %>
   <%= javascript_include_tag "vendor", :debug => false %>
 
   <div id="sign-in-modal" class="modal">
-    <%= link_to fa_icon("arrow-left", text: "Back"), "#sign-in-modal", class: "close-modal" %>
 
     <div class="modal-content">
       <h4 class="center">Sign In</h4>
@@ -86,7 +85,6 @@
   </div>
 
   <div id="contact-milieu-modal" class="modal">
-    <%= link_to fa_icon("arrow-left", text: "Back"), "#contact-milieu-modal", class: "close-modal" %>
     <div class="modal-content">
       <%= form_tag "/contact_milieu", id: "contact-milieu", remote: :true do %>
         <h4>Contact Milieu</h4>

@@ -5,40 +5,39 @@
     </div>
 
     <ul class="right hide-on-med-and-down">
-      <li class="overshadow"><%= link_to "About Us", "http://about.milieu.io", title: "About Us" %></li>
+      <li class="overshadow"><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us" %></li>
       <li class="overshadow"><%= link_to "Launch Consultation", "#", title: "Launch Consultation - Coming Soon" %></li>
       <% if signed_in? %>
-      <li class="overshadow"><%= link_to "Sign Out", session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
+      <li class="overshadow"><%= link_to  t('nav_bar.sign_out_text'), session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
       <% else %>
-      <li class="overshadow"><%= link_to "Sign In", "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>
+      <li class="overshadow"><%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>
       <% end %>
-      <!-- <li><%= link_to "Contact", "#contact-milieu-modal", title: "Contact Milieu", class: "modal-trigger" %></li> -->
     </ul>
   </nav>
 
   <div class="title">
-    What’s being built in my neighbourhood?
+    <%= t('home.title') %>
   </div>
 
   <div class="subtitle hide-on-med-and-down">
     <p>
-      Shape the vision of your neighborhood by commenting and voting on development projects
+      <%= t('home.subtitle.p1') %>
     </p>
     <p>
-      Simplify public engagement by launching your own consultation
+      <%= t('home.subtitle.p2') %>
     </p>
   </div>
 
   <div class="search">
     <%= form_tag search_dev_sites_path, method: :post do %>
       <%= fa_icon 'globe', class: 'globe' %>
-      <%= text_field_tag 'search', nil, type: 'customsearch', placeholder: 'Address', class: 'search-input', autocomplete: 'off'  %>
+      <%= text_field_tag 'search', nil, type: 'customsearch', placeholder: 'Search address', class: 'search-input', autocomplete: 'off'  %>
       <%= button_tag fa_icon('paper-plane') %>
     <% end %>
   </div>
 
   <div class="featured">
-    Featured Developments
+    <%= t('home.featured') %>
   </div>
 
   <div class="featured-developments">
@@ -54,6 +53,10 @@
   </div>
 
   <div class="footer hide-on-small-only">
+    <div class="localization">
+      <%= link_to "EN", "/en", class: "overshadow" %> |
+      <%= link_to "FR", "/fr", class: "overshadow" %>
+    </div>
     <div class="social-media">
       <%= link_to fa_icon('medium'), "https://medium.com/@milieucities", title: "Find us on Medium", class: "overshadow"  %>
       <%= link_to fa_icon('facebook'), "https://facebook.com/milieuapp/", title: "Find us on Facebook", class: "overshadow"  %>
@@ -62,20 +65,19 @@
     </div>
     <div class="business">
       <%= link_to "Terms", "#term-modal", class: "modal-trigger overshadow" %>
-      <%= link_to "Contact", "#contact-milieu-modal", class: "modal-trigger overshadow" %>
+      <%= link_to t('nav_bar.contact_us_text'), "#contact-milieu-modal", class: "modal-trigger overshadow" %>
     </div>
   </div>
 </div>
 
 <div id="term-modal" class="modal" style="align-items: initial;">
-  <%= link_to fa_icon("arrow-left", text: "Back"), "#term-modal", class: "close-modal" %>
 
-  <div class="modal-content" style="color:#fff;">
+  <div class="modal-content">
 
-    <b>Mission</b>
+    <b><%= "#{t('home.term_modal.mission')}" %> </b>
 
     <p>
-      Milieu is a system for connecting citizens, urban developers and city officials to work together to make better planning and development decisions.
+      <%= "#{t('home.term_modal.text_01')}" %>
     </p>
 
     <p>
@@ -86,7 +88,7 @@
       By incorporating feedback from all stakeholders involved in the planning and development processes, Milieu creates a platform for ongoing dialogue in the construction of the city. This includes fostering a feedback loop of trust, transparency and accountability between city officials, urban developers and citizens.
     </p>
 
-    <b>Milieu Principles</b>
+    <b><%= "#{t('home.term_modal.principles')}" %></b>
 
     <p>
       People should have the freedom to access information on urban planning and development and to connect, discuss and share this information with others.
@@ -96,14 +98,16 @@
       People should have the practical tools to be able to access information on urban planning and development in a simple and efficient way and discuss and share this information.
     </p>
 
+    </p>
+      <%= "#{t('home.term_modal.text_04')}" %>
     <p>
-      Milieu publicly makes available information about its purpose, plans, policies and operations.
+      <%= "#{t('home.term_modal.text_05')}" %>
     </p>
 
-    <b>Data Policy</b>
+    <b><%= "#{t('home.term_modal.data_policy')}" %></b>
 
     <p>
-      Milieu reserves all intellectual property related to its processes, algorithms, methodologies and collateral materials.
+      <%= "#{t('home.term_modal.text_06')}" %>
     </p>
 
     <p>
@@ -114,7 +118,7 @@
       You own all of the content and information you post on Milieu and can control and remove your information from the Milieu service.
     </p>
 
-    <b>Community Standards</b>
+    <b><%= "#{t('home.term_modal.community_standards')}" %></b>
 
     <p>
       Milieu keeps your account and personal information safe. By joining Milieu, you agree to authenticate yourself by using your real name and identity. By connecting with your authentic identity the milieu community is more accountable and transparent.
@@ -133,15 +137,15 @@
     </p>
 
     <p>
-      Please contact us at any moment regarding questions, concerns or should you have to report something.
+      <%= "#{t('home.term_modal.text_10')}" %>
     </p>
 
     <p>
-      Thank you
+      <%= "#{t('home.term_modal.text_11')}" %>
     </p>
 
     <p>
-      The Milieu Team
+      <%= "#{t('home.term_modal.text_12')}" %>
     </p>
   </div>
 </div>
