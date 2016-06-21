@@ -4,6 +4,10 @@
   <title>MILIEU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <%= favicon_link_tag 'favicon.ico' %>
+
+  <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3i1Xy08ztd88pd4CTQPRN9-C_dOtSsxs&libraries=places"></script>
+
   <!-- Font Styles -->
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300,500,700,900' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
@@ -41,65 +45,76 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
+<body data-locale="<%= I18n.locale %>">
   <%= render "layouts/nav" %>
   <%= render "layouts/flash", :flash => flash %>
   <%= yield %>
   <%= javascript_include_tag "vendor", :debug => false %>
+
+  <div id="sign-in-modal" class="modal">
+
+    <div class="modal-content">
+      <h4 class="center">Sign In</h4>
+
+      <%= form_tag sessions_path, class: "login-form" do %>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <%= text_field_tag :email, params[:email], class: 'hide' %>
+            <%= text_field_tag :email, params[:email], autocomplete: 'off' %>
+            <%= label_tag "Email" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <%= password_field_tag :password, nil, class: 'hide' %>
+            <%= password_field_tag :password, nil, autocomplete: 'off' %>
+            <%= label_tag "Password" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <%= submit_tag "Sign In", class: 'waves-effect btn' %>
+          </div>
+        </div>
+
+      <% end %>
+
+      <%= link_to "Sign Up", new_user_path, class: "signup-link" %>
+    </div>
+  </div>
+
+  <div id="contact-milieu-modal" class="modal">
+    <div class="modal-content">
+      <%= form_tag "/contact_milieu", id: "contact-milieu", remote: :true do %>
+        <h4>Contact Milieu</h4>
+        <div class="row">
+          <div class="col input-field s12 m6">
+            <%= text_field_tag 'name', nil %>
+            <%= label_tag :name %>
+          </div>
+          <div class="col input-field s12 m6">
+            <%= text_field_tag 'email', nil %>
+            <%= label_tag :email %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col input-field s12">
+            <%= text_area_tag 'message', nil, class: "materialize-textarea" %>
+            <%= label_tag :message %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col input-field s12">
+            <%= submit_tag "Send", class: "waves-effect waves-light btn modal-action modal-close right" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
 </body>
 
 </html>
-
-<div id="sign-in-modal" class="modal">
-  <div class="modal-content">
-    <h4 class="center">Sign In</h4>
-
-    <%= form_tag sessions_path, class: "login-form" do %>
-
-      <div class="row">
-        <div class="input-field col s12">
-          <%= text_field_tag :email, params[:email], placeholder: "Email" %>
-          <%= password_field_tag :password, nil, placeholder: "Password" %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="input-field col s12">
-          <%= submit_tag "Sign In", class: 'waves-effect btn' %>
-        </div>
-      </div>
-
-    <% end %>
-
-    <%= link_to "Sign Up", new_user_path, class: "signup-link" %>
-  </div>
-</div>
-
-<div id="contact-milieu-modal" class="modal">
-  <div class="modal-content">
-    <%= form_tag "/contact_milieu", id: "contact-milieu", remote: :true do %>
-      <h4>Contact Milieu</h4>
-      <div class="row">
-        <div class="col input-field s12 m6">
-          <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
-          <%= label_tag :name %>
-        </div>
-        <div class="col input-field s12 m6">
-          <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
-          <%= label_tag :email %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col input-field s12">
-          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: 'Leave a message.' %>
-          <%= label_tag :message %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col input-field s12">
-          <%= submit_tag "Send", class: "waves-effect waves-light btn modal-action modal-close right" %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>

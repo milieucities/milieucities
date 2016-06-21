@@ -1,0 +1,230 @@
+#home{
+  background-image: image-url('green-ottawa.png');
+  background-size: cover;
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+
+  nav{
+    background-color: transparent;
+    box-shadow: none;
+
+    .logo{
+      display: inline-block;
+
+      a{
+        margin-left: 40px;
+
+        img{
+          height: 20px;
+        }
+      }
+    }
+
+    ul{
+      padding-right: 20px;
+    }
+
+    li a{
+      font-size: 16px;
+      letter-spacing: 0.75px;
+      font-weight: 300;
+
+      &:hover{
+        background-color: transparent;
+      }
+    }
+  }
+
+  .title{
+    width: 100%;
+    text-align: center;
+    font-size: 48px;
+    color: #fff;
+    padding-top: 20px;
+
+    @media #{$small-and-down} {
+      font-size: 28px;
+    }
+  }
+
+  .subtitle{
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 0.5px;
+    padding-top: 20px;
+
+    p{
+      margin: 0;
+      font-size: 16px;
+      padding-top: 10px;
+    }
+  }
+
+  .search{
+    width: 600px;
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+    margin-top: 50px;
+    position: relative;
+    height: 50px;
+    box-sizing: border-box;;
+
+    .map-marker{
+      color: $secondary-color;
+      position: absolute;
+      top: 11px;
+      font-size: 19px;
+      left: 12px;
+      z-index: 1;
+    }
+
+    button{
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 43.5px;
+      box-sizing: border-box;
+      background-color: $secondary-color;
+      border-radius: 4px;
+      padding: 5px 25px;
+      font-size: 16px;
+      border: none;
+      color: #fff;
+      transition: 100ms;
+      letter-spacing: 0.5px;
+
+      &:hover, &:focus{
+        background-color: $dark-secondary-color;
+      }
+    }
+
+    input{
+      width: calc(100% - 75px);
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      border: none;
+      height: 43.5px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      text-align: center;
+      padding: 10px;
+      padding-left: 70px;
+      color: $dark-secondary-color;
+
+      @media #{$small-and-down} {
+        padding-left: 35px;
+      }
+
+      &::-webkit-input-placeholder {
+        color: $primary-color;
+        opacity: 0.5;
+      }
+
+      &::-moz-placeholder {
+        color: $primary-color;
+        opacity: 0.5;
+      }
+
+      &:-ms-input-placeholder {
+        color: $primary-color;
+        opacity: 0.5;
+      }
+
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+
+  .featured{
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    padding-top: 30px;
+  }
+
+  .featured-developments{
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+
+
+    .development{
+      height: 300px;
+      width: 300px;
+      background-size: cover;
+      display: block;
+      margin: 0 15px;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+
+      &.d1{
+        background-image: image-url('richmond.png');
+      }
+
+      &.d2{
+        background-image: image-url('armstrong.png');
+      }
+
+      &.d3{
+        background-image: image-url('richmond.png');
+      }
+    }
+  }
+
+  .footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 40px;
+
+    .localization{
+      position: absolute;
+      left: 40px;
+      color: #fff;
+
+      a{
+        color: #fff;
+        font-size: 0.9rem;
+      }
+    }
+
+    .social-media{
+      position: absolute;
+      left: 44%;
+
+      a{
+        color: #fff;
+        padding: 15px;
+        font-size: 16px;
+      }
+    }
+
+    .business{
+      padding-right: 20px;
+      position: absolute;
+      right: 0;
+
+      a{
+        color: #fff;
+        padding: 15px;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        font-weight: 300;
+      }
+    }
+  }
+}

@@ -1,164 +1,154 @@
-<section id="home" class="row no-pad">
-  <div id="home-map"></div>
-
-  <div class="row-container" style="top: 84px;">
-
-  <div class="legend">
-
-    <div class="title">
-      <b>How can you use Milieu?</b>
+<section id="home">
+  <nav>
+    <div class="logo hide-on-med-and-down">
+      <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "nav-logo" %>
     </div>
 
-    <div class="item">
-      <%= image_tag "consultation.png", class: "icon" %>
-      <div class="text">Participate in current public consultations</div>
-    </div>
+    <ul class="right hide-on-med-and-down">
+      <li class="overshadow"><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us" %></li>
+      <li class="overshadow"><%= link_to "Launch Consultation", "#", title: "Launch Consultation - Coming Soon" %></li>
+      <% if signed_in? %>
+      <li class="overshadow"><%= link_to  t('nav_bar.sign_out_text'), session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
+      <% else %>
+      <li class="overshadow"><%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>
+      <% end %>
+    </ul>
+  </nav>
 
-    <div class="item">
-      <%= image_tag "comment.png", class: "icon" %>
-      <div class="text">Learn more about new urban developments</div>
-    </div>
-
-    <div class="item">
-      <%= image_tag "vacant.png", class: "icon" %>
-      <div class="text">Start a discussion around vacant and derelict sites</div>
-    </div>
-
-    <div class="item">
-      <%= image_tag "event.png", class: "icon" %>
-      <div class="text">Explore community events</div>
-    </div>
-
-    <%= link_to "VIEW MAP", map_path, class: "mobile-view-map z-depth-1 hoverable hide-on-large-only" %>
-
+  <div class="title">
+    <%= t('home.title') %>
   </div>
 
-  <%= link_to "VIEW MAP", map_path, class: "view-map z-depth-1 hoverable hide-on-med-and-down" %>
+  <div class="subtitle hide-on-med-and-down">
+    <p>
+      <%= t('home.subtitle.p1') %>
+    </p>
+    <p>
+      <%= t('home.subtitle.p2') %>
+    </p>
+  </div>
 
-<div class="survey">
+  <div class="search">
+    <%= form_tag search_dev_sites_path, method: :post do %>
+      <%= fa_icon 'map-marker', class: 'map-marker' %>
+      <%= text_field_tag 'search', nil, type: 'customsearch', placeholder: t('home.search_bar_text'), class: 'search-input', autocomplete: 'off'  %>
+      <%= button_tag do %>
+        <%= fa_icon('search') %>
+        <%= t('search_button_text') %>
+      <% end %>
+    <% end %>
+  </div>
 
-  <div class="title">Share what gets you excited about ottawa</div>
+  <div class="featured">
+    <%= t('home.featured') %>
+  </div>
 
-  <%= form_tag("/survey", method: "post") do %>
+  <div class="featured-developments">
+    <%= link_to dev_site_path(1822), class: "development d1 overshadow" do %>
+      190 Richmond
+    <% end %>
+    <%= link_to dev_site_path(1869), class: "development d2 hide-on-small-only overshadow" do %>
+      Armstrong Street Study
+    <% end %>
+    <!-- <%= link_to "#", class: "development d3 hide-on-med-and-down overshadow" do %>
+      190 Richmond 3
+    <% end %> -->
+  </div>
 
-    <div class="row">
-      <div class="input-field col s12">
-        <%= text_area_tag :ottawa, nil, class: "materialize-textarea" %>
-        <%= label_tag :ottawa, "My Ottawa includes" %>
-      </div>
+  <div class="footer hide-on-small-only">
+    <div class="localization">
+      <%= link_to "EN", "/en", class: "overshadow" %> |
+      <%= link_to "FR", "/fr", class: "overshadow" %>
     </div>
-
-    <div class="row">
-      <div class="input-field col s12">
-        <%= select_tag :hood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES) %>
-        <%= label_tag :hood, "Neighboorhood I Live in" %>
-      </div>
+    <div class="social-media">
+      <%= link_to fa_icon('medium'), "https://medium.com/@milieucities", title: "Find us on Medium", class: "overshadow"  %>
+      <%= link_to fa_icon('facebook'), "https://facebook.com/milieuapp/", title: "Find us on Facebook", class: "overshadow"  %>
+      <%= link_to fa_icon('twitter'), "https://twitter.com/milieucities", title: "Find us on Twitter", class: "overshadow"  %>
+      <%= link_to fa_icon('instagram'),"https://www.instagram.com/milieucities/", title: "Find us on Instagram", class: "overshadow"  %>
     </div>
-
-    <div class="row">
-      <div class="input-field col s12">
-        <%= submit_tag "Enter Map", class: "waves-effect btn enter-map", style: "width: 100%;" %>
-      </div>
-
-      <div class="input-field col s12 find">
-        Find us on
-      </div>
-
-      <div class="input-field col s12 social-links">
-        <div class="col s3">
-          <%= link_to fa_icon("facebook"), "https://m.facebook.com/milieuapp/", title: "Find us on Facebook" %><br/>Facebook
-        </div>
-        <div class="col s3">
-          <%= link_to fa_icon("twitter"), "https://twitter.com/milieucities", title: "Find us on Twitter" %><br/>Twitter
-        </div>
-        <div class="col s3">
-          <%= link_to fa_icon("medium"), "https://medium.com/@milieucities", title: "Find us on Medium" %><br/>Medium
-        </div>
-        <div class="col s3">
-          <%= link_to fa_icon("instagram"), "https://www.instagram.com/milieucities/", title: "Find us on Instagram" %><br/>Instagram
-        </div>
-      </div>
+    <div class="business">
+      <%= link_to "Terms", "#term-modal", class: "modal-trigger overshadow" %>
+      <%= link_to t('nav_bar.contact_us_text'), "#contact-milieu-modal", class: "modal-trigger overshadow" %>
     </div>
+  </div>
+</div>
 
-   <% end %>
+<div id="term-modal" class="modal" style="align-items: initial;">
 
-    <div class="terms">
-      By using Milieu, I agree to the <%= link_to "terms of service", "#term-modal", class: "modal-trigger" %>.
-    </div>
-   </div>
-
- </div>
-</section>
-
-<div id="term-modal" class="modal">
   <div class="modal-content">
 
-    <b>Mission</b>
+    <b><%= "#{t('home.term_modal.mission')}" %> </b>
 
     <p>
-      Milieu is a system for connecting citizens, urban developers and city officials to work together to make better planning and development decisions.
+      <%= "#{t('home.term_modal.text_01')}" %>
     </p>
 
     <p>
-      Our mission is to provide people with an open platform to access, share and discuss planning and
-      development in the city. This includes connecting with other people and sharing information through
-      social media. By soliciting citizen feedback and aggregating the data collected from public consultations,
-      we aim to facilitate participatory and effective decision-making in planning and development. We also
-      aim to build a feedback loop of trust, transparency and accountability between city officials, urban
-      developers and the public.
+      Our mission is to provide people with a platform for to access, share and discuss urban planning and development in the city. This includes connecting with other people and sharing information through social media. By soliciting citizen feedback and aggregating the data collected from public consultations we aim to facilitate rapid, participatory and effective decision-making in planning and development.
     </p>
 
     <p>
-      As we grow and evolve in this project we want to hear from you, please send your feedback to info@milieu.io!
+      By incorporating feedback from all stakeholders involved in the planning and development processes, Milieu creates a platform for ongoing dialogue in the construction of the city. This includes fostering a feedback loop of trust, transparency and accountability between city officials, urban developers and citizens.
     </p>
 
-    <b>Milieu Principles</b>
+    <b><%= "#{t('home.term_modal.principles')}" %></b>
 
     <p>
-      People should have the freedom and the practical tools to access information on planning and development and to connect, discuss and share this information with others.
-    </p>
-
-    <p>
-      Milieu publicly makes available information about its purpose, plans, policies and operations.
-    </p>
-
-    <b>Data Policy</b>
-
-    <p>
-      Milieu reserves all intellectual property related to its processes, algorithms, methodologies and collateral materials.
+      People should have the freedom to access information on urban planning and development and to connect, discuss and share this information with others.
     </p>
 
     <p>
-      Public feedback through the consultation process or participation in the application will result in data
-      collection. This data shall be the intellectual property of the Milieu. Any publication by Milieu of data,
-      conclusions, or analysis arising from this consultation shall be at the discretion of Milieu.
+      People should have the practical tools to be able to access information on urban planning and development in a simple and efficient way and discuss and share this information.
     </p>
 
-    <b>Community Standards</b>
-
+    </p>
+      <%= "#{t('home.term_modal.text_04')}" %>
     <p>
-      By joining Milieu, you agree to authenticate yourself by using your real name and identity. By connecting
-      with your authentic identity, the milieu community is more accountable and transparent. You will not
-      provide any false personal information on Milieu, create more than one personal account, or create an
-      account for anyone other than yourself.
+      <%= "#{t('home.term_modal.text_05')}" %>
     </p>
 
+    <b><%= "#{t('home.term_modal.data_policy')}" %></b>
+
     <p>
-      Be mindful of others, please do not post content or take any action on Milieu that infringes or violates
-      someone else's rights or otherwise violates the law. We can remove any content or information you
-      post on Milieu if we believe that it violates this Statement or our policies.
+      <%= "#{t('home.term_modal.text_06')}" %>
     </p>
 
     <p>
-      Please contact us at any moment regarding questions, concerns or should you have to report something.
+      Public feedback through the consultation process or participation in the application will result in data collection that is specific to the proposed development under consideration. This data shall be the intellectual property of the Milieu. Any publication by Milieu of data, conclusions or analysis arising from this consultation shall be at the discretion of Milieu.
     </p>
 
     <p>
-      Thank you
+      You own all of the content and information you post on Milieu and can control and remove your information from the Milieu service.
+    </p>
+
+    <b><%= "#{t('home.term_modal.community_standards')}" %></b>
+
+    <p>
+      Milieu keeps your account and personal information safe. By joining Milieu, you agree to authenticate yourself by using your real name and identity. By connecting with your authentic identity the milieu community is more accountable and transparent.
     </p>
 
     <p>
-      The Milieu Team
+      You will not provide any false personal information on Milieu, or create an account for anyone other than yourself without permission. You will not create more than one personal account.
+    </p>
+
+    <p>
+      We respect other people's rights, and expect you to do the same. You will not post content or take any action on Milieu that infringes or violates someone else's rights or otherwise violates the law.
+    </p>
+
+    <p>
+      We can remove any content or information you post on Milieu if we believe that it violates this Statement or our policies.
+    </p>
+
+    <p>
+      <%= "#{t('home.term_modal.text_10')}" %>
+    </p>
+
+    <p>
+      <%= "#{t('home.term_modal.text_11')}" %>
+    </p>
+
+    <p>
+      <%= "#{t('home.term_modal.text_12')}" %>
     </p>
   </div>
 </div>

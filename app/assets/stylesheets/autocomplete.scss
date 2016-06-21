@@ -1,0 +1,32 @@
+.autocomplete-wrapper{
+  position: relative;
+}
+
+.autocomplete-dropdown{
+  position: absolute;
+  top: 41px;
+  left: 0;
+  background-color: #fff;
+  margin: 0;
+  color: $dark-secondary-color;
+  text-align: center;
+  width: calc(100% - 75px);
+
+  li{
+    padding: 10px;
+    cursor: pointer;
+    padding-left: 70px;
+
+    @media #{$small-and-down} {
+      padding-left: 35px;
+    }
+
+    &.highlighted{
+      background-color: #eee;
+    }
+
+    &:hover{
+      background-color: #eee;
+    }
+  }
+}

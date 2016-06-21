@@ -9,10 +9,16 @@ class DevSitesController < ApplicationController
       @dev_sites = DevSite.all.joins(:addresses).where.not( addresses: [] ).limit(150)
     end
 
+    @locale = params[:locale]
+
     respond_to do |format|
         format.html
         format.json
     end
+  end
+
+  def search
+    redirect_to map_path
   end
 
   def images
@@ -44,7 +50,7 @@ class DevSitesController < ApplicationController
           title: ds.title,
           address: address,
           :'marker-symbol' => ds.marker,
-          description: "<div class=\"marker-title\"><a href=\"/dev_sites/#{ds.id}\">#{ds.title}</a></div>Status: #{ds.status}"
+          description: "<div class=\"marker-title\"><a href=\"/#{params[:locale]}/dev_sites/#{ds.id}\">#{ds.title}</a></div>Status: #{ds.status}"
         }
       }
     end
@@ -53,6 +59,7 @@ class DevSitesController < ApplicationController
   end
 
   def show
+    @locale = params[:locale]
     if current_user
       @comments = @dev_site.comments.build
     end

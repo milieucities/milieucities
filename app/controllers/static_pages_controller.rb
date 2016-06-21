@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
 
   def home
+    @no_header = true
   end
 
   def events
@@ -25,6 +26,11 @@ class StaticPagesController < ApplicationController
 
   def contact_file_lead
     ContactMailer.contact_file_lead(params[:name], params[:email], params[:message], params[:dev_site_id]).deliver_now
+    render nothing: true
+  end
+
+  def contact_councillor
+    ContactMailer.contact_councillor(params[:name], params[:email], params[:message], params[:dev_site_id]).deliver_now
     render nothing: true
   end
 
