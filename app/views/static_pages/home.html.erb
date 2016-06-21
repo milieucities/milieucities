@@ -30,9 +30,12 @@
 
   <div class="search">
     <%= form_tag search_dev_sites_path, method: :post do %>
-      <%= fa_icon 'globe', class: 'globe' %>
-      <%= text_field_tag 'search', nil, type: 'customsearch', placeholder: 'Search address', class: 'search-input', autocomplete: 'off'  %>
-      <%= button_tag fa_icon('paper-plane') %>
+      <%= fa_icon 'map-marker', class: 'map-marker' %>
+      <%= text_field_tag 'search', nil, type: 'customsearch', placeholder: t('home.search_bar_text'), class: 'search-input', autocomplete: 'off'  %>
+      <%= button_tag do %>
+        <%= fa_icon('search') %>
+        <%= t('search_button_text') %>
+      <% end %>
     <% end %>
   </div>
 

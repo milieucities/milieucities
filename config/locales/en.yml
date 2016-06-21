@@ -1,4 +1,5 @@
 en:
+  search_button_text: 'search'
   nav_bar:
     slogan: 'Building Better Cities with People'
     launch: 'Launch Consultation'
@@ -12,6 +13,7 @@ en:
     subtitle:
       p1: 'Shape the vision of your neighborhood by commenting and voting on development projects'
       p2: 'Simplify public engagement by launching your own consultation'
+    search_bar_text: 'Enter an address'
     featured: 'Featured Developments'
     why_use_milieu:
       how: 'How can you use Milieu?'
