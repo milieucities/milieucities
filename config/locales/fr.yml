@@ -1,4 +1,5 @@
 fr:
+  search_button_text: 'search'
   nav_bar:
     slogan: 'Bâtîr de meilleures villes ensemble'
     launch: 'Consultation de Lancement'
@@ -12,6 +13,7 @@ fr:
     subtitle:
       p1: 'Façonner la vision de votre quartier en commentant et en votant sur les projets de développement'
       p2: 'Simplifier la participation du public en lançant votre propre consultation'
+    search_bar_text: 'Enter an address'
     featured: 'Développements en vedette'
     why_use_milieu:
       how: 'Comment utiliser Milieu?'
