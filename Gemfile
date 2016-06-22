@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -11,7 +11,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'firebase', '~> 0.2.6'
 gem 'bcrypt', '~> 3.1.11'
-gem 'ratyrate', '~> 1.2.2.alpha'
 gem 'unirest', '~> 1.1.2'
 gem 'rabl', '~> 0.12.0'
 gem 'pg', '~> 0.18.4'
@@ -58,6 +57,7 @@ group :development do
   gem 'web-console', '~> 3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 1.6.4'
+  gem 'brakeman', :require => false
 end
 
 group :test do
