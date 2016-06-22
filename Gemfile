@@ -22,7 +22,7 @@ gem 'fastimage'
 gem 'photoswipe-rails'
 gem 'momentjs-rails', '~> 2.11.0'
 gem 'simple_token_authentication', '~> 1.12.0'
-gem 'unicorn', '~> 5.0'
+gem 'unicorn', '5.1.0'
 gem 'materialize-sass', '~> 0.97'
 gem 'pry', '~> 0.10.3'
 gem 'dotenv-rails', '~> 2.1.1', :groups => [:development, :test]
