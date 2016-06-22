@@ -16,9 +16,6 @@ class User < ActiveRecord::Base
 
   has_many :comments, as: :commentable
 
-  # Rating
-  ratyrate_rater
-
   validates               :email,
                             presence: {message: "Email is required"},
                             uniqueness: {message: "Email already in use"}
