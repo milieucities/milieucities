@@ -8,15 +8,30 @@
     color: $secondary-color;
   }
 
+  .modal-trigger{
+    @media #{$small-and-down} {
+      font-size: 0.9rem;
+    }
+  }
+
   .container{
     background-color: #fff;
     padding: 40px;
+
+    @media #{$small-and-down} {
+      padding: 20px;
+      width: 100%;
+    }
   }
 
   .title{
     font-size: 3rem;
     font-weight: 300;
     padding-bottom: 30px;
+
+    @media #{$small-and-down} {
+      font-size: 1.5rem;
+    }
   }
 
   h3{
