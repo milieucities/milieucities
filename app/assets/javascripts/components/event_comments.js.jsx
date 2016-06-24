@@ -101,7 +101,7 @@ EventComments.CommentsForm = React.createClass({
           <input type="hidden" name="comment[event_id]" id="comment_event_id" value={this.props.eventId} />
           <input type="hidden" name="comment[user_id]" id="comment_user_id" value={this.props.userId} />
 
-          <textarea valueLink={this.linkState('body')}  placeholder="I can't wait to see this in our neighbourhood!" name="comment[body]" id="comment_body"></textarea>
+          <textarea valueLink={this.linkState('body')}  placeholder="What do you think?" name="comment[body]" id="comment_body"></textarea>
           <input type="submit" name="commit" value="Comment" className="btn"/>
         </form>
       </div>
