@@ -18,6 +18,10 @@
     background-color: #fff;
     padding: 40px;
 
+    @media #{$medium-and-down} {
+      width: 85%;
+    }
+
     @media #{$small-and-down} {
       padding: 20px;
       width: 100%;
