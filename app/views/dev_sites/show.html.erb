@@ -8,6 +8,12 @@
     <%= @dev_site.addresses.empty? ? @dev_site.title : @dev_site.addresses.first.street %>
   </div>
 
+  <% if @dev_site.id == 1869 %>
+  <div class="row">
+    <div id="armstrong-map"></div>
+  </div>
+  <% end %>
+
   <div class="row">
     <div class="col s12 m12 l7">
       <div id="slides">
