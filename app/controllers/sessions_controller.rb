@@ -9,16 +9,14 @@ class SessionsController < ApplicationController
 
   def create
 
-    email = params[:email]
-    password = params[:password]
+    email = params[:session][:email].downcase
+    password = params[:session][:password]
 
     @user = User.find_by_email(email)
 
     if @user && @user.authenticate(password)
-      session[:user_id] = @user.id
-      puts request.referrer
-      redirect_to(root_path, notice: "Welcome to Milieu")
-      # (request.referrer == new_session_path) ? redirect_to(root_path, notice: "Welcome to Milieu") : redirect_to(request.referrer, notice: "Welcome to Milieu")
+      login @user
+      redirect_to root_path, notice: "Welcome to Milieu"
     else
       redirect_to new_session_path, alert: "Could not sign in, try again"
     end
@@ -26,10 +24,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout
+    log_out
+    redirect_to root_path, notice: "Logged out"
   end
 
   private
+
+      def session_params
+        require(:session).permit(:email, :password)
+      end
 
       def update_activity_time
         session[:expires_at] = 24.hours.from_now

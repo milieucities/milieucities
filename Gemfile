@@ -46,6 +46,13 @@ gem 'simple_form', '~> 3.2.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :test do
+  gem 'rspec-rails', '~> 3.1'
+  gem "factory_girl_rails"
+  gem 'ffaker'
+  gem 'shoulda-matchers'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 8.2'
