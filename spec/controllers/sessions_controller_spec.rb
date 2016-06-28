@@ -45,6 +45,7 @@ describe SessionsController do
     end
 
     it "returns to home page after a successful logout" do
+      delete :destroy, { id: @user.id, locale: :en }
       expect(response).to redirect_to(root_path)
       expect(session[:user_id].nil?).to be_truthy
     end
