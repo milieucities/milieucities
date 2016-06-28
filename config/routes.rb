@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     # Add about page route
     get 'about', to: 'static_pages#about'
 
-    resources :users
+    resources :users, only: [:index, :new, :create, :destroy]
     resources :sessions, only: [:new, :create, :destroy]
 
     ##############################

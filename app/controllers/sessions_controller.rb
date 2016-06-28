@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
   before_action :session_expiry, except: [:create]
 
   def new
-
   end
 
   def create

@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token
 
-  has_secure_password validations: false
-
   # THIS ARRAY MUST BE IN ORDER BY EACH WARDS, WARD NUMBER
   VALID_NEIGHBOURHOOD_TYPES = [ "Orleans", "Innes", "Barrhaven", "Kanata North",
     "West Carleton-March", "Stittsville", "Bay", "College", "Knoxdale-Merivale",
@@ -21,12 +19,13 @@ class User < ActiveRecord::Base
   validates               :email,
                             presence: {message: "Email is required"},
                             uniqueness: {message: "Email already in use"}
+  validates               :username,
+                            presence: {message: "Username is required"}
+  has_secure_password
   validates               :password,
                             presence: {message: "Password is required", on: :create},
                             confirmation: {message: "Passwords do not match."},
                             length: { in: 6..20, message: "Password must be between 6 to 20 characters"}
-  validates               :username,
-                            presence: {message: "Username is required"}
 
 
   def full_name
