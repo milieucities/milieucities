@@ -15,4 +15,11 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please log in."
+      redirect_to root_path
+    end
+  end
+
 end

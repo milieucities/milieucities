@@ -6,7 +6,7 @@
 
     <ul class="right hide-on-med-and-down">
       <li class="overshadow"><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us" %></li>
-      <li class="overshadow"><%= link_to "Launch Consultation", "#", title: "Launch Consultation - Coming Soon" %></li>
+      <li class="overshadow"><%= link_to t('nav_bar.launch'), "#", title: t('nav_bar.launch'), class: 'tooltipped', data: { position: 'bottom', delay: '50', tooltip: 'Coming Soon' } %></li>
       <% if signed_in? %>
       <li class="overshadow"><%= link_to  t('nav_bar.sign_out_text'), session_path(id: "nothing"), method: :delete, title: "Sign Out" %></li>
       <% else %>

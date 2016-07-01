@@ -131,7 +131,7 @@
     <div  class="col s12 m12 l6">
       <h5>Comment</h5>
 
-      <%= react_component "Comments", { devSiteId: @dev_site.id, userId: @user.id,
+      <%= react_component "Comments", { devSiteId: @dev_site.id, userId: current_user ? current_user.id : 'null',
         authenticityToken: form_authenticity_token, locale: @locale } %>
 
     </div>

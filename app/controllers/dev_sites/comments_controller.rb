@@ -1,5 +1,6 @@
 class DevSites::CommentsController < CommentsController
   before_action :set_commentable
+  before_action :logged_in_user, only: [:create]
 
   def index
     @dev_site = DevSite.find(params[:dev_site_id])
@@ -28,7 +29,7 @@ class DevSites::CommentsController < CommentsController
     def comment_params
       params.require(:comment).permit(:body, :dev_site_id, :user_id)
     end
-    
+
     def set_commentable
       @commentable = DevSite.find(params[:dev_site_id])
     end
