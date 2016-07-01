@@ -4,7 +4,7 @@
   <title>MILIEU</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <%= favicon_link_tag 'favicon.ico' %>
+  <%= favicon_link_tag "favicon.ico" %>
 
   <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3i1Xy08ztd88pd4CTQPRN9-C_dOtSsxs&libraries=places"></script>
 
@@ -52,36 +52,25 @@
   <%= javascript_include_tag "vendor", :debug => false %>
 
   <div id="sign-in-modal" class="modal">
-
     <div class="modal-content">
-      <h4 class="center">Sign In</h4>
-
-      <%= form_tag sessions_path, class: "login-form" do %>
-
+      <h1 class="center">Sign In</h4>
+      <%= form_for :session, url: sessions_path, html: { class: 'login-form' } do |f| %>
         <div class="row">
           <div class="input-field col s12">
-            <%= text_field_tag :email, params[:email], class: 'hide' %>
-            <%= text_field_tag :email, params[:email], autocomplete: 'off' %>
-            <%= label_tag "Email" %>
+            <%= f.label :email %>
+            <%= f.text_field :email, autocomplete: 'off' %>
           </div>
         </div>
-
         <div class="row">
           <div class="input-field col s12">
-            <%= password_field_tag :password, nil, class: 'hide' %>
-            <%= password_field_tag :password, nil, autocomplete: 'off' %>
-            <%= label_tag "Password" %>
+            <%= f.label :password %>
+            <%= f.password_field :password, autocomplete: 'off' %>
           </div>
         </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-            <%= submit_tag "Sign In", class: 'waves-effect btn' %>
-          </div>
+        <div class="actions">
+          <%= f.submit "Sign In", class: 'waves-effect btn' %>
         </div>
-
       <% end %>
-
       <%= link_to "Sign Up", new_user_path, class: "signup-link" %>
     </div>
   </div>

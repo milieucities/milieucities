@@ -53,7 +53,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'dotenv-rails', '~> 2.1.1'
   # DEVELOMENT specific gems
-  gem 'web-console', '~> 3.0'
+  # gem 'web-console', '~> 3.0'
   gem 'spring', '~> 1.6.4'
   gem 'brakeman', :require => false
   gem "better_errors"
