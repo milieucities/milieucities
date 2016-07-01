@@ -2,20 +2,22 @@
 
   <h1 class="center">Sign In</h1>
 
-  <%= form_tag sessions_path, class: "login-form" do %>
-
-
+  <%= form_for :session, url: sessions_path, html: { class: 'login-form' } do |f| %>
     <div class="row">
-    <div class="input-field col s12">
-      <%= text_field_tag :email, params[:email], placeholder: "Email" %>
-
-      <%= password_field_tag :password, nil, placeholder: "Password" %>
+      <div class="input-field col s12">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
     </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+      </div>
     </div>
     <div class="actions">
       <%= submit_tag "Sign In", class: 'waves-effect btn' %>
     </div>
-
   <% end %>
 
   <%= link_to "Sign Up", new_user_path, class: "signup-link" %>

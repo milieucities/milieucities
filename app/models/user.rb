@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_secure_password validations: false
+  attr_accessor :remember_token
 
   # THIS ARRAY MUST BE IN ORDER BY EACH WARDS, WARD NUMBER
   VALID_NEIGHBOURHOOD_TYPES = [ "Orleans", "Innes", "Barrhaven", "Kanata North",
@@ -19,12 +19,13 @@ class User < ActiveRecord::Base
   validates               :email,
                             presence: {message: "Email is required"},
                             uniqueness: {message: "Email already in use"}
+  validates               :username,
+                            presence: {message: "Username is required"}
+  has_secure_password
   validates               :password,
                             presence: {message: "Password is required", on: :create},
                             confirmation: {message: "Passwords do not match."},
                             length: { in: 6..20, message: "Password must be between 6 to 20 characters"}
-  validates               :username,
-                            presence: {message: "Username is required"}
 
 
   def full_name
@@ -38,5 +39,30 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
+
+  # Forgets a user.
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+
+  # Returns true if the given token matches the digest.
+  def authenticated?(remember_token)
+    return false if remember_digest.nil?
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
 
 end
