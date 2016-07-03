@@ -1,35 +1,35 @@
 <section id="map">
   <div class="legend hide-on-small-only">
 
-    <div class="title">Filter Neighbourhood</div>
+    <div class="title"><%= t('map.filter-section.main-label') %></div>
 
     <div class="row">
       <div class="input-field col s12">
         <%= select_tag :neighbourhood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES), include_blank: true, id: "neighbourhood-filter" %>
-        <%= label_tag :neighbourhood %>
+        <%= label_tag :neighbourhood, t('map.filter-section.neighbourhood-dropdown-label') %>
       </div>
     </div>
 
-    <div class="title">Filter Status</div>
+    <div class="title"><%= t('map.filter-section.filter-status-label') %></div>
 
     <div class="item filter-item" data-filter="consultation">
       <%= image_tag "consultation.png", class: "icon" %>
-      <div class="text">Participate in current public consultations</div>
+      <div class="text"><%= t('map.filter-section.participate-label') %></div>
     </div>
 
     <div class="item filter-item" data-filter="new-development" >
       <%= image_tag "comment.png", class: "icon" %>
-      <div class="text">Learn more about new urban developments</div>
+      <div class="text"><%= t('map.filter-section.learn-label') %></div>
     </div>
 
     <div class="item filter-item" data-filter="vacant-derelict">
       <%= image_tag "vacant.png", class: "icon" %>
-      <div class="text">Start a discussion around vacant and derelict sites</div>
+      <div class="text"><%= t('map.filter-section.discuss-label') %></div>
     </div>
 
     <div class="item filter-item" data-filter="events">
       <%= image_tag "event.png", class: "icon" %>
-      <div class="text">Explore community events</div>
+      <div class="text"><%= t('map.filter-section.explore-label') %></div>
     </div>
   </div>
   <div id="dev-site-profile"></div>

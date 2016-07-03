@@ -1,4 +1,13 @@
 fr:
+  map:
+    filter-section:
+      main-label: 'Filter Neighbourhood'
+      neighbourhood-dropdown-label: 'Neighbourhood'
+      filter-status-label: 'Filter Status'
+      participate-label: 'Participate in current public consultations'
+      learn-label: 'Learn more about new urban developments'
+      discuss-label: 'Start a discussion around vacant and derelict sites'
+      explore-label: 'Explore community events'
   dev-sites:
     show:
       back-to-map-link: 'Back to Map'
