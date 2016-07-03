@@ -2,7 +2,7 @@
 
   <div class="container">
 
-  <%= link_to fa_icon("arrow-left", text: "Back to Map"), map_path, class: "back-to-map" %><br/><br/>
+  <%= link_to fa_icon("arrow-left", text: t('dev-sites.show.back-to-map-link')), map_path, class: "back-to-map" %><br/><br/>
 
   <div class="title">
     <%= @dev_site.addresses.empty? ? @dev_site.title : @dev_site.addresses.first.street %>
@@ -24,19 +24,19 @@
 
       <div class="row info">
 
-        <div class="col s6 label">Development Id:</div>
+        <div class="col s6 label"><%= t('dev-sites.show.dev-id') %></div>
         <div class="col s6"><%= @dev_site.devID.present? ? @dev_site.devID : "N/A" %></div>
 
-        <div class="col s6 label">Application Type:</div>
+        <div class="col s6 label"><%= t('dev-sites.show.application-type') %></div>
         <div class="col s6"><%= @dev_site.application_type.present? ? @dev_site.application_type : "N/A" %></div>
 
-        <div class="col s6 label">Ward Name:</div>
+        <div class="col s6 label"><%= t('dev-sites.show.ward-name') %></div>
         <div class="col s6"><%= @dev_site.ward_name.present? ? @dev_site.ward_name : "N/A" %></div>
 
-        <div class="col s6 label">Ward Number:</div>
+        <div class="col s6 label"><%= t('dev-sites.show.ward-number') %></div>
         <div class="col s6"><%= @dev_site.ward_num.present? ? @dev_site.ward_num : "N/A" %></div>
 
-        <div class="col s6 label">Votes:</div>
+        <div class="col s6 label"><%= t('dev-sites.show.votes') %></div>
 
         <div class="col s6">
           <% if signed_in? %>
@@ -68,8 +68,8 @@
                 <table class="striped">
                   <thead>
                     <tr>
-                        <th>Status</th>
-                        <th>Status Date</th>
+                        <th><%= t('dev-sites.show.status-box.status') %></th>
+                        <th><%= t('dev-sites.show.status-box.status-date') %></th>
                     </tr>
                   </thead>
 
@@ -89,8 +89,7 @@
         <% if @dev_site.urban_planner_email.present? %>
         <div class="row">
           <div class="col s12">
-            <%= link_to fa_icon("envelope-o", text: " Contact Planner"),
-            "#contact-file-lead-modal", class: "modal-trigger btn" %>
+            <%= link_to fa_icon("envelope-o", text: t('dev-sites.show.contact-planner-text')), "#contact-file-lead-modal", class: "modal-trigger btn" %>
           </div>
         </div>
         <% end %>
@@ -98,8 +97,7 @@
         <% if @dev_site.ward_councillor_email.present? %>
         <div class="row">
           <div class="col s12">
-            <%= link_to fa_icon("envelope-o", text: " Contact Councillor"),
-            "#contact-councillor-modal", class: "modal-trigger btn" %>
+            <%= link_to fa_icon("envelope-o", text: t('dev-sites.show.contact-councillor-text')), "#contact-councillor-modal", class: "modal-trigger btn" %>
           </div>
         </div>
         <% end %>
@@ -111,7 +109,7 @@
 
   <div class="row">
     <div class="col s12 m12 l6" style="max-width: 750px">
-      <h5>Description</h5>
+      <h5><%= t('dev-sites.show.description-label') %></h5>
       <p><%= @dev_site.description.present? ? markdown(@dev_site.description) : "No description present." %></p>
 
       <% if @dev_site.files.present? || @dev_site.city_files.present? %>
@@ -129,7 +127,7 @@
     </div>
 
     <div  class="col s12 m12 l6">
-      <h5>Comment</h5>
+      <h5><%= t('dev-sites.show.comments-label') %></h5>
 
       <%= react_component "Comments", { devSiteId: @dev_site.id, userId: current_user ? current_user.id : 'null',
         authenticityToken: form_authenticity_token, locale: @locale } %>
@@ -151,7 +149,7 @@
 <div id="contact-file-lead-modal" class="modal">
   <div class="modal-content">
     <%= form_tag "/contact_file_lead", id: "contact-file-lead", remote: :true do %>
-      <h4>Contact Lead Planner</h4>
+      <h4><%= t('dev-sites.show.contact-lead-planner-modal.modal-label') %></h4>
 
       <div class="row">
         <div class="col input-field s12">
@@ -164,22 +162,22 @@
       <div class="row">
         <div class="col input-field s12 m6">
           <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
-          <%= label_tag :name %>
+          <%= label_tag :name, t('dev-sites.show.contact-lead-planner-modal.name-label') %>
         </div>
         <div class="col input-field s12 m6">
           <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
-          <%= label_tag :email %>
+          <%= label_tag :email, t('dev-sites.show.contact-lead-planner-modal.email-label') %>
         </div>
       </div>
       <div class="row">
         <div class="col input-field s12">
-          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: 'Leave a message.' %>
-          <%= label_tag :message %>
+          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: t('dev-sites.show.contact-lead-planner-modal.message-placeholder') %>
+          <%= label_tag :message, t('dev-sites.show.contact-lead-planner-modal.message-label') %>
         </div>
       </div>
       <div class="row">
         <div class="col input-field s12">
-          <%= submit_tag "Send", class: "waves-effect waves-light btn modal-action modal-close right" %>
+          <%= submit_tag t('dev-sites.show.contact-lead-planner-modal.send-button-text'), class: "waves-effect waves-light btn modal-action modal-close right" %>
         </div>
       </div>
     <% end %>
@@ -189,7 +187,7 @@
 <div id="contact-councillor-modal" class="modal">
   <div class="modal-content">
     <%= form_tag "/contact_councillor", id: "contact-councillor", remote: :true do %>
-      <h4>Contact Councillor</h4>
+      <h4><%= t('dev-sites.show.contact-councillor-modal.modal-label') %></h4>
 
       <div class="row">
         <div class="col input-field s12">
@@ -202,22 +200,22 @@
       <div class="row">
         <div class="col input-field s12 m6">
           <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
-          <%= label_tag :name %>
+          <%= label_tag :name, t('dev-sites.show.contact-councillor-modal.name-label') %>
         </div>
         <div class="col input-field s12 m6">
           <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
-          <%= label_tag :email %>
+          <%= label_tag :email, t('dev-sites.show.contact-councillor-modal.email-label') %>
         </div>
       </div>
       <div class="row">
         <div class="col input-field s12">
-          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: 'Leave a message.' %>
-          <%= label_tag :message %>
+          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: t('dev-sites.show.contact-councillor-modal.message-placeholder') %>
+          <%= label_tag :message, t('dev-sites.show.contact-councillor-modal.message-label') %>
         </div>
       </div>
       <div class="row">
         <div class="col input-field s12">
-          <%= submit_tag "Send", class: "waves-effect waves-light btn modal-action modal-close right" %>
+          <%= submit_tag t('dev-sites.show.contact-councillor-modal.send-button-text'), class: "waves-effect waves-light btn modal-action modal-close right" %>
         </div>
       </div>
     <% end %>
