@@ -65,27 +65,6 @@ fr:
       p2: 'Simplifier la participation du public en lançant votre propre consultation'
     search_bar_text: 'Enter an address'
     featured: 'Développements en vedette'
-    why_use_milieu:
-      how: 'Comment utiliser Milieu?'
-      participate: 'Participez aux consultations publiques en court'
-      learn: 'Apprenez-en plus sur les nouveaux développments'
-      start: 'Commencez une discussion'
-      explore: 'Découvrez les événements communautaires'
-    view_map_button: 'AFFICHER LA CARTE'
-    survey:
-      header: 'Share what gets you excited about ottawa'
-      my_ottawa_label: 'My Ottawa includes'
-      neighbourhood_label: 'Mon Quatier'
-      submit_button: 'Enter Map'
-      find_us_on: 'Suivez-nous sur'
-      outlets:
-        facebook: 'Facebook'
-        twitter: 'Twitter'
-        medium: 'Medium'
-        instagram: 'Instagram'
-      terms:
-        by_using: 'En utilisant Milieu, j’accepte '
-        link_button: 'les conditions'
     term_modal:
       mission: 'Mission'
       text_01: 'Milieu is a system for connecting citizens, urban developers and city officials to work together to make better planning and development decisions.'
@@ -105,7 +84,6 @@ fr:
       com_standards_3: "We respect other people's rights, and expect you to do the same. You will not post content or take any action on Milieu that infringes or violates someone else's rights or otherwise violates the law."
       com_standards_4: 'We can remove any content or information you post on Milieu if we believe that it violates this Statement or our policies.'
       text_08: 'You own all of the content and information you post on Milieu and can control and remove your information from the Milieu service.'
-      text_09: "Milieu keeps your account and personal information safe. By joining Milieu, you agree to authenticate yourself by using your real name and identity. By connecting with your authentic identity the milieu community is more accountable and transparent."
       text_10: 'Please contact us at any moment regarding questions, concerns or should you have to report something.'
       text_11: 'Thank you'
       text_12: 'The Milieu Team'
