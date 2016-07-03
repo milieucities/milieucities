@@ -1,4 +1,31 @@
 fr:
+  dev-sites:
+    show:
+      back-to-map-link: 'Back to Map'
+      dev-id: 'Development Id:'
+      application-type: 'Application Type:'
+      ward-name: 'Ward Name:'
+      ward-number: 'Ward Number:'
+      votes: 'Votes:'
+      status-box:
+        status: 'Status'
+        status-date: 'Status Date'
+      contact-planner-text: 'Contact Planner'
+      contact-councillor-text: 'Contact Councillor'
+      description-label: 'Description'
+      comments-label: 'Comments'
+  contact-milieu-modal:
+    header-text: 'Contact Milieu'
+    name-label: 'name'
+    message-label: 'message'
+    email-label: 'email'
+    send-button: 'Send'
+  sign-in-modal:
+    email-label: 'email'
+    password-label: 'password'
+    sign-in-modal-text: 'Sign In'
+    sign-in-button: 'Sign In'
+    sign-up-button: 'Sign Up'
   search_button_text: 'Search'
   nav_bar:
     slogan: 'Bâtîr de meilleures villes ensemble'
