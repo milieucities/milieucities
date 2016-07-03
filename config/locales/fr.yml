@@ -1,4 +1,54 @@
 fr:
+  map:
+    filter-section:
+      main-label: 'Filter Neighbourhood'
+      neighbourhood-dropdown-label: 'Neighbourhood'
+      filter-status-label: 'Filter Status'
+      participate-label: 'Participate in current public consultations'
+      learn-label: 'Learn more about new urban developments'
+      discuss-label: 'Start a discussion around vacant and derelict sites'
+      explore-label: 'Explore community events'
+  dev-sites:
+    show:
+      back-to-map-link: 'Back to Map'
+      dev-id: 'Development Id:'
+      application-type: 'Application Type:'
+      ward-name: 'Ward Name:'
+      ward-number: 'Ward Number:'
+      votes: 'Votes:'
+      status-box:
+        status: 'Status'
+        status-date: 'Status Date'
+      contact-planner-text: 'Contact Planner'
+      contact-councillor-text: 'Contact Councillor'
+      description-label: 'Description'
+      comments-label: 'Comments'
+      contact-lead-planner-modal:
+        modal-label: 'Contact Lead Planner'
+        name-label: 'name'
+        email-label: 'email'
+        message-label: 'message'
+        message-placeholder: 'Leave a message.'
+        send-button-text: 'Send'
+      contact-councillor-modal:
+        modal-label: 'Contact Councillor'
+        name-label: 'name'
+        email-label: 'email'
+        message-label: 'message'
+        message-placeholder: 'Leave a message.'
+        send-button-text: 'Send'
+  contact-milieu-modal:
+    header-text: 'Contact Milieu'
+    name-label: 'name'
+    message-label: 'message'
+    email-label: 'email'
+    send-button: 'Send'
+  sign-in-modal:
+    email-label: 'email'
+    password-label: 'password'
+    sign-in-modal-text: 'Sign In'
+    sign-in-button: 'Sign In'
+    sign-up-button: 'Sign Up'
   search_button_text: 'Search'
   nav_bar:
     slogan: 'Bâtîr de meilleures villes ensemble'
@@ -15,53 +65,25 @@ fr:
       p2: 'Simplifier la participation du public en lançant votre propre consultation'
     search_bar_text: 'Enter an address'
     featured: 'Développements en vedette'
-    why_use_milieu:
-      how: 'Comment utiliser Milieu?'
-      participate: 'Participez aux consultations publiques en court'
-      learn: 'Apprenez-en plus sur les nouveaux développments'
-      start: 'Commencez une discussion'
-      explore: 'Découvrez les événements communautaires'
-    view_map_button: 'AFFICHER LA CARTE'
-    survey:
-      header: 'Share what gets you excited about ottawa'
-      my_ottawa_label: 'My Ottawa includes'
-      neighbourhood_label: 'Mon Quatier'
-      submit_button: 'Enter Map'
-      find_us_on: 'Suivez-nous sur'
-      outlets:
-        facebook: 'Facebook'
-        twitter: 'Twitter'
-        medium: 'Medium'
-        instagram: 'Instagram'
-      terms:
-        by_using: 'En utilisant Milieu, j’accepte '
-        link_button: 'les conditions'
     term_modal:
       mission: 'Mission'
       text_01: 'Milieu is a system for connecting citizens, urban developers and city officials to work together to make better planning and development decisions.'
-      text_02: 'Our mission is to provide people with an open platform to access, share and discuss planning and
-      development in the city. This includes connecting with other people and sharing information through
-      social media. By soliciting citizen feedback and aggregating the data collected from public consultations,
-      we aim to facilitate participatory and effective decision-making in planning and development. We also
-      aim to build a feedback loop of trust, transparency and accountability between city officials, urban
-      developers and the public.'
-      text_03: 'As we grow and evolve in this project we want to hear from you, please send your feedback to info@milieu.io!'
+      text_02: 'Our mission is to provide people with a platform for to access, share and discuss urban planning and development in the city. This includes connecting with other people and sharing information through social media. By soliciting citizen feedback and aggregating the data collected from public consultations we aim to facilitate rapid, participatory and effective decision-making in planning and development.'
+      text_03: 'By incorporating feedback from all stakeholders involved in the planning and development processes, Milieu creates a platform for ongoing dialogue in the construction of the city. This includes fostering a feedback loop of trust, transparency and accountability between city officials, urban developers and citizens.'
       principles: 'Milieu Principles'
+      principles_1: 'People should have the freedom to access information on urban planning and development and to connect, discuss and share this information with others.'
+      principles_2: 'People should have the practical tools to be able to access information on urban planning and development in a simple and efficient way and discuss and share this information.'
       text_04: 'People should have the freedom and the practical tools to access information on planning and development and to connect, discuss and share this information with others.'
       text_05: 'Milieu publicly makes available information about its purpose, plans, policies and operations.'
       data_policy: 'Data Policy'
       text_06: 'Milieu reserves all intellectual property related to its processes, algorithms, methodologies and collateral materials.'
-      text_07: 'Public feedback through the consultation process or participation in the application will result in data
-      collection. This data shall be the intellectual property of the Milieu. Any publication by Milieu of data,
-      conclusions, or analysis arising from this consultation shall be at the discretion of Milieu.'
+      text_07: 'Public feedback through the consultation process or participation in the application will result in data collection that is specific to the proposed development under consideration. This data shall be the intellectual property of the Milieu. Any publication by Milieu of data, conclusions or analysis arising from this consultation shall be at the discretion of Milieu.'
       community_standards: 'Community Standards'
-      text_08: 'By joining Milieu, you agree to authenticate yourself by using your real name and identity. By connecting
-      with your authentic identity, the milieu community is more accountable and transparent. You will not
-      provide any false personal information on Milieu, create more than one personal account, or create an
-      account for anyone other than yourself.'
-      text_09: "Be mindful of others, please do not post content or take any action on Milieu that infringes or violates
-      someone else's rights or otherwise violates the law. We can remove any content or information you
-      post on Milieu if we believe that it violates this Statement or our policies."
+      com_standards_1: 'Milieu keeps your account and personal information safe. By joining Milieu, you agree to authenticate yourself by using your real name and identity. By connecting with your authentic identity the milieu community is more accountable and transparent.'
+      com_standards_2: 'You will not provide any false personal information on Milieu, or create an account for anyone other than yourself without permission. You will not create more than one personal account.'
+      com_standards_3: "We respect other people's rights, and expect you to do the same. You will not post content or take any action on Milieu that infringes or violates someone else's rights or otherwise violates the law."
+      com_standards_4: 'We can remove any content or information you post on Milieu if we believe that it violates this Statement or our policies.'
+      text_08: 'You own all of the content and information you post on Milieu and can control and remove your information from the Milieu service.'
       text_10: 'Please contact us at any moment regarding questions, concerns or should you have to report something.'
       text_11: 'Thank you'
       text_12: 'The Milieu Team'
