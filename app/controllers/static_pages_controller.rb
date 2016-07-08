@@ -34,6 +34,12 @@ class StaticPagesController < ApplicationController
     render nothing: true
   end
 
+  def privacy
+  end
+
+  def tos
+  end
+
   def about
 
   end
