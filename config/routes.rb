@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     get 'map', to: 'static_pages#map'
     get '/citizencity', to: 'static_pages#citizencity'
 
+    get '/tos', to: 'static_pages#tos'
+    get '/privacy', to: 'static_pages#privacy'
+
     resources :comments, only: [:index]
 
     resources :dev_sites do

@@ -65,6 +65,9 @@ fr:
       p2: 'Simplifier la participation du public en lançant votre propre consultation'
     search_bar_text: 'Enter an address'
     featured: 'Développements en vedette'
+    terms_of_use_link: "Terms of Use"
+    privacy_policy_link: "Privacy Policy"
+  terms_of_use_header_text: "Terms of Use"
   term_of_use:
     introduction:
       title: "1. Introduction"
@@ -108,47 +111,53 @@ fr:
     change_of_terms:
       title: "9. Change of Terms"
       statement001: "1. Milieu can change the Terms of Use at any times.  We will provide notice of changes to the terms of use by updating this terms document.  You should check this terms document regularly for changes. If you do not agree to any change of terms, you must stop using Milieu."
-    privacy:
-      title: "10. Privacy Policy"
-      information_collection:
-        title: "1. Information Collection"
-        statement001: "1. Information which you post in the comment section is public."
-        statement002: "2. In the spirit of transparency and accountability and keeping in-line with the vision of Milieu, we aim to facilitate thoughtful and respectful conversations on urban planning and development, usernames or names of those whose sign up will appear with each written submission."
-        statement003: "3. By submitting a comment you accept that Milieu has the right to reproduce and publish this in any manner we choose."
-        statement004: "4. We do not endorse any of the comments submitted."
-        statement005: "5. Comments are moderated according to ensure a climate of civility."
-        statement006: "6. You can chose to delete or change information you post in the comment section at any time. Deleted information will not be accessible on Milieu, but people may still be able to access deleted information through saved screenshots or caches."
-        statement007: "7. Feedback which you provide to Milieu on a proposed development will result in data collection which is specific to the proposed development in question."
-        statement008: "8. We may share information with our clients in order to help them with urban planning research."
-        statement009: "9. We will not share your personal information with advertisers."
-      log_data:
-        title: "2. Log Data"
-        statement001: "1. When you use our service we usually receive information about your computer such as your internet protocol (IP) address, browser type, referring pages, operating system, and time stamp."
-      cookies:
-        title: "3. Cookies"
-        statement001: "1. Milieu uses cookies. Cookies are small text files sent from a website and stored in your web browser. You can change your browser settings to block cookies. You can also delete cookies after they are downloaded onto your computer. If you choose to block or delete cookies some aspects of our service may not work."
-      third_party_links:
-        title: "4. Third Party Links"
-        statement001: "1. Our website contains link to third party sites. This privacy policy does not cover these sites. These sites have their own independent privacy policies. Milieu has no control and assumes no liability for the activities of these sites or their use of personal information."
-      email_links:
-        title: "5. Email Links"
-        statement001: "1. The Milieu website and app provides links to the email of city planners and councillors. Milieu is not privy to the content of these emails. Milieu is not responsible for the security or privacy of emails sent to city planners and councillors. Please contact the City of Ottawa if you have questions about their email service."
-      security:
-        title: "6. Security"
-        statement001: "1. Milieu works hard to keep your account and personal data secure, but we cannot guarantee safety."
-        statement002: "2. Milieu recommends that you take proper precautions to keep your personal information safe online."
-      changes_to_privacy_policy:
-        title: "7. Changes to this Privacy Policy"
-        statement001: "1. We may change this privacy policy at any time. We will provide notice of changes to this privacy policy by making changes to this page. You should check this page regularly for changes. If you do not agree to any change of the privacy policy, you must stop using Milieu."
-      compliance:
-        title: "8. Compliance"
-        statement001: "1. Milieu is a Canadian company. We are incorporated in Canada, and our servers are in Canada. Your information may therefore be processed, stored, collected and analyzed in Canada."
-      legal_disclaimer:
-        title: "9. Legal disclaimer"
-        statement001: "1. We reserve the right to disclose your personal information as required to by law, such as in the case of subpoena, warrant or other court proceeding. We may disclose your information in order to protect our safety, your safety or the safety of others."
-      scope:
-        title: "10. Scope"
-        statement001: "1. This privacy policy applies to lay users of our website and our mobile application. It does not apply to our clients and partners."
-      contact_us:
-        title: "11. Contact Us"
-        statement001: "1. If you have any questions about this privacy policy please contact us at info@milieu.io  sincerely , the Milieu Team"
+    change_log:
+      title: "Change Log"
+      statement001: "July 8, 2016: Updated our Terms of Use."
+  privacy:
+    title: "10. Privacy Policy"
+    information_collection:
+      title: "1. Information Collection"
+      statement001: "1. Information which you post in the comment section is public."
+      statement002: "2. In the spirit of transparency and accountability and keeping in-line with the vision of Milieu, we aim to facilitate thoughtful and respectful conversations on urban planning and development, usernames or names of those whose sign up will appear with each written submission."
+      statement003: "3. By submitting a comment you accept that Milieu has the right to reproduce and publish this in any manner we choose."
+      statement004: "4. We do not endorse any of the comments submitted."
+      statement005: "5. Comments are moderated according to ensure a climate of civility."
+      statement006: "6. You can chose to delete or change information you post in the comment section at any time. Deleted information will not be accessible on Milieu, but people may still be able to access deleted information through saved screenshots or caches."
+      statement007: "7. Feedback which you provide to Milieu on a proposed development will result in data collection which is specific to the proposed development in question."
+      statement008: "8. We may share information with our clients in order to help them with urban planning research."
+      statement009: "9. We will not share your personal information with advertisers."
+    log_data:
+      title: "2. Log Data"
+      statement001: "1. When you use our service we usually receive information about your computer such as your internet protocol (IP) address, browser type, referring pages, operating system, and time stamp."
+    cookies:
+      title: "3. Cookies"
+      statement001: "1. Milieu uses cookies. Cookies are small text files sent from a website and stored in your web browser. You can change your browser settings to block cookies. You can also delete cookies after they are downloaded onto your computer. If you choose to block or delete cookies some aspects of our service may not work."
+    third_party_links:
+      title: "4. Third Party Links"
+      statement001: "1. Our website contains link to third party sites. This privacy policy does not cover these sites. These sites have their own independent privacy policies. Milieu has no control and assumes no liability for the activities of these sites or their use of personal information."
+    email_links:
+      title: "5. Email Links"
+      statement001: "1. The Milieu website and app provides links to the email of city planners and councillors. Milieu is not privy to the content of these emails. Milieu is not responsible for the security or privacy of emails sent to city planners and councillors. Please contact the City of Ottawa if you have questions about their email service."
+    security:
+      title: "6. Security"
+      statement001: "1. Milieu works hard to keep your account and personal data secure, but we cannot guarantee safety."
+      statement002: "2. Milieu recommends that you take proper precautions to keep your personal information safe online."
+    changes_to_privacy_policy:
+      title: "7. Changes to this Privacy Policy"
+      statement001: "1. We may change this privacy policy at any time. We will provide notice of changes to this privacy policy by making changes to this page. You should check this page regularly for changes. If you do not agree to any change of the privacy policy, you must stop using Milieu."
+    compliance:
+      title: "8. Compliance"
+      statement001: "1. Milieu is a Canadian company. We are incorporated in Canada, and our servers are in Canada. Your information may therefore be processed, stored, collected and analyzed in Canada."
+    legal_disclaimer:
+      title: "9. Legal disclaimer"
+      statement001: "1. We reserve the right to disclose your personal information as required to by law, such as in the case of subpoena, warrant or other court proceeding. We may disclose your information in order to protect our safety, your safety or the safety of others."
+    scope:
+      title: "10. Scope"
+      statement001: "1. This privacy policy applies to lay users of our website and our mobile application. It does not apply to our clients and partners."
+    contact_us:
+      title: "11. Contact Us"
+      statement001: "1. If you have any questions about this privacy policy please contact us at info@milieu.io  sincerely , the Milieu Team"
+    change_log:
+      title: "Change Log"
+      statement001: "July 8, 2016: Added Privacy Policy"
