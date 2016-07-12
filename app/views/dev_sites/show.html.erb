@@ -148,7 +148,7 @@
 
 <div id="contact-file-lead-modal" class="modal">
   <div class="modal-content">
-    <%= form_tag "/contact_file_lead", id: "contact-file-lead", remote: :true do %>
+    <%= form_for :contact_file_lead, url: contact_file_lead_path, html: {id: "contact-file-lead"}, remote: :true do |f| %>
       <h4><%= t('dev-sites.show.contact-lead-planner-modal.modal-label') %></h4>
 
       <div class="row">
@@ -157,27 +157,27 @@
         </div>
       </div>
 
-      <%= hidden_field_tag 'dev_site_id', @dev_site.id %>
+      <%= f.hidden_field :dev_site_id, value: @dev_site.id %>
 
       <div class="row">
         <div class="col input-field s12 m6">
-          <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
-          <%= label_tag :name, t('dev-sites.show.contact-lead-planner-modal.name-label') %>
+          <%= f.label :name, t('dev-sites.show.contact-lead-planner-modal.name-label') %>
+          <%= f.text_field :name, placeholder: 'Mark Ruffalo', required: true %>
         </div>
         <div class="col input-field s12 m6">
-          <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
-          <%= label_tag :email, t('dev-sites.show.contact-lead-planner-modal.email-label') %>
+          <%= f.label :email, t('dev-sites.show.contact-lead-planner-modal.email-label') %>
+          <%= f.text_field :email, placeholder: 'mark.ruffalo@gmail.com', required: true %>
         </div>
       </div>
       <div class="row">
         <div class="col input-field s12">
-          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: t('dev-sites.show.contact-lead-planner-modal.message-placeholder') %>
-          <%= label_tag :message, t('dev-sites.show.contact-lead-planner-modal.message-label') %>
+          <%= f.label :message, t('dev-sites.show.contact-lead-planner-modal.message-label') %>
+          <%= f.text_area :message, class: "materialize-textarea", placeholder: t('dev-sites.show.contact-lead-planner-modal.message-placeholder') %>
         </div>
       </div>
       <div class="row">
         <div class="col input-field s12">
-          <%= submit_tag t('dev-sites.show.contact-lead-planner-modal.send-button-text'), class: "waves-effect waves-light btn modal-action modal-close right" %>
+          <%= f.submit t('dev-sites.show.contact-lead-planner-modal.send-button-text'), class: "waves-effect waves-light btn modal-action modal-close right" %>
         </div>
       </div>
     <% end %>
@@ -186,7 +186,7 @@
 
 <div id="contact-councillor-modal" class="modal">
   <div class="modal-content">
-    <%= form_tag "/contact_councillor", id: "contact-councillor", remote: :true do %>
+    <%= form_for :contact_councillor, url: contact_councillor_path, html: { id: "contact-councillor" }, remote: :true do |f| %>
       <h4><%= t('dev-sites.show.contact-councillor-modal.modal-label') %></h4>
 
       <div class="row">
@@ -194,28 +194,27 @@
           <h6><i><%= @dev_site.ward_councillor_email %></i></h6>
         </div>
       </div>
-
-      <%= hidden_field_tag 'dev_site_id', @dev_site.id %>
-
+      
+      <%= f.hidden_field :dev_site_id, value: @dev_site.id %>
       <div class="row">
         <div class="col input-field s12 m6">
-          <%= text_field_tag 'name', nil, placeholder: 'Mark Ruffalo' %>
-          <%= label_tag :name, t('dev-sites.show.contact-councillor-modal.name-label') %>
+          <%= f.label :name, t('dev-sites.show.contact-councillor-modal.name-label') %>
+          <%= f.text_field :name, placeholder: 'Mark Ruffalo' %>
         </div>
         <div class="col input-field s12 m6">
-          <%= text_field_tag 'email', nil, placeholder: 'mark.ruffalo@gmail.com' %>
-          <%= label_tag :email, t('dev-sites.show.contact-councillor-modal.email-label') %>
+          <%= f.label :email, t('dev-sites.show.contact-councillor-modal.email-label') %>
+          <%= f.text_field :email, placeholder: 'mark.ruffalo@gmail.com' %>
         </div>
       </div>
       <div class="row">
         <div class="col input-field s12">
-          <%= text_area_tag 'message', nil, class: "materialize-textarea", placeholder: t('dev-sites.show.contact-councillor-modal.message-placeholder') %>
-          <%= label_tag :message, t('dev-sites.show.contact-councillor-modal.message-label') %>
+          <%= f.label :message, t('dev-sites.show.contact-councillor-modal.message-label') %>
+          <%= f.text_area :message, class: "materialize-textarea", placeholder: t('dev-sites.show.contact-councillor-modal.message-placeholder') %>
         </div>
       </div>
       <div class="row">
         <div class="col input-field s12">
-          <%= submit_tag t('dev-sites.show.contact-councillor-modal.send-button-text'), class: "waves-effect waves-light btn modal-action modal-close right" %>
+          <%= f.submit t('dev-sites.show.contact-councillor-modal.send-button-text'), class: "waves-effect waves-light btn modal-action modal-close right" %>
         </div>
       </div>
     <% end %>

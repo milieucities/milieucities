@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV['SMTP_USER']
+  default from: 'info@milieu.io'
   layout 'mailer'
 end
