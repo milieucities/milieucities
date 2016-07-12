@@ -52,6 +52,8 @@ group :development, :test do
   gem 'byebug', '~> 8.2'
   gem 'pry-byebug'
   gem 'dotenv-rails', '~> 2.1.1'
+  gem 'letter_opener'
+  gem 'launchy'
   # DEVELOMENT specific gems
   # gem 'web-console', '~> 3.0'
   gem 'spring', '~> 1.6.4'
