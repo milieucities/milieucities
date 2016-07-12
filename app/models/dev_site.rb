@@ -92,6 +92,7 @@ class DevSite < ActiveRecord::Base
   end
 
   def image_hash
+    return if self.images.empty?
     self.images.map do |img|
       dimensions = FastImage.size(img.url)
       { src: img.url, w: dimensions.first, h: dimensions.last }

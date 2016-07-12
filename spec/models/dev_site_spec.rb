@@ -19,6 +19,8 @@ describe DevSite do
   it { should respond_to(:files) }
   it { should respond_to(:images) }
 
+  it { should respond_to(:image_hash) }
+
   it { should be_valid }
 
 end
