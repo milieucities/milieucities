@@ -43,7 +43,7 @@
     <div  class="col s12">
       <h5>Comment</h5>
 
-      <%= react_component "EventComments", { eventId: @event.id, userId: @user.id,
+      <%= react_component "EventComments", { eventId: @event.id, userId: current_user ? current_user.id : 'null',
         authenticityToken: form_authenticity_token, locale: @locale } %>
 
     </div>
