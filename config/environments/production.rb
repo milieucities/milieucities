@@ -2,6 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.react.addons = true
+  config.react.variant = :production
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -80,7 +81,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #SMTP GMail Settings
-  config.action_mailer.default_url_options = { :host => 'milieuv2.herokuapp.com'}
+  config.action_mailer.default_url_options = { :host => 'milieu.io' }
 
   config.action_mailer.delivery_method = :smtp
 
