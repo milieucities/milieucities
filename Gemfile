@@ -42,6 +42,7 @@ gem 'ajax-autocomplete-rails', '~> 0.1.1'
 gem 'font-awesome-rails', '~> 4.5'
 gem 'simple_form', '~> 3.2.1'
 gem 'rollbar'
+gem "skylight"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
