@@ -411,6 +411,8 @@ GEM
       actionmailer (>= 3.2.6, < 5)
       actionpack (>= 3.2.6, < 5)
       devise (~> 3.2)
+    skylight (0.10.5)
+      activesupport (>= 3.0.0)
     slop (3.6.0)
     spring (1.6.4)
     sprockets (3.6.2)
@@ -501,6 +503,7 @@ DEPENDENCIES
   shoulda-matchers
   simple_form (~> 3.2.1)
   simple_token_authentication (~> 1.12.0)
+  skylight
   spring (~> 1.6.4)
   turbolinks (~> 2.5.3)
   uglifier (>= 1.3.0)
