@@ -36,47 +36,47 @@ module MapData
       dev_site_json =  Net::HTTP.get_response URI('http://ottwatch.ca/api/devapps/'+dev_app_id)
       dev_site = JSON.parse(dev_site_json.body)
     rescue Exception => msg
-      puts msg.inspect
+      return false
     end
 
 
     new_dev_site = DevSite.new(
-      description: dev_site['description'],
-      appID: dev_site['appid'],
-      devID: dev_site['devid'],
-      received_date: dev_site['receiveddate'],
-      updated: dev_site['updated'],
-      application_type: dev_site['apptype'],
-      ward_num: dev_site['ward'],
-      ward_name: @wards[dev_site['ward']]
+    description: dev_site['description'],
+    appID: dev_site['appid'],
+    devID: dev_site['devid'],
+    received_date: dev_site['receiveddate'],
+    updated: dev_site['updated'],
+    application_type: dev_site['apptype'],
+    ward_num: dev_site['ward'],
+    ward_name: @wards[dev_site['ward']]
     )
 
     dev_site['address'].each do |address|
       new_dev_site.addresses.build(
-        lat: address['lat'],
-        lon: address['lon'],
-        geocode_lat: address['lat'],
-        geocode_lon: address['lon'],
-        street: address['addr'] + ', Ottawa, Ontario, Canada'
+      lat: address['lat'],
+      lon: address['lon'],
+      geocode_lat: address['lat'],
+      geocode_lon: address['lon'],
+      street: address['addr'] + ', Ottawa, Ontario, Canada'
       )
-    end
+    end if dev_site['address'].present?
 
     dev_site['statuses'].each do |status|
       new_dev_site.statuses.build(
-        status_date: status['statusdate'],
-        status: status['status'],
-        created: status['created']
+      status_date: status['statusdate'],
+      status: status['status'],
+      created: status['created']
       )
-    end
+    end if dev_site['statuses'].present?
 
     dev_site['files'].each do |file|
       new_dev_site.city_files.build(
-        name: file['title'],
-        link: file['href'],
-        orig_created: file['created'],
-        orig_update: file['updated']
+      name: file['title'],
+      link: file['href'],
+      orig_created: file['created'],
+      orig_update: file['updated']
       )
-    end
+    end if dev_site['files'].present?
 
     begin
       if new_dev_site.save
@@ -85,6 +85,7 @@ module MapData
         @counter += 1
       else
         puts "Did not save - #{dev_site['devid']}"
+        puts "Did not save - #{new_dev_site.errors.messages}"
       end
     rescue Exception => msg
       puts 'Error retrieving new dev site'
@@ -110,14 +111,14 @@ module MapData
     end
 
     current_dev_site.update(
-      description: dev_site['description'],
-      appID: dev_site['appid'],
-      devID: dev_site['devid'],
-      received_date: dev_site['receiveddate'],
-      updated: dev_site['updated'],
-      application_type: dev_site['apptype'],
-      ward_num: dev_site['ward'],
-      ward_name: @wards[dev_site['ward']]
+    description: dev_site['description'],
+    appID: dev_site['appid'],
+    devID: dev_site['devid'],
+    received_date: dev_site['receiveddate'],
+    updated: dev_site['updated'],
+    application_type: dev_site['apptype'],
+    ward_num: dev_site['ward'],
+    ward_name: @wards[dev_site['ward']]
     )
 
     current_dev_site.addresses.destroy_all
@@ -126,30 +127,30 @@ module MapData
 
     dev_site['address'].each do |address|
       current_dev_site.addresses.build(
-        lat: address['lat'],
-        lon: address['lon'],
-        geocode_lat: address['lat'],
-        geocode_lon: address['lon'],
-        street: address['addr'] + ', Ottawa, Ontario, Canada'
+      lat: address['lat'],
+      lon: address['lon'],
+      geocode_lat: address['lat'],
+      geocode_lon: address['lon'],
+      street: address['addr'] + ', Ottawa, Ontario, Canada'
       )
-    end
+    end if dev_site['address'].present?
 
     dev_site['statuses'].each do |status|
       current_dev_site.statuses.build(
-        status_date: status['statusdate'],
-        status: status['status'],
-        created: status['created']
+      status_date: status['statusdate'],
+      status: status['status'],
+      created: status['created']
       )
-    end
+    end if dev_site['statuses'].present?
 
     dev_site['files'].each do |file|
       current_dev_site.city_files.build(
-        name: file['title'],
-        link: file['href'],
-        orig_created: file['created'],
-        orig_update: file['updated']
+      name: file['title'],
+      link: file['href'],
+      orig_created: file['created'],
+      orig_update: file['updated']
       )
-    end
+    end if dev_site['files'].present?
 
     begin
       if current_dev_site.save
@@ -158,6 +159,7 @@ module MapData
         @counter += 1
       else
         puts "Did not save - #{dev_site['devid']}"
+        puts "Did not save - #{new_dev_site.errors.messages}"
       end
     rescue Exception => msg
       puts msg.inspect
@@ -176,9 +178,8 @@ module MapData
 
   dev_site_ids = dev_sites.map { |dev_site| dev_site['devid'] }
 
-  dev_site_ids.first(50).each do |dev_site_id|
+  dev_site_ids.each do |dev_site_id|
     dev_site = DevSite.find_by(devID: dev_site_id)
     dev_site.present? ? update_dev_site(dev_site) : create_dev_site(dev_site_id)
   end
-
 end
