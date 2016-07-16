@@ -6,9 +6,9 @@ class DevSitesController < ApplicationController
   def index
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
     if params[:filter].present?
-      @dev_sites = @dev_sites.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.filter(params[:filter]).where.not( addresses: [] )
     else
-      @dev_sites = @dev_sites.all.joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.all.where.not( addresses: [] )
     end
 
     @locale = params[:locale]
@@ -30,9 +30,9 @@ class DevSitesController < ApplicationController
   def geojson
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
     if params[:filter].present?
-      @dev_sites = @dev_sites.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.filter(params[:filter]).where.not( addresses: [] )
     else
-      @dev_sites = @dev_sites.all.joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.all.where.not( addresses: [] )
     end
 
     @geojson = []
