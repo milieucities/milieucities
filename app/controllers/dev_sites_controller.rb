@@ -4,10 +4,11 @@ class DevSitesController < ApplicationController
   skip_before_filter :verify_signed_out_user, if: :json_request?
 
   def index
+    @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
     if params[:filter].present?
-      @dev_sites = DevSite.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
     else
-      @dev_sites = DevSite.all.joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.all.joins(:addresses).where.not( addresses: [] )
     end
 
     @locale = params[:locale]
@@ -27,10 +28,11 @@ class DevSitesController < ApplicationController
   end
 
   def geojson
+    @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
     if params[:filter].present?
-      @dev_sites = DevSite.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
     else
-      @dev_sites = DevSite.all.joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.all.joins(:addresses).where.not( addresses: [] )
     end
 
     @geojson = []
