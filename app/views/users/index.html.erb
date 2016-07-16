@@ -5,6 +5,7 @@
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
+          <th>Signed up</th>
         </tr>
       </thead>
 
@@ -14,6 +15,7 @@
           <td><%= user.first_name || '-'  %></td>
           <td><%= user.last_name || '-' %></td>
           <td><%= user.email %></td>
+          <td><%= user.created_at %></td>
         </tr>
         <% end %>
       </tbody>
