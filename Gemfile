@@ -7,15 +7,12 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails', '~> 4.1.0'
 gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'turbolinks', '~> 2.5.3'
-
 gem 'bcrypt', '~> 3.1.11'
-gem 'unirest', '~> 1.1.2'
 gem 'rabl', '~> 0.12.0'
 gem 'pg', '~> 0.18.4'
 gem 'lunchy', '~> 0.10.4'
 gem 'cocoon', '~> 1.2.9'
 gem 'geocoder', '~> 1.3.1'
-
 gem 'redcarpet'
 gem 'fastimage'
 gem 'photoswipe-rails'
@@ -39,6 +36,9 @@ gem 'font-awesome-rails', '~> 4.5'
 gem 'rollbar'
 gem 'skylight'
 
+gem 'cancancan', '~> 1.15.0'
+gem 'rolify', '~> 5.1.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -55,7 +55,7 @@ group :development, :test do
   gem 'brakeman', :require => false
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'i18n-tasks', '~> 0.9.5'
+  # gem 'i18n-tasks', '~> 0.9.5'
   # TEST specific gems
   gem 'rspec-rails', '~> 3.1'
   gem "factory_girl_rails"
@@ -66,5 +66,4 @@ group :development, :test do
 end
 
 group :production do
-
 end
