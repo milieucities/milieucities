@@ -7,9 +7,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails', '~> 4.1.0'
 gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'turbolinks', '~> 2.5.3'
-gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'firebase', '~> 0.2.6'
+
 gem 'bcrypt', '~> 3.1.11'
 gem 'unirest', '~> 1.1.2'
 gem 'rabl', '~> 0.12.0'
@@ -17,6 +15,7 @@ gem 'pg', '~> 0.18.4'
 gem 'lunchy', '~> 0.10.4'
 gem 'cocoon', '~> 1.2.9'
 gem 'geocoder', '~> 1.3.1'
+
 gem 'redcarpet'
 gem 'fastimage'
 gem 'photoswipe-rails'
@@ -36,13 +35,9 @@ gem 'figaro', '~> 1.1.1'
 gem 'react-rails', '~> 1.6.2'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'ajax-autocomplete-rails', '~> 0.1.1'
-## For APIs ##
-# gem 'compass-rails', github: "Compass/compass-rails", branch: "master"
-
 gem 'font-awesome-rails', '~> 4.5'
-gem 'simple_form', '~> 3.2.1'
 gem 'rollbar'
-gem "skylight"
+gem 'skylight'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -56,7 +51,6 @@ group :development, :test do
   gem 'letter_opener'
   gem 'launchy'
   # DEVELOMENT specific gems
-  # gem 'web-console', '~> 3.0'
   gem 'spring', '~> 1.6.4'
   gem 'brakeman', :require => false
   gem "better_errors"
