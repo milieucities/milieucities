@@ -55,7 +55,7 @@ group :development, :test do
   gem 'brakeman', :require => false
   gem "better_errors"
   gem "binding_of_caller"
-  # gem 'i18n-tasks', '~> 0.9.5'
+  gem 'i18n-tasks', '~> 0.9.5'
   # TEST specific gems
   gem 'rspec-rails', '~> 3.1'
   gem "factory_girl_rails"
