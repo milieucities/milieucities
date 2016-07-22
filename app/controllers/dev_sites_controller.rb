@@ -61,7 +61,6 @@ class DevSitesController < ApplicationController
   end
 
   def show
-    @locale = params[:locale]
     if current_user
       @comments = @dev_site.comments.build
     end
@@ -110,27 +109,6 @@ class DevSitesController < ApplicationController
     end
   end
 
-  def all_devsite_comments
-    sid = params[:dev_site_id]
-    @comments = Comment.where(dev_site_id: sid)
-    respond_to do |format|
-      format.json {
-                    render :json => ['all_comments_of_devsite' => @comments]
-                  }
-    end
-  end
-
-  def upvote
-    @dev_site = DevSite.find(params[:id])
-    @dev_site.upvote_by current_user
-    redirect_to :back
-  end
-
-  def downvote
-    @dev_site = DevSite.find(params[:id])
-    @dev_site.downvote_by current_user
-    redirect_to :back
-  end
 
   private
     def set_dev_site

@@ -103,8 +103,8 @@
     <div  class="col s12 m12 l6">
       <h5><%= t('dev-sites.show.comments-label') %></h5>
 
-      <%= react_component "Comments", { devSiteId: @dev_site.id, userId: current_user ? current_user.id : 'null',
-        authenticityToken: form_authenticity_token, locale: @locale } %>
+      <%= react_component "Comments", { devSiteId: @dev_site.id, userId: current_user.id,
+        authenticityToken: form_authenticity_token, locale: params[:locale] } %>
 
     </div>
 
