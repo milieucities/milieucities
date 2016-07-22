@@ -13,10 +13,6 @@ Rails.application.routes.draw do
 
     resources :dev_sites do
       resources :comments, module: :dev_sites do
-        member do
-          put 'upvote', to: 'comments#upvote'
-          put 'downvote', to: 'comments#downvote'
-        end
       end
 
       get :geojson, on: :collection
@@ -25,22 +21,11 @@ Rails.application.routes.draw do
       collection do
         post :search
       end
-
-      # Voting
-      member do
-        put 'upvote', to: 'dev_sites#upvote'
-        put 'downvote', to: 'dev_sites#downvote'
-      end
-
     end
 
     resources :projects
     resources :events do
       resources :comments, module: :events do
-        member do
-          put 'upvote', to: 'comments#upvote'
-          put 'downvote', to: 'comments#downvote'
-        end
       end
       get :images, on: :member
       get :geojson, on: :collection

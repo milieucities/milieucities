@@ -45,10 +45,6 @@ Comments.Comment = React.createClass({
     var user = this.props.comment.user;
     return (
       <div className="comment">
-        <div className="voting">
-          <i className="fa fa-angle-up fa-2x"></i><br/>
-          <i className="fa fa-angle-down fa-2x"></i>
-        </div>
         <div className="user">{ user ? user.username : "Anonymous"}
         <span className="role"> | { user ? user.role : "User" } </span>
         </div>
