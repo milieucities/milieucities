@@ -5,6 +5,12 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
 
+    if params[:page].present? || params[:limit].present?
+      limit = params[:limit].present? ? params[:limit].to_i : 20
+      page = params[:page].present? ? params[:page].to_i : 0
+      @events.limit!(limit).offset!(limit * page + 1)
+    end
+
     respond_to do |format|
         format.html
         format.json
@@ -37,10 +43,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @locale = params[:locale]
-    if current_user
-      @comments = @event.comments.build
-    end
   end
 
   def new

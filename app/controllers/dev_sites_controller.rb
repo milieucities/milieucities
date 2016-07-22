@@ -10,7 +10,11 @@ class DevSitesController < ApplicationController
       @dev_sites = @dev_sites.all.where.not( addresses: [] )
     end
 
-    @locale = params[:locale]
+    if params[:page].present? || params[:limit].present?
+      limit = params[:limit].present? ? params[:limit].to_i : 20
+      page = params[:page].present? ? params[:page].to_i : 0
+      @dev_sites.limit!(limit).offset!(limit * page + 1)
+    end
 
     respond_to do |format|
         format.html
@@ -19,6 +23,7 @@ class DevSitesController < ApplicationController
   end
 
   def search
+    #TODO
     redirect_to map_path
   end
 
@@ -61,9 +66,6 @@ class DevSitesController < ApplicationController
   end
 
   def show
-    if current_user
-      @comments = @dev_site.comments.build
-    end
   end
 
   def new

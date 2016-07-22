@@ -11,7 +11,7 @@ describe SessionsController do
 
        before(:each) do
         credentials = { email: @user.email, password: @user.password, password_confirmation: @user.password_confirmation }
-        post :create, { session: credentials, locale: :en }
+        post :create, { session: credentials }
       end
 
       it "returns the user record corresponding to the given credentials" do
@@ -24,7 +24,7 @@ describe SessionsController do
      context "when credentials are not missing" do
        before(:each) do
         credentials = { email: "", password: "", password_confirmation: "" }
-        post :create, { session: credentials, locale: :en }
+        post :create, { session: credentials }
       end
 
       it "returns the user record corresponding to the given credentials" do
@@ -40,11 +40,11 @@ describe SessionsController do
     before(:each) do
       @user = FactoryGirl.create(:user, first_name: "John", last_name: "Smith", username: "jsmith")
       sign_in(@user)
-      delete :destroy, { id: @user.id, locale: :en }
+      delete :destroy, { id: @user.id }
     end
 
     it "returns to home page after a successful logout" do
-      delete :destroy, { id: @user.id, locale: :en }
+      delete :destroy, { id: @user.id }
       expect(response).to redirect_to(root_path)
       expect(session[:user_id].nil?).to be_truthy
     end

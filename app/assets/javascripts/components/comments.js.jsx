@@ -23,7 +23,7 @@ var Comments = React.createClass({
 });
 
 Comments.CommentsIndex = React.createClass({
-  comments: function(){
+  commentNodes: function(){
     var commentNodes = this.props.comments.map(function(comment){
       return (
         <Comments.Comment {...this.props} key={comment.id} comment={comment} />
@@ -34,7 +34,7 @@ Comments.CommentsIndex = React.createClass({
   render: function(){
     return (
       <div id="comments">
-        {this.comments()}
+        {this.commentNodes()}
       </div>
     );
   }
@@ -42,7 +42,7 @@ Comments.CommentsIndex = React.createClass({
 
 Comments.Comment = React.createClass({
   render: function(){
-    var user = this.props.comment.user;
+    let { user } = this.props.comment;
     return (
       <div className="comment">
         <div className="user">{ user ? user.username : "Anonymous"}

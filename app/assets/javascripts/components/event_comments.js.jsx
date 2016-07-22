@@ -94,7 +94,7 @@ EventComments.CommentsForm = React.createClass({
   },
   render: function(){
     let backUpActionUrl = "/"+ this.props.locale + "/users/new";
-    if(this.props.userId !== 'null'){
+    if(this.props.userId){
       return (
         <div>
           <form id="new_comment" onSubmit={this.submit}>
