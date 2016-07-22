@@ -60,36 +60,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :new, :create, :destroy]
     resources :sessions, only: [:new, :create, :destroy]
 
-    ##############################
-    ### INTERNAL API ENDPOINTS ###
-    ##############################
-
-    namespace :api, defaults: {format: :json} do
-      namespace :v1 do
-        ## USER REGISTRATIONS ##
-        resources :registrations, only: [:create, :destroy, :index, :show]
-
-        ## SESSIONS ##
-        namespace :sessions, path: '/', as: nil do
-          post :login_authentication
-          get  :login
-          get  :logout
-        end
-
-        ## EVENTS ##
-        resources :events
-
-        ## DEV SITES ##
-        resources :dev_sites
-
-        scope module: :maps do
-          # Ottawa Map
-          get 'ottawamap', to: 'ottawa_map#map'
-          get 'loadWards', to: 'ottawa_map#loadGeoJsonData'
-          get 'loadMarkers', to: 'ottawa_map#loadMarkers'
-        end
-      end
-    end
   end
 
   root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root

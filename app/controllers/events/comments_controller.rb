@@ -28,7 +28,7 @@ class Events::CommentsController < CommentsController
     def comment_params
       params.require(:comment).permit(:body, :event_id, :user_id)
     end
-    
+
     def set_commentable
       @commentable = Event.find(params[:event_id])
     end

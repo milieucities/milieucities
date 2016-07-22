@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628135328) do
+ActiveRecord::Schema.define(version: 20160722002043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,18 @@ ActiveRecord::Schema.define(version: 20160628135328) do
     t.datetime "updated_at"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "neighbourhood"
+    t.string   "postal_code"
+    t.boolean  "accepted_terms"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -161,6 +173,17 @@ ActiveRecord::Schema.define(version: 20160628135328) do
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
   create_table "statuses", force: :cascade do |t|
     t.datetime "status_date"
     t.string   "status"
@@ -189,6 +212,13 @@ ActiveRecord::Schema.define(version: 20160628135328) do
 
   add_index "users", ["remember_digest"], name: "index_users_on_remember_digest", using: :btree
 
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
   create_table "votes", force: :cascade do |t|
     t.integer  "votable_id"
     t.string   "votable_type"
@@ -206,4 +236,5 @@ ActiveRecord::Schema.define(version: 20160628135328) do
 
   add_foreign_key "comments", "dev_sites"
   add_foreign_key "comments", "events"
+  add_foreign_key "profiles", "users"
 end

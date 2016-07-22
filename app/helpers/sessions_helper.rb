@@ -1,5 +1,14 @@
 module SessionsHelper
 
+  def current_user
+    @user = User.find(session[:user_id]) if signed_in?
+    @user ||= User.new
+  end
+
+  def signed_in?
+    session[:user_id].present?
+  end
+
   def login(user)
     session[:user_id] = user.id
   end
@@ -15,23 +24,7 @@ module SessionsHelper
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end
-
-  def current_user
-    if user_id = session[:user_id]
-      @current_user ||= User.find_by(id: user_id)
-    elsif user_id = cookies.signed[:user_id]
-      user = User.find_by(id: user_id)
-      if user && user.authenticated?(cookies[:remember_token])
-        login user
-        @current_user = user
-      end
-    end
-  end
-
-  def logged_in?
-    !current_user.nil?
-  end
-
+  
   def log_out
     forget(current_user)
     session.delete(:user_id)

@@ -1,5 +1,4 @@
 require 'spec_helper'
-include SessionsHelper
 
 describe SessionsController do
   describe "POST #create" do
@@ -40,7 +39,7 @@ describe SessionsController do
   describe "DELETE #destroy" do
     before(:each) do
       @user = FactoryGirl.create(:user, first_name: "John", last_name: "Smith", username: "jsmith")
-      login(@user)
+      sign_in(@user)
       delete :destroy, { id: @user.id, locale: :en }
     end
 

@@ -21,13 +21,6 @@ describe SessionsHelper do
     it "returns right user when session is nil (equal to current_user )" do
       remember(@user)
       expect(@user).to eq current_user
-      expect(!session[:user_id].nil?).to be_truthy
-    end
-
-    it "returns nil for current_user when remember digest is wrong" do
-      remember(@user)
-      @user.update_attribute(:remember_digest, User.digest(User.new_token))
-      expect(current_user).to be_nil
     end
 
    end

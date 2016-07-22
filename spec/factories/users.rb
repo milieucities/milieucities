@@ -3,7 +3,12 @@ FactoryGirl.define do
     email { FFaker::Internet.email }
     password "12345678"
     password_confirmation "12345678"
-    first_name { FFaker::Name::FIRST_NAMES }
-    last_name { FFaker::Name::LAST_NAMES }
+
+    factory :admin_user do
+      after(:build) do |user|
+        user.add_role :admin
+      end
+    end
+
   end
 end

@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :signed_in?
+  load_and_authorize_resource
 
   def index
     @comments = Comment.all

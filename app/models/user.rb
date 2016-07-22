@@ -1,35 +1,22 @@
 class User < ActiveRecord::Base
+  rolify
+  has_secure_password validations: false
   attr_accessor :remember_token
 
-  # THIS ARRAY MUST BE IN ORDER BY EACH WARDS, WARD NUMBER
-  VALID_NEIGHBOURHOOD_TYPES = [ "Orleans", "Innes", "Barrhaven", "Kanata North",
-    "West Carleton-March", "Stittsville", "Bay", "College", "Knoxdale-Merivale",
-    "Gloucester-Southgate", "Beacon Hill-Cyrville", "Rideau-Vanier", "Rideau-Rockcliffe",
-    "Somerset", "Kitchissippi", "River", "Capital", "Alta Vista", "Cumberland", "Osgoode",
-    "Rideau-Goulbourn", "Gloucester-South Nepean", "Kanata South"]
+  has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile
+  has_many :comments, as: :commentable
 
-  VALID_ROLE_TYPES = ["Public", "City Official", "Organization", "Urban Developer"]
+  validates :accepted_terms, acceptance: true
+  validates  :email, presence: {message: "Email is required"},
+  uniqueness: {message: "Email already in use"}
+
+  validates  :password, presence: {message: "Password is required", on: :create},
+  confirmation: {message: "Passwords do not match."},
+  length: { in: 6..20, message: "Password must be between 6 to 20 characters"}
 
   before_create do |doc|
     doc.api_key = doc.generate_api_key
-  end
-
-  has_many :comments, as: :commentable
-
-  validates               :email,
-                            presence: {message: "Email is required"},
-                            uniqueness: {message: "Email already in use"}
-  validates               :username,
-                            presence: {message: "Username is required"}
-  has_secure_password
-  validates               :password,
-                            presence: {message: "Password is required", on: :create},
-                            confirmation: {message: "Passwords do not match."},
-                            length: { in: 6..20, message: "Password must be between 6 to 20 characters"}
-
-
-  def full_name
-    "#{self.first_name} #{self.last_name}"
   end
 
   def generate_api_key
@@ -41,7 +28,7 @@ class User < ActiveRecord::Base
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
+    BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
@@ -50,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def remember
-    self.remember_token = User.new_token
+    remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 

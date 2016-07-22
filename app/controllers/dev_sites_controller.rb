@@ -1,7 +1,6 @@
 class DevSitesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_dev_site, only: [:show, :edit, :images, :update, :destroy]
-  before_action :logged_in_user, only: [:new, :edit, :update, :destroy]
-  skip_before_filter :verify_signed_out_user, if: :json_request?
 
   def index
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)

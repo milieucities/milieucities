@@ -15,7 +15,6 @@ en:
       application-type: 'Application Type:'
       ward-name: 'Ward Name:'
       ward-number: 'Ward Number:'
-      votes: 'Votes:'
       status-box:
         status: 'Status'
         status-date: 'Status Date'
