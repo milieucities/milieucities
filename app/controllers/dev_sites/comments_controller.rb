@@ -28,7 +28,7 @@ class DevSites::CommentsController < CommentsController
     def comment_params
       params.require(:comment).permit(:body, :dev_site_id, :user_id)
     end
-    
+
     def set_commentable
       @commentable = DevSite.find(params[:dev_site_id])
     end

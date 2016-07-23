@@ -93,18 +93,28 @@ EventComments.CommentsForm = React.createClass({
     return false;
   },
   render: function(){
-    return (
-      <div>
-        <form id="new_comment" onSubmit={this.submit}>
-          <input name="utf8" type="hidden" value="✓" />
-          <input type="hidden" name="authenticity_token" value={this.props.authenticityToken} />
-          <input type="hidden" name="comment[event_id]" id="comment_event_id" value={this.props.eventId} />
-          <input type="hidden" name="comment[user_id]" id="comment_user_id" value={this.props.userId} />
+    let backUpActionUrl = "/"+ this.props.locale + "/users/new";
+    if(this.props.userId){
+      return (
+        <div>
+          <form id="new_comment" onSubmit={this.submit}>
+            <input name="utf8" type="hidden" value="✓" />
+            <input type="hidden" name="authenticity_token" value={this.props.authenticityToken} />
+            <input type="hidden" name="comment[event_id]" id="comment_event_id" value={this.props.eventId} />
+            <input type="hidden" name="comment[user_id]" id="comment_user_id" value={this.props.userId} />
 
-          <textarea valueLink={this.linkState('body')}  placeholder="I can't wait to see this in our neighbourhood!" name="comment[body]" id="comment_body"></textarea>
-          <input type="submit" name="commit" value="Comment" className="btn"/>
+            <textarea valueLink={this.linkState('body')}  placeholder="What do you think?" name="comment[body]" id="comment_body"></textarea>
+            <input type="submit" name="commit" value="Comment" className="btn"/>
+          </form>
+        </div>
+      );
+    } else {
+      return (
+        <form action={ backUpActionUrl } method="get">
+            <input type="submit" value="Sign up to Comment"
+                 name="Submit" id="frm1_submit" className="btn" />
         </form>
-      </div>
-    );
+      )
+    }
   }
 });

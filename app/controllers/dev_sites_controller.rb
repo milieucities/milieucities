@@ -1,15 +1,24 @@
 class DevSitesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_dev_site, only: [:show, :edit, :images, :update, :destroy]
-  skip_before_filter :verify_signed_out_user, if: :json_request?
 
   def index
+    @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
     if params[:filter].present?
-      @dev_sites = DevSite.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.filter(params[:filter]).where.not( addresses: [] )
     else
+<<<<<<< HEAD
       @dev_sites = DevSite.all.joins(:addresses).where.not( addresses: [] ).limit(150)
+=======
+      @dev_sites = @dev_sites.all.where.not( addresses: [] )
+>>>>>>> master
     end
 
-    @locale = params[:locale]
+    if params[:page].present? || params[:limit].present?
+      limit = params[:limit].present? ? params[:limit].to_i : 20
+      page = params[:page].present? ? params[:page].to_i : 0
+      @dev_sites.limit!(limit).offset!(limit * page + 1)
+    end
 
     respond_to do |format|
         format.html
@@ -18,6 +27,7 @@ class DevSitesController < ApplicationController
   end
 
   def search
+    #TODO
     redirect_to map_path
   end
 
@@ -26,10 +36,11 @@ class DevSitesController < ApplicationController
   end
 
   def geojson
+    @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
     if params[:filter].present?
-      @dev_sites = DevSite.filter(params[:filter]).joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.filter(params[:filter]).where.not( addresses: [] )
     else
-      @dev_sites = DevSite.all.joins(:addresses).where.not( addresses: [] )
+      @dev_sites = @dev_sites.all.where.not( addresses: [] )
     end
 
     @geojson = []
@@ -59,10 +70,6 @@ class DevSitesController < ApplicationController
   end
 
   def show
-    @locale = params[:locale]
-    if current_user
-      @comments = @dev_site.comments.build
-    end
   end
 
   def new
@@ -108,27 +115,6 @@ class DevSitesController < ApplicationController
     end
   end
 
-  def all_devsite_comments
-    sid = params[:dev_site_id]
-    @comments = Comment.where(dev_site_id: sid)
-    respond_to do |format|
-      format.json {
-                    render :json => ['all_comments_of_devsite' => @comments]
-                  }
-    end
-  end
-
-  def upvote
-    @dev_site = DevSite.find(params[:id])
-    @dev_site.upvote_by current_user
-    redirect_to :back
-  end
-
-  def downvote
-    @dev_site = DevSite.find(params[:id])
-    @dev_site.downvote_by current_user
-    redirect_to :back
-  end
 
   private
     def set_dev_site

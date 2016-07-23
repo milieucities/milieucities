@@ -2,6 +2,10 @@ class StaticPagesController < ApplicationController
 
   def home
     @no_header = true
+    respond_to do |format|
+      format.html
+      format.json { head :no_content }
+    end
   end
 
   def events
@@ -20,36 +24,33 @@ class StaticPagesController < ApplicationController
   end
 
   def contact_milieu
-    ContactMailer.contact_milieu(params[:name], params[:email], params[:message]).deliver_now
+    message = params.required(:contact_milieu).permit(:name, :email, :message)
+    ContactMailer.contact_milieu(message).deliver_now
     render nothing: true
   end
 
   def contact_file_lead
-    ContactMailer.contact_file_lead(params[:name], params[:email], params[:message], params[:dev_site_id]).deliver_now
+    message = params.required(:contact_file_lead).permit(:name, :email, :message, :dev_site_id)
+    ContactMailer.contact_file_lead(message).deliver_now
     render nothing: true
   end
 
   def contact_councillor
-    ContactMailer.contact_councillor(params[:name], params[:email], params[:message], params[:dev_site_id]).deliver_now
+    message = params.required(:contact_councillor).permit(:name, :email, :message, :dev_site_id)
+    ContactMailer.contact_councillor(message).deliver_now
     render nothing: true
   end
 
+  def privacy
+  end
+
+  def tos
+  end
+
   def about
-
   end
 
-  def submitSurvey
-    name = params[:ottawa].to_s if params[:ottawa]
-    hood = params[:hood].to_s if params[:hood]
-    saveToFirebase(name, hood)
-  end
-
-  def submitSurveyCitizen
-    name = params[:ottawa].to_s if params[:ottawa]
-    hood = params[:hood].to_s if params[:hood]
-    saveToFirebaseCitizen(name, hood)
-  end
-
+<<<<<<< HEAD
 
   private
 
@@ -99,4 +100,6 @@ class StaticPagesController < ApplicationController
       end
     end
 
+=======
+>>>>>>> master
 end

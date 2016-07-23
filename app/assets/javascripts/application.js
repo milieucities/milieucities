@@ -25,8 +25,6 @@
 //= require photoswipe
 //= require handlebars.runtime
 //= require_tree ./templates
-//  VENDOR PACKAGES
-//= require jquery-comments/js/jquery-comments.min.js
 
 
 //= require_tree .

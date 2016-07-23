@@ -1,5 +1,54 @@
 en:
-  search_button_text: 'search'
+  map:
+    filter-section:
+      main-label: 'Filter Neighbourhood'
+      neighbourhood-dropdown-label: 'Neighbourhood'
+      filter-status-label: 'Filter Status'
+      participate-label: 'Participate in current public consultations'
+      learn-label: 'Learn more about new urban developments'
+      discuss-label: 'Start a discussion around vacant and derelict sites'
+      explore-label: 'Explore community events'
+  dev-sites:
+    show:
+      back-to-map-link: 'Back to Map'
+      dev-id: 'Development Id:'
+      application-type: 'Application Type:'
+      ward-name: 'Ward Name:'
+      ward-number: 'Ward Number:'
+      status-box:
+        status: 'Status'
+        status-date: 'Status Date'
+      contact-planner-text: 'Contact Planner'
+      contact-councillor-text: 'Contact Councillor'
+      description-label: 'Description'
+      comments-label: 'Comments'
+      contact-lead-planner-modal:
+        modal-label: 'Contact Lead Planner'
+        name-label: 'name'
+        email-label: 'email'
+        message-label: 'message'
+        message-placeholder: 'Leave a message.'
+        send-button-text: 'Send'
+      contact-councillor-modal:
+        modal-label: 'Contact Councillor'
+        name-label: 'name'
+        email-label: 'email'
+        message-label: 'message'
+        message-placeholder: 'Leave a message.'
+        send-button-text: 'Send'
+  contact-milieu-modal:
+    header-text: 'Contact Milieu'
+    name-label: 'name'
+    message-label: 'message'
+    email-label: 'email'
+    send-button: 'Send'
+  sign-in-modal:
+    email-label: 'email'
+    password-label: 'password'
+    sign-in-modal-text: 'Sign In'
+    sign-in-button: 'Sign In'
+    sign-up-button: 'Sign Up'
+  search_button_text: 'Search'
   nav_bar:
     slogan: 'Building Better Cities with People'
     launch: 'Launch Consultation'
@@ -15,53 +64,99 @@ en:
       p2: 'Simplify public engagement by launching your own consultation'
     search_bar_text: 'Enter an address'
     featured: 'Featured Developments'
-    why_use_milieu:
-      how: 'How can you use Milieu?'
-      participate: 'Participate in current public consultations'
-      learn: 'Learn more about new urban developments'
-      start: 'Start a discussion around vacant and derelict sites'
-      explore: 'Explore community events'
-    view_map_button: 'VIEW MAP'
-    survey:
-      header: 'Share what gets you excited about ottawa'
-      my_ottawa_label: 'My Ottawa includes'
-      neighbourhood_label: 'Neighbourhood I Live in'
-      submit_button: 'Enter Map'
-      find_us_on: 'Find us on'
-      outlets:
-        facebook: 'Facebook'
-        twitter: 'Twitter'
-        medium: 'Medium'
-        instagram: 'Instagram'
-      terms:
-        by_using: 'By using Milieu, I agree to the'
-        link_button: 'terms of service'
-    term_modal:
-      mission: 'Mission'
-      text_01: 'Milieu is a system for connecting citizens, urban developers and city officials to work together to make better planning and development decisions.'
-      text_02: 'Our mission is to provide people with an open platform to access, share and discuss planning and
-      development in the city. This includes connecting with other people and sharing information through
-      social media. By soliciting citizen feedback and aggregating the data collected from public consultations,
-      we aim to facilitate participatory and effective decision-making in planning and development. We also
-      aim to build a feedback loop of trust, transparency and accountability between city officials, urban
-      developers and the public.'
-      text_03: 'As we grow and evolve in this project we want to hear from you, please send your feedback to info@milieu.io!'
-      principles: 'Milieu Principles'
-      text_04: 'People should have the freedom and the practical tools to access information on planning and development and to connect, discuss and share this information with others.'
-      text_05: 'Milieu publicly makes available information about its purpose, plans, policies and operations.'
-      data_policy: 'Data Policy'
-      text_06: 'Milieu reserves all intellectual property related to its processes, algorithms, methodologies and collateral materials.'
-      text_07: 'Public feedback through the consultation process or participation in the application will result in data
-      collection. This data shall be the intellectual property of the Milieu. Any publication by Milieu of data,
-      conclusions, or analysis arising from this consultation shall be at the discretion of Milieu.'
-      community_standards: 'Community Standards'
-      text_08: 'By joining Milieu, you agree to authenticate yourself by using your real name and identity. By connecting
-      with your authentic identity, the milieu community is more accountable and transparent. You will not
-      provide any false personal information on Milieu, create more than one personal account, or create an
-      account for anyone other than yourself.'
-      text_09: "Be mindful of others, please do not post content or take any action on Milieu that infringes or violates
-      someone else's rights or otherwise violates the law. We can remove any content or information you
-      post on Milieu if we believe that it violates this Statement or our policies."
-      text_10: 'Please contact us at any moment regarding questions, concerns or should you have to report something.'
-      text_11: 'Thank you'
-      text_12: 'The Milieu Team'
+    terms_of_use_link: "Terms of Use"
+    privacy_policy_link: "Privacy Policy"
+  terms_of_use_header_text: "Terms of Use"
+  term_of_use:
+    introduction:
+      title: "1. Introduction"
+      statement001: "1. These terms are a contract between you and Milieu."
+      statement002: "2. Your use of Milieu is conditional upon your acceptance of our terms of use."
+      statement003: "3. If you disagree with any of the terms, you cannot use Milieu."
+      statement004: "4. Please read the terms carefully."
+    creating_an_account:
+      title: "2. Creating an Account"
+      statement001: "1. By creating a Milieu account, you agree to authenticate yourself with your real name and identity."
+      statement002: "2. You will not provide any false personal. information on Milieu, or create an account for anyone other than yourself without permission."
+      statement003: "3. You will not create more than one personal account."
+    posting_on_milieu:
+      title: "3. Posting on Milieu"
+      statement001: "1. By posting content on Milieu you grant Milieu a non-exclusive and royalty free license to reproduce and publicly display your user content for any purpose."
+      statement002: "2. Content you post on Milieu represents your opinion and your opinion alone."
+      statement003: "3. Milieu is not responsible for any reliance or liability that may arise from content you post on Milieu."
+      statement004: "4. You will not post content containing offensive or hateful language."
+      statement005: "5. You will not post content or take any action on Milieu that infringes or violates someone else's rights or otherwise violates the law."
+      statement006: "6. We can remove any content or information you post on Milieu for any reason."
+    respecting_integrity_of_platform:
+      title: "4. Respecting the Integrity of our Platform"
+      statement001: "1. You will not use our service to spread spam."
+      statement002: "2. You will not use our service for phishing or to distribute content which would compromise the security of someone else’s computer."
+      statement003: "3. You will not attempt to disrupt Milieu’s internal service or tamper with our API."
+    intellectual_property:
+      title: "5. Intellectual Property"
+      statement001: "1. Milieu reserves all intellectual property related to its API, processes, methodologies and collateral materials."
+      statement002: "2. Public feedback through the consultation process or participation in the application will result in data collection that is specific to the proposed development under consideration. This data shall be the intellectual property of Milieu Incorporated Any publication by Milieu of data, conclusions or analysis arising from this consultation shall be at the discretion of Milieu."
+    disclaimer_of_warranty:
+      title: "6. Disclaimer of Warranty"
+      statement001: "1. Milieu is provided “as is” with no warranties, express or implied. Milieu comes with no warranty of merchantability, fitness for a particular purpose, security, non-infringement or title."
+    limitation_of_liability:
+      title: "7. Limitation of Liability"
+      statement001: "1. Milieu is not liable for any loss or damages which may arise directly, or indirectly through the use of our service. This includes, but it not limited to, general, pecuniary and exemplary damages."
+      statement002: "2. To the maximum extent allowed by law, this limitation of liability will apply in all circumstances, whether the liability claim is based in statute, tort, or contract."
+    severability:
+      title: "8. Severability"
+      statement001: "1. If any provision of these terms is found invalid by a court of law, the other provisions of the Terms will remain in full effect."
+      statement002: "2. If Milieu chooses not to exercise a term, that does not waive the term."
+    change_of_terms:
+      title: "9. Change of Terms"
+      statement001: "1. Milieu can change the Terms of Use at any times.  We will provide notice of changes to the terms of use by updating this terms document.  You should check this terms document regularly for changes. If you do not agree to any change of terms, you must stop using Milieu."
+    change_log:
+      title: "Change Log"
+      statement001: "July 8, 2016: Updated our Terms of Use."
+  privacy:
+    title: "Privacy Policy"
+    information_collection:
+      title: "1. Information Collection"
+      statement001: "1. Information which you post in the comment section is public."
+      statement002: "2. In the spirit of transparency and accountability and keeping in-line with the vision of Milieu, we aim to facilitate thoughtful and respectful conversations on urban planning and development, usernames or names of those whose sign up will appear with each written submission."
+      statement003: "3. By submitting a comment you accept that Milieu has the right to reproduce and publish this in any manner we choose."
+      statement004: "4. We do not endorse any of the comments submitted."
+      statement005: "5. Comments are moderated according to ensure a climate of civility."
+      statement006: "6. You can chose to delete or change information you post in the comment section at any time. Deleted information will not be accessible on Milieu, but people may still be able to access deleted information through saved screenshots or caches."
+      statement007: "7. Feedback which you provide to Milieu on a proposed development will result in data collection which is specific to the proposed development in question."
+      statement008: "8. We may share information with our clients in order to help them with urban planning research."
+      statement009: "9. We will not share your personal information with advertisers."
+    log_data:
+      title: "2. Log Data"
+      statement001: "1. When you use our service we usually receive information about your computer such as your internet protocol (IP) address, browser type, referring pages, operating system, and time stamp."
+    cookies:
+      title: "3. Cookies"
+      statement001: "1. Milieu uses cookies. Cookies are small text files sent from a website and stored in your web browser. You can change your browser settings to block cookies. You can also delete cookies after they are downloaded onto your computer. If you choose to block or delete cookies some aspects of our service may not work."
+    third_party_links:
+      title: "4. Third Party Links"
+      statement001: "1. Our website contains link to third party sites. This privacy policy does not cover these sites. These sites have their own independent privacy policies. Milieu has no control and assumes no liability for the activities of these sites or their use of personal information."
+    email_links:
+      title: "5. Email Links"
+      statement001: "1. The Milieu website and app provides links to the email of city planners and councillors. Milieu is not privy to the content of these emails. Milieu is not responsible for the security or privacy of emails sent to city planners and councillors. Please contact the City of Ottawa if you have questions about their email service."
+    security:
+      title: "6. Security"
+      statement001: "1. Milieu works hard to keep your account and personal data secure, but we cannot guarantee safety."
+      statement002: "2. Milieu recommends that you take proper precautions to keep your personal information safe online."
+    changes_to_privacy_policy:
+      title: "7. Changes to this Privacy Policy"
+      statement001: "1. We may change this privacy policy at any time. We will provide notice of changes to this privacy policy by making changes to this page. You should check this page regularly for changes. If you do not agree to any change of the privacy policy, you must stop using Milieu."
+    compliance:
+      title: "8. Compliance"
+      statement001: "1. Milieu is a Canadian company. We are incorporated in Canada, and our servers are in Canada. Your information may therefore be processed, stored, collected and analyzed in Canada."
+    legal_disclaimer:
+      title: "9. Legal disclaimer"
+      statement001: "1. We reserve the right to disclose your personal information as required to by law, such as in the case of subpoena, warrant or other court proceeding. We may disclose your information in order to protect our safety, your safety or the safety of others."
+    scope:
+      title: "10. Scope"
+      statement001: "1. This privacy policy applies to lay users of our website and our mobile application. It does not apply to our clients and partners."
+    contact_us:
+      title: "11. Contact Us"
+      statement001: "1. If you have any questions about this privacy policy please contact us at info@milieu.io  sincerely , the Milieu Team"
+    change_log:
+      title: "Change Log"
+      statement001: "July 8, 2016: Added Privacy Policy"

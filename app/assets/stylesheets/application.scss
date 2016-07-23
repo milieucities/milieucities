@@ -12,11 +12,11 @@ $dark-secondary-color: darken($secondary-color, 15%);
 @import "forms";
 @import "maps/home";
 @import "maps/main";
+@import "maps/armstrong";
 @import "photoswipe/photoswipe";
 @import "photoswipe/index";
 @import "photoswipe/default-skin/default-skin";
 @import "about";
-@import "animations";
 @import "comments";
 @import "users";
 @import "home";
@@ -55,7 +55,7 @@ a{
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: $primary-color;
+  color: $secondary-color;
   font-weight: 300;
 }
 

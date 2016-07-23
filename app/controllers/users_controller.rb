@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
 
   def index
     @users = User.all
@@ -9,16 +10,16 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user.build_profile
   end
 
   def create
     @user = User.new(user_params)
-
     if @user.save
-      login(@user)
+      session[:user_id] = @user.id
       redirect_to root_path, notice: "Welcome to Milieu"
     else
+      flash[:alert] = "You must accept terms of service" unless @user.profile.accepted_terms
       render :new
     end
   end
@@ -32,19 +33,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    @users = User.all
-  end
-
-  def show
-    @user = User.find(params[:id])
-  end
-
-
   private
 
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation,
-        :bio, :role, :neighbourhood, :address, :organization)
-    end
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation,
+    profile_attributes: [:name, :neighbourhood, :postal_code, :accepted_terms])
+  end
+
 end

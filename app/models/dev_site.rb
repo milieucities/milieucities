@@ -1,9 +1,6 @@
 class DevSite < ActiveRecord::Base
   attr_accessor :images, :files
 
-  # Voting
-  acts_as_votable
-
   default_scope { order(ward_num: :asc ) }
 
   VALID_APPLICATION_TYPES = [ "Site Plan Control", "Official Plan Amendment", "Zoning By-law Amendment",
@@ -14,7 +11,6 @@ class DevSite < ActiveRecord::Base
     "Low-rise Residential", "Mid-rise Residential", "Hi-rise Residential", "Mixed-use Residential/Community",
     "Commercial", "Commercial/Hotel","Mixed-use", "Additions"]
 
-  # establish_connection DB_OTTAWA
   # ASSOCIATIONS
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, dependent: :destroy
@@ -24,26 +20,25 @@ class DevSite < ActiveRecord::Base
   accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :statuses, allow_destroy: true
 
-  ## Validations
-  validates     :devID, uniqueness: { message: "Dev Id must be unique" }
-  validates     :application_type, presence: { message: "Application type is required" }
-  validates     :description, presence: { message: "Description is required" }
-  validates     :ward_name, presence: { message: "Ward name is required" }
-  validates     :ward_num, presence: { message: "Ward number is required" }, numericality: true
+  validates :devID, uniqueness: { message: "Dev Id must be unique" }
+  validates :application_type, presence: { message: "Application type is required" }
+  validates :description, presence: { message: "Description is required" }
+  validates :ward_name, presence: { message: "Ward name is required" }
+  validates :ward_num, presence: { message: "Ward number is required" }, numericality: true
 
 
   def self.filter(filter_by)
     @dev_sites = DevSite.all
     if filter_by == "consultation" then
-      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Comment Period in Progress", "Community Information and Comment Session Open"] } ).group('dev_sites.id')
+      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Comment Period in Progress", "Community Information and Comment Session Open"] } )
     elsif filter_by == "new-development" then
-      @dev_sites = @dev_sites.where( application_type: VALID_APPLICATION_TYPES.reject { |at| ["Derelict", "Vacant"].include?(at) } )
-      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: Status::VALID_STATUS_TYPES.reject { |st| ["Unknown", "Comment Period in Progress", "Community Information and Comment Session Open"].include?(st) } } )
+      @dev_sites = @dev_sites.where( application_type: VALID_APPLICATION_TYPES.reject { |at| ["Derelict", "Vacant", "Unknown"].include?(at) } )
+      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: Status::VALID_STATUS_TYPES.reject { |st| ["Unknown", "Comment Period in Progress", "Community Information and Comment Session Open"].include?(st) } } )
     elsif filter_by == "vacant-derelict" then
-      @dev_sites = @dev_sites.where( application_type: ["Derelict", "Vacant"] )
-      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Unknown"] })
+      @dev_sites = @dev_sites.where( application_type: ["Derelict", "Vacant", "Unknown"] )
+      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Unknown"] })
     elsif filter_by == "events" then
-      @dev_sites = @dev_sites.joins(:statuses).where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Event"] })
+      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Event"] })
     elsif filter_by == "nothing"
       # DO NOTHING
     else
@@ -92,6 +87,7 @@ class DevSite < ActiveRecord::Base
   end
 
   def image_hash
+    return if self.images.empty?
     self.images.map do |img|
       dimensions = FastImage.size(img.url)
       { src: img.url, w: dimensions.first, h: dimensions.last }
@@ -107,10 +103,7 @@ class DevSite < ActiveRecord::Base
     end
   end
 
-  # CarrierWave - Images
   mount_uploaders :images, ImagesUploader
-
-  # CarrierWave - Files
   mount_uploaders :files, FilesUploader
 
 end
