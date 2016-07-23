@@ -427,7 +427,6 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.6)
       rack (>= 1.0)
-    will_paginate (3.0.7)
     xml-simple (1.1.5)
 
 PLATFORMS
@@ -486,7 +485,6 @@ DEPENDENCIES
   turbolinks (~> 2.5.3)
   uglifier (>= 1.3.0)
   unicorn (~> 5.0)
-  will_paginate
 
 BUNDLED WITH
    1.12.5

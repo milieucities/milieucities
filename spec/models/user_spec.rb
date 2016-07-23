@@ -20,11 +20,4 @@ describe User do
     it { should_not be_valid }
   end
 
-  describe "authenticated test" do
-    it "should be false when there is no value entered" do
-      expect(user.authenticated?('')).to be_falsy
-    end
-
-  end
-
 end

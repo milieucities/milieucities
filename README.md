@@ -2,6 +2,16 @@
 
 [![Codeship Status for Milieucitiesrepo/m-server](https://codeship.com/projects/35ebcc50-1fd6-0134-d851-7a39504521c1/status?branch=master)](https://codeship.com/projects/160460)
 
+### Installation & Usage
+
+1. Clone the repository to your local machine: `git clone https://github.com/Milieucities/m-server`
+
+2. Bundle the gemfile `bundle install`. Note you may have to install bundler `gem install bundler`.
+
+3. Set up your `database.yml` to configure with postgres and run `rake db:create && rake db:migrate`
+
+4. You're done! Run `rails s` and you're ready to start developing!
+
 ### REST API (for non authorized users)
 
 ##### GET /dev_sites
