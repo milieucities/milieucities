@@ -87,9 +87,9 @@ $(document).on('ready page:load', function(){
     $("#dev-site-profile")[0].onscroll = function() {
       if($("#main-map").length > 0) {
         for (var i = 0; i < geojsonData.length; i++) {
-          var id = geojsonData[i].dev_site.id;
+          var id = geojsonData[i].id;
           if (isElementOnScreen(id)) {
-            setActiveChapter(geojsonData[i].dev_site);
+            setActiveChapter(geojsonData[i]);
             break;
           }
         }

@@ -1,18 +1,21 @@
 <%= form_for @user, html: { class: "one-page-form" } do |f| %>
 
-  <%= f.hidden_field :role, value: params[:role], id: "role" %>
+
+  <%= f.fields_for :profile do |profile| %>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <%= profile.text_field :name %>
+      <%= profile.label :name %>
+    </div>
+  </div>
+
+  <% end %>
 
   <div class="row">
     <div class="input-field col s12">
       <%= f.email_field :email %>
       <%= f.label :email  %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="input-field col s12">
-      <%= f.text_field :username %>
-      <%= f.label :username  %>
     </div>
   </div>
 
@@ -28,17 +31,30 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="input-field col m6 s12">
-      <%= f.text_field :address %>
-      <%= f.label :address, "Postal Code (optional)" %>
-    </div>
-    <div class="input-field col m6 s12">
-      <%= f.select :neighbourhood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES, selected: @user.neighbourhood), include_blank: true %>
-      <%= f.label :neighbourhood %>
-    </div>
-  </div>
+  <%= f.fields_for :profile do |profile| %>
 
+    <div class="row">
+      <div class="input-field col s12 m6">
+        <%= profile.text_field :postal_code %>
+        <%= profile.label :postal_code %>
+      </div>
+      <div class="input-field col s12 m6">
+        <%= profile.label :neighbourhood %>
+        <%= profile.select :neighbourhood, options_for_select(Profile::VALID_NEIGHBOURHOOD_TYPES), include_blank: true %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <%= profile.check_box :accepted_terms %>
+        <%= profile.label :accepted_terms do %>
+          <%= '<a href="/tos" style="display:inline">Accept terms of service</a>'.html_safe %>
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+  <br/>
   <%= content_tag :button, "Submit", type: :submit, class: "waves-effect waves-light btn submit" %>
 
 <% end %>

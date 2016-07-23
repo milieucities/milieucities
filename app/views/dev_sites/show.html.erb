@@ -36,32 +36,6 @@
         <div class="col s6 label"><%= t('dev-sites.show.ward-number') %></div>
         <div class="col s6"><%= @dev_site.ward_num.present? ? @dev_site.ward_num : "N/A" %></div>
 
-        <div class="col s6 label"><%= t('dev-sites.show.votes') %></div>
-
-        <div class="col s6">
-          <% if signed_in? %>
-            <%= link_to upvote_dev_site_path(@dev_site), method: :put do %>
-              <i class="fa fa-thumbs-o-up fa-2x upvote"></i>
-              <%= @dev_site.get_upvotes.size %>
-            <% end %>
-
-            <%= link_to downvote_dev_site_path(@dev_site), method: :put do %>
-              <i class="fa fa-thumbs-o-down fa-2x downvote"></i>
-              <%= @dev_site.get_downvotes.size %>
-            <% end %>
-          <% else %>
-            <%= link_to "#sign-in-modal", class: "modal-trigger" do %>
-              <i class="fa fa-thumbs-o-up fa-2x upvote"></i>
-              <%= @dev_site.get_upvotes.size %>
-            <% end %>
-
-            <%= link_to "#sign-in-modal", class: "modal-trigger" do %>
-              <i class="fa fa-thumbs-o-down fa-2x downvote"></i>
-              <%= @dev_site.get_downvotes.size %>
-            <% end %>
-          <% end %>
-        </div>
-
         <div class="row" style="max-width: 400px;">
           <div class="col s12">
               <% if @dev_site.statuses.present? %>
@@ -129,8 +103,8 @@
     <div  class="col s12 m12 l6">
       <h5><%= t('dev-sites.show.comments-label') %></h5>
 
-      <%= react_component "Comments", { devSiteId: @dev_site.id, userId: current_user ? current_user.id : 'null',
-        authenticityToken: form_authenticity_token, locale: @locale } %>
+      <%= react_component "Comments", { devSiteId: @dev_site.id, userId: current_user.id,
+        authenticityToken: form_authenticity_token, locale: params[:locale] } %>
 
     </div>
 
@@ -194,7 +168,7 @@
           <h6><i><%= @dev_site.ward_councillor_email %></i></h6>
         </div>
       </div>
-      
+
       <%= f.hidden_field :dev_site_id, value: @dev_site.id %>
       <div class="row">
         <div class="col input-field s12 m6">

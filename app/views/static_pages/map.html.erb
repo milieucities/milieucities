@@ -5,7 +5,7 @@
 
     <div class="row">
       <div class="input-field col s12">
-        <%= select_tag :neighbourhood, options_for_select(User::VALID_NEIGHBOURHOOD_TYPES), include_blank: true, id: "neighbourhood-filter" %>
+        <%= select_tag :neighbourhood, options_for_select(Profile::VALID_NEIGHBOURHOOD_TYPES), include_blank: true, id: "neighbourhood-filter" %>
         <%= label_tag :neighbourhood, t('map.filter-section.neighbourhood-dropdown-label') %>
       </div>
     </div>

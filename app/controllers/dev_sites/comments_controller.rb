@@ -1,6 +1,5 @@
 class DevSites::CommentsController < CommentsController
   before_action :set_commentable
-  before_action :logged_in_user, only: [:create]
 
   def index
     @dev_site = DevSite.find(params[:dev_site_id])
