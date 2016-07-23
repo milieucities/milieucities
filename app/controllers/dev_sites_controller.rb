@@ -7,11 +7,7 @@ class DevSitesController < ApplicationController
     if params[:filter].present?
       @dev_sites = @dev_sites.filter(params[:filter]).where.not( addresses: [] )
     else
-<<<<<<< HEAD
-      @dev_sites = DevSite.all.joins(:addresses).where.not( addresses: [] ).limit(150)
-=======
       @dev_sites = @dev_sites.all.where.not( addresses: [] )
->>>>>>> master
     end
 
     if params[:page].present? || params[:limit].present?
