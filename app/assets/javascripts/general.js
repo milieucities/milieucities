@@ -1,7 +1,5 @@
 $(document).on('page:change', function(){
 
-  // var defaultBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-45.24, 75.41));
-
   $('.search-input').autocomplete({
     callback   : function(v){
       var googleLocationAutocomplete = new google.maps.places.AutocompleteService();

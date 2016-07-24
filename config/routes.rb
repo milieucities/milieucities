@@ -15,7 +15,6 @@ Rails.application.routes.draw do
       post 'contact_councillor'
     end
 
-
     resources :dev_sites do
       resources :comments, module: :dev_sites do
       end
@@ -27,6 +26,7 @@ Rails.application.routes.draw do
       collection do
         post :search
         get :geojson
+        get :map
       end
     end
 
@@ -49,10 +49,7 @@ Rails.application.routes.draw do
 
   end
 
-  # root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
   root to: redirect("/", status: 302), as: :redirected_root
-  # get '/*path', to: redirect('/#{I18n.default_locale}/%{path}', status: 302), constraints: {path: /(?!(#{I18n.available_locales.join('|')})\/).*/}, format: false
-  # get '*path' => redirect("/#{I18n.default_locale}", status: 302)
   get '*path' => redirect("/", status: 302)
 
 end

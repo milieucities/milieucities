@@ -1,0 +1,24 @@
+{
+  "name": "Milieu",
+  "version": "1.0.0",
+  "description": "Milieu root directory",
+  "engines": {
+    "node": "6.0.0",
+    "npm": "3.10.3"
+  },
+  "scripts": {
+    "start": "(cd app/client && npm start)",
+    "postinstall": "cd app/client && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Milieucitiesrepo/m-server.git"
+  },
+  "author": "Milieucitiesrepo",
+  "dependencies": {},
+  "devDependencies": {},
+  "cacheDirectories": [
+    "node_modules",
+    "app/client/node_modules"
+  ]
+}

@@ -5,7 +5,7 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-    can [:index, :read, :search, :images, :geojson], DevSite
+    can [:index, :read, :search, :images, :geojson, :map], DevSite
     can [:index, :read], Events
     can :read, Profile
     can [:new, :create], User
@@ -21,7 +21,7 @@ class Ability
       can :manage, Comment
     # REGULAR USER ================================================
     elsif !user.new_record?
-      can [:index, :read, :search, :images, :geojson], DevSite
+      can [:index, :read, :search, :images, :geojson, :map], DevSite
       can [:index, :read], Events
       can :manage, Profile, user_id: user.id
       can :manage, Comment, user_id: user.id

@@ -3,32 +3,30 @@ var DevSites = React.createClass({
     return { devSites: [], selectedDevSite: null };
   },
   componentDidMount: function() {
-    $.getJSON("/" + this.props.locale + "/dev_sites", function(data){
+    $.getJSON("/dev_sites", function(data){
       this.setState({ devSites: data, selectedDevSite: ((data.length > 0) ? data[0] : null) });
     }.bind(this));
   },
   changeSelectedDevSite: function(devSite){
     this.setState({ selectedDevSite: devSite });
   },
-  render: function(){
-
-    var noDevSites;
-    var devSitesNodes = this.state.devSites.map(function(devSite){
-      return <DevSites.Item {...this.props} devSite={devSite} selectedDevSite={this.state.selectedDevSite} key={devSite.id} changeSelectedDevSite={this.changeSelectedDevSite} />;
-    }.bind(this));
-
-    if(this.state.devSites.length === 0){
-      noDevSites = <div className="flow-text center">No developments sites loaded.</div>;
+  devSitesNodes: function(){
+    if(this.state.devSites.length !== 0){
+      return this.state.devSites.map(function(devSite){
+        return <DevSites.Item {...this.props} devSite={devSite} selectedDevSite={this.state.selectedDevSite} key={devSite.id} changeSelectedDevSite={this.changeSelectedDevSite} />;
+      }.bind(this));
+    }else{
+      return <div className="flow-text center">No developments sites loaded.</div>;
     }
-
+  },
+  render: function(){
     return <section id="dev-sites-index">
              <div className="header">
                All Developing Sites <span className="count">| {this.state.devSites.length} Sites</span>
              </div>
              <DevSites.Show {...this.props} devSite={this.state.selectedDevSite} />
              <div className="dev-sites row">
-               {devSitesNodes}
-               {noDevSites}
+               {this.devSitesNodes()}
              </div>
            </section>
   }
