@@ -4,13 +4,15 @@
 
 ### Installation & Usage
 
-1. Clone the repository to your local machine: `git clone https://github.com/Milieucities/m-server`
+1. Clone the repository to your local machine: `git clone https://github.com/Milieucities/m-server`.
 
 2. Bundle the gemfile `bundle install`. Note you may have to install bundler `gem install bundler`.
 
-3. Set up your `database.yml` to configure with postgres and run `rake db:create && rake db:migrate`
+3. Set up your `database.yml` to configure with postgres and run `rake db:create && rake db:migrate`.
 
-4. You're done! Run `rails s` and you're ready to start developing!
+4. Install node packages `npm install`.
+
+4. You're done! Run `foreman start` or `heroku local` and you're ready to start developing!
 
 ### REST API (for non authorized users)
 

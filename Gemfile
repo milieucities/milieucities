@@ -49,12 +49,14 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.1.1'
   gem 'letter_opener'
   gem 'launchy'
+  gem 'puma'
   # DEVELOMENT specific gems
   gem 'spring', '~> 1.6.4'
   gem 'brakeman', :require => false
   gem "better_errors"
   gem "binding_of_caller"
   gem 'i18n-tasks', '~> 0.9.5'
+  gem "foreman"
   # TEST specific gems
   gem 'rspec-rails', '~> 3.1'
   gem "factory_girl_rails"
@@ -66,3 +68,5 @@ end
 
 group :production do
 end
+
+ruby "2.3.0"

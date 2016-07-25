@@ -22,6 +22,10 @@ class DevSitesController < ApplicationController
     end
   end
 
+  def map
+    render layout: "no_nav"
+  end
+
   def search
     #TODO
     redirect_to map_path

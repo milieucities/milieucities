@@ -1,0 +1,5 @@
+<% if Rails.env.production? %>
+  <%= javascript_include_tag 'bundle' %>
+<% else %>
+  <%= javascript_include_tag 'http://localhost:8080/bundle.js' %>
+<% end %>

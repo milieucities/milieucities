@@ -1,0 +1,64 @@
+const webpack = require('webpack');
+const path = require('path');
+const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+
+module.exports = {
+  entry: {
+    bundle: path.resolve(__dirname, 'index')
+  },
+
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
+
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    publicPath: 'http://localhost:8080/',
+    filename: '[name].js'
+  },
+
+  plugins: [
+    new LodashModuleReplacementPlugin,
+    new ExtractTextPlugin('[name].css')
+  ],
+
+  module: {
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash'
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style',
+        'css?modules&importLoaders=3&localIdentName=[name]-[local]',
+        'sass',
+        'sass-resources']
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style',
+        'css?modules&importLoaders=3&localIdentName=[name]-[local]']
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url?limit=100000&minetype=application/font-woff'
+      },
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file'
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'url'
+      }
+    ]
+  },
+
+  postcss: [autoprefixer],
+
+  sassResources: ['../assets/stylesheets/variables.scss']
+}

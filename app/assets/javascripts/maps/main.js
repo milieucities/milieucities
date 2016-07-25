@@ -138,7 +138,6 @@ function initMap(){
 };
 
 function loadEventData(url){
-  url = "/" + LOCALE + url
   $.getJSON(url, function(data){
     geojsonData = data.dev_sites;
     data.LOCALE = LOCALE
@@ -148,7 +147,6 @@ function loadEventData(url){
 }
 
 function loadDevSiteData(url){
-  url = "/" + LOCALE + url
   $.getJSON(url, function(data){
     geojsonData = data;
     data.LOCALE = LOCALE
@@ -158,7 +156,6 @@ function loadDevSiteData(url){
 }
 
 function loadGeoJsonData(url){
-  url = "/" + LOCALE + url
   $.getJSON(url, function(data){
 
     if(map.getSource("devSites")){

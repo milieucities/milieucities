@@ -2,7 +2,6 @@
 <html>
 <%= render "layouts/head"%>
 <body data-locale="<%= I18n.locale %>">
-  <%= render "layouts/nav" %>
   <%= render "layouts/flash", :flash => flash %>
   <%= yield %>
   <%= javascript_include_tag "vendor", :debug => false %>
@@ -10,5 +9,4 @@
   <%= render "layouts/contact_modal" %>
   <%= render "layouts/webpack" %>
 </body>
-
 </html>
