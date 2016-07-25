@@ -21,7 +21,11 @@ module.exports = {
 
   plugins: [
     new LodashModuleReplacementPlugin,
-    new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('[name].css'),
+    new webpack.ProvidePlugin({
+          Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
+          fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+     })
   ],
 
   module: {

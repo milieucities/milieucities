@@ -5,6 +5,7 @@
 
 .sidebar {
   width: 50%;
-  height: 100%;
-  background-color: red;
+  height: 100vh;
+  background-color: #fff;
+  overflow-y: scroll;
 }

@@ -1,0 +1,77 @@
+.container {
+}
+
+.item {
+  padding: 15px;
+  padding-bottom: 0;
+  background-color: #fff;
+  display: block;
+
+  &:hover{
+    background-color: #e2eae9;
+  }
+}
+
+.address {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.info {
+  color: #999;
+  font-size: 14px;
+}
+
+.description {
+  font-weight: 500;
+  color: #555;
+  font-size: 16px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pagination {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-style: italic;
+  margin: 0 auto;
+  height: 60px;
+}
+
+.rightarrow {
+  background: url('./icons/right-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+}
+
+.disableleftarrow {
+  background: url('./icons/left-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+  opacity: 0.3;
+}
+
+.leftarrow {
+  background: url('./icons/left-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+}
