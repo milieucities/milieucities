@@ -23,3 +23,16 @@
     width: 100%;
   }
 }
+
+input, textarea{
+  margin-bottom: 0px !important;
+}
+
+.error-message{
+  color: #f44336;
+  font-size: 0.75rem;
+}
+
+input:focus{
+  outline: none;
+}

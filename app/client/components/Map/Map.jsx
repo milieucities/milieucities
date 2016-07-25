@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import css from './map.scss'
+import MapSearch from '../MapSearch/MapSearch'
+import MapFilter from '../MapFilter/MapFilter'
 
 export default class Map extends Component {
   constructor(props) {
@@ -8,8 +10,11 @@ export default class Map extends Component {
     this.state = {};
   }
   render() {
-    return <div>
-      map
+    return <div className={css.container}>
+      <div className={css.sidebar}>
+        <MapSearch />
+        <MapFilter />
+      </div>
     </div>;
   }
 }
