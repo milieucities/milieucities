@@ -5,6 +5,8 @@ import css from './dev-site-list.scss'
 export default class DevSiteList extends Component {
   constructor(props) {
     super(props);
+    this.parent = this.props.parent;
+
     this.devSiteNodes = () => this._devSiteNodes();
     this.handleDevSiteClick = (e) => this._handleDevSiteClick(e);
     this.handlePreviousClick = (e) => this._handlePreviousClick(e);
@@ -12,19 +14,20 @@ export default class DevSiteList extends Component {
   }
   _handleDevSiteClick(e) {
     e.preventDefault();
+    this.parent.setState({ activeDevSiteId: e.currentTarget.dataset.id });
   }
   _handlePreviousClick(e) {
     e.preventDefault()
     if(this.props.page < 2) return;
-    this.props.parent.setState({ page: (this.props.page - 1) }, () => this.props.parent.loadDevSites());
+    this.parent.setState({ page: (this.props.page - 1) }, () => this.parent.loadDevSites());
   }
   _handleForwardClick(e) {
     e.preventDefault()
-    this.props.parent.setState({ page: (this.props.page + 1) }, () => this.props.parent.loadDevSites());
+    this.parent.setState({ page: (this.props.page + 1) }, () => this.parent.loadDevSites());
   }
   _devSiteNodes() {
     return this.props.devSites.map(devSite => {
-      return <a href="#" onClick={this.handleDevSiteClick} className={css.item} key={devSite.id}>
+      return <a href="#" onClick={this.handleDevSiteClick} data-id={devSite.id} className={css.item} key={devSite.id}>
         <div className={css.address}>{devSite.address}</div>
         <div className={css.info}>{devSite.devID}</div>
         <div className={css.info}>{devSite.application_type}</div>
