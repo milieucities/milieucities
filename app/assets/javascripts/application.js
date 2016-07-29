@@ -26,6 +26,8 @@
 //= require handlebars.runtime
 //= require_tree ./templates
 
+//= require velocity.min
+//= require velocity.uipack
 
 //= require_tree .
 //= require_self

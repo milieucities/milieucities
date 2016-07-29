@@ -57,8 +57,19 @@
   color: #777;
 }
 
-.body{
+.wholebody {
   color: #777;
+}
+
+.body {
+  color: #777;
+  max-height: 150px;
+  overflow-y: hidden;
+}
+
+.readmore {
+  color: #333;
+  font-size: 14px;
 }
 
 .loadmore {

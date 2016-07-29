@@ -30,15 +30,25 @@ class StaticPagesController < ApplicationController
   end
 
   def contact_file_lead
-    message = params.required(:contact_file_lead).permit(:name, :email, :message, :dev_site_id)
+    if params[:contact_file_lead].present?
+      message = params.required(:contact_file_lead).permit(:name, :email, :message, :dev_site_id)
+    else
+      message = params.permit(:name, :email, :message, :dev_site_id)
+    end
+
     ContactMailer.contact_file_lead(message).deliver_now
-    render nothing: true
+    render json: {}
   end
 
   def contact_councillor
-    message = params.required(:contact_councillor).permit(:name, :email, :message, :dev_site_id)
+    if params[:contact_councillor].present?
+      message = params.required(:contact_councillor).permit(:name, :email, :message, :dev_site_id)
+    else
+      message = params.permit(:name, :email, :message, :dev_site_id)
+    end
+
     ContactMailer.contact_councillor(message).deliver_now
-    render nothing: true
+    render json: {}
   end
 
   def privacy

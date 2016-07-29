@@ -1,7 +1,8 @@
 object @dev_site
 
 attributes :id, :devID, :application_type, :title, :status, :status_date, :address, :images, :files,
-  :description, :ward_name, :ward_num, :image_url, :hearts, :updated_at, :latitude, :longitude
+  :description, :ward_name, :ward_num, :image_url, :hearts, :updated_at, :latitude, :longitude,
+  :urban_planner_email, :ward_councillor_email
 
 node(:url) { |dev_site| dev_site_path(dev_site.id) }
 

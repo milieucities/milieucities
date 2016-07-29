@@ -3,15 +3,19 @@ import { render } from 'react-dom'
 import css from './dev-site.scss'
 import { capitalize, replace, concat } from 'lodash'
 import Comments from '../Comments/Comments'
+import Modal from '../Modal/Modal'
 
 export default class DevSite extends Component {
   constructor(props) {
     super(props);
-    this.state = { showFiles: false }
+    this.state = { showFiles: false, showReadMore: false }
     this.parent = this.props.parent;
     this.loadDevSite = () => this._loadDevSite();
     this.toggleShowFiles = () => this.setState({ showFiles: !this.state.showFiles });
     this.closeDevSite = () => this.parent.setState({ activeDevSiteId: null });
+    this.viewWholeDescription = (e) => this._viewWholeDescription(e);
+    this.openEmailModal = (e) => this._openEmailModal(e);
+    this.handleEmail = (e) => this._handleEmail(e);
     this.loadDevSite();
   }
   componentDidUpdate(prevProps, prevState) {
@@ -19,12 +23,49 @@ export default class DevSite extends Component {
   }
   _loadDevSite() {
     $.getJSON(`/dev_sites/${this.props.id}`,
-      devSiteJson => this.setState({ devSite: devSiteJson })
+      devSiteJson => this.setState({ devSite: devSiteJson },
+        () => {
+          if(this.refs.description.scrollHeight > 145) {
+            this.setState({ showReadMore: true, readMoreClicked: false });
+          }
+        }
+      )
     );
   }
+  _viewWholeDescription(e) {
+    e.preventDefault();
+    this.setState({ readMoreClicked: true });
+  }
+  _openEmailModal(e) {
+    e.preventDefault();
+    const { urban_planner_email, ward_councillor_email } = this.state.devSite;
+    const contact = e.currentTarget.innerText;
+    this.setState({ showModal: true, contact });
+  }
+  _handleEmail(e) {
+    e.preventDefault();
+    const { contact } = this.state;
+    const url = contact === 'Urban Planner' ? '/contact_file_lead' : '/contact_councillor';
+
+    $.ajax({
+      url: url,
+      dataType: 'JSON',
+      type: 'POST',
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: new FormData(e.currentTarget),
+      success: () => {
+        Materialize.toast('Message successfully sent!', 3500, 'teal');
+        this.setState({ showModal: false });
+      }
+    });
+
+  }
   render() {
-    let { devSite, showFiles } = this.state;
-    if(!devSite) return <div></div>;
+    const { devSite, showFiles, showModal, showReadMore,
+            readMoreClicked, contact } = this.state;
+    if(!devSite) return <div />;
     return <div className={css.container}>
       <div className={css.menu}>
         <i className={css.close} onClick={this.closeDevSite}></i>
@@ -65,27 +106,55 @@ export default class DevSite extends Component {
           </div>
         </div>
 
-        <div className={css.description}>Description</div>
-        <p className={css.p} dangerouslySetInnerHTML={{__html: devSite.description}}></p>
+        <div className={css.descriptiontitle}>Description</div>
+        <div className={readMoreClicked ? css.wholedescription : css.description}
+          ref='description' dangerouslySetInnerHTML={{__html: devSite.description}}>
+        </div>
+        {showReadMore && !readMoreClicked && <a href='#'
+          onClick={this.viewWholeDescription} className={css.readmore}>Read More...</a>}
 
-        {devSite.city_files.length > 0 ?
+        {devSite.city_files.length > 0 &&
           <div className={css.filecontainer} onClick={this.toggleShowFiles}>
           <i className={css.folder}></i>
           {showFiles ? 'Hide ' : 'View ' } {devSite.city_files.length} attached files
-        </div> : null}
+        </div>}
 
         {showFiles && devSite.city_files.map(file => {
           return <a key={file.id} href={file.link} target='_blank' className={css.filelink}>- {file.name}</a>
         })}
 
         <div className={css.emailofficials}>
-          <a href="#" className={css.email}><i className={css.mail}></i> Urban Planner</a>
-          <a href="#" className={css.email}><i className={css.mail}></i> Councillor</a>
+          <a href='#' onClick={this.openEmailModal} className={css.email}>
+            <i className={css.mail}></i> Urban Planner
+          </a>
+          <a href='#' onClick={this.openEmailModal} className={css.email}>
+            <i className={css.mail}></i> Councillor
+          </a>
         </div>
 
       </div>
 
       <Comments devSiteId={devSite.id} />
+      {showModal && <Modal parent={this}>
+        <EmailModal contact={contact} address={devSite.address} id={devSite.id} handleEmail={this.handleEmail} />
+      </Modal>}
     </div>;
   }
+}
+
+const EmailModal = (props) => {
+  return <div className={css.emailmodal}>
+    <div className={css.contact}>Contact {props.contact}</div>
+    <div className={css.address}>{props.address}</div>
+
+    <form onSubmit={props.handleEmail} acceptCharset='UTF-8' >
+      <input name='utf8' type='hidden' value='✓' />
+      <input value={props.id} type='hidden' name='dev_site_id' />
+      <input type='custom-text' required='required' name='name' className={css.input} placeholder='Name' />
+      <input type='custom-text' required='required' name='email' className={css.input} placeholder='Email' />
+      <textarea name='message' required='required' className={css.textarea} placeholder='Message'></textarea>
+      <input type='submit' name='commit' value='Send' className={css.submit} />
+    </form>
+
+  </div>
 }

@@ -92,18 +92,39 @@ class CommentForm extends Component {
 
 }
 
-const Comment = (props) => {
-  return <div className={css.comment}>
-    <div className={css.info}>
-      <span className={css.name}>
-        {props.comment.user ? props.comment.user.username : 'Anonymous'}
-      </span>
-      <span className={css.date}>
-        {moment(props.comment.created_at).format('MMMM DD, YYYY ')}
-      </span>
+class Comment extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { showReadMore: false };
+    this.viewWholeBody = (e) => this._viewWholeBody(e);
+  }
+  componentDidMount() {
+    if(this.refs.body.scrollHeight > 150) {
+      this.setState({ showReadMore: true, readMoreClicked: false });
+    }
+  }
+  _viewWholeBody(e) {
+    e.preventDefault();
+    this.setState({ readMoreClicked: true });
+  }
+  render() {
+    const { comment } = this.props;
+    const { readMoreClicked, showReadMore } = this.state;
+
+    return <div className={css.comment}>
+      <div className={css.info}>
+        <span className={css.name}>
+          {comment.user ? comment.user.username : 'Anonymous'}
+        </span>
+        <span className={css.date}>
+          {moment(comment.created_at).format('MMMM DD, YYYY ')}
+        </span>
+      </div>
+      <div className={readMoreClicked ? css.wholebody : css.body} ref="body"
+           dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}>
+      </div>
+      {showReadMore && !readMoreClicked &&
+        <a href="#" onClick={this.viewWholeBody} className={css.readmore}>Read More...</a>}
     </div>
-    <div className={css.body}
-         dangerouslySetInnerHTML={{__html: props.comment.body.replace(/\n\r?/g, '<br>') }}>
-    </div>
-  </div>
+  }
 }

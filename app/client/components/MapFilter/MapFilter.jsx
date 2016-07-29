@@ -10,11 +10,11 @@ export default class MapFilter extends Component {
   }
   _handleClick(e) {
     e.preventDefault();
-    const text = (this.state.activeText === e.target.innerText ? null : e.target.innerText);
+    const text = this.state.activeText !== e.target.innerText && e.target.innerText;
     this.setState({ activeText: text });
   }
   render() {
-    let { activeText } = this.state;
+    const { activeText } = this.state;
     const sortType = ['Popular', 'Latest', 'Coolest', 'Coldest'];
     return <div className={css.container}>
       <div className={css.sort}>
