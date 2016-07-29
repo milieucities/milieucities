@@ -13,7 +13,7 @@ class DevSitesController < ApplicationController
     if params[:page].present? || params[:limit].present?
       limit = params[:limit].present? ? params[:limit].to_i : 20
       page = params[:page].present? ? params[:page].to_i : 0
-      @dev_sites.limit!(limit).offset!(limit * page + 1)
+      @dev_sites.limit!(limit).offset!(limit * page)
     end
 
     respond_to do |format|
@@ -41,6 +41,12 @@ class DevSitesController < ApplicationController
       @dev_sites = @dev_sites.filter(params[:filter]).where.not( addresses: [] )
     else
       @dev_sites = @dev_sites.all.where.not( addresses: [] )
+    end
+
+    if params[:page].present? || params[:limit].present?
+      limit = params[:limit].present? ? params[:limit].to_i : 20
+      page = params[:page].present? ? params[:page].to_i : 0
+      @dev_sites.limit!(limit).offset!(limit * page)
     end
 
     @geojson = []

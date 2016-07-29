@@ -1,11 +1,13 @@
 .container {
+
 }
 
 .item {
-  padding: 15px;
+  padding: 15px 20px;
   padding-bottom: 0;
   background-color: #fff;
   display: block;
+  transition: 200ms;
 
   &:hover{
     background-color: #e2eae9;
@@ -13,7 +15,7 @@
 }
 
 .address {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
 }
 

@@ -1,0 +1,21 @@
+.container{
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.sidebar {
+  width: 50%;
+  height: 100vh;
+  background-color: #fff;
+  overflow-y: scroll;
+  float: left;
+}
+
+.content {
+  width: 50%;
+  height: 100vh;
+  overflow-y: scroll;
+  float: left;
+  position: relative;
+}

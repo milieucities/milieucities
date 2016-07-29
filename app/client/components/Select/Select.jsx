@@ -62,12 +62,12 @@ export default class Select extends Component {
   _dropdownNode() {
     return <ul className={css.dropdown} onKeyDown={this.handleKeyDown} tabIndex="0" ref="dropdown">
       <li onClick={this.handleListOptionsClick}
-          className={this.state.highlightedIndex === 0 ? css.highlighted : null}>
+          className={this.state.highlightedIndex === 0 && css.highlighted}>
         {this.props.title}
       </li>
       <div className={css.divider}></div>
         {this.props.options.map( (option, i) => {
-          return(<li key={i} onClick={this.handleListOptionsClick} className={this.state.highlightedIndex === (i+1) ? css.highlighted : null}>
+          return(<li key={i} onClick={this.handleListOptionsClick} className={this.state.highlightedIndex === (i+1) && css.highlighted}>
                      {option}
                  </li>);
         })}
@@ -87,7 +87,7 @@ export default class Select extends Component {
           {this.state.value ? this.selectedTextNode() : this.props.title}
         </div>
       </div>
-      {this.state.active ? this.dropdownNode() : null}
+      {this.state.active && this.dropdownNode()}
     </div>;
   }
 }

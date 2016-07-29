@@ -12,6 +12,7 @@
   height: 50px;
   border: 1px solid #eee;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .caret {
@@ -43,7 +44,7 @@
 
 .value{
   padding-top: 2px;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   font-weight: 700;
   line-height: normal;

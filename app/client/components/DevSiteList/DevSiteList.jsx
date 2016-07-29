@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import css from './dev-site-list.scss'
+import { replace } from 'lodash'
+
 
 export default class DevSiteList extends Component {
   constructor(props) {
@@ -30,7 +32,7 @@ export default class DevSiteList extends Component {
       return <a href="#" onClick={this.handleDevSiteClick} data-id={devSite.id} className={css.item} key={devSite.id}>
         <div className={css.address}>{devSite.address}</div>
         <div className={css.info}>{devSite.devID}</div>
-        <div className={css.info}>{devSite.application_type}</div>
+        <div className={css.info}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
         <div className={css.info} dangerouslySetInnerHTML={{__html: devSite.status}}></div>
         <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
       </a>
@@ -40,7 +42,7 @@ export default class DevSiteList extends Component {
     return <div className={css.container}>
       {this.devSiteNodes()}
       <div className={css.pagination}>
-        <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 1 ? css.disableleftarrow : css.leftarrow}></a>
+        <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
         {this.props.page} of 48
         <a href="#" onClick={this.handleForwardClick} className={css.rightarrow}></a>
       </div>

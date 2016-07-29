@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -20,12 +19,7 @@ module.exports = {
   },
 
   plugins: [
-    new LodashModuleReplacementPlugin,
-    new ExtractTextPlugin('[name].css'),
-    new webpack.ProvidePlugin({
-          Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
-          fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-     })
+    new ExtractTextPlugin('[name].css')
   ],
 
   module: {
@@ -38,7 +32,7 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ['style',
-        'css?modules&importLoaders=3&localIdentName=[name]-[local]',
+        'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]',
         'sass',
         'sass-resources']
       },

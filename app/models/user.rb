@@ -14,4 +14,6 @@ class User < ActiveRecord::Base
   confirmation: {message: "Passwords do not match."},
   length: { in: 6..20, message: "Password must be between 6 to 20 characters"}
 
+  delegate :name, to: :profile, allow_nil: true
+
 end

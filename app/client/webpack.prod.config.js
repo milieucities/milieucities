@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require("path");
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -30,8 +29,7 @@ module.exports = {
       'process.env': {
         'ENV': JSON.stringify(ENV)
       }
-    }),
-    new LodashModuleReplacementPlugin
+    })
   ],
 
   module: {

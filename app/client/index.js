@@ -1,1 +1,1 @@
-import Map from './components/Map/Map'
+import MapWrapper from './components/MapWrapper/MapWrapper'

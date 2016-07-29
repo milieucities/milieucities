@@ -26,9 +26,8 @@
     "font-awesome-webpack": "0.0.4",
     "if-env": "1.0.0",
     "image-webpack-loader": "^1.8.0",
-    "jquery": "^2.2.4",
+    "immutable": "^3.8.1",
     "lodash": "^4.13.1",
-    "lodash-webpack-plugin": "^0.9.1",
     "node-sass": "^3.7.0",
     "postcss-loader": "^0.9.1",
     "react": "^15.2.1",
@@ -37,8 +36,7 @@
     "sass-resources-loader": "^1.0.2",
     "url-loader": "^0.5.7",
     "velocity-animate": "^1.2.3",
-    "webpack": "^1.13.0",
-    "whatwg-fetch": "^1.0.0"
+    "webpack": "^1.13.0"
   },
   "devDependencies": {
     "exports-loader": "^0.6.3",

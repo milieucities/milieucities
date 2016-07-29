@@ -82,7 +82,7 @@ export default class Autocomplete extends Component {
     return this.state.suggestions.map((suggestion,i) => {
       return <li key={i}
                  onClick={this.handleListSuggestionClick}
-                 className={this.state.highlightedIndex === i ? css.highlighted : null}>
+                 className={this.state.highlightedIndex === i && css.highlighted}>
                  {suggestion}
               </li>;
     })

@@ -1,20 +1,4 @@
-.container{
-  width: 100vw;
+.container {
   height: 100vh;
-}
-
-.sidebar {
-  width: 50%;
-  height: 100vh;
-  background-color: #fff;
-  overflow-y: scroll;
-  float: left;
-}
-
-.content {
-  width: 50%;
-  height: 100vh;
-  background-color: red;
-  overflow-y: scroll;
-  float: left;
+  width: 100%;
 }

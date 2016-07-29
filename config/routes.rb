@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  scope ':locale', locale: /en|fr/ do
+  scope '(:locale)', locale: /en|fr/ do
     root to: 'static_pages#home'
 
     namespace :static_pages, path: '/', as: nil do
@@ -50,13 +50,13 @@ Rails.application.routes.draw do
   end
 
   # handles /bad-locale|anything/valid-path
-  get '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
-
-  # handles /anything|valid-path-but-no-locale
-  get '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
-
-  # handles /
-  get '', to: redirect("/#{I18n.locale}")
+  # get '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
+  #
+  # # handles /anything|valid-path-but-no-locale
+  # get '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+  #
+  # # handles /
+  # get '', to: redirect("/#{I18n.locale}")
 
 
 end
