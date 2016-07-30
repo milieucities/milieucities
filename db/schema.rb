@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722002043) do
+ActiveRecord::Schema.define(version: 20160729161005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,16 @@ ActiveRecord::Schema.define(version: 20160722002043) do
     t.float    "geocode_lat"
     t.float    "geocode_lon"
   end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "dev_site_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "likes", ["dev_site_id"], name: "index_likes_on_dev_site_id", using: :btree
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
   create_table "overall_averages", force: :cascade do |t|
     t.integer  "rateable_id"
@@ -236,5 +246,7 @@ ActiveRecord::Schema.define(version: 20160722002043) do
 
   add_foreign_key "comments", "dev_sites"
   add_foreign_key "comments", "events"
+  add_foreign_key "likes", "dev_sites"
+  add_foreign_key "likes", "users"
   add_foreign_key "profiles", "users"
 end

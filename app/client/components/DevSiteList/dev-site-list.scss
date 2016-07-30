@@ -2,6 +2,13 @@
 
 }
 
+.empty {
+  padding: 20px 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+}
+
 .item {
   padding: 15px 20px;
   padding-bottom: 0;
@@ -45,6 +52,17 @@
   font-style: italic;
   margin: 0 auto;
   height: 60px;
+}
+
+.disablerightarrow{
+  background: url('./icons/right-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+  opacity: 0.3;
 }
 
 .rightarrow {

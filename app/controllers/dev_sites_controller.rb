@@ -4,11 +4,9 @@ class DevSitesController < ApplicationController
 
   def index
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
-    if params[:filter].present?
-      @dev_sites = @dev_sites.filter(params[:filter]).where.not( addresses: [] )
-    else
-      @dev_sites = @dev_sites.all.where.not( addresses: [] )
-    end
+    @dev_sites = @dev_sites.search(search_params) if search?
+    @total = @dev_sites.count
+    paginate
 
     if params[:page].present? || params[:limit].present?
       limit = params[:limit].present? ? params[:limit].to_i : 20
@@ -17,8 +15,8 @@ class DevSitesController < ApplicationController
     end
 
     respond_to do |format|
-        format.html
-        format.json
+      format.html
+      format.json
     end
   end
 
@@ -43,11 +41,7 @@ class DevSitesController < ApplicationController
       @dev_sites = @dev_sites.all.where.not( addresses: [] )
     end
 
-    if params[:page].present? || params[:limit].present?
-      limit = params[:limit].present? ? params[:limit].to_i : 20
-      page = params[:page].present? ? params[:page].to_i : 0
-      @dev_sites.limit!(limit).offset!(limit * page)
-    end
+    paginate
 
     @geojson = []
 
@@ -89,7 +83,6 @@ class DevSitesController < ApplicationController
 
   def create
     @dev_site = DevSite.new(dev_site_params)
-
     respond_to do |format|
       if @dev_site.save
         format.html { redirect_to @dev_site, notice: 'Development site was successfully created.' }
@@ -127,9 +120,29 @@ class DevSitesController < ApplicationController
       @dev_site = DevSite.find(params[:id])
     end
 
+    def paginate
+      if params[:page].present? || params[:limit].present?
+        limit = params[:limit].present? ? params[:limit].to_i : 20
+        page = params[:page].present? ? params[:page].to_i : 0
+        @dev_sites.limit!(limit).offset!(limit * page)
+      end
+    end
+
+    def search?
+      params[:search].present? && ( params[:search][:closest].present? ||
+                                    params[:search][:year].present? ||
+                                    params[:search][:ward].present? ||
+                                    params[:search][:status].present? )
+    end
+
+    def search_params
+      params.require(:search).permit(:closest, :ward, :year, :status)
+    end
+
     def dev_site_params
       params.require(:dev_site).permit(:devID, :application_type, :title, :images_cache, :files_cache, :build_type,
       :description, :ward_councillor_email, :urban_planner_email, :ward_name, :ward_num, :image_url, :hearts, {images: []}, {files: []},
+      likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
       addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
       statuses_attributes: [:id, :status, :status_date, :_destroy] )
     end

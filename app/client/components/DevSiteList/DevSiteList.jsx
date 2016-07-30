@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import css from './dev-site-list.scss'
-import { replace } from 'lodash'
+import { replace, ceil } from 'lodash'
 
 
 export default class DevSiteList extends Component {
   constructor(props) {
     super(props);
     this.parent = this.props.parent;
-
     this.devSiteNodes = () => this._devSiteNodes();
     this.handleDevSiteClick = (e) => this._handleDevSiteClick(e);
     this.handlePreviousClick = (e) => this._handlePreviousClick(e);
@@ -20,11 +19,12 @@ export default class DevSiteList extends Component {
   }
   _handlePreviousClick(e) {
     e.preventDefault()
-    if(this.props.page < 2) return;
+    if(this.props.page < 1) return;
     this.parent.setState({ page: (this.props.page - 1) }, () => this.parent.loadDevSites());
   }
   _handleForwardClick(e) {
     e.preventDefault()
+    if((this.props.page+1) === ceil(this.props.total / 20)) return;
     this.parent.setState({ page: (this.props.page + 1) }, () => this.parent.loadDevSites());
   }
   _devSiteNodes() {
@@ -39,12 +39,18 @@ export default class DevSiteList extends Component {
     })
   }
   render() {
+    if(!this.props.devSites) {
+      return <div className={css.empty}>
+        No development sites found.
+      </div>
+    }
+
     return <div className={css.container}>
       {this.devSiteNodes()}
       <div className={css.pagination}>
         <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
-        {this.props.page} of 48
-        <a href="#" onClick={this.handleForwardClick} className={css.rightarrow}></a>
+        {this.props.page + 1} of {ceil(this.props.total / 20)}
+        <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
       </div>
     </div>;
   }

@@ -13,7 +13,6 @@ class DevSites::CommentsController < CommentsController
     end
 
     render formats: :json
-
   end
 
   def create
@@ -23,7 +22,7 @@ class DevSites::CommentsController < CommentsController
 
     respond_to do |format|
       if @comment.save
-        format.json
+        format.json { render :show, status: :ok }
       else
         format.json { render json: @comment.errors, status: 406 }
       end

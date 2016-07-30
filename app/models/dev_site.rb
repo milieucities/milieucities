@@ -16,9 +16,13 @@ class DevSite < ActiveRecord::Base
   has_many :addresses, dependent: :destroy
   has_many :statuses, dependent: :destroy
   has_many :city_files, dependent: :destroy
+  has_many :likes, dependent: :destroy
+
+  # delegate :lat, :lon to: :addresses, allow_nil: true
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :statuses, allow_destroy: true
+  accepts_nested_attributes_for :likes, allow_destroy: true
 
   validates :devID, uniqueness: { message: "Dev Id must be unique" }
   validates :application_type, presence: { message: "Application type is required" }
@@ -46,6 +50,38 @@ class DevSite < ActiveRecord::Base
     end
 
     @dev_sites.limit(150)
+  end
+
+  def self.search(search_params)
+    dev_site_ids = []
+    dev_sites = DevSite.all
+
+    if search_params[:closest].present?
+      dev_site_ids
+        .push(Address.closest(origin: search_params[:closest])
+        .limit(500)
+        .pluck(:dev_site_id))
+      dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
+    end
+
+
+    if search_params[:year].present?
+      dev_sites = dev_sites
+        .where('extract(year from updated) = ?', search_params[:year])
+    end
+
+    if search_params[:ward].present?
+      dev_sites = dev_sites
+        .where(ward_name: search_params[:ward])
+    end
+
+    if search_params[:status].present?
+      dev_sites = dev_sites
+        .where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' )
+        .where( statuses: { status: search_params[:status] })
+    end
+
+    dev_sites
   end
 
   def marker

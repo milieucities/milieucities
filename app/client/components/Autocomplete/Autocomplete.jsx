@@ -22,7 +22,7 @@ export default class Autocomplete extends Component {
 
   }
   componentDidMount() {
-    this.setState({ inputProps: omit(this.props, ["callback", "className"]) });
+    this.setState({ inputProps: omit(this.props, ['callback', 'className', 'onSelect']) });
   }
   _handleKeyUp(e) {
     if([9,13,27,38,40].indexOf(e.which) !== -1) return;
@@ -35,7 +35,7 @@ export default class Autocomplete extends Component {
       break;
       case 13: /* ENTER */
       e.preventDefault();
-      if(this.state.highlightedIndex !== null) this.setSuggestion(this.state.suggestions[this.state.highlightedIndex]);
+        this.setSuggestion(this.state.suggestions[this.state.highlightedIndex] || this.inputTextField.value);
       break;
       case 27: /* ESC */
       this.closeDropdown();
@@ -75,7 +75,7 @@ export default class Autocomplete extends Component {
   }
   _setSuggestion(suggestion) {
     this.setState({ value: suggestion });
-    this.props.onSelect.call(this, suggestion);
+    this.props.onSelect(suggestion);
     this.closeDropdown();
   }
   _dropdownSuggestionNodes() {
@@ -95,8 +95,8 @@ export default class Autocomplete extends Component {
   render() {
     return <div className={css.wrapper}>
       <i className={css.searchicon}></i>
-      <input type="text" className={css.textfield}
-        autoComplete="off"
+      <input type='text' className={css.textfield}
+        autoComplete='off'
         {...this.state.inputProps}
         ref={(input) => this.inputTextField = input}
         value={this.state.value}

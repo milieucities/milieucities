@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
   has_many :comments, as: :commentable
+  has_many :likes, dependent: :destroy
 
   validates :accepted_terms, acceptance: true
   validates  :email, presence: {message: "Email is required"},

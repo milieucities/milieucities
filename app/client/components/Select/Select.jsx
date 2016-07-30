@@ -20,7 +20,7 @@ export default class Select extends Component {
   _handleSelected(selectedText) {
     const text = (selectedText === this.props.title ? null : selectedText);
     this.setState({ value: text });
-    this.props.onSelect.call(this, text);
+    this.props.onSelect(this.props.title, text);
     this.closeDropdown();
   }
   _handleKeyDown(e) {

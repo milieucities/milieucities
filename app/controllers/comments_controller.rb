@@ -9,4 +9,7 @@ class CommentsController < ApplicationController
     end
   end
 
+  def show
+  end
+
 end

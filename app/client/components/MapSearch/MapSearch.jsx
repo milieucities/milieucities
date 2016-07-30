@@ -3,13 +3,15 @@ import { render } from 'react-dom'
 import css from './map-search.scss'
 import Autocomplete from '../Autocomplete/Autocomplete'
 import Select from '../Select/Select'
+import { toLower, toUpper } from 'lodash'
 
 export default class MapSearch extends Component {
   constructor(props) {
     super(props);
+    this.parent = this.props.parent;
     this.autocompleteCallback = (address, autocomplete) => this._autocompleteCallback(address, autocomplete);
     this.handleAutocompleteSelect = (address) => this._handleAutocompleteSelect(address);
-    this.handleSelectDropdown = (selectedText) => this._handleSelectDropdown(selectedText);
+    this.handleSelectDropdown = (type, value) => this._handleSelectDropdown(type, value);
   }
   _autocompleteCallback(address, autocomplete) {
     const googleLocationAutocomplete = new google.maps.places.AutocompleteService();
@@ -20,12 +22,15 @@ export default class MapSearch extends Component {
     })
   }
   _handleAutocompleteSelect(address) {
-    // TODO
-    return false;
+    this.parent.setState({ search: this.parent.state.search.set('closest', address) },
+      () => this.parent.search()
+    );
   }
-  _handleSelectDropdown(selectedText) {
-    // TODO
-    return false;
+  _handleSelectDropdown(type, value) {
+    value = type === "Ward" ? toUpper(value) : value;
+    this.parent.setState({ search: this.parent.state.search.set(toLower(type), value) },
+      () => this.parent.search()
+    );
   }
   render() {
     return <div className={css.container}>
@@ -50,11 +55,26 @@ export default class MapSearch extends Component {
 
 const YEARS = ['2016', '2015', '2014', '2013', '2012', '2011'];
 
-const STATUS_TYPES = ['Committee of Adjustment', 'Application File Pending', 'Application Reactivated',
-  'Application Approved', 'Application Approved by Committee', 'Application Recommended to Council',
-  'Draft Report sent to Councillor and Applicant for Response', 'In Appeal Period', 'Comment Period in Progress',
-  'Community Information and Comment Session Held', 'Comment Period has Ended/Issue Resolution',
-  'Community Information and Comment Session Open', 'Unknown'];
+const STATUS_TYPES = ["Agreement Package Received from Owner", "Agreement Signed", "Amendment Initiated",
+                      "Amendment Recommended to Council for Approval", "Appealed to OMB",
+                      "Applicant Concurs", "Applicant Does Not Concur", "Application Approved",
+                      "Application Approved - No Agreement/Letter of Undertaking Required",
+                      "Application Approved by Committee", "Application Approved by Council",
+                      "Application Approved by OMB", "Application Approved by OMB - Agreement Pending",
+                      "Application Approved by Staff", "Application Approved in part by OMB",
+                      "Application Draft Approved", "Application File Pending", "Application Reactivated",
+                      "Application Recommended to Council for Approval", "Application Recommended to Council for Refusal",
+                      "Application Refused by OMB", "Application on Hold", "By-law Passed - Appeal Period Pending",
+                      "By-law Passed - In Appeal Period", "Comment Period has Ended/Issue Resolution",
+                      "Comment Period in Progress", "Community \"Heads Up\" - Completed", "Community Information and Comment Session Held",
+                      "Councillor Concurs", "Deferred by Committee", "Delegated Authority Reinstated",
+                      "Draft Approval Revised/Extended", "Draft Approved", "Draft Report Sent to Councillor and Applicant for Response",
+                      "In Appeal Period", "No Appeal", "No Appeal - Official Plan Amendment Adopted", "Notice of Public Meeting Sent",
+                      "OMB Appeal Withdrawn - Application Approved", "OMB Hearing Held", "OMB Package Sent", "OMB Pre-Hearing Held",
+                      "Public Meeting Held", "Receipt of Agreement from Owner Pending",
+                      "Receipt of Letter of Undertaking from Owner Pending", "Referred to Staff by Committee",
+                      "Request for Agreement Received", "Revision Request Received", "Unknown", "Zoning By-law in Effect"]
+
 
 const WARD_TYPES = [ 'Orleans', 'Innes', 'Barrhaven', 'Kanata North',
   'West Carleton-March', 'Stittsville', 'Bay', 'College', 'Knoxdale-Merivale',

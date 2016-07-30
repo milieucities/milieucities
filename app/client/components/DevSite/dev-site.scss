@@ -95,6 +95,17 @@
   width: 25px;
   height: 25px;
   display: block;
+  cursor: pointer;
+}
+
+.liked {
+  background: url('./icons/full-heart.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 25px;
+  height: 25px;
+  display: block;
+  cursor: pointer;
 }
 
 .delimiter {

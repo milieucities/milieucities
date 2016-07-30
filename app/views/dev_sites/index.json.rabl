@@ -1,10 +1,16 @@
-collection @dev_sites
+object false
 
-attributes :id, :devID, :application_type, :title, :status, :status_date, :address, :images,
-  :description, :ward_name, :ward_num, :image_url, :hearts, :updated_at, :latitude, :longitude
+node(:total) { |_| @total }
 
-child(:addresses) { attributes :id, :street }
+child(@dev_sites) {
 
-child(:statuses) { attributes :id, :status, :status_date }
+  attributes :id, :devID, :application_type, :title, :status, :status_date, :address, :images,
+    :description, :ward_name, :ward_num, :image_url, :hearts, :updated_at, :latitude, :longitude
 
-child(:comments) { attributes :id, :body }
+  child(:addresses) { attributes :id, :street }
+
+  child(:statuses) { attributes :id, :status, :status_date }
+
+  child(:comments) { attributes :id, :body }
+
+}

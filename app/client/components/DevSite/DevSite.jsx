@@ -16,6 +16,7 @@ export default class DevSite extends Component {
     this.viewWholeDescription = (e) => this._viewWholeDescription(e);
     this.openEmailModal = (e) => this._openEmailModal(e);
     this.handleEmail = (e) => this._handleEmail(e);
+    this.toggleLike = () => this._toggleLike();
     this.loadDevSite();
   }
   componentDidUpdate(prevProps, prevState) {
@@ -62,10 +63,26 @@ export default class DevSite extends Component {
     });
 
   }
+  _toggleLike() {
+    const { devSite } = this.state;
+    const data = devSite.like ?
+                {dev_site: {likes_attributes: {"0" : {id: devSite.like.id, _destroy: 1 }}} } :
+                {dev_site: {likes_attributes: {"0" : {user_id: devSite.current_user_id, dev_site_id: devSite.id}}} }
+
+    $.ajax({
+      url: `/dev_sites/${devSite.id}`,
+      dataType: 'JSON',
+      type: 'PATCH',
+      cache: false,
+      data: data,
+      success: devSiteJson => this.setState({ devSite: devSiteJson })
+    });
+  }
   render() {
     const { devSite, showFiles, showModal, showReadMore,
             readMoreClicked, contact } = this.state;
     if(!devSite) return <div />;
+
     return <div className={css.container}>
       <div className={css.menu}>
         <i className={css.close} onClick={this.closeDevSite}></i>
@@ -80,8 +97,8 @@ export default class DevSite extends Component {
             Share
           </div>
           <div className={css.likecontainer}>
-            <i className={css.like}></i>
-            90
+            <i className={devSite.like ? css.liked : css.like} onClick={this.toggleLike}></i>
+            { devSite.likes_count }
           </div>
         </div>
 
@@ -94,7 +111,7 @@ export default class DevSite extends Component {
         <div className={css.row}>
           <div className={css.col}>
             <div className={css.title}>Development Id</div>
-            <div className={css.subtitle}>{devSite.devID}</div>
+            <div className={css.subtitle}>{devSite.updated}</div>
           </div>
           <div className={css.col}>
             <div className={css.title}>Ward</div>
