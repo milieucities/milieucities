@@ -10,12 +10,18 @@ export default class DevSiteList extends Component {
     this.parent = this.props.parent;
     this.devSiteNodes = () => this._devSiteNodes();
     this.handleDevSiteClick = (e) => this._handleDevSiteClick(e);
+    this.handleDevSiteMouseEnter = (e) => this.parent.setState({ hoverdDevSiteId: e.currentTarget.dataset.id });
+    this.handleDevSiteMouseLeave = () => this.parent.setState({ hoverdDevSiteId: null });
     this.handlePreviousClick = (e) => this._handlePreviousClick(e);
     this.handleForwardClick = (e) => this._handleForwardClick(e);
   }
   _handleDevSiteClick(e) {
     e.preventDefault();
-    this.parent.setState({ activeDevSiteId: e.currentTarget.dataset.id });
+    if(this.parent.state.activeDevSiteId === e.currentTarget.dataset.id){
+      this.parent.setState({ activeDevSiteId: null });
+    }else{
+      this.parent.setState({ activeDevSiteId: e.currentTarget.dataset.id });
+    }
   }
   _handlePreviousClick(e) {
     e.preventDefault()
@@ -29,7 +35,12 @@ export default class DevSiteList extends Component {
   }
   _devSiteNodes() {
     return this.props.devSites.map(devSite => {
-      return <a href="#" onClick={this.handleDevSiteClick} data-id={devSite.id} className={css.item} key={devSite.id}>
+      return <a href="#" onClick={this.handleDevSiteClick}
+                         onMouseEnter={this.handleDevSiteMouseEnter}
+                         onMouseLeave={this.handleDevSiteMouseLeave}
+                         data-id={devSite.id}
+                         className={css.item}
+                         key={devSite.id}>
         <div className={css.address}>{devSite.address}</div>
         <div className={css.info}>{devSite.devID}</div>
         <div className={css.info}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>

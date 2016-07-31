@@ -63,6 +63,7 @@ export default class Autocomplete extends Component {
   }
   _closeDropdown() {
     this.setState({ open: false, suggestions: [], highlightedIndex: null });
+    this.inputTextField.blur();
     document.removeEventListener('click', this.handleSyntheticBlur);
   }
   _search(value = this.state.value){

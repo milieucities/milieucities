@@ -2,7 +2,7 @@ module FindByOrderedIdsActiveRecordExtension
   extend ActiveSupport::Concern
   module ClassMethods
     def find_ordered(ids)
-      order_clause = "CASE id "
+      order_clause = "CASE dev_sites.id "
       ids.each_with_index do |id, index|
         order_clause << "WHEN #{id} THEN #{index} "
       end

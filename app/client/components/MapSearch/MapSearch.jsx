@@ -12,6 +12,7 @@ export default class MapSearch extends Component {
     this.autocompleteCallback = (address, autocomplete) => this._autocompleteCallback(address, autocomplete);
     this.handleAutocompleteSelect = (address) => this._handleAutocompleteSelect(address);
     this.handleSelectDropdown = (type, value) => this._handleSelectDropdown(type, value);
+    this.geocodeAddress = (address) => this._geocodeAddress(address);
   }
   _autocompleteCallback(address, autocomplete) {
     const googleLocationAutocomplete = new google.maps.places.AutocompleteService();
@@ -22,14 +23,18 @@ export default class MapSearch extends Component {
     })
   }
   _handleAutocompleteSelect(address) {
-    this.parent.setState({ search: this.parent.state.search.set('closest', address) },
-      () => this.parent.search()
-    );
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, (result) => {
+      const [latitude, longitude] = [result[0].geometry.location.lat(), result[0].geometry.location.lng()];
+      this.parent.setState({ search: this.parent.state.search.set('closest', address), latitude, longitude },
+        () => this.parent.search_and_sort()
+      );
+    });
   }
   _handleSelectDropdown(type, value) {
     value = type === "Ward" ? toUpper(value) : value;
     this.parent.setState({ search: this.parent.state.search.set(toLower(type), value) },
-      () => this.parent.search()
+      () => this.parent.search_and_sort()
     );
   }
   render() {
@@ -74,7 +79,6 @@ const STATUS_TYPES = ["Agreement Package Received from Owner", "Agreement Signed
                       "Public Meeting Held", "Receipt of Agreement from Owner Pending",
                       "Receipt of Letter of Undertaking from Owner Pending", "Referred to Staff by Committee",
                       "Request for Agreement Received", "Revision Request Received", "Unknown", "Zoning By-law in Effect"]
-
 
 const WARD_TYPES = [ 'Orleans', 'Innes', 'Barrhaven', 'Kanata North',
   'West Carleton-March', 'Stittsville', 'Bay', 'College', 'Knoxdale-Merivale',

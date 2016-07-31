@@ -2,6 +2,7 @@ class DevSite < ActiveRecord::Base
   attr_accessor :images, :files
 
   default_scope { order(ward_num: :asc ) }
+  scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
 
   VALID_APPLICATION_TYPES = [ "Site Plan Control", "Official Plan Amendment", "Zoning By-law Amendment",
     "Demolition Control", "Cash-in-lieu of Parking", "Plan of Subdivision",
@@ -18,8 +19,6 @@ class DevSite < ActiveRecord::Base
   has_many :city_files, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  # delegate :lat, :lon to: :addresses, allow_nil: true
-
   accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :statuses, allow_destroy: true
   accepts_nested_attributes_for :likes, allow_destroy: true
@@ -29,7 +28,6 @@ class DevSite < ActiveRecord::Base
   validates :description, presence: { message: "Description is required" }
   validates :ward_name, presence: { message: "Ward name is required" }
   validates :ward_num, presence: { message: "Ward number is required" }, numericality: true
-
 
   def self.filter(filter_by)
     @dev_sites = DevSite.all
@@ -58,7 +56,8 @@ class DevSite < ActiveRecord::Base
 
     if search_params[:closest].present?
       dev_site_ids
-        .push(Address.closest(origin: search_params[:closest])
+        .push(Address.within(1, :origin => search_params[:closest])
+        .closest(origin: search_params[:closest])
         .limit(500)
         .pluck(:dev_site_id))
       dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
@@ -77,8 +76,8 @@ class DevSite < ActiveRecord::Base
 
     if search_params[:status].present?
       dev_sites = dev_sites
-        .where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' )
-        .where( statuses: { status: search_params[:status] })
+        .where('statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)')
+        .where(statuses: { status: search_params[:status] })
     end
 
     dev_sites
@@ -99,12 +98,12 @@ class DevSite < ActiveRecord::Base
 
   def status
     return if self.statuses.empty?
-    self.statuses.last.status
+    self.statuses.order('status_date DESC').first.status
   end
 
   def status_date
     return if self.statuses.empty?
-    self.statuses.last.status_date ? self.statuses.last.status_date.strftime("%B %e, %Y") : nil
+    self.statuses.order('status_date DESC').first.status_date ? self.statuses.order('status_date DESC').first.status_date.strftime("%B %e, %Y") : nil
   end
 
   def address

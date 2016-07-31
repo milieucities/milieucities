@@ -11,20 +11,22 @@ import { Map } from 'immutable'
 export default class MapWrapper extends Component {
   constructor(props) {
     super(props);
-    this.state = { page: 0, devSites: [], activeDevSiteId: null, search: Map() };
+    this.state = { page: 0, devSites: [], search: Map(), latitude: 45.3072, longitude: -75.8174 };
+    this.search_and_sort = () => this._search_and_sort();
     this.loadDevSites = () => this._loadDevSites();
-    this.search = () => this._search();
     this.loadDevSites();
   }
   _loadDevSites() {
+    const { page, search, sort } = this.state;
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
-    $.getJSON(`/dev_sites`, {page: this.state.page, search:  this.state.search.toObject()},
+    $.getJSON(`/dev_sites`, {page, sort, search: search.toObject()},
       json => this.setState({ devSites: json.dev_sites, total: json.total }, scrollToTop)
     );
   }
-  _search() {
+  _search_and_sort() {
+    const { search, sort } = this.state;
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
-    $.getJSON(`/dev_sites`, {page: 0, search:  this.state.search.toObject()},
+    $.getJSON(`/dev_sites`, {page: 0, sort, search: search.toObject() },
       json => this.setState({page: 0, devSites: json.dev_sites, total: json.total }, scrollToTop)
     );
   }
@@ -37,7 +39,7 @@ export default class MapWrapper extends Component {
       </div>
       <div className={css.content}>
         {this.state.activeDevSiteId && <DevSite id={this.state.activeDevSiteId} parent={this} />}
-        <MapAwesome devSites={this.state.devSites} />
+        <MapAwesome {...this.state} parent={this} />
       </div>
     </div>;
   }

@@ -111,7 +111,7 @@ export default class DevSite extends Component {
         <div className={css.row}>
           <div className={css.col}>
             <div className={css.title}>Development Id</div>
-            <div className={css.subtitle}>{devSite.updated}</div>
+            <div className={css.subtitle}>{devSite.devID}</div>
           </div>
           <div className={css.col}>
             <div className={css.title}>Ward</div>

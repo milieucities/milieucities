@@ -1,76 +1,188 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import css from './map.scss'
+import { replace } from 'lodash'
 
 export default class Map extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
+    this.parent = this.props.parent;
     this.loadMap = () => this._loadMap();
+    this.loadDevSites = () => this._loadDevSites();
+    this.geoJsonBuilder = () => this._geoJsonBuilder();
+    mapboxgl.accessToken = 'pk.eyJ1IjoibXR1Y2swNjMiLCJhIjoiY2ltNXA0OHZhMDFub3RzbTR5b3NmbTR4bCJ9.WDWrgehrJIsDpt1BX5IASQ';
+  }
+  // shouldComponentUpdate(prevProps, prevState) {
+  //   const { latitude, longitude, devSites } = this.props;
+  //   return (prevProps.longitude !== longitude ||
+  //           prevProps.latitude !== latitude ||
+  //           prevProps.devSites !== devSites)
+  // }
+  componentDidUpdate(prevProps, prevState) {
+    const { map, popup } = this;
+    const { latitude, longitude, devSites, hoverdDevSiteId } = this.props;
+
+    // const { latitude, longitude } = this.props;
+    // if(prevProps.longitude !== longitude || prevProps.latitude !== latitude) {
+    // }
+    // if(this.map.loaded()) this.loadDevSites();
+    if(map.loaded() && prevProps.devSites !== devSites) this.loadDevSites();
+
+    if(hoverdDevSiteId){
+      const features = map.querySourceFeatures('devSites', {filter: ['==', 'id', hoverdDevSiteId]});
+      if(!features.length) {
+        popup.remove();
+        return;
+      }
+
+      const feature = features[0];
+      popup.setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.description)
+        .addTo(map);
+    }
   }
   componentDidMount() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoibXR1Y2swNjMiLCJhIjoiY2ltNXA0OHZhMDFub3RzbTR5b3NmbTR4bCJ9.WDWrgehrJIsDpt1BX5IASQ';
-    this.map = new mapboxgl.Map({
+    const { latitude, longitude } = this.props;
+    const map = this.map = new mapboxgl.Map({
       container: 'main-map',
       style: 'mapbox://styles/mtuck063/cim8gs43500449lm1hv082tp2',
-      center: [-75.8174, 45.3072],
-      zoom: 8.5
+      center: [longitude, latitude],
+      zoom: 9
     });
-    // this.loadMap();
+    map.addControl(new mapboxgl.Navigation({position: 'top-left'}));
+    map.scrollZoom.disable();
+    map.on('load', this.loadMap);
+
+    const popup = this.popup = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false
+    });
+
+    map.on('mousemove', e => {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['devSites'] });
+      map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
+      if(!features.length) {
+        popup.remove();
+        return;
+      }
+
+      const feature = features[0];
+      popup.setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.description)
+        .addTo(map);
+    });
+
+    map.on('click', e => {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['devSites'] });
+
+      if(features.length) {
+        const feature = features[0];
+        this.parent.setState({ activeDevSiteId: feature.properties.id });
+      }
+    });
+  }
+  _geoJsonBuilder() {
+    return {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: this.props.devSites.map(devSite => {
+          return {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [devSite.longitude, devSite.latitude]
+            },
+            properties: {
+              id: `${devSite.id}`,
+              title: devSite.title,
+              address: devSite.address,
+              'marker-symbol': 'consultation',
+              description: `<b>${devSite.address}</b>
+                            <br/>${replace(devSite.application_type, /coa/, 'Committee of Adjustment')}
+                            <br/>${devSite.status}`
+            }
+          }
+        })
+      }
+    }
+  }
+  _loadDevSites() {
+    const { map } = this;
+    const { latitude, longitude } = this.props;
+
+    if(map.getSource("devSites")){
+      map.removeSource("devSites");
+      map.removeLayer("devSites");
+    }
+
+    map.addSource("devSites", this.geoJsonBuilder());
+
+    map.addLayer({
+      "id": "devSites",
+      "type": "symbol",
+      "source": "devSites",
+      "layout": {
+        "icon-image": "{marker-symbol}",
+        "icon-size": 1,
+        "icon-allow-overlap": true,
+        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+        "text-size": 12,
+        "text-offset": [0, 0.6],
+        "text-anchor": "top"
+      }
+    });
+
+    map.flyTo({ center: [longitude, latitude], zoom: 14 });
   }
   _loadMap() {
-    this.map.on('style.load', () => {
-      $.getJSON(`/dev_sites/geojson?limit=10&page=1`, geoJson => {
 
-        if(this.map.getSource("devSites")){
-          this.map.removeSource("devSites");
-          this.map.removeLayer("devSites");
-        }
+    const { map } = this;
 
-        this.map.addSource("devSites", {
-          "type": "geojson",
-          "data": { "type": "FeatureCollection",
-          "features": geoJson }
-        });
-
-        this.map.addSource("wards", {
-          "type": "geojson",
-          "data": wardGeoJson
-        });
-
-        this.map.addLayer({
-          "id": "devSites",
-          "type": "symbol",
-          "source": "devSites",
-          "layout": {
-            "icon-image": "{marker-symbol}",
-            "icon-size": 1,
-            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-            "text-size": 12,
-            "text-offset": [0, 0.6],
-            "text-anchor": "top"
-          }
-        });
-
-        this.map.addLayer({
-          "id": "fill-wards",
-          "type": "fill",
-          "source": "wards",
-          "paint": {
-            "fill-color": "#3E6880",
-            "fill-opacity": 0.3
-          }
-        });
-
-        this.map.addLayer({
-          "id": "line-wards",
-          "type": "line",
-          "source": "wards",
-          "paint": {
-            "line-color": "#3E6880"
-          }
-        });
-      });
+    map.addSource("wards", {
+      "type": "geojson",
+      "data": wardGeoJson
     });
+
+    map.addLayer({
+      "id": "fill-wards",
+      "type": "fill",
+      "source": "wards",
+      "paint": {
+        "fill-color": "#3E6880",
+        "fill-opacity": 0.3
+      }
+    });
+
+    map.addLayer({
+      "id": "line-wards",
+      "type": "line",
+      "source": "wards",
+      "paint": {
+        "line-color": "#3E6880"
+      }
+    });
+
+    // map.addSource("devSites", this.geoJsonBuilder());
+    //
+    // map.addLayer({
+    //   "id": "devSites",
+    //   "type": "symbol",
+    //   "source": "devSites",
+    //   "layout": {
+    //     "icon-image": "{marker-symbol}",
+    //     "icon-size": 1,
+    //     "icon-allow-overlap": true,
+    //     "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+    //     "text-size": 12,
+    //     "text-offset": [0, 0.6],
+    //     "text-anchor": "top"
+    //   }
+    // });
+
+
   }
   render() {
     return <div style={{height: '100vh'}} id="main-map">
@@ -78,7 +190,6 @@ export default class Map extends Component {
     </div>;
   }
 }
-
 
 const wardGeoJson = {
   "type": "FeatureCollection",

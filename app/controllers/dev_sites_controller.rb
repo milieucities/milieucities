@@ -5,14 +5,9 @@ class DevSitesController < ApplicationController
   def index
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
     @dev_sites = @dev_sites.search(search_params) if search?
+    @dev_sites = @dev_sites.send(params[:sort]) if sort?
     @total = @dev_sites.count
     paginate
-
-    if params[:page].present? || params[:limit].present?
-      limit = params[:limit].present? ? params[:limit].to_i : 20
-      page = params[:page].present? ? params[:page].to_i : 0
-      @dev_sites.limit!(limit).offset!(limit * page)
-    end
 
     respond_to do |format|
       format.html
@@ -126,6 +121,10 @@ class DevSitesController < ApplicationController
         page = params[:page].present? ? params[:page].to_i : 0
         @dev_sites.limit!(limit).offset!(limit * page)
       end
+    end
+
+    def sort?
+      params[:sort].present?
     end
 
     def search?
