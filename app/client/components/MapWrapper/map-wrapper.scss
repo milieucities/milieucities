@@ -1,12 +1,12 @@
 .container{
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 50px);
   position: relative;
 }
 
 .sidebar {
   width: 50%;
-  height: 100vh;
+  height: calc(100vh - 50px);
   background-color: #fff;
   overflow-y: scroll;
   float: left;
@@ -18,7 +18,7 @@
 
 .content {
   width: 50%;
-  height: 100vh;
+  height: calc(100vh - 50px);
   overflow-y: scroll;
   float: left;
   position: relative;

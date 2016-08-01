@@ -1,7 +1,7 @@
 <section id="home">
   <nav>
     <div class="logo hide-on-med-and-down">
-      <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "nav-logo" %>
+      <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "logo" %>
     </div>
 
     <ul class="right hide-on-med-and-down">
@@ -29,7 +29,7 @@
   </div>
 
   <div class="search">
-    <%= form_tag search_dev_sites_path, method: :post do %>
+    <%= form_tag dev_sites_path, method: :get, id: 'home-search' do %>
       <%= fa_icon 'map-marker', class: 'map-marker' %>
       <%= text_field_tag 'search', nil, type: 'customsearch', placeholder: t('home.search_bar_text'), class: 'search-input', autocomplete: 'off'  %>
       <%= button_tag do %>

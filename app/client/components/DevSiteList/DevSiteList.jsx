@@ -30,7 +30,7 @@ export default class DevSiteList extends Component {
   }
   _handleForwardClick(e) {
     e.preventDefault()
-    if((this.props.page+1) === ceil(this.props.total / 20)) return;
+    if((this.props.page + 1) === ceil(this.props.total / 20)) return;
     this.parent.setState({ page: (this.props.page + 1) }, () => this.parent.loadDevSites());
   }
   _devSiteNodes() {
@@ -57,10 +57,15 @@ export default class DevSiteList extends Component {
     }
 
     return <div className={css.container}>
+      <div className={css.pagination}>
+        <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
+        {this.props.page + 1} / {ceil(this.props.total / 20)}
+        <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
+      </div>
       {this.devSiteNodes()}
       <div className={css.pagination}>
         <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
-        {this.props.page + 1} of {ceil(this.props.total / 20)}
+        {this.props.page + 1} / {ceil(this.props.total / 20)}
         <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
       </div>
     </div>;

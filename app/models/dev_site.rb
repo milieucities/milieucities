@@ -53,10 +53,10 @@ class DevSite < ActiveRecord::Base
     dev_site_ids = []
     dev_sites = DevSite.all
 
-    if search_params[:closest].present?
+    if search_params[:latitude].present? && search_params[:longitude].present?
       dev_site_ids
-        .push(Address.within(5, :origin => search_params[:closest])
-        .closest(origin: search_params[:closest])
+        .push(Address.within(5, :origin => [search_params[:latitude], search_params[:longitude]])
+        .closest(origin: [search_params[:latitude], search_params[:longitude]])
         .limit(150)
         .pluck(:dev_site_id))
       dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)

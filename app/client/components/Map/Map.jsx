@@ -13,46 +13,43 @@ export default class Map extends Component {
     this.geoJsonBuilder = () => this._geoJsonBuilder();
     mapboxgl.accessToken = 'pk.eyJ1IjoibXR1Y2swNjMiLCJhIjoiY2ltNXA0OHZhMDFub3RzbTR5b3NmbTR4bCJ9.WDWrgehrJIsDpt1BX5IASQ';
   }
-  shouldComponentUpdate(prevProps, prevState) {
+  shouldComponentUpdate(nextProps, nextState) {
     const { devSites, hoverdDevSiteId } = this.props;
-
-    return (devSites !== prevProps.devSites ||
-            hoverdDevSiteId !== null)
+    return (nextProps.devSites !== devSites ||
+            nextProps.hoverdDevSiteId !== hoverdDevSiteId)
   }
   componentDidUpdate(prevProps, prevState) {
     const { map, popup } = this;
-    const { devSites, hoverdDevSiteId, search } = this.props;
+    const { devSites, hoverdDevSiteId, ward } = this.props;
 
     if(map.style.loaded() && prevProps.devSites !== devSites){
       this.loadDevSites();
     }
 
-    if(search.get('ward') && devSites.length > 0){
+    if(ward && devSites.length > 0){
       const zoom = map.getZoom() < 9.5 ? 12.5 : map.getZoom();
       const { longitude, latitude } = devSites[0];
       map.flyTo({ center: [longitude, latitude], zoom })
     }
 
-    if(hoverdDevSiteId){
-      const features = map.querySourceFeatures('devSites', {filter: ['==', 'id', hoverdDevSiteId]});
-      if(!features.length) {
-        popup.remove();
-        return;
-      }
-
-      const feature = features[0];
-      popup.setLngLat(feature.geometry.coordinates)
-        .setHTML(feature.properties.description)
-        .addTo(map);
+    const features = map.querySourceFeatures('devSites', {filter: ['==', 'id', hoverdDevSiteId]});
+    if(!features.length) {
+      popup.remove();
+      return;
     }
+
+    const feature = features[0];
+    popup.setLngLat(feature.geometry.coordinates)
+      .setHTML(feature.properties.description)
+      .addTo(map);
   }
   componentDidMount() {
     const { latitude, longitude } = this.props;
     const map = this.map = new mapboxgl.Map({
       container: 'main-map',
       style: 'mapbox://styles/mtuck063/cim8gs43500449lm1hv082tp2',
-      center: [longitude, latitude],
-      zoom: 9
+      center: [(longitude || -75.8174) , (latitude || 45.3072)],
+      zoom: (longitude && latitude ? 13 : 9)
     });
     map.dragRotate.disable();
     map.touchZoomRotate.disableRotation();
@@ -82,7 +79,7 @@ export default class Map extends Component {
 
     map.on('dragend', e => {
       const [latitude, longitude] = [map.getCenter().lat, map.getCenter().lng];
-      this.parent.setState({ search: this.parent.state.search.set('closest', [latitude, longitude]), latitude, longitude },
+      this.parent.setState({ latitude, longitude },
         () => this.parent.search_and_sort()
       );
     });
@@ -185,7 +182,7 @@ export default class Map extends Component {
 
   }
   render() {
-    return <div style={{height: '100vh'}} id='main-map' />;
+    return <div className={css.container} id='main-map' />;
   }
 }
 

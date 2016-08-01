@@ -5,7 +5,7 @@ import css from './select.scss'
 export default class Select extends Component {
   constructor(props) {
     super(props);
-    this.state = { active: false, value: null, highlightedIndex: null }
+    this.state = { active: false, value: this.props.defaultValue, highlightedIndex: null }
     this.handleSyntheticBlur = (e) => this._handleSyntheticBlur(e);
     this.handleFocus = () => this._openDropdown();
     this.handleClick = () => this._openDropdown();

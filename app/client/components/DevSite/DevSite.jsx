@@ -26,6 +26,7 @@ export default class DevSite extends Component {
     $.getJSON(`/dev_sites/${this.props.id}`,
       devSiteJson => this.setState({ devSite: devSiteJson },
         () => {
+          console.log(this.state.devSite);
           if(this.refs.description.scrollHeight > 140) {
             this.setState({ showReadMore: true, readMoreClicked: false });
           }

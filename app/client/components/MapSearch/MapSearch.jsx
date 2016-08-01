@@ -26,18 +26,18 @@ export default class MapSearch extends Component {
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': address}, (result) => {
       const [latitude, longitude] = [result[0].geometry.location.lat(), result[0].geometry.location.lng()];
-      this.parent.setState({ search: this.parent.state.search.set('closest', address), latitude, longitude },
+      this.parent.setState({ latitude, longitude },
         () => this.parent.search_and_sort()
       );
     });
   }
   _handleSelectDropdown(type, value) {
     if(type === 'Ward' && value){
-      this.parent.setState({ search: this.parent.state.search.set(toLower(type), toUpper(value)).delete('closest') },
+      this.parent.setState({ [toLower(type)]: toUpper(value), latitude: null, longitude: null },
         () => this.parent.search_and_sort()
       );
     }else{
-      this.parent.setState({ search: this.parent.state.search.set(toLower(type), value) },
+      this.parent.setState({ [toLower(type)]: value },
         () => this.parent.search_and_sort()
       );
     }
@@ -50,13 +50,13 @@ export default class MapSearch extends Component {
       <div className={css.divider}></div>
       <div className='row no-marg'>
         <div className='col s12 m4'>
-          <Select title='Year' options={YEARS} onSelect={this.handleSelectDropdown} />
+          <Select title='Year' options={YEARS} defaultValue={this.props.year} onSelect={this.handleSelectDropdown} />
         </div>
         <div className='col s12 m4'>
-          <Select title='Status' options={STATUS_TYPES} onSelect={this.handleSelectDropdown} />
+          <Select title='Status' options={STATUS_TYPES} defaultValue={this.props.status} onSelect={this.handleSelectDropdown} />
         </div>
         <div className='col s12 m4'>
-          <Select title='Ward' options={WARD_TYPES} onSelect={this.handleSelectDropdown} />
+          <Select title='Ward' options={WARD_TYPES} defaultValue={this.props.ward} onSelect={this.handleSelectDropdown} />
         </div>
       </div>
     </div>;

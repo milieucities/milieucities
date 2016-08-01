@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       get 'citizencity'
       get 'tos'
       get 'privacy'
-      get 'about'
       post 'contact_citizencity'
       post 'contact_milieu'
       post 'contact_file_lead'
@@ -23,11 +22,6 @@ Rails.application.routes.draw do
         get :images
       end
 
-      collection do
-        post :search
-        get :geojson
-        get :map
-      end
     end
 
     resources :events do
