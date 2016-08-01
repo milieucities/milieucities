@@ -10,6 +10,10 @@
   background-color: #fff;
   overflow-y: scroll;
   float: left;
+
+  @media #{$medium-and-down} {
+    width: 100%;
+  }
 }
 
 .content {
@@ -18,4 +22,10 @@
   overflow-y: scroll;
   float: left;
   position: relative;
+
+  @media #{$medium-and-down} {
+    height: auto;
+    width: 100%;
+    float: none;
+  }
 }

@@ -50,7 +50,7 @@ export default class DevSiteList extends Component {
     })
   }
   render() {
-    if(!this.props.devSites) {
+    if(this.props.devSites.length === 0) {
       return <div className={css.empty}>
         No development sites found.
       </div>

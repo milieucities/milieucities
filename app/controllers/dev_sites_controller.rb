@@ -135,7 +135,7 @@ class DevSitesController < ApplicationController
     end
 
     def search_params
-      params.require(:search).permit(:closest, :ward, :year, :status)
+      params.require(:search).permit(:closest, :ward, :year, :status, closest: [])
     end
 
     def dev_site_params

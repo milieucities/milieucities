@@ -75,7 +75,7 @@ export default class Autocomplete extends Component {
     this.openDropdown();
   }
   _setSuggestion(suggestion) {
-    this.setState({ value: suggestion });
+    this.setState({ value: '' });
     this.props.onSelect(suggestion);
     this.closeDropdown();
   }

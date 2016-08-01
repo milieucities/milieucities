@@ -2,13 +2,18 @@
   border-left: 1px solid #ddd;
   box-sizing: border-box;
   font-family: 'Lato';
-  position: absolute;
+  position: fixed;
   background-color: #f7f7f7;
   top:0;
   right:0;
-  width: 100%;
+  width: 50%;
   z-index: 1;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
+
+  @media #{$medium-and-down} {
+    width: 100%;
+  }
 }
 
 .menu {
@@ -44,6 +49,10 @@
 .wrapper {
   padding: 30px 50px;
   background-color: #fff;
+
+  @media #{$small-and-down} {
+    padding: 20px;
+  }
 }
 
 .title {
@@ -52,6 +61,10 @@
   padding-bottom: 10px;
   text-align: center;
   color: #333;
+
+  @media #{$small-and-down} {
+    font-size: 24px;
+  }
 }
 
 .subtitle {
@@ -165,6 +178,10 @@
       font-weight: 700;
       color: #444;
       padding-bottom: 5px;
+
+      @media #{$small-and-down} {
+        font-size: 14px;
+      }
     }
 
     .subtitle{
@@ -190,7 +207,7 @@
   padding: 10px 0;
   margin: 0;
   color: #777;
-  max-height: 145px;
+  max-height: 140px;
   overflow-y: hidden;
 }
 

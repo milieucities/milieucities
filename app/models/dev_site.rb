@@ -1,7 +1,6 @@
 class DevSite < ActiveRecord::Base
   attr_accessor :images, :files
 
-  default_scope { order(ward_num: :asc ) }
   scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
 
   VALID_APPLICATION_TYPES = [ "Site Plan Control", "Official Plan Amendment", "Zoning By-law Amendment",
@@ -56,9 +55,9 @@ class DevSite < ActiveRecord::Base
 
     if search_params[:closest].present?
       dev_site_ids
-        .push(Address.within(1, :origin => search_params[:closest])
+        .push(Address.within(5, :origin => search_params[:closest])
         .closest(origin: search_params[:closest])
-        .limit(500)
+        .limit(150)
         .pluck(:dev_site_id))
       dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
     end
