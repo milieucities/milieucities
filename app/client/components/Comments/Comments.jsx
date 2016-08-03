@@ -45,9 +45,11 @@ export default class Comments extends Component {
   }
   render() {
     const { comments, total } = this.state;
-    return <div className={this.currentUserId ? css.container : css.nouser}>
-      {this.currentUserId ? <CommentForm {...this.props} parent={this} /> :
-        <a href="#sign-in-modal" className='modal-trigger btn'>Sign in to comment</a>}
+    return <div className={css.container}>
+      <div className={!this.currentUserId && css.nouser}>
+        {this.currentUserId ? <CommentForm {...this.props} parent={this} /> :
+          <a href="#sign-in-modal" className='modal-trigger btn'>Sign in to comment</a>}
+      </div>
       {total > 0 && <div className={css.number}> {total} responses</div>}
       {comments.map(comment => <Comment comment={comment} key={comment.id} />)}
       {this.hasMoreComments() && <a onClick={this.appendMoreComments} className={css.loadmore}>Load More Comments</a> }
@@ -115,11 +117,10 @@ class Comment extends Component {
   render() {
     const { comment } = this.props;
     const { readMoreClicked, showReadMore } = this.state;
-
     return <div className={css.comment}>
       <div className={css.info}>
         <span className={css.name}>
-          {comment.user ? comment.user.username : 'Anonymous'}
+          {comment.user && (comment.user.username || comment.user.name || 'Anonymous')}
         </span>
         <span className={css.date}>
           {moment(comment.created_at).format('MMMM DD, YYYY ')}

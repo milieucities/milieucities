@@ -15,13 +15,14 @@ $(document).on('page:change', function(){
     e.preventDefault();
 
     var address = $('#search').val();
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': address}, (result, status) => {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, function(result, status) {
       if(result.length > 0){
-        const [latitude, longitude] = [result[0].geometry.location.lat(), result[0].geometry.location.lng()];
-        Turbolinks.visit(`dev_sites?latitude=${latitude}&longitude=${longitude}`);
+        var latitude = result[0].geometry.location.lat();
+        var longitude = result[0].geometry.location.lng();
+        Turbolinks.visit("dev_sites?latitude" + latitude + "&longitude=" + longitude);
       }else{
-        Turbolinks.visit(`dev_sites`);
+        Turbolinks.visit("dev_sites");
       }
     });
 

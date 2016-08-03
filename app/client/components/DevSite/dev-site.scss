@@ -2,17 +2,19 @@
   border-left: 1px solid #ddd;
   box-sizing: border-box;
   font-family: 'Lato';
-  position: fixed;
+  position: absolute;
   background-color: #f7f7f7;
-  top: 50px;
+  top: 0;
   right:0;
-  width: 50%;
+  width: 100%;
   z-index: 1;
   height: calc(100vh - 50px);
   overflow-y: scroll;
 
   @media #{$medium-and-down} {
     width: 100%;
+    top: 50px;
+    position: fixed;
   }
 }
 

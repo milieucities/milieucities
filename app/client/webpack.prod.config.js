@@ -27,7 +27,8 @@ module.exports = {
     new ExtractTextPlugin('[name].[hash].css'),
     new webpack.DefinePlugin({
       'process.env': {
-        'ENV': JSON.stringify(ENV)
+        NODE_ENV: JSON.stringify('production'),
+        ENV: JSON.stringify(ENV)
       }
     })
   ],
@@ -42,7 +43,7 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ['style',
-        'css?modules&importLoaders=3&localIdentName=[name]-[local]',
+        'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]',
         'sass',
         'sass-resources']
       },
@@ -51,7 +52,7 @@ module.exports = {
         loader: 'url?limit=100000&minetype=application/font-woff'
       },
       {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file'
       },
       {

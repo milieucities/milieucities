@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import omit from 'lodash.omit'
+import { omit } from 'lodash'
 import css from './map-autocomplete.scss'
 
 export default class Autocomplete extends Component {

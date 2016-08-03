@@ -33,7 +33,7 @@ gem 'ajax-autocomplete-rails', '~> 0.1.1'
 gem 'font-awesome-rails', '~> 4.5'
 gem 'rollbar'
 gem 'skylight'
-
+gem 'dotenv-rails', '~> 2.1.1'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 
@@ -45,7 +45,6 @@ group :development, :test do
   # group together
   gem 'byebug', '~> 8.2'
   gem 'pry-byebug'
-  gem 'dotenv-rails', '~> 2.1.1'
   gem 'letter_opener'
   gem 'launchy'
   gem 'puma'
