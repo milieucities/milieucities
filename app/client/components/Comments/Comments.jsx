@@ -120,7 +120,7 @@ class Comment extends Component {
     return <div className={css.comment}>
       <div className={css.info}>
         <span className={css.name}>
-          {comment.user && (comment.user.username || comment.user.name || 'Anonymous')}
+          {comment.user ? (comment.user.username || comment.user.name || 'Anonymous') : 'Anonymous'}
         </span>
         <span className={css.date}>
           {moment(comment.created_at).format('MMMM DD, YYYY ')}

@@ -2,12 +2,8 @@
   border-left: 1px solid #ddd;
   box-sizing: border-box;
   font-family: 'Lato';
-  position: absolute;
   background-color: #f7f7f7;
-  top: 0;
-  right:0;
   width: 100%;
-  z-index: 1;
   height: calc(100vh - 50px);
   overflow-y: scroll;
 
@@ -15,6 +11,7 @@
     width: 100%;
     top: 50px;
     position: fixed;
+    z-index: 2;
   }
 }
 
@@ -254,9 +251,10 @@
 
   .email{
     background-color: #b6cef0;
-    color: #555;
+    color: #fff;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 5px 10px;
     border-radius: 2px;
     width: 45%;
@@ -270,6 +268,11 @@
     width: 30px;
     margin-right: 20px;
     display: inline-block;
+    @media #{$small-and-down} {
+      height: 20px;
+      width: 20px;
+      margin-right: 10px;
+    }
   }
 }
 

@@ -19,9 +19,8 @@
 .content {
   width: 50%;
   height: calc(100vh - 50px);
-  overflow-y: scroll;
-  float: left;
   position: relative;
+  float: left;
 
   @media #{$medium-and-down} {
     height: auto;

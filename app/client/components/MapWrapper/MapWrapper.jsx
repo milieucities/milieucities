@@ -61,7 +61,7 @@ export default class MapWrapper extends Component {
       </div>
       <div className={css.content}>
         {this.state.activeDevSiteId && <DevSite id={this.state.activeDevSiteId} parent={this} />}
-        {!this.state.isMobile && <MapAwesome {...this.state} parent={this} />}
+        {!this.state.isMobile && !this.state.activeDevSiteId && <MapAwesome {...this.state} parent={this} />}
       </div>
     </div>;
   }
