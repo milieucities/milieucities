@@ -1,12 +1,12 @@
 <section id="home">
   <nav>
-    <div class="logo hide-on-med-and-down">
-      <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "nav-logo" %>
+    <div class="logo">
+      <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "logo" %>
     </div>
 
-    <ul class="right hide-on-med-and-down">
-      <li class="overshadow"><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us" %></li>
-      <li class="overshadow"><%= link_to t('nav_bar.launch'), "#", title: t('nav_bar.launch'), class: 'tooltipped', data: { position: 'bottom', delay: '50', tooltip: 'Coming Soon' } %></li>
+    <ul class="right">
+      <li class="overshadow"><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us", class: 'hide-on-small-only' %></li>
+      <li class="overshadow"><%= link_to t('nav_bar.launch'), "#", title: t('nav_bar.launch'), class: 'tooltipped hide-on-small-only', data: { position: 'bottom', delay: '50', tooltip: 'Coming Soon' } %></li>
       <% if signed_in? %>
       <li class="overshadow"><%= link_to  t('nav_bar.sign_out_text'), session_path(id: current_user.id), method: :delete, title: "Sign Out" %></li>
       <% else %>
@@ -29,7 +29,7 @@
   </div>
 
   <div class="search">
-    <%= form_tag search_dev_sites_path, method: :post do %>
+    <%= form_tag dev_sites_path, method: :get, id: 'home-search' do %>
       <%= fa_icon 'map-marker', class: 'map-marker' %>
       <%= text_field_tag 'search', nil, type: 'customsearch', placeholder: t('home.search_bar_text'), class: 'search-input', autocomplete: 'off'  %>
       <%= button_tag do %>
@@ -53,9 +53,6 @@
     <%= link_to dev_site_path(1870), class: "development d3 hide-on-small-only overshadow" do %>
       Somerset House
     <% end %>
-    <!-- <%= link_to "#", class: "development d3 hide-on-med-and-down overshadow" do %>
-      190 Richmond 3
-    <% end %> -->
   </div>
 
   <div class="footer hide-on-small-only">

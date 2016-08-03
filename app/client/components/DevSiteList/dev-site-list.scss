@@ -1,0 +1,110 @@
+.container {
+
+}
+
+.empty {
+  padding: 20px 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.activeitem{
+  padding: 15px 20px;
+  padding-bottom: 0;
+  display: block;
+  background-color: #e2eae9;
+}
+
+.item {
+  padding: 15px 20px;
+  padding-bottom: 0;
+  background-color: #fff;
+  display: block;
+  transition: 200ms;
+
+  &:hover{
+    background-color: #e2eae9;
+  }
+}
+
+.address {
+  font-size: 22px;
+  font-weight: 700;
+
+  @media #{$small-and-down} {
+    font-size: 18px;
+    line-height: 1;
+    padding-bottom: 10px;
+  }
+}
+
+.info {
+  color: #999;
+  font-size: 14px;
+}
+
+.description {
+  font-weight: 500;
+  color: #555;
+  font-size: 16px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pagination {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-style: italic;
+  margin: 0 auto;
+  height: 60px;
+}
+
+.disablerightarrow{
+  background: url('./icons/right-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+  opacity: 0.3;
+}
+
+.rightarrow {
+  background: url('./icons/right-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+}
+
+.disableleftarrow {
+  background: url('./icons/left-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+  opacity: 0.3;
+}
+
+.leftarrow {
+  background: url('./icons/left-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10px;
+  height: 20px;
+  display: block;
+  cursor: pointer;
+}

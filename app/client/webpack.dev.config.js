@@ -2,9 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
+
   entry: {
     bundle: path.resolve(__dirname, 'index')
   },
@@ -20,7 +20,6 @@ module.exports = {
   },
 
   plugins: [
-    new LodashModuleReplacementPlugin,
     new ExtractTextPlugin('[name].css')
   ],
 
@@ -34,7 +33,7 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ['style',
-        'css?modules&importLoaders=3&localIdentName=[name]-[local]',
+        'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]',
         'sass',
         'sass-resources']
       },
@@ -48,7 +47,7 @@ module.exports = {
         loader: 'url?limit=100000&minetype=application/font-woff'
       },
       {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file'
       },
       {

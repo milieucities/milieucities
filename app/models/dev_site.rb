@@ -1,7 +1,7 @@
 class DevSite < ActiveRecord::Base
   attr_accessor :images, :files
 
-  default_scope { order(ward_num: :asc ) }
+  scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
 
   VALID_APPLICATION_TYPES = [ "Site Plan Control", "Official Plan Amendment", "Zoning By-law Amendment",
     "Demolition Control", "Cash-in-lieu of Parking", "Plan of Subdivision",
@@ -16,9 +16,11 @@ class DevSite < ActiveRecord::Base
   has_many :addresses, dependent: :destroy
   has_many :statuses, dependent: :destroy
   has_many :city_files, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :statuses, allow_destroy: true
+  accepts_nested_attributes_for :likes, allow_destroy: true
 
   validates :devID, uniqueness: { message: "Dev Id must be unique" }
   validates :application_type, presence: { message: "Application type is required" }
@@ -26,49 +28,47 @@ class DevSite < ActiveRecord::Base
   validates :ward_name, presence: { message: "Ward name is required" }
   validates :ward_num, presence: { message: "Ward number is required" }, numericality: true
 
+  def self.search(search_params)
+    dev_site_ids = []
+    dev_sites = DevSite.all
 
-  def self.filter(filter_by)
-    @dev_sites = DevSite.all
-    if filter_by == "consultation" then
-      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Comment Period in Progress", "Community Information and Comment Session Open"] } )
-    elsif filter_by == "new-development" then
-      @dev_sites = @dev_sites.where( application_type: VALID_APPLICATION_TYPES.reject { |at| ["Derelict", "Vacant", "Unknown"].include?(at) } )
-      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: Status::VALID_STATUS_TYPES.reject { |st| ["Unknown", "Comment Period in Progress", "Community Information and Comment Session Open"].include?(st) } } )
-    elsif filter_by == "vacant-derelict" then
-      @dev_sites = @dev_sites.where( application_type: ["Derelict", "Vacant", "Unknown"] )
-      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Unknown"] })
-    elsif filter_by == "events" then
-      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Event"] })
-    elsif filter_by == "nothing"
-      # DO NOTHING
-    else
-      @dev_sites = @dev_sites.where(ward_num: (User::VALID_NEIGHBOURHOOD_TYPES.index(filter_by) + 1))
+    if search_params[:latitude].present? && search_params[:longitude].present?
+      dev_site_ids
+        .push(Address.within(5, :origin => [search_params[:latitude], search_params[:longitude]])
+        .closest(origin: [search_params[:latitude], search_params[:longitude]])
+        .limit(150)
+        .pluck(:dev_site_id))
+      dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
     end
 
-    @dev_sites.limit(150)
-  end
 
-  def marker
-    if ["Comment Period in Progress", "Community Information and Comment Session Open"].include?(self.statuses.last.try(:status))
-      marker = "consultation"
-    elsif ["Event"].include?(self.statuses.last.try(:status))
-      marker = "event"
-    elsif ["Unknown"].include?(self.statuses.last.try(:status))
-      marker = "vacant"
-    else
-      marker = "comment"
+    if search_params[:year].present?
+      dev_sites = dev_sites
+        .where('extract(year from updated) = ?', search_params[:year])
     end
-    marker
+
+    if search_params[:ward].present?
+      dev_sites = dev_sites
+        .where(ward_name: search_params[:ward])
+    end
+
+    if search_params[:status].present?
+      dev_sites = dev_sites
+        .where('statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)')
+        .where(statuses: { status: search_params[:status] })
+    end
+
+    dev_sites
   end
 
   def status
     return if self.statuses.empty?
-    self.statuses.last.status
+    self.statuses.order('status_date DESC').first.status
   end
 
   def status_date
     return if self.statuses.empty?
-    self.statuses.last.status_date ? self.statuses.last.status_date.strftime("%B %e, %Y") : nil
+    self.statuses.order('status_date DESC').first.status_date ? self.statuses.order('status_date DESC').first.status_date.strftime("%B %e, %Y") : nil
   end
 
   def address
@@ -78,12 +78,12 @@ class DevSite < ActiveRecord::Base
 
   def latitude
     return if self.addresses.empty?
-    self.addresses.first.geocode_lat
+    self.addresses.first.lat
   end
 
   def longitude
     return if self.addresses.empty?
-    self.addresses.first.geocode_lon
+    self.addresses.first.lon
   end
 
   def image_hash

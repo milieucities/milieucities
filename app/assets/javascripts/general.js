@@ -11,6 +11,28 @@ $(document).on('page:change', function(){
     }
   });
 
+  $('#home-search').submit(function(e){
+    e.preventDefault();
+
+    var address = $('#search').val();
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': address}, (result, status) => {
+      if(result.length > 0){
+        const [latitude, longitude] = [result[0].geometry.location.lat(), result[0].geometry.location.lng()];
+        Turbolinks.visit(`dev_sites?latitude=${latitude}&longitude=${longitude}`);
+      }else{
+        Turbolinks.visit(`dev_sites`);
+      }
+    });
+
+  });
+
+  window.onpopstate = function(e){
+    if(e.state){
+      Turbolinks.visit(e.state.path);
+    }
+  };
+
   if($('#notice').length){
     Materialize.toast($('#notice').data("notice"), 3500, "teal");
   }
@@ -62,3 +84,17 @@ $(document).on('page:change', function(){
   });
 
 });
+
+$(document).ready(function() {
+  $.ajaxSetup({ cache: false });
+});
+
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+  results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}

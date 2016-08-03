@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
   has_many :comments, as: :commentable
+  has_many :likes, dependent: :destroy
 
   validates :accepted_terms, acceptance: true
   validates  :email, presence: {message: "Email is required"},
@@ -13,5 +14,7 @@ class User < ActiveRecord::Base
   validates  :password, presence: {message: "Password is required", on: :create},
   confirmation: {message: "Passwords do not match."},
   length: { in: 6..20, message: "Password must be between 6 to 20 characters"}
+
+  delegate :name, to: :profile, allow_nil: true
 
 end

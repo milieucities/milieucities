@@ -39,24 +39,27 @@ module MapData
       return false
     end
 
+    if (dev_site['address'].blank? ||
+       dev_site['address'][0]['lat'].blank? ||
+       dev_site['address'][0]['lon'].blank?)
+       return false
+    end
 
     new_dev_site = DevSite.new(
-    description: dev_site['description'],
-    appID: dev_site['appid'],
-    devID: dev_site['devid'],
-    received_date: dev_site['receiveddate'],
-    updated: dev_site['updated'],
-    application_type: dev_site['apptype'],
-    ward_num: dev_site['ward'],
-    ward_name: @wards[dev_site['ward']]
+      description: dev_site['description'],
+      appID: dev_site['appid'],
+      devID: dev_site['devid'],
+      received_date: dev_site['receiveddate'],
+      updated: dev_site['updated'],
+      application_type: dev_site['apptype'],
+      ward_num: dev_site['ward'],
+      ward_name: @wards[dev_site['ward']]
     )
 
     dev_site['address'].each do |address|
       new_dev_site.addresses.build(
       lat: address['lat'],
       lon: address['lon'],
-      geocode_lat: address['lat'],
-      geocode_lon: address['lon'],
       street: address['addr'] + ', Ottawa, Ontario, Canada'
       )
     end if dev_site['address'].present?
@@ -101,6 +104,13 @@ module MapData
     rescue Exception => msg
       puts 'Error retrieving updated dev site'
       puts msg.inspect
+    end
+
+    if (dev_site['address'].blank? ||
+       dev_site['address'][0]['lat'].blank? ||
+       dev_site['address'][0]['lon'].blank?)
+       current_dev_site.destroy
+       return false
     end
 
     if current_dev_site.updated == dev_site['updated']

@@ -6,11 +6,13 @@ var Comments = React.createClass({
   },
   componentDidMount: function() {
     $.getJSON("/" + this.props.locale +"/dev_sites/"+ this.props.devSiteId + "/comments", function(data){
+      var data = data.comments || [];
       this.setState({ comments: data });
     }.bind(this));
   },
   save: function(data){
-    this.setState({ comments: data });
+    this.state.comments.push(data);
+    this.setState({ comments: this.state.comments });
   },
   render: function(){
     return (
@@ -75,13 +77,6 @@ Comments.CommentsForm = React.createClass({
       success: function(data) {
         this.setState({ body: "" });
         this.props.save(data);
-      }.bind(this),
-      error: function(data) {
-        if(data.status === 406){
-          //TODO
-        }else{
-          //TODO
-        }
       }.bind(this)
     });
 

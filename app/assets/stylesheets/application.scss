@@ -9,9 +9,7 @@ $dark-secondary-color: darken($secondary-color, 15%);
 @import "dev_sites_index";
 @import "dev_sites_show";
 @import "events";
-@import "forms";
 @import "maps/home";
-@import "maps/main";
 @import "maps/armstrong";
 @import "photoswipe/photoswipe";
 @import "photoswipe/index";
@@ -23,68 +21,7 @@ $dark-secondary-color: darken($secondary-color, 15%);
 @import "autocomplete";
 @import "layout";
 
-body{
-  background-color: #fafafa;
-  font-family: "Lato";
-}
-
-.signup-link{
-  text-align: center;
-  display: block;
-  color: $secondary-color;
-}
-
-.dropdown-content{
-  max-height: 300px;
-
-  li{
-    line-height: 50px;
-  }
-}
-
-a{
-  color: #333;
-}
-
-.no-pad{
-  padding: 0 !important;
-}
-
-.no-marg{
-  margin: 0 !important;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: $secondary-color;
-  font-weight: 300;
-}
-
-.clear{
-  clear: both;
-  display: table;
-  content: "";
-}
-
-.dropdown-content li > a, .dropdown-content li > span{
-  color: #333;
-}
-
-input, textarea{
-  margin-bottom: 0px !important;
-}
-
-.error-message{
-  color: #f44336;
-  font-size: 0.75rem;
-}
-
-.small-container{
-  min-height: 100vh;
-  padding-top: 64px;
-  background-color: #fafafa;
-
-  h1, h3{
-    margin: 0;
-    padding: 2rem 0;
-  }
-}
+@import "base/forms";
+@import "base/global";
+@import "base/links";
+@import "base/typography";

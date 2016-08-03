@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       get 'citizencity'
       get 'tos'
       get 'privacy'
-      get 'about'
       post 'contact_citizencity'
       post 'contact_milieu'
       post 'contact_file_lead'
@@ -23,11 +22,6 @@ Rails.application.routes.draw do
         get :images
       end
 
-      collection do
-        post :search
-        get :geojson
-        get :map
-      end
     end
 
     resources :events do
@@ -49,7 +43,7 @@ Rails.application.routes.draw do
 
   end
 
-  root to: redirect("/", status: 302), as: :redirected_root
-  get '*path' => redirect("/", status: 302)
+  root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
+  get '*path' => redirect("/#{I18n.default_locale}", status: 302)
 
 end
