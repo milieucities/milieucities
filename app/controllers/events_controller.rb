@@ -1,45 +1,14 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :images]
 
   def index
     @events = Event.all
-
-    if params[:page].present? || params[:limit].present?
-      limit = params[:limit].present? ? params[:limit].to_i : 20
-      page = params[:page].present? ? params[:page].to_i : 0
-      @events.limit!(limit).offset!(limit * page + 1)
-    end
+    paginate
 
     respond_to do |format|
         format.html
         format.json
     end
-  end
-
-  def geojson
-
-    @geojson = []
-
-    Event.all.each do |event|
-      @geojson << {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [event.geocode_lon, event.geocode_lat]
-        },
-        properties: {
-          id: event.id,
-          zoom: 9,
-          title: event.title,
-          address: event.location,
-          :'marker-symbol' => "event",
-          description: "<div class=\"marker-title\"><a href=\"/#{params[:locale]}/events/#{event.id}\">#{event.title}</a></div>"
-        }
-      }
-    end
-
-    render json: @geojson
   end
 
   def show
@@ -97,7 +66,16 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
     end
 
+    def paginate
+      if params[:page].present? || params[:limit].present?
+        limit = params[:limit].present? ? params[:limit].to_i : 20
+        page = params[:page].present? ? params[:page].to_i : 0
+        @dev_sites.limit!(limit).offset!(limit * page)
+      end
+    end
+
     def event_params
-      params.require(:event).permit(:title, :description, :time, :date, :images_cache, :location, :contact_email, :contact_tel, images: [])
+      params.require(:event).permit(:title, :description, :time, :date,
+      :images_cache, :location, :contact_email, :contact_tel, images: [])
     end
 end

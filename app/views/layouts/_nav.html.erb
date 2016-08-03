@@ -8,7 +8,7 @@
 
     <ul id="slide-out" class="side-nav">
       <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "nav-logo" %>
-      <li><%= link_to t('nav_bar.map_link_text'), map_path, title: t('nav_bar.map_link_text') %></li>
+      <li><%= link_to t('nav_bar.map_link_text'), dev_sites_path, title: t('nav_bar.map_link_text') %></li>
       <li><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: t('nav_bar.about_link_text') %></li>
       <% if signed_in? %>
       <li><%= link_to t('nav_bar.sign_out_text'), session_path(id: "nothing"), method: :delete, title: t('nav_bar.sign_out_text') %></li>
@@ -16,13 +16,13 @@
       <li><%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: t('nav_bar.sign_in_text'), class: "modal-trigger" %></li>
       <% end %>
       <li><%= link_to t('nav_bar.contact_us_text'), "#contact-milieu-modal", title: t('nav_bar.contact_us_text'), class: "modal-trigger" %></li>
-      <li><%= link_to "EN", request.original_url.gsub("/fr/", "/en/"), class: 'deep-purple accent-1' %></li>
-      <li><%= link_to "FR", request.original_url.gsub("/en/", "/fr/"), class: 'deep-purple accent-1' %></li>
+      <li><%= link_to "EN", params[:locale].present? ? request.original_url.gsub("/fr/", "/en/") : request.path.prepend("/en"), class: 'deep-purple accent-1' %></li>
+      <li><%= link_to "FR", params[:locale].present? ? request.original_url.gsub("/en/", "/fr/") : request.path.prepend("/fr"), class: 'deep-purple accent-1' %></li>
     </ul>
 
     <ul class="right hide-on-med-and-down">
 
-      <li><%= link_to t('nav_bar.map_link_text'), map_path, title: t('nav_bar.map_link_text') %></li>
+      <li><%= link_to t('nav_bar.map_link_text'), dev_sites_path, title: t('nav_bar.map_link_text') %></li>
       <li><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: t('nav_bar.about_link_text') %></li>
       <% if signed_in? %>
       <li><%= link_to t('nav_bar.sign_out_text'), session_path(id: "nothing"), method: :delete, title: t('nav_bar.sign_out_text') %></li>

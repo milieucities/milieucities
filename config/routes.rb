@@ -43,14 +43,7 @@ Rails.application.routes.draw do
 
   end
 
-  # handles /bad-locale|anything/valid-path
-  # get '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
-  #
-  # # handles /anything|valid-path-but-no-locale
-  # get '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
-  #
-  # # handles /
-  # get '', to: redirect("/#{I18n.locale}")
-
+  root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
+  get '*path' => redirect("/#{I18n.default_locale}", status: 302)
 
 end

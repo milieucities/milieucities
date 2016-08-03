@@ -10,6 +10,7 @@ export default class DevSite extends Component {
     super(props);
     this.state = { showFiles: false, showReadMore: false }
     this.parent = this.props.parent;
+    this.currentUserId = parseInt(document.body.dataset.userId);
     this.loadDevSite = () => this._loadDevSite();
     this.toggleShowFiles = () => this.setState({ showFiles: !this.state.showFiles });
     this.closeDevSite = () => this.parent.setState({ activeDevSiteId: null });
@@ -26,7 +27,6 @@ export default class DevSite extends Component {
     $.getJSON(`/dev_sites/${this.props.id}`,
       devSiteJson => this.setState({ devSite: devSiteJson },
         () => {
-          console.log(this.state.devSite);
           if(this.refs.description.scrollHeight > 140) {
             this.setState({ showReadMore: true, readMoreClicked: false });
           }
@@ -67,8 +67,8 @@ export default class DevSite extends Component {
   _toggleLike() {
     const { devSite } = this.state;
     const data = devSite.like ?
-                {dev_site: {likes_attributes: {"0" : {id: devSite.like.id, _destroy: 1 }}} } :
-                {dev_site: {likes_attributes: {"0" : {user_id: devSite.current_user_id, dev_site_id: devSite.id}}} }
+                {dev_site: {likes_attributes: {'0' : {id: devSite.like.id, _destroy: 1 }}} } :
+                {dev_site: {likes_attributes: {'0' : {user_id: this.currentUserId, dev_site_id: devSite.id}}} }
 
     $.ajax({
       url: `/dev_sites/${devSite.id}`,
@@ -76,13 +76,18 @@ export default class DevSite extends Component {
       type: 'PATCH',
       cache: false,
       data: data,
-      success: devSiteJson => this.setState({ devSite: devSiteJson })
+      success: devSiteJson => this.setState({ devSite: devSiteJson }),
+      error: (res) => {
+        if(res.status == 403){
+          Materialize.toast('Must sign in to like a development site.', 3500, 'red lighten-2');
+        }
+      }
     });
   }
   render() {
     const { devSite, showFiles, showModal, showReadMore,
             readMoreClicked, contact } = this.state;
-    if(!devSite) return <div />;
+    if(!devSite) return <div></div>;
 
     return <div className={css.container}>
       <div className={css.menu}>
@@ -90,6 +95,7 @@ export default class DevSite extends Component {
         <a className={css.expand} href={devSite.url}></a>
       </div>
       <div className={css.wrapper}>
+
         <div className={css.title}>{devSite.address}</div>
         <div className={css.subtitle}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
         <div className={css.interact}>

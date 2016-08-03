@@ -23,9 +23,6 @@
 //= require moment
 //= require ajax.autocomplete
 //= require photoswipe
-//= require handlebars.runtime
-//= require_tree ./templates
-
 //= require velocity.min
 //= require velocity.uipack
 

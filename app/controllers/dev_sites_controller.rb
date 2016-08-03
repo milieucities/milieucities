@@ -62,7 +62,7 @@ class DevSitesController < ApplicationController
   def destroy
     @dev_site.destroy
     respond_to do |format|
-      format.html { redirect_to map_path, notice: 'Dev site was successfully destroyed.' }
+      format.html { redirect_to dev_sites_path, notice: 'Dev site was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

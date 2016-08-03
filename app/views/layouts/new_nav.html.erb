@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
 <%= render "layouts/head"%>
-<body data-locale="<%= I18n.locale %>">
-  <div class="nav">
+<body data-locale="<%= I18n.locale %>" data-user-id="<%= current_user.id %>">
+  <div class="new-nav">
     <div class="logo">
       <%= link_to image_tag("dark-milieu-logo.svg"), root_path, class: "logo" %>
-      <%= link_to "Building Better Cities With People", root_path, class: "logo" %>
+      <%= link_to "Building Better Cities With People", root_path, class: "logo hide-on-small-only" %>
     </div>
 
-
     <div class="links">
-      <%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us" %>
-      <%= link_to t('nav_bar.launch'), "#", title: t('nav_bar.launch'), class: 'tooltipped', data: { position: 'bottom', delay: '50', tooltip: 'Coming Soon' } %>
+      <%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us", class: 'hide-on-small-only' %>
+      <%= link_to t('nav_bar.launch'), "#", title: t('nav_bar.launch'), class: 'tooltipped hide-on-small-only', data: { position: 'bottom', delay: '50', tooltip: 'Coming Soon' } %>
       <%= link_to  t('nav_bar.sign_out_text'), session_path(id: current_user.id), method: :delete, title: "Sign Out" if signed_in? %>
       <%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" unless signed_in? %>
     </div>

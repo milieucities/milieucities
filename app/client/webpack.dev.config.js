@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+
   entry: {
     bundle: path.resolve(__dirname, 'index')
   },

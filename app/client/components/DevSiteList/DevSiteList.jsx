@@ -39,7 +39,7 @@ export default class DevSiteList extends Component {
                          onMouseEnter={this.handleDevSiteMouseEnter}
                          onMouseLeave={this.handleDevSiteMouseLeave}
                          data-id={devSite.id}
-                         className={css.item}
+                         className={this.props.activeDevSiteId == devSite.id ? css.activeitem : css.item}
                          key={devSite.id}>
         <div className={css.address}>{devSite.address}</div>
         <div className={css.info}>{devSite.devID}</div>

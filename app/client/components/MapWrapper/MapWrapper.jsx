@@ -49,15 +49,15 @@ export default class MapWrapper extends Component {
     $.getJSON(`/dev_sites`, params, json => {
       const path = `/dev_sites?${$.param(params)}`;
       window.history.replaceState({ path },'', path);
-      this.setState({ devSites: (json.dev_sites || []), total: json.total }, scrollToTop);
+      this.setState({page: 0, devSites: (json.dev_sites || []), total: json.total }, scrollToTop);
     });
   }
   render() {
     return <div className={css.container}>
       <div className={css.sidebar} ref='sidebar'>
-        <MapSearch parent={this} {...this.state} />
+        <MapSearch {...this.state} parent={this} />
         {false && <MapFilter parent={this} />}
-        <DevSiteList devSites={this.state.devSites} page={this.state.page} total={this.state.total} parent={this} />
+        <DevSiteList {...this.state} parent={this} />
       </div>
       <div className={css.content}>
         {this.state.activeDevSiteId && <DevSite id={this.state.activeDevSiteId} parent={this} />}

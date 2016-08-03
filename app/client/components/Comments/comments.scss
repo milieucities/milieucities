@@ -7,6 +7,17 @@
  }
 }
 
+.nouser{
+  background-color: #f7f7f7;
+  padding: 30px 50px;
+  display: flex;
+  justify-content: center;
+  
+  @media #{$small-and-down} {
+    padding: 20px;
+  }
+}
+
 .number{
   padding: 20px;
   font-style: italic;

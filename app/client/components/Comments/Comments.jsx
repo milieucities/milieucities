@@ -7,10 +7,14 @@ export default class Comments extends Component {
   constructor(props) {
     super(props);
     this.state = { comments: List(), page: 0, limit: 5 }
+    this.currentUserId = document.body.dataset.userId;
     this.loadComments = () => this._loadComments();
     this.hasMoreComments = () => this._hasMoreComments();
     this.appendMoreComments = () => this._appendMoreComments();
     this.loadComments();
+  }
+  componentDidMount() {
+    $('.modal-trigger').leanModal();
   }
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.devSiteId !== this.props.devSiteId) {
@@ -41,8 +45,9 @@ export default class Comments extends Component {
   }
   render() {
     const { comments, total } = this.state;
-    return <div className={css.container}>
-      <CommentForm {...this.props} parent={this} />
+    return <div className={this.currentUserId ? css.container : css.nouser}>
+      {this.currentUserId ? <CommentForm {...this.props} parent={this} /> :
+        <a href="#sign-in-modal" className='modal-trigger btn'>Sign in to comment</a>}
       {total > 0 && <div className={css.number}> {total} responses</div>}
       {comments.map(comment => <Comment comment={comment} key={comment.id} />)}
       {this.hasMoreComments() && <a onClick={this.appendMoreComments} className={css.loadmore}>Load More Comments</a> }
@@ -66,7 +71,7 @@ class CommentForm extends Component {
       dataType: 'JSON',
       type: 'POST',
       cache: false,
-      data: {comment: { body: body }, limit: limit },
+      data: {comment: { body }, limit },
       success: (json) => {
         this.parent.setState({
           comments: this.parent.state.comments.unshift(json),

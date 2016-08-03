@@ -28,27 +28,6 @@ class DevSite < ActiveRecord::Base
   validates :ward_name, presence: { message: "Ward name is required" }
   validates :ward_num, presence: { message: "Ward number is required" }, numericality: true
 
-  def self.filter(filter_by)
-    @dev_sites = DevSite.all
-    if filter_by == "consultation" then
-      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Comment Period in Progress", "Community Information and Comment Session Open"] } )
-    elsif filter_by == "new-development" then
-      @dev_sites = @dev_sites.where( application_type: VALID_APPLICATION_TYPES.reject { |at| ["Derelict", "Vacant", "Unknown"].include?(at) } )
-      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: Status::VALID_STATUS_TYPES.reject { |st| ["Unknown", "Comment Period in Progress", "Community Information and Comment Session Open"].include?(st) } } )
-    elsif filter_by == "vacant-derelict" then
-      @dev_sites = @dev_sites.where( application_type: ["Derelict", "Vacant", "Unknown"] )
-      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Unknown"] })
-    elsif filter_by == "events" then
-      @dev_sites = @dev_sites.where( 'statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)' ).where( statuses: { status: ["Event"] })
-    elsif filter_by == "nothing"
-      # DO NOTHING
-    else
-      @dev_sites = @dev_sites.where(ward_num: (User::VALID_NEIGHBOURHOOD_TYPES.index(filter_by) + 1))
-    end
-
-    @dev_sites.limit(150)
-  end
-
   def self.search(search_params)
     dev_site_ids = []
     dev_sites = DevSite.all
@@ -82,19 +61,6 @@ class DevSite < ActiveRecord::Base
     dev_sites
   end
 
-  def marker
-    if ["Comment Period in Progress", "Community Information and Comment Session Open"].include?(self.statuses.last.try(:status))
-      marker = "consultation"
-    elsif ["Event"].include?(self.statuses.last.try(:status))
-      marker = "event"
-    elsif ["Unknown"].include?(self.statuses.last.try(:status))
-      marker = "vacant"
-    else
-      marker = "comment"
-    end
-    marker
-  end
-
   def status
     return if self.statuses.empty?
     self.statuses.order('status_date DESC').first.status
@@ -112,12 +78,12 @@ class DevSite < ActiveRecord::Base
 
   def latitude
     return if self.addresses.empty?
-    self.addresses.first.geocode_lat
+    self.addresses.first.lat
   end
 
   def longitude
     return if self.addresses.empty?
-    self.addresses.first.geocode_lon
+    self.addresses.first.lon
   end
 
   def image_hash

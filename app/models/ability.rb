@@ -9,7 +9,6 @@ class Ability
     can [:index, :read], Events
     can :read, Profile
     can [:new, :create], User
-    can :manage, Comment #REMOVE THIS LINE AFTER
     can :read, Comment
 
 

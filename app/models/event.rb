@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  include Geokit::Geocoders
   attr_accessor :images
   mount_uploaders :images, ImagesUploader
 
@@ -11,10 +12,15 @@ class Event < ActiveRecord::Base
   validates :description, presence: { message: "Description is required" }
   validates :date, presence: { message: "Date is required" }
 
-  # GEOCODER
-  geocoded_by :location, :latitude => :geocode_lat, :longitude => :geocode_lon
-  after_validation :geocode, if: -> (obj){ obj.location.present? and obj.location_changed? }
+  after_validation :geocoded, if: -> (obj){ obj.location.present? and obj.location_changed? }
 
+  def geocoded
+    lat_and_lng = Geokit::Geocoders::GoogleGeocoder.geocode self.location
+    if lat_and_lng.success
+      self.geocode_lat = lat_and_lng.lat
+      self.geocode_lon = lat_and_lng.lng
+    end
+  end
 
   def image_hash
     self.images.map do |img|

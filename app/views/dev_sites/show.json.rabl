@@ -4,8 +4,6 @@ attributes :id, :devID, :application_type, :title, :status, :status_date, :addre
   :description, :ward_name, :ward_num, :image_url, :updated_at, :latitude, :longitude,
   :urban_planner_email, :ward_councillor_email, :updated
 
-node(:current_user_id) { |_| current_user.id }
-
 node(:likes_count) { |dev_site| dev_site.likes.count  }
 
 node(:like) { |dev_site| Like.find_by(user_id: current_user.id, dev_site_id: dev_site.id).try(:attributes) }

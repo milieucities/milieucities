@@ -129,7 +129,9 @@ export default class Map extends Component {
 
     map.addSource('devSites', this.geoJsonBuilder());
     const zoom = map.getZoom() < 9.5 ? 12.5 : map.getZoom();
-    map.flyTo({ center: [longitude, latitude], zoom });
+    if(latitude && longitude){
+      map.flyTo({ center: [longitude, latitude], zoom });
+    }
   }
   _loadMap() {
 
