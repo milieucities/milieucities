@@ -20,7 +20,7 @@ $(document).on('page:change', function(){
       if(result.length > 0){
         var latitude = result[0].geometry.location.lat();
         var longitude = result[0].geometry.location.lng();
-        Turbolinks.visit("dev_sites?latitude" + latitude + "&longitude=" + longitude);
+        Turbolinks.visit("dev_sites?latitude=" + latitude + "&longitude=" + longitude);
       }else{
         Turbolinks.visit("dev_sites");
       }

@@ -98,6 +98,9 @@ export default class DevSite extends Component {
 
         <div className={css.title}>{devSite.address}</div>
         <div className={css.subtitle}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
+
+        <img src={devSite.image_url} className={css.image} />
+
         <div className={css.interact}>
           <div className={css.sharecontainer}>
             <i className={css.share}></i>

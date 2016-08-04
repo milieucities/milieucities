@@ -72,6 +72,16 @@
   color: #aaa;
 }
 
+.image {
+  max-height: 400px;
+  width: 600px;
+  max-width: 100%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
 .interact {
   display: flex;
   justify-content: space-between;
