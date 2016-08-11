@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
 
   validates :accepted_terms, acceptance: true
   validates  :email, presence: {message: "Email is required"},
-  uniqueness: {message: "Email already in use"}
+  uniqueness: {message: "Email already in use"}, unless: "provider.present?"
 
   validates  :password, presence: {message: "Password is required", on: :create},
   confirmation: {message: "Passwords do not match."},
-  length: { in: 6..20, message: "Password must be between 6 to 20 characters"}
+  length: { in: 6..20, message: "Password must be between 6 to 20 characters"}, unless: "provider.present?"
 
   delegate :name, to: :profile, allow_nil: true
 
