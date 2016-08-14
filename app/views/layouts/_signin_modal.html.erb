@@ -1,28 +1,44 @@
-<div id="sign-in-modal" class="modal">
+<div id="sign-in-modal" class="modal">   
   <div class="modal-content">
-    <h1 class="center"><%= t('sign-in-modal.sign-in-modal-text') %></h4>
+    <!-- <i class="fa fa-times " id="close" aria-hidden="true"></i> -->
+    <h1 class="center"><%= t('sign-in-modal.sign-in-modal-text') %></h1>
     <%= form_for :session, url: sessions_path, html: { class: 'login-form' } do |f| %>
     <div class="row">
-         <li><%= link_to 'Facebook', '/auth/facebook' %></li>
-         <li><%= link_to 'Google+', '/auth/google' %></li>
-       </div>
+      <h4><center>with</center></h4>
+      <!-- svg -->
+      <center><div class="col-sm-3" id="socials">
+        <a href="/auth/facebook" alt="login using facebook"  > 
+          <i class="fa fa-facebook fa-3x" aria-hidden="true" style="color:#3B5998;"></i>
+        </a>
+        <a href="auth/google" alt="login using google" >  
+          <i class="fa fa-google fa-3x" aria-hidden="true" style="color:#DD4B39;"></i>
+        </a>        
+      </div> </center>    
+    </div>
       <div class="row">
-      <div class="row">
-        <div class="input-field col s12">
-          <%= f.label :email, t('sign-in-modal.email-label') %>
-          <%= f.text_field :email, autocomplete: 'off' %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.label :email, t('sign-in-modal.email-label') %>
+            <%= f.text_field :email, autocomplete: 'off' %>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <%= f.label :password, t('sign-in-modal.password-label') %>
-          <%= f.password_field :password, autocomplete: 'off' %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.label :password, t('sign-in-modal.password-label') %>
+            <%= f.password_field :password, autocomplete: 'off' %>
+          </div>
         </div>
+        <div class="actions">
+          <%= f.submit t('sign-in-modal.sign-in-button'), class: 'waves-effect btn' %>
+        </div>
+      <% end %>
+      <div class="row">
+        <center>New to Mileu?<center>
+        <%= link_to t('sign-in-modal.sign-up-button'), new_user_path, class: "signup-link" %>
       </div>
-      <div class="actions">
-        <%= f.submit t('sign-in-modal.sign-in-button'), class: 'waves-effect btn' %>
+      
+      <div class="col md6">      
+       <center>By signing in, you accept <b><%= link_to t('home.terms_of_use_link'), tos_path %><b>.<center>
       </div>
-    <% end %>
-    <%= link_to t('sign-in-modal.sign-up-button'), new_user_path, class: "signup-link" %>
   </div>
 </div>

@@ -12,9 +12,8 @@ class OmniauthController < ApplicationController
   		)
   		@user.build_profile(name: request.env['omniauth.auth']['info']['name'])
   		@user.save
-  		session[:user_id] = @user.id 
-  	
+  		session[:user_id] = @user.id  	
   	end 
-     redirect_to root_path
+     redirect_to root_path, notice: "Welcome to Milieu"
   end
  end

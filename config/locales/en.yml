@@ -47,16 +47,16 @@ en:
     about_link_text: 'About'
     sign_out_text: 'Sign Out'
     sign_in_text: 'Sign In'
-    contact_us_text: 'Contact Milieu'
+    contact_us_text: 'Contact'
   home:
-    title: "What’s being built in my neighbourhood?"
+    title: "What’s being built in my city?"
     subtitle:
       p1: 'Shape the vision of your neighborhood by commenting and voting on development projects'
       p2: 'Simplify public engagement by launching your own consultation'
     search_bar_text: 'Enter an address'
     featured: 'Featured Developments'
-    terms_of_use_link: "Terms of Use"
-    privacy_policy_link: "Privacy Policy"
+    terms_of_use_link: "Terms"
+    #privacy_policy_link: "Privacy Policy"
   terms_of_use_header_text: "Terms of Use"
   term_of_use:
     introduction:
