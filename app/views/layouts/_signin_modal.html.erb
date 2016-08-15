@@ -1,17 +1,15 @@
 <div id="sign-in-modal" class="modal">   
-  <div class="modal-content">
-    <!-- <i class="fa fa-times " id="close" aria-hidden="true"></i> -->
+  <div class="modal-content">    
     <h1 class="center"><%= t('sign-in-modal.sign-in-modal-text') %></h1>
     <%= form_for :session, url: sessions_path, html: { class: 'login-form' } do |f| %>
     <div class="row">
       <h4><center>with</center></h4>
-      <!-- svg -->
-      <center><div class="col-sm-3" id="socials">
+        <center><div class="col-s3 socials">
         <a href="/auth/facebook" alt="login using facebook"  > 
-          <i class="fa fa-facebook fa-3x" aria-hidden="true" style="color:#3B5998;"></i>
+          <i class="fa fa-facebook fa-3x" style="color:#3B5998;"></i>
         </a>
         <a href="auth/google" alt="login using google" >  
-          <i class="fa fa-google fa-3x" aria-hidden="true" style="color:#DD4B39;"></i>
+          <i class="fa fa-google fa-3x" style="color:#DD4B39;"></i>
         </a>        
       </div> </center>    
     </div>

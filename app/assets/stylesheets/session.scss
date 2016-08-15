@@ -6,13 +6,15 @@
     width: 100%;
   }
 }
-#socials{
+.socials{
 	padding-top: 30px;
-	a{ padding: 20px;}
+	a {
+		padding: 20px;
+	}
 }
 #close{
 	margin-top: 2px;
-    margin-right: 2px;
+	margin-right: 2px;
 	position: absolute;
 	top: 0;
 	right: 0;

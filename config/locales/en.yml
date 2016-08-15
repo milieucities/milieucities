@@ -27,7 +27,7 @@ en:
         message-label: 'message'
         message-placeholder: 'Leave a message.'
         send-button-text: 'Send'
-  contact-milieu-modal:
+  contact-milieu-modal: 
     header-text: 'Contact Milieu'
     name-label: 'name'
     message-label: 'message'
@@ -55,8 +55,8 @@ en:
       p2: 'Simplify public engagement by launching your own consultation'
     search_bar_text: 'Enter an address'
     featured: 'Featured Developments'
-    terms_of_use_link: "Terms"
-    #privacy_policy_link: "Privacy Policy"
+    terms_of_use_link: "Terms of Use"
+    privacy_policy_link: "Privacy Policy"
   terms_of_use_header_text: "Terms of Use"
   term_of_use:
     introduction:
