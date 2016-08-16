@@ -10,12 +10,10 @@
       <% if signed_in? %>
       <li class="overshadow"><%= link_to  t('nav_bar.sign_out_text'), session_path(id: current_user.id), method: :delete, title: "Sign Out" %></li>
       <% else %>
-      <li class="overshadow"><%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>  
-
-      <li class="overshadow"><%= link_to "EN", "/en", class: "hide-on-small-only" %> 
-        <li class="overshaddow"><%= link_to "FR", "/fr", class: "hide-on-small-only" %>
-      </li>      
+      <li class="overshadow"><%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>          
       <% end %>
+      <li class="overshadow"><%= link_to "EN", "/en", class: "hide-on-small-only" %> </li>
+      <li class="overshaddow"><%= link_to "FR", "/fr", class: "hide-on-small-only" %></li> 
     </ul>
   </nav>
 
@@ -62,9 +60,8 @@
       <%= link_to t('home.terms_of_use_link'), tos_path, class: "overshadow" %>     
     </div>
   </div>
-
-
 <div id="term-modal" class="modal" style="align-items: initial;">
   <div class="modal-content">
   </div>
 </div>
+</section>
