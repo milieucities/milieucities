@@ -27,7 +27,7 @@ en:
         message-label: 'message'
         message-placeholder: 'Leave a message.'
         send-button-text: 'Send'
-  contact-milieu-modal:
+  contact-milieu-modal: 
     header-text: 'Contact Milieu'
     name-label: 'name'
     message-label: 'message'
@@ -47,12 +47,9 @@ en:
     about_link_text: 'About'
     sign_out_text: 'Sign Out'
     sign_in_text: 'Sign In'
-    contact_us_text: 'Contact Milieu'
+    contact_us_text: 'Contact'
   home:
-    title: "What’s being built in my neighbourhood?"
-    subtitle:
-      p1: 'Shape the vision of your neighborhood by commenting and voting on development projects'
-      p2: 'Simplify public engagement by launching your own consultation'
+    title: "What’s being built in my city?"    
     search_bar_text: 'Enter an address'
     featured: 'Featured Developments'
     terms_of_use_link: "Terms of Use"

@@ -12,22 +12,14 @@
       <% else %>
       <li class="overshadow"><%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>
       <% end %>
+      <li class="overshadow"><%= link_to "EN", "/en", class: "hide-on-small-only" %> </li>
+      <li class="overshaddow"><%= link_to "FR", "/fr", class: "hide-on-small-only" %></li>
     </ul>
   </nav>
 
   <div class="title">
     <%= t('home.title') %>
   </div>
-
-  <div class="subtitle hide-on-med-and-down">
-    <p>
-      <%= t('home.subtitle.p1') %>
-    </p>
-    <p>
-      <%= t('home.subtitle.p2') %>
-    </p>
-  </div>
-
   <div class="search">
     <%= form_tag dev_sites_path, method: :get, id: 'home-search' do %>
       <%= fa_icon 'map-marker', class: 'map-marker' %>
@@ -56,26 +48,16 @@
   </div>
 
   <div class="footer hide-on-small-only">
-    <div class="localization">
-      <%= link_to "EN", "/en", class: "overshadow" %> |
-      <%= link_to "FR", "/fr", class: "overshadow" %>
-    </div>
     <div class="social-media">
-      <%= link_to fa_icon('medium'), "https://medium.com/@milieucities", title: "Find us on Medium", class: "overshadow"  %>
-      <%= link_to fa_icon('facebook'), "https://facebook.com/milieuapp/", title: "Find us on Facebook", class: "overshadow"  %>
       <%= link_to fa_icon('twitter'), "https://twitter.com/milieucities", title: "Find us on Twitter", class: "overshadow"  %>
       <%= link_to fa_icon('instagram'),"https://www.instagram.com/milieucities/", title: "Find us on Instagram", class: "overshadow"  %>
+       <%= link_to fa_icon('facebook'), "https://facebook.com/milieuapp/", title: "Find us on Facebook", class: "overshadow"  %>
+       <%= link_to fa_icon('linkedin'), "https://www.linkedin.com/company/milieu.io", title: "Find us on Medium", class: "overshadow "  %>
+      <%= link_to fa_icon('medium'), "https://medium.com/@milieucities", title: "Find us on Medium", class: "overshadow "  %>
     </div>
     <div class="business">
       <%= link_to t('nav_bar.contact_us_text'), "#contact-milieu-modal", class: "modal-trigger overshadow" %>
       <%= link_to t('home.terms_of_use_link'), tos_path, class: "overshadow" %>
-      <%= link_to t('home.privacy_policy_link'), privacy_path, class: "overshadow" %>
     </div>
   </div>
-</div>
-
-<div id="term-modal" class="modal" style="align-items: initial;">
-
-  <div class="modal-content">
-  </div>
-</div>
+</section>

@@ -10,7 +10,7 @@
         <li><%= t('term_of_use.introduction.statement001') %></li>
         <li><%= t('term_of_use.introduction.statement002') %></li>
         <li><%= t('term_of_use.introduction.statement003') %></li>
-        <li><%= t('term_of_use.introduction.statement004') %></li>
+        <li><%= t('term_of_use.introduction.statement004') %></li>  
       </ul>
       <h2><%= t('term_of_use.creating_an_account.title') %></h2>
       <ul>
@@ -60,18 +60,81 @@
       <ul>
         <li><%= t('term_of_use.change_log.statement001') %></li>
       </ul>
-    </div>
+      <% title t('privacy.title') + " - " %>
+ <!-- privacy session -->
+<article>
+    <div class="row">
+      <div class="col s12">
+        <br/><br/>
+        <h1><%= t('privacy.title') %></h1>
+        <h2><%= t('privacy.information_collection.title') %></h2>
+        <ul>
+          <li><%= t('privacy.information_collection.statement001') %></li>
+          <li><%= t('privacy.information_collection.statement002') %></li>
+          <li><%= t('privacy.information_collection.statement003') %></li>
+          <li><%= t('privacy.information_collection.statement004') %></li>
+          <li><%= t('privacy.information_collection.statement005') %></li>
+          <li><%= t('privacy.information_collection.statement006') %></li>
+          <li><%= t('privacy.information_collection.statement007') %></li>
+          <li><%= t('privacy.information_collection.statement008') %></li>
+          <li><%= t('privacy.information_collection.statement009') %></li>
+        </ul>
+        <h2><%= t('privacy.log_data.title') %></h2>
+        <ul>
+          <li><%= t('privacy.log_data.statement001') %></li>
+        </ul>
+        <h2><%= t('privacy.cookies.title') %></h2>
+        <ul>
+          <li><%= t('privacy.cookies.statement001') %></li>
+        </ul>
+        <h2><%= t('privacy.third_party_links.title') %></h2>
+        <ul>
+          <li><%= t('privacy.third_party_links.statement001') %></li>
+        </ul>
+        <h2><%= t('privacy.email_links.title') %></h2>
+        <ul>
+          <li><%= t('privacy.email_links.statement001') %></li>
+        </ul>
+        <h2><%= t('privacy.security.title') %></h2>
+        <ul>
+          <li><%= t('privacy.security.statement001') %></li>
+          <li><%= t('privacy.security.statement002') %></li>
+        </ul>
+        <h2><%= t('privacy.changes_to_privacy_policy.title') %></h2>
+        <ul>
+          <li><%= t('privacy.changes_to_privacy_policy.statement001') %></li>
+        </ul>
+        <h2><%= t('privacy.compliance.title') %></h2>
+        <ul>
+          <li><%= t('privacy.compliance.statement001') %></li>
+        </ul>
+        <h2><%= t('privacy.legal_disclaimer.title') %></h2>
+        <ul>
+          <li><%= t('privacy.legal_disclaimer.statement001') %></li>
+        </ul>
+        <h2><%= t('privacy.scope.title') %></h2>
+        <ul>
+          <li><%= t('privacy.scope.statement001') %></li>
+        </ul>
+        <h2><%= t('privacy.contact_us.title') %></h2>
+        <ul>
+          <li><%= t('privacy.contact_us.statement001') %></li>
+        </ul>
+        <h3><%= t('privacy.change_log.title') %></h3>
+        <ul>
+          <li><%= t('privacy.change_log.statement001') %></li>
+        </ul>
+      </div>
+    </div>      
   </div>
 </div>
+
 <footer>
   <div class="container">
     <div class="row">
       <div class="col s6">
           <%= link_to t('home.terms_of_use_link'), tos_path %>
-      </div>
-      <div class="col s6">
-        <%= link_to t('home.privacy_policy_link'), privacy_path %>
-      </div>
+      </div>      
     </div>
   </div>
 </footer>

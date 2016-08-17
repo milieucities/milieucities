@@ -14,6 +14,13 @@ Rails.application.routes.draw do
       post 'contact_councillor'
     end
 
+    #omniauth
+    namespace :omniauth, path: '/', as: nil do 
+      get :create, path: 'auth/:facebook/callback'
+      get :create, path: 'auth/:twitter/callback'
+      get :create, path: 'auth/:google/callback'
+    end
+
     resources :dev_sites do
       resources :comments, module: :dev_sites do
       end

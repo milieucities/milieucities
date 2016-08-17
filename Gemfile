@@ -40,6 +40,14 @@ gem 'rolify', '~> 5.1.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#omniauth gems
+gem 'therubyracer' 
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+
+
 group :development, :test do
   # DEVELOPMENT AND TEST
   # group together
