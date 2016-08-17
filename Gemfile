@@ -33,7 +33,6 @@ gem 'ajax-autocomplete-rails', '~> 0.1.1'
 gem 'font-awesome-rails', '~> 4.5'
 gem 'rollbar'
 gem 'skylight'
-gem 'dotenv-rails', '~> 2.1.1'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 
@@ -41,7 +40,7 @@ gem 'rolify', '~> 5.1.0'
 # gem 'capistrano-rails', group: :development
 
 #omniauth gems
-gem 'therubyracer' 
+gem 'therubyracer'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
@@ -57,6 +56,7 @@ group :development, :test do
   gem 'launchy'
   gem 'puma'
   # DEVELOMENT specific gems
+  gem 'dotenv-rails', '~> 2.1.1'
   gem 'spring', '~> 1.6.4'
   gem 'brakeman', :require => false
   gem "better_errors"
