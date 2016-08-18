@@ -62,6 +62,7 @@ en:
       statement002: "2. Your use of Milieu is conditional upon your acceptance of our terms of use."
       statement003: "3. If you disagree with any of the terms, you cannot use Milieu."
       statement004: "4. Please read the terms carefully."
+
     creating_an_account:
       title: "2. Creating an Account"
       statement001: "1. By creating a Milieu account, you agree to authenticate yourself with your real name and identity."
@@ -83,7 +84,7 @@ en:
     intellectual_property:
       title: "5. Intellectual Property"
       statement001: "1. Milieu reserves all intellectual property related to its API, processes, methodologies and collateral materials."
-      statement002: "2. Public feedback through the consultation process or participation in the application will result in data collection that is specific to the proposed development under consideration. This data shall be the intellectual property of Milieu Incorporated Any publication by Milieu of data, conclusions or analysis arising from this consultation shall be at the discretion of Milieu."
+      statement002: "2. Public feedback through the consultation process or participation in the application will result in data collection that is specific to the proposed development under consideration. This data shall be the intellectual property of Milieu Technologies Ltd. Any publication by Milieu of data, conclusions or analysis arising from this consultation shall be at the discretion of Milieu."
     disclaimer_of_warranty:
       title: "6. Disclaimer of Warranty"
       statement001: "1. Milieu is provided “as is” with no warranties, express or implied. Milieu comes with no warranty of merchantability, fitness for a particular purpose, security, non-infringement or title."
@@ -100,7 +101,7 @@ en:
       statement001: "1. Milieu can change the Terms of Use at any times.  We will provide notice of changes to the terms of use by updating this terms document.  You should check this terms document regularly for changes. If you do not agree to any change of terms, you must stop using Milieu."
     change_log:
       title: "Change Log"
-      statement001: "July 8, 2016: Updated our Terms of Use."
+      statement001: "August 17, 2016: Updated our Terms of Use."
   privacy:
     title: "Privacy Policy"
     information_collection:
@@ -110,10 +111,11 @@ en:
       statement003: "3. By submitting a comment you accept that Milieu has the right to reproduce and publish this in any manner we choose."
       statement004: "4. We do not endorse any of the comments submitted."
       statement005: "5. Comments are moderated according to ensure a climate of civility."
-      statement006: "6. You can chose to delete or change information you post in the comment section at any time. Deleted information will not be accessible on Milieu, but people may still be able to access deleted information through saved screenshots or caches."
+      statement006: "6. You can choose to delete your account at any time by contacting us and requesting your account be deleted. Deleted information will not be accessible on Milieu, but people may still be able to access comment submissions through saved screenshots or caches. Comment submissions may still be included in reports and analysis arising from the initial submission prior to account deletion."
       statement007: "7. Feedback which you provide to Milieu on a proposed development will result in data collection which is specific to the proposed development in question."
       statement008: "8. We may share information with our clients in order to help them with urban planning research."
       statement009: "9. We will not share your personal information with advertisers."
+      statement010: "10. As part of signing up to milieu you agree to receive updates on Milieu by email or newsletter. You can choose to unsubscribe from our mailing list at anytime by contacting us or unsubscribing from the mailing list."
     log_data:
       title: "2. Log Data"
       statement001: "1. When you use our service we usually receive information about your computer such as your internet protocol (IP) address, browser type, referring pages, operating system, and time stamp."
@@ -128,7 +130,7 @@ en:
       statement001: "1. The Milieu website and app provides links to the email of city planners and councillors. Milieu is not privy to the content of these emails. Milieu is not responsible for the security or privacy of emails sent to city planners and councillors. Please contact the City of Ottawa if you have questions about their email service."
     security:
       title: "6. Security"
-      statement001: "1. Milieu works hard to keep your account and personal data secure, but we cannot guarantee safety."
+      statement001: "1. Milieu works hard to keep your account and personal data secure."
       statement002: "2. Milieu recommends that you take proper precautions to keep your personal information safe online."
     changes_to_privacy_policy:
       title: "7. Changes to this Privacy Policy"
@@ -147,4 +149,4 @@ en:
       statement001: "1. If you have any questions about this privacy policy please contact us at info@milieu.io  sincerely , the Milieu Team"
     change_log:
       title: "Change Log"
-      statement001: "July 8, 2016: Added Privacy Policy"
+      statement001: "August 17, 2016: Updated our Privacy Policy."
