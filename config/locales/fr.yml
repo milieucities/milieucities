@@ -36,7 +36,6 @@ fr:
   sign-in-modal:
     email-label: 'email'
     password-label: 'password'
-    sign-in-modal-text: 'Sign In'
     sign-in-button: 'Sign In'
     sign-up-button: 'Sign Up'
   search_button_text: 'Search'
@@ -49,7 +48,7 @@ fr:
     sign_in_text: 'Connexion'
     contact_us_text: 'Contactez Milieu'
   home:
-    title: "Ce qui est en cours de construction dans ma ville?"    
+    title: "Ce qui est en cours de construction dans ma ville?"
     search_bar_text: 'Enter an address'
     featured: 'Développements en vedette'
     terms_of_use_link: "Conditions d'utilisation"
