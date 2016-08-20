@@ -5,15 +5,17 @@
   width: 100vw;
   position: relative;
 
-  nav{
-    background-color: transparent;
-    box-shadow: none;
+  .nav{
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
 
     .logo{
-      display: inline-block;
+      display: flex;
+      align-items: center;
 
       a{
-        margin-left: 40px;
+        margin-left: 20px;
 
         img{
           height: 20px;
@@ -22,13 +24,19 @@
     }
 
     ul{
-      padding-right: 20px;
+      list-style-type: none;
+      margin: 0;
+      display: flex;
     }
 
     li a{
       font-size: 16px;
       letter-spacing: 0.75px;
       font-weight: 300;
+      line-height: 70px;
+      height: 70px;
+      color: $white;
+      padding: 0 20px;
 
       &:hover{
         background-color: transparent;
@@ -101,7 +109,7 @@
     }
 
     input{
-      width: calc(100% - 125px);
+      width: calc(100% - 135px);
       position: absolute;
       top: 0;
       left: 0;
@@ -110,6 +118,7 @@
       height: 43.5px;
       box-sizing: border-box;
       border-radius: 4px;
+      font-size: 16px;
       text-align: center;
       padding: 10px;
       padding-left: 70px;
@@ -224,6 +233,41 @@
         font-size: 16px;
         letter-spacing: 0.5px;
         font-weight: 300;
+      }
+    }
+  }
+
+  .autocomplete-wrapper{
+    position: relative;
+  }
+
+  .autocomplete-dropdown{
+    position: absolute;
+    top: 41px;
+    left: 0;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    color: $dark-secondary-color;
+    text-align: center;
+    width: calc(100% - 135px);
+    list-style-type: none;
+
+    li{
+      padding: 10px;
+      cursor: pointer;
+      padding-left: 70px;
+
+      @media #{$small-and-down} {
+        padding-left: 35px;
+      }
+
+      &.highlighted{
+        background-color: #eee;
+      }
+
+      &:hover{
+        background-color: #eee;
       }
     }
   }

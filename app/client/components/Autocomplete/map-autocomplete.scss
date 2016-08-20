@@ -53,9 +53,10 @@
   width: 100%;
   padding: 14px;
   padding-left: 55px;
-  border: 1px solid #eee;
+  border: 1px solid $light-gray;
   font-size: 16px;
-  color: #333;
-  background-color: #fff;
+  color: $black;
+  background-color: $white;
   border-radius: 2px;
+  transition: 200ms;
 }

@@ -9,13 +9,12 @@ class DevSitesController < ApplicationController
     paginate
 
     respond_to do |format|
-      format.html { render layout: "new_nav" }
+      format.html
       format.json
     end
   end
 
   def map
-    render layout: "new_nav"
   end
 
   def images
@@ -95,7 +94,6 @@ class DevSitesController < ApplicationController
     def search_params
       params.permit(:latitude, :longitude, :year, :ward, :status)
     end
-
 
     def dev_site_params
       params.require(:dev_site).permit(:devID, :application_type, :title, :images_cache, :files_cache, :build_type,

@@ -58,7 +58,7 @@ export default class DevSite extends Component {
       processData: false,
       data: new FormData(e.currentTarget),
       success: () => {
-        Materialize.toast('Message successfully sent!', 3500, 'teal');
+        window.flash('notice', 'Message successfully sent!')
         this.setState({ showModal: false });
       }
     });
@@ -79,7 +79,7 @@ export default class DevSite extends Component {
       success: devSiteJson => this.setState({ devSite: devSiteJson }),
       error: (res) => {
         if(res.status == 403){
-          Materialize.toast('Must sign in to like a development site.', 3500, 'red lighten-2');
+          window.flash('alert', 'Must sign in to like a development site.')
         }
       }
     });

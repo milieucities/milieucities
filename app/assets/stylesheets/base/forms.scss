@@ -1,36 +1,39 @@
-.one-page-form{
-  max-width: 700px;
-  margin: 0 auto;
-  padding-bottom: 50px;
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+input[type="number"],
+textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 3px;
+  background-color: $white;
+  color: $black;
+  border: 1px solid $light-gray;
+  transition: 200ms;
+  box-sizing: border-box;
 
-  h5{
-    text-align: center;
+  &:focus{
+    border: 1px solid $gray;
   }
 
-  a{
-    color: #333;
-    font-size: 14px;
-    text-align: center;
-    display: table;
-    margin: 0 auto;
-
-    &:hover{
-      text-decoration: underline;
-    }
-  }
-
-  .btn.submit{
-    width: 100%;
+  &.error{
+    border-color: $error;
   }
 }
 
-input, textarea{
-  margin-bottom: 0px !important;
+.input-field {
+  margin-bottom:20px;
 }
 
-.error-message{
-  color: #f44336;
-  font-size: 0.75rem;
+label{
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: block;
+  font-size: 0.8rem;
 }
 
 input:focus{

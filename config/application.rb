@@ -37,27 +37,5 @@ module MilieuServer
 
     config.autoload_paths += %W(\#{config.root}/lib)
 
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
-
-      if(instance.class.to_s.eql?("ActionView::Helpers::Tags::Label"))
-        html_tag << "<span class=\"error-message\">#{instance.error_message.join(" and ")}</span>".html_safe
-      else
-        if instance.class.to_s.eql?("ActionView::Helpers::Tags::TextArea") then
-          field = html_tag.split(" ")
-          pos = field.count - 2
-          field.insert(pos, "class=\"invalid\"")
-          html_tag = field.join(" ")
-        elsif instance.class.to_s.eql?("ActionView::Helpers::Tags::TextField")
-          field = html_tag.split(" ")
-          pos = field.count - 1
-          field.insert(pos, "class=\"invalid\"")
-          html_tag = field.join(" ")
-        end
-      end
-
-      html_tag.html_safe
-
-    }
-
   end
 end

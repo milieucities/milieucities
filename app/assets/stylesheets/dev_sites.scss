@@ -1,5 +1,4 @@
 #dev-site-show{
-  padding-top: 64px;
   position: relative;
   color: #555;
   background-color: #f4f4f4;
@@ -138,4 +137,15 @@
     outline: none;
   }
 
+}
+
+#armstrong-map{
+  height: 70vh;
+  max-height: 600px;
+}
+
+#comments-index{
+  padding: 100px 40px 50px;
+  max-width: 1170px;
+  margin: 0 auto;
 }
