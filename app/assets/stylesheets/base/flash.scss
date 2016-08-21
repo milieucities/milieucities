@@ -16,12 +16,10 @@
   display: none;
 
   &.notice{
-    background-color: $light-primary-color;
-    border-bottom: 5px solid $primary-color;
+    background-color: $primary-color;
   }
 
   &.alert{
     background-color: $light-error;
-    border-bottom: 5px solid $error;
   }
 }

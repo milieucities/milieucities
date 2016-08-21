@@ -10,10 +10,10 @@
   border-radius: 2px;
   transition: 200ms;
   color: $white;
-  background-color: $secondary-color;
+  background-color: $dark-secondary-color;
   box-sizing: border-box;
 
   &:hover, &:focus {
-    background-color: $primary-color;
+    background-color: $secondary-color;
   }
 }

@@ -3,9 +3,7 @@
     <a href="/auth/facebook" class="omni fb"><%= fa_icon "facebook" %> Continue with Facebook </a>
     <a href="/auth/google" class="omni google"><%= fa_icon "google" %> Continue with Google </a>
 
-    <div class="or">
-      or
-    </div>
+    <div class="or">or</div>
 
     <%= form_for :session, url: sessions_path, html: { class: 'login-form' } do |f| %>
       <div class="input-field">

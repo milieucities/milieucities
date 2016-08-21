@@ -1,57 +1,3 @@
-#sign-in-modal{
-  max-width: 350px;
-  background-color: $pale-gray;
-
-  .or {
-    font-weight: 700;
-    padding: 20px 0;
-    text-align: center;
-  }
-
-  .omni {
-    padding: 10px;
-    display: block;
-    cursor: pointer;
-    color: $white;
-    margin-bottom: 10px;
-    border-radius: 3px;
-
-    i {
-      padding-right: 20px
-    }
-
-    &.fb {
-      background-color: #3B5998;
-    }
-
-    &.google {
-      background-color: #DD4B39;
-    }
-  }
-}
-
-.login-form {
-  margin: 0 auto;
-  padding-bottom: 20px;
-
-  input:-webkit-autofill {
-    background-color: $white !important;
-    -webkit-box-shadow:0 0 0 50px $white inset;
-    -webkit-text-fill-color: #000;
-  }
-
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-  }
-
-  .btn{
-    width: 100%;
-  }
-}
-
 nav{
   background-color: white;
   height: 50px;
@@ -73,7 +19,6 @@ nav{
   }
 
   .links{
-
     a{
       height: 50px;
       line-height: 50px;

@@ -94,17 +94,18 @@
       right: 0;
       height: 43.5px;
       box-sizing: border-box;
-      background-color: $secondary-color;
       border-radius: 4px;
       padding: 5px 25px;
       font-size: 16px;
       border: none;
       color: #fff;
-      transition: 100ms;
+      transition: 200ms;
       letter-spacing: 0.5px;
+      cursor: pointer;
+      background-color: $dark-secondary-color;
 
       &:hover, &:focus{
-        background-color: $dark-secondary-color;
+        background-color: $secondary-color;
       }
     }
 
@@ -123,6 +124,7 @@
       padding: 10px;
       padding-left: 70px;
       color: $dark-secondary-color;
+      transition: 200ms;
 
       @media #{$small-and-down} {
         padding-left: 35px;

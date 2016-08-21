@@ -20,35 +20,36 @@ export default class MapWrapper extends Component {
                    ward: getParameterByName('ward'),
                    status: getParameterByName('status'),
                    year: getParameterByName('year'),
+                   activeDevSiteId: getParameterByName('activeDevSiteId'),
                    isMobile: (window.innerWidth < 992) };
 
     this.search_and_sort = () => this._search_and_sort();
     this.loadDevSites = () => this._loadDevSites();
+    this.params = () => this._params();
     this.loadDevSites();
 
     window.onresize = debounce(() => {
       this.setState({ isMobile: (window.innerWidth < 992) });
     }, 100)
   }
+  componentDidUpdate(prevProps, prevState) {
+    const path = `${window.location.pathname}?${$.param(this.params())}`;
+    window.history.replaceState({ path },'', path);
+  }
+  _params() {
+    const { page, latitude, longitude, ward, status, year, activeDevSiteId } = this.state;
+    const params = omitBy({ page, latitude, longitude, ward, status, year, activeDevSiteId }, isNil);
+    return params;
+  }
   _loadDevSites() {
-    const { page, latitude, longitude, ward, status, year } = this.state;
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
-    const params = omitBy({ page, latitude, longitude, ward, status, year }, isNil);
-
-    $.getJSON(`/dev_sites`, params, json => {
-      const path = `/dev_sites?${$.param(params)}`;
-      window.history.replaceState({ path },'', path);
+    $.getJSON(`/dev_sites`, this.params(), json => {
       this.setState({ devSites: (json.dev_sites || []), total: json.total }, scrollToTop);
     });
   }
   _search_and_sort() {
-    const { latitude, longitude, ward, status, year } = this.state;
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
-    const params = omitBy({ page: 0, latitude, longitude, ward, status, year }, isNil);
-
-    $.getJSON(`/dev_sites`, params, json => {
-      const path = `/dev_sites?${$.param(params)}`;
-      window.history.replaceState({ path },'', path);
+    $.getJSON(`/dev_sites`, this.params(), json => {
       this.setState({page: 0, devSites: (json.dev_sites || []), total: json.total }, scrollToTop);
     });
   }
