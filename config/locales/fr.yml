@@ -52,7 +52,6 @@ fr:
     search_bar_text: 'Enter an address'
     featured: 'Développements en vedette'
     terms_of_use_link: "Conditions d'utilisation"
-    privacy_policy_link: "Privacy Policy"
   terms_of_use_header_text: "Terms of Use"
   term_of_use:
     introduction:

@@ -52,7 +52,6 @@ en:
     search_bar_text: 'Enter an address'
     featured: 'Featured Developments'
     terms_of_use_link: "Terms of Use"
-    privacy_policy_link: "Privacy Policy"
   terms_of_use_header_text: "Terms of Use"
   term_of_use:
     introduction:
