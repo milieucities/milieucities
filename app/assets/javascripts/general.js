@@ -20,9 +20,9 @@ $(document).on('page:change', function(){
       if(result.length > 0){
         var latitude = result[0].geometry.location.lat();
         var longitude = result[0].geometry.location.lng();
-        Turbolinks.visit("dev_sites?latitude=" + latitude + "&longitude=" + longitude);
+        Turbolinks.visit('dev_sites?latitude=' + latitude + '&longitude=' + longitude);
       }else{
-        Turbolinks.visit("dev_sites");
+        Turbolinks.visit('dev_sites');
       }
     });
 
@@ -35,53 +35,49 @@ $(document).on('page:change', function(){
   };
 
   if($('#notice').length){
-    Materialize.toast($('#notice').data("notice"), 3500, "teal");
+    window.flash('notice',  $('#notice').data('notice'));
   }
 
   if($('#alert').length){
-    Materialize.toast($('#alert').data("alert"), 3500, "red darken-4");
+    window.flash('alert', $('#alert').data('alert'));
   }
 
-  $("#contact-councillor").on("ajax:success", function(){
+  $('#contact-councillor').on("ajax:success", function(){
     this.reset();
-    Materialize.toast("Message successfully sent!", 3500, "teal");
-  }).on("ajax:error", function(){
+    window.flash('notice', 'Message successfully sent!');
+  }).on('ajax:error', function(){
     this.reset();
-    Materialize.toast("Message unsuccessfully sent!", 3500, "red darken-4");
+    window.flash('alert', 'Message unsuccessfully sent!');
   });
 
-  $("#contact-file-lead").on("ajax:success", function(){
+  $('#contact-file-lead').on('ajax:success', function(){
     this.reset();
-    Materialize.toast("Message successfully sent!", 3500, "teal");
-  }).on("ajax:error", function(){
+    window.flash('notice', 'Message successfully sent!');
+  }).on('ajax:error', function(){
     this.reset();
-    Materialize.toast("Message unsuccessfully sent!", 3500, "red darken-4");
+    window.flash('alert', 'Message unsuccessfully sent!');
   });
 
-  $("#contact-milieu").on("ajax:success", function(){
+  $('#contact-milieu').on('ajax:success', function(){
     this.reset();
-    Materialize.toast("Message successfully sent!", 3500, "teal");
-  }).on("ajax:error", function(){
+    window.flash('notice', 'Message successfully sent!');
+  }).on('ajax:error', function(){
     this.reset();
-    Materialize.toast("Message unsuccessfully sent!", 3500, "red darken-4");
+    window.flash('alert', 'Message unsuccessfully sent!');
   });
 
-  $("#contact-citizencity").on("ajax:success", function(){
+  $('#contact-citizencity').on('ajax:success', function(){
     this.reset();
-    Materialize.toast("Message successfully sent!", 3500, "teal");
-  }).on("ajax:error", function(){
+    window.flash('notice', 'Message successfully sent!');
+  }).on('ajax:error', function(){
     this.reset();
-    Materialize.toast("Message unsuccessfully sent!", 3500, "red darken-4");
+    window.flash('alert', 'Message unsuccessfully sent!');
   });
 
-  $('.button-collapse').sideNav();
-  $('select').material_select();
   $('.modal-trigger').leanModal();
-  $('.datepicker').pickadate();
 
   $('.input-field').on('cocoon:after-insert', function(e, insertedItem) {
     $('select').material_select();
-    $('.datepicker').pickadate();
   });
 
 });
@@ -92,10 +88,10 @@ $(document).ready(function() {
 
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
   results = regex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }

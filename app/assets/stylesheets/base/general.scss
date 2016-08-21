@@ -1,0 +1,20 @@
+html, body {
+  height:100%;
+  background-color: $pale-gray;
+}
+
+body{
+  margin:0;
+}
+
+a:focus,
+button:focus,
+input:focus:not([type="checkbox"]):not([type="radio"]),
+textarea:focus,
+label:focus{
+  outline: none;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}

@@ -1,0 +1,32 @@
+nav{
+  background-color: white;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+
+  .logo{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding-left: 20px;
+    color: #333;
+
+    img{
+      height: 25px;
+    }
+  }
+
+  .links{
+    a{
+      height: 50px;
+      line-height: 50px;
+      font-size: 14px;
+      color: #333;
+      letter-spacing: 0.75px;
+      padding: 0 20px;
+    }
+  }
+
+}

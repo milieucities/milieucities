@@ -1,8 +1,7 @@
 <% title t('terms_of_use_header_text') + " - " %>
-<div class="container" style="padding-top: 64px">
+<div class="container">
   <div class="row">
-    <br/><br/>
-    <%= link_to fa_icon("arrow-left", text: 'Back'), root_path %>
+    <%= link_to fa_icon("long-arrow-left", text: 'Back'), root_path %>
     <div class="col s12">
       <h1><%= t('terms_of_use_header_text') %></h1>
       <h2><%= t('term_of_use.introduction.title') %></h2>
@@ -10,7 +9,7 @@
         <li><%= t('term_of_use.introduction.statement001') %></li>
         <li><%= t('term_of_use.introduction.statement002') %></li>
         <li><%= t('term_of_use.introduction.statement003') %></li>
-        <li><%= t('term_of_use.introduction.statement004') %></li>  
+        <li><%= t('term_of_use.introduction.statement004') %></li>
       </ul>
       <h2><%= t('term_of_use.creating_an_account.title') %></h2>
       <ul>
@@ -126,16 +125,6 @@
           <li><%= t('privacy.change_log.statement001') %></li>
         </ul>
       </div>
-    </div>      
-  </div>
-</div>
-
-<footer>
-  <div class="container">
-    <div class="row">
-      <div class="col s6">
-          <%= link_to t('home.terms_of_use_link'), tos_path %>
-      </div>      
     </div>
   </div>
-</footer>
+</div>

@@ -1,21 +1,39 @@
-.login-form {
-  max-width: 400px;
-  margin: 0 auto;
+#sign-in-modal{
+  max-width: 350px;
+  background-color: $pale-gray;
 
-  .btn{
-    width: 100%;
+  form {
+    padding-bottom: 20px;
+
+    .btn {
+      width: 100%;
+    }
   }
-}
-.socials{
-	padding-top: 30px;
-	a {
-		padding: 20px;
-	}
-}
-#close{
-	margin-top: 2px;
-	margin-right: 2px;
-	position: absolute;
-	top: 0;
-	right: 0;
+
+  .or {
+    font-weight: 700;
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .omni {
+    padding: 10px;
+    display: block;
+    cursor: pointer;
+    color: $white;
+    margin-bottom: 10px;
+    border-radius: 3px;
+
+    i {
+      padding-right: 20px
+    }
+
+    &.fb {
+      background-color: #3B5998;
+    }
+
+    &.google {
+      background-color: #DD4B39;
+    }
+  }
 }

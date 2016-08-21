@@ -1,36 +1,27 @@
 <div id="sign-in-modal" class="modal">
   <div class="modal-content">
-    <h1 class="center"><%= t('sign-in-modal.sign-in-modal-text') %></h1>
+    <a href="/auth/facebook" class="omni fb"><%= fa_icon "facebook" %> Continue with Facebook </a>
+    <a href="/auth/google" class="omni google"><%= fa_icon "google" %> Continue with Google </a>
+
+    <div class="or">or</div>
+
     <%= form_for :session, url: sessions_path, html: { class: 'login-form' } do |f| %>
-    <div class="row">
-      <h4 class="center">with</h4>
-      <div class="socials center">
-        <a href="/auth/facebook" alt="login using facebook"  >
-          <i class="fa fa-facebook fa-3x" style="color:#3B5998;"></i>
-        </a>
-        <a href="auth/google" alt="login using google" >
-          <i class="fa fa-google fa-3x" style="color:#DD4B39;"></i>
-        </a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
+      <div class="input-field">
         <%= f.label :email, t('sign-in-modal.email-label') %>
         <%= f.text_field :email, autocomplete: 'off' %>
       </div>
-      <div class="input-field col s12">
+      <div class="input-field">
         <%= f.label :password, t('sign-in-modal.password-label') %>
         <%= f.password_field :password, autocomplete: 'off' %>
       </div>
-    </div>
-    <div class="actions">
-      <%= f.submit t('sign-in-modal.sign-in-button'), class: 'waves-effect btn' %>
-    </div>
+      <%= f.submit t('sign-in-modal.sign-in-button'), class: 'btn' %>
     <% end %>
+
     <div class="row">
-      <div class="center">New to Mileu?</div>
+      <small>New to Mileu?</small><br/>
       <%= link_to t('sign-in-modal.sign-up-button'), new_user_path, class: "signup-link" %>
     </div>
-    <div class="center">By signing in, you accept <b><%= link_to t('home.terms_of_use_link'), tos_path %></b>.</div>
+
+    <small class="center">By signing in, you accept <b><%= link_to t('home.terms_of_use_link'), tos_path %></b>.</small>
   </div>
 </div>

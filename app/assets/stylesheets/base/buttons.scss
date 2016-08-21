@@ -1,0 +1,19 @@
+.btn {
+  display: inline-block;
+  padding: 10px 30px;
+  text-decoration: none;
+  border :none;
+  font-size: 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size :0.8em;
+  border-radius: 2px;
+  transition: 200ms;
+  color: $white;
+  background-color: $dark-secondary-color;
+  box-sizing: border-box;
+
+  &:hover, &:focus {
+    background-color: $secondary-color;
+  }
+}

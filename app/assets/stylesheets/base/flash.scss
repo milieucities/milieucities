@@ -1,0 +1,25 @@
+#flash{
+  position: fixed;
+  top: 10px;
+  width: 400px;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  text-align: center;
+  box-sizing: border-box;
+  font-weight: 300;
+  padding: 15px;
+  border-radius: 2px;
+  margin: 0 auto;
+  color: white;
+  max-width: 90vw;
+  display: none;
+
+  &.notice{
+    background-color: $primary-color;
+  }
+
+  &.alert{
+    background-color: $light-error;
+  }
+}

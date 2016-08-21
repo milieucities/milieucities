@@ -1,12 +1,13 @@
 <section id="home">
-  <nav>
+  <div class="nav">
     <div class="logo">
       <%= link_to image_tag("milieulogo-02.svg"), root_path, class: "logo" %>
     </div>
 
-    <ul class="right">
+    <ul>
       <li class="overshadow"><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us", class: 'hide-on-small-only' %></li>
-      <li class="overshadow"><%= link_to t('nav_bar.launch'), "#", title: t('nav_bar.launch'), class: 'tooltipped hide-on-small-only', data: { position: 'bottom', delay: '50', tooltip: 'Coming Soon' } %></li>
+      <li class="overshadow"><%= link_to t('nav_bar.map_link_text'), dev_sites_path, title: t('nav_bar.map_link_text') %></li>
+      <!-- <li class="overshadow"><%= link_to t('nav_bar.launch'), "#", title: t('nav_bar.launch'), class: 'tooltipped hide-on-small-only', data: { position: 'bottom', delay: '50', tooltip: 'Coming Soon' } %></li> -->
       <% if signed_in? %>
       <li class="overshadow"><%= link_to  t('nav_bar.sign_out_text'), session_path(id: current_user.id), method: :delete, title: "Sign Out" %></li>
       <% else %>
@@ -15,7 +16,7 @@
       <li class="overshadow"><%= link_to "EN", "/en", class: "hide-on-small-only" %> </li>
       <li class="overshaddow"><%= link_to "FR", "/fr", class: "hide-on-small-only" %></li>
     </ul>
-  </nav>
+  </div>
 
   <div class="title">
     <%= t('home.title') %>
@@ -23,7 +24,7 @@
   <div class="search">
     <%= form_tag dev_sites_path, method: :get, id: 'home-search' do %>
       <%= fa_icon 'map-marker', class: 'map-marker' %>
-      <%= text_field_tag 'search', nil, type: 'customsearch', placeholder: t('home.search_bar_text'), class: 'search-input', autocomplete: 'off'  %>
+      <%= text_field_tag 'search', nil, placeholder: t('home.search_bar_text'), class: 'search-input', autocomplete: 'off'  %>
       <%= button_tag do %>
         <%= fa_icon('search') %>
         <%= t('search_button_text') %>
