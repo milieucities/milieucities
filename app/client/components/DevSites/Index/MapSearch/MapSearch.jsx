@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
 import css from './map-search.scss'
-import Autocomplete from '../Autocomplete/Autocomplete'
-import Select from '../Select/Select'
+import Autocomplete from '../../../Utility/Autocomplete/Autocomplete'
+import Select from '../../../Utility/Select/Select'
 import { toLower, toUpper } from 'lodash'
 
 export default class MapSearch extends Component {

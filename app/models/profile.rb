@@ -7,4 +7,5 @@ class Profile < ActiveRecord::Base
     "Somerset", "Kitchissippi", "River", "Capital", "Alta Vista", "Cumberland", "Osgoode",
     "Rideau-Goulbourn", "Gloucester-South Nepean", "Kanata South"]
 
+  mount_uploader :avatar, AvatarUploader
 end

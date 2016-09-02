@@ -17,12 +17,21 @@ textarea {
   box-sizing: border-box;
 
   &:focus{
-    border: 1px solid $gray;
+    border: 1px solid #cdcdcd;
   }
 
   &.error{
     border-color: $error;
   }
+}
+
+input[type="range"]{
+  color: $primary-color;
+  width: 100%;
+}
+
+textarea {
+  min-height: 100px;
 }
 
 select {
@@ -40,7 +49,7 @@ select {
 
 label{
   text-transform: uppercase;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   display: block;
   font-size: 0.8rem;
 }
@@ -53,7 +62,7 @@ input:focus {
   max-width: 500px;
   margin: 0 auto;
 
-  a:hover {
+  a:hover:not(.btn) {
     text-decoration: underline;
   }
 }

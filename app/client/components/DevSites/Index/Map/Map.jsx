@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
 import css from './map.scss'
 import { replace } from 'lodash'
 

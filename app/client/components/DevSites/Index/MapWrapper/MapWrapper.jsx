@@ -69,7 +69,6 @@ export default class MapWrapper extends Component {
 }
 
 document.addEventListener('page:change', () => {
-  if(document.querySelector('#dev-site-map')){
-    render(<MapWrapper/>, document.querySelector('#dev-site-map'))
-  }
+  const devSiteMap = document.querySelector('#dev-site-map');
+  devSiteMap && render(<MapWrapper/>, devSiteMap)
 })

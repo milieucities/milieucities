@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
 import { List } from 'immutable'
 import css from './comments.scss'
 

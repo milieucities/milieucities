@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
 import css from './dev-site.scss'
 import { capitalize, replace, concat } from 'lodash'
 import Comments from '../Comments/Comments'
-import Modal from '../Modal/Modal'
+import Modal from '../../../Utility/Modal/Modal'
 
 export default class DevSite extends Component {
   constructor(props) {
@@ -25,7 +24,7 @@ export default class DevSite extends Component {
   }
   _loadDevSite() {
     $.getJSON(`/dev_sites/${this.props.id}`,
-      devSiteJson => this.setState({ devSite: devSiteJson },
+      devSite => this.setState({ devSite },
         () => {
           if(this.refs.description.scrollHeight > 140) {
             this.setState({ showReadMore: true, readMoreClicked: false });

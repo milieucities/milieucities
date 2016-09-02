@@ -17,8 +17,6 @@ gem 'redcarpet'
 gem 'fastimage'
 gem 'photoswipe-rails'
 gem 'momentjs-rails', '~> 2.11.0'
-gem 'unicorn', '5.1.0'
-gem 'pry', '~> 0.10.3'
 gem 'micro_token', '~> 0.0.3'
 gem 'redis', '~> 3.2.2'
 gem 'hiredis', '~> 0.6.1'
@@ -46,24 +44,24 @@ gem 'omniauth-google-oauth2'
 
 
 group :development, :test do
-  # DEVELOPMENT AND TEST
-  # group together
-  gem 'byebug', '~> 8.2'
+  gem 'pry'
+  gem 'byebug'
+  gem 'spring'
   gem 'pry-byebug'
+  gem 'rspec-rails', '~> 3.3'
+  gem 'factory_girl_rails', "~> 4.2.1"
   gem 'letter_opener'
-  gem 'launchy'
-  gem 'puma'
-  # DEVELOMENT specific gems
   gem 'dotenv-rails', '~> 2.1.1'
-  gem 'spring', '~> 1.6.4'
+  gem 'i18n-tasks', '~> 0.9.5'
+  gem 'puma'
+  gem 'launchy'
   gem 'brakeman', :require => false
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'i18n-tasks', '~> 0.9.5'
   gem "foreman"
-  # TEST specific gems
-  gem 'rspec-rails', '~> 3.1'
-  gem "factory_girl_rails"
+end
+
+group :test do
   gem 'ffaker'
   gem 'shoulda-matchers'
   gem 'minitest-reporters', '~> 1.1.8'
@@ -71,6 +69,7 @@ group :development, :test do
 end
 
 group :production do
+  gem 'unicorn', '5.1.0'
 end
 
 ruby "2.3.0"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811001654) do
+ActiveRecord::Schema.define(version: 20160902120351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,8 +143,14 @@ ActiveRecord::Schema.define(version: 20160811001654) do
     t.string   "neighbourhood"
     t.string   "postal_code"
     t.boolean  "accepted_terms"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "street"
+    t.string   "avatar"
+    t.string   "city"
+    t.string   "age_range"
+    t.string   "field_of_occupation"
+    t.boolean  "receive_newletter"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -203,6 +209,21 @@ ActiveRecord::Schema.define(version: 20160811001654) do
     t.integer  "dev_site_id"
   end
 
+  create_table "surveys", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "lived_in_neighborhood"
+    t.string   "neighborhood_description"
+    t.string   "community_involvement"
+    t.string   "biking_infrastructure"
+    t.string   "urban_intensification"
+    t.string   "heritage"
+    t.text     "interesting_neighborhood_topics"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "surveys", ["user_id"], name: "index_surveys_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -251,4 +272,5 @@ ActiveRecord::Schema.define(version: 20160811001654) do
   add_foreign_key "likes", "dev_sites"
   add_foreign_key "likes", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "surveys", "users"
 end

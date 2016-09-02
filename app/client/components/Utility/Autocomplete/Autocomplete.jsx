@@ -71,7 +71,7 @@ export default class Autocomplete extends Component {
       this.setState({ suggestions: [] });
       return;
     }
-    this.props.callback.call(this, value, this);
+    this.props.callback(value, this);
     this.openDropdown();
   }
   _setSuggestion(suggestion) {

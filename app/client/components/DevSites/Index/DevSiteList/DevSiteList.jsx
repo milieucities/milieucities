@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
 import css from './dev-site-list.scss'
 import { replace, ceil } from 'lodash'
 

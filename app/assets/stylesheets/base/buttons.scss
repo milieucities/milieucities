@@ -13,7 +13,26 @@
   background-color: $dark-secondary-color;
   box-sizing: border-box;
 
+  &.transparent {
+    background-color: transparent;
+    color: $dark-secondary-color;
+  }
+
+  &.block {
+    display: block;
+    text-align: center;
+  }
+
+  &.cancel {
+    background-color: $error;
+
+    &:hover{
+      background-color: $light-error;
+    }
+  }
+
   &:hover, &:focus {
     background-color: $secondary-color;
+    color: $white;
   }
 }

@@ -1,1 +1,2 @@
-import MapWrapper from './components/MapWrapper/MapWrapper'
+import './components/DevSites/Index/MapWrapper/MapWrapper'
+import './components/Profiles/Edit/Edit'

@@ -3,9 +3,12 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
 
   has_one :profile, dependent: :destroy
+  has_one :survey, dependent: :destroy
   accepts_nested_attributes_for :profile
   has_many :comments, as: :commentable
   has_many :likes, dependent: :destroy
+
+  after_create :create_survey
 
   validates :accepted_terms, acceptance: true
   validates  :email, presence: {message: "Email is required"},
