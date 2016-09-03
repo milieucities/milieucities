@@ -29,3 +29,5 @@ app/client/npm-debug.log*
 
 # Ignore public folder
 /public/assets
+/config/initializers/carrierwave.rb
+/coverage/

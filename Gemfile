@@ -33,6 +33,7 @@ gem 'rollbar'
 gem 'skylight'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
+gem 'simplecov', :require => false, :group => :test
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
