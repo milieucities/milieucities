@@ -7,6 +7,7 @@
     <ul>
       <li><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us", class: 'hide-on-small-only' %></li>
       <li><%= link_to t('nav_bar.map_link_text'), dev_sites_path, title: t('nav_bar.map_link_text') %></li>
+      <!-- <li class="overshadow"><%= link_to t('nav_bar.launch'), "#", title: t('nav_bar.launch'), class: 'tooltipped hide-on-small-only', data: { position: 'bottom', delay: '50', tooltip: 'Coming Soon' } %></li> -->
       <% if signed_in? %>
         <div class="user-dropdown-container">
           <%= link_to edit_user_profile_path(current_user) do %>
