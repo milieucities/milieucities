@@ -19,7 +19,6 @@
           </div>
         </div>
       <% end %>
-      <%= link_to  t('nav_bar.sign_out_text'), session_path(id: current_user.id), method: :delete, title: "Sign Out" if signed_in? %>
       <%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" unless signed_in? %>
 
       <%= link_to "EN", params[:locale].present? ? request.original_url.gsub("/fr/", "/en/") : request.path.prepend("/en"), class: "hide-on-small-only" %>

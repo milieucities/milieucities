@@ -84,13 +84,14 @@ export default class Edit extends Component {
   }
   render() {
     const { profile, avatarUploading, survey, error } = this.state;
+    console.log(profile);
     return <div className={css.container}>
       <div className={css.info}>
         <div className={css.avatar}>
           {avatarUploading && <div className={css.loader}><i className='fa fa-spin fa-circle-o-notch fa-3x fa-fw' /></div>}
           <label className={css.icon} htmlFor='profile_avatar'><i className='fa fa-picture-o' /></label>
           <input type='file' ref='avatar' id='profile_avatar' onChange={this.uploadAvatar} style={{display: 'none'}} />
-          <img src={ profile && profile.avatar && profile.avatar.thumb.url || require('./images/default-avatar.png')} />
+          <img src={ profile && profile.avatar && profile.avatar.web.url || require('./images/default-avatar.png')} />
         </div>
 
         <div className={css.delete}>

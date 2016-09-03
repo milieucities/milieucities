@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       get :create, path: 'auth/:google/callback'
     end
 
+    resources :conversations
+
     resources :dev_sites do
       resources :comments, module: :dev_sites do
       end

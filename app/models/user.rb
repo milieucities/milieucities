@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :profile
   has_many :comments, as: :commentable
   has_many :likes, dependent: :destroy
+  has_many :conversations, dependent: :destroy
 
   after_create :create_survey
 

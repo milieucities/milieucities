@@ -9,5 +9,5 @@ class Profile < ActiveRecord::Base
 
   validates  :name, presence: { message: "Name is required" }
 
-  mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, ImagesUploader
 end

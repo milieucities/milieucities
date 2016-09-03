@@ -9,7 +9,7 @@ module ApplicationHelper
     content_for(:title) { page_title }
   end
 
-  def avatar(user, version="small_thumb", options={})
+  def avatar(user, version="web", options={})
     if user.profile.blank? || user.profile.avatar.blank?
       image_tag "default-avatar.png", class: "#{options[:html_class]}"
     else
