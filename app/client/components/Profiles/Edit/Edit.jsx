@@ -61,6 +61,9 @@ export default class Edit extends Component {
       success: profile => {
         this.setState({ profile });
         window.flash('notice', 'Profile updated successfully');
+      },
+      error: error => {
+        this.setState({ error: error.responseJSON });
       }
     });
   }
@@ -80,7 +83,7 @@ export default class Edit extends Component {
     });
   }
   render() {
-    const { profile, avatarUploading, survey } = this.state;
+    const { profile, avatarUploading, survey, error } = this.state;
     return <div className={css.container}>
       <div className={css.info}>
         <div className={css.avatar}>
@@ -108,6 +111,7 @@ export default class Edit extends Component {
               <div className='input-field col s12'>
                 <label htmlFor='profile_name'>Name</label>
                 <input type='text' defaultValue={profile.name} id='profile_name' name='profile[name]'/>
+                {error && error.name && <div className='error-message'>{error.name}</div>}
               </div>
             </div>
 

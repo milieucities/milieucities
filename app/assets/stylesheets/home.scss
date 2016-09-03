@@ -26,7 +26,65 @@
     ul{
       list-style-type: none;
       margin: 0;
+      margin-right: 20px;
       display: flex;
+
+      .user-dropdown-container {
+        display: flex;
+        align-items: center;
+        color: $white;
+        font-weight: 300;
+        padding: 0 20px;
+        position: relative;
+
+        > a {
+          color: $white;
+          display: flex;
+          align-items: center;
+        }
+
+        &:hover {
+          .user-dropdown {
+            display: block;
+          }
+        }
+
+        .user-dropdown {
+          position: absolute;
+          top: 90%;
+          display: none;
+          background-color: $white;
+          border: 1px solid #eee;
+          right: 0;
+          
+          &:hover{
+            display: block;
+          }
+
+          a {
+            display: block;
+            padding: 10px 15px;
+            width: 100px;
+            font-size: 0.8rem;
+            font-weight: 300;
+            transition: 200ms;
+
+            &:hover{
+              background-color: $secondary-color;
+              color: $white;
+            }
+          }
+        }
+
+        img {
+          height: 30px;
+          width: 30px;
+          border-radius: 2px;
+          object-fit: cover;
+          margin-right: 10px
+        }
+      }
+
     }
 
     li a{

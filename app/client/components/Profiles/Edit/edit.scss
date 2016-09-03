@@ -13,6 +13,10 @@
   .delete {
     margin: 50px auto 0;
   }
+
+  @media #{$small-and-down} {
+    display: none;
+  }
 }
 
 .avatar {

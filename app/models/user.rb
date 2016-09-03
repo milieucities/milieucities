@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
   after_create :create_survey
 
   validates :accepted_terms, acceptance: true
-  validates  :email, presence: {message: "Email is required"},
-  uniqueness: {message: "Email already in use"}, unless: "provider.present?"
+  validates  :email, presence: { message: "Email is required" },
+  uniqueness: { message: "Email already in use" }, unless: "provider.present?"
 
   validates  :password, presence: {message: "Password is required", on: :create},
   confirmation: {message: "Passwords do not match."},

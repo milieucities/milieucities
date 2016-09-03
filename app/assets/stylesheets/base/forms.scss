@@ -54,10 +54,6 @@ label{
   font-size: 0.8rem;
 }
 
-input:focus {
-  outline: none;
-}
-
 .one-page-form {
   max-width: 500px;
   margin: 0 auto;
@@ -65,4 +61,10 @@ input:focus {
   a:hover:not(.btn) {
     text-decoration: underline;
   }
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: $error;
+  padding-top: 5px;
 }
