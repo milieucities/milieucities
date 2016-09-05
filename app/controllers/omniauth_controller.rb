@@ -2,7 +2,7 @@ class OmniauthController < ApplicationController
 
   def create
     @user = User.find_by(uid: request.env['omniauth.auth']['uid'])
-
+    
     unless @user.present?
       @user = User.create(uid: request.env['omniauth.auth']['uid'],
                           provider: request.env['omniauth.auth']['provider'])

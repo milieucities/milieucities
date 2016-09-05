@@ -15,11 +15,13 @@ Rails.application.routes.draw do
     end
 
     #omniauth
-    namespace :omniauth, path: '/', as: nil do 
+    namespace :omniauth, path: '/', as: nil do
       get :create, path: 'auth/:facebook/callback'
       get :create, path: 'auth/:twitter/callback'
       get :create, path: 'auth/:google/callback'
     end
+
+    resources :conversations
 
     resources :dev_sites do
       resources :comments, module: :dev_sites do
@@ -45,7 +47,10 @@ Rails.application.routes.draw do
     end
 
     resources :comments, only: [:index]
-    resources :users, only: [:index, :new, :create, :destroy]
+    resources :users, only: [:index, :new, :create, :destroy] do
+      resource :profile, only: [:edit, :update, :show]
+      resource :survey, only: [:edit, :update, :show]
+    end
     resources :sessions, only: [:new, :create, :destroy]
 
   end

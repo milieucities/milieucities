@@ -5,15 +5,24 @@
     </div>
 
     <ul>
-      <li class="overshadow"><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us", class: 'hide-on-small-only' %></li>
-      <li class="overshadow"><%= link_to t('nav_bar.map_link_text'), dev_sites_path, title: t('nav_bar.map_link_text') %></li>
+      <li><%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us", class: 'hide-on-small-only' %></li>
+      <li><%= link_to t('nav_bar.map_link_text'), dev_sites_path, title: t('nav_bar.map_link_text') %></li>
       <!-- <li class="overshadow"><%= link_to t('nav_bar.launch'), "#", title: t('nav_bar.launch'), class: 'tooltipped hide-on-small-only', data: { position: 'bottom', delay: '50', tooltip: 'Coming Soon' } %></li> -->
       <% if signed_in? %>
-      <li class="overshadow"><%= link_to  t('nav_bar.sign_out_text'), session_path(id: current_user.id), method: :delete, title: "Sign Out" %></li>
-      <% else %>
-      <li class="overshadow"><%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>
+        <div class="user-dropdown-container">
+          <%= link_to edit_user_profile_path(current_user) do %>
+            <%= avatar current_user %> <%= current_user.profile.try(:name) %>
+          <% end %>
+          <div class="user-dropdown">
+            <%= link_to "Profile", edit_user_profile_path(current_user)  %>
+            <%= link_to t('nav_bar.sign_out_text'), session_path(current_user), method: :delete, title: "Sign Out" %>
+          </div>
+        </div>
       <% end %>
-      <li class="overshadow"><%= link_to "EN", "/en", class: "hide-on-small-only" %> </li>
+      <% unless signed_in? %>
+      <li><%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" %></li>
+      <% end %>
+      <li ><%= link_to "EN", "/en", class: "hide-on-small-only" %> </li>
       <li class="overshaddow"><%= link_to "FR", "/fr", class: "hide-on-small-only" %></li>
     </ul>
   </div>
@@ -37,13 +46,13 @@
   </div>
 
   <div class="featured-developments">
-    <%= link_to dev_site_path(1822), class: "development d1 overshadow" do %>
+    <%= link_to dev_sites_path(activeDevSiteId: 1822), class: "development d1 overshadow" do %>
       190 Richmond
     <% end %>
-    <%= link_to dev_site_path(1869), class: "development d2 hide-on-small-only overshadow" do %>
+    <%= link_to dev_sites_path(activeDevSiteId: 1869), class: "development d2 hide-on-small-only overshadow" do %>
       Armstrong Street Study
     <% end %>
-    <%= link_to dev_site_path(1870), class: "development d3 hide-on-small-only overshadow" do %>
+    <%= link_to dev_sites_path(activeDevSiteId: 1870), class: "development d3 hide-on-small-only overshadow" do %>
       Somerset House
     <% end %>
   </div>

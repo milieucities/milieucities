@@ -8,9 +8,21 @@
     <div class="links">
       <%= link_to t('nav_bar.about_link_text'), "http://about.milieu.io", title: "About Us", class: 'hide-on-small-only' %>
       <%= link_to t('nav_bar.map_link_text'), dev_sites_path, title: t('nav_bar.map_link_text') %>
-      <%= link_to  t('nav_bar.sign_out_text'), session_path(id: current_user.id), method: :delete, title: "Sign Out" if signed_in? %>
+      <% if signed_in? %>
+        <div class="user-dropdown-container">
+          <%= link_to edit_user_profile_path(current_user) do %>
+            <%= avatar current_user %> <%= current_user.profile.try(:name) %>
+          <% end %>
+          <div class="user-dropdown">
+            <%= link_to "Profile", edit_user_profile_path(current_user)  %>
+            <%= link_to t('nav_bar.sign_out_text'), session_path(current_user), method: :delete, title: "Sign Out" %>
+          </div>
+        </div>
+      <% end %>
       <%= link_to t('nav_bar.sign_in_text'), "#sign-in-modal", title: "Sign In", class: "modal-trigger" unless signed_in? %>
-      <%= link_to "EN", params[:locale].present? ? request.original_url.gsub("/fr/", "/en/") : request.path.prepend("/en"), class: "hide-on-small-only" %> |
+
+      <%= link_to "EN", params[:locale].present? ? request.original_url.gsub("/fr/", "/en/") : request.path.prepend("/en"), class: "hide-on-small-only" %>
+      <%= content_tag :span, " | ", class: "hide-on-small-only" %>
       <%= link_to "FR", params[:locale].present? ? request.original_url.gsub("/en/", "/fr/") : request.path.prepend("/fr"), class: "hide-on-small-only" %>
     </div>
   </nav>
