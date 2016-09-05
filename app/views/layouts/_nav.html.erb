@@ -11,7 +11,7 @@
       <% if signed_in? %>
         <div class="user-dropdown-container">
           <%= link_to edit_user_profile_path(current_user) do %>
-            <%= avatar current_user %> <%= current_user.profile.name %>
+            <%= avatar current_user %> <%= current_user.profile.try(:name) %>
           <% end %>
           <div class="user-dropdown">
             <%= link_to "Profile", edit_user_profile_path(current_user)  %>

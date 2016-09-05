@@ -18,7 +18,13 @@
 .menu {
   background-color: #6d9493;
   height: 50px;
-  width: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+
+  @media #{$medium-and-down} {
+    width: 100%;
+  }
 }
 
 .expand {
@@ -46,11 +52,11 @@
 }
 
 .wrapper {
-  padding: 30px 50px;
+  padding: 80px 50px 30px;
   background-color: #fff;
 
   @media #{$small-and-down} {
-    padding: 20px;
+    padding: 60px 20px 20px;
   }
 }
 

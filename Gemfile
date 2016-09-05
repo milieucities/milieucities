@@ -27,8 +27,6 @@ gem 'figaro', '~> 1.1.1'
 gem 'react-rails', '~> 1.6.2'
 gem 'ajax-autocomplete-rails', '~> 0.1.1'
 gem 'font-awesome-rails', '~> 4.5'
-gem 'rollbar'
-gem 'skylight'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 
@@ -52,7 +50,6 @@ group :development, :test do
   gem 'factory_girl_rails', "~> 4.2.1"
   gem 'letter_opener'
   gem 'dotenv-rails', '~> 2.1.1'
-  gem 'i18n-tasks', '~> 0.9.5'
   gem 'puma'
   gem 'launchy'
   gem 'brakeman', :require => false

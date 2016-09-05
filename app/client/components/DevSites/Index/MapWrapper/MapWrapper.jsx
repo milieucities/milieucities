@@ -38,8 +38,7 @@ export default class MapWrapper extends Component {
   }
   _params() {
     const { page, latitude, longitude, ward, status, year, activeDevSiteId } = this.state;
-    const params = omitBy({ page, latitude, longitude, ward, status, year, activeDevSiteId }, isNil);
-    return params;
+    return omitBy({ page, latitude, longitude, ward, status, year, activeDevSiteId }, isNil);
   }
   _loadDevSites() {
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;

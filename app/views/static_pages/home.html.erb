@@ -11,7 +11,7 @@
       <% if signed_in? %>
         <div class="user-dropdown-container">
           <%= link_to edit_user_profile_path(current_user) do %>
-            <%= avatar current_user %> <%= current_user.profile.name %>
+            <%= avatar current_user %> <%= current_user.profile.try(:name) %>
           <% end %>
           <div class="user-dropdown">
             <%= link_to "Profile", edit_user_profile_path(current_user)  %>
@@ -46,13 +46,13 @@
   </div>
 
   <div class="featured-developments">
-    <%= link_to dev_site_path(1822), class: "development d1 overshadow" do %>
+    <%= link_to dev_sites_path(activeDevSiteId: 1822), class: "development d1 overshadow" do %>
       190 Richmond
     <% end %>
-    <%= link_to dev_site_path(1869), class: "development d2 hide-on-small-only overshadow" do %>
+    <%= link_to dev_sites_path(activeDevSiteId: 1869), class: "development d2 hide-on-small-only overshadow" do %>
       Armstrong Street Study
     <% end %>
-    <%= link_to dev_site_path(1870), class: "development d3 hide-on-small-only overshadow" do %>
+    <%= link_to dev_sites_path(activeDevSiteId: 1870), class: "development d3 hide-on-small-only overshadow" do %>
       Somerset House
     <% end %>
   </div>

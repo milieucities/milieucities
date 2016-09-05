@@ -42,6 +42,9 @@ export default class Edit extends Component {
       success: profile => {
         this.setState({ profile, avatarUploading: false });
         window.flash('notice', 'Profile updated successfully');
+      },
+      error: error => {
+        window.flash('alert', 'Failed to save profile')
       }
     });
   }
@@ -63,6 +66,7 @@ export default class Edit extends Component {
         window.flash('notice', 'Profile updated successfully');
       },
       error: error => {
+        window.flash('alert', 'Failed to save profile')
         this.setState({ error: error.responseJSON });
       }
     });
@@ -84,7 +88,6 @@ export default class Edit extends Component {
   }
   render() {
     const { profile, avatarUploading, survey, error } = this.state;
-    console.log(profile);
     return <div className={css.container}>
       <div className={css.info}>
         <div className={css.avatar}>
@@ -101,11 +104,11 @@ export default class Edit extends Component {
         </div>
       </div>
       <div className={css.content}>
-        <h2>Profile Settings</h2>
 
         {
           profile &&
           <form acceptCharset='UTF-8' onSubmit={this.submitProfileForm}>
+            <h2>Profile Settings</h2>
             <input name='utf8' type='hidden' value='✓'/>
 
             <div className='row'>
@@ -172,12 +175,15 @@ export default class Edit extends Component {
           </form>
         }
 
-        <div className={css.divider}></div>
-        <h2>Let us know you a little better...</h2>
-
         {
           survey &&
+
+
           <form acceptCharset='UTF-8' onSubmit={this.submitSurveyForm}>
+
+            <div className={css.divider}></div>
+            <h2>Let us know you a little better...</h2>
+
             <input name='utf8' type='hidden' value='✓'/>
 
             <div className='row'>
