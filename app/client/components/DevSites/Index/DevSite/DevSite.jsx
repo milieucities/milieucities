@@ -7,13 +7,12 @@ import Modal from '../../../Utility/Modal/Modal'
 export default class DevSite extends Component {
   constructor(props) {
     super(props);
-    this.state = { showFiles: false, showReadMore: false }
+    this.state = { showFiles: false}
     this.parent = this.props.parent;
     this.currentUserId = parseInt(document.body.dataset.userId);
     this.loadDevSite = () => this._loadDevSite();
     this.toggleShowFiles = () => this.setState({ showFiles: !this.state.showFiles });
     this.closeDevSite = () => this.parent.setState({ activeDevSiteId: null });
-    this.viewWholeDescription = (e) => this._viewWholeDescription(e);
     this.openEmailModal = (e) => this._openEmailModal(e);
     this.handleEmail = (e) => this._handleEmail(e);
     this.toggleLike = () => this._toggleLike();
@@ -24,18 +23,8 @@ export default class DevSite extends Component {
   }
   _loadDevSite() {
     $.getJSON(`/dev_sites/${this.props.id}`,
-      devSite => this.setState({ devSite },
-        () => {
-          if(this.refs.description.scrollHeight > 140) {
-            this.setState({ showReadMore: true, readMoreClicked: false });
-          }
-        }
-      )
+      devSite => this.setState({ devSite })
     );
-  }
-  _viewWholeDescription(e) {
-    e.preventDefault();
-    this.setState({ readMoreClicked: true });
   }
   _openEmailModal(e) {
     e.preventDefault();
@@ -76,8 +65,8 @@ export default class DevSite extends Component {
       cache: false,
       data: data,
       success: devSiteJson => this.setState({ devSite: devSiteJson }),
-      error: (res) => {
-        if(res.status == 403){
+      error: error => {
+        if(error.status == 403){
           window.flash('alert', 'Must sign in to like a development site.')
         }
       }
@@ -133,11 +122,7 @@ export default class DevSite extends Component {
         </div>
 
         <div className={css.descriptiontitle}>Description</div>
-        <div className={readMoreClicked ? css.wholedescription : css.description}
-          ref='description' dangerouslySetInnerHTML={{__html: devSite.description}}>
-        </div>
-        {showReadMore && !readMoreClicked && <a href='#'
-          onClick={this.viewWholeDescription} className={css.readmore}>Read More...</a>}
+        <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
 
         {devSite.city_files.length > 0 &&
           <div className={css.filecontainer} onClick={this.toggleShowFiles}>
