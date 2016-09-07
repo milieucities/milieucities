@@ -7,4 +7,7 @@ class Profile < ActiveRecord::Base
     "Somerset", "Kitchissippi", "River", "Capital", "Alta Vista", "Cumberland", "Osgoode",
     "Rideau-Goulbourn", "Gloucester-South Nepean", "Kanata South"]
 
+  validates  :name, presence: { message: "Name is required", on: :update }
+
+  mount_uploader :avatar, ImagesUploader
 end

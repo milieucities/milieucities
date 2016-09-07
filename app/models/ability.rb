@@ -5,26 +5,25 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-    can [:index, :read, :search, :images, :geojson, :map], DevSite
-    can [:index, :read], Events
+    can [:read, :search, :images, :geojson, :map], DevSite
+    can :read, Events
     can :read, Profile
     can [:new, :create], User
     can :read, Comment
-
+    can :read, Conversation
 
     # ADMIN =======================================================
     if user.has_role? :admin
-      can :manage, User
-      can :manage, Profile
-      can :manage, DevSite
-      can :manage, Event
-      can :manage, Comment
+      can :manage, :all
     # REGULAR USER ================================================
     elsif !user.new_record?
       can [:index, :read, :search, :images, :geojson, :map], DevSite
       can [:index, :read], Events
+      can :manage, User, id: user.id
       can :manage, Profile, user_id: user.id
+      can :manage, Survey, user_id: user.id
       can :manage, Comment, user_id: user.id
+      can :manage, Conversation, user_id: user.id
       can :read, Comment
     end
 

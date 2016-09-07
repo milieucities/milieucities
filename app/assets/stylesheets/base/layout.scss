@@ -19,7 +19,65 @@ nav{
   }
 
   .links{
-    a{
+    display: flex;
+    align-items: center;
+
+    .user-dropdown-container {
+      display: flex;
+      align-items: center;
+      color: $white;
+      padding: 0 20px;
+      position: relative;
+
+      > a {
+        display: flex;
+        align-items: center;
+      }
+
+      &:hover {
+        .user-dropdown {
+          display: block;
+        }
+      }
+
+      .user-dropdown {
+        position: absolute;
+        top: 95%;
+        display: none;
+        background-color: $white;
+        z-index: 1000;
+        right: 0;
+        border: 1px solid #eee;
+        box-shadow: 3px 3px 4px #aaa;
+
+        &:hover{
+          display: block;
+        }
+
+        a {
+          display: block;
+          padding: 10px 15px;
+          width: 150px;
+          font-size: 0.8rem;
+          transition: 200ms;
+
+          &:hover{
+            background-color: $secondary-color;
+            color: $white;
+          }
+        }
+      }
+
+      img {
+        height: 30px;
+        width: 30px;
+        border-radius: 2px;
+        object-fit: cover;
+        margin-right: 10px
+      }
+    }
+
+    > a{
       height: 50px;
       line-height: 50px;
       font-size: 14px;

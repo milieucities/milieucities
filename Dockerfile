@@ -6,7 +6,6 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs
 RUN mkdir /m-server
 WORKDIR /m-server
-EXPOSE 5000
 ADD Gemfile /m-server/Gemfile
 ADD Gemfile.lock /m-server/Gemfile.lock
 RUN bundle install
