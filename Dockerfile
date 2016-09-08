@@ -7,9 +7,9 @@ RUN apt-get install -y nodejs
 RUN mkdir /m-server
 WORKDIR /m-server
 ADD Gemfile /m-server/Gemfile
-ADD Gemfile.lock /m-server/Gemfile.lock
+RUN gem install bundler
 RUN bundle install
 ADD . /m-server
-RUN gem install bundler
+
 
 
