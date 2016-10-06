@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :likes, dependent: :destroy
   has_many :conversations, dependent: :destroy
+  has_many :votes
 
   after_create :create_survey
 

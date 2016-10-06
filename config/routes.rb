@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:index]
     resources :users, only: [:index, :new, :create, :destroy] do
       resource :profile, only: [:edit, :update, :show]
+      resources :votes, only: [:create, :destroy]
       resource :survey, only: [:edit, :update, :show]
     end
     resources :sessions, only: [:new, :create, :destroy]

@@ -49,7 +49,7 @@
   border-bottom: 1px solid #ddd;
   padding-bottom: 15px;
   margin-bottom: 15px;
-  
+
   &:last-child{
     border: none;
     padding: none;
@@ -95,7 +95,10 @@
   transition: 200ms;
   cursor: pointer;
 
-  &:hover{
+  &:hover {
     opacity: 1;
   }
+}
+.votesContainer {
+  padding-top: 10px;  
 }

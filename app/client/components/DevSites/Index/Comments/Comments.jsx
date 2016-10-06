@@ -50,7 +50,7 @@ export default class Comments extends Component {
           <a href="#sign-in-modal" className='modal-trigger btn'>Sign in to comment</a>}
       </div>
       {total > 0 && <div className={css.number}> {total} responses</div>}
-      {comments.map(comment => <Comment comment={comment} key={comment.id} />)}
+      {comments.map(comment => <Comment comment={comment} key={comment.id} parent={this} />)}
       {this.hasMoreComments() && <a onClick={this.appendMoreComments} className={css.loadmore}>Load More Comments</a> }
     </div>;
   }
@@ -102,7 +102,10 @@ class Comment extends Component {
   constructor(props) {
     super(props);
     this.state = { showReadMore: false };
+    this.currentUserId = document.body.dataset.userId;
     this.viewWholeBody = (e) => this._viewWholeBody(e);
+    this.voteUp = () => this._voteUp();
+    this.voteDown = () => this._voteDown();
   }
   componentDidMount() {
     if(this.refs.body.scrollHeight > 150) {
@@ -112,6 +115,68 @@ class Comment extends Component {
   _viewWholeBody(e) {
     e.preventDefault();
     this.setState({ readMoreClicked: true });
+  }
+  _voteUp() {
+    const { comment, parent } = this.props;
+    console.log(comment);
+    if(comment.voted_up) {
+      $.ajax({
+        url: `/users/${this.currentUserId}/votes/${comment.voted_up}`,
+        dataType: 'JSON',
+        type: 'DELETE',
+        data: { vote: { comment_id: this.props.comment.id } },
+        success: () => {
+          parent.loadComments();
+        },
+        error: error => {
+          window.flash('alert', 'Failed to vote on comment.')
+        }
+      });
+    } else {
+      $.ajax({
+        url: `/users/${this.currentUserId}/votes`,
+        dataType: 'JSON',
+        type: 'POST',
+        data: { vote: { up: true, comment_id: this.props.comment.id } },
+        success: () => {
+          parent.loadComments();
+        },
+        error: error => {
+          window.flash('alert', 'Failed to vote on comment.')
+        }
+      });
+    }
+  }
+  _voteDown() {
+    const { comment, parent } = this.props;
+    console.log(comment);
+    if(comment.voted_down) {
+      $.ajax({
+        url: `/users/${this.currentUserId}/votes/${comment.voted_down}`,
+        dataType: 'JSON',
+        type: 'DELETE',
+        data: { vote: { comment_id: this.props.comment.id } },
+        success: () => {
+          parent.loadComments();
+        },
+        error: error => {
+          window.flash('alert', 'Failed to vote on comment.')
+        }
+      });
+    } else {
+      $.ajax({
+        url: `/users/${this.currentUserId}/votes`,
+        dataType: 'JSON',
+        type: 'POST',
+        data: { vote: { up: false, comment_id: this.props.comment.id } },
+        success: () => {
+          parent.loadComments();
+        },
+        error: error => {
+          window.flash('alert', 'Failed to vote on comment.')
+        }
+      });
+    }
   }
   render() {
     const { comment } = this.props;
@@ -125,8 +190,15 @@ class Comment extends Component {
           {moment(comment.created_at).format('MMMM DD, YYYY ')}
         </span>
       </div>
-      <div className={readMoreClicked ? css.wholebody : css.body} ref="body"
-           dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}>
+      <div className={css.bodyContainer}>
+        <div className={readMoreClicked ? css.wholebody : css.body} ref="body"
+             dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}>
+        </div>
+        <div className={css.votesContainer}>
+          <i className="fa fa-angle-up fa-2x" onClick={this.voteUp}></i>
+          <i className="fa fa-angle-down fa-2x" onClick={this.voteDown}></i>
+          { comment.vote_count }
+        </div>
       </div>
       {showReadMore && !readMoreClicked &&
         <a href="#" onClick={this.viewWholeBody} className={css.readmore}>Read More...</a>}
