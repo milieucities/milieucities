@@ -22,7 +22,6 @@ Rails.application.routes.draw do
     end
 
     resources :conversations
-
     resources :dev_sites do
       resources :comments, module: :dev_sites do
       end
