@@ -54,6 +54,18 @@ Rails.application.routes.draw do
 
   end
 
+# Backend API Routing
+  scope '/api/v1' do
+    resources :dev_sites do
+      resources :comments, module: :dev_sites do
+      end
+      member do
+        get :images
+      end
+
+    end
+  end
+
   root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
   get '*path' => redirect("/#{I18n.default_locale}", status: 302)
 
