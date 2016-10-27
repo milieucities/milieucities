@@ -7,10 +7,10 @@ services:
 
   web:
     build: .
-    command: bin/rails server --port 3000 --binding 0.0.0.0
+    command: /usr/local/heroku/bin/heroku local
     ports:
       - "3000:3000"
     links:
       - db
     volumes:
-      - .:/milieu
+      - .:/milieu/:rw
