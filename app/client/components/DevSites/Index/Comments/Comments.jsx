@@ -118,7 +118,6 @@ class Comment extends Component {
   }
   _voteUp() {
     const { comment, parent } = this.props;
-    console.log(comment);
     if(comment.voted_up) {
       $.ajax({
         url: `/users/${this.currentUserId}/votes/${comment.voted_up}`,
@@ -132,12 +131,42 @@ class Comment extends Component {
           window.flash('alert', 'Failed to vote on comment.')
         }
       });
-    } else {
+    } else if(comment.voted_down) {
+        $.ajax({
+          url: `/users/${this.currentUserId}/votes/${comment.voted_down}`,
+          dataType: 'JSON',
+          type: 'DELETE',
+          data: { vote: { comment_id: this.props.comment.id } },
+          success: () => {
+            parent.loadComments();
+          },
+          error: error => {
+            window.flash('alert', 'Failed to vote on comment.')
+          }
+        });
+      } else {
+        $.ajax({
+          url: `/users/${this.currentUserId}/votes`,
+          dataType: 'JSON',
+          type: 'POST',
+          data: { vote: { up: true, comment_id: this.props.comment.id } },
+          success: () => {
+            parent.loadComments();
+          },
+          error: error => {
+            window.flash('alert', 'Failed to vote on comment.')
+          }
+        });
+      }
+  }
+  _voteDown() {
+    const { comment, parent } = this.props;
+    if(comment.voted_down) {
       $.ajax({
-        url: `/users/${this.currentUserId}/votes`,
+        url: `/users/${this.currentUserId}/votes/${comment.voted_down}`,
         dataType: 'JSON',
-        type: 'POST',
-        data: { vote: { up: true, comment_id: this.props.comment.id } },
+        type: 'DELETE',
+        data: { vote: { comment_id: this.props.comment.id } },
         success: () => {
           parent.loadComments();
         },
@@ -145,14 +174,9 @@ class Comment extends Component {
           window.flash('alert', 'Failed to vote on comment.')
         }
       });
-    }
-  }
-  _voteDown() {
-    const { comment, parent } = this.props;
-    console.log(comment);
-    if(comment.voted_down) {
+    } else if(comment.voted_up) {
       $.ajax({
-        url: `/users/${this.currentUserId}/votes/${comment.voted_down}`,
+        url: `/users/${this.currentUserId}/votes/${comment.voted_up}`,
         dataType: 'JSON',
         type: 'DELETE',
         data: { vote: { comment_id: this.props.comment.id } },

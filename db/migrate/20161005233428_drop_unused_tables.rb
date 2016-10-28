@@ -1,7 +1,6 @@
 class DropUnusedTables < ActiveRecord::Migration
   def change
     drop_table :votes
-    drop_table :votes_tables
     drop_table :rating_caches
     drop_table :rates
     drop_table :projects

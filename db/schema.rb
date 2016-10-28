@@ -197,6 +197,15 @@ ActiveRecord::Schema.define(version: 20161005234002) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  create_table "vote_tables", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "comment_id"
+    t.boolean "up"
+  end
+
+  add_index "vote_tables", ["comment_id"], name: "index_vote_tables_on_comment_id", using: :btree
+  add_index "vote_tables", ["user_id"], name: "index_vote_tables_on_user_id", using: :btree
+
   create_table "votes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "comment_id"
@@ -213,6 +222,8 @@ ActiveRecord::Schema.define(version: 20161005234002) do
   add_foreign_key "likes", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "surveys", "users"
+  add_foreign_key "vote_tables", "comments"
+  add_foreign_key "vote_tables", "users"
   add_foreign_key "votes", "comments"
   add_foreign_key "votes", "users"
 end
