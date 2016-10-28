@@ -7,7 +7,7 @@ class DevSite < ActiveRecord::Base
     "Demolition Control", "Cash-in-lieu of Parking", "Plan of Subdivision",
     "Plan of Condominium", "Derelict", "Vacant" ,"Master Plan"]
 
-  VALID_BUILDING_TYPES = [ "Not Applicable", "Derelict", "Demolition", "Residential Apartment",
+  VALID_BUILDING_TYPES = ["Not Applicable", "Derelict", "Demolition", "Residential Apartment",
     "Low-rise Residential", "Mid-rise Residential", "Hi-rise Residential", "Mixed-use Residential/Community",
     "Commercial", "Commercial/Hotel","Mixed-use", "Additions"]
 

@@ -22,7 +22,6 @@ Rails.application.routes.draw do
     end
 
     resources :conversations
-
     resources :dev_sites do
       resources :comments, module: :dev_sites do
       end
@@ -54,6 +53,18 @@ Rails.application.routes.draw do
     end
     resources :sessions, only: [:new, :create, :destroy]
 
+  end
+
+# Backend API Routing
+  scope '/api/v1' do
+    resources :dev_sites do
+      resources :comments, module: :dev_sites do
+      end
+      member do
+        get :images
+      end
+
+    end
   end
 
   root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root

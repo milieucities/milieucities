@@ -29,6 +29,7 @@ gem 'ajax-autocomplete-rails', '~> 0.1.1'
 gem 'font-awesome-rails', '~> 4.5'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
+gem 'rack-cors'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

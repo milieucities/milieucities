@@ -2,13 +2,13 @@ class User < ActiveRecord::Base
   rolify
   has_secure_password validations: false
 
-  has_one :profile, dependent: :destroy
   has_one :survey, dependent: :destroy
-  accepts_nested_attributes_for :profile
   has_many :comments, as: :commentable
   has_many :likes, dependent: :destroy
   has_many :conversations, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_one :profile, dependent: :destroy
+  accepts_nested_attributes_for :profile
 
   after_create :create_survey
 
