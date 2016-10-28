@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :likes, dependent: :destroy
   has_many :conversations, dependent: :destroy
+  has_many :votes, dependent: :destroy
   has_one :profile, dependent: :destroy
   accepts_nested_attributes_for :profile
 

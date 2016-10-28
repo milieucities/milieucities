@@ -23,6 +23,7 @@ class Ability
       can :manage, Profile, user_id: user.id
       can :manage, Survey, user_id: user.id
       can :manage, Comment, user_id: user.id
+      can :manage, Vote, user_id: user.id
       can :manage, Conversation, user_id: user.id
       can :read, Comment
     end
