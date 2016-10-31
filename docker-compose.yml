@@ -4,8 +4,6 @@ services:
     image: postgres:9.4.1
     ports:
       - "5432:5432"
-    expose:
-      - "5432"
 
   web:
     build: .
@@ -13,10 +11,7 @@ services:
     ports:
       - "3000:3000"
       - "8080:8080"
-    links:
+    depends_on:
       - db
     volumes:
       - .:/milieu/:rw
-    expose:
-      - "3000"
-      - "8080"

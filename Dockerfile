@@ -1,5 +1,7 @@
 FROM ruby:2.3.0
 
+MAINTAINER Milieu
+
 # for heroku cli
 RUN apt-get install -y wget
 RUN apt-get install -y curl
@@ -28,21 +30,15 @@ RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
 # for a JS runtime
 RUN apt-get install -y nodejs
 
-# for npm
-#RUN apt-get install -y npm
-
 ENV APP_HOME /milieu
-RUN mkdir $APP_HOME
+RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
-#ENTRYPOINT [ "/milieu/entrypoint.sh" ]
-#CMD [ "/milieu/start.sh" ]
-EXPOSE 3000
-EXPOSE 8080
+EXPOSE 3000 8080
 
-ADD . $APP_HOME
+COPY . $APP_HOME
 
-ADD Gemfile Gemfile.lock $APP_HOME/
+COPY Gemfile Gemfile.lock $APP_HOME/
 
 RUN bundle install
 
