@@ -1,0 +1,17 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.4.1
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: /usr/local/heroku/bin/heroku local
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+    depends_on:
+      - db
+    volumes:
+      - .:/milieu/:rw

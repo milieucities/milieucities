@@ -14,6 +14,20 @@
 
 4. You're done! Run `foreman start` or `heroku local` and you're ready to start developing!
 
+### Quick Start with Docker (DEVELOPMENT ONLY)
+
+1. Install Docker
+
+2. Clone the repository to your local machine: `git clone https://github.com/Milieucities/m-server`.
+
+3. Set up your `.env` and `config/database.yml`. See the .example file as the example.
+
+4. Go to your local repository directory and build docker image: `docker-compose build`.
+
+5. Start with `docker-compose up`.
+
+6. Open another terminal to run `docker-compose run web rake db:create` & `docker-compose run web rake db:migrate` & `docker-compose run web rake db:seed`
+
 ### REST API (for non authorized users)
 
 ##### GET /dev_sites
