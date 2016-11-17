@@ -95,7 +95,6 @@ class CommentForm extends Component {
       </div>
     </form>
   }
-
 }
 
 class Comment extends Component {

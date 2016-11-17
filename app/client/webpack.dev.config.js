@@ -15,7 +15,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
+    publicPath: 'http://0.0.0.0:8080/',
     filename: '[name].js'
   },
 
@@ -33,7 +33,7 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ['style',
-        'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]',
+        'css?modules&importLoaders=3&localIdentName=[name]-[local]',
         'sass',
         'sass-resources']
       },

@@ -34,7 +34,6 @@ class DevSitesController < ApplicationController
   end
 
   def create
-    @dev_site = DevSite.new(dev_site_params)
     respond_to do |format|
       if @dev_site.save
         format.html { redirect_to @dev_site, notice: 'Development site was successfully created.' }
@@ -68,9 +67,6 @@ class DevSitesController < ApplicationController
 
 
   private
-    def set_dev_site
-      @dev_site = DevSite.find(params[:id])
-    end
 
     def paginate
       if params[:page].present? || params[:limit].present?

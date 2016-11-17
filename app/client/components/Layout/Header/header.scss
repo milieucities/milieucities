@@ -1,0 +1,65 @@
+.container {
+  height: 50px;
+  width: 100vw;
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 1px 5px #aaa;
+  box-sizing: border-box;
+  z-index: 10000;
+
+  .logo {
+    img {
+      height: 25px;
+      width: 25px;
+      object-fit: contain;
+    }
+  }
+
+  .linksAndLocale {
+    display: flex;
+
+    .links {
+      a {
+        padding: 0 20px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 15px;
+        display: inline-flex;
+        cursor: pointer;
+        align-items: center;
+        vertical-align: middle;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .profileImage {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        border-radius: 20px;
+      }
+    }
+
+    .locale {
+      border-left: 1px solid #555;
+      height: 50px;
+      padding-left: 20px;
+
+      a {
+        height: 50px;
+        line-height: 50px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+
+}

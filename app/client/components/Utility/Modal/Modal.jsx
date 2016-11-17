@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import css from './modal.scss'
 
-export default class MapFilter extends Component {
+export default class Modal extends Component {
   constructor(props) {
     super(props);
     this.handleCloseModal = (e) => this._handleCloseModal(e)

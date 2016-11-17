@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   scope '(:locale)', locale: /en|fr/ do
-    root to: 'static_pages#home'
+    root to: 'pages#home'
 
-    namespace :static_pages, path: '/', as: nil do
+    namespace :pages, path: '/', as: nil do
       get 'map'
       get 'citizencity'
       get 'tos'
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
 
     resources :conversations
+    resources :newsletter_subscriptions, only: [:create]
     resources :dev_sites do
       resources :comments, module: :dev_sites do
       end

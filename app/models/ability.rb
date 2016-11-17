@@ -11,6 +11,7 @@ class Ability
     can [:new, :create], User
     can :read, Comment
     can :read, Conversation
+    can :create, NewsletterSubscription
 
     # ADMIN =======================================================
     if user.has_role? :admin
