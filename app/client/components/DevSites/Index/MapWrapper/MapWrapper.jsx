@@ -4,7 +4,7 @@ import css from './map-wrapper.scss'
 import MapSearch from '../MapSearch/MapSearch'
 import MapFilter from '../MapFilter/MapFilter'
 import DevSiteList from '../DevSiteList/DevSiteList'
-import DevSite from '../DevSite/DevSite'
+import DevSite from '../../Show/Show'
 import MapAwesome from '../Map/Map'
 import { Map } from 'immutable'
 import { debounce, omitBy, isNil } from 'lodash'
@@ -28,9 +28,11 @@ export default class MapWrapper extends Component {
     this.params = () => this._params();
     this.loadDevSites();
 
-    window.onresize = debounce(() => {
-      this.setState({ isMobile: (window.innerWidth < 992) });
-    }, 100)
+    window.addEventListener('resize', () => {
+      debounce(() => {
+        this.setState({ isMobile: (window.innerWidth < 992) });
+      }, 100)()
+    })
   }
   componentDidUpdate(prevProps, prevState) {
     const path = `${window.location.pathname}?${$.param(this.params())}`;

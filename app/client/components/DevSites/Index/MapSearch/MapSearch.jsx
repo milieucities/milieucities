@@ -44,7 +44,7 @@ export default class MapSearch extends Component {
   render() {
     return <div className={css.container}>
       <div className={css.wrapper}>
-        <Autocomplete callback={this.autocompleteCallback} placeholder='Address' type='custom' onSelect={this.handleAutocompleteSelect}/>
+        <Autocomplete callback={this.autocompleteCallback} placeholder='Address' type='search' onSelect={this.handleAutocompleteSelect}/>
       </div>
       <div className={css.divider}></div>
       <div className='row no-marg'>
@@ -84,8 +84,8 @@ const STATUS_TYPES = ['Agreement Package Received from Owner', 'Agreement Signed
                       'Receipt of Letter of Undertaking from Owner Pending', 'Referred to Staff by Committee',
                       'Request for Agreement Received', 'Revision Request Received', 'Unknown', 'Zoning By-law in Effect']
 
-const WARD_TYPES = [ 'Orleans', 'Innes', 'Barrhaven', 'Kanata North',
-  'West Carleton-March', 'Stittsville', 'Bay', 'College', 'Knoxdale-Merivale',
-  'Gloucester-Southgate', 'Beacon Hill-Cyrville', 'Rideau-Vanier', 'Rideau-Rockcliffe',
-  'Somerset', 'Kitchissippi', 'River', 'Capital', 'Alta Vista', 'Cumberland', 'Osgoode',
-  'Rideau-Goulbourn', 'Gloucester-South Nepean', 'Kanata South']
+const WARD_TYPES = ['Orleans', 'Innes', 'Barrhaven', 'Kanata North',
+                    'West Carleton-March', 'Stittsville', 'Bay', 'College', 'Knoxdale-Merivale',
+                    'Gloucester-Southgate', 'Beacon Hill-Cyrville', 'Rideau-Vanier', 'Rideau-Rockcliffe',
+                    'Somerset', 'Kitchissippi', 'River', 'Capital', 'Alta Vista', 'Cumberland', 'Osgoode',
+                    'Rideau-Goulbourn', 'Gloucester-South Nepean', 'Kanata South']
