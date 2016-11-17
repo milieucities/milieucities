@@ -59,9 +59,9 @@ export default class Home extends Component {
           <div className={css.title}>Featured Developments</div>
 
           <div className={css.featured}>
-            <a href={`/${this.locale}/dev_sites?activeDevSiteId=200`}><DevSite id={200} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${this.locale}/dev_sites?activeDevSiteId=201`}><DevSite id={201} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${this.locale}/dev_sites?activeDevSiteId=100`}><DevSite id={100} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${this.locale}/dev_sites?activeDevSiteId=1822`}><DevSite id={1822} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${this.locale}/dev_sites?activeDevSiteId=1869`}><DevSite id={1869} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${this.locale}/dev_sites?activeDevSiteId=1870`}><DevSite id={1870} preview={true} horizontal={isMobile} /></a>
           </div>
 
         </div>
