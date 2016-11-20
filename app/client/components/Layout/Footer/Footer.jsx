@@ -54,8 +54,7 @@ export default class Footer extends Component {
             <ul>
               <li><a href='http://about.milieu.io'>Our Vision</a></li>
               <li><a href='http://about.milieu.io#large-image-1'>Our Team</a></li>
-              <li><a href='http://about.milieu.io'>Our Services</a></li>
-              <li><a href={`/${this.locale}/users/new`}>Join Milieu</a></li>
+              <li><a href='http://about.milieu.io#summary'>Our Services</a></li>
             </ul>
           </div>
           <div className='col s12 m3'>
@@ -63,11 +62,9 @@ export default class Footer extends Component {
               Explore
             </div>
             <ul>
-              <li><a href='https://medium.com/@milieucities'>Blog</a></li>
               <li><a href={`/${this.locale}/dev_sites`}>Map</a></li>
+              <li><a href='https://medium.com/@milieucities'>Blog</a></li>
               <li><a href={`/${this.locale}/tos`}>Legal</a></li>
-              <li><a href={`/${this.locale}/tos#privacy`}>Privacy Policy</a></li>
-              <li><a href={`/${this.locale}/tos`}>Terms and Conditions</a></li>
             </ul>
           </div>
           <div className='col s12 m6'>

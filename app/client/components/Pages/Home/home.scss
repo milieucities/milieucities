@@ -82,6 +82,8 @@
       margin: 10px;
       @media #{$small-and-down} {
         margin: 0;
+        width: 100%;
+        word-break: break-word;
       }
     }
 

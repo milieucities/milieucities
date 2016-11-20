@@ -384,6 +384,11 @@
       display: -webkit-box;
       -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
+
+      p, blockquote {
+        margin: 0;
+        padding: 0;
+      }
     }
   }
 }
@@ -455,6 +460,11 @@
       display: -webkit-box;
       -webkit-line-clamp: 7;
       -webkit-box-orient: vertical;
+
+      p, blockquote, figure {
+        margin: 0;
+        padding: 0;
+      }
 
       @media #{$small-and-down} {
         font-size: 13px;

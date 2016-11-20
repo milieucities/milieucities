@@ -80,7 +80,7 @@ export default class extends Component {
     if(preview && !horizontal) {
       return(
         <div className={css.verticalPreviewContainer}>
-          <div className={css.status}>Open for Comments</div>
+          {false && <div className={css.status}>Open for Comments</div>}
           <img src={devSite.image_url} className={css.image} />
           <div className={css.content}>
             <div className={css.address}>{devSite.address}</div>
@@ -93,7 +93,7 @@ export default class extends Component {
     if(preview && horizontal) {
       return(
         <div className={css.horizontalPreviewContainer}>
-          <div className={css.status}>Open for Comments</div>
+          {false && <div className={css.status}>Open for Comments</div>}
           <img src={devSite.image_url} className={css.image} />
           <div className={css.content}>
             <div className={css.address}>{devSite.address}</div>
