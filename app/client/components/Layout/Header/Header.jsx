@@ -5,9 +5,7 @@ import { debounce } from 'lodash'
 export default class Header extends Component {
   constructor() {
     super()
-    this.state = { isMobile: (window.innerWidth < 600) }
-    this.currentUserId = document.body.dataset.userId
-    this.locale = document.body.dataset.locale
+    this.state = { isMobile: (window.innerWidth < 600) };
 
     window.addEventListener('resize', () => {
       debounce(() => {
@@ -17,36 +15,34 @@ export default class Header extends Component {
   }
   componentDidMount() {
     $('.modal-trigger').leanModal();
-
-    $.getJSON(`/users/${this.currentUserId}/profile`,
-      profile => this.setState({ profile })
-    );
   }
   render() {
     const { profile } = this.state;
+    const { userId, userAvatar, userName, locale } = document.body.dataset;
 
     return (
       <div className={css.container}>
-        <a href={`/${this.locale}`} className={css.logo}>
+        <a href={`/${locale}`} className={css.logo}>
           <img src={require('./images/dark-logo.svg')} />
         </a>
         <div className={css.linksAndLocale}>
           <div className={css.links}>
             {
-              !this.currentUserId &&
+              !userId &&
               <div>
-                <a href={`/${this.locale}/dev_sites`} title='Map'>Map</a>
-                <a href={`/${this.locale}/users/new`} title='Sign Up'>Sign Up</a>
+                <a href={`/${locale}/dev_sites`} title='Map'>Map</a>
+                <a href={`/${locale}/users/new`} title='Sign Up'>Sign Up</a>
                 <a href='#sign-in-modal' className='modal-trigger' title='Log In'>Log In</a>
+                <a href='http://about.milieu.io/' title='About'>About</a>
               </div>
             }
             {
-              this.currentUserId &&
+              userId &&
               <div>
-                <a href={`/${this.locale}/users/${this.currentUserId}/profile/edit`}>
-                  <img className={css.profileImage} src={ profile && profile.avatar && profile.avatar.web.url || require('./images/default-avatar.png')} />
+                <a href={`/${locale}/users/${userId}`}>
+                  <img className={css.profileImage} src={ userAvatar || require('./images/default-avatar.png')} />
                 </a>
-                <a title='Sign Out' rel='nofollow' data-method='delete' href={`/${this.locale}/sessions/${this.currentUserId}`}>Log Out</a>
+                <a title='Sign Out' rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userId}`}>Log Out</a>
               </div>
             }
           </div>

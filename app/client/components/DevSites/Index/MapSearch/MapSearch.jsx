@@ -44,7 +44,7 @@ export default class MapSearch extends Component {
   render() {
     return <div className={css.container}>
       <div className={css.wrapper}>
-        <Autocomplete callback={this.autocompleteCallback} placeholder='Address' type='search' onSelect={this.handleAutocompleteSelect}/>
+        <Autocomplete callback={this.autocompleteCallback} placeholder='Address' type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
       </div>
       <div className={css.divider}></div>
       <div className='row no-marg'>

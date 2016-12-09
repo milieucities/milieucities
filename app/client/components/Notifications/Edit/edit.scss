@@ -1,0 +1,185 @@
+.info {
+  background-color: $dark-primary-color;
+  padding: 40px 0 30px;
+  height: 130px;
+
+  .imgContainer{
+    position: relative;
+    width: 300px;
+    min-width: 300px;
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 3px;
+    object-fit: cover;
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  > div {
+    display: flex;
+  }
+
+  .content {
+    width: 100%;
+
+    .name {
+      color: $white;
+      margin: 0;
+      padding-bottom: 15px;
+    }
+
+    .role {
+      color: $light-primary-color;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+.container {
+  background-color: $white;
+
+  > div {
+    display: flex;
+  }
+
+  .menu {
+    width: 300px;
+    min-width: 300px;
+    margin-top: 60px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      max-width: 250px;
+
+      li {
+        border-bottom: 1px solid #ddd;
+        transition: 250ms;
+
+        a {
+          font-size: 14px;
+          padding: 10px 0;
+          display: block;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+
+    .meta {
+      background-color: $light-gray;
+      display: flex;
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 3px;
+
+      .label {
+        color: #555;
+        width: 200px;
+        min-width: 200px;
+        font-weight: 700;
+        margin-right: 25px;
+      }
+
+      .avatar {
+        position: relative;
+
+        &:hover {
+          .icon {
+            opacity: 1;
+          }
+        }
+
+        .changePhoto {
+          text-align: center;
+          font-weight: 400;
+          letter-spacing: 1px;
+          padding: 10px;
+          font-size: 0.8rem;
+          border-radius: 2px;
+          margin-top: 3px;
+          text-transform: uppercase;
+          cursor: pointer;
+          color: $white;
+          background-color: $secondary-color;
+          opacity: 1;
+          transition: 200ms;
+          width: 100%;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+
+        .loader {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 200px;
+          width: 200px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(0,0,0,0.5);
+          color: $white;
+
+          i {
+            width: 48px;
+            height: 48px;
+          }
+        }
+
+        .icon {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          background-color: $error;
+          height: 30px;
+          width: 30px;
+          border-radius: 1px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $white;
+          cursor: pointer;
+          transition: 200ms;
+
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+
+        img {
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+          border-radius: 3px;
+          display: block;
+          box-sizing: border-box;
+          border: 1px solid #ddd;
+        }
+      }
+
+      .data {
+        width: 100%;
+
+        .entry {
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+}

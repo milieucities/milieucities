@@ -33,14 +33,14 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ['style',
-        'css?modules&importLoaders=3&localIdentName=[name]-[local]',
+        'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]',
         'sass',
         'sass-resources']
       },
       {
         test: /\.css$/,
         loaders: ['style',
-        'css?modules&importLoaders=3&localIdentName=[name]-[local]']
+        'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]']
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

@@ -51,7 +51,7 @@ export default class Home extends Component {
           <div>
             <div className={css.title}>What’s being built in my city?</div>
             <div className={css.search}>
-              <Autocomplete callback={this.autocompleteCallback} placeholder='Enter an address' type='search' onSelect={this.handleAutocompleteSelect}/>
+              <Autocomplete callback={this.autocompleteCallback} placeholder='Enter an address' type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@ export default class Home extends Component {
   }
 }
 
-document.addEventListener('page:change', () => {
+document.addEventListener('turbolinks:load', () => {
   const home = document.querySelector('#home')
   home && render(<Home/>, home)
 })

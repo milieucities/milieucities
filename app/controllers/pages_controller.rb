@@ -4,9 +4,6 @@ class PagesController < ApplicationController
     @no_header = true
   end
 
-  def events
-  end
-
   def map
   end
 
@@ -45,12 +42,6 @@ class PagesController < ApplicationController
 
     ContactMailer.contact_councillor(message).deliver_now
     render json: {}
-  end
-
-  def privacy
-  end
-
-  def tos
   end
 
   def about

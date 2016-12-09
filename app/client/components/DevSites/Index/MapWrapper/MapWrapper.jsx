@@ -69,7 +69,7 @@ export default class MapWrapper extends Component {
   }
 }
 
-document.addEventListener('page:change', () => {
+document.addEventListener('turbolinks:load', () => {
   const devSiteMap = document.querySelector('#dev-site-map');
   devSiteMap && render(<MapWrapper/>, devSiteMap)
 })

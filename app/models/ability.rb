@@ -22,6 +22,7 @@ class Ability
       can [:index, :read], Events
       can :manage, User, id: user.id
       can :manage, Profile, user_id: user.id
+      can :manage, Notification, user_id: user.id
       can :manage, Survey, user_id: user.id
       can :manage, Comment, user_id: user.id
       can :manage, Vote, user_id: user.id

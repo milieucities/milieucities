@@ -10,12 +10,12 @@
   border-radius: 2px;
   transition: 200ms;
   color: $white;
-  background-color: $dark-secondary-color;
+  background-color: $primary-color;
   box-sizing: border-box;
 
   &.transparent {
     background-color: transparent;
-    color: $dark-secondary-color;
+    color: $dark-primary-color;
   }
 
   &.block {
@@ -32,7 +32,7 @@
   }
 
   &:hover, &:focus {
-    background-color: $secondary-color;
+    opacity: 0.8;
     color: $white;
   }
 }
