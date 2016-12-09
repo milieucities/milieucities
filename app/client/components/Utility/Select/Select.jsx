@@ -66,9 +66,26 @@ export default class Select extends Component {
       </li>
       <div className={css.divider}></div>
         {this.props.options.map( (option, i) => {
-          return(<li key={i} onClick={this.handleListOptionsClick} className={this.state.highlightedIndex === (i+1) && css.highlighted}>
-                     {option}
-                 </li>);
+          if (option == 'Active Development'){
+            return(<li key={i} className={css.title}>
+                       {option}
+                   </li>);
+          }
+          if (option == 'Comment Period'){
+            return(<li key={i} className={css.title}>
+                       {option}
+                   </li>);
+          }
+          if (option == 'Comment period closed'){
+            return(<li key={i} className={css.title}>
+                       {option}
+                   </li>);
+          }
+          else{
+            return(<li key={i} onClick={this.handleListOptionsClick} className={this.state.highlightedIndex === (i+1) && css.highlighted}>
+                       {option}
+                   </li>);
+          }
         })}
     </ul>;
   }
