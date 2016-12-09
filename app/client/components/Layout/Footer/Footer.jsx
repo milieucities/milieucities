@@ -24,7 +24,7 @@ export default class Footer extends Component {
     e.preventDefault();
 
     $.ajax({
-      url: `/newsletter_subscriptions`,
+      url: '/newsletter_subscriptions',
       dataType: 'JSON',
       type: 'POST',
       data: { newsletter_subscription: { email: this.refs.email.value } },
@@ -38,7 +38,6 @@ export default class Footer extends Component {
         } else {
           window.flash('alert', 'An error occured while attempting to subscribe your email. Refresh the page and try again.');
         }
-        console.log(this.refs.email.value);
         this.refs.email.value = ''
       }
     })
@@ -64,7 +63,8 @@ export default class Footer extends Component {
             <ul>
               <li><a href={`/${this.locale}/dev_sites`}>Map</a></li>
               <li><a href='https://medium.com/@milieucities'>Blog</a></li>
-              <li><a href={`/${this.locale}/tos`}>Legal</a></li>
+              <li><a href={`/${this.locale}/legal/terms_of_use`}>Terms of Use</a></li>
+              <li><a href={`/${this.locale}/legal/privacy`}>Privacy</a></li>
             </ul>
           </div>
           <div className='col s12 m6'>

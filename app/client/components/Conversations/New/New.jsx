@@ -98,7 +98,7 @@ export default class New extends Component {
   }
 }
 
-document.addEventListener('page:change', () => {
+document.addEventListener('turbolinks:load', () => {
   const conversationNew = document.querySelector('#conversation-new');
   conversationNew && render(<New/>, conversationNew)
 })

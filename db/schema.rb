@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161116173334) do
+ActiveRecord::Schema.define(version: 20161209042249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,15 @@ ActiveRecord::Schema.define(version: 20161116173334) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "newletter",  default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -136,6 +145,7 @@ ActiveRecord::Schema.define(version: 20161116173334) do
     t.string   "age_range"
     t.string   "field_of_occupation"
     t.boolean  "receive_newletter"
+    t.text     "bio"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -217,6 +227,7 @@ ActiveRecord::Schema.define(version: 20161116173334) do
   add_foreign_key "conversations", "users"
   add_foreign_key "likes", "dev_sites"
   add_foreign_key "likes", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "surveys", "users"
   add_foreign_key "votes", "comments"

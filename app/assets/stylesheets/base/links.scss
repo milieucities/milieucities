@@ -4,6 +4,10 @@ a{
   transition: 250ms;
   cursor: pointer;
 
+  &.btn {
+    color: $white !important;
+  }
+
   &:visited {
     color: $black;
   }
