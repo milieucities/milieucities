@@ -93,7 +93,10 @@
     }
 
     &.highlighted{
-      background-color: #e2eae9;
+      background-color: #D3D3D3;
+    }
+    &.title{
+      font-weight: bold;
     }
   }
 }

@@ -21,6 +21,7 @@ export default class MapSearch extends Component {
       autocomplete.setState({ suggestions: suggestions });
     })
   }
+
   _handleAutocompleteSelect(address) {
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': address}, (result) => {
@@ -64,22 +65,20 @@ export default class MapSearch extends Component {
 
 const YEARS = ['2016', '2015', '2014', '2013', '2012', '2011'];
 
-const STATUS_TYPES = ['Agreement Package Received from Owner', 'Agreement Signed', 'Amendment Initiated',
+const STATUS_TYPES = ['Active Development','Application File Pending', 'Application Reactivated','Comment Period','Comment Period in Progress','Community \'Heads Up\' - Completed','Community Information and Comment Session Held','Notice of Public Meeting Sent','Comment period closed', 'Agreement Package Received from Owner', 'Agreement Signed', 'Amendment Initiated',
                       'Amendment Recommended to Council for Approval', 'Appealed to OMB',
                       'Applicant Concurs', 'Applicant Does Not Concur', 'Application Approved',
                       'Application Approved - No Agreement/Letter of Undertaking Required',
                       'Application Approved by Committee', 'Application Approved by Council',
                       'Application Approved by OMB', 'Application Approved by OMB - Agreement Pending',
                       'Application Approved by Staff', 'Application Approved in part by OMB',
-                      'Application Draft Approved', 'Application File Pending', 'Application Reactivated',
+                      'Application Draft Approved',
                       'Application Recommended to Council for Approval', 'Application Recommended to Council for Refusal',
                       'Application Refused by OMB', 'Application on Hold', 'By-law Passed - Appeal Period Pending',
                       'By-law Passed - In Appeal Period', 'Comment Period has Ended/Issue Resolution',
-                      'Comment Period in Progress', 'Community \'Heads Up\' - Completed', 'Community Information and Comment Session Held',
                       'Councillor Concurs', 'Deferred by Committee', 'Delegated Authority Reinstated',
                       'Draft Approval Revised/Extended', 'Draft Approved', 'Draft Report Sent to Councillor and Applicant for Response',
-                      'In Appeal Period', 'No Appeal', 'No Appeal - Official Plan Amendment Adopted', 'Notice of Public Meeting Sent',
-                      'OMB Appeal Withdrawn - Application Approved', 'OMB Hearing Held', 'OMB Package Sent', 'OMB Pre-Hearing Held',
+                      'In Appeal Period', 'No Appeal', 'No Appeal - Official Plan Amendment Adopted','OMB Appeal Withdrawn - Application Approved', 'OMB Hearing Held', 'OMB Package Sent', 'OMB Pre-Hearing Held',
                       'Public Meeting Held', 'Receipt of Agreement from Owner Pending',
                       'Receipt of Letter of Undertaking from Owner Pending', 'Referred to Staff by Committee',
                       'Request for Agreement Received', 'Revision Request Received', 'Unknown', 'Zoning By-law in Effect']
