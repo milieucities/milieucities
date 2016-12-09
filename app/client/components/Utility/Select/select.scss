@@ -87,6 +87,7 @@
     text-align: center;
     color: #0a0a0a;
     font-size: 14px;
+    line-height: 14px;
 
     &:hover{
       background-color: #e2eae9;
@@ -95,8 +96,15 @@
     &.highlighted{
       background-color: #D3D3D3;
     }
+
     &.title{
       font-weight: bold;
+      cursor: default;
+      background-color: $light-gray;
+
+      &:hover{
+        background-color: $light-gray;
+      }
     }
   }
 }
