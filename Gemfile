@@ -30,6 +30,9 @@ gem 'font-awesome-rails', '~> 4.5'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 gem 'rack-cors'
+gem 'jwt'
+gem 'simple_command'
+gem 'rails-api', require: 'rails-api/action_controller/api'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

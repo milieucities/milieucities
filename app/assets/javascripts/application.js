@@ -17,6 +17,7 @@
 //= require turbolinks
 //= require jquery.turbolinks
 //= require react
+//= require components
 //= require react_ujs
 //= require_tree ./components
 //= require cocoon

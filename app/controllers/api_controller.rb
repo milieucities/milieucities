@@ -1,16 +1,15 @@
-class ApplicationController < ActionController::Base
+class ApiController < ActionController::API
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
-  #before_action :authenticate_request, :if => :is_json
+  # protect_from_forgery with: :exception
+  before_action :authenticate_request, :if => :is_json
   before_action :set_locale
   before_action :current_user
 
-  include SessionsHelper
+  #include SessionsHelper
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
-      format.html { redirect_to root_url, :alert => exception.message }
       format.json { render json: {}, status: 403 }
     end
   end

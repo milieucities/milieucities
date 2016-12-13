@@ -67,6 +67,12 @@ Rails.application.routes.draw do
     end
   end
 
+  scope '/test' do
+    post '/authenticate', to: 'authentication#authenticate'
+    resources :api_dev_sites do
+    end
+  end
+
   root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
   get '*path' => redirect("/#{I18n.default_locale}", status: 302)
 
