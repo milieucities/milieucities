@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import css from './header.scss'
 import { debounce } from 'lodash'
 import i18n from './locale'
+import CookiesNotification from '../../Notifications/Cookies/CookiesNotification'
 
 export default class Header extends Component {
   constructor() {
@@ -63,6 +64,10 @@ export default class Header extends Component {
             </div>
           }
         </div>
+        {
+          localStorage.getItem('acceptedMilieuCookies') !== 'true' &&
+          <CookiesNotification />
+        }
       </div>
     );
   }

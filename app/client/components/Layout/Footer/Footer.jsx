@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import css from './footer.scss'
 import { debounce } from 'lodash'
-import CookiesNotification from '../../Notifications/Cookies/CookiesNotification'
 
 export default class Footer extends Component {
   constructor() {
@@ -87,7 +86,6 @@ export default class Footer extends Component {
             </div>
           </div>
         </div>
-        {localStorage.getItem('acceptedMilieuCookies') !== 'true' && <CookiesNotification />}
       </div>
     );
   }

@@ -9,16 +9,22 @@
   border-top: 4px solid #486A89;
   z-index: 10000;
 
+  p {
+    margin: 0;
+  }
+
   .notificationText {
     line-height: 1.5;
     text-align: center;
 
     a {
       color: white;
-      &:hover {
-        color: white;
-        }
-      &:visited {
+
+      &:first-child {
+        text-decoration: underline;
+      }
+
+      &:hover, &:visited {
         color: white;
       }
     }
