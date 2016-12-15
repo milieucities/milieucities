@@ -8,6 +8,7 @@ import DevSite from '../../Show/Show'
 import MapAwesome from '../Map/Map'
 import { Map } from 'immutable'
 import { debounce, omitBy, isNil } from 'lodash'
+import Header from '../../../Layout/Header/Header'
 
 export default class MapWrapper extends Component {
   constructor(props) {
@@ -28,11 +29,11 @@ export default class MapWrapper extends Component {
     this.params = () => this._params();
     this.loadDevSites();
 
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize',
       debounce(() => {
-        this.setState({ isMobile: (window.innerWidth < 992) });
-      }, 100)()
-    })
+        this.setState({ isMobile: (window.innerWidth < 992) })
+      }, 100)
+    );
   }
   componentDidUpdate(prevProps, prevState) {
     const path = `${window.location.pathname}?${$.param(this.params())}`;
@@ -55,17 +56,28 @@ export default class MapWrapper extends Component {
     });
   }
   render() {
-    return <div className={css.container}>
-      <div className={css.sidebar} ref='sidebar'>
-        <MapSearch {...this.state} parent={this} />
-        {false && <MapFilter parent={this} />}
-        <DevSiteList {...this.state} parent={this} />
+    return(
+      <div>
+        <Header />
+        <div className={css.container}>
+          <div className={css.sidebar} ref='sidebar'>
+            <MapSearch {...this.state} parent={this} />
+            {false && <MapFilter parent={this} />}
+            <DevSiteList {...this.state} parent={this} />
+          </div>
+          <div className={css.content}>
+            {
+              this.state.activeDevSiteId &&
+              <DevSite id={this.state.activeDevSiteId} parent={this} />
+            }
+            {
+              !this.state.isMobile && !this.state.activeDevSiteId &&
+              <MapAwesome {...this.state} parent={this} />
+            }
+          </div>
+        </div>
       </div>
-      <div className={css.content}>
-        {this.state.activeDevSiteId && <DevSite id={this.state.activeDevSiteId} parent={this} />}
-        {!this.state.isMobile && !this.state.activeDevSiteId && <MapAwesome {...this.state} parent={this} />}
-      </div>
-    </div>;
+    );
   }
 }
 

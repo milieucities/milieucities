@@ -10,11 +10,11 @@ export default class Footer extends Component {
     this.locale = document.body.dataset.locale
     this.handleSubmit = (e) => this._handleSubmit(e);
 
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
-      }, 100)()
-    })
+      }, 100)
+    );
   }
   _handleSubmit(e) {
     if(e.which !== 13 && e.type !== 'click') {
@@ -63,7 +63,6 @@ export default class Footer extends Component {
             <ul>
               <li><a href={`/${this.locale}/dev_sites`}>Map</a></li>
               <li><a href='https://medium.com/@milieucities'>Blog</a></li>
-              <li><a href={`/${this.locale}/legal/terms_of_use`}>Terms of Use</a></li>
               <li><a href={`/${this.locale}/legal/privacy`}>Privacy</a></li>
             </ul>
           </div>

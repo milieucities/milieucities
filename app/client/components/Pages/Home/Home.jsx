@@ -7,20 +7,20 @@ import DevSite from '../../DevSites/Show/Show'
 import Autocomplete from '../../Utility/Autocomplete/Autocomplete'
 import Carousel from '../../Utility/Carousel/Carousel'
 import { debounce } from 'lodash'
+import i18n from './locale'
 
 export default class Home extends Component {
   constructor() {
     super()
     this.state = { isMobile: (window.innerWidth < 600) }
-    this.locale = document.body.dataset.locale
     this.autocompleteCallback = (address, autocomplete) => this._autocompleteCallback(address, autocomplete)
     this.handleAutocompleteSelect = (address) => this._handleAutocompleteSelect(address)
 
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize',
       debounce(() => {
-        this.setState({ isMobile: (window.innerWidth < 600) });
-      }, 100)()
-    })
+        this.setState({ isMobile: (window.innerWidth < 600) })
+      }, 100)
+    );
   }
   _autocompleteCallback(address, autocomplete) {
     const googleLocationAutocomplete = new google.maps.places.AutocompleteService()
@@ -43,25 +43,28 @@ export default class Home extends Component {
   }
   render() {
     const { isMobile } = this.state;
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+
     return (
       <div>
         <Header />
         <div className={css.landingContainer}>
           <img src={require('./images/ui.jpg')} />
           <div>
-            <div className={css.title}>What’s being built in my city?</div>
+            <div className={css.title}>{i18n.title}</div>
             <div className={css.search}>
-              <Autocomplete callback={this.autocompleteCallback} placeholder='Enter an address' type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
+              <Autocomplete callback={this.autocompleteCallback} placeholder={i18n.enterAddress} type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
             </div>
           </div>
         </div>
         <div className={css.featuredContainer}>
-          <div className={css.title}>Featured Developments</div>
+          <div className={css.title}>{i18n.featuredDevelopments}</div>
 
           <div className={css.featured}>
-            <a href={`/${this.locale}/dev_sites?activeDevSiteId=1822`}><DevSite id={1822} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${this.locale}/dev_sites?activeDevSiteId=1869`}><DevSite id={1869} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${this.locale}/dev_sites?activeDevSiteId=1870`}><DevSite id={1870} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${locale}/dev_sites?activeDevSiteId=1822`}><DevSite id={1822} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${locale}/dev_sites?activeDevSiteId=1869`}><DevSite id={1869} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${locale}/dev_sites?activeDevSiteId=1870`}><DevSite id={1870} preview={true} horizontal={isMobile} /></a>
           </div>
 
         </div>
