@@ -2,6 +2,7 @@ class DevSitesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @no_header = true
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
     @dev_sites = @dev_sites.search(search_params) if search?
     @dev_sites = @dev_sites.send(params[:sort]) if sort?
