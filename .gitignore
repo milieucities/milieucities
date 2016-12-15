@@ -23,9 +23,12 @@ node_modules
 app/client/node_modules
 npm-debug.log*
 app/client/npm-debug.log*
+Gemfile.lock
 
 # Ignore application configuration
 /config/application.yml
 
 # Ignore public folder
 /public/assets
+
+

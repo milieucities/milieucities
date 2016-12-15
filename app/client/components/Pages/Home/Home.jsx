@@ -41,6 +41,7 @@ export default class Home extends Component {
       }
     })
   }
+
   render() {
     const { isMobile } = this.state;
     return (
