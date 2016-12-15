@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import css from './header.scss'
 import { debounce } from 'lodash'
+import LocalizedStrings from 'react-localization';
 
 export default class Header extends Component {
+
   constructor() {
     super()
     this.state = { isMobile: (window.innerWidth < 600) };
@@ -19,7 +21,22 @@ export default class Header extends Component {
   render() {
     const { profile } = this.state;
     const { userId, userAvatar, userName, locale } = document.body.dataset;
-
+    let text = new LocalizedStrings({
+      en:{
+        map: "Map",
+        about: "About",
+        logIn: "Log In",
+        logOut: "Log Out",
+        signUp: "Sign Up"
+      },
+      fr: {
+        map: "Carte",
+        about: "À Propos",
+        logIn: "Connexion",
+        logOut: "Deconnexion",
+        signUp: "S'inscrire"
+      }
+    });
     return (
       <div className={css.container}>
         <a href={`/${locale}`} className={css.logo}>
@@ -30,10 +47,10 @@ export default class Header extends Component {
             {
               !userId &&
               <div>
-                <a href={`/${locale}/dev_sites`} title='Map'>Map</a>
-                <a href={`/${locale}/users/new`} title='Sign Up'>Sign Up</a>
-                <a href='#sign-in-modal' className='modal-trigger' title='Log In'>Log In</a>
-                <a href='http://about.milieu.io/' title='About'>About</a>
+                <a href={`/${locale}/dev_sites`} title={text.map}>{text.map}</a>
+                <a href={`/${locale}/users/new`} title={text.signUp}>{text.signUp}</a>
+                <a href='#sign-in-modal' className='modal-trigger' title={text.logIn}>{text.logIn}</a>
+                <a href='http://about.milieu.io/' title={text.about}>{text.about}</a>
               </div>
             }
             {
@@ -42,7 +59,7 @@ export default class Header extends Component {
                 <a href={`/${locale}/users/${userId}`}>
                   <img className={css.profileImage} src={ userAvatar || require('./images/default-avatar.png')} />
                 </a>
-                <a title='Sign Out' rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userId}`}>Log Out</a>
+                <a title={text.logOut} rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userId}`}>{text.logOut}</a>
               </div>
             }
           </div>
