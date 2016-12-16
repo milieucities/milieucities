@@ -31,13 +31,14 @@ export default class Home extends Component {
     })
   }
   _handleAutocompleteSelect(address) {
+    const { locale } = document.body.dataset;
     const geocoder = new google.maps.Geocoder()
     geocoder.geocode({'address': address}, (result) => {
       if(result.length > 0){
         const [latitude, longitude] = [result[0].geometry.location.lat(), result[0].geometry.location.lng()]
-        Turbolinks.visit(`/dev_sites?latitude=${latitude}&longitude=${longitude}`);
+        Turbolinks.visit(`/${locale}/dev_sites?latitude=${latitude}&longitude=${longitude}`);
       } else {
-        Turbolinks.visit('/dev_sites');
+        Turbolinks.visit(`/${locale}/dev_sites`);
       }
     })
   }

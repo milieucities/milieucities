@@ -36,6 +36,7 @@ export default class MapWrapper extends Component {
     );
   }
   componentDidUpdate(prevProps, prevState) {
+    const { locale } = document.body.dataset;
     const path = `${window.location.pathname}?${$.param(this.params())}`;
     window.history.replaceState({ path },'', path);
   }
