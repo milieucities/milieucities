@@ -3,6 +3,18 @@ import css from './show.scss'
 import { capitalize, replace } from 'lodash'
 import Comments from '../../Comments/Comments'
 import Modal from '../../Utility/Modal/Modal'
+import {
+  ShareButtons,
+  generateShareIcon
+} from 'react-share';
+
+const {
+  FacebookShareButton,
+  TwitterShareButton
+} = ShareButtons;
+
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
 
 export default class extends Component {
   constructor(props) {
@@ -75,6 +87,7 @@ export default class extends Component {
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
+    const shareUrl = 'http://github.com';
     if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
@@ -118,8 +131,24 @@ export default class extends Component {
 
           <div className={css.interact}>
             <div className={css.sharecontainer}>
-              <i className={css.share}></i>
-              Share
+              <FacebookShareButton
+                url={devSite.url}
+                title={devSite.address}
+                media={devSite.image_url}
+                className="Demo__some-network__share-button">
+                <FacebookIcon
+                  size={32}
+                  round />
+              </FacebookShareButton>
+              <TwitterShareButton
+                url={devSite.url}
+                title={devSite.address}
+                media={devSite.image_url}
+                className="Demo__some-network__share-button">
+              <TwitterIcon
+                size={32}
+                round />
+              </TwitterShareButton>
             </div>
             <div className={css.likecontainer}>
               <i className={devSite.like ? css.liked : css.like} onClick={this.toggleLike}></i>
