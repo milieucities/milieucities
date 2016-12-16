@@ -13,7 +13,7 @@ class DevSite < ActiveRecord::Base
 
   # ASSOCIATIONS
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :addresses, dependent: :destroy
+  has_many :addresses, as: :addressable, dependent: :destroy
   has_many :statuses, dependent: :destroy
   has_many :city_files, dependent: :destroy
   has_many :likes, dependent: :destroy
