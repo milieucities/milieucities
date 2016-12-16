@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
+import i18n from './locale'
 import css from './edit.scss'
 
 export default class Edit extends Component {
@@ -44,7 +45,7 @@ export default class Edit extends Component {
   render() {
     const { notification, loading, error } = this.state;
     const { userId, userAvatar, userName, locale } = document.body.dataset;
-
+    i18n.setLanguage(locale);
     return(
       <div>
         <Header/>
@@ -55,7 +56,7 @@ export default class Edit extends Component {
             </div>
             <div className={css.content}>
               <h1 className={css.name}>{userName}</h1>
-              <div className={css.role}>COMMUNITY MEMBER</div>
+              <div className={css.role}>{i18n.role}</div>
             </div>
           </div>
         </div>
@@ -63,9 +64,9 @@ export default class Edit extends Component {
           <div className='container'>
             <div className={css.menu}>
               <ul>
-                <li><a href={`/${locale}/users/${userId}`}>Dashboard</a></li>
-                <li><a href={`/${locale}/users/${userId}/edit`}>Account Settings</a></li>
-                <li><b><a href={`/${locale}/users/${userId}/notification/edit`}>Notification</a></b></li>
+                <li><a href={`/${locale}/users/${userId}`}>{i18n.dashboard}</a></li>
+                <li><a href={`/${locale}/users/${userId}/edit`}>{i18n.settings}</a></li>
+                <li><b><a href={`/${locale}/users/${userId}/notification/edit`}>{i18n.notification}</a></b></li>
               </ul>
             </div>
             {
@@ -81,7 +82,7 @@ export default class Edit extends Component {
             {
               !loading &&
               <div className={css.content}>
-                <h2>Notifications</h2>
+                <h2>{i18n.notifications}</h2>
 
                 <div className={css.meta}>
                   <div className={css.label}>
@@ -90,25 +91,25 @@ export default class Edit extends Component {
                   <div className={css.data}>
                     <div className='row'>
                       <div className='input-field col s12'>
-                        When would you like to receive emails from us?
+                        {i18n.emailQ1}
                       </div>
                       <form id='notification-form'>
                         <div className='input-field col s12'>
                           <input type='hidden' name='notification[updated_dev_site_near_me]' value={false} />
                           <input type='checkbox' defaultChecked={notification.updated_dev_site_near_me} id='notification_updated_dev_site_near_me' name='notification[updated_dev_site_near_me]'/>
-                          <label htmlFor='notification_updated_dev_site_near_me'>When there is a new development in your area</label>
+                          <label htmlFor='notification_updated_dev_site_near_me'>{i18n.emailQ1S1}</label>
                         </div>
                         <div className='input-field col s12'>
                           <input type='hidden' name='notification[newletter]' value={false} />
                           <input type='checkbox' defaultChecked={notification.newletter} id='notification_newsletter' name='notification[newletter]'/>
-                          <label htmlFor='notification_newsletter'>Milieu newsletter and company updates</label>
+                          <label htmlFor='notification_newsletter'>{i18n.emailQ1S2}</label>
                         </div>
                       </form>
                     </div>
                   </div>
                 </div>
                 <div className='row'>
-                  <button name='commit' type='submit' className='btn' onClick={this.submitForm}>Save</button>
+                  <button name='commit' type='submit' className='btn' onClick={this.submitForm}>{i18n.save}</button>
                 </div>
               </div>
             }
