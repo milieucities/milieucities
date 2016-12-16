@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   include Geokit::Geocoders
   attr_accessor :images
-  mount_uploaders :images, ImagesUploader
+  mount_uploader :images, ImagesUploader
 
   has_many :comments, as: :commentable, dependent: :destroy
 

@@ -11,7 +11,7 @@ NULLCMD = :
 
 #### Start of system configuration section. ####
 
-srcdir = bin
+srcdir = /Users/Mac/.rvm/gems/ruby-2.3.0/bin
 topdir = /Users/Mac/.rvm/rubies/ruby-2.3.0/include/ruby-2.3.0
 hdrdir = $(topdir)
 arch_hdrdir = /Users/Mac/.rvm/rubies/ruby-2.3.0/include/ruby-2.3.0/x86_64-darwin15

@@ -113,7 +113,11 @@ class DevSite < ActiveRecord::Base
     where(id: ids).order(order_clause)
   end
 
-  mount_uploaders :images, ImagesUploader
-  mount_uploaders :files, FilesUploader
+  mount_uploader :images, ImagesUploader
+  mount_uploader :files, FilesUploader
+
+  after_create do
+    Resque.enqueue(NotifyAllNearResidentsJob, id)
+  end
 
 end
