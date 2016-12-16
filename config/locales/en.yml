@@ -1,4 +1,43 @@
 en:
+  activerecord:
+    attributes:
+      user:
+        email: 'EMAIL'
+        password: 'PASSWORD'
+        password_confirmation: 'PASSWORD CONFIRMATION'
+      profile:
+        name: 'NAME'
+        postal_code: 'POSTAL CODE'
+        neighbourhood: 'NEIGHBOURHOOD'
+  users:
+    new:
+      terms: "Accept terms of use"
+      title: "Sign Up"
+      submit: "CREATE ACCOUNT"
+  layouts:
+    _signin_modal:
+      email: 'EMAIL'
+      password: 'PASSWORD'
+      facebook: "Continue with Facebook"
+      google: "Continue with Google"
+      or: "or"
+      new: "New to Mileu?"
+      signup: "Sign Up"
+      signin: "Sign In"
+      accept: "By signing in, you accept "
+      terms: "Terms of Use"
+  sessions:
+    alert:
+      could_not_signin: "Could not sign in, try again"
+    notice:
+      welcome: "Welcome to Milieu"
+    new:
+      signup: "Sign Up"
+      signin: "Sign In"
+      email: 'EMAIL'
+      password: 'PASSWORD'
+
+
   dev-sites:
     show:
       back-to-map-link: 'Back to Map'

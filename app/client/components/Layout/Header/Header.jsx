@@ -23,7 +23,7 @@ export default class Header extends Component {
     if(location.pathname.match(regex)) {
       return location.pathname.replace(regex, `/${locale}/`)
     } else {
-      return `/${locale}/${location.pathname}`
+      return `/${locale}/${location.pathname.length > 1 ? '' : location.pathname}`
     }
   }
   render() {
