@@ -20,7 +20,7 @@ class NotificationsController < ApplicationController
   private
 
   def notification_params
-    params.require(:notification).permit(:newletter)
+    params.require(:notification).permit(:newletter, :updated_dev_site_near_me)
   end
 
 end

@@ -94,9 +94,14 @@ export default class Edit extends Component {
                       </div>
                       <form id='notification-form'>
                         <div className='input-field col s12'>
+                          <input type='hidden' name='notification[updated_dev_site_near_me]' value={false} />
+                          <input type='checkbox' defaultChecked={notification.updated_dev_site_near_me} id='notification_updated_dev_site_near_me' name='notification[updated_dev_site_near_me]'/>
+                          <label htmlFor='notification_updated_dev_site_near_me'>When there is a new development in your area</label>
+                        </div>
+                        <div className='input-field col s12'>
                           <input type='hidden' name='notification[newletter]' value={false} />
                           <input type='checkbox' defaultChecked={notification.newletter} id='notification_newsletter' name='notification[newletter]'/>
-                          <label htmlFor='notification_newsletter' style={{display: 'inline', textTransform: 'none', paddingLeft: 10}}>I would like to receive newsletters</label>
+                          <label htmlFor='notification_newsletter'>Milieu newsletter and company updates</label>
                         </div>
                       </form>
                     </div>

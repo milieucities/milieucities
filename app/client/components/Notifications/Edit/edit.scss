@@ -176,6 +176,12 @@
       .data {
         width: 100%;
 
+        label {
+          display: inline;
+          text-transform: none;
+          padding-left: 10px;
+        }
+
         .entry {
           padding-bottom: 10px;
         }
