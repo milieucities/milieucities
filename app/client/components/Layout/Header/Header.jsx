@@ -9,6 +9,8 @@ export default class Header extends Component {
     super()
     this.state = { isMobile: (window.innerWidth < 600) };
 
+    this.openModal = () => this._openModal();
+
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
@@ -17,6 +19,9 @@ export default class Header extends Component {
   }
   componentDidMount() {
     $('.modal-trigger').leanModal();
+  }
+  _openModal() {
+    document.querySelector('#sign-in-modal .modal-content').focus();
   }
   handleChangeLocalization(locale) {
     const regex = /^\/en\/|\/en$|\/fr\/|\/fr$/;
@@ -43,7 +48,7 @@ export default class Header extends Component {
               <div>
                 <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
                 <a href={`/${locale}/users/new`} title={i18n.signUp}>{i18n.signUp}</a>
-                <a href='#sign-in-modal' className='modal-trigger' title={i18n.logIn}>{i18n.logIn}</a>
+                <a href='#sign-in-modal' className='modal-trigger' ref='modal' onClick={this.openModal} title={i18n.logIn}>{i18n.logIn}</a>
                 <a href='http://about.milieu.io/' title={i18n.about}>{i18n.about}</a>
               </div>
             }

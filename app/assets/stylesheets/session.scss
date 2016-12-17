@@ -7,6 +7,14 @@
 
     .btn {
       width: 100%;
+      &:focus{
+        background-color: rgba(230, 126, 34,0.599);
+      }
+    }
+    input{
+      &:focus{
+        background-color: rgba(230, 126, 34,0.599);
+      }
     }
   }
 
@@ -23,6 +31,9 @@
     color: $white;
     margin-bottom: 10px;
     border-radius: 3px;
+    &:focus{
+      background-color: rgba(230, 126, 34,0.599);
+    }
 
     @media #{$small-and-down} {
       font-size: 14px;
@@ -34,10 +45,16 @@
 
     &.fb {
       background-color: #3B5998;
+      &:focus{
+        background-color: rgba(230, 126, 34,0.599);
+      }
     }
 
     &.google {
       background-color: #DD4B39;
+      &:focus{
+        background-color: rgba(230, 126, 34,0.599);
+      }
     }
   }
 }

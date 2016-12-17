@@ -11,6 +11,7 @@ export default class Comments extends Component {
     this.hasMoreComments = () => this._hasMoreComments();
     this.appendMoreComments = () => this._appendMoreComments();
     this.loadComments();
+    this.openModal = () => this._openModal();
   }
   componentDidMount() {
     $('.modal-trigger').leanModal();
@@ -21,6 +22,9 @@ export default class Comments extends Component {
         () => this.loadComments()
       )
     }
+  }
+  _openModal() {
+    document.querySelector('#sign-in-modal .modal-content').focus();
   }
   _loadComments() {
     $.getJSON(`/dev_sites/${this.props.devSiteId}/comments`,
@@ -47,7 +51,7 @@ export default class Comments extends Component {
     return <div className={css.container}>
       <div className={!this.currentUserId && css.nouser}>
         {this.currentUserId ? <CommentForm {...this.props} parent={this} /> :
-          <a href="#sign-in-modal" className='modal-trigger btn'>Sign in to comment</a>}
+          <a href="#sign-in-modal" className='modal-trigger btn' onClick={this.openModal}>Sign in to comment</a>}
       </div>
       {total > 0 && <div className={css.number}> {total} responses</div>}
       {comments.map(comment => <Comment comment={comment} key={comment.id} parent={this} />)}
@@ -218,13 +222,13 @@ class Comment extends Component {
              dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}>
         </div>
         <div className={css.votesContainer}>
-          <i className="fa fa-angle-up fa-2x" onClick={this.voteUp}></i>
-          <i className="fa fa-angle-down fa-2x" onClick={this.voteDown}></i>
+          <i className="fa fa-angle-up fa-2x" onClick={this.voteUp} tabIndex='0'></i>
+          <i className="fa fa-angle-down fa-2x" onClick={this.voteDown} tabIndex='0'></i>
           { comment.vote_count }
         </div>
       </div>
       {showReadMore && !readMoreClicked &&
-        <a href="#" onClick={this.viewWholeBody} className={css.readmore}>Read More...</a>}
+        <a href="#" onClick={this.viewWholeBody} className={css.readmore} tabIndex='0'>Read More...</a>}
     </div>
   }
 }

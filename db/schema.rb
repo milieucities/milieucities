@@ -217,6 +217,9 @@ ActiveRecord::Schema.define(version: 20161209042249) do
     t.integer "user_id"
     t.integer "comment_id"
     t.boolean "up"
+    t.boolean "neutralvote"
+    t.boolean "voted_up"
+    t.boolean "voted_down"
   end
 
   add_index "votes", ["comment_id"], name: "index_votes_on_comment_id", using: :btree

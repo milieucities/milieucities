@@ -20,6 +20,7 @@ export default class extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.id !== this.props.id) this.loadDevSite();
+      this.refs.container.focus();
   }
   _loadDevSite() {
     $.getJSON(`/dev_sites/${this.props.id}`,
@@ -31,6 +32,7 @@ export default class extends Component {
     const { urban_planner_email, ward_councillor_email } = this.state.devSite;
     const contact = e.currentTarget.innerText;
     this.setState({ showModal: true, contact });
+    document.querySelector('#email-modal #contact-file-lead-modal').focus();
   }
   _handleEmail(e) {
     e.preventDefault();
@@ -104,9 +106,9 @@ export default class extends Component {
     }
 
     return(
-      <div className={css.container}>
+      <div className={css.container} ref='container' tabIndex='-1'>
         <div className={css.menu}>
-          <i className={css.close} onClick={this.closeDevSite}></i>
+          <i className={css.close} onClick={this.closeDevSite} tabIndex='0'></i>
           <a className={css.expand} href={devSite.url}></a>
         </div>
         <div className={css.wrapper}>
@@ -167,11 +169,11 @@ export default class extends Component {
           }
 
           <div className={css.emailofficials}>
-            <a href='#' onClick={this.openEmailModal} className={css.email}>
-              <i className={css.mail}></i> Urban Planner
+            <a href='#email-modal' onClick={this.openEmailModal} className={css.email} >
+              <i className={css.mail} tabIndex='0'></i> Urban Planner
             </a>
-            <a href='#' onClick={this.openEmailModal} className={css.email}>
-              <i className={css.mail}></i> Councillor
+            <a href='#email-modal' onClick={this.openEmailModal} className={css.email}>
+              <i className={css.mail} tabIndex='0'></i> Councillor
             </a>
           </div>
 
@@ -191,7 +193,7 @@ export default class extends Component {
 
 const EmailModal = (props) => {
   return <div className={css.emailmodal}>
-    <div className={css.contact}>Contact {props.contact}</div>
+    <div className={css.contact} >Contact {props.contact}</div>
     <div className={css.address}>{props.address}</div>
 
     <form onSubmit={props.handleEmail} acceptCharset='UTF-8' >
@@ -200,7 +202,7 @@ const EmailModal = (props) => {
       <input type='custom-text' required='required' name='name' className={css.input} placeholder='Name' />
       <input type='custom-text' required='required' name='email' className={css.input} placeholder='Email' />
       <textarea name='message' required='required' className={css.textarea} placeholder='Message'></textarea>
-      <input type='submit' name='commit' value='Send' className={css.submit} />
+      <input type='submit' name='commit' value='Send' className={css.submit}/>
     </form>
 
   </div>

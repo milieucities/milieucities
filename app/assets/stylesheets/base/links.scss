@@ -3,6 +3,10 @@ a{
   text-decoration: none;
   transition: 250ms;
   cursor: pointer;
+  &:focus{
+      background-color: rgba(230, 126, 34,0.599);
+    }
+
 
   &.btn {
     color: $white !important;

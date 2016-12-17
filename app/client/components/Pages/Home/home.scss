@@ -44,7 +44,7 @@
 
       &:focus {
         transition: 500ms;
-        border-color: #92c7c6;
+        border: 3px solid #e67e22;
         box-shadow: -5px -5px #92c7c6;
       }
     }
@@ -85,6 +85,9 @@
         width: 100%;
         word-break: break-word;
       }
+      &:focus{
+        background-color: rgba(230, 126, 34,0.599);
+      }
     }
 
     @media #{$medium-and-down} {
@@ -112,6 +115,9 @@
     margin: 0 10px;
     box-sizing: border-box;
     position: relative;
+    &:focus{
+      background-color: rgba(230, 126, 34,0.599);
+    }
 
     @media #{$small-and-down} {
       width: 220px;

@@ -1,6 +1,11 @@
 .container {
   background-color: #f7f7ef;
   padding: 20px 10px;
+  input{
+    &:focus{
+        background-color: rgba(230, 126, 34,0.599);
+      }
+  }
 }
 
 .wrapper {

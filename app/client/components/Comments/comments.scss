@@ -29,6 +29,9 @@
   background-color: #fff;
   border-radius: 3px;
   height: 150px;
+  &:focus{
+    background-color: rgba(230, 126, 34,0.599);
+  }
 }
 
 .submit{
@@ -98,7 +101,12 @@
   &:hover {
     opacity: 1;
   }
+  &:focus{
+    border: 3px solid #e67e22;
+  }
 }
 .votesContainer {
-  padding-top: 10px;  
+  &:focus{
+    background-color: rgba(230, 126, 34,0.599);
+  }
 }

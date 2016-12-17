@@ -39,6 +39,9 @@
         &:hover {
           text-decoration: underline;
         }
+        &:focus{
+          background-color: rgba(230, 126, 34,0.599);
+        }
       }
     }
   }
@@ -50,6 +53,9 @@
 
     a {
       font-size: 20px;
+      &:focus{
+        background-color: rgba(230, 126, 34,0.599);
+      }
     }
   }
 
@@ -59,6 +65,9 @@
     input {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+      &:focus{
+        background-color: rgba(230, 126, 34,0.599);
+      }
     }
 
     button {
@@ -66,6 +75,9 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       font-size: 18px;
+      &:focus{
+        background-color: rgba(230, 126, 34,0.599);
+      }
     }
   }
 }
