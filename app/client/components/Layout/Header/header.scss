@@ -38,7 +38,7 @@
         align-items: center;
         vertical-align: middle;
         &:focus {
-          background-color: rgba(230, 126, 34,0.599);
+          background-color: $accessibility;
         }
 
         &:hover {
@@ -65,7 +65,7 @@
         font-size: 15px;
         cursor: pointer;
         &:focus{
-          background-color: rgba(230, 126, 34,0.599);          
+          background-color: $accessibility;          
         }
       }
     }

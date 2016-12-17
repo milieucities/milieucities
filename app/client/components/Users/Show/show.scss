@@ -72,7 +72,7 @@
             color: $primary-color;
           }
           &:focus{
-            background-color: rgba(230, 126, 34,0.599);
+            background-color: $accessibility;
           }
         }
       }

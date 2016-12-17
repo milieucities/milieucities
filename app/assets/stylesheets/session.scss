@@ -8,12 +8,12 @@
     .btn {
       width: 100%;
       &:focus{
-        background-color: rgba(230, 126, 34,0.599);
+        background-color: $accessibility;
       }
     }
     input{
       &:focus{
-        background-color: rgba(230, 126, 34,0.599);
+        background-color: $accessibility;
       }
     }
   }
@@ -32,7 +32,7 @@
     margin-bottom: 10px;
     border-radius: 3px;
     &:focus{
-      background-color: rgba(230, 126, 34,0.599);
+      background-color: $accessibility;
     }
 
     @media #{$small-and-down} {
@@ -46,14 +46,14 @@
     &.fb {
       background-color: #3B5998;
       &:focus{
-        background-color: rgba(230, 126, 34,0.599);
+        background-color: $accessibility;
       }
     }
 
     &.google {
       background-color: #DD4B39;
       &:focus{
-        background-color: rgba(230, 126, 34,0.599);
+        background-color: $accessibility;
       }
     }
   }

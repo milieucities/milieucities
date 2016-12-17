@@ -37,7 +37,7 @@
     float: right;
     cursor: pointer;
     &:focus{
-      background-color: rgba(230, 126, 34,0.599);
+      background-color: $accessibility;
     }
   }
 
@@ -52,7 +52,7 @@
     float: right;
     cursor: pointer;
     &:focus{
-      background-color: rgba(230, 126, 34,0.599);
+      background-color: $accessibility;
     }
   }
 
@@ -121,7 +121,7 @@
     height: 25px;
     display: block;
     &:focus{
-      background-color: rgba(230, 126, 34,0.599);
+      background-color: $accessibility;
     }
   }
 
@@ -246,7 +246,7 @@
     width: 20px;
     margin-right: 20px;
     &:focus{
-      background-color: rgba(230, 126, 34,0.599);
+      background-color: $accessibility;
     }
   }
 
@@ -307,21 +307,6 @@
       padding: 20px 0;
     }
 
-    .input {
-      max-width: 300px;
-      background: #fff;
-      border: 1px solid #ccc;
-      box-shadow: 0px 2px 4px 0px rgba(204,204,204,0.50);
-      border-radius: 2px;
-      margin: 20px 0;
-      display: block;
-      width: 100%;
-      padding: 12.5px 20px;
-      &:focus{
-        border: 3px solid #e67e22;
-      }
-    }
-
     .contact {
       font-size: 24px;
       font-weight: 700;
@@ -331,30 +316,6 @@
       font-size: 18px;
     }
 
-    .textarea{
-      background: #fff;
-      border: 1px solid #ccc;
-      box-shadow: 0px 2px 4px 0px rgba(204,204,204,0.50);
-      border-radius: 2px;
-      margin: 20px 0;
-      padding: 20px;
-      height: 150px;
-      &:focus{
-        border: 3px solid #e67e22;
-      }
-    }
-
-    .submit{
-      background-color: #6d9493;
-      padding: 10px 40px;
-      border: none;
-      color: #fff;
-      border-radius: 2px;
-      margin-top: 20px;
-      &:focus{
-        border: 3px solid #e67e22;
-      }
-    }
   }
 }
 
@@ -397,6 +358,7 @@
       font-weight: 700;
       font-size: 18px;
       padding-bottom: 15px;
+      margin: 0;
     }
 
     .description {
@@ -469,6 +431,7 @@
       font-weight: 700;
       font-size: 18px;
       padding-bottom: 15px;
+      margin: 0;
 
       @media #{$small-and-down} {
         font-size: 13px;
@@ -494,8 +457,8 @@
   }
 }
 a:focus{
-  background-color: rgba(230, 126, 34,0.599);
+  background-color: $accessibility;
 }
 i:focus{
-  background-color: rgba(230, 126, 34,0.599);
+  background-color: $accessibility;
 }

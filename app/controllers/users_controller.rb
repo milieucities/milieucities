@@ -25,8 +25,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "Welcome to Milieu"
+      redirect_to root_path, notice: t('sessions.notice.welcome')
     else
+      #TODO: Translate to French
       flash[:alert] = "You must accept terms of service" unless @user.profile.accepted_terms
       render :new
     end

@@ -40,7 +40,7 @@ export default class DevSiteList extends Component {
                          data-id={devSite.id}
                          className={this.props.activeDevSiteId == devSite.id ? css.activeitem : css.item}
                          key={devSite.id}>
-        <div className={css.address}>{devSite.address}</div>
+        <h3 className={css.address}>{devSite.address}</h3>
         <div className={css.info}>{devSite.devID}</div>
         <div className={css.info}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
         <div className={css.info} dangerouslySetInnerHTML={{__html: devSite.status}}></div>

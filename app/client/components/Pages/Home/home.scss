@@ -24,6 +24,7 @@
     font-size: 48px;
     text-align: center;
     position: relative;
+    margin: 0;
 
     @media #{$small-and-down} {
       font-size: 36px;
@@ -44,8 +45,8 @@
 
       &:focus {
         transition: 500ms;
-        border: 3px solid #e67e22;
-        box-shadow: -5px -5px #92c7c6;
+        border-color: $primary-color;
+        box-shadow: -5px -5px $primary-color;
       }
     }
   }
@@ -63,6 +64,7 @@
     padding: 25px 0;
     font-size: 24px;
     text-align: center;
+    margin: 0;
 
     @media #{$small-and-down} {
       font-size: 20px;
@@ -86,7 +88,7 @@
         word-break: break-word;
       }
       &:focus{
-        background-color: rgba(230, 126, 34,0.599);
+        background-color: $accessibility;
       }
     }
 
@@ -116,7 +118,7 @@
     box-sizing: border-box;
     position: relative;
     &:focus{
-      background-color: rgba(230, 126, 34,0.599);
+      background-color: $accessibility;
     }
 
     @media #{$small-and-down} {
@@ -131,8 +133,8 @@
     }
 
     .title {
-      font-size: 36px;
       padding: 20px 0;
+      margin: 0;
       @media #{$small-and-down} {
         font-size: 24px;
       }
@@ -148,7 +150,7 @@
       height: 200px;
       background-color: #D5FFFE;
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
       content: '';
       width: 310px;

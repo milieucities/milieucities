@@ -1,4 +1,43 @@
 fr:
+  activerecord:
+    attributes:
+      user:
+        email: 'courriel'
+        password: 'Mot de passe'
+        password_confirmation: 'confirmation mot de passe'
+      profile:
+        name: 'prénom'
+        postal_code: 'code postale'
+        neighbourhood: 'quartier'
+  users:
+    new:
+      terms: "accepter les conditions d'utilisation"
+      title: "Connecter"
+      submit: "créer une compte"
+  layouts:
+    _signin_modal:
+      email: 'courriel'
+      password: 'Mot de passe'
+      facebook: "Continuer avec Facebook"
+      google: "Continuer avec Google"
+      or: "ou"
+      new: "Nouveau à Milieu?"
+      signup: "Inscrivez-vous"
+      signin: "Connexion"
+      accept: "En vous connectant, vous acceptez les "
+      terms: "Conditions d'utilisation"
+  sessions:
+    alert:
+      could_not_signin: "Echec de la connexion, veuillez réessayer"  #TODO:Confirm
+    notice:
+      welcome: "Bienvenue à Milieu"
+    new:
+      signup: "Inscrivez-vous"
+      signin: "Connexion"
+      email: 'courriel'
+      password: 'Mot de passe'
+
+
   dev-sites:
     show:
       back-to-map-link: 'Back to Map'

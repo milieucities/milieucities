@@ -6,9 +6,9 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email].downcase)
     if @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "Welcome to Milieu"
+      redirect_to root_path, notice: t('sessions.notice.welcome')
     else
-      redirect_to new_session_path, alert: "Could not sign in, try again"
+      redirect_to new_session_path, alert: t('sessions.alert.could_not_signin')
     end
   end
 

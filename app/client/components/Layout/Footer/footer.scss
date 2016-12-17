@@ -17,6 +17,7 @@
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 2px;
+    margin: 0;
     padding: 40px 0;
     color: #000;
   }
@@ -40,7 +41,7 @@
           text-decoration: underline;
         }
         &:focus{
-          background-color: rgba(230, 126, 34,0.599);
+          background-color: $accessibility;
         }
       }
     }
@@ -54,7 +55,7 @@
     a {
       font-size: 20px;
       &:focus{
-        background-color: rgba(230, 126, 34,0.599);
+        background-color: $accessibility;
       }
     }
   }
@@ -66,7 +67,7 @@
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       &:focus{
-        background-color: rgba(230, 126, 34,0.599);
+        background-color: $accessibility;
       }
     }
 
@@ -76,7 +77,7 @@
       border-bottom-left-radius: 0;
       font-size: 18px;
       &:focus{
-        background-color: rgba(230, 126, 34,0.599);
+        background-color: $accessibility;
       }
     }
   }

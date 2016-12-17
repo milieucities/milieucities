@@ -30,7 +30,7 @@
   border-radius: 3px;
   height: 150px;
   &:focus{
-    background-color: rgba(230, 126, 34,0.599);
+    background-color: $accessibility;
   }
 }
 
@@ -107,6 +107,6 @@
 }
 .votesContainer {
   &:focus{
-    background-color: rgba(230, 126, 34,0.599);
+    background-color: $accessibility;
   }
 }

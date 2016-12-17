@@ -15,9 +15,7 @@
     "url": "https://github.com/Milieucitiesrepo/m-server.git"
   },
   "author": "Milieucitiesrepo",
-  "dependencies": {
-    "react-share": "^1.11.0"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "cacheDirectories": [
     "node_modules",
