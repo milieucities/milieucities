@@ -1,4 +1,7 @@
 en:
+  time:
+    formats:
+      default: "%B %e, %Y"
   activerecord:
     attributes:
       user:
