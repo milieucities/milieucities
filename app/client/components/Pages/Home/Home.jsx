@@ -42,7 +42,6 @@ export default class Home extends Component {
       }
     })
   }
-
   render() {
     const { isMobile } = this.state;
     const { locale } = document.body.dataset;
@@ -52,16 +51,16 @@ export default class Home extends Component {
       <div>
         <Header />
         <div className={css.landingContainer}>
-          <img src={require('./images/ui.jpg')} />
+          <img src={require('./images/ui.jpg')} alt='Image of a modern city' />
           <div>
-            <div className={css.title}>{i18n.title}</div>
+            <h1 className={css.title}>{i18n.title}</h1>
             <div className={css.search}>
               <Autocomplete callback={this.autocompleteCallback} placeholder={i18n.enterAddress} type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
             </div>
           </div>
         </div>
         <div className={css.featuredContainer}>
-          <div className={css.title}>{i18n.featuredDevelopments}</div>
+          <h2 className={css.title}>{i18n.featuredDevelopments}</h2>
 
           <div className={css.featured}>
             <a href={`/${locale}/dev_sites?activeDevSiteId=1822`}><DevSite id={1822} preview={true} horizontal={isMobile} /></a>
@@ -72,15 +71,20 @@ export default class Home extends Component {
         </div>
         <div className={css.articleContainer}>
           <Carousel>
-            <a href='https://medium.com/@MilieuCities/zoning-101-a88c1e397455#.du6yt0qgk' target='_blank' className={css.article}>
+            <a title={'Go to Milieu\'s article of Zoning 101'} href='https://medium.com/@MilieuCities/zoning-101-a88c1e397455#.du6yt0qgk' target='_blank' className={css.article}>
               <div className={css.type}>Article</div>
-              <div className={css.title}>Zoning 101</div>
+              <h2 className={css.title}>Zoning 101</h2>
               <div className={css.summary}>Zoning regulations are the rules of the game if you — or a developer — want to construct a building.</div>
             </a>
-            <a href='https://medium.com/@MilieuCities/whose-streets-are-we-planning-88f3ed1bc613#.hv858aafk' target='_blank' className={css.article}>
+            <a title={'Go to Milieu\'s article of Whose streets are we planning?'} href='https://medium.com/@MilieuCities/whose-streets-are-we-planning-88f3ed1bc613#.hv858aafk' target='_blank' className={css.article}>
               <div className={css.type}>Article</div>
-              <div className={css.title}>Whose streets are we planning?</div>
+              <h2 className={css.title}>Whose streets are we planning?</h2>
               <div className={css.summary}>Transportation planning offers huge opportunities to enable equity.</div>
+            </a>
+            <a title={'Go to Milieu\'s article of What we learned from pop-up engagement'} href='https://medium.com/@MilieuCities/what-we-learned-from-pop-up-engagement-65cec34fefde#.l84ns3xc6' target='_blank' className={css.article}>
+              <div className={css.type}>Article</div>
+              <h3 className={css.title}>What we learned from pop-up engagement</h3>
+              <div className={css.summary}>Milieu’s on-going goal is to facilitate a human-centered approach to urban planning and development.</div>
             </a>
           </Carousel>
         </div>

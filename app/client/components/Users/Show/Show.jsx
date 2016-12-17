@@ -28,11 +28,11 @@ export default class Show extends Component {
         <div className={css.info}>
           <div className='container'>
             <div className={css.imgContainer}>
-              <img src={userAvatar || require('./images/default-avatar.png')} />
+              <img alt='Profile Avatar' src={userAvatar || require('./images/default-avatar.png')} />
             </div>
             <div className={css.content}>
               <h1 className={css.name}>{userName}</h1>
-              <div className={css.role}>{i18n.role}</div>
+              <h3 className={css.role}>{i18n.role}</h3>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default class Show extends Component {
             {
               !loading &&
               <div className={css.content}>
-                <a href={`/${locale}/users/${userId}/edit`} className='btn right'>{i18n.edit}</a>
+                <a href={`/${locale}/users/${userId}/edit`} title='Edit your profile' className='btn right'>{i18n.edit}</a>
                 <h2>{i18n.dashboard}</h2>
 
                 <div className={css.meta}>

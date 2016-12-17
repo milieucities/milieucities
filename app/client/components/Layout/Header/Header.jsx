@@ -23,7 +23,7 @@ export default class Header extends Component {
     if(location.pathname.match(regex)) {
       return location.pathname.replace(regex, `/${locale}/`)
     } else {
-      return `/${locale}/${location.pathname.length > 1 ? '' : location.pathname}`
+      return `/${locale}/${location.pathname.length > 1 ? location.pathname : ''}`
     }
   }
   render() {
@@ -34,7 +34,7 @@ export default class Header extends Component {
     return (
       <div className={css.container}>
         <a href={`/${locale}`} className={css.logo}>
-          <img src={require('./images/dark-logo.svg')} />
+          <img src={require('./images/dark-logo.svg')} title={'Milieu\'s Logo'} />
         </a>
         <div className={css.linksAndLocale}>
           <div className={css.links}>
@@ -50,7 +50,9 @@ export default class Header extends Component {
             {
               userId &&
               <div>
-                <a href={`/${locale}/users/${userId}`}>
+                <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
+                <a href='http://about.milieu.io/' title={i18n.about}>{i18n.about}</a>
+                <a href={`/${locale}/users/${userId}`} title='Go to your Dashboard'>
                   <img className={css.profileImage} src={ userAvatar || require('./images/default-avatar.png')} />
                 </a>
                 <a title={i18n.logOut} rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userId}`}>{i18n.logOut}</a>
@@ -60,7 +62,7 @@ export default class Header extends Component {
           {
             !this.state.isMobile &&
             <div className={css.locale}>
-              <a href={this.handleChangeLocalization('en')}>EN</a> | <a href={this.handleChangeLocalization('fr')}>FR</a>
+              <a title='Change language to English' href={this.handleChangeLocalization('en')}>EN</a> | <a title='Change language to French' href={this.handleChangeLocalization('fr')}>FR</a>
             </div>
           }
         </div>
