@@ -73,12 +73,12 @@ export default class Home extends Component {
         <div className={css.articleContainer}>
           <Carousel>
             <a href='https://medium.com/@MilieuCities/zoning-101-a88c1e397455#.du6yt0qgk' target='_blank' className={css.article}>
-              <div className={css.type}>Article</div>
+              <div className={css.type}>{i18n.article}</div>
               <div className={css.title}>Zoning 101</div>
               <div className={css.summary}>Zoning regulations are the rules of the game if you — or a developer — want to construct a building.</div>
             </a>
             <a href='https://medium.com/@MilieuCities/whose-streets-are-we-planning-88f3ed1bc613#.hv858aafk' target='_blank' className={css.article}>
-              <div className={css.type}>Article</div>
+              <div className={css.type}>{i18n.article}</div>
               <div className={css.title}>Whose streets are we planning?</div>
               <div className={css.summary}>Transportation planning offers huge opportunities to enable equity.</div>
             </a>

@@ -14,16 +14,16 @@ const i18n = new LocalizedStrings({
     subscribe: "SUBSCRIBE TO NEWSLETTER"
   },
   fr: {
-    about: "À propos de nous",
+    about: "au sujet de Milieu",
     explore: "Explorer",
-    followUs: "Suivez-nous",
+    followUs: "nous suivre",
     ourVision: "Notre vision",
     ourTeam: "Notre équipe",
-    ourServices: "Notre Services",
+    ourServices: "Nos Services",
     map: "Carte",
     blog: "Blog",
     privacy: "Confidentialité",
-    subscribe: "Inscrivez-vous à notre newsletter"
+    subscribe: "abonnez-vous à notre bulletin"
   }
 });
 
