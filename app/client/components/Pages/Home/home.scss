@@ -24,6 +24,7 @@
     font-size: 48px;
     text-align: center;
     position: relative;
+    margin: 0;
 
     @media #{$small-and-down} {
       font-size: 36px;
@@ -63,6 +64,7 @@
     padding: 25px 0;
     font-size: 24px;
     text-align: center;
+    margin: 0;
 
     @media #{$small-and-down} {
       font-size: 20px;
@@ -125,8 +127,8 @@
     }
 
     .title {
-      font-size: 36px;
       padding: 20px 0;
+      margin: 0;
       @media #{$small-and-down} {
         font-size: 24px;
       }
@@ -142,7 +144,7 @@
       height: 200px;
       background-color: #D5FFFE;
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
       content: '';
       width: 310px;
