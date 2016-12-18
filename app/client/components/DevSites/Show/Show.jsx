@@ -86,7 +86,7 @@ export default class extends Component {
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
             <h3 className={css.address}>{devSite.address}</h3>
-            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }} tabIndex='-1'></div>
           </div>
         </div>
       )
@@ -99,7 +99,7 @@ export default class extends Component {
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
             <h3 className={css.address}>{devSite.address}</h3>
-            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }} tabIndex='-1'></div>
           </div>
         </div>
       )

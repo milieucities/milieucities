@@ -19,9 +19,6 @@
       width: 25px;
       object-fit: contain;
     }
-    &:focus{
-      border: 3px solid #e67e22;
-    }
   }
 
   .linksAndLocale {
@@ -37,9 +34,6 @@
         cursor: pointer;
         align-items: center;
         vertical-align: middle;
-        &:focus {
-          background-color: $accessibility;
-        }
 
         &:hover {
           text-decoration: underline;
@@ -64,9 +58,6 @@
         line-height: 50px;
         font-size: 15px;
         cursor: pointer;
-        &:focus{
-          background-color: $accessibility;          
-        }
       }
     }
   }
