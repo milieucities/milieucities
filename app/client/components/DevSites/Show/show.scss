@@ -462,3 +462,9 @@ a:focus{
 i:focus{
   background-color: $accessibility;
 }
+input:focus{
+  background-color: $accessibility;
+}
+textarea:focus{
+  background-color: $accessibility;
+}
