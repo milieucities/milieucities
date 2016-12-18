@@ -11,8 +11,8 @@ export default class extends Component {
     this.parent = this.props.parent;
     this.currentUserId = parseInt(document.body.dataset.userId);
     this.loadDevSite = () => this._loadDevSite();
-    this.toggleShowFiles = () => this.setState({ showFiles: !this.state.showFiles });
-    this.closeDevSite = () => this.parent.setState({ activeDevSiteId: null });
+    this.toggleShowFiles = (e) => this._toggleShowFiles(e);
+    this.closeDevSite = (e) => this._closeDevSite(e);
     this.openEmailModal = (e) => this._openEmailModal(e);
     this.handleEmail = (e) => this._handleEmail(e);
     this.toggleLike = () => this._toggleLike();
@@ -73,6 +73,14 @@ export default class extends Component {
       }
     });
   }
+  _closeDevSite(e) {
+    e.preventDefault();
+    this.parent.setState({ activeDevSiteId: null });
+  }
+  _toggleShowFiles(e) {
+    e.preventDefault();
+    this.setState({ showFiles: !this.state.showFiles });
+  }
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
@@ -107,7 +115,7 @@ export default class extends Component {
     return(
       <div className={css.container} ref='container' tabIndex='-1'>
         <div className={css.menu}>
-          <i className={css.close} onClick={this.closeDevSite} tabIndex='0'></i>
+          <a className={css.close} onClick={this.closeDevSite} href='#'></a>
           <a className={css.expand} href={devSite.url}></a>
         </div>
         <div className={css.wrapper}>
@@ -154,7 +162,7 @@ export default class extends Component {
 
           {
             devSite.city_files.length > 0 &&
-            <a title='Toggle view of relevant files' className={css.filecontainer} onClick={this.toggleShowFiles}>
+            <a title='Toggle view of relevant files' href='#' className={css.filecontainer} onClick={this.toggleShowFiles}>
               <i className={css.folder}></i>
               {showFiles ? 'Hide ' : 'View ' } {devSite.city_files.length} attached files
             </a>
@@ -169,10 +177,10 @@ export default class extends Component {
 
           <div className={css.emailofficials}>
             <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Urban Planner'>
-              <i className={css.mail} tabIndex='0'></i> Urban Planner
+              <i className={css.mail}></i> Urban Planner
             </a>
             <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Councillor'>
-              <i className={css.mail} tabIndex='0'></i> Councillor
+              <i className={css.mail}></i> Councillor
             </a>
           </div>
 

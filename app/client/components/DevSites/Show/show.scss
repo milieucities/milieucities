@@ -36,8 +36,11 @@
     display: block;
     float: right;
     cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 3px;
+
     &:focus{
-      background-color: $accessibility;
+      border: 2px solid $accessibility;
     }
   }
 
@@ -51,8 +54,11 @@
     display: block;
     float: right;
     cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 3px;
+
     &:focus{
-      background-color: $accessibility;
+      border: 2px solid $accessibility;
     }
   }
 
@@ -245,9 +251,6 @@
     height: 20px;
     width: 20px;
     margin-right: 20px;
-    &:focus{
-      background-color: $accessibility;
-    }
   }
 
   .filelink {
@@ -277,6 +280,10 @@
       padding: 5px 10px;
       border-radius: 2px;
       width: 45%;
+
+      &:focus{
+        background-color: $accessibility;
+      }
     }
 
     .mail{

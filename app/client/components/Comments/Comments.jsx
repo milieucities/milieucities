@@ -228,7 +228,7 @@ class Comment extends Component {
         </div>
       </div>
       {showReadMore && !readMoreClicked &&
-        <a href="#" onClick={this.viewWholeBody} className={css.readmore} tabIndex='0'>Read More...</a>}
+        <a href="#" onClick={this.viewWholeBody} className={css.readmore} tabIndex='-1'>Read More...</a>}
     </div>
   }
 }
