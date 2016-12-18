@@ -28,7 +28,7 @@ export default class Header extends Component {
   }
   render() {
     const { profile } = this.state;
-    const { userId, userAvatar, userName, locale } = document.body.dataset;
+    const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
 
     return (
@@ -52,10 +52,10 @@ export default class Header extends Component {
               <div>
                 <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
                 <a href='http://about.milieu.io/' title={i18n.about}>{i18n.about}</a>
-                <a href={`/${locale}/users/${userId}`} title='Go to your Dashboard'>
+                <a href={`/${locale}/users/${userSlug}`} title='Go to your Dashboard'>
                   <img className={css.profileImage} src={ userAvatar || require('./images/default-avatar.png')} />
                 </a>
-                <a title={i18n.logOut} rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userId}`}>{i18n.logOut}</a>
+                <a title={i18n.logOut} rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userSlug}`}>{i18n.logOut}</a>
               </div>
             }
           </div>
