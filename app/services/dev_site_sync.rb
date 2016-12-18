@@ -1,11 +1,10 @@
-require 'net/http'
-require 'json'
-
 module Services
-  class DevSiteScraper
-    class DevSiteScraperException; end
+  class DevSiteSync
+    class DevSiteSyncError < StandardError; end
 
-    ROOT_URL = 'http://ottwatch.ca'
+    attr_reader :dev_site_ids
+
+    ROOT_URL = 'http://ottwatch.ca/api/devapps/'
     WARDS = {
       "1" => "ORLEANS",
       "2" => "INNES",
@@ -33,30 +32,35 @@ module Services
     }
 
     def initialize
-      @counter = 1
+      @counter = 0
       @dev_site_ids = get_dev_site_ids
     end
 
-    def scrape
+    def sync
       @dev_site_ids.each do |dev_site_id|
         dev_site = DevSite.find_by(devID: dev_site_id)
         dev_site.present? ? update_dev_site(dev_site) : create_dev_site(dev_site_id)
       end
+      puts "=========================================="
+      puts "Found and processed #{@counter} dev sites."
+      puts "=========================================="
     end
 
-    def get_dev_site_ids
-      path = '/api/devapps/all'
 
+    private
+
+    def get_dev_site_ids
+      path = 'all'
       begin
         dev_sites = retrieve_and_parse_data(path)
         dev_sites.collect { |dev_site| dev_site['devid'] }
       rescue Exception => e
-        raise DevSiteScraperException, "Unable to retrieve dev sites from ottwatch: #{e.inspect}"
+        raise DevSiteSyncError, "Unable to retrieve dev sites from ottwatch: #{e.inspect}"
       end
     end
     
     def create_dev_site(dev_app_id)
-      path = "/api/devapps/#{dev_app_id}"
+      path = "#{dev_app_id}"
       begin 
         dev_site = retrieve_and_parse_data(path)
       rescue Exception
@@ -73,7 +77,6 @@ module Services
 
       begin
         if new_dev_site.save
-          puts @counter
           puts "Saved application - #{dev_site['devid']}"
           @counter += 1
         else
@@ -86,7 +89,7 @@ module Services
     end
 
     def update_dev_site(current_dev_site)
-      path = "/api/devapps/#{current_dev_site.devID}"
+      path = "#{current_dev_site.devID}"
       begin
         dev_site = retrieve_and_parse_data(path)
       rescue Exception => msg
@@ -96,7 +99,6 @@ module Services
       return false if missing_address?(dev_site)
 
       if current_dev_site.updated == dev_site['updated']
-        puts @counter
         puts "Latest application - #{dev_site['devid']}"
         @counter += 1
         return
@@ -111,7 +113,6 @@ module Services
 
       begin
         if current_dev_site.save
-          puts @counter
           puts "Updated application - #{dev_site['devid']}"
           @counter += 1
         else
