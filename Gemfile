@@ -31,7 +31,6 @@ gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 gem 'rack-cors'
 gem 'whenever'
-gem 'timecop'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
