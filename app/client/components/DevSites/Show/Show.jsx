@@ -32,7 +32,6 @@ export default class extends Component {
     const { urban_planner_email, ward_councillor_email } = this.state.devSite;
     const contact = e.currentTarget.innerText;
     this.setState({ showModal: true, contact });
-    document.querySelector('#email-modal #contact-file-lead-modal').focus();
   }
   _handleEmail(e) {
     e.preventDefault();
@@ -170,10 +169,10 @@ export default class extends Component {
 
           <div className={css.emailofficials}>
             <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Urban Planner'>
-              <i className={css.mail} tabIndex='-1'></i> Urban Planner
+              <i className={css.mail} tabIndex='0'></i> Urban Planner
             </a>
             <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Councillor'>
-              <i className={css.mail} tabIndex='-1'></i> Councillor
+              <i className={css.mail} tabIndex='0'></i> Councillor
             </a>
           </div>
 
@@ -192,7 +191,7 @@ export default class extends Component {
 }
 
 const EmailModal = (props) => {
-  return <div className={css.emailmodal}>
+  return <div className={css.emailmodal} tabIndex='-1'>
     <div className={css.contact} >Contact {props.contact}</div>
     <div className={css.address}>{props.address}</div>
 
