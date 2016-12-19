@@ -17,6 +17,7 @@
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 2px;
+    margin: 0;
     padding: 40px 0;
     color: #000;
   }
@@ -39,6 +40,9 @@
         &:hover {
           text-decoration: underline;
         }
+        &:focus{
+          background-color: $accessibility;
+        }
       }
     }
   }
@@ -50,6 +54,9 @@
 
     a {
       font-size: 20px;
+      &:focus{
+        background-color: $accessibility;
+      }
     }
   }
 

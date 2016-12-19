@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
+import i18n from './locale'
 import css from './edit.scss'
 
 export default class Edit extends Component {
@@ -23,6 +24,9 @@ export default class Edit extends Component {
   }
   _submitForm(e) {
     const form = new FormData(document.querySelector('#notification-form'));
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const { notiUpdateF, notiUpdateS } = i18n;
     console.log(form.keys());
     $.ajax({
       url: `/users/${this.currentUserId}/notification`,
@@ -33,29 +37,29 @@ export default class Edit extends Component {
       data: form,
       success: notification => {
         this.setState({ notification });
-        window.flash('notice', 'Notification updated successfully');
+        window.flash('notice', notiUpdateS);
       },
       error: error => {
-        window.flash('alert', 'Failed to save notification changes')
+        window.flash('alert', notiUpdateF)
         this.setState({ error: error.responseJSON });
       }
     });
   }
   render() {
     const { notification, loading, error } = this.state;
-    const { userId, userAvatar, userName, locale } = document.body.dataset;
-
+    const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
+    i18n.setLanguage(locale);
     return(
       <div>
         <Header/>
         <div className={css.info}>
           <div className='container'>
             <div className={css.imgContainer}>
-              <img src={userAvatar || require('./images/default-avatar.png')} />
+              <img alt='Profile Avatar' src={userAvatar || require('./images/default-avatar.png')} />
             </div>
             <div className={css.content}>
               <h1 className={css.name}>{userName}</h1>
-              <div className={css.role}>COMMUNITY MEMBER</div>
+              <h3 className={css.role}>{i18n.role}</h3>
             </div>
           </div>
         </div>
@@ -63,9 +67,9 @@ export default class Edit extends Component {
           <div className='container'>
             <div className={css.menu}>
               <ul>
-                <li><a href={`/${locale}/users/${userId}`}>Dashboard</a></li>
-                <li><a href={`/${locale}/users/${userId}/edit`}>Account Settings</a></li>
-                <li><b><a href={`/${locale}/users/${userId}/notification/edit`}>Notification</a></b></li>
+                <li><a href={`/${locale}/users/${userSlug}`}>{i18n.dashboard}</a></li>
+                <li><a href={`/${locale}/users/${userSlug}/edit`}>{i18n.settings}</a></li>
+                <li><b><a href={`/${locale}/users/${userSlug}/notification/edit`}>{i18n.notification}</a></b></li>
               </ul>
             </div>
             {
@@ -81,7 +85,7 @@ export default class Edit extends Component {
             {
               !loading &&
               <div className={css.content}>
-                <h2>Notifications</h2>
+                <h2>{i18n.notifications}</h2>
 
                 <div className={css.meta}>
                   <div className={css.label}>
@@ -90,20 +94,25 @@ export default class Edit extends Component {
                   <div className={css.data}>
                     <div className='row'>
                       <div className='input-field col s12'>
-                        When would you like to receive emails from us?
+                        {i18n.emailQ1}
                       </div>
                       <form id='notification-form'>
                         <div className='input-field col s12'>
+                          <input type='hidden' name='notification[updated_dev_site_near_me]' value={false} />
+                          <input type='checkbox' defaultChecked={notification.updated_dev_site_near_me} id='notification_updated_dev_site_near_me' name='notification[updated_dev_site_near_me]'/>
+                          <label htmlFor='notification_updated_dev_site_near_me'>{i18n.emailQ1S1}</label>
+                        </div>
+                        <div className='input-field col s12'>
                           <input type='hidden' name='notification[newletter]' value={false} />
                           <input type='checkbox' defaultChecked={notification.newletter} id='notification_newsletter' name='notification[newletter]'/>
-                          <label htmlFor='notification_newsletter' style={{display: 'inline', textTransform: 'none', paddingLeft: 10}}>I would like to receive newsletters</label>
+                          <label htmlFor='notification_newsletter'>{i18n.emailQ1S2}</label>
                         </div>
                       </form>
                     </div>
                   </div>
                 </div>
                 <div className='row'>
-                  <button name='commit' type='submit' className='btn' onClick={this.submitForm}>Save</button>
+                  <button name='commit' type='submit' className='btn' onClick={this.submitForm}>{i18n.save}</button>
                 </div>
               </div>
             }

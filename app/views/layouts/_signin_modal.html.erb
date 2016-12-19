@@ -1,27 +1,27 @@
 <div id="sign-in-modal" class="modal">
-  <div class="modal-content">
-    <a href="/auth/facebook" class="omni fb"><%= fa_icon "facebook" %> Continue with Facebook </a>
-    <a href="/auth/google" class="omni google"><%= fa_icon "google" %> Continue with Google </a>
+  <div class="modal-content" tabindex='-1'>
+    <a href="/auth/facebook" class="omni fb"><%= fa_icon "facebook" %> <%= t 'layouts._signin_modal.facebook' %> </a>
+    <a href="/auth/google" class="omni google"><%= fa_icon "google" %> <%= t 'layouts._signin_modal.google' %> </a>
 
-    <div class="or">or</div>
+    <div class="or"><%= t 'layouts._signin_modal.or'%></div>
 
     <%= form_for :session, url: sessions_path, html: { class: 'login-form' } do |f| %>
       <div class="input-field">
-        <%= f.label :email, t('sign-in-modal.email-label') %>
+        <%= f.label :email, t('layouts._signin_modal.email') %>
         <%= f.text_field :email, autocomplete: 'off' %>
       </div>
       <div class="input-field">
-        <%= f.label :password, t('sign-in-modal.password-label') %>
+        <%= f.label :password, t('layouts._signin_modal.password') %>
         <%= f.password_field :password, autocomplete: 'off' %>
       </div>
-      <%= f.submit t('sign-in-modal.sign-in-button'), class: 'btn' %>
+      <%= f.submit t('layouts._signin_modal.signin'), class: 'btn' %>
     <% end %>
 
     <div class="row">
-      <small>New to Mileu?</small><br/>
-      <%= link_to t('sign-in-modal.sign-up-button'), new_user_path, class: "signup-link" %>
+      <small><%= t 'layouts._signin_modal.new' %></small><br/>
+      <%= link_to t('layouts._signin_modal.signup'), new_user_path, class: "signup-link" %>
     </div>
 
-    <small class="center">By signing in, you accept <b><%= link_to t('home.terms_of_use_link'), legal_privacy_path %></b>.</small>
+    <small class="center"><%= t 'layouts._signin_modal.accept' %><b><%= link_to t('layouts._signin_modal.terms'), legal_privacy_path %></b>.</small>
   </div>
 </div>

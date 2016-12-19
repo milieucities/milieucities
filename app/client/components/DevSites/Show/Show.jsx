@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import css from './show.scss'
 import { capitalize, replace } from 'lodash'
+import i18n from './locale'
 import Comments from '../../Comments/Comments'
 import Modal from '../../Utility/Modal/Modal'
 import { ShareButtons, generateShareIcon } from 'react-share';
@@ -17,8 +18,8 @@ export default class extends Component {
     this.parent = this.props.parent;
     this.currentUserId = parseInt(document.body.dataset.userId);
     this.loadDevSite = () => this._loadDevSite();
-    this.toggleShowFiles = () => this.setState({ showFiles: !this.state.showFiles });
-    this.closeDevSite = () => this.parent.setState({ activeDevSiteId: null });
+    this.toggleShowFiles = (e) => this._toggleShowFiles(e);
+    this.closeDevSite = (e) => this._closeDevSite(e);
     this.openEmailModal = (e) => this._openEmailModal(e);
     this.handleEmail = (e) => this._handleEmail(e);
     this.toggleLike = () => this._toggleLike();
@@ -26,6 +27,7 @@ export default class extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.id !== this.props.id) this.loadDevSite();
+    this.refs.container &&  this.refs.container.focus();
   }
   _loadDevSite() {
     $.getJSON(`/dev_sites/${this.props.id}`,
@@ -42,7 +44,9 @@ export default class extends Component {
     e.preventDefault();
     const { contact } = this.state;
     const url = contact === 'Urban Planner' ? '/contact_file_lead' : '/contact_councillor';
-
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const { messageSent, mustSign } = i18n
     $.ajax({
       url: url,
       dataType: 'JSON',
@@ -52,7 +56,7 @@ export default class extends Component {
       processData: false,
       data: new FormData(e.currentTarget),
       success: () => {
-        window.flash('notice', 'Message successfully sent!')
+        window.flash('notice', messageSent)
         this.setState({ showModal: false });
       }
     });
@@ -73,24 +77,35 @@ export default class extends Component {
       success: devSiteJson => this.setState({ devSite: devSiteJson }),
       error: error => {
         if(error.status == 403){
-          window.flash('alert', 'Must sign in to like a development site.')
+          window.flash('alert', mustSign)
         }
       }
     });
   }
+  _closeDevSite(e) {
+    e.preventDefault();
+    this.parent.setState({ activeDevSiteId: null });
+  }
+  _toggleShowFiles(e) {
+    e.preventDefault();
+    this.setState({ showFiles: !this.state.showFiles });
+  }
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+
     if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
       return(
-        <div className={css.verticalPreviewContainer}>
-          {false && <div className={css.status}>Open for Comments</div>}
-          <img src={devSite.image_url} className={css.image} />
+        <div className={css.verticalPreviewContainer} title={`Development Site at ${devSite.address}`}>
+          {false && <div className={css.status}>{i18n.openForComments}</div>}
+          <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
-            <div className={css.address}>{devSite.address}</div>
-            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+            <h3 className={css.address}>{devSite.address}</h3>
+            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }} tabIndex='-1'></div>
           </div>
         </div>
       )
@@ -98,21 +113,21 @@ export default class extends Component {
 
     if(preview && horizontal) {
       return(
-        <div className={css.horizontalPreviewContainer}>
-          {false && <div className={css.status}>Open for Comments</div>}
-          <img src={devSite.image_url} className={css.image} />
+        <div className={css.horizontalPreviewContainer} title={`Go to ${devSite.address}`}>
+          {false && <div className={css.status}>{i18n.openForComments}</div>}
+          <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
-            <div className={css.address}>{devSite.address}</div>
-            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+            <h3 className={css.address}>{devSite.address}</h3>
+            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }} tabIndex='-1'></div>
           </div>
         </div>
       )
     }
 
     return(
-      <div className={css.container}>
+      <div className={css.container} ref='container' tabIndex='-1'>
         <div className={css.menu}>
-          <i className={css.close} onClick={this.closeDevSite}></i>
+          <a className={css.close} onClick={this.closeDevSite} href='#'></a>
           <a className={css.expand} href={devSite.url}></a>
         </div>
         <div className={css.wrapper}>
@@ -120,7 +135,7 @@ export default class extends Component {
           <div className={css.title}>{devSite.address}</div>
           <div className={css.subtitle}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
 
-          <img src={devSite.image_url} className={css.image} />
+          <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
 
           <div className={css.interact}>
             <div className={css.sharecontainer}>
@@ -155,28 +170,28 @@ export default class extends Component {
 
           <div className={css.row}>
             <div className={css.col}>
-              <div className={css.title}>Development Id</div>
+              <div className={css.title}>{i18n.devId}</div>
               <div className={css.subtitle}>{devSite.devID}</div>
             </div>
             <div className={css.col}>
-              <div className={css.title}>Ward</div>
+              <div className={css.title}>{i18n.ward}</div>
               <div className={css.subtitle}>{capitalize(devSite.ward_name)}</div>
             </div>
             <div className={css.col}>
-              <div className={css.title}>Status</div>
+              <div className={css.title}>{i18n.status}</div>
               <div className={css.subtitle} dangerouslySetInnerHTML={{__html: devSite.status}}></div>
             </div>
           </div>
 
-          <div className={css.descriptiontitle}>Description</div>
+          <div className={css.descriptiontitle}>{i18n.description}</div>
           <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
 
           {
             devSite.city_files.length > 0 &&
-            <div className={css.filecontainer} onClick={this.toggleShowFiles}>
+            <a title='Toggle view of relevant files' href='#' className={css.filecontainer} onClick={this.toggleShowFiles}>
               <i className={css.folder}></i>
               {showFiles ? 'Hide ' : 'View ' } {devSite.city_files.length} attached files
-            </div>
+            </a>
           }
 
           {
@@ -187,10 +202,10 @@ export default class extends Component {
           }
 
           <div className={css.emailofficials}>
-            <a href='#' onClick={this.openEmailModal} className={css.email}>
+            <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Urban Planner'>
               <i className={css.mail}></i> Urban Planner
             </a>
-            <a href='#' onClick={this.openEmailModal} className={css.email}>
+            <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Councillor'>
               <i className={css.mail}></i> Councillor
             </a>
           </div>
@@ -210,17 +225,26 @@ export default class extends Component {
 }
 
 const EmailModal = (props) => {
-  return <div className={css.emailmodal}>
-    <div className={css.contact}>Contact {props.contact}</div>
+  return <div className={css.emailmodal} tabIndex='-1'>
+    <div className={css.contact} >Contact {props.contact}</div>
     <div className={css.address}>{props.address}</div>
 
     <form onSubmit={props.handleEmail} acceptCharset='UTF-8' >
       <input name='utf8' type='hidden' value='✓' />
       <input value={props.id} type='hidden' name='dev_site_id' />
-      <input type='custom-text' required='required' name='name' className={css.input} placeholder='Name' />
-      <input type='custom-text' required='required' name='email' className={css.input} placeholder='Email' />
-      <textarea name='message' required='required' className={css.textarea} placeholder='Message'></textarea>
-      <input type='submit' name='commit' value='Send' className={css.submit} />
+      <div className='input-field'>
+        <label>{i18n.name}</label>
+        <input type='text' required='required' name='name' className={css.input} />
+      </div>
+      <div className='input-field'>
+        <label>{i18n.email}</label>
+        <input type='text' required='required' name='email' className={css.input} />
+      </div>
+      <div className='input-field'>
+        <label>{i18n.message}</label>
+        <textarea name='message' required='required' className={css.textarea}></textarea>
+      </div>
+      <input type='submit' name='commit' value='Send' className='btn' />
     </form>
 
   </div>

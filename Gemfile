@@ -30,6 +30,8 @@ gem 'font-awesome-rails', '~> 4.7.0.0'
 gem 'cancancan', '~> 1.15.0'
 gem 'rolify', '~> 5.1.0'
 gem 'rack-cors'
+gem 'friendly_id', '~> 5.1.0'
+gem 'whenever'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

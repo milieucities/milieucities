@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import css from './map-search.scss'
+import i18n from './locale'
 import Autocomplete from '../../../Utility/Autocomplete/Autocomplete'
 import Select from '../../../Utility/Select/Select'
 import { toLower, toUpper } from 'lodash'
@@ -43,20 +44,23 @@ export default class MapSearch extends Component {
     }
   }
   render() {
+  const { locale } = document.body.dataset;
+  i18n.setLanguage(locale);
+
     return <div className={css.container}>
       <div className={css.wrapper}>
-        <Autocomplete callback={this.autocompleteCallback} placeholder='Address' type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
+        <Autocomplete callback={this.autocompleteCallback} placeholder={i18n.address} type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
       </div>
       <div className={css.divider}></div>
       <div className='row no-marg'>
         <div className='col s12 m4'>
-          <Select title='Year' options={YEARS} defaultValue={this.props.year} onSelect={this.handleSelectDropdown} />
+          <Select title={i18n.year} options={YEARS} defaultValue={this.props.year} onSelect={this.handleSelectDropdown} />
         </div>
         <div className='col s12 m4'>
-          <Select title='Status' options={STATUS_TYPES} defaultValue={this.props.status} onSelect={this.handleSelectDropdown} />
+          <Select title={i18n.status} options={STATUS_TYPES} defaultValue={this.props.status} onSelect={this.handleSelectDropdown} />
         </div>
         <div className='col s12 m4'>
-          <Select title='Ward' options={WARD_TYPES} defaultValue={this.props.ward} onSelect={this.handleSelectDropdown} />
+          <Select title={i18n.ward} options={WARD_TYPES} defaultValue={this.props.ward} onSelect={this.handleSelectDropdown} />
         </div>
       </div>
     </div>;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { List } from 'immutable'
 import css from './comments.scss'
+import i18n from './locale'
 
 export default class Comments extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class Comments extends Component {
     this.hasMoreComments = () => this._hasMoreComments();
     this.appendMoreComments = () => this._appendMoreComments();
     this.loadComments();
+    this.openModal = () => this._openModal();
   }
   componentDidMount() {
     $('.modal-trigger').leanModal();
@@ -21,6 +23,9 @@ export default class Comments extends Component {
         () => this.loadComments()
       )
     }
+  }
+  _openModal() {
+    document.querySelector('#sign-in-modal .modal-content').focus();
   }
   _loadComments() {
     $.getJSON(`/dev_sites/${this.props.devSiteId}/comments`,
@@ -44,14 +49,25 @@ export default class Comments extends Component {
   }
   render() {
     const { comments, total } = this.state;
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
     return <div className={css.container}>
       <div className={!this.currentUserId && css.nouser}>
-        {this.currentUserId ? <CommentForm {...this.props} parent={this} /> :
-          <a href="#sign-in-modal" className='modal-trigger btn'>Sign in to comment</a>}
+        {
+          this.currentUserId
+          ? <CommentForm {...this.props} parent={this} />
+          : <a href="#sign-in-modal" className='modal-trigger btn' onClick={this.openModal}>{i18n.signInToComment}</a>
+        }
       </div>
-      {total > 0 && <div className={css.number}> {total} responses</div>}
+      {
+        total > 0 &&
+        <div className={css.number}> {total} responses</div>
+      }
       {comments.map(comment => <Comment comment={comment} key={comment.id} parent={this} />)}
-      {this.hasMoreComments() && <a onClick={this.appendMoreComments} className={css.loadmore}>Load More Comments</a> }
+      {
+        this.hasMoreComments() &&
+        <a onClick={this.appendMoreComments} className={css.loadmore}>{i18n.loadMore}</a>
+      }
     </div>;
   }
 }
@@ -83,15 +99,17 @@ class CommentForm extends Component {
     });
   }
   render() {
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
     return <form id='new_comment' onSubmit={this.submitForm}>
       <input name='utf8' type='hidden' value='✓' />
       <div className={css.wrapper}>
         <textarea className={css.textarea}
                   value={this.state.body}
                   onChange={this.handleChange}
-                  placeholder='What do you think?'>
+                  placeholder={i18n.whatDoYouThink}>
         </textarea>
-        <input type='submit' value='Comment' className={css.submit}/>
+        <input type='submit' value={i18n.comment} className={css.submit}/>
       </div>
     </form>
   }
@@ -117,6 +135,9 @@ class Comment extends Component {
   }
   _voteUp() {
     const { comment, parent } = this.props;
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const { failedToVote } = i18n;
     if(comment.voted_up) {
       $.ajax({
         url: `/users/${this.currentUserId}/votes/${comment.voted_up}`,
@@ -127,7 +148,7 @@ class Comment extends Component {
           parent.loadComments();
         },
         error: error => {
-          window.flash('alert', 'Failed to vote on comment.')
+          window.flash('alert', failedToVote)
         }
       });
     } else if(comment.voted_down) {
@@ -140,7 +161,7 @@ class Comment extends Component {
             parent.loadComments();
           },
           error: error => {
-            window.flash('alert', 'Failed to vote on comment.')
+            window.flash('alert', failedToVote)
           }
         });
       } else {
@@ -153,13 +174,16 @@ class Comment extends Component {
             parent.loadComments();
           },
           error: error => {
-            window.flash('alert', 'Failed to vote on comment.')
+            window.flash('alert', failedToVote)
           }
         });
       }
   }
   _voteDown() {
     const { comment, parent } = this.props;
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const { failedToVote } = i18n;
     if(comment.voted_down) {
       $.ajax({
         url: `/users/${this.currentUserId}/votes/${comment.voted_down}`,
@@ -170,7 +194,7 @@ class Comment extends Component {
           parent.loadComments();
         },
         error: error => {
-          window.flash('alert', 'Failed to vote on comment.')
+          window.flash('alert', failedToVote)
         }
       });
     } else if(comment.voted_up) {
@@ -183,7 +207,7 @@ class Comment extends Component {
           parent.loadComments();
         },
         error: error => {
-          window.flash('alert', 'Failed to vote on comment.')
+          window.flash('alert', failedToVote)
         }
       });
     } else {
@@ -196,7 +220,7 @@ class Comment extends Component {
           parent.loadComments();
         },
         error: error => {
-          window.flash('alert', 'Failed to vote on comment.')
+          window.flash('alert', failedToVote)
         }
       });
     }
@@ -204,10 +228,13 @@ class Comment extends Component {
   render() {
     const { comment } = this.props;
     const { readMoreClicked, showReadMore } = this.state;
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+
     return <div className={css.comment}>
       <div className={css.info}>
         <span className={css.name}>
-          {comment.user ? (comment.user.username || comment.user.name || 'Anonymous') : 'Anonymous'}
+          {comment.user ? (comment.user.username || comment.user.name || i18n.anoymous) : i18n.anoymous}
         </span>
         <span className={css.date}>
           {moment(comment.created_at).format('MMMM DD, YYYY ')}
@@ -218,13 +245,15 @@ class Comment extends Component {
              dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}>
         </div>
         <div className={css.votesContainer}>
-          <i className="fa fa-angle-up fa-2x" onClick={this.voteUp}></i>
-          <i className="fa fa-angle-down fa-2x" onClick={this.voteDown}></i>
+          <i className="fa fa-angle-up fa-2x" onClick={this.voteUp} tabIndex='0'></i>
+          <i className="fa fa-angle-down fa-2x" onClick={this.voteDown} tabIndex='0'></i>
           { comment.vote_count }
         </div>
       </div>
-      {showReadMore && !readMoreClicked &&
-        <a href="#" onClick={this.viewWholeBody} className={css.readmore}>Read More...</a>}
+      {
+        showReadMore && !readMoreClicked &&
+        <a href="#" onClick={this.viewWholeBody} className={css.readmore} tabIndex='-1'>{i18n.readMore}</a>
+      }
     </div>
   }
 }
