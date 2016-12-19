@@ -1,4 +1,7 @@
 en:
+  time:
+    formats:
+      default: "%B %e, %Y"
   activerecord:
     attributes:
       user:
@@ -14,6 +17,8 @@ en:
       terms: "Accept terms of use"
       title: "Sign Up"
       submit: "CREATE ACCOUNT"
+    alert:
+      mustAcceptTerms: "You must accept terms of service"
   layouts:
     _signin_modal:
       email: 'EMAIL'
@@ -66,6 +71,28 @@ en:
         message-label: 'message'
         message-placeholder: 'Leave a message.'
         send-button-text: 'Send'
+    create:
+      createS: "Development site was successfully created."
+    update:
+      updateS: "Dev site was successfully updated."
+    destroy:
+      destroyS: "Dev site was successfully destroyed."
+  events:
+    alert:
+      mustFillReqired: "All required fields must be submitted."
+    create:
+      createS: "Event was successfully created."
+    update:
+      updateS: "Event was successfully updated."
+    destroy:
+      destroyS: "Event was successfully destroyed."
+  validates:
+    alert:
+      emailIsRequired: "Email is required"
+      emailAlreadyInUse: "Email already in use"
+      passwordIsRequired: "Password is required"
+      passwordNotMatch: "Passwords do not match"
+      passwordLimitation: "Password must be between 6 to 20 characters"
   contact-milieu-modal:
     header-text: 'Contact Milieu'
     name-label: 'name'

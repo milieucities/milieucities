@@ -16,6 +16,9 @@ export default class Footer extends Component {
     );
   }
   _handleSubmit(e) {
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const { subscribeS, subscribeF } = i18n;
     if(e.which !== 13 && e.type !== 'click') {
       return false;
     }
@@ -28,14 +31,14 @@ export default class Footer extends Component {
       type: 'POST',
       data: { newsletter_subscription: { email: this.refs.email.value } },
       success: () => {
-        window.flash('notice', 'Thank you for subscribing to our newletter');
+        window.flash('notice', subscribeS);
         this.refs.email.value = ''
       },
       error: error => {
         if(error.status == 422) {
           window.flash('alert', error.responseJSON.email.join('. '));
         } else {
-          window.flash('alert', 'An error occured while attempting to subscribe your email. Refresh the page and try again.');
+          window.flash('alert', subscribeF);
         }
         this.refs.email.value = ''
       }
@@ -72,11 +75,11 @@ export default class Footer extends Component {
               {i18n.followUs}
             </h3>
             <div className={css.socialMediaLinks}>
-              <a title='Find us on Twitter' href='https://twitter.com/milieucities'><i className='fa fa-twitter'></i></a>
-              <a title='Find us on Instagram' href='https://www.instagram.com/milieucities/'><i className='fa fa-instagram'></i></a>
-               <a title='Find us on Facebook' href='https://www.facebook.com/Milieucities/'><i className='fa fa-facebook'></i></a>
-               <a title='Find us on Linkedin' href='https://www.linkedin.com/company/milieu.io'><i className='fa fa-linkedin'></i></a>
-              <a title='Find us on Medium' href='https://medium.com/@milieucities'><i className='fa fa-medium'></i></a>
+              <a title={i18n.twitter} href='https://twitter.com/milieucities'><i className='fa fa-twitter'></i></a>
+              <a title={i18n.instagram} href='https://www.instagram.com/milieucities/'><i className='fa fa-instagram'></i></a>
+               <a title={i18n.facebook} href='https://www.facebook.com/Milieucities/'><i className='fa fa-facebook'></i></a>
+               <a title={i18n.linkedin} href='https://www.linkedin.com/company/milieu.io'><i className='fa fa-linkedin'></i></a>
+              <a title={i18n.medium} href='https://medium.com/@milieucities'><i className='fa fa-medium'></i></a>
             </div>
             <h3 className={css.title}>
               {i18n.subscribe}

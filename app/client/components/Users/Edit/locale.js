@@ -19,9 +19,16 @@ const i18n = new LocalizedStrings({
     city: 'City',
     save: 'SAVE',
     delete: 'DELETE ACCOUNT',
+    avatarDelS: 'Avatar successully deleted',
+    avatarDelF: 'Failed to delete avatar',
+    profileUploadS: 'Profile updated successfully',
+    profileUploadF: 'Failed to save profile',
+    deleteConfirm: 'Are you sure you would like to delete your account?',
+    accountDeleteS: 'Account deleted',
+    accountDeleteF: 'Failed to delete account'
   },
   fr: {
-    role: 'COMMUNITY MEMBER', //TODO: Translate to French
+    role: 'membre du communauté',
     dashboard: 'Tableau de bord',
     settings: 'Paramètres du compte',
     notification: 'Notification',
@@ -34,11 +41,17 @@ const i18n = new LocalizedStrings({
     newPassword: 'Nouveau mot de pass',
     newPasswordConfirmation: 'Confirmer le mot de pass',
     location: 'Adresse',
-    street: 'Adresse', //TODO: Confirm
+    street: 'Adresse',
     city: 'Ville',
     save: 'sauvegarder',
     delete: 'supprimer votre compte',
-    notifications: 'Notifications',
+    avatarDelS: 'Avatar supprimé',
+    avatarDelF: 'La suppression d’avatar a échoué',
+    profileUploadS: 'Profil mis à jour',
+    profileUploadF: 'La mise à jour du profil a échoué',
+    deleteConfirm: 'Êtes-vous certain que vous vouliez supprimer votre compte?',
+    accountDeleteS: 'Compte supprimée',
+    accountDeleteF: 'La suppression de compte a échoué'
   }
 });
 

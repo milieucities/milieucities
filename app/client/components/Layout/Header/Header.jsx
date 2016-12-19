@@ -47,7 +47,7 @@ export default class Header extends Component {
               !userId &&
               <div>
                 <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
-                <a href={`/${locale}/users/new`} title={i18n.signUp}>{i18n.signUp}</a>
+                <a href={`/${locale}/users/new`} className='hide-on-small-only' title={i18n.signUp}>{i18n.signUp}</a>
                 <a href='#sign-in-modal' className='modal-trigger' onClick={this.openModal} title={i18n.logIn}>{i18n.logIn}</a>
                 <a href='http://about.milieu.io/' title={i18n.about}>{i18n.about}</a>
               </div>
@@ -56,11 +56,11 @@ export default class Header extends Component {
               userId &&
               <div>
                 <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
-                <a href='http://about.milieu.io/' title={i18n.about}>{i18n.about}</a>
+                <a href='http://about.milieu.io/' className='hide-on-small-only' title={i18n.about}>{i18n.about}</a>
                 <a href={`/${locale}/users/${userSlug}`} title='Go to your Dashboard'>
                   <img className={css.profileImage} src={ userAvatar || require('./images/default-avatar.png')} />
                 </a>
-                <a title={i18n.logOut} rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userSlug}`}>{i18n.logOut}</a>
+                <a title={i18n.logOut} rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userId}`}>{i18n.logOut}</a>
               </div>
             }
           </div>

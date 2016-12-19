@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import css from './show.scss'
 import { capitalize, replace } from 'lodash'
+import i18n from './locale'
 import Comments from '../../Comments/Comments'
 import Modal from '../../Utility/Modal/Modal'
 
@@ -37,7 +38,9 @@ export default class extends Component {
     e.preventDefault();
     const { contact } = this.state;
     const url = contact === 'Urban Planner' ? '/contact_file_lead' : '/contact_councillor';
-
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const { messageSent, mustSign } = i18n
     $.ajax({
       url: url,
       dataType: 'JSON',
@@ -47,7 +50,7 @@ export default class extends Component {
       processData: false,
       data: new FormData(e.currentTarget),
       success: () => {
-        window.flash('notice', 'Message successfully sent!')
+        window.flash('notice', messageSent)
         this.setState({ showModal: false });
       }
     });
@@ -68,7 +71,7 @@ export default class extends Component {
       success: devSiteJson => this.setState({ devSite: devSiteJson }),
       error: error => {
         if(error.status == 403){
-          window.flash('alert', 'Must sign in to like a development site.')
+          window.flash('alert', mustSign)
         }
       }
     });
@@ -84,12 +87,15 @@ export default class extends Component {
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+
     if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
       return(
         <div className={css.verticalPreviewContainer} title={`Development Site at ${devSite.address}`}>
-          {false && <div className={css.status}>Open for Comments</div>}
+          {false && <div className={css.status}>{i18n.openForComments}</div>}
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
             <h3 className={css.address}>{devSite.address}</h3>
@@ -102,7 +108,7 @@ export default class extends Component {
     if(preview && horizontal) {
       return(
         <div className={css.horizontalPreviewContainer} title={`Go to ${devSite.address}`}>
-          {false && <div className={css.status}>Open for Comments</div>}
+          {false && <div className={css.status}>{i18n.openForComments}</div>}
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
             <h3 className={css.address}>{devSite.address}</h3>
@@ -128,7 +134,7 @@ export default class extends Component {
           <div className={css.interact}>
             <div className={css.sharecontainer}>
               <i className={css.share}></i>
-              Share
+              {i18n.share}
             </div>
             <div className={css.likecontainer}>
               <i className={devSite.like ? css.liked : css.like} onClick={this.toggleLike}></i>
@@ -144,20 +150,20 @@ export default class extends Component {
 
           <div className={css.row}>
             <div className={css.col}>
-              <div className={css.title}>Development Id</div>
+              <div className={css.title}>{i18n.devId}</div>
               <div className={css.subtitle}>{devSite.devID}</div>
             </div>
             <div className={css.col}>
-              <div className={css.title}>Ward</div>
+              <div className={css.title}>{i18n.ward}</div>
               <div className={css.subtitle}>{capitalize(devSite.ward_name)}</div>
             </div>
             <div className={css.col}>
-              <div className={css.title}>Status</div>
+              <div className={css.title}>{i18n.status}</div>
               <div className={css.subtitle} dangerouslySetInnerHTML={{__html: devSite.status}}></div>
             </div>
           </div>
 
-          <div className={css.descriptiontitle}>Description</div>
+          <div className={css.descriptiontitle}>{i18n.description}</div>
           <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
 
           {
@@ -207,15 +213,15 @@ const EmailModal = (props) => {
       <input name='utf8' type='hidden' value='✓' />
       <input value={props.id} type='hidden' name='dev_site_id' />
       <div className='input-field'>
-        <label>Name</label>
+        <label>{i18n.name}</label>
         <input type='text' required='required' name='name' className={css.input} />
       </div>
       <div className='input-field'>
-        <label>Email</label>
+        <label>{i18n.email}</label>
         <input type='text' required='required' name='email' className={css.input} />
       </div>
       <div className='input-field'>
-        <label>Message</label>
+        <label>{i18n.message}</label>
         <textarea name='message' required='required' className={css.textarea}></textarea>
       </div>
       <input type='submit' name='commit' value='Send' className='btn' />

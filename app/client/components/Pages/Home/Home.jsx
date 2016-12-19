@@ -71,17 +71,17 @@ export default class Home extends Component {
         <div className={css.articleContainer}>
           <Carousel>
             <a title={'Go to Milieu\'s article of Zoning 101'} href='https://medium.com/@MilieuCities/zoning-101-a88c1e397455#.du6yt0qgk' target='_blank' className={css.article}>
-              <div className={css.type}>Article</div>
-              <h2 className={css.title}>Zoning 101</h2>
-              <div className={css.summary}>Zoning regulations are the rules of the game if you — or a developer — want to construct a building.</div>
+              <div className={css.type}>{i18n.article}</div>
+              <h2 className={css.title}>{i18n.title1}</h2>
+              <div className={css.summary}>{i18n.summary1}</div>
             </a>
             <a title={'Go to Milieu\'s article of Whose streets are we planning?'} href='https://medium.com/@MilieuCities/whose-streets-are-we-planning-88f3ed1bc613#.hv858aafk' target='_blank' className={css.article}>
-              <div className={css.type}>Article</div>
-              <h2 className={css.title}>Whose streets are we planning?</h2>
-              <div className={css.summary}>Transportation planning offers huge opportunities to enable equity.</div>
+              <div className={css.type}>{i18n.article}</div>
+              <h2 className={css.title}>{i18n.title2}</h2>
+              <div className={css.summary}>{i18n.summary2}</div>
             </a>
             <a title={'Go to Milieu\'s article of What we learned from pop-up engagement'} href='https://medium.com/@MilieuCities/what-we-learned-from-pop-up-engagement-65cec34fefde#.l84ns3xc6' target='_blank' className={css.article}>
-              <div className={css.type}>Article</div>
+              <div className={css.type}>{i18n.article}</div>
               <h3 className={css.title}>What we learned from pop-up engagement</h3>
               <div className={css.summary}>Milieu’s on-going goal is to facilitate a human-centered approach to urban planning and development.</div>
             </a>

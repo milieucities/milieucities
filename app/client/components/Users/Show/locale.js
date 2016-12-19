@@ -11,7 +11,7 @@ const i18n = new LocalizedStrings({
     noComment: 'You have not submitted a comment yet.'
   },
   fr: {
-    role: 'COMMUNITY MEMBER', //TODO: Translate to French
+    role: 'membre du communauté',
     dashboard: 'Tableau de bord',
     settings: 'Paramètres du compte',
     notification: 'Notification',

@@ -26,6 +26,9 @@ export default class Edit extends Component {
     );
   }
   _deleteAvatar(e) {
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const { avatarDelS, avatarDelF} = i18n;
     let form = new FormData();
     form.append('profile[remove_avatar]', true);
 
@@ -39,15 +42,18 @@ export default class Edit extends Component {
       data: form,
       success: user => {
         this.setState({ user, avatarUploading: false });
-        window.flash('notice', 'Avatar successully deleted');
+        window.flash('notice', avatarDelS);
       },
       error: error => {
         this.setState({ avatarUploading: false });
-        window.flash('alert', 'Failed to delete avatar')
+        window.flash('alert', avatarDelF)
       }
     });
   }
   _uploadAvatar(e) {
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const {profileUploadF, profileUploadS} = i18n;
     let form = new FormData();
     form.append('profile[avatar]', this.refs.avatar.files[0]);
 
@@ -61,16 +67,19 @@ export default class Edit extends Component {
       data: form,
       success: user => {
         this.setState({ user, avatarUploading: false });
-        window.flash('notice', 'Profile updated successfully');
+        window.flash('notice', profileUploadS);
       },
       error: error => {
         this.setState({ avatarUploading: false });
-        window.flash('alert', 'Failed to save profile')
+        window.flash('alert', profileUploadF)
       }
     });
   }
   _submitForm(e) {
     const form = new FormData(document.querySelector('#user-form'));
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const {profileUploadF, profileUploadS} = i18n;
 
     $.ajax({
       url: `/users/${this.currentUserId}`,
@@ -81,18 +90,19 @@ export default class Edit extends Component {
       data: form,
       success: user => {
         this.setState({ user, error: null });
-        window.flash('notice', 'Profile updated successfully');
+        window.flash('notice', profileUploadS);
       },
       error: error => {
-        window.flash('alert', 'Failed to save profile')
+        window.flash('alert', profileUploadF)
         this.setState({ error: error.responseJSON });
       }
     });
   }
-  _deleteAccount(e) {
-    e.preventDefault();
-
-    if(!confirm("Are you sure you would like to delete your account?")){
+  _deleteAccount() {
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const { deleteConfirm, accountDeleteS, accountDeleteF } = i18n;
+    if(!confirm(deleteConfirm)){
       return false;
     }
 
@@ -102,10 +112,10 @@ export default class Edit extends Component {
       type: 'DELETE',
       success: () => {
         Turbolinks.visit('/');
-        window.flash('notice', 'Account deleted');
+        window.flash('notice', accountDeleteS);
       },
       error: error => {
-        window.flash('alert', 'Failed to delete account')
+        window.flash('alert', accountDeleteF)
       }
     });
   }
@@ -113,7 +123,6 @@ export default class Edit extends Component {
     const { user, avatarUploading, loading, error } = this.state;
     const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
-    console.log(error);
     return(
       <div>
         <Header/>
