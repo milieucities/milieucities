@@ -24,9 +24,9 @@
 }
 
 .textarea{
-  border: 1px solid #eee;
+  border: 1px solid $light-gray;
   padding: 20px;
-  background-color: #fff;
+  background-color: $white;
   border-radius: 3px;
   height: 150px;
 }
@@ -102,8 +102,9 @@
   &:hover {
     opacity: 1;
   }
-  &:focus{
-    border: 3px solid #e67e22;
+
+  &:focus {
+    border: 3px solid $accessibility;
   }
 }
 
