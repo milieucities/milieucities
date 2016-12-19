@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe DevSitesController, type: :controller do
-  let(:dev_site)     {create(:dev_site)}
+  let(:dev_site)         {create(:dev_site)}
   let(:valid_attributes) { attributes_for(:dev_site) }
 
   shared_examples("a user who can't manage dev sites") do

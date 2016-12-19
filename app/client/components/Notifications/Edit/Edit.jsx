@@ -47,7 +47,7 @@ export default class Edit extends Component {
   }
   render() {
     const { notification, loading, error } = this.state;
-    const { userId, userAvatar, userName, locale } = document.body.dataset;
+    const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
     return(
       <div>
@@ -55,11 +55,11 @@ export default class Edit extends Component {
         <div className={css.info}>
           <div className='container'>
             <div className={css.imgContainer}>
-              <img src={userAvatar || require('./images/default-avatar.png')} />
+              <img alt='Profile Avatar' src={userAvatar || require('./images/default-avatar.png')} />
             </div>
             <div className={css.content}>
               <h1 className={css.name}>{userName}</h1>
-              <div className={css.role}>{i18n.role}</div>
+              <h3 className={css.role}>{i18n.role}</h3>
             </div>
           </div>
         </div>
@@ -67,9 +67,9 @@ export default class Edit extends Component {
           <div className='container'>
             <div className={css.menu}>
               <ul>
-                <li><a href={`/${locale}/users/${userId}`}>{i18n.dashboard}</a></li>
-                <li><a href={`/${locale}/users/${userId}/edit`}>{i18n.settings}</a></li>
-                <li><b><a href={`/${locale}/users/${userId}/notification/edit`}>{i18n.notification}</a></b></li>
+                <li><a href={`/${locale}/users/${userSlug}`}>{i18n.dashboard}</a></li>
+                <li><a href={`/${locale}/users/${userSlug}/edit`}>{i18n.settings}</a></li>
+                <li><b><a href={`/${locale}/users/${userSlug}/notification/edit`}>{i18n.notification}</a></b></li>
               </ul>
             </div>
             {

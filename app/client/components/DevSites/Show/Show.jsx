@@ -12,8 +12,8 @@ export default class extends Component {
     this.parent = this.props.parent;
     this.currentUserId = parseInt(document.body.dataset.userId);
     this.loadDevSite = () => this._loadDevSite();
-    this.toggleShowFiles = () => this.setState({ showFiles: !this.state.showFiles });
-    this.closeDevSite = () => this.parent.setState({ activeDevSiteId: null });
+    this.toggleShowFiles = (e) => this._toggleShowFiles(e);
+    this.closeDevSite = (e) => this._closeDevSite(e);
     this.openEmailModal = (e) => this._openEmailModal(e);
     this.handleEmail = (e) => this._handleEmail(e);
     this.toggleLike = () => this._toggleLike();
@@ -21,6 +21,7 @@ export default class extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.id !== this.props.id) this.loadDevSite();
+    this.refs.container &&  this.refs.container.focus();
   }
   _loadDevSite() {
     $.getJSON(`/dev_sites/${this.props.id}`,
@@ -75,6 +76,14 @@ export default class extends Component {
       }
     });
   }
+  _closeDevSite(e) {
+    e.preventDefault();
+    this.parent.setState({ activeDevSiteId: null });
+  }
+  _toggleShowFiles(e) {
+    e.preventDefault();
+    this.setState({ showFiles: !this.state.showFiles });
+  }
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
@@ -85,12 +94,12 @@ export default class extends Component {
 
     if(preview && !horizontal) {
       return(
-        <div className={css.verticalPreviewContainer}>
+        <div className={css.verticalPreviewContainer} title={`Development Site at ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
-          <img src={devSite.image_url} className={css.image} />
+          <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
-            <div className={css.address}>{devSite.address}</div>
-            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+            <h3 className={css.address}>{devSite.address}</h3>
+            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }} tabIndex='-1'></div>
           </div>
         </div>
       )
@@ -98,21 +107,21 @@ export default class extends Component {
 
     if(preview && horizontal) {
       return(
-        <div className={css.horizontalPreviewContainer}>
+        <div className={css.horizontalPreviewContainer} title={`Go to ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
-          <img src={devSite.image_url} className={css.image} />
+          <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
-            <div className={css.address}>{devSite.address}</div>
-            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+            <h3 className={css.address}>{devSite.address}</h3>
+            <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }} tabIndex='-1'></div>
           </div>
         </div>
       )
     }
 
     return(
-      <div className={css.container}>
+      <div className={css.container} ref='container' tabIndex='-1'>
         <div className={css.menu}>
-          <i className={css.close} onClick={this.closeDevSite}></i>
+          <a className={css.close} onClick={this.closeDevSite} href='#'></a>
           <a className={css.expand} href={devSite.url}></a>
         </div>
         <div className={css.wrapper}>
@@ -120,7 +129,7 @@ export default class extends Component {
           <div className={css.title}>{devSite.address}</div>
           <div className={css.subtitle}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
 
-          <img src={devSite.image_url} className={css.image} />
+          <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
 
           <div className={css.interact}>
             <div className={css.sharecontainer}>
@@ -159,10 +168,10 @@ export default class extends Component {
 
           {
             devSite.city_files.length > 0 &&
-            <div className={css.filecontainer} onClick={this.toggleShowFiles}>
+            <a title='Toggle view of relevant files' href='#' className={css.filecontainer} onClick={this.toggleShowFiles}>
               <i className={css.folder}></i>
-              {showFiles ? i18n.hide : i18n.view } {devSite.city_files.length} {i18n.file}
-            </div>
+              {showFiles ? 'Hide ' : 'View ' } {devSite.city_files.length} attached files
+            </a>
           }
 
           {
@@ -173,10 +182,10 @@ export default class extends Component {
           }
 
           <div className={css.emailofficials}>
-            <a href='#' onClick={this.openEmailModal} className={css.email}>
+            <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Urban Planner'>
               <i className={css.mail}></i> Urban Planner
             </a>
-            <a href='#' onClick={this.openEmailModal} className={css.email}>
+            <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Councillor'>
               <i className={css.mail}></i> Councillor
             </a>
           </div>
@@ -196,17 +205,26 @@ export default class extends Component {
 }
 
 const EmailModal = (props) => {
-  return <div className={css.emailmodal}>
-    <div className={css.contact}>Contact {props.contact}</div>
+  return <div className={css.emailmodal} tabIndex='-1'>
+    <div className={css.contact} >Contact {props.contact}</div>
     <div className={css.address}>{props.address}</div>
 
     <form onSubmit={props.handleEmail} acceptCharset='UTF-8' >
       <input name='utf8' type='hidden' value='✓' />
       <input value={props.id} type='hidden' name='dev_site_id' />
-      <input type='custom-text' required='required' name='name' className={css.input} placeholder={i18n.name} />
-      <input type='custom-text' required='required' name='email' className={css.input} placeholder={i18n.email} />
-      <textarea name='message' required='required' className={css.textarea} placeholder={i18n.message}></textarea>
-      <input type='submit' name='commit' value='Send' className={css.submit} />
+      <div className='input-field'>
+        <label>{i18n.name}</label>
+        <input type='text' required='required' name='name' className={css.input} />
+      </div>
+      <div className='input-field'>
+        <label>{i18n.email}</label>
+        <input type='text' required='required' name='email' className={css.input} />
+      </div>
+      <div className='input-field'>
+        <label>{i18n.message}</label>
+        <textarea name='message' required='required' className={css.textarea}></textarea>
+      </div>
+      <input type='submit' name='commit' value='Send' className='btn' />
     </form>
 
   </div>

@@ -71,6 +71,9 @@
           &:hover {
             color: $primary-color;
           }
+          &:focus{
+            background-color: $accessibility;
+          }
         }
       }
     }

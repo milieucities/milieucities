@@ -9,6 +9,8 @@ export default class Header extends Component {
     super()
     this.state = { isMobile: (window.innerWidth < 600) };
 
+    this.openModal = () => this._openModal();
+
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
@@ -18,23 +20,26 @@ export default class Header extends Component {
   componentDidMount() {
     $('.modal-trigger').leanModal();
   }
+  _openModal() {
+    document.querySelector('#sign-in-modal .modal-content').focus();
+  }
   handleChangeLocalization(locale) {
     const regex = /^\/en\/|\/en$|\/fr\/|\/fr$/;
     if(location.pathname.match(regex)) {
       return location.pathname.replace(regex, `/${locale}/`)
     } else {
-      return `/${locale}/${location.pathname.length > 1 ? '' : location.pathname}`
+      return `/${locale}/${location.pathname.length > 1 ? location.pathname : ''}`
     }
   }
   render() {
     const { profile } = this.state;
-    const { userId, userAvatar, userName, locale } = document.body.dataset;
+    const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
 
     return (
       <div className={css.container}>
         <a href={`/${locale}`} className={css.logo}>
-          <img src={require('./images/dark-logo.svg')} />
+          <img src={require('./images/dark-logo.svg')} title={'Milieu\'s Logo'} />
         </a>
         <div className={css.linksAndLocale}>
           <div className={css.links}>
@@ -42,15 +47,17 @@ export default class Header extends Component {
               !userId &&
               <div>
                 <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
-                <a href={`/${locale}/users/new`} title={i18n.signUp}>{i18n.signUp}</a>
-                <a href='#sign-in-modal' className='modal-trigger' title={i18n.logIn}>{i18n.logIn}</a>
+                <a href={`/${locale}/users/new`} className='hide-on-small-only' title={i18n.signUp}>{i18n.signUp}</a>
+                <a href='#sign-in-modal' className='modal-trigger' onClick={this.openModal} title={i18n.logIn}>{i18n.logIn}</a>
                 <a href='http://about.milieu.io/' title={i18n.about}>{i18n.about}</a>
               </div>
             }
             {
               userId &&
               <div>
-                <a href={`/${locale}/users/${userId}`}>
+                <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
+                <a href='http://about.milieu.io/' className='hide-on-small-only' title={i18n.about}>{i18n.about}</a>
+                <a href={`/${locale}/users/${userSlug}`} title='Go to your Dashboard'>
                   <img className={css.profileImage} src={ userAvatar || require('./images/default-avatar.png')} />
                 </a>
                 <a title={i18n.logOut} rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userId}`}>{i18n.logOut}</a>
@@ -60,7 +67,7 @@ export default class Header extends Component {
           {
             !this.state.isMobile &&
             <div className={css.locale}>
-              <a href={this.handleChangeLocalization('en')}>EN</a> | <a href={this.handleChangeLocalization('fr')}>FR</a>
+              <a title='Change language to English' href={this.handleChangeLocalization('en')}>EN</a> | <a title='Change language to French' href={this.handleChangeLocalization('fr')}>FR</a>
             </div>
           }
         </div>
