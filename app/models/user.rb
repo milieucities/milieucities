@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
+
   rolify
   has_secure_password validations: false
 
@@ -25,4 +27,29 @@ class User < ActiveRecord::Base
                         unless: "provider.present?"
 
   delegate :name, to: :profile, allow_nil: true
+  friendly_id :slug_candidates, use: :slugged
+
+  def slug_candidates
+    [
+      :username,
+      :name_from_profile,
+      :full_name,
+      :email_mailbox,
+      [:first_name, :organization],
+      [:first_name, :last_name, :organization]
+    ]
+  end
+
+  def full_name
+    "#{first_name} #{last_name}" if first_name && last_name
+  end
+
+  def email_mailbox
+    "#{email.split('@')[0]}"
+  end
+
+  def name_from_profile
+    "#{profile.name}" if profile && profile.name
+  end
+
 end

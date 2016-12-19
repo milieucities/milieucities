@@ -5,6 +5,7 @@
       data-signed-in="<%= signed_in? %>"
       <% if signed_in? %>
       data-user-id="<%= current_user.id %>"
+      data-user-slug="<%= current_user.slug %>"
       data-user-name="<%= current_user.profile.name %>"
       data-user-avatar="<%= current_user.profile.avatar.web.preview.url %>"
       <% end %>

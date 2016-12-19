@@ -7,7 +7,6 @@ export default class Footer extends Component {
   constructor() {
     super()
     this.state = { isMobile: (window.innerWidth < 600) }
-    this.currentUserId = document.body.dataset.userId
     this.handleSubmit = (e) => this._handleSubmit(e);
 
     window.addEventListener('resize',

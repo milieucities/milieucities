@@ -20,7 +20,7 @@ export default class Show extends Component {
   }
   render() {
     const { user, loading } = this.state;
-    const { userId, userAvatar, userName, locale } = document.body.dataset;
+    const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
     return(
       <div>
@@ -40,9 +40,9 @@ export default class Show extends Component {
           <div className='container'>
             <div className={css.menu}>
               <ul>
-                <li><b><a href={`/${locale}/users/${userId}`}>{i18n.dashboard}</a></b></li>
-                <li><a href={`/${locale}/users/${userId}/edit`}>{i18n.settings}</a></li>
-                <li><a href={`/${locale}/users/${userId}/notification/edit`}>{i18n.notification}</a></li>
+                <li><b><a href={`/${locale}/users/${userSlug}`}>{i18n.dashboard}</a></b></li>
+                <li><a href={`/${locale}/users/${userSlug}/edit`}>{i18n.settings}</a></li>
+                <li><a href={`/${locale}/users/${userSlug}/notification/edit`}>{i18n.notification}</a></li>
               </ul>
             </div>
             {
@@ -58,7 +58,7 @@ export default class Show extends Component {
             {
               !loading &&
               <div className={css.content}>
-                <a href={`/${locale}/users/${userId}/edit`} title='Edit your profile' className='btn right'>{i18n.edit}</a>
+                <a href={`/${locale}/users/${userSlug}/edit`} title='Edit your profile' className='btn right'>{i18n.edit}</a>
                 <h2>{i18n.dashboard}</h2>
 
                 <div className={css.meta}>

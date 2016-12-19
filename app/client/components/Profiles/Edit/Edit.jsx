@@ -10,6 +10,7 @@ export default class Edit extends Component {
 
     this.state = {};
     this.currentUserId = parseInt(document.body.dataset.userId);
+    this.userSlug = document.body.dataset.userSlug;
 
     this.loadProfile = () => this._loadProfile();
     this.loadProfile();
@@ -105,7 +106,7 @@ export default class Edit extends Component {
             <div className={css.delete}>
               <a data-confirm='Are you positive that you want to delete your account?'
                 className='btn cancel block' rel='nofollow'
-                data-method='delete' href={`/users/${this.currentUserId}`}>Delete Account</a>
+                data-method='delete' href={`/users/${this.userSlug}`}>Delete Account</a>
             </div>
           </div>
           <div className={css.content}>
