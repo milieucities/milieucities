@@ -4,6 +4,12 @@ import { capitalize, replace } from 'lodash'
 import i18n from './locale'
 import Comments from '../../Comments/Comments'
 import Modal from '../../Utility/Modal/Modal'
+import { ShareButtons, generateShareIcon } from 'react-share';
+
+const { FacebookShareButton, TwitterShareButton } = ShareButtons;
+
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
 
 export default class extends Component {
   constructor(props) {
@@ -133,8 +139,22 @@ export default class extends Component {
 
           <div className={css.interact}>
             <div className={css.sharecontainer}>
-              <i className={css.share}></i>
-              {i18n.share}
+              <FacebookShareButton
+                url={devSite.url}
+                title={devSite.address}
+                media={devSite.image_url}>
+                <FacebookIcon
+                  size={32}
+                  round />
+              </FacebookShareButton>
+              <TwitterShareButton
+                url={devSite.url}
+                title={devSite.address}
+                media={devSite.image_url}>
+              <TwitterIcon
+                size={32}
+                round />
+              </TwitterShareButton>
             </div>
             <div className={css.likecontainer}>
               <i className={devSite.like ? css.liked : css.like} onClick={this.toggleLike}></i>
