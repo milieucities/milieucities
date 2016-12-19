@@ -31,17 +31,9 @@ class User < ActiveRecord::Base
 
   def slug_candidates
     [
-      :username,
       :name_from_profile,
-      :full_name,
-      :email_mailbox,
-      [:first_name, :organization],
-      [:first_name, :last_name, :organization]
+      :email_mailbox
     ]
-  end
-
-  def full_name
-    "#{first_name} #{last_name}" if first_name && last_name
   end
 
   def email_mailbox
