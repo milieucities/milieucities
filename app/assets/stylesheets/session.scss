@@ -7,6 +7,14 @@
 
     .btn {
       width: 100%;
+      &:focus{
+        background-color: $accessibility;
+      }
+    }
+    input{
+      &:focus{
+        background-color: $accessibility;
+      }
     }
   }
 
@@ -23,6 +31,9 @@
     color: $white;
     margin-bottom: 10px;
     border-radius: 3px;
+    &:focus{
+      background-color: $accessibility;
+    }
 
     @media #{$small-and-down} {
       font-size: 14px;
@@ -34,10 +45,16 @@
 
     &.fb {
       background-color: #3B5998;
+      &:focus{
+        background-color: $accessibility;
+      }
     }
 
     &.google {
       background-color: #DD4B39;
+      &:focus{
+        background-color: $accessibility;
+      }
     }
   }
 }

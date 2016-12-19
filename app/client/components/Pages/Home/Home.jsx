@@ -67,7 +67,6 @@ export default class Home extends Component {
             <a href={`/${locale}/dev_sites?activeDevSiteId=1869`}><DevSite id={1869} preview={true} horizontal={isMobile} /></a>
             <a href={`/${locale}/dev_sites?activeDevSiteId=1870`}><DevSite id={1870} preview={true} horizontal={isMobile} /></a>
           </div>
-
         </div>
         <div className={css.articleContainer}>
           <Carousel>

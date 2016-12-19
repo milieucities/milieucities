@@ -36,6 +36,12 @@
     display: block;
     float: right;
     cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 3px;
+
+    &:focus{
+      border: 2px solid $accessibility;
+    }
   }
 
   .close {
@@ -48,6 +54,12 @@
     display: block;
     float: right;
     cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 3px;
+
+    &:focus{
+      border: 2px solid $accessibility;
+    }
   }
 
   .wrapper {
@@ -114,6 +126,9 @@
     width: 25px;
     height: 25px;
     display: block;
+    &:focus{
+      background-color: $accessibility;
+    }
   }
 
   .like {
@@ -265,6 +280,10 @@
       padding: 5px 10px;
       border-radius: 2px;
       width: 45%;
+
+      &:focus{
+        background-color: $accessibility;
+      }
     }
 
     .mail{

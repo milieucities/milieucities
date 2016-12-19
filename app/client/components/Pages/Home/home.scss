@@ -45,8 +45,8 @@
 
       &:focus {
         transition: 500ms;
-        border-color: #92c7c6;
-        box-shadow: -5px -5px #92c7c6;
+        border-color: $primary-color;
+        box-shadow: -5px -5px $primary-color;
       }
     }
   }
@@ -87,6 +87,9 @@
         width: 100%;
         word-break: break-word;
       }
+      &:focus{
+        background-color: $accessibility;
+      }
     }
 
     @media #{$medium-and-down} {
@@ -109,7 +112,6 @@
     display: block;
     color: #fff;
     text-align: center;
-    transition: 2s;
     padding: 10px;
     margin: 0 10px;
     box-sizing: border-box;

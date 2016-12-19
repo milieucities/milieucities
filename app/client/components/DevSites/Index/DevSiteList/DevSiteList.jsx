@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import css from './dev-site-list.scss'
 import { replace, ceil } from 'lodash'
 
-
 export default class DevSiteList extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +34,8 @@ export default class DevSiteList extends Component {
   _devSiteNodes() {
     return this.props.devSites.map(devSite => {
       return <a href="#" onClick={this.handleDevSiteClick}
+                         onFocus={this.handleDevSiteMouseEnter}
+                         onBlur={this.handleDevSiteMouseLeave}
                          onMouseEnter={this.handleDevSiteMouseEnter}
                          onMouseLeave={this.handleDevSiteMouseLeave}
                          data-id={devSite.id}
@@ -55,18 +56,20 @@ export default class DevSiteList extends Component {
       </div>
     }
 
-    return <div className={css.container}>
-      <div className={css.pagination}>
-        <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
-        {this.props.page + 1} / {ceil(this.props.total / 20)}
-        <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
+    return(
+      <div className={css.container}>
+        <div className={css.pagination}>
+          <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
+          {this.props.page + 1} / {ceil(this.props.total / 20)}
+          <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
+        </div>
+        {this.devSiteNodes()}
+        <div className={css.pagination}>
+          <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
+          {this.props.page + 1} / {ceil(this.props.total / 20)}
+          <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
+        </div>
       </div>
-      {this.devSiteNodes()}
-      <div className={css.pagination}>
-        <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
-        {this.props.page + 1} / {ceil(this.props.total / 20)}
-        <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
-      </div>
-    </div>;
+    );
   }
 }

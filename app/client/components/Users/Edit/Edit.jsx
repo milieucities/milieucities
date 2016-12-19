@@ -89,7 +89,8 @@ export default class Edit extends Component {
       }
     });
   }
-  _deleteAccount() {
+  _deleteAccount(e) {
+    e.preventDefault();
 
     if(!confirm("Are you sure you would like to delete your account?")){
       return false;
@@ -242,7 +243,7 @@ export default class Edit extends Component {
                 </div>
                 <div className='row'>
                   <button name='commit' type='submit' className='btn' onClick={this.submitForm}>{i18n.save}</button>
-                  <a name='commit' type='submit' style={{marginLeft: 10, float: 'right'}} onClick={this.deleteAccount}>{i18n.delete}</a>
+                  <a name='commit' type='submit' style={{marginLeft: 10, float: 'right'}} onClick={this.deleteAccount} href='#'>{i18n.delete}</a>
                 </div>
               </div>
             }
