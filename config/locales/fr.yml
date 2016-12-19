@@ -70,6 +70,8 @@ fr:
       terms: "accepter les conditions d'utilisation"
       title: "Connecter"
       submit: "créer une compte"
+    alert:
+      mustAcceptTerms: "Vous devez accepter les conditions d’utilisation"
   layouts:
     _signin_modal:
       email: 'courriel'
@@ -84,7 +86,7 @@ fr:
       terms: "Conditions d'utilisation"
   sessions:
     alert:
-      could_not_signin: "Echec de la connexion, veuillez réessayer"  #TODO:Confirm
+      could_not_signin: "Échec de l’ouverture de session. Veuillez essayer à nouveau."
     notice:
       welcome: "Bienvenue à Milieu"
     new:
@@ -122,6 +124,28 @@ fr:
         message-label: 'message'
         message-placeholder: 'Leave a message.'
         send-button-text: 'Send'
+    create:
+      createS: "Site de développement crée."
+    update:
+      updateS: "Site de développement mise à jour."
+    destroy:
+      destroyS: "Site de développement supprimée."
+  events:
+    alert:
+      mustFillReqired: "Tous les champs obligatoires doivent être soumis."
+    create:
+      createS: "Événement crée."
+    update:
+      updateS: "Événement mise à jour."
+    destroy:
+      destroyS: "Événement supprimé."
+  validates:
+    alert:
+      emailIsRequired: "Courriel est requis"
+      emailAlreadyInUse: "Courriel déjà utilisé"
+      passwordIsRequired: "Password is required" #TODO: Translate
+      passwordNotMatch: "Passwords do not match"
+      passwordLimitation: "Password must be between 6 to 20 characters"
   contact-milieu-modal:
     header-text: 'Contact Milieu'
     name-label: 'prénom'

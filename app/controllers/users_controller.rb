@@ -27,8 +27,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path, notice: t('sessions.notice.welcome')
     else
-      #TODO: Translate to French
-      flash[:alert] = "You must accept terms of service" unless @user.profile.accepted_terms
+      flash[:alert] = t('users.alert.mustAcceptTerms') unless @user.profile.accepted_terms
       render :new
     end
   end

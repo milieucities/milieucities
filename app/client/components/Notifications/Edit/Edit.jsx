@@ -24,6 +24,9 @@ export default class Edit extends Component {
   }
   _submitForm(e) {
     const form = new FormData(document.querySelector('#notification-form'));
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
+    const { notiUpdateF, notiUpdateS } = i18n;
     console.log(form.keys());
     $.ajax({
       url: `/users/${this.currentUserId}/notification`,
@@ -34,10 +37,10 @@ export default class Edit extends Component {
       data: form,
       success: notification => {
         this.setState({ notification });
-        window.flash('notice', 'Notification updated successfully');
+        window.flash('notice', notiUpdateS);
       },
       error: error => {
-        window.flash('alert', 'Failed to save notification changes')
+        window.flash('alert', notiUpdateF)
         this.setState({ error: error.responseJSON });
       }
     });

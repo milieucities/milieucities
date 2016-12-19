@@ -161,7 +161,7 @@ export default class extends Component {
             devSite.city_files.length > 0 &&
             <div className={css.filecontainer} onClick={this.toggleShowFiles}>
               <i className={css.folder}></i>
-              {showFiles ? 'Hide ' : 'View ' } {devSite.city_files.length} attached files
+              {showFiles ? i18n.hide : i18n.view } {devSite.city_files.length} {i18n.file}
             </div>
           }
 
