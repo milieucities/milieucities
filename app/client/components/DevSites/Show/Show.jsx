@@ -3,15 +3,9 @@ import css from './show.scss'
 import { capitalize, replace } from 'lodash'
 import Comments from '../../Comments/Comments'
 import Modal from '../../Utility/Modal/Modal'
-import {
-  ShareButtons,
-  generateShareIcon
-} from 'react-share';
+import { ShareButtons, generateShareIcon } from 'react-share';
 
-const {
-  FacebookShareButton,
-  TwitterShareButton
-} = ShareButtons;
+const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
@@ -87,7 +81,6 @@ export default class extends Component {
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
-    const shareUrl = 'http://github.com';
     if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
@@ -134,8 +127,7 @@ export default class extends Component {
               <FacebookShareButton
                 url={devSite.url}
                 title={devSite.address}
-                media={devSite.image_url}
-                className="Demo__some-network__share-button">
+                media={devSite.image_url}>
                 <FacebookIcon
                   size={32}
                   round />
@@ -143,8 +135,7 @@ export default class extends Component {
               <TwitterShareButton
                 url={devSite.url}
                 title={devSite.address}
-                media={devSite.image_url}
-                className="Demo__some-network__share-button">
+                media={devSite.image_url}>
               <TwitterIcon
                 size={32}
                 round />
