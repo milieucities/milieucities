@@ -4,8 +4,16 @@
 
 .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-in:focus{
   background-color: #fff;
+
+  &:focus {
+    border: 1px solid $accessibility;
+  }
 }
 
 .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-out:focus{
   background-color: #fff;
+
+  &:focus {
+    border: 1px solid $accessibility;
+  }
 }

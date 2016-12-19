@@ -36,3 +36,9 @@
     color: $white;
   }
 }
+
+button {
+  &:focus {
+    background-color: $accessibility;
+  }
+}
