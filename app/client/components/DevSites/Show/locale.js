@@ -13,7 +13,7 @@ const i18n = new LocalizedStrings({
     description: "Description",
     view: "View ",
     hide: "Hide ",
-    file: "attached files",
+    file: " attached files",
     urbanPlanner: "Urban Planner",
     councillor: "Councillor",
     name: "Name",
@@ -33,7 +33,7 @@ const i18n = new LocalizedStrings({
     description: "Description",
     view: "Afficher ", //TODO: Double check!
     hide: "Masquer ",
-    file: "Pièces jointes",
+    file: " Pièces jointes",
     urbanPlanner: "Urbanisme",
     councillor: "Conseiller",
     name: "Prénom",
