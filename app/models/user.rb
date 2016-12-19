@@ -32,16 +32,22 @@ class User < ActiveRecord::Base
   def slug_candidates
     [
       :name_from_profile,
-      :email_mailbox
+      :email_mailbox,
+      :name_and_id,
+      :id
     ]
   end
 
   def email_mailbox
-    "#{email.split('@')[0]}"
+    "#{email.split('@')[0]}" if email.present?
   end
 
   def name_from_profile
     "#{profile.name}" if profile && profile.name
+  end
+
+  def name_and_id
+    "#{profile.name}-#{id}" profile && profile.name
   end
 
 end
