@@ -1,0 +1,57 @@
+.info {
+  background-color: $dark-primary-color;
+  padding: 30px 0 15px;
+
+  .imgContainer{
+    position: relative;
+    width: 300px;
+    min-width: 300px;
+  }
+
+  .container {
+    padding: 20px 10px;
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 3px;
+    object-fit: cover;
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  > div {
+    display: flex;
+  }
+
+  .content {
+    width: 100%;
+
+    .name {
+      color: $white;
+      margin: 0;
+      margin-bottom: 15px;
+    }
+
+    .role {
+      color: $light-primary-color;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .verified {
+      color: $light-tertiary-color;
+      letter-spacing: 1px;
+
+      .verifyBtn {
+        margin-left: 10px;
+        padding: 5px 15px;
+      }
+    }
+  }
+}

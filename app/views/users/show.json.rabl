@@ -1,6 +1,6 @@
 object @user
 
-  attributes :id, :provider, :email
+  attributes :id, :provider, :email, :organization, :community_role, :verification_status
 
 child :profile do
   attributes :id, :name, :bio, :avatar, :anonymous_comments

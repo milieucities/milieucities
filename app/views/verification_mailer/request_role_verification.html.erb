@@ -1,0 +1,10 @@
+<p>A user has requested verification!</p>
+<br>
+<p>Name: <%= @user.profile.name %></p>
+<p>Organization: <%= @user.organization || 'None provided' %></p>
+<p>Role: <%= @user.community_role || 'None provided' %></p>
+<p>User ID: <%= @user.id %></p>
+<br>
+<p>Update this user's status on the <%= link_to 'Users admin page', users_url %>.</p>
+<br>
+<p>Keep up the good work!</p>

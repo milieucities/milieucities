@@ -46,6 +46,16 @@ class UsersController < ApplicationController
     render json: {}, status: :ok
   end
 
+  def request_verification
+    VerificationMailer.request_role_verification(@user).deliver_now
+    if @user.update(verification_status: 'pendingVerification')
+      render json: @user, status: :ok
+    else
+      messages = @user.errors.full_messages.join(', ')
+      render json: messages, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
@@ -53,6 +63,9 @@ class UsersController < ApplicationController
       :email,
       :password,
       :password_confirmation,
+      :organization,
+      :community_role,
+      :verification_status,
       address_attributes: [
         :id,
         :street,

@@ -1,3 +1,10 @@
+<style>
+  th, td {
+    padding: 4px 8px;
+    text-align: left;
+  }
+</style>
+
 <div id="users">
     <table>
       <thead>
@@ -6,6 +13,8 @@
           <th>Email</th>
           <th>Signed up</th>
           <th>Receive Newsletter</th>
+          <th>Verified Status</th>
+          <th>Verification</th>
         </tr>
       </thead>
 
@@ -16,6 +25,11 @@
           <td><%= user.email %></td>
           <td><%= user.created_at %></td>
           <td><%= user.profile.try(:receive_newletter) %></td>
+          <td><%= user.verification_status %></td>
+          <td>
+            <% if user.verification_status === 'pendingVerification' %>
+              <%= link_to 'Verify', user_path(@user, user: {verification_status: 'verified'}), method: :put, class: 'btn' %></td>
+            <% end %>
         </tr>
         <% end %>
       </tbody>

@@ -49,5 +49,4 @@ class User < ActiveRecord::Base
   def name_and_id
     "#{profile.name}-#{id}" if profile && profile.name
   end
-
 end

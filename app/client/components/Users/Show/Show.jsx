@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
+import ProfileHeader from '../../Common/ProfileHeader/ProfileHeader'
+import ProfileMenu from '../../Common/ProfileMenu/ProfileMenu'
 import i18n from './locale'
 import css from './show.scss'
 import { debounce } from 'lodash'
@@ -25,26 +27,15 @@ export default class Show extends Component {
     return(
       <div>
         <Header/>
-        <div className={css.info}>
-          <div className='container'>
-            <div className={css.imgContainer}>
-              <img alt='Profile Avatar' src={userAvatar || require('./images/default-avatar.png')} />
-            </div>
-            <div className={css.content}>
-              <h1 className={css.name}>{userName}</h1>
-              <h3 className={css.role}>{i18n.role}</h3>
-            </div>
-          </div>
-        </div>
+        <ProfileHeader
+          userName={userName}
+          userAvatar={userAvatar}
+          user={user}
+          verificationCallback={this.loadUser}
+        />
         <div className={css.container}>
           <div className='container'>
-            <div className={css.menu}>
-              <ul>
-                <li><b><a href={`/${locale}/users/${userSlug}`}>{i18n.dashboard}</a></b></li>
-                <li><a href={`/${locale}/users/${userSlug}/edit`}>{i18n.settings}</a></li>
-                <li><a href={`/${locale}/users/${userSlug}/notification/edit`}>{i18n.notification}</a></li>
-              </ul>
-            </div>
+            <ProfileMenu active='dashboard' />
             {
               loading &&
               <div className='loading-screen'>

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
+import ProfileHeader from '../../Common/ProfileHeader/ProfileHeader'
+import ProfileMenu from '../../Common/ProfileMenu/ProfileMenu'
 import i18n from './locale'
 import css from './edit.scss'
 import { debounce } from 'lodash'
@@ -25,6 +27,7 @@ export default class Edit extends Component {
       user => this.setState({ user, loading: false })
     );
   }
+
   _deleteAvatar(e) {
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
@@ -50,6 +53,7 @@ export default class Edit extends Component {
       }
     });
   }
+
   _uploadAvatar(e) {
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
@@ -75,6 +79,7 @@ export default class Edit extends Component {
       }
     });
   }
+
   _submitForm(e) {
     const form = new FormData(document.querySelector('#user-form'));
     const { locale } = document.body.dataset;
@@ -98,6 +103,7 @@ export default class Edit extends Component {
       }
     });
   }
+
   _deleteAccount() {
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
@@ -119,6 +125,7 @@ export default class Edit extends Component {
       }
     });
   }
+
   render() {
     const { user, avatarUploading, loading, error } = this.state;
     const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
@@ -127,26 +134,15 @@ export default class Edit extends Component {
     return(
       <div>
         <Header/>
-        <div className={css.info}>
-          <div className='container'>
-            <div className={css.imgContainer}>
-              <img alt='Profile Avatar' src={userAvatar || require('./images/default-avatar.png')} />
-            </div>
-            <div className={css.content}>
-              <h1 className={css.name}>{userName}</h1>
-              <h3 className={css.role}>{i18n.role}</h3>
-            </div>
-          </div>
-        </div>
+        <ProfileHeader
+          userName={userName}
+          userAvatar={userAvatar}
+          user={user}
+          verificationCallback={this.loadUser}
+        />
         <div className={css.container}>
           <div className='container'>
-            <div className={css.menu}>
-              <ul>
-                <li><a href={`/${locale}/users/${userSlug}`}>{i18n.dashboard}</a></li>
-                <li><b><a href={`/${locale}/users/${userSlug}/edit`}>{i18n.settings}</a></b></li>
-                <li><a href={`/${locale}/users/${userSlug}/notification/edit`}>{i18n.notification}</a></li>
-              </ul>
-            </div>
+            <ProfileMenu active='settings' />
             {
               loading &&
               <div className='loading-screen'>
@@ -168,7 +164,7 @@ export default class Edit extends Component {
                       {avatarUploading && <div className={css.loader}><i className='fa fa-spin fa-circle-o-notch fa-3x fa-fw' /></div>}
                       {user && user.profile.avatar && <div className={css.icon} onClick={this.deleteAvatar} ><i className='fa fa-trash-o'/></div>}
                       <input type='file' ref='avatar' id='profile_avatar' onChange={this.uploadAvatar} style={{display: 'none'}} />
-                      <img alt='Editable Profile Avatar' src={ user && user.profile.avatar|| require('./images/default-avatar.png')} />
+                      <img alt='Editable Profile Avatar' src={ user && user.profile.avatar|| require('../../Common/images/default-avatar.png')} />
                       <label htmlFor='profile_avatar' className={css.changePhoto}>{i18n.changePhoto}</label>
                     </div>
                   </div>
@@ -188,10 +184,20 @@ export default class Edit extends Component {
                           <input type='checkbox' id='profile_anonymous' defaultChecked={user.profile.anonymous_comments} name='user[profile_attributes][anonymous_comments]'/>
                           <label htmlFor='profile_anonymous'>I would like all my comments to be anonymous</label>
                         </div>
+                        <div className='input-field col s12 m8 l6'>
+                          <label htmlFor='user_organization'>{i18n.organization}</label>
+                          <input type='text' id='user_organization' defaultValue={user.organization} name='user[organization]'/>
+                          {error && error['user.organization'] && <div className='error-message'>{error['user.organization']}</div>}
+                        </div>
+                        <div className='input-field col s12 m8 l6'>
+                          <label htmlFor='user_community_role'>{i18n.communityRole}</label>
+                          <input type='text' id='user_community_role' defaultValue={user.community_role} name='user[community_role]'/>
+                          {error && error['user.community_role'] && <div className='error-message'>{error['user.community_role']}</div>}
+                        </div>
                       </div>
                       <div className='row'>
                         <div className='input-field col s12'>
-                          <label htmlFor='profile_bio'>Bio</label>
+                          <label htmlFor='profile_bio'>{i18n.bio}</label>
                           <textarea id='profile_bio' defaultValue={user.profile.bio} name='user[profile_attributes][bio]'/>
                         </div>
                       </div>
