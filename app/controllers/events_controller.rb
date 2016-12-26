@@ -30,10 +30,10 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html { redirect_to @event, notice: t('events.create.createS') }
         format.json { render :show, status: :created, location: @event }
       else
-        flash.now[:alert] = 'All required fields must be submitted.'
+        flash.now[:alert] = t('events.alert.mustFillReqired')
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
@@ -43,10 +43,10 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to @event, notice: t('events.update.updateS') }
         format.json { render :show, status: :ok, location: @event }
       else
-        flash.now[:alert] = 'All required fields must be submitted.'
+        flash.now[:alert] = t('events.alert.mustFillReqired')
         format.html { render :edit }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
@@ -56,7 +56,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to map_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to map_url, notice: t('events.destroy.destroyS') }
       format.json { head :no_content }
     end
   end

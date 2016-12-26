@@ -28,11 +28,11 @@
     font-size: 14px;
 
     &:hover{
-      background-color: #e2eae9;
+      background-color: $light-tertiary-color;
     }
 
     &.highlighted{
-      background-color: #e2eae9;
+      background-color: $light-tertiary-color;
     }
   }
 }

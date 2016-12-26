@@ -17,7 +17,7 @@ textarea {
   box-sizing: border-box;
 
   &:focus{
-    border: 1px solid #cdcdcd;
+    border: 1px solid $gray;
   }
 
   &.error{
