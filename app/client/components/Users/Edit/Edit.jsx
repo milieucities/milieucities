@@ -123,6 +123,7 @@ export default class Edit extends Component {
     const { user, avatarUploading, loading, error } = this.state;
     const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
+    if(user && !user.address) user.address = {}
     return(
       <div>
         <Header/>
@@ -236,16 +237,17 @@ export default class Edit extends Component {
                     {i18n.location}
                   </div>
                   <div className={css.data}>
+                    <input type='hidden' name={'user[address_attributes][id]'} value={user.address.id}/>
                     <div className='row'>
                       <div className='input-field col s12 m8 l6'>
-                        <label htmlFor='profile_street'>{i18n.street}</label>
-                        <input type='text' id='profile_street' form='user-form' defaultValue={user.profile.street} name='user[profile_attributes][street]'/>
+                        <label htmlFor='address_street'>{i18n.street}</label>
+                        <input type='text' id='address_street' form='user-form' defaultValue={user.address.street} name='user[address_attributes][street]'/>
                       </div>
                     </div>
                     <div className='row'>
                       <div className='input-field col s12 m8 l6'>
-                        <label htmlFor='profile_city'>{i18n.city}</label>
-                        <input type='text' id='profile_city' form='user-form' defaultValue={user.profile.city} name='user[profile_attributes][city]'/>
+                        <label htmlFor='address_city'>{i18n.city}</label>
+                        <input type='text' id='address_city' form='user-form' defaultValue={user.address.city} name='user[address_attributes][city]'/>
                       </div>
                     </div>
                   </div>

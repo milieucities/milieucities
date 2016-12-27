@@ -4,16 +4,16 @@ class User < ActiveRecord::Base
   rolify
   has_secure_password validations: false
 
-  has_one :survey, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :conversations, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_one :notification, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_one :address, as: :addressable, dependent: :destroy
   has_many :comments
   accepts_nested_attributes_for :profile
+  accepts_nested_attributes_for :address
 
-  after_create :create_survey
   after_create :create_notification
 
   validates :accepted_terms, acceptance: true
