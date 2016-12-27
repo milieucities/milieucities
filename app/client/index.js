@@ -9,7 +9,5 @@ import './components/Notifications/Edit/Edit'
 
 import './components/Pages/Home/Home'
 
-import './components/Profiles/Edit/Edit'
-
 import './components/Users/Show/Show'
 import './components/Users/Edit/Edit'

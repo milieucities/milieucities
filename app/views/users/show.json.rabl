@@ -3,11 +3,15 @@ object @user
   attributes :id, :provider, :email
 
 child :profile do
-  attributes :id, :name, :street, :bio, :avatar, :city, :age_range, :field_of_occupation, :receive_newletter, :postal_code
+  attributes :id, :name, :bio, :avatar
 
   node :avatar do |profile|
     profile.avatar.web.preview.url if profile.avatar.present?
   end
+end
+
+child :address do
+  attributes :id, :street, :city
 end
 
 child :comments do

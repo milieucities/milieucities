@@ -11,7 +11,6 @@ class DevSite < ActiveRecord::Base
     "Low-rise Residential", "Mid-rise Residential", "Hi-rise Residential", "Mixed-use Residential/Community",
     "Commercial", "Commercial/Hotel","Mixed-use", "Additions"]
 
-  # ASSOCIATIONS
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :statuses, dependent: :destroy

@@ -54,7 +54,6 @@ Rails.application.routes.draw do
       resource :profile, only: [:edit, :update, :show]
       resource :notification, only: [:edit, :update, :show]
       resources :votes, only: [:create, :destroy]
-      resource :survey, only: [:edit, :update, :show]
     end
     resources :sessions, only: [:new, :create, :destroy]
 
