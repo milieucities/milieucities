@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.5.1'
+
+# rails core gems
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails', '~> 4.1.0'
@@ -8,28 +10,34 @@ gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'turbolinks', '~> 5.0.0'
 gem 'rack-cors', '~> 0.4.0'
 
-gem 'pg', '~> 0.18.4'
-gem 'redis', '~> 3.2.2'
+# background services gems
+gem 'whenever'
 gem 'resque', '~> 1.26.0'
 
-gem 'bcrypt', '~> 3.1.11'
-gem 'geokit-rails'
-gem 'cancancan', '~> 1.15.0'
-gem 'rolify', '~> 5.1.0'
-gem 'rabl', '~> 0.12.0'
-
-gem 'redcarpet'
-gem 'fastimage'
-gem 'photoswipe-rails'
-gem 'momentjs-rails', '~> 2.11.0'
-gem 'react-rails', '~> 1.6.2'
-gem 'font-awesome-rails', '~> 4.7.0.0'
-
+# model gems
 gem 'carrierwave', '~> 0.10'
+gem 'fastimage'
+gem 'rolify', '~> 5.1.0'
+gem 'friendly_id', '~> 5.1.0'
+gem 'cancancan', '~> 1.15.0'
+gem 'geokit-rails'
+gem 'bcrypt', '~> 3.1.11'
 gem 'fog', '~> 1.38'
 gem 'rmagick', '~> 2.15.4', :require => 'RMagick'
 
-#omniauth gems
+# view gems
+gem 'font-awesome-rails', '~> 4.7.0.0'
+gem 'momentjs-rails', '~> 2.11.0'
+gem 'photoswipe-rails'
+gem 'react-rails', '~> 1.6.2'
+gem 'redcarpet'
+gem 'rabl', '~> 0.12.0'
+
+# database gems
+gem 'pg', '~> 0.18.4'
+gem 'redis', '~> 3.2.2'
+
+# omniauth gems
 gem 'therubyracer'
 gem 'omniauth'
 gem 'omniauth-twitter'

@@ -14,6 +14,6 @@ class OmniauthController < ApplicationController
     @user.update(email: request.env['omniauth.auth']['info']['email']) if @user.email.nil?
 
     session[:user_id]= @user.id
-    redirect_to root_path, notice: "Welcome to Milieu"
+    redirect_to root_path, notice: t('sessions.notice.welcome')
   end
 end
