@@ -15,5 +15,5 @@ child :address do
 end
 
 child :comments do
-  attributes :id, :body
+  attributes :id, :body, :last_posted
 end

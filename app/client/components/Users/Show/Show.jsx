@@ -65,8 +65,13 @@ export default class Show extends Component {
                   <div className={css.label}>{i18n.recentComments}</div>
                   <div className={css.data}>
                     {
-                      user && user.comments.map((comment, i) => {
-                        return <div className={css.entry} key={i}>{comment.body}</div>
+                      user && user.comments.slice(0, 5).map((comment, i) => {
+                        return(
+                          <div className={css.entry} key={i}>
+                            <div className={css.date}>{comment.last_posted}</div>
+                            {comment.body}
+                          </div>
+                        )
                       })
                     }
                     {

@@ -17,6 +17,7 @@
 
 .byebug_history
 /config/database.yml
+dump.rdb
 .env
 
 node_modules
@@ -30,5 +31,3 @@ Gemfile.lock
 
 # Ignore public folder
 /public/assets
-
-

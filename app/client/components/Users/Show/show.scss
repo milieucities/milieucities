@@ -100,7 +100,13 @@
         width: 100%;
 
         .entry {
-          padding-bottom: 10px;
+          padding-bottom: 20px;
+
+          .date {
+            font-size: 12px;
+            padding-bottom: 5px;
+            font-style: italic;
+          }
         }
       }
     }
