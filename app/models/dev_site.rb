@@ -40,7 +40,6 @@ class DevSite < ActiveRecord::Base
       dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
     end
 
-
     if search_params[:year].present?
       dev_sites = dev_sites
         .where('extract(year from updated) = ?', search_params[:year])
@@ -116,7 +115,7 @@ class DevSite < ActiveRecord::Base
   mount_uploader :files, FilesUploader
 
   after_create do
-    Resque.enqueue(NotifyAllNearResidentsJob, id)
+    Resque.enqueue(NewDevelopmentJob, id)
   end
 
 end

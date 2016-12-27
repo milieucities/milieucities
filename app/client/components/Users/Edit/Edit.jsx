@@ -191,23 +191,20 @@ export default class Edit extends Component {
                     </form>
                   </div>
                 </div>
-                {
-                  !user.provider &&
-                  <div className={css.meta}>
-                    <div className={css.label}>
-                      {i18n.contact}
-                    </div>
-                    <div className={css.data}>
-                      <div className='row'>
-                        <div className='input-field col s12 m8 l6'>
-                          <label htmlFor='user_email'>{i18n.email}</label>
-                          <input type='text' id='user_email' defaultValue={user.email} name='user[email]' form='user-form'/>
-                          {error && error.email && <div className='error-message'>{error.email}</div>}
-                        </div>
+                <div className={css.meta}>
+                  <div className={css.label}>
+                    {i18n.contact}
+                  </div>
+                  <div className={css.data}>
+                    <div className='row'>
+                      <div className='input-field col s12 m8 l6'>
+                        <label htmlFor='user_email'>{i18n.email}</label>
+                        <input type='text' id='user_email' defaultValue={user.email} name='user[email]' form='user-form'/>
+                        {error && error.email && <div className='error-message'>{error.email}</div>}
                       </div>
                     </div>
                   </div>
-                }
+                </div>
                 {
                   !user.provider &&
                   <div className={css.meta}>

@@ -12,8 +12,8 @@ class Address < ActiveRecord::Base
   def geocoded
     lat_and_lng = Geokit::Geocoders::GoogleGeocoder.geocode(full_address)
     if lat_and_lng.success
-      lat = lat_and_lng.lat
-      lon = lat_and_lng.lng
+      self.lat = lat_and_lng.lat
+      self.lon = lat_and_lng.lng
     end
   end
 
