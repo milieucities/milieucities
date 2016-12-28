@@ -62,6 +62,7 @@ class UsersController < ApplicationController
         :id,
         :name,
         :bio,
+        :anonymous_comments,
         :neighbourhood,
         :postal_code,
         :accepted_terms

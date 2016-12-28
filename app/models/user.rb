@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
                         allow_blank: true,
                         unless: "provider.present?"
 
-  delegate :name, to: :profile, allow_nil: true
+  delegate :name, :anonymous_comments, to: :profile, allow_nil: true
   friendly_id :slug_candidates, use: :slugged
 
   def slug_candidates

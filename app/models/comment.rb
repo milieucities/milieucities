@@ -6,7 +6,6 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   default_scope { order(created_at: :desc) }
   has_many :votes, dependent: :destroy
-
   validates :body, presence: { message: "Comment is required" }
 
   def voted_up(current_user)
@@ -19,7 +18,7 @@ class Comment < ActiveRecord::Base
 
   def last_posted
     if updated_at > 1.day.ago
-      return time_ago_in_words(updated_at)
+      return "#{time_ago_in_words(updated_at)} ago"
     else
       return updated_at.strftime("%B %e, %Y")
     end
