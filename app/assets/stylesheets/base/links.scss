@@ -3,6 +3,8 @@ a{
   text-decoration: none;
   transition: opacity 250ms;
   cursor: pointer;
+  transition: background-color 0s linear 100ms;
+  background-color: inherit;
 
   &:focus {
     background-color: $accessibility;

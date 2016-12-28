@@ -40,7 +40,6 @@ class DevSite < ActiveRecord::Base
       dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
     end
 
-
     if search_params[:year].present?
       dev_sites = dev_sites
         .where('extract(year from updated) = ?', search_params[:year])
@@ -112,7 +111,11 @@ class DevSite < ActiveRecord::Base
     where(id: ids).order(order_clause)
   end
 
-  mount_uploaders :images, ImagesUploader
-  mount_uploaders :files, FilesUploader
+  mount_uploader :images, ImagesUploader
+  mount_uploader :files, FilesUploader
+
+  after_create do
+    Resque.enqueue(NewDevelopmentNotificationJob, id)
+  end
 
 end

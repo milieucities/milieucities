@@ -40,7 +40,7 @@ class DevSitesController < ApplicationController
         format.html { redirect_to @dev_site, notice: t('dev-sites.create.created') }
         format.json { render :show, status: :created, location: @dev_site }
       else
-        format.html { render :new }
+        format.html { render :new, alert: 'Failed to create development site' }
         format.json { render json: @dev_site.errors, status: :unprocessable_entity }
       end
     end
