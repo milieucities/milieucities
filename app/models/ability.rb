@@ -18,8 +18,7 @@ class Ability
       can :manage, :all
     # REGULAR USER ================================================
     elsif !user.new_record?
-      # can [:index, :read, :search, :images, :geojson, :map], DevSite
-      can :manage, DevSite
+      can [:index, :read, :search, :images, :geojson, :map], DevSite
       can [:index, :read], Events
       can [:new, :create, :update, :destroy, :show], User, id: user.id
       can :manage, Profile, user_id: user.id
