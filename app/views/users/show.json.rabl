@@ -3,7 +3,7 @@ object @user
   attributes :id, :provider, :email
 
 child :profile do
-  attributes :id, :name, :bio, :avatar
+  attributes :id, :name, :bio, :avatar, :anonymous_comments
 
   node :avatar do |profile|
     profile.avatar.web.preview.url if profile.avatar.present?
@@ -15,5 +15,5 @@ child :address do
 end
 
 child :comments do
-  attributes :id, :body
+  attributes :id, :body, :last_posted
 end

@@ -4,7 +4,7 @@ a{
   transition: opacity 250ms;
   cursor: pointer;
 
-  &:focus{
+  &:focus {
     background-color: $accessibility;
   }
 

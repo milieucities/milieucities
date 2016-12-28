@@ -230,30 +230,31 @@ class Comment extends Component {
     const { readMoreClicked, showReadMore } = this.state;
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
-
-    return <div className={css.comment}>
-      <div className={css.info}>
-        <span className={css.name}>
-          {comment.user ? (comment.user.username || comment.user.name || i18n.anoymous) : i18n.anoymous}
-        </span>
-        <span className={css.date}>
-          {moment(comment.created_at).format('MMMM DD, YYYY ')}
-        </span>
-      </div>
-      <div className={css.bodyContainer}>
-        <div className={readMoreClicked ? css.wholebody : css.body} ref="body"
-             dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}>
+    return(
+      <div className={css.comment}>
+        <div className={css.info}>
+          <span className={css.name}>
+            {comment.user ? (!comment.user.anonymous_comments && comment.user.name || i18n.anoymous) : i18n.anoymous}
+          </span>
+          <span className={css.date}>
+            {moment(comment.created_at).format('MMMM DD, YYYY ')}
+          </span>
         </div>
-        <div className={css.votesContainer}>
-          <i className="fa fa-angle-up fa-2x" onClick={this.voteUp} tabIndex='0'></i>
-          <i className="fa fa-angle-down fa-2x" onClick={this.voteDown} tabIndex='0'></i>
-          { comment.vote_count }
+        <div className={css.bodyContainer}>
+          <div className={readMoreClicked ? css.wholebody : css.body} ref="body"
+               dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}>
+          </div>
+          <div className={css.votesContainer}>
+            <i className="fa fa-angle-up fa-2x" onClick={this.voteUp} tabIndex='0'></i>
+            <i className="fa fa-angle-down fa-2x" onClick={this.voteDown} tabIndex='0'></i>
+            { comment.vote_count }
+          </div>
         </div>
+        {
+          showReadMore && !readMoreClicked &&
+          <a href="#" onClick={this.viewWholeBody} className={css.readmore} tabIndex='-1'>{i18n.readMore}</a>
+        }
       </div>
-      {
-        showReadMore && !readMoreClicked &&
-        <a href="#" onClick={this.viewWholeBody} className={css.readmore} tabIndex='-1'>{i18n.readMore}</a>
-      }
-    </div>
+    )
   }
 }

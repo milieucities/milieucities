@@ -28,6 +28,5 @@ class Ability
       can :manage, Conversation, user_id: user.id
       can :read, Comment
     end
-
   end
 end

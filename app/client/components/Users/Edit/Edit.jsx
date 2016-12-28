@@ -183,6 +183,13 @@ export default class Edit extends Component {
                         </div>
                       </div>
                       <div className='row'>
+                        <div className='input-field col s12' style={{display: 'flex', alignItems: 'center'}}>
+                          <input type='hidden' name='user[profile_attributes][anonymous_comments]' value={false} />
+                          <input type='checkbox' id='profile_anonymous' defaultChecked={user.profile.anonymous_comments} name='user[profile_attributes][anonymous_comments]'/>
+                          <label htmlFor='profile_anonymous'>I would like all my comments to be anonymous</label>
+                        </div>
+                      </div>
+                      <div className='row'>
                         <div className='input-field col s12'>
                           <label htmlFor='profile_bio'>Bio</label>
                           <textarea id='profile_bio' defaultValue={user.profile.bio} name='user[profile_attributes][bio]'/>

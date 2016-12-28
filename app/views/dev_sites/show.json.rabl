@@ -18,6 +18,6 @@ child(:statuses) { attributes :id, :status, :status_date }
 
 child(:comments) { attributes :id, :body
 
-  child(:user) { attributes :first_name, :last_name, :email }
+  child(:user) { attributes :name, :email }
 
 }
