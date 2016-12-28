@@ -115,7 +115,7 @@ class DevSite < ActiveRecord::Base
   mount_uploader :files, FilesUploader
 
   after_create do
-    Resque.enqueue(NewDevelopmentJob, id)
+    Resque.enqueue(NewDevelopmentNotificationJob, id)
   end
 
 end

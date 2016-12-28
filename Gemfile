@@ -12,7 +12,8 @@ gem 'rack-cors', '~> 0.4.0'
 
 # background services gems
 gem 'whenever'
-gem 'resque', '~> 1.26.0'
+gem 'resque', '~> 1.26.0', :require => 'resque/server'
+gem 'mandrill-api', '~> 1.0.53'
 
 # model gems
 gem 'carrierwave', '~> 0.10'
@@ -32,6 +33,7 @@ gem 'photoswipe-rails'
 gem 'react-rails', '~> 1.6.2'
 gem 'redcarpet'
 gem 'rabl', '~> 0.12.0'
+gem 'cocoon'
 
 # database gems
 gem 'pg', '~> 0.18.4'

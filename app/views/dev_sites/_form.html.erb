@@ -16,8 +16,7 @@
       <%= f.hidden_field :images_cache %>
     </div>
     <div class="file-path-wrapper">
-      <% img_str = @dev_site.images.map { |img| File.basename(img.path) }.join(", ") %>
-      <input type="text" class="file-path" value="<%= img_str %>" >
+      <input type="text" class="file-path" >
     </div>
   </div>
 </div>
@@ -80,8 +79,7 @@
       <%= f.hidden_field :files_cache %>
     </div>
     <div class="file-path-wrapper">
-      <% file_str = @dev_site.files.map { |file| File.basename(file.path) }.join(", ") %>
-      <input type="text" class="file-path" value="<%= file_str %>">
+      <input type="text" class="file-path">
     </div>
   </div>
 </div>

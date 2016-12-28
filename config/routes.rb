@@ -71,7 +71,10 @@ Rails.application.routes.draw do
     end
   end
 
+  mount Resque::Server, :at => "/resque"
+
   root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
   get '*path' => redirect("/#{I18n.default_locale}", status: 302)
+
 
 end

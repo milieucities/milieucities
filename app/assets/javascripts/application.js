@@ -23,6 +23,7 @@
 //= require photoswipe
 //= require velocity.min
 //= require velocity.uipack
+//= require cocoon
 
 //= require_tree .
 //= require_self
