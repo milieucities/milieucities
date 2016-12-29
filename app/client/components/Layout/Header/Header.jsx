@@ -38,6 +38,7 @@ export default class Header extends Component {
 
     return (
       <div className={css.container}>
+        <a href='.landingContainer' tabIndex='0' className={css.skip}>Skip to content</a>
         <a href={`/${locale}`} className={css.logo}>
           <img src={require('./images/dark-logo.svg')} title={'Milieu\'s Logo'} />
         </a>
