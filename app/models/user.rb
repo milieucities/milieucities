@@ -17,16 +17,21 @@ class User < ActiveRecord::Base
   after_create :create_notification
 
   validates :accepted_terms, acceptance: true
-  validates  :email, presence: { message: I18n.t('validates.alert.emailIsRequired') },
+  validates :email, presence: { message: I18n.t('validates.alert.emailIsRequired') },
                      uniqueness: { message: I18n.t('validates.alert.emailAlreadyInUse') }, unless: "provider.present?"
 
-  validates  :password, presence: { message: I18n.t('validates.alert.passwordIsRequired'), on: :create },
+  validates :password, presence: { message: I18n.t('validates.alert.passwordIsRequired'), on: :create },
                         confirmation: { message: I18n.t('validates.alert.passwordNotMatch') },
                         length: { in: 6..20, message: I18n.t('validates.alert.passwordLimitation') },
                         allow_blank: true,
                         unless: "provider.present?"
+  validates :organization, presence: true, if: :verification_requested?
+  validates :community_role, presence: true, if: :verification_requested?
+  validates :name, presence: true, if: :verification_requested?
+  validates :bio, presence: true, if: :verification_requested?
+  validates :web_presence, presence: true, if: :verification_requested?
 
-  delegate :name, :anonymous_comments, to: :profile, allow_nil: true
+  delegate :name, :bio, :web_presence, :anonymous_comments, to: :profile, allow_nil: true
   friendly_id :slug_candidates, use: :slugged
 
   def slug_candidates
@@ -48,5 +53,9 @@ class User < ActiveRecord::Base
 
   def name_and_id
     "#{profile.name}-#{id}" if profile && profile.name
+  end
+
+  def verification_requested?
+    verification_status == 'pendingVerification'
   end
 end

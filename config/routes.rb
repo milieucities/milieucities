@@ -55,10 +55,6 @@ Rails.application.routes.draw do
       resource :profile, only: [:edit, :update, :show]
       resource :notification, only: [:edit, :update, :show]
       resources :votes, only: [:create, :destroy]
-
-      member do
-        get :request_verification
-      end
     end
     resources :sessions, only: [:new, :create, :destroy]
 

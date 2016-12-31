@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
+  before_action :update_verification_status, only: [:update]
+  after_action :send_verification_mailer, only: [:update]
 
   def index
     @users = User.all
@@ -36,7 +38,8 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render :show, status: :ok
     else
-      render json: @user.errors, status: :unprocessable_entity
+      messages = @user.errors.full_messages.join(', ')
+      render json: messages, status: :unprocessable_entity
     end
   end
 
@@ -44,16 +47,6 @@ class UsersController < ApplicationController
     @user.destroy
     session.delete(:user_id)
     render json: {}, status: :ok
-  end
-
-  def request_verification
-    VerificationMailer.request_role_verification(@user).deliver_now
-    if @user.update(verification_status: 'pendingVerification')
-      render json: @user, status: :ok
-    else
-      messages = @user.errors.full_messages.join(', ')
-      render json: messages, status: :unprocessable_entity
-    end
   end
 
   private
@@ -75,11 +68,24 @@ class UsersController < ApplicationController
         :id,
         :name,
         :bio,
+        :web_presence,
         :anonymous_comments,
         :neighbourhood,
         :postal_code,
         :accepted_terms
       ]
     )
+  end
+
+  def update_verification_status
+    if user_params[:verification_status] == 'pendingVerification'
+      @user.verification_status = 'pendingVerification'
+    end
+  end
+
+  def send_verification_mailer
+    if user_params[:verification_status] == 'pendingVerification' && @user.valid?
+      VerificationMailer.request_role_verification(@user).deliver_now
+    end
   end
 end

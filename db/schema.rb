@@ -154,11 +154,16 @@ ActiveRecord::Schema.define(version: 20170108172702) do
     t.datetime "updated_at",                                  null: false
     t.string   "avatar"
     t.text     "bio"
+<<<<<<< HEAD
     t.boolean  "anonymous_comments",  default: false
     t.string   "web_presence"
     t.string   "verification_status", default: "notVerified"
     t.string   "community_role"
     t.string   "organization"
+=======
+    t.boolean  "anonymous_comments", default: false
+    t.string   "web_presence"
+>>>>>>> added required fields to user profile when verified status is requested
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree

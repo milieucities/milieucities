@@ -31,7 +31,6 @@ export default class Show extends Component {
           userName={userName}
           userAvatar={userAvatar}
           user={user}
-          verificationCallback={this.loadUser}
         />
         <div className={css.container}>
           <div className='container'>

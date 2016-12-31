@@ -8,6 +8,7 @@ export default class ProfileHeader extends Component {
     super()
     this.verifiedStatus = () => this._verifiedStatus();
     this.requestVerification = () => this._requestVerification();
+    this.sendVerificationRequest = () => this.this._sendVerificationRequest()
   }
   _userRoleandOrganization() {
     if (this.props.user && this.props.user.organization && this.props.user.community_role) {
@@ -20,33 +21,12 @@ export default class ProfileHeader extends Component {
   _verifiedStatus() {
     if (this.props.user && (this.props.user.community_role || this.props.user.organization)) {
       return (
-        <Verification 
+        <Verification
           onRequestVerification={this.requestVerification}
-          verifiedStatus={this.props.user.verification_status}
+          {... this.props}
         />
       )
     }
-  }
-
-  _requestVerification() {
-    const userId = document.body.dataset.userId
-
-    $.ajax({
-      url: `/users/${userId}/request_verification`,
-      dataType: 'JSON',
-      type: 'GET',
-      success: (res, status) => {
-        if (status === 'success') {
-          this.props.verificationCallback();
-          window.flash('notice', 'Requested verification');
-        } else {
-          window.flash('alert', `We weren\t able to make your request: ${res}`);
-        }
-      },
-      error: error => {
-        window.flash('alert', error)
-      }
-    });
   }
 
   render() {

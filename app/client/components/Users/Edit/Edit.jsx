@@ -4,6 +4,8 @@ import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
 import ProfileHeader from '../../Common/ProfileHeader/ProfileHeader'
 import ProfileMenu from '../../Common/ProfileMenu/ProfileMenu'
+import TextInputWithLabel from '../../Common/FormFields/TextInputWithLabel'
+import TextAreaWithLabel from '../../Common/FormFields/TextAreaWithLabel'
 import i18n from './locale'
 import css from './edit.scss'
 import { debounce } from 'lodash'
@@ -12,7 +14,7 @@ export default class Edit extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { loading: true };
+    this.state = { loading: true, verificationRequested: false };
     this.currentUserId = parseInt(document.body.dataset.userId);
 
     this.uploadAvatar = (e) => this._uploadAvatar(e);
@@ -20,12 +22,18 @@ export default class Edit extends Component {
     this.submitForm = (e) => this._submitForm(e);
     this.deleteAccount = (e) => this._deleteAccount(e);
     this.loadUser = () => this._loadUser();
+    this.flagVerificationRequested = () => this._flagVerificationRequested();
     this.loadUser();
   }
+
   _loadUser() {
     $.getJSON(`/users/${this.currentUserId}`,
       user => this.setState({ user, loading: false })
     );
+  }
+
+  _flagVerificationRequested() {
+    this.setState({ verificationRequested: true })
   }
 
   _deleteAvatar(e) {
@@ -81,6 +89,7 @@ export default class Edit extends Component {
   }
 
   _submitForm(e) {
+    this.setState({ verificationRequested: false })
     const form = new FormData(document.querySelector('#user-form'));
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
@@ -138,6 +147,8 @@ export default class Edit extends Component {
           userName={userName}
           userAvatar={userAvatar}
           user={user}
+          showVerificationButton={user && user.verification_status === 'notVerified'}
+          flagVerificationRequested={this.flagVerificationRequested}
           verificationCallback={this.loadUser}
         />
         <div className={css.container}>
@@ -172,11 +183,14 @@ export default class Edit extends Component {
                     <form id='user-form'>
                       <input type='hidden' name={'user[profile_attributes][id]'} value={user.profile.id}/>
                       <div className='row'>
-                        <div className='input-field col s12 m8 l6'>
-                          <label htmlFor='profile_name'>{i18n.name}</label>
-                          <input type='text' id='profile_name' defaultValue={user.profile.name} name='user[profile_attributes][name]'/>
-                          {error && error['profile.name'] && <div className='error-message'>{error['profile.name']}</div>}
-                        </div>
+                        <TextInputWithLabel
+                          classes='col s12 m8 l6'
+                          fieldRef='profile_name'
+                          fieldName='user[profile_attributes][name]'
+                          label={i18n.name}
+                          defaultValue={user.profile.name}
+                          required={true}
+                        />
                       </div>
                       <div className='row'>
                         <div className='input-field col s12' style={{display: 'flex', alignItems: 'center'}}>
@@ -184,22 +198,41 @@ export default class Edit extends Component {
                           <input type='checkbox' id='profile_anonymous' defaultChecked={user.profile.anonymous_comments} name='user[profile_attributes][anonymous_comments]'/>
                           <label htmlFor='profile_anonymous'>I would like all my comments to be anonymous</label>
                         </div>
-                        <div className='input-field col s12 m8 l6'>
-                          <label htmlFor='user_organization'>{i18n.organization}</label>
-                          <input type='text' id='user_organization' defaultValue={user.organization} name='user[organization]'/>
-                          {error && error['user.organization'] && <div className='error-message'>{error['user.organization']}</div>}
-                        </div>
-                        <div className='input-field col s12 m8 l6'>
-                          <label htmlFor='user_community_role'>{i18n.communityRole}</label>
-                          <input type='text' id='user_community_role' defaultValue={user.community_role} name='user[community_role]'/>
-                          {error && error['user.community_role'] && <div className='error-message'>{error['user.community_role']}</div>}
-                        </div>
+                        <TextInputWithLabel
+                          classes='col s12 m8 l6'
+                          fieldRef='user_organization'
+                          fieldName='user[organization]'
+                          label={i18n.organization}
+                          defaultValue={user.organization}
+                          required={this.state.verificationRequested}
+                        />
+                        <TextInputWithLabel
+                          classes='col s12 m8 l6'
+                          fieldRef='user_community_role'
+                          fieldName='user[community_role]'
+                          label={i18n.communityRole}
+                          defaultValue={user.community_role}
+                          required={this.state.verificationRequested}
+                        />
+                        <TextInputWithLabel
+                          classes='col s12'
+                          fieldRef='profile_web_presence'
+                          fieldName='user[profile_attributes][web_presence]'
+                          label={i18n.webPresence}
+                          helpText={i18n.webPresenceHelpText}
+                          defaultValue={user.profile.web_presence}
+                          required={false}
+                        />
                       </div>
                       <div className='row'>
-                        <div className='input-field col s12'>
-                          <label htmlFor='profile_bio'>{i18n.bio}</label>
-                          <textarea id='profile_bio' defaultValue={user.profile.bio} name='user[profile_attributes][bio]'/>
-                        </div>
+                        <TextAreaWithLabel
+                          classes='col s12'
+                          fieldRef='profile_bio'
+                          fieldName='user[profile_attributes][bio]'
+                          label={i18n.bio}
+                          defaultValue={user.profile.bio}
+                          required={this.state.verificationRequested}
+                        />
                       </div>
                     </form>
                   </div>
@@ -210,11 +243,15 @@ export default class Edit extends Component {
                   </div>
                   <div className={css.data}>
                     <div className='row'>
-                      <div className='input-field col s12 m8 l6'>
-                        <label htmlFor='user_email'>{i18n.email}</label>
-                        <input type='text' id='user_email' defaultValue={user.email} name='user[email]' form='user-form'/>
-                        {error && error.email && <div className='error-message'>{error.email}</div>}
-                      </div>
+                      <TextInputWithLabel
+                        classes='col s12 m8 l6'
+                        fieldRef='user_email'
+                        fieldName='user[email]'
+                        label={i18n.email}
+                        defaultValue={user.email}
+                        form='user-form'
+                        required={true}
+                      />
                     </div>
                   </div>
                 </div>
@@ -249,16 +286,26 @@ export default class Edit extends Component {
                   <div className={css.data}>
                     <input type='hidden' name={'user[address_attributes][id]'} value={user.address.id}/>
                     <div className='row'>
-                      <div className='input-field col s12 m8 l6'>
-                        <label htmlFor='address_street'>{i18n.street}</label>
-                        <input type='text' id='address_street' form='user-form' defaultValue={user.address.street} name='user[address_attributes][street]'/>
-                      </div>
+                      <TextInputWithLabel
+                        classes='col s12 m8 l6'
+                        fieldRef='address_street'
+                        fieldName='user[address_attributes][street]'
+                        label={i18n.street}
+                        defaultValue={user.address.street}
+                        form='user-form'
+                        required={true}
+                      />
                     </div>
                     <div className='row'>
-                      <div className='input-field col s12 m8 l6'>
-                        <label htmlFor='address_city'>{i18n.city}</label>
-                        <input type='text' id='address_city' form='user-form' defaultValue={user.address.city} name='user[address_attributes][city]'/>
-                      </div>
+                      <TextInputWithLabel
+                        classes='col s12 m8 l6'
+                        fieldRef='address_city'
+                        fieldName='user[address_attributes][city]'
+                        label={i18n.city}
+                        defaultValue={user.address.city}
+                        form='user-form'
+                        required={false}
+                      />
                     </div>
                   </div>
                 </div>
