@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Tooltip from '../Tooltip/Tooltip'
 
 export default class TextInputWithLabel extends Component {
   constructor(props) {
@@ -21,7 +22,10 @@ export default class TextInputWithLabel extends Component {
   render() {
     return(
       <div className={`input-field ${this.props.classes}`}>
-        <label htmlFor={this.props.fieldRef}>{this.props.label}</label>
+        <label htmlFor={this.props.fieldRef}>
+          {this.props.label}
+        </label>
+        {this.props.tooltipText && <Tooltip text={this.props.tooltipText} />}
         <input 
           type='text' 
           id={this.props.fieldRef} 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import i18n from './locale'
 import css from './profileHeader.scss'
+import Tooltip from '../Tooltip/Tooltip'
 
 export default class Verification extends Component {
   constructor() {
@@ -8,6 +9,7 @@ export default class Verification extends Component {
     this.requestVerification = () => this._requestVerification()
     this.sendVerificationRequest = () => this._sendVerificationRequest()
   }
+
   _requestVerification() {
     this.props.flagVerificationRequested()
     this.sendVerificationRequest()
@@ -34,6 +36,7 @@ export default class Verification extends Component {
       }
     });
   }
+
   render() {
     const status = `${i18n.status}${i18n[this.props.user.verification_status]}`
     return(
@@ -46,6 +49,9 @@ export default class Verification extends Component {
           >{i18n.requestVerification}
           </button>
         }
+        <Tooltip 
+          text={i18n.verificationTooltip}
+        />
       </span>
     )
   }

@@ -219,9 +219,9 @@ export default class Edit extends Component {
                           fieldRef='profile_web_presence'
                           fieldName='user[profile_attributes][web_presence]'
                           label={i18n.webPresence}
-                          helpText={i18n.webPresenceHelpText}
                           defaultValue={user.profile.web_presence}
                           required={false}
+                          tooltipText={i18n.webPresenceTooltipText}
                         />
                       </div>
                       <div className='row'>
