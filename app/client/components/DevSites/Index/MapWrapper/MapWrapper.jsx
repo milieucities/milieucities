@@ -16,8 +16,9 @@ export default class MapWrapper extends Component {
 
     this.state = { page: parseInt(getParameterByName('page')) || 0,
                    devSites: [],
-                   latitude: getParameterByName('latitude'),
-                   longitude: getParameterByName('longitude'),
+                   latitude: getParameterByName('latitude') || 45.42435419303618,
+                   longitude: getParameterByName('longitude') || -75.68289194238083,
+                   zoom: getParameterByName('zoom') || 12.5,
                    ward: getParameterByName('ward'),
                    status: getParameterByName('status'),
                    year: getParameterByName('year'),
@@ -41,8 +42,8 @@ export default class MapWrapper extends Component {
     window.history.replaceState({ path },'', path);
   }
   _params() {
-    const { page, latitude, longitude, ward, status, year, activeDevSiteId } = this.state;
-    return omitBy({ page, latitude, longitude, ward, status, year, activeDevSiteId }, isNil);
+    const { page, latitude, longitude, zoom, ward, status, year, activeDevSiteId } = this.state;
+    return omitBy({ page, latitude, longitude, zoom, ward, status, year, activeDevSiteId }, isNil);
   }
   _loadDevSites() {
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
