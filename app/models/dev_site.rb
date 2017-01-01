@@ -36,7 +36,7 @@ class DevSite < ActiveRecord::Base
         .push(Address.within(5, :origin => [search_params[:latitude], search_params[:longitude]])
         .closest(origin: [search_params[:latitude], search_params[:longitude]])
         .limit(150)
-        .pluck(:dev_site_id))
+        .pluck(:addressable_id))
       dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
     end
 
