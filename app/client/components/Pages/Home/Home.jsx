@@ -15,7 +15,7 @@ export default class Home extends Component {
     this.state = { isMobile: (window.innerWidth < 600) }
     this.autocompleteCallback = (address, autocomplete) => this._autocompleteCallback(address, autocomplete)
     this.handleAutocompleteSelect = (address) => this._handleAutocompleteSelect(address)
-    this.skipHeader = () => this._skipHeader()
+    this.goTop = () => this._goTop()
 
     window.addEventListener('resize',
       debounce(() => {
@@ -31,8 +31,8 @@ export default class Home extends Component {
       autocomplete.setState({ suggestions })
     })
   }
-  _skipHeader() {
-    $(window).scrollTop(100);
+  _goTop() {
+    $(window).scrollTop(0);
   }
   _handleAutocompleteSelect(address) {
     const { locale } = document.body.dataset;
@@ -53,8 +53,7 @@ export default class Home extends Component {
 
     return (
       <div>
-        <Header
-          skip={this.skipHeader}/>
+        <Header />
         <div className={css.landingContainer}>
           <img src={require('./images/ui.jpg')} alt='Image of a modern city' />
           <div>
@@ -92,7 +91,9 @@ export default class Home extends Component {
             </a>
           </Carousel>
         </div>
-      <Footer />
+      <Footer
+        skip={this.goTop}
+         />
       </div>
     )
   }
