@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class TextAreaWithLabel extends Component {
   constructor(props) {
     super(props)
-    const valid = this.props.defaultValue.length > 0
+    const valid = this.props.defaultValue && this.props.defaultValue.length > 0
     const errorText = `${this.props.label} is a required field.`
 
     this.state = { valid, errorText }
@@ -21,11 +21,11 @@ export default class TextAreaWithLabel extends Component {
   render() {
     return(
       <div className={`input-field ${this.props.classes}`}>
-        <label htmlFor={this.props.fieldRef}>{this.props.label}</label>
+        <label htmlFor={this.props.id}>{this.props.label}</label>
         <textarea 
-          id={this.props.fieldRef} 
+          id={this.props.id} 
           defaultValue={this.props.defaultValue} 
-          name={this.props.fieldName}
+          name={this.props.name}
           form={this.props.form}
           onBlur={this.props.required && this.validate}
         />

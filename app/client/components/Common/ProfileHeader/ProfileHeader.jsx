@@ -7,9 +7,8 @@ export default class ProfileHeader extends Component {
   constructor() {
     super()
     this.verifiedStatus = () => this._verifiedStatus();
-    this.requestVerification = () => this._requestVerification();
-    this.sendVerificationRequest = () => this.this._sendVerificationRequest()
   }
+  
   _userRoleandOrganization() {
     if (this.props.user && this.props.user.organization && this.props.user.community_role) {
       return `${this.props.user.community_role}, ${this.props.user.organization}`
@@ -22,7 +21,6 @@ export default class ProfileHeader extends Component {
     if (this.props.user && (this.props.user.community_role || this.props.user.organization)) {
       return (
         <Verification
-          onRequestVerification={this.requestVerification}
           {... this.props}
         />
       )

@@ -185,8 +185,8 @@ export default class Edit extends Component {
                       <div className='row'>
                         <TextInputWithLabel
                           classes='col s12 m8 l6'
-                          fieldRef='profile_name'
-                          fieldName='user[profile_attributes][name]'
+                          id='profile_name'
+                          name='user[profile_attributes][name]'
                           label={i18n.name}
                           defaultValue={user.profile.name}
                           required={true}
@@ -200,24 +200,24 @@ export default class Edit extends Component {
                         </div>
                         <TextInputWithLabel
                           classes='col s12 m8 l6'
-                          fieldRef='user_organization'
-                          fieldName='user[organization]'
+                          id='user_organization'
+                          name='user[organization]'
                           label={i18n.organization}
                           defaultValue={user.organization}
                           required={this.state.verificationRequested}
                         />
                         <TextInputWithLabel
                           classes='col s12 m8 l6'
-                          fieldRef='user_community_role'
-                          fieldName='user[community_role]'
+                          id='user_community_role'
+                          name='user[community_role]'
                           label={i18n.communityRole}
                           defaultValue={user.community_role}
                           required={this.state.verificationRequested}
                         />
                         <TextInputWithLabel
                           classes='col s12'
-                          fieldRef='profile_web_presence'
-                          fieldName='user[profile_attributes][web_presence]'
+                          id='profile_web_presence'
+                          name='user[profile_attributes][web_presence]'
                           label={i18n.webPresence}
                           defaultValue={user.profile.web_presence}
                           required={false}
@@ -227,8 +227,8 @@ export default class Edit extends Component {
                       <div className='row'>
                         <TextAreaWithLabel
                           classes='col s12'
-                          fieldRef='profile_bio'
-                          fieldName='user[profile_attributes][bio]'
+                          id='profile_bio'
+                          name='user[profile_attributes][bio]'
                           label={i18n.bio}
                           defaultValue={user.profile.bio}
                           required={this.state.verificationRequested}
@@ -245,8 +245,8 @@ export default class Edit extends Component {
                     <div className='row'>
                       <TextInputWithLabel
                         classes='col s12 m8 l6'
-                        fieldRef='user_email'
-                        fieldName='user[email]'
+                        id='user_email'
+                        name='user[email]'
                         label={i18n.email}
                         defaultValue={user.email}
                         form='user-form'
@@ -288,8 +288,8 @@ export default class Edit extends Component {
                     <div className='row'>
                       <TextInputWithLabel
                         classes='col s12 m8 l6'
-                        fieldRef='address_street'
-                        fieldName='user[address_attributes][street]'
+                        id='address_street'
+                        name='user[address_attributes][street]'
                         label={i18n.street}
                         defaultValue={user.address.street}
                         form='user-form'
@@ -299,8 +299,8 @@ export default class Edit extends Component {
                     <div className='row'>
                       <TextInputWithLabel
                         classes='col s12 m8 l6'
-                        fieldRef='address_city'
-                        fieldName='user[address_attributes][city]'
+                        id='address_city'
+                        name='user[address_attributes][city]'
                         label={i18n.city}
                         defaultValue={user.address.city}
                         form='user-form'

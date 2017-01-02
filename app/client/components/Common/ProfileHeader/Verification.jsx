@@ -28,7 +28,7 @@ export default class Verification extends Component {
           this.props.verificationCallback();
           window.flash('notice', 'Requested verification');
         } else {
-          window.flash('alert', `We weren\t able to make your request: ${res}`);
+          window.flash('alert', `We weren\'t able to make your request: ${res}`);
         }
       },
       error: error => {

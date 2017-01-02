@@ -4,7 +4,7 @@ import Tooltip from '../Tooltip/Tooltip'
 export default class TextInputWithLabel extends Component {
   constructor(props) {
     super(props)
-    const valid = this.props.defaultValue.length > 0
+    const valid = this.props.defaultValue && this.props.defaultValue.length > 0
     const errorText = `${this.props.label} is a required field.`
     
     this.state = { valid, errorText }
@@ -22,15 +22,15 @@ export default class TextInputWithLabel extends Component {
   render() {
     return(
       <div className={`input-field ${this.props.classes}`}>
-        <label htmlFor={this.props.fieldRef}>
+        <label htmlFor={this.props.id}>
           {this.props.label}
         </label>
         {this.props.tooltipText && <Tooltip text={this.props.tooltipText} />}
         <input 
           type='text' 
-          id={this.props.fieldRef} 
+          id={this.props.id} 
           defaultValue={this.props.defaultValue} 
-          name={this.props.fieldName}
+          name={this.props.name}
           form={this.props.form}
           onBlur={this.validate}
         />
