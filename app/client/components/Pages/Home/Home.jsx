@@ -32,7 +32,7 @@ export default class Home extends Component {
     })
   }
   _skipHeader() {
-    this.refs.landingContainer.focus();  console.log('I');
+    $(window).scrollTop(100);
   }
   _handleAutocompleteSelect(address) {
     const { locale } = document.body.dataset;
@@ -55,7 +55,7 @@ export default class Home extends Component {
       <div>
         <Header
           skip={this.skipHeader}/>
-        <div className={css.landingContainer} ref='landingContainer'>
+        <div className={css.landingContainer}>
           <img src={require('./images/ui.jpg')} alt='Image of a modern city' />
           <div>
             <h1 className={css.title}>{i18n.title}</h1>
