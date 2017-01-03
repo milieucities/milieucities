@@ -5,15 +5,13 @@ const i18n = new LocalizedStrings({
     map: 'Map',
     about: 'About',
     logIn: 'Log In',
-    logOut: 'Log Out',
-    signUp: 'Sign Up'
+    logOut: 'Log Out'
   },
   fr: {
     map: 'Carte',
     about: 'À Propos',
     logIn: 'Connexion',
-    logOut: 'Deconnexion',
-    signUp: 'S\'inscrire'
+    logOut: 'Deconnexion'
   }
 });
 

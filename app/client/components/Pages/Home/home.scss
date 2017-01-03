@@ -1,29 +1,91 @@
 .landingContainer {
-  height: 85vh;
+  min-height: 65vh;
   width: 100vw;
-  padding: 20px;
+  padding: 75px;
   box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 5px 10px 0 $gray;
+  background-image: url('./images/ui.png');
+  background-size: cover;
+  color: $white;
+  text-shadow: 5px 5px 10px $black;
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
+  justify-content: flex-end;
 
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 85vh;
-    width: 100vw;
-    background-image: url('./images/ui.jpg');
-    object-fit: cover;
-    filter: grayscale(35%);
+  @media #{$medium-and-down} {
+    padding: 40px;
   }
 
+  @media #{$small-and-down} {
+    padding: 20px;
+  }
+
+  a {
+    color: $white;
+  }
+
+  .signUpContainer {
+    letter-spacing: 1px;
+  }
+
+  .signUpButton {
+    background-color: $primary-color;
+    box-shadow: 1px 1px 15px 0px #000;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 300;
+    font-size: 22px;
+    margin-top: 30px;
+    margin-right: 40px;
+    text-shadow: none;
+    color: $white;
+    display: inline-block;
+
+    @media #{$small-and-down} {
+      margin-right: 20px;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      background-color: $accessibility;
+    }
+  }
+
+  .callToAction {
+    border-left: 3px solid $white;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+    justify-content: center;
+    min-height: calc(65vh * 0.8);
+    height: 80%;
+
+    a {
+      margin-top: 30px;
+      display: inline-block;
+    }
+  }
+
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px 0;
+
   .title {
-    color: #456;
-    font-size: 48px;
+    color: $dark-secondary-color;
+    font-size: 36px;
     text-align: center;
     position: relative;
+    font-weight: 700;
     margin: 0;
 
     @media #{$small-and-down} {
@@ -33,20 +95,23 @@
 
   .search {
     max-width: 400px;
+    width: 100%;
     margin: 0 auto;
     padding-top: 40px;
     position: relative;
     z-index: 2;
 
+    i {
+      color: $primary-color;
+    }
+
     input {
-      transition: 500ms;
-      border: 1px solid #456;
-      box-shadow: 5px 5px #456;
+      border-radius: 25px;
+      box-shadow: 2px 2px 5px 0 $gray;
+      background-color: $light-gray;
 
       &:focus {
-        transition: 500ms;
-        border-color: $primary-color;
-        box-shadow: -5px -5px $primary-color;
+        box-shadow: 2px 2px 5px 0 $secondary-color;
       }
     }
   }
@@ -62,7 +127,9 @@
 
   .title {
     padding: 25px 0;
-    font-size: 24px;
+    font-size: 48px;
+    font-weight: 700;
+    color: $dark-secondary-color;
     text-align: center;
     margin: 0;
 

@@ -26,6 +26,7 @@ npm-debug.log*
 app/client/npm-debug.log*
 Gemfile.lock
 Makefile
+*.DS_Store
 
 # Ignore application configuration
 /config/application.yml

@@ -15,12 +15,16 @@ export default class Home extends Component {
     this.state = { isMobile: (window.innerWidth < 600) }
     this.autocompleteCallback = (address, autocomplete) => this._autocompleteCallback(address, autocomplete)
     this.handleAutocompleteSelect = (address) => this._handleAutocompleteSelect(address)
+    this.openModal = () => this._openModal();
 
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
       }, 100)
     );
+  }
+  _openModal() {
+    document.querySelector('#sign-in-modal .modal-content').focus();
   }
   _autocompleteCallback(address, autocomplete) {
     const googleLocationAutocomplete = new google.maps.places.AutocompleteService()
@@ -44,19 +48,37 @@ export default class Home extends Component {
   }
   render() {
     const { isMobile } = this.state;
-    const { locale } = document.body.dataset;
+    const { locale, signedIn } = document.body.dataset;
     i18n.setLanguage(locale);
 
     return (
       <div>
         <Header />
         <div className={css.landingContainer}>
-          <img src={require('./images/ui.jpg')} alt='Image of a modern city' />
           <div>
-            <h1 className={css.title}>{i18n.title}</h1>
-            <div className={css.search}>
-              <Autocomplete callback={this.autocompleteCallback} placeholder={i18n.enterAddress} type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
+            <h1>Milieu</h1>
+            <h3>{i18n.heroText1}</h3>
+            {
+              signedIn == 'false' &&
+              <div className={css.signUpContainer}>
+                <a href={`/${locale}/users/new`} className={css.signUpButton}>{i18n.signUp}</a>
+                {i18n.haveAccount} <a href='#sign-in-modal' className='modal-trigger' style={{marginLeft: 10}} onClick={this.openModal}>{i18n.signIn}</a>
+              </div>
+            }
+          </div>
+
+          <div className={`hide-on-small-only ${css.callToAction}`}>
+            <h3>{i18n.heroText2}</h3>
+            <div>
+              <a href='#'>{i18n.launchProject}</a>
             </div>
+          </div>
+
+        </div>
+        <div className={css.searchContainer}>
+          <h2 className={css.title}>{i18n.title}</h2>
+          <div className={css.search}>
+            <Autocomplete searchBtn callback={this.autocompleteCallback} placeholder={i18n.enterAddress} type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
           </div>
         </div>
         <div className={css.featuredContainer}>
