@@ -2,7 +2,13 @@ import LocalizedStrings from 'react-localization';
 
 const i18n = new LocalizedStrings({
   en:{
-    title: 'What’s being built in my city?',
+    heroText1: 'Join the community to discuss, contribute, and co-create a better urban environment together',
+    signUp: 'Sign Up',
+    haveAccount: 'Have an account?',
+    signIn: 'Sign In',
+    heroText2: 'Get community insight for urban planning and development projects',
+    launchProject: 'Launch your project today',
+    title: 'Discover What is Being Built in Your City',
     featuredDevelopments: 'Featured Developments',
     enterAddress: 'Enter an address',
     article: 'Article',
@@ -12,7 +18,13 @@ const i18n = new LocalizedStrings({
     summary2: 'Transportation planning offers huge opportunities to enable equity.'
   },
   fr: {
-    title: 'Ce qui est en cours de construction dans ma ville?',
+    heroText1: 'Rejoignez la communauté pour discuter, contribuer et co-créer un meilleur environnement urbain ensemble',
+    signUp: 'S\'inscrire',
+    haveAccount: 'Vous avez une compte?',
+    signIn: 'Se connecter',
+    heroText2: 'Obtenez un aperçu communautaire des projets d\'urbanisme et de développement',
+    launchProject: 'Lancez votre projet aujourd\'hui',
+    title: 'Découvrez Ce Qui Est Construit Dans Votre Ville',
     featuredDevelopments: 'Développements en vedette',
     enterAddress: 'Entrer une adresse',
     article: 'Article',

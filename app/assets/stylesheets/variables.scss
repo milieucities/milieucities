@@ -11,22 +11,23 @@ $small-and-down: "only screen and (max-width : #{$small-screen})" !default;
 $medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
 $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
 
-$light-primary-color: #b0c4de;
-$primary-color: #6391bc;
-$dark-primary-color: #486A89;
-$black-primary-color: #202E3C;
+// Must match 'base/colorswatches'
+
+$light-primary-color: #D5FFFE;
+$primary-color: #92c7c6;
+$dark-primary-color: #6D9493;
 
 $secondary-color: #5d9bc0;
 $dark-secondary-color: #3a7496;
 
 $light-tertiary-color: #e2eae9;
 
+$accessibility: #e77e23;
+
 $light-gray: #eee;
 $pale-gray: #fafafa;
 $gray: #aaa;
 $dark-gray: #555;
-
-$accessibility: #e77e23;
 
 $success: #5f9ea0;
 $light-error: #e9967a;
