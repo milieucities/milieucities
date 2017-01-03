@@ -55,6 +55,7 @@ group :development, :test do
   gem 'puma'
   gem 'better_errors'
   gem 'foreman'
+  gem 'rubocop', require: false
 end
 
 group :test do
