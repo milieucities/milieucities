@@ -1,0 +1,5 @@
+AllCops:
+  Exclude:
+    - 'app/client/node_modules/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/*'
