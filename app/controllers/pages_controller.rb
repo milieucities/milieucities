@@ -11,11 +11,10 @@ class PagesController < ApplicationController
   end
 
   def contact_citizencity
-    ContactMailer.contact_citizencity(
-      params[:name], 
-      params[:email], 
-      params[:message]
-    ).deliver_now
+    mailer = ContactMailer.contact_citizencity(params[:name],
+                                               params[:email],
+                                               params[:message])
+    mailer.deliver_now
     render nothing: true
   end
 

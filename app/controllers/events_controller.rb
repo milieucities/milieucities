@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    paginate
+    @dev_sites = paginate(@dev_sites)
 
     respond_to do |format|
       format.html
@@ -65,13 +65,6 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:id])
-  end
-
-  def paginate
-    return if params[:page].blank? || params[:limit].blank?
-    limit = params[:limit].present? ? params[:limit].to_i : 20
-    page = params[:page].present? ? params[:page].to_i : 0
-    @dev_sites.limit!(limit).offset!(limit * page)
   end
 
   def event_params
