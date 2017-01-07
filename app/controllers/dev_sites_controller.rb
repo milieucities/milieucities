@@ -2,6 +2,7 @@ class DevSitesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @no_header = true
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
     @dev_sites = @dev_sites.search(search_params) if search?
     @dev_sites = @dev_sites.send(params[:sort]) if sort?
@@ -34,13 +35,12 @@ class DevSitesController < ApplicationController
   end
 
   def create
-    @dev_site = DevSite.new(dev_site_params)
     respond_to do |format|
       if @dev_site.save
-        format.html { redirect_to @dev_site, notice: 'Development site was successfully created.' }
+        format.html { redirect_to @dev_site, notice: t('dev-sites.create.created') }
         format.json { render :show, status: :created, location: @dev_site }
       else
-        format.html { render :new }
+        format.html { render :new, alert: 'Failed to create development site' }
         format.json { render json: @dev_site.errors, status: :unprocessable_entity }
       end
     end
@@ -49,7 +49,7 @@ class DevSitesController < ApplicationController
   def update
     respond_to do |format|
       if @dev_site.update(dev_site_params)
-        format.html { redirect_to @dev_site, notice: 'Dev site was successfully updated.' }
+        format.html { redirect_to @dev_site, notice: t('dev_sites.update.updateS') }
         format.json { render :show, status: :accepted, location: @dev_site }
       else
         format.html { render :edit }
@@ -61,16 +61,13 @@ class DevSitesController < ApplicationController
   def destroy
     @dev_site.destroy
     respond_to do |format|
-      format.html { redirect_to dev_sites_path, notice: 'Dev site was successfully destroyed.' }
+      format.html { redirect_to dev_sites_path, notice: t('dev_sites.destroy.destroyS') }
       format.json { head :no_content }
     end
   end
 
 
   private
-    def set_dev_site
-      @dev_site = DevSite.find(params[:id])
-    end
 
     def paginate
       if params[:page].present? || params[:limit].present?

@@ -15,7 +15,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
+    publicPath: 'http://0.0.0.0:8080/',
     filename: '[name].js'
   },
 
@@ -31,6 +31,11 @@ module.exports = {
         loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash'
       },
       {
+        test: /\.(json|geojson)$/,
+        exclude: /node_modules/,
+        loader: 'json-loader'
+      },
+      {
         test: /\.scss$/,
         loaders: ['style',
         'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]',
@@ -40,7 +45,7 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['style',
-        'css?modules&importLoaders=3&localIdentName=[name]-[local]']
+        'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]']
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

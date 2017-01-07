@@ -11,9 +11,8 @@ class DevSite < ActiveRecord::Base
     "Low-rise Residential", "Mid-rise Residential", "Hi-rise Residential", "Mixed-use Residential/Community",
     "Commercial", "Commercial/Hotel","Mixed-use", "Additions"]
 
-  # ASSOCIATIONS
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :addresses, dependent: :destroy
+  has_many :addresses, as: :addressable, dependent: :destroy
   has_many :statuses, dependent: :destroy
   has_many :city_files, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -37,10 +36,9 @@ class DevSite < ActiveRecord::Base
         .push(Address.within(5, :origin => [search_params[:latitude], search_params[:longitude]])
         .closest(origin: [search_params[:latitude], search_params[:longitude]])
         .limit(150)
-        .pluck(:dev_site_id))
+        .pluck(:addressable_id))
       dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
     end
-
 
     if search_params[:year].present?
       dev_sites = dev_sites
@@ -113,7 +111,11 @@ class DevSite < ActiveRecord::Base
     where(id: ids).order(order_clause)
   end
 
-  mount_uploaders :images, ImagesUploader
-  mount_uploaders :files, FilesUploader
+  mount_uploader :images, ImagesUploader
+  mount_uploader :files, FilesUploader
+
+  after_create do
+    Resque.enqueue(NewDevelopmentNotificationJob, id)
+  end
 
 end

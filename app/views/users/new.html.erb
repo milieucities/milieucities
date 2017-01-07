@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col s12">
-      <h2>Sign Up</h2>
+      <h2><%= t '.title' %></h2>
     </div>
   </div>
 
@@ -52,7 +52,7 @@
     <div class="row">
       <div class="input-field col s12">
         <small>
-          <%= profile.check_box :accepted_terms %> <a href="/tos">Accept terms of service</a>
+          <%= profile.check_box :accepted_terms %> <a href="/legal/privacy"><%= t '.terms' %></a>
         </small>
       </div>
     </div>
@@ -61,7 +61,7 @@
 
   <div class="row">
     <div class="input-field col s12">
-      <%= submit_tag "Create Account", class: 'btn' %>
+      <%= submit_tag "#{t('.submit')}", class: 'btn' %>
     </div>
   </div>
 

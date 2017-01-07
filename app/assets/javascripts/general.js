@@ -1,32 +1,4 @@
-$(document).on('page:change', function(){
-
-  $('.search-input').autocomplete({
-    callback: function(v){
-      var googleLocationAutocomplete = new google.maps.places.AutocompleteService();
-      var request = { input: v, types: ['address'], componentRestrictions: {country: 'ca'} };
-      googleLocationAutocomplete.getPlacePredictions(request, function(predictions){
-        data = predictions.map(function(prediction){ return prediction.description; });
-        this.setData(data);
-      }.bind(this));
-    }
-  });
-
-  $('#home-search').submit(function(e){
-    e.preventDefault();
-
-    var address = $('#search').val();
-    var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': address}, function(result, status) {
-      if(result.length > 0){
-        var latitude = result[0].geometry.location.lat();
-        var longitude = result[0].geometry.location.lng();
-        Turbolinks.visit('dev_sites?latitude=' + latitude + '&longitude=' + longitude);
-      }else{
-        Turbolinks.visit('dev_sites');
-      }
-    });
-
-  });
+$(document).on('turbolinks:load', function(){
 
   window.onpopstate = function(e){
     if(e.state){
@@ -84,6 +56,10 @@ $(document).on('page:change', function(){
 
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
+});
+
+$(document).on('click', 'a',function(e) {
+  this.blur();
 });
 
 function getParameterByName(name, url) {

@@ -8,7 +8,7 @@ node(:likes_count) { |dev_site| dev_site.likes.count  }
 
 node(:like) { |dev_site| Like.find_by(user_id: current_user.id, dev_site_id: dev_site.id).try(:attributes) }
 
-node(:url) { |dev_site| dev_site_path(dev_site.id) }
+node(:url) { |dev_site| dev_site_url(dev_site.id) }
 
 child(:addresses) { attributes :id, :street }
 
@@ -18,6 +18,6 @@ child(:statuses) { attributes :id, :status, :status_date }
 
 child(:comments) { attributes :id, :body
 
-  child(:user) { attributes :first_name, :last_name, :email }
+  child(:user) { attributes :name, :email }
 
 }

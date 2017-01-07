@@ -78,6 +78,10 @@
   top: 0px;
   left: 0px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  outline: none;
+  &:focus{
+    border: 3px solid $accessibility;
+}
 
   li{
     padding: 15px 10px;
@@ -87,13 +91,24 @@
     text-align: center;
     color: #0a0a0a;
     font-size: 14px;
+    line-height: 14px;
 
     &:hover{
-      background-color: #e2eae9;
+      background-color: $light-tertiary-color;
     }
 
     &.highlighted{
-      background-color: #e2eae9;
+      background-color: #D3D3D3;
+    }
+
+    &.title{
+      font-weight: bold;
+      cursor: default;
+      background-color: $light-gray;
+
+      &:hover{
+        background-color: $light-gray;
+      }
     }
   }
 }

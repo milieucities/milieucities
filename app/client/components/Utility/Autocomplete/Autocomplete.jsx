@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { omit } from 'lodash'
-import css from './map-autocomplete.scss'
+import css from './autocomplete.scss'
 
 export default class Autocomplete extends Component {
   constructor(props) {
@@ -9,20 +9,20 @@ export default class Autocomplete extends Component {
 
     this.search = (value) => this._search(value);
     this.handleListSuggestionClick = (e) => this.setSuggestion(e.target.innerText);
+    this.handleSearchClick = (e) => this._handleSearchClick(e);
     this.handleChange = (e) => this.setState({ value: this.inputTextField.value });
-    this.handleFocus = () => this.search();
+    this.handleFocus = (e) => this._handleFocus(e);
+    this.handleBlur = (e) => this._handleBlur(e);
     this.handleKeyUp = (e) => this._handleKeyUp(e);
     this.handleKeyDown = (e) => this._handleKeyDown(e);
     this.handleSyntheticBlur = (e) => this._handleSyntheticBlur(e);
     this.openDropdown = () => this._openDropdown();
     this.closeDropdown = () => this._closeDropdown();
     this.setSuggestion = (suggestion) => this._setSuggestion(suggestion);
-    this.dropdownSuggestionNodes = () => this._dropdownSuggestionNodes();
-    this.dropdownNode = () => this._dropdownNode();
 
   }
   componentDidMount() {
-    this.setState({ inputProps: omit(this.props, ['callback', 'className', 'onSelect']) });
+    this.setState({ inputProps: omit(this.props, ['callback', 'className', 'onSelect', 'onFocus', 'searchBtn']) });
   }
   _handleKeyUp(e) {
     if([9,13,27,38,40].indexOf(e.which) !== -1) return;
@@ -53,9 +53,24 @@ export default class Autocomplete extends Component {
       break;
     }
   }
+  _handleFocus(e) {
+    if(typeof this.props.onFocus === 'function') {
+      this.props.onFocus(e);
+    }
+    this.search();
+  }
+  _handleBlur(e) {
+    if(typeof this.props.onBlur === 'function') {
+      this.props.onBlur(e);
+    }
+  }
   _handleSyntheticBlur(e) {
     if(e.target === this.inputTextField) return;
     this.closeDropdown();
+  }
+  _handleSearchClick(e) {
+    e.preventDefault();
+    this.setSuggestion(this.inputTextField.value);
   }
   _openDropdown() {
     this.setState({ open: true });
@@ -76,36 +91,47 @@ export default class Autocomplete extends Component {
   }
   _setSuggestion(suggestion) {
     this.setState({ value: '' });
-    this.props.onSelect(suggestion);
+    if(typeof this.props.onSelect === 'function') {
+      this.props.onSelect(suggestion);
+    }
     this.closeDropdown();
   }
-  _dropdownSuggestionNodes() {
-    return this.state.suggestions.map((suggestion,i) => {
-      return <li key={i}
-                 onClick={this.handleListSuggestionClick}
-                 className={this.state.highlightedIndex === i && css.highlighted}>
-                 {suggestion}
-              </li>;
-    })
-  }
-  _dropdownNode() {
-    return <ul className={css.dropdown}>
-      {this.dropdownSuggestionNodes()}
-    </ul>;
-  }
   render() {
-    return <div className={css.wrapper}>
-      <i className={css.searchicon}></i>
-      <input type='text' className={css.textfield}
-        autoComplete='off'
-        {...this.state.inputProps}
-        ref={(input) => this.inputTextField = input}
-        value={this.state.value}
-        onFocus={this.handleFocus}
-        onKeyUp={this.handleKeyUp}
-        onKeyDown={this.handleKeyDown}
-        onChange={this.handleChange} />
-      {this.state.open ? this.dropdownNode() : null}
-    </div>;
+    return(
+      <div className={css.wrapper}>
+        <i className={`fa fa-map-marker ${css.searchicon}`}></i>
+        <input type='text' className={css.textfield}
+          autoComplete='off'
+          {...this.state.inputProps}
+          ref={(input) => this.inputTextField = input}
+          value={this.state.value}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          onKeyUp={this.handleKeyUp}
+          onKeyDown={this.handleKeyDown}
+          onChange={this.handleChange}
+        />
+        {
+          this.props.searchBtn &&
+          <a className={css.searchBtn} href='#' onClick={this.handleSearchClick}>
+            Search
+          </a>
+        }
+        {
+          this.state.open &&
+          <ul className={css.dropdown}>
+            {
+              this.state.suggestions.map((suggestion,i) => {
+                return(
+                  <li key={i} onClick={this.handleListSuggestionClick} className={this.state.highlightedIndex === i ? css.highlighted : ''}>
+                    {suggestion}
+                  </li>
+                )
+              })
+            }
+          </ul>
+        }
+      </div>
+    );
   }
 }

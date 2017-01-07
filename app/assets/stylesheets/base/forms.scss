@@ -17,11 +17,21 @@ textarea {
   box-sizing: border-box;
 
   &:focus{
-    border: 1px solid #cdcdcd;
+    border: 1px solid $gray;
   }
 
   &.error{
     border-color: $error;
+  }
+}
+
+input[type="checkbox"], input[type="radio"] {
+  + label {
+    padding-left: 5px;
+    text-transform: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0;
   }
 }
 
@@ -44,7 +54,8 @@ select {
 }
 
 .input-field {
-  margin-bottom:20px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 label{

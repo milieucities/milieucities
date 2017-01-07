@@ -20,12 +20,11 @@
 //= require components
 //= require react_ujs
 //= require_tree ./components
-//= require cocoon
 //= require moment
-//= require ajax.autocomplete
 //= require photoswipe
 //= require velocity.min
 //= require velocity.uipack
+//= require cocoon
 
 //= require_tree .
 //= require_self

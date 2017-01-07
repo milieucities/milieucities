@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
 <%= render "layouts/head"%>
-<body data-locale="<%= I18n.locale %>" data-user-id="<%= current_user.id %>">
+<body data-locale="<%= I18n.locale %>"
+      data-signed-in="<%= signed_in? %>"
+      <% if signed_in? %>
+      data-user-id="<%= current_user.id %>"
+      data-user-slug="<%= current_user.slug %>"
+      data-user-name="<%= current_user.profile.name %>"
+      data-user-avatar="<%= current_user.profile.avatar.web.preview.url %>"
+      <% end %>
+      >
   <%= render "layouts/nav" %>
   <%= render "layouts/flash", :flash => flash %>
   <%= yield %>
   <%= render "layouts/signin_modal" %>
   <%= render "layouts/contact_modal" %>
-  <%= render "layouts/webpack" %>
 </body>
 </html>

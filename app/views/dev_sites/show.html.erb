@@ -4,9 +4,9 @@
 
   <%= link_to fa_icon("arrow-left", text: t('dev-sites.show.back-to-map-link')), dev_sites_path, class: "back-to-map" %><br/><br/>
 
-  <div class="title">
+  <h1 class="title">
     <%= @dev_site.addresses.empty? ? @dev_site.title : @dev_site.addresses.first.street %>
-  </div>
+  </h1>
 
   <% if @dev_site.id == 1869 %>
   <div class="row">
@@ -51,7 +51,7 @@
                   <% @dev_site.statuses.each do |status| %>
                     <tr>
                       <td><%= status.status.html_safe || "N/A" %></td>
-                      <td><%= status.status_date.present? ? status.status_date.strftime("%B %e, %Y") : "N/A" %></td>
+                      <td><%= status.status_date.present? ? l(status.status_date) : "N/A" %></td>
                     </tr>
                   <% end %>
                   </tbody>
@@ -83,11 +83,11 @@
 
   <div class="row">
     <div class="col s12 m12 l6" style="max-width: 750px">
-      <h5><%= t('dev-sites.show.description-label') %></h5>
+      <h3><%= t('dev-sites.show.description-label') %></h3>
       <p><%= @dev_site.description.present? ? markdown(@dev_site.description) : "No description present." %></p>
 
       <% if @dev_site.files.present? || @dev_site.city_files.present? %>
-      <h5>Files</h5>
+      <h3>Files</h3>
       <ul class="files">
         <% @dev_site.files.each do |file| %>
           <li><%= fa_icon("file-o") %><%= link_to File.basename(file.path), file.url %></li>
@@ -101,7 +101,7 @@
     </div>
 
     <div  class="col s12 m12 l6">
-      <h5><%= t('dev-sites.show.comments-label') %></h5>
+      <h3><%= t('dev-sites.show.comments-label') %></h3>
 
       <%= react_component "Comments", { devSiteId: @dev_site.id, userId: current_user.id,
         authenticityToken: form_authenticity_token, locale: params[:locale] } %>

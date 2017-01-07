@@ -1,0 +1,38 @@
+.cookiesNotification {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 10px 20px;
+  background-color: #92c7c6;
+  color: white;
+  border-top: 4px solid #486A89;
+  z-index: 10000;
+
+  p {
+    margin: 0;
+  }
+
+  .notificationText {
+    line-height: 1.5;
+    text-align: center;
+
+    a {
+      color: white;
+
+      &:first-child {
+        text-decoration: underline;
+      }
+
+      &:hover, &:visited {
+        color: white;
+      }
+    }
+  }
+
+  .okButton {
+    background-color: #5d9bc0;
+    padding: 4px 14px;
+    margin-left: 20px;
+  }
+}

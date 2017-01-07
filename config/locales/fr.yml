@@ -1,44 +1,163 @@
 fr:
+  date:
+    abbr_day_names:
+    - dim
+    - lun
+    - mar
+    - mer
+    - jeu
+    - ven
+    - sam
+    abbr_month_names:
+    -
+    - jan.
+    - fév.
+    - mar.
+    - avr.
+    - mai
+    - juin
+    - juil.
+    - août
+    - sept.
+    - oct.
+    - nov.
+    - déc.
+    day_names:
+    - dimanche
+    - lundi
+    - mardi
+    - mercredi
+    - jeudi
+    - vendredi
+    - samedi
+    formats:
+      default: "%d/%m/%Y"
+      short: "%e %b"
+      long: "%e %B %Y"
+    month_names:
+    -
+    - janvier
+    - février
+    - mars
+    - avril
+    - mai
+    - juin
+    - juillet
+    - août
+    - septembre
+    - octobre
+    - novembre
+    - décembre
+    order:
+    - :day
+    - :month
+    - :year
+  time:
+    formats:
+      default: "%B %e, %Y"
+  activerecord:
+    attributes:
+      user:
+        email: 'courriel'
+        password: 'Mot de passe'
+        password_confirmation: 'confirmation mot de passe'
+      profile:
+        name: 'prénom'
+        postal_code: 'code postale'
+        neighbourhood: 'quartier'
+  users:
+    new:
+      terms: "accepter les conditions d'utilisation"
+      title: "Connecter"
+      submit: "créer une compte"
+    alert:
+      mustAcceptTerms: "Vous devez accepter les conditions d’utilisation"
+  layouts:
+    _signin_modal:
+      email: 'courriel'
+      password: 'Mot de passe'
+      facebook: "Continuer avec Facebook"
+      google: "Continuer avec Google"
+      or: "ou"
+      new: "Nouveau à Milieu?"
+      signup: "Inscrivez-vous"
+      signin: "Connexion"
+      accept: "En vous connectant, vous acceptez les "
+      terms: "Conditions d'utilisation"
+  sessions:
+    alert:
+      could_not_signin: "Échec de l’ouverture de session. Veuillez essayer à nouveau."
+    notice:
+      welcome: "Bienvenue à Milieu"
+    new:
+      signup: "Inscrivez-vous"
+      signin: "Connexion"
+      email: 'courriel'
+      password: 'Mot de passe'
+
+
   dev-sites:
     show:
       back-to-map-link: 'Back to Map'
-      dev-id: 'Development Id:'
-      application-type: 'Application Type:'
-      ward-name: 'Ward Name:'
-      ward-number: 'Ward Number:'
+      dev-id: 'Demande no:'
+      application-type: 'Type de demande:'
+      ward-name: 'Nom du quartier:'
+      ward-number: 'Numéro du quartier:'
       status-box:
-        status: 'Status'
-        status-date: 'Status Date'
-      contact-planner-text: 'Contact Planner'
-      contact-councillor-text: 'Contact Councillor'
+        status: 'État d’avancement'
+        status-date: 'Date d’état'
+      contact-planner-text: 'CONTACTER PLANIFICATEUR'
+      contact-councillor-text: 'CONTACTER COUNSEILLER'
       description-label: 'Description'
-      comments-label: 'Comments'
+      comments-label: 'Commentaires'
       contact-lead-planner-modal:
         modal-label: 'Contact Lead Planner'
-        name-label: 'name'
-        email-label: 'email'
+        name-label: 'prénom'
+        email-label: 'courriel'
         message-label: 'message'
         message-placeholder: 'Leave a message.'
         send-button-text: 'Send'
       contact-councillor-modal:
-        modal-label: 'Contact Councillor'
-        name-label: 'name'
-        email-label: 'email'
+        modal-label: 'CONTACTER COUNSEILLER'
+        name-label: 'prénom'
+        email-label: 'courriel'
         message-label: 'message'
         message-placeholder: 'Leave a message.'
         send-button-text: 'Send'
+    create:
+      createS: "Site de développement crée."
+    update:
+      updateS: "Site de développement mise à jour."
+    destroy:
+      destroyS: "Site de développement supprimée."
+  events:
+    alert:
+      mustFillReqired: "Tous les champs obligatoires doivent être soumis."
+    create:
+      createS: "Événement crée."
+    update:
+      updateS: "Événement mise à jour."
+    destroy:
+      destroyS: "Événement supprimé."
+  validates:
+    alert:
+      emailIsRequired: "Courriel est requis"
+      emailAlreadyInUse: "Courriel déjà utilisé"
+      passwordIsRequired: "Password is required" #TODO: Translate
+      passwordNotMatch: "Passwords do not match"
+      passwordLimitation: "Password must be between 6 to 20 characters"
   contact-milieu-modal:
     header-text: 'Contact Milieu'
-    name-label: 'name'
+    name-label: 'prénom'
     message-label: 'message'
-    email-label: 'email'
+    email-label: 'courriel'
     send-button: 'Send'
   sign-in-modal:
-    email-label: 'email'
-    password-label: 'password'
-    sign-in-button: 'Sign In'
-    sign-up-button: 'Sign Up'
-  search_button_text: 'Search'
+    email-label: 'courriel'
+    password-label: 'Mot de passe'
+    sign-in-button: 'Connecter'
+    sign-up-button: 'inscrivez-vous'
+  search_button_text: 'chercher'
   nav_bar:
     slogan: 'Bâtîr de meilleures villes ensemble'
     launch: 'Consultation de Lancement'
@@ -52,7 +171,7 @@ fr:
     search_bar_text: 'Enter an address'
     featured: 'Développements en vedette'
     terms_of_use_link: "Conditions d'utilisation"
-  terms_of_use_header_text: "Terms of Use"
+  terms_of_use_header_text: "conditions d’utilisation"
   term_of_use:
     introduction:
       title: "1. Introduction"

@@ -13,7 +13,7 @@
             <%= avatar current_user %> <%= current_user.profile.try(:name) %>
           <% end %>
           <div class="user-dropdown">
-            <%= link_to "Profile", edit_user_profile_path(current_user)  %>
+            <%= link_to "Profile", edit_user_path(current_user)  %>
             <%= link_to t('nav_bar.sign_out_text'), session_path(current_user), method: :delete, title: "Sign Out" %>
           </div>
         </div>

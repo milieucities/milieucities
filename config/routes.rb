@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
 
   scope '(:locale)', locale: /en|fr/ do
-    root to: 'static_pages#home'
+    root to: 'pages#home'
 
-    namespace :static_pages, path: '/', as: nil do
+    namespace :pages, path: '/', as: nil do
       get 'map'
       get 'citizencity'
-      get 'tos'
-      get 'privacy'
       post 'contact_citizencity'
       post 'contact_milieu'
       post 'contact_file_lead'
       post 'contact_councillor'
+    end
+
+    namespace :legal do
+      get :terms_of_use
+      get :privacy
     end
 
     #omniauth
@@ -22,6 +25,7 @@ Rails.application.routes.draw do
     end
 
     resources :conversations
+    resources :newsletter_subscriptions, only: [:create]
     resources :dev_sites do
       resources :comments, module: :dev_sites do
       end
@@ -46,10 +50,10 @@ Rails.application.routes.draw do
     end
 
     resources :comments, only: [:index]
-    resources :users, only: [:index, :new, :create, :destroy] do
+    resources :users do
       resource :profile, only: [:edit, :update, :show]
+      resource :notification, only: [:edit, :update, :show]
       resources :votes, only: [:create, :destroy]
-      resource :survey, only: [:edit, :update, :show]
     end
     resources :sessions, only: [:new, :create, :destroy]
 
@@ -73,7 +77,10 @@ Rails.application.routes.draw do
     end
   end
 
+  mount Resque::Server, :at => "/resque"
+
   root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
   get '*path' => redirect("/#{I18n.default_locale}", status: 302)
+
 
 end
