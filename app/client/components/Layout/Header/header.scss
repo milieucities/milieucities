@@ -23,14 +23,16 @@
         overflow: hidden;
     }
 
-    a.skip:active,
-    a.skip:focus,
-    a.skip:hover {
+    a.skip{
+      &:active,
+      &:focus,
+      &:hover {
         left: 50px;
         top: 0;
         width: auto;
         height: auto;
         overflow: visible;
+      }
     }
 
   .logo {
