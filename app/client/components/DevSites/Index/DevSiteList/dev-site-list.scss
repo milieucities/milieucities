@@ -1,9 +1,33 @@
 .container {
   .empty {
-    padding: 20px 0;
+    padding: 20px;
     text-align: center;
-    font-size: 24px;
     font-weight: 500;
+
+    .inputSuggestion {
+      padding-top: 10px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .inputContainer {
+      display: flex;
+      align-items: center;
+      padding-top: 20px;
+
+      input {
+        border-color: #ccc;
+
+        &:focus {
+          border-color: $gray;
+        }
+      }
+
+      a {
+        margin-left: 10px;
+        font-size: 14px;
+      }
+    }
   }
 
   .activeitem{

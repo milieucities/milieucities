@@ -88,6 +88,7 @@ en:
       destroyS: "Event was successfully destroyed."
   validates:
     alert:
+      cityIsRequired: "City is required"
       emailIsRequired: "Email is required"
       emailAlreadyInUse: "Email already in use"
       passwordIsRequired: "Password is required"

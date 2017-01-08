@@ -12,6 +12,7 @@ class Ability
     can :read, Comment
     can :read, Conversation
     can :create, NewsletterSubscription
+    can :create, CityRequest
 
     # ADMIN =======================================================
     if user.has_role? :admin
