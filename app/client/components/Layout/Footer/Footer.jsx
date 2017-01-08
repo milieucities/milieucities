@@ -8,12 +8,16 @@ export default class Footer extends Component {
     super()
     this.state = { isMobile: (window.innerWidth < 600) }
     this.handleSubmit = (e) => this._handleSubmit(e);
+    this.goTop = () => this._goTop()
 
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
       }, 100)
     );
+  }
+  _goTop() {
+    $(window).scrollTop(0);
   }
   _handleSubmit(e) {
     const { locale } = document.body.dataset;
@@ -89,7 +93,7 @@ export default class Footer extends Component {
               <button onClick={this.handleSubmit} className='btn' title='Subscribe your email'><i className='fa fa-envelope-o'></i></button>
             </div>
           </div>
-          <a href="#" onClick={this.props.skip} className={css.skip} title='To the top'><i className="fa fa-arrow-up"></i></a>
+          <a href="#" onClick={this.goTop} className={css.skip} title='To the top'><i className="fa fa-arrow-up"></i></a>
         </div>
       </div>
     );

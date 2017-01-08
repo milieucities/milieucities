@@ -15,7 +15,6 @@ export default class Home extends Component {
     this.state = { isMobile: (window.innerWidth < 600) }
     this.autocompleteCallback = (address, autocomplete) => this._autocompleteCallback(address, autocomplete)
     this.handleAutocompleteSelect = (address) => this._handleAutocompleteSelect(address)
-    this.goTop = () => this._goTop()
 
     window.addEventListener('resize',
       debounce(() => {
@@ -30,9 +29,6 @@ export default class Home extends Component {
       const suggestions = predictions ? predictions.map(function(prediction){ return prediction.description }) : []
       autocomplete.setState({ suggestions })
     })
-  }
-  _goTop() {
-    $(window).scrollTop(0);
   }
   _handleAutocompleteSelect(address) {
     const { locale } = document.body.dataset;
@@ -91,9 +87,7 @@ export default class Home extends Component {
             </a>
           </Carousel>
         </div>
-      <Footer
-        skip={this.goTop}
-         />
+      <Footer/>
       </div>
     )
   }
