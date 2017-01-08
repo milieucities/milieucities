@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227232949) do
+ActiveRecord::Schema.define(version: 20170108172702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,12 @@ ActiveRecord::Schema.define(version: 20161227232949) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "dev_site_id"
+  end
+
+  create_table "city_requests", force: :cascade do |t|
+    t.string   "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -149,6 +155,7 @@ ActiveRecord::Schema.define(version: 20161227232949) do
     t.string   "avatar"
     t.text     "bio"
     t.boolean  "anonymous_comments", default: false
+    t.string   "web_presence"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -177,12 +184,15 @@ ActiveRecord::Schema.define(version: 20161227232949) do
     t.string   "username"
     t.string   "email"
     t.string   "role"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "password_digest"
     t.string   "uid"
     t.string   "provider"
     t.string   "slug"
+    t.string   "verification_status", default: "notVerified"
+    t.string   "community_role"
+    t.string   "organization"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

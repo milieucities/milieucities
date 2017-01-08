@@ -70,7 +70,7 @@ export default class Home extends Component {
           <div className={`hide-on-small-only ${css.callToAction}`}>
             <h3>{i18n.heroText2}</h3>
             <div>
-              <a href='#'>{i18n.launchProject}</a>
+              <a href='http://about.milieu.io/'>{i18n.launchProject}</a>
             </div>
           </div>
 

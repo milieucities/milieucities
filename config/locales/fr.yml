@@ -141,6 +141,7 @@ fr:
       destroyS: "Événement supprimé."
   validates:
     alert:
+      cityIsRequired: "Ville est requis"
       emailIsRequired: "Courriel est requis"
       emailAlreadyInUse: "Courriel déjà utilisé"
       passwordIsRequired: "Password is required" #TODO: Translate

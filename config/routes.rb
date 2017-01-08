@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
     resources :conversations
     resources :newsletter_subscriptions, only: [:create]
+    resources :city_requests, only: [:create]
     resources :dev_sites do
       resources :comments, module: :dev_sites do
       end
