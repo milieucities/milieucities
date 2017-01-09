@@ -55,22 +55,7 @@ class DevSite < ActiveRecord::Base
     location_search
     query_search
 
-<<<<<<< HEAD
-    if search_params[:ward].present?
-      dev_sites = dev_sites
-        .where('lower(ward_name) = lower(?)', search_params[:ward])
-    end
-
-    if search_params[:status].present?
-      dev_sites = dev_sites
-        .where('statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)')
-        .where(statuses: { status: search_params[:status] })
-    end
-
-    dev_sites
-=======
     @dev_sites
->>>>>>> master
   end
 
   def status
@@ -127,7 +112,7 @@ class DevSite < ActiveRecord::Base
   mount_uploader :files, FilesUploader
 
   after_create do
-    Resque.enqueue(NewDevelopmentNotificationJob, id)
+    Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?
   end
 
   private
@@ -141,45 +126,49 @@ class DevSite < ActiveRecord::Base
     "#{root_url}?size=#{image_size}&location=#{street_address}&key=#{api_key}"
   end
 
-  def location_search
-    location_search_params = [:latitude, :longitude]
-    search_by_location if location_search_params.all? { |param| @search_params[param].present? }
-  end
+  class << self
 
-  def query_search
-    query_params = [:year, :ward, :status]
-    query_params.each do |param|
-      self.send("search_by_#{param}") if @search_params[param].present?
+    def location_search
+      location_search_params = [:latitude, :longitude]
+      search_by_location if location_search_params.all? { |param| @search_params[param].present? }
     end
-  end
 
-  def search_by_location
-    dev_site_ids = []
-    lat = @search_params[:latitude]
-    lon = @search_params[:longitude]
-    dev_site_ids
+    def query_search
+      query_params = [:year, :ward, :status]
+      query_params.each do |param|
+        self.send("search_by_#{param}") if @search_params[param].present?
+      end
+    end
+
+    def search_by_location
+      dev_site_ids = []
+      lat = @search_params[:latitude]
+      lon = @search_params[:longitude]
+      dev_site_ids
       .push(Address.within(5, origin: [lat, lon])
       .closest(origin: [lat, lon])
       .limit(150)
       .pluck(:addressable_id))
-    @dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
-  end
+      @dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
+    end
 
-  def search_by_year
-    @dev_sites = @dev_sites
+    def search_by_year
+      @dev_sites = @dev_sites
       .where('extract(year from updated) = ?', @search_params[:year])
-  end
+    end
 
-  def search_by_ward
-    @dev_sites = @dev_sites
-      .where(ward_name: @search_params[:ward])
-  end
+    def search_by_ward
+      @dev_sites = @dev_sites
+      .where('lower(ward_name) = lower(?)', @search_params[:ward])
+    end
 
-  def search_by_status
-    @dev_sites = @dev_sites
+    def search_by_status
+      @dev_sites = @dev_sites
       .where('statuses.status_date = (SELECT MAX(statuses.status_date) ' +
-             'FROM statuses ' +
-             'WHERE statuses.dev_site_id = dev_sites.id)')
+      'FROM statuses ' +
+      'WHERE statuses.dev_site_id = dev_sites.id)')
       .where(statuses: { status: @search_params[:status] })
+    end
+
   end
 end

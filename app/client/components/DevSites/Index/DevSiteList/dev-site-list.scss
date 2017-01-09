@@ -34,7 +34,7 @@
     padding: 15px 20px;
     padding-bottom: 0;
     display: block;
-    background-color: $light-tertiary-color;
+    background-color: $quaternary-color;
   }
 
   .item {
@@ -45,7 +45,7 @@
     transition: 200ms;
 
     &:hover, &:focus {
-      background-color: $light-tertiary-color !important;
+      background-color: $quaternary-color !important;
     }
   }
 
