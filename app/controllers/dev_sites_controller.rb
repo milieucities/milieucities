@@ -1,4 +1,5 @@
 class DevSitesController < ApplicationController
+  DEFAULT_SITES_LIMIT = 20
   load_and_authorize_resource
 
   def index
@@ -40,6 +41,7 @@ class DevSitesController < ApplicationController
         format.html { redirect_to @dev_site, notice: t('dev-sites.create.created') }
         format.json { render :show, status: :created, location: @dev_site }
       else
+        # TODO: alert needs translation
         format.html { render :new, alert: 'Failed to create development site' }
         format.json { render json: @dev_site.errors, status: :unprocessable_entity }
       end
@@ -66,37 +68,64 @@ class DevSitesController < ApplicationController
     end
   end
 
-
   private
 
-    def paginate
-      if params[:page].present? || params[:limit].present?
-        limit = params[:limit].present? ? params[:limit].to_i : 20
-        page = params[:page].present? ? params[:page].to_i : 0
-        @dev_sites.limit!(limit).offset!(limit * page)
-      end
-    end
+  def paginate
+    return if params[:page].blank? || params[:limit].blank?
+    limit = sites_limit
+    page = page_number
+    @dev_sites.limit!(limit).offset!(limit * page)
+  end
 
-    def sort?
-      params[:sort].present?
-    end
+  def sites_limit
+    params[:limit].present? ? params[:limit].to_i : DEFAULT_SITES_LIMIT
+  end
 
-    def search?
-      ((params[:latitude].present? && params[:longitude].present?) ||
-      params[:year].present? ||
-      params[:ward].present? ||
-      params[:status].present? )
-    end
+  def page_number
+    params[:page].present? ? params[:page].to_i : 0
+  end
 
-    def search_params
-      params.permit(:latitude, :longitude, :year, :ward, :status)
-    end
+  def sort?
+    params[:sort].present?
+  end
 
-    def dev_site_params
-      params.require(:dev_site).permit(:devID, :application_type, :title, :images_cache, :files_cache, :build_type,
-      :description, :ward_councillor_email, :urban_planner_email, :ward_name, :ward_num, :image_url, :hearts, {images: []}, {files: []},
-      likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
-      addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
-      statuses_attributes: [:id, :status, :status_date, :_destroy] )
-    end
+  def search?
+    location_search_present? || search_term_present?
+  end
+
+  def search_term_present?
+    search_terms = [:year, :status, :ward]
+    search_terms.any? { |query| params[query].present? }
+  end
+
+  def location_search_present?
+    params[:latitude].present? && params[:longitude].present?
+  end
+
+  def search_params
+    params.permit(:latitude, :longitude, :year, :ward, :status)
+  end
+
+  # rubocop:disable Metrics/MethodLength
+  def dev_site_params
+    params.require(:dev_site)
+      .permit(:devID,
+              :application_type,
+              :title,
+              :images_cache,
+              :files_cache,
+              :build_type,
+              :description,
+              :ward_councillor_email,
+              :urban_planner_email,
+              :ward_name,
+              :ward_num,
+              :image_url,
+              :hearts,
+              images: [],
+              files: [],
+              likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
+              addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
+              statuses_attributes: [:id, :status, :status_date, :_destroy])
+  end
 end

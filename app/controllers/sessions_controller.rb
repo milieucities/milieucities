@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   before_action :session_expiry, except: [:create]
 
   def create
-    @user = User.find_by(email: params[:session][:email].downcase)
+    @user = find_user_by_email
     if @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
       redirect_to root_path, notice: t('sessions.notice.welcome')
@@ -24,13 +24,17 @@ class SessionsController < ApplicationController
   end
 
   def session_expiry
-    get_session_time_left
-    log_out if @session_time_left <= 0
+    log_out if session_time_left <= 0
   end
 
-  def get_session_time_left
+  def session_time_left
+    # TODO: change to TimeWithZone times
     expire_time = session[:expires_at] || Time.now
-    @session_time_left = (expire_time.to_time - Time.now).to_i
+    (expire_time.to_time - Time.now).to_i
   end
 
+  def find_user_by_email
+    email = params[:session][:email].downcase
+    User.find_by(email: email)
+  end
 end

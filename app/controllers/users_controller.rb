@@ -49,6 +49,7 @@ class UsersController < ApplicationController
 
   private
 
+  # rubocop:disable Metrics/MethodLength
   def user_params
     params.require(:user).permit(
       :email,

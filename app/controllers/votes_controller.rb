@@ -1,6 +1,6 @@
 class VotesController < ApplicationController
   load_and_authorize_resource :user
-  load_and_authorize_resource :vote, :through => :user
+  load_and_authorize_resource :vote, through: :user
 
   def create
     if @vote.save
@@ -16,8 +16,8 @@ class VotesController < ApplicationController
   end
 
   private
-    def vote_params
-      params.require(:vote).permit(:comment_id, :up)
-    end
 
+  def vote_params
+    params.require(:vote).permit(:comment_id, :up)
+  end
 end
