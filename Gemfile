@@ -12,7 +12,7 @@ gem 'rack-cors', '~> 0.4.0'
 
 # background services gems
 gem 'whenever'
-gem 'resque', '~> 1.26.0', :require => 'resque/server'
+gem 'resque', '~> 1.26.0', require: 'resque/server'
 gem 'mandrill-api', '~> 1.0.53'
 
 # model gems
@@ -24,7 +24,7 @@ gem 'cancancan', '~> 1.15.0'
 gem 'geokit-rails'
 gem 'bcrypt', '~> 3.1.11'
 gem 'fog', '~> 1.38'
-gem 'rmagick', '~> 2.15.4', :require => 'RMagick'
+gem 'rmagick', '~> 2.15.4', require: 'RMagick'
 
 # view gems
 gem 'font-awesome-rails', '~> 4.7.0.0'
@@ -46,7 +46,6 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 
-
 group :development, :test do
   gem 'pry'
   gem 'spring'
@@ -55,6 +54,7 @@ group :development, :test do
   gem 'puma'
   gem 'better_errors'
   gem 'foreman'
+  gem 'rubocop', require: false
 end
 
 group :test do

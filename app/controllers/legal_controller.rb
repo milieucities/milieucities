@@ -1,5 +1,4 @@
 class LegalController < ApplicationController
-
   def privacy
     @no_header = true
   end
@@ -7,5 +6,4 @@ class LegalController < ApplicationController
   def terms_of_use
     @no_header = true
   end
-
 end

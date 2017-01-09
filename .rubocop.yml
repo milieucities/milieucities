@@ -1,0 +1,21 @@
+Rails:
+  Enabled: true
+Documentation:
+  Enabled: false
+Style/AlignParameters:
+  SupportedStyles:
+    - with_first_parameter
+    - with_fixed_indentation
+Metrics/ClassLength:
+  Max: 150
+Metrics/LineLength:
+  Max: 100
+Metrics/MethodLength:
+  Max: 15
+Metrics/AbcSize:
+  Max: 20
+AllCops:
+  Exclude:
+    - 'app/client/node_modules/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/*'

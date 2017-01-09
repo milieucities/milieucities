@@ -20,8 +20,17 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:name, :street, :avatar, :remove_avatar, :city, :bio,
-      :age_range, :field_of_occupation, :receive_newletter, :postal_code)
+    params.require(:profile).permit(
+      :name,
+      :street,
+      :avatar,
+      :remove_avatar,
+      :city,
+      :bio,
+      :age_range,
+      :field_of_occupation,
+      :receive_newletter,
+      :postal_code
+    )
   end
-
 end

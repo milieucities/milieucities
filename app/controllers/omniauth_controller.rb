@@ -1,19 +1,33 @@
 class OmniauthController < ApplicationController
-
   def create
-    @user = User.find_by(uid: request.env['omniauth.auth']['uid'])
+    @user_auth = request.env['omniauth.auth']
+    @user = find_user_by_uid || create_user
 
-    unless @user.present?
-      @user = User.create(uid: request.env['omniauth.auth']['uid'],
-                          email: request.env['omniauth.auth']['info']['email'],
-                          provider: request.env['omniauth.auth']['provider'])
-      @user.build_profile(name: request.env['omniauth.auth']['info']['name'])
-      @user.save
-    end
+    update_user_email if @user.email.nil?
 
-    @user.update(email: request.env['omniauth.auth']['info']['email']) if @user.email.nil?
-
-    session[:user_id]= @user.id
+    session[:user_id] = @user.id
     redirect_to root_path, notice: t('sessions.notice.welcome')
+  end
+
+  private
+
+  def find_user_by_uid
+    User.find_by(uid: @user_auth['uid'])
+  end
+
+  def create_user
+    new_user = User.create(uid: @user_auth['uid'],
+                           email: @user_auth['info']['email'],
+                           provider: @user_auth['provider'])
+    build_user_profile(new_user)
+    new_user.save
+  end
+
+  def build_user_profile(new_user)
+    new_user.build_profile(name: @user_auth['info']['name'])
+  end
+
+  def update_user_email
+    @user.update(email: @user_auth['info']['email'])
   end
 end

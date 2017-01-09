@@ -14,5 +14,4 @@ class CityRequestsController < ApplicationController
   def city_request_params
     params.require(:city_request).permit(:city)
   end
-
 end

@@ -3,11 +3,11 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    paginate
+    @dev_sites = paginate(@dev_sites)
 
     respond_to do |format|
-        format.html
-        format.json
+      format.html
+      format.json
     end
   end
 
@@ -62,20 +62,22 @@ class EventsController < ApplicationController
   end
 
   private
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    def paginate
-      if params[:page].present? || params[:limit].present?
-        limit = params[:limit].present? ? params[:limit].to_i : 20
-        page = params[:page].present? ? params[:page].to_i : 0
-        @dev_sites.limit!(limit).offset!(limit * page)
-      end
-    end
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    def event_params
-      params.require(:event).permit(:title, :description, :time, :date,
-      :images_cache, :location, :contact_email, :contact_tel, images: [])
-    end
+  def event_params
+    params.require(:event).permit(
+      :title,
+      :description,
+      :time,
+      :date,
+      :images_cache,
+      :location,
+      :contact_email,
+      :contact_tel,
+      images: []
+    )
+  end
 end
