@@ -1,15 +1,16 @@
 <div class="nested-fields">
 
   <div class="input-field col s12 m6">
-    <%= f.select :status, options_for_select(Status::VALID_STATUS_TYPES, selected: f.object.status) %>
     <%= f.label :status %>
+    <%= f.select :status, options_for_select(Status::VALID_STATUS_TYPES, selected: f.object.status) %>
   </div>
 
   <div class="input-field col s12 m6">
-    <%= f.text_field :status_date, class: "datepicker" %>
     <%= f.label :status_date, "Status Date" %>
+    <%= f.date_select :status_date %>
   </div>
 
-  <%= link_to_remove_association 'Remove status...', f %>
-
+  <div class="col s12">
+    <%= link_to_remove_association 'Remove status', f, class: 'cancel btn' %>
+  </div>
 </div>

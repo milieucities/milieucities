@@ -3,7 +3,12 @@ class DevSite < ActiveRecord::Base
 
   scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
 
-  VALID_APPLICATION_TYPES = ['Site Plan Control',
+  VALID_APPLICATION_TYPES = ['Site Plan Approval',
+                             'Condo Approval',
+                             'Subdivision Approval',
+                             'Zoning Amendment',
+                             'Registered Condominium',
+                             'Site Plan Control',
                              'Official Plan Amendment',
                              'Zoning By-law Amendment',
                              'Demolition Control',
@@ -50,7 +55,22 @@ class DevSite < ActiveRecord::Base
     location_search
     query_search
 
+<<<<<<< HEAD
+    if search_params[:ward].present?
+      dev_sites = dev_sites
+        .where('lower(ward_name) = lower(?)', search_params[:ward])
+    end
+
+    if search_params[:status].present?
+      dev_sites = dev_sites
+        .where('statuses.status_date = (SELECT MAX(statuses.status_date) FROM statuses WHERE statuses.dev_site_id = dev_sites.id)')
+        .where(statuses: { status: search_params[:status] })
+    end
+
+    dev_sites
+=======
     @dev_sites
+>>>>>>> master
   end
 
   def status

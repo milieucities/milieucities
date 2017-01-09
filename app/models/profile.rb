@@ -1,6 +1,7 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
   # THIS ARRAY MUST BE IN ORDER BY EACH WARDS, WARD NUMBER
+
   VALID_NEIGHBOURHOOD_TYPES = ['Orleans',
                                'Innes',
                                'Barrhaven',
@@ -23,7 +24,14 @@ class Profile < ActiveRecord::Base
                                'Osgoode',
                                'Rideau-Goulbourn',
                                'Gloucester-South Nepean',
-                               'Kanata South']
+                               'Kanata South',
+                               'Ward 1',
+                               'Ward 2',
+                               'Ward 3',
+                               'Ward 4',
+                               'Ward 5',
+                               'Ward 6'
+                             ]
 
   validates :name, presence: { message: "Name is required", on: :update }
   validates :organization, presence: true, if: :verification_requested?
