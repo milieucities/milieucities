@@ -147,7 +147,7 @@ export default class Edit extends Component {
           userName={userName}
           userAvatar={userAvatar}
           user={user}
-          showVerificationButton={user && user.verification_status === 'notVerified'}
+          showVerificationButton={user && user.profile.verification_status === 'notVerified'}
           flagVerificationRequested={this.flagVerificationRequested}
           verificationCallback={this.loadUser}
         />
@@ -200,18 +200,18 @@ export default class Edit extends Component {
                         </div>
                         <TextInputWithLabel
                           classes='col s12 m8 l6'
-                          id='user_organization'
-                          name='user[organization]'
+                          id='profile_organization'
+                          name='user[profile_attributes][organization]'
                           label={i18n.organization}
-                          defaultValue={user.organization}
+                          defaultValue={user.profile.organization}
                           required={this.state.verificationRequested}
                         />
                         <TextInputWithLabel
                           classes='col s12 m8 l6'
-                          id='user_community_role'
-                          name='user[community_role]'
+                          id='profile_community_role'
+                          name='user[profile_attributes][community_role]'
                           label={i18n.communityRole}
-                          defaultValue={user.community_role}
+                          defaultValue={user.profile.community_role}
                           required={this.state.verificationRequested}
                         />
                         <TextInputWithLabel

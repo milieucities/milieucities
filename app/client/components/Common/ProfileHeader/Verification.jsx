@@ -17,13 +17,23 @@ export default class Verification extends Component {
 
   _sendVerificationRequest() {
     const userId = document.body.dataset.userId
-    const data = { user: { verification_status: 'pendingVerification' } }
+    const data = {
+      user: {
+        profile_attributes: {
+          id: this.props.user.profile.id,
+          verification_status: 'pendingVerification'
+        }
+      }
+    }
     $.ajax({
       url: `/users/${userId}`,
       dataType: 'JSON',
       data: data,
       type: 'PATCH',
+      // contentType: false,
+      // processData: false,
       success: (res, status) => {
+        console.log(res)
         if (status === 'success') {
           this.props.verificationCallback();
           window.flash('notice', 'Requested verification');
@@ -38,18 +48,18 @@ export default class Verification extends Component {
   }
 
   render() {
-    const status = `${i18n.status}${i18n[this.props.user.verification_status]}`
+    const status = `${i18n.status}${i18n[this.props.user.profile.verification_status]}`
     return(
       <span className={css.verified}>
         {status}
-        {this.props.showVerificationButton && this.props.user.verification_status === 'notVerified' &&
-          <button 
+        {this.props.showVerificationButton && this.props.user.profile.verification_status === 'notVerified' &&
+          <button
             className={`btn ${css.verifyBtn}`}
             onClick={this.requestVerification}
           >{i18n.requestVerification}
           </button>
         }
-        <Tooltip 
+        <Tooltip
           text={i18n.verificationTooltip}
         />
       </span>

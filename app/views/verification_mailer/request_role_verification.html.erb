@@ -1,8 +1,10 @@
 <p>A user has requested verification!</p>
 <br>
 <p>Name: <%= @user.profile.name %></p>
-<p>Organization: <%= @user.organization || 'None provided' %></p>
-<p>Role: <%= @user.community_role || 'None provided' %></p>
+<p>Organization: <%= @user.profile.organization || 'None provided' %></p>
+<p>Role: <%= @user.profile.community_role || 'None provided' %></p>
+<p>Bio: <%= @user.profile.bio || 'None provided' %></p>
+<p>Web presence: <%= link_to(@user.profile.web_presence.to_s, @user.profile.web_presence) || 'None provided' %></p>
 <p>User ID: <%= @user.id %></p>
 <br>
 <p>Update this user's status on the <%= link_to 'Users admin page', users_url %>.</p>

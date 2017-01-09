@@ -8,7 +8,7 @@ export default class ProfileHeader extends Component {
     super()
     this.verifiedStatus = () => this._verifiedStatus();
   }
-  
+
   _userRoleandOrganization() {
     if (this.props.user && this.props.user.organization && this.props.user.community_role) {
       return `${this.props.user.community_role}, ${this.props.user.organization}`
@@ -18,7 +18,7 @@ export default class ProfileHeader extends Component {
   }
 
   _verifiedStatus() {
-    if (this.props.user && (this.props.user.community_role || this.props.user.organization)) {
+    if (this.props.user && (this.props.user.profile.community_role || this.props.user.profile.organization)) {
       return (
         <Verification
           {... this.props}

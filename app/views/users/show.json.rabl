@@ -1,9 +1,9 @@
 object @user
 
-  attributes :id, :provider, :email, :organization, :community_role, :verification_status
+  attributes :id, :provider, :email
 
 child :profile do
-  attributes :id, :name, :bio, :avatar, :anonymous_comments, :web_presence
+  attributes :id, :name, :bio, :avatar, :anonymous_comments, :web_presence, :organization, :community_role, :verification_status
 
   node :avatar do |profile|
     profile.avatar.web.preview.url if profile.avatar.present?

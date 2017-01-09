@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
-  before_action :update_verification_status, only: [:update]
-  after_action :send_verification_mailer, only: [:update]
 
   def index
     @users = User.all
@@ -56,9 +54,6 @@ class UsersController < ApplicationController
       :email,
       :password,
       :password_confirmation,
-      :organization,
-      :community_role,
-      :verification_status,
       address_attributes: [
         :id,
         :street,
@@ -72,20 +67,11 @@ class UsersController < ApplicationController
         :anonymous_comments,
         :neighbourhood,
         :postal_code,
-        :accepted_terms
+        :accepted_terms,
+        :organization,
+        :community_role,
+        :verification_status
       ]
     )
-  end
-
-  def update_verification_status
-    if user_params[:verification_status] == 'pendingVerification'
-      @user.verification_status = 'pendingVerification'
-    end
-  end
-
-  def send_verification_mailer
-    if user_params[:verification_status] == 'pendingVerification' && @user.valid?
-      VerificationMailer.request_role_verification(@user).deliver_now
-    end
   end
 end

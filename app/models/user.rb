@@ -25,12 +25,6 @@ class User < ActiveRecord::Base
                         length: { in: 6..20, message: I18n.t('validates.alert.passwordLimitation') },
                         allow_blank: true,
                         unless: "provider.present?"
-  validates :organization, presence: true, if: :verification_requested?
-  validates :community_role, presence: true, if: :verification_requested?
-  validates :name, presence: true, if: :verification_requested?
-  validates :bio, presence: true, if: :verification_requested?
-  validates :web_presence, presence: true, if: :verification_requested?
-
   delegate :name, :bio, :web_presence, :anonymous_comments, to: :profile, allow_nil: true
   friendly_id :slug_candidates, use: :slugged
 
@@ -53,9 +47,5 @@ class User < ActiveRecord::Base
 
   def name_and_id
     "#{profile.name}-#{id}" if profile && profile.name
-  end
-
-  def verification_requested?
-    verification_status == 'pendingVerification'
   end
 end
