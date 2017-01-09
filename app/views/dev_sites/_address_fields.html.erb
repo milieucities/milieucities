@@ -1,9 +1,27 @@
-<div class="nested-fields row">
+<div class="nested-fields rows">
 
   <div class="input-field col s12">
+    <%= f.label :street %>
     <%= f.text_field :street %>
-    <%= f.label :street, "Full Address" %>
   </div>
 
-  <%= link_to_remove_association 'Remove address...', f %>
+  <div class="input-field col s12 m4">
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="input-field col s12 m4">
+    <%= f.label :province_state, "Province" %>
+    <%= f.text_field :province_state %>
+  </div>
+
+  <div class="input-field col s12 m4">
+    <%= f.label :country %>
+    <%= f.text_field :country %>
+  </div>
+
+  <div class="col s12">
+    <%= link_to_remove_association 'Remove address', f, class: 'cancel btn' %>
+  </div>
+
 </div>
