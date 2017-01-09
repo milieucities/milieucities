@@ -2,11 +2,12 @@ import LocalizedStrings from 'react-localization';
 
 const i18n = new LocalizedStrings({
   en:{
-    role: 'COMMUNITY MEMBER',
-    dashboard: 'Dashboard',
     settings: 'Account Settings',
-    notification: 'Notification',
     name: 'Name',
+    organization: 'Organization',
+    communityRole: 'Role',
+    webPresence: 'Web presence',
+    webPresenceTooltipText: 'I.e. Personal website, LinkedIn profile, Twitter page, etc.',
     bio: 'Bio',
     changePhoto: 'Change Photo',
     contact: 'Contact',
@@ -28,11 +29,12 @@ const i18n = new LocalizedStrings({
     accountDeleteF: 'Failed to delete account'
   },
   fr: {
-    role: 'membre du communauté',
-    dashboard: 'Tableau de bord',
     settings: 'Paramètres du compte',
-    notification: 'Notification',
     name: 'prénom',
+    organization: 'Organisation',
+    communityRole: 'Rôle',
+    webPresence: 'Présence sur la web',
+    webPresenceTooltipText: 'I.e. Siteweb personel, profil de LinkedIn, Twitter, etc.',
     bio: 'Bio',
     changePhoto: 'Changer la photo',
     contact: 'Contact',

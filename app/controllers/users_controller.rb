@@ -36,7 +36,8 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render :show, status: :ok
     else
-      render json: @user.errors, status: :unprocessable_entity
+      messages = @user.errors.full_messages.join(', ')
+      render json: messages, status: :unprocessable_entity
     end
   end
 
@@ -62,10 +63,14 @@ class UsersController < ApplicationController
         :id,
         :name,
         :bio,
+        :web_presence,
         :anonymous_comments,
         :neighbourhood,
         :postal_code,
-        :accepted_terms
+        :accepted_terms,
+        :organization,
+        :community_role,
+        :verification_status
       ]
     )
   end

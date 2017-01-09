@@ -1,0 +1,27 @@
+.menu {
+  width: 300px;
+  min-width: 300px;
+  margin-top: 60px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    max-width: 250px;
+
+    li {
+      border-bottom: 1px solid #ddd;
+      transition: 250ms;
+
+      a {
+        font-size: 14px;
+        padding: 10px 0;
+        display: block;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
