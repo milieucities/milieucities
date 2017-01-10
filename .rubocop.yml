@@ -25,3 +25,4 @@ AllCops:
     - 'app/client/node_modules/**/*'
     - 'db/schema.rb'
     - 'db/migrate/**/*'
+    - 'bin/**/*'
