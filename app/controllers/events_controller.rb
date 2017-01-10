@@ -11,19 +11,13 @@ class EventsController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @event = Event.new
   end
 
-  def edit
-  end
-
-  def images
-    render json: { images: @event.image_hash }
-  end
+  def edit; end
 
   def create
     @event = Event.new(event_params)

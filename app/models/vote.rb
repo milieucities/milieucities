@@ -3,7 +3,7 @@ class Vote < ActiveRecord::Base
   belongs_to :comment
 
   after_create do
-    if(up)
+    if up
       comment.increment!(:vote_count)
     else
       comment.decrement!(:vote_count)
@@ -11,7 +11,7 @@ class Vote < ActiveRecord::Base
   end
 
   after_destroy do
-    if(up)
+    if up
       comment.decrement!(:vote_count)
     else
       comment.increment!(:vote_count)

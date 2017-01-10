@@ -12,21 +12,11 @@ class Event < ActiveRecord::Base
   validates :description, presence: { message: 'Description is required' }
   validates :date, presence: { message: 'Date is required' }
 
-  after_validation :geocoded, if: -> (obj) { obj.location.present? && obj.location_changed? }
-
   def geocoded
     lat_and_lng = Geokit::Geocoders::GoogleGeocoder.geocode location
-    if lat_and_lng.success
-      self.geocode_lat = lat_and_lng.lat
-      self.geocode_lon = lat_and_lng.lng
-    end
-  end
-
-  def image_hash
-    self.images.map do |img|
-      dimensions = FastImage.size(img.url)
-      { src: img.url, w: dimensions.first, h: dimensions.last }
-    end
+    return if lat_and_lng.success
+    self.geocode_lat = lat_and_lng.lat
+    self.geocode_lon = lat_and_lng.lng
   end
 
   def image_url

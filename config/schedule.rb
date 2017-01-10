@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, Rails.root.join 'log', 'cron.log'
+set :output, Rails.root.join('log', 'cron.log')
 
 every 1.day, at: '3:00 am' do
   rake 'sync_devsites'

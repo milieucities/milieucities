@@ -3,34 +3,38 @@ class DevSite < ActiveRecord::Base
 
   scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
 
-  VALID_APPLICATION_TYPES = ['Site Plan Approval',
-                             'Condo Approval',
-                             'Subdivision Approval',
-                             'Zoning Amendment',
-                             'Registered Condominium',
-                             'Site Plan Control',
-                             'Official Plan Amendment',
-                             'Zoning By-law Amendment',
-                             'Demolition Control',
-                             'Cash-in-lieu of Parking',
-                             'Plan of Subdivision',
-                             'Plan of Condominium',
-                             'Derelict',
-                             'Vacant',
-                             'Master Plan']
+  VALID_APPLICATION_TYPES = [
+    'Site Plan Approval',
+    'Condo Approval',
+    'Subdivision Approval',
+    'Zoning Amendment',
+    'Registered Condominium',
+    'Site Plan Control',
+    'Official Plan Amendment',
+    'Zoning By-law Amendment',
+    'Demolition Control',
+    'Cash-in-lieu of Parking',
+    'Plan of Subdivision',
+    'Plan of Condominium',
+    'Derelict',
+    'Vacant',
+    'Master Plan'
+  ].freeze
 
-  VALID_BUILDING_TYPES = ['Not Applicable',
-                          'Derelict',
-                          'Demolition',
-                          'Residential Apartment',
-                          'Low-rise Residential',
-                          'Mid-rise Residential',
-                          'Hi-rise Residential',
-                          'Mixed-use Residential/Community',
-                          'Commercial',
-                          'Commercial/Hotel',
-                          'Mixed-use',
-                          'Additions']
+  VALID_BUILDING_TYPES = [
+    'Not Applicable',
+    'Derelict',
+    'Demolition',
+    'Residential Apartment',
+    'Low-rise Residential',
+    'Mid-rise Residential',
+    'Hi-rise Residential',
+    'Mixed-use Residential/Community',
+    'Commercial',
+    'Commercial/Hotel',
+    'Mixed-use',
+    'Additions'
+  ].freeze
 
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
@@ -65,8 +69,8 @@ class DevSite < ActiveRecord::Base
 
   def status_date
     return if statuses.empty?
-    return nil if !statuses.order('status_date DESC').first.status_date
-    statuses.order('status_date DESC').first.status_date.strftime("%B %e, %Y")
+    return nil unless statuses.order('status_date DESC').first.status_date
+    statuses.order('status_date DESC').first.status_date.strftime('%B %e, %Y')
   end
 
   def address
@@ -82,14 +86,6 @@ class DevSite < ActiveRecord::Base
   def longitude
     return if addresses.empty?
     addresses.first.lon
-  end
-
-  def image_hash
-    return if images.empty?
-    images.map do |img|
-      dimensions = FastImage.size(img.url)
-      { src: img.url, w: dimensions.first, h: dimensions.last }
-    end
   end
 
   def image_url
@@ -127,7 +123,6 @@ class DevSite < ActiveRecord::Base
   end
 
   class << self
-
     def location_search
       location_search_params = [:latitude, :longitude]
       search_by_location if location_search_params.all? { |param| @search_params[param].present? }
@@ -136,7 +131,7 @@ class DevSite < ActiveRecord::Base
     def query_search
       query_params = [:year, :ward, :status]
       query_params.each do |param|
-        self.send("search_by_#{param}") if @search_params[param].present?
+        send("search_by_#{param}") if @search_params[param].present?
       end
     end
 
@@ -145,30 +140,26 @@ class DevSite < ActiveRecord::Base
       lat = @search_params[:latitude]
       lon = @search_params[:longitude]
       dev_site_ids
-      .push(Address.within(5, origin: [lat, lon])
-      .closest(origin: [lat, lon])
-      .limit(150)
-      .pluck(:addressable_id))
+        .push(Address.within(5, origin: [lat, lon])
+        .closest(origin: [lat, lon])
+        .limit(150)
+        .pluck(:addressable_id))
       @dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
     end
 
     def search_by_year
-      @dev_sites = @dev_sites
-      .where('extract(year from updated) = ?', @search_params[:year])
+      @dev_sites.where!('extract(year from updated) = ?', @search_params[:year])
     end
 
     def search_by_ward
-      @dev_sites = @dev_sites
-      .where('lower(ward_name) = lower(?)', @search_params[:ward])
+      @dev_sites.where!('lower(ward_name) = lower(?)', @search_params[:ward])
     end
 
     def search_by_status
-      @dev_sites = @dev_sites
-      .where('statuses.status_date = (SELECT MAX(statuses.status_date) ' +
-      'FROM statuses ' +
-      'WHERE statuses.dev_site_id = dev_sites.id)')
-      .where(statuses: { status: @search_params[:status] })
+      @dev_sites
+        .where!("statuses.status_date = (select max(statuses.status_date) \
+                 from statuses where statuses.dev_site_id = dev_sites.id)")
+        .where!(statuses: { status: @search_params[:status] })
     end
-
   end
 end

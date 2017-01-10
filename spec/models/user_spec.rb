@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) {build_stubbed(:user)}
+  let(:user) { build_stubbed(:user) }
 
   subject { user }
 
@@ -10,14 +10,13 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should be_valid }
 
-  describe "when email is not present" do
-    before { user.email = "" }
+  describe 'when email is not present' do
+    before { user.email = '' }
     it { should_not be_valid }
   end
 
-  describe "when passwords do not match" do
-    before { user.password = "1", user.password_confirmation = "2" }
+  describe 'when passwords do not match' do
+    before { user.password = '1', user.password_confirmation = '2' }
     it { should_not be_valid }
   end
-
 end

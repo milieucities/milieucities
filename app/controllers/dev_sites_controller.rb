@@ -16,15 +16,7 @@ class DevSitesController < ApplicationController
     end
   end
 
-  def map
-  end
-
-  def images
-    render json: { images: @dev_site.image_hash }
-  end
-
-  def show
-  end
+  def show; end
 
   def new
     @dev_site = DevSite.new
@@ -32,8 +24,7 @@ class DevSitesController < ApplicationController
     @dev_site.statuses.build
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     respond_to do |format|
@@ -71,13 +62,12 @@ class DevSitesController < ApplicationController
   private
 
   def paginate
-    return if params[:page].blank? || params[:limit].blank?
-    limit = sites_limit
+    limit = dev_sites_limit
     page = page_number
     @dev_sites.limit!(limit).offset!(limit * page)
   end
 
-  def sites_limit
+  def dev_sites_limit
     params[:limit].present? ? params[:limit].to_i : DEFAULT_SITES_LIMIT
   end
 
@@ -108,24 +98,27 @@ class DevSitesController < ApplicationController
 
   # rubocop:disable Metrics/MethodLength
   def dev_site_params
-    params.require(:dev_site)
-      .permit(:devID,
-              :application_type,
-              :title,
-              :images_cache,
-              :files_cache,
-              :build_type,
-              :description,
-              :ward_councillor_email,
-              :urban_planner_email,
-              :ward_name,
-              :ward_num,
-              :image_url,
-              :hearts,
-              images: [],
-              files: [],
-              likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
-              addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
-              statuses_attributes: [:id, :status, :status_date, :_destroy])
+    params
+      .require(:dev_site)
+      .permit(
+        :devID,
+        :application_type,
+        :title,
+        :images_cache,
+        :files_cache,
+        :build_type,
+        :description,
+        :ward_councillor_email,
+        :urban_planner_email,
+        :ward_name,
+        :ward_num,
+        :image_url,
+        :hearts,
+        images: [],
+        files: [],
+        likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
+        addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
+        statuses_attributes: [:id, :status, :status_date, :_destroy]
+      )
   end
 end

@@ -14,9 +14,14 @@ Metrics/MethodLength:
   Max: 15
 Metrics/AbcSize:
   Max: 20
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Bundler/OrderedGems:
+  Enabled: false
+Style/ColonMethodCall:
+  Enabled: false
 AllCops:
   Exclude:
     - 'app/client/node_modules/**/*'
     - 'db/schema.rb'
-    - 'config/**/*'
     - 'db/migrate/**/*'

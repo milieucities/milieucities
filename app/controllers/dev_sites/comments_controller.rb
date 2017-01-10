@@ -1,5 +1,5 @@
 module DevSites
-  class CommentsController < CommentsController
+  class CommentsController < ApplicationController
     def index
       all_comments = dev_site.comments
       @total = all_comments.count
@@ -8,6 +8,8 @@ module DevSites
 
       render formats: :json
     end
+
+    def show; end
 
     def create
       @comment = dev_site.comments.build comment_params

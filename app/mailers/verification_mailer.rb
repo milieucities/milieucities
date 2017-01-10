@@ -3,6 +3,6 @@ class VerificationMailer < ApplicationMailer
 
   def request_role_verification(user)
     @user = user
-    mail(:to => MILIEU_EMAIL_ADDRESS, :subject => "Request for user role verification")
+    mail(to: MILIEU_EMAIL_ADDRESS, subject: 'Request for user role verification')
   end
 end

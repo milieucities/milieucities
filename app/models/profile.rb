@@ -2,38 +2,39 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   # THIS ARRAY MUST BE IN ORDER BY EACH WARDS, WARD NUMBER
 
-  VALID_NEIGHBOURHOOD_TYPES = ['Orleans',
-                               'Innes',
-                               'Barrhaven',
-                               'Kanata North',
-                               'West Carleton-March',
-                               'Stittsville',
-                               'Bay',
-                               'College',
-                               'Knoxdale-Merivale',
-                               'Gloucester-Southgate',
-                               'Beacon Hill-Cyrville',
-                               'Rideau-Vanier',
-                               'Rideau-Rockcliffe',
-                               'Somerset',
-                               'Kitchissippi',
-                               'River',
-                               'Capital',
-                               'Alta Vista',
-                               'Cumberland',
-                               'Osgoode',
-                               'Rideau-Goulbourn',
-                               'Gloucester-South Nepean',
-                               'Kanata South',
-                               'Ward 1',
-                               'Ward 2',
-                               'Ward 3',
-                               'Ward 4',
-                               'Ward 5',
-                               'Ward 6'
-                             ]
+  VALID_NEIGHBOURHOOD_TYPES = [
+    'Orleans',
+    'Innes',
+    'Barrhaven',
+    'Kanata North',
+    'West Carleton-March',
+    'Stittsville',
+    'Bay',
+    'College',
+    'Knoxdale-Merivale',
+    'Gloucester-Southgate',
+    'Beacon Hill-Cyrville',
+    'Rideau-Vanier',
+    'Rideau-Rockcliffe',
+    'Somerset',
+    'Kitchissippi',
+    'River',
+    'Capital',
+    'Alta Vista',
+    'Cumberland',
+    'Osgoode',
+    'Rideau-Goulbourn',
+    'Gloucester-South Nepean',
+    'Kanata South',
+    'Ward 1',
+    'Ward 2',
+    'Ward 3',
+    'Ward 4',
+    'Ward 5',
+    'Ward 6'
+  ].freeze
 
-  validates :name, presence: { message: "Name is required", on: :update }
+  validates :name, presence: { message: 'Name is required', on: :update }
   validates :organization, presence: true, if: :verification_requested?
   validates :community_role, presence: true, if: :verification_requested?
   validates :name, presence: true, if: :verification_requested?
