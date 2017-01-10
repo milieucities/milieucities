@@ -1,11 +1,9 @@
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
-
   scope '(:locale)', locale: /en|fr/ do
     root to: 'pages#home'
 
     namespace :pages, path: '/', as: nil do
-      get 'map'
-      get 'citizencity'
       post 'contact_citizencity'
       post 'contact_milieu'
       post 'contact_file_lead'
@@ -17,7 +15,7 @@ Rails.application.routes.draw do
       get :privacy
     end
 
-    #omniauth
+    # Omniauth
     namespace :omniauth, path: '/', as: nil do
       get :create, path: 'auth/:facebook/callback'
       get :create, path: 'auth/:twitter/callback'
@@ -28,27 +26,10 @@ Rails.application.routes.draw do
     resources :newsletter_subscriptions, only: [:create]
     resources :city_requests, only: [:create]
     resources :dev_sites do
-      resources :comments, module: :dev_sites do
-      end
-
-      member do
-        get :images
-      end
-
+      resources :comments, module: :dev_sites
     end
 
-    resources :events do
-      resources :comments, module: :events do
-      end
-
-      member do
-        get :images
-      end
-
-      collection do
-        get :geojson
-      end
-    end
+    resources :events
 
     resources :comments, only: [:index]
     resources :users do
@@ -57,25 +38,17 @@ Rails.application.routes.draw do
       resources :votes, only: [:create, :destroy]
     end
     resources :sessions, only: [:new, :create, :destroy]
-
   end
 
-# Backend API Routing
+  # Backend API Routing
   scope '/api/v1' do
     resources :dev_sites do
-      resources :comments, module: :dev_sites do
-      end
-      member do
-        get :images
-      end
-
+      resources :comments, module: :dev_sites
     end
   end
 
-  mount Resque::Server, :at => "/resque"
+  mount Resque::Server, at: '/resque'
 
   root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
   get '*path' => redirect("/#{I18n.default_locale}", status: 302)
-
-
 end

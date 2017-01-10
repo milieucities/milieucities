@@ -16,8 +16,8 @@ class Ability
   private
 
   def user_abilities
-    can [:read, :search, :images, :geojson, :map], DevSite
-    can :read, Events
+    can :read, DevSite
+    can :read, Event
     can :read, Profile
     can [:new, :create], User
     can :read, Comment
@@ -31,14 +31,14 @@ class Ability
   end
 
   def regular_user_abilities(user)
-    can [:index, :read, :search, :images, :geojson, :map], DevSite
-    can [:index, :read], Events
-    can [:new, :create, :update, :destroy, :show], User, id: user.id
+    can :read, DevSite
+    can :read, Event
+    can [:new, :create, :update, :edit, :destroy, :show], User, id: user.id
     can :manage, Profile, user_id: user.id
     can :manage, Notification, user_id: user.id
     can :manage, Comment, user_id: user.id
+    can :read, Comment
     can :manage, Vote, user_id: user.id
     can :manage, Conversation, user_id: user.id
-    can :read, Comment
   end
 end

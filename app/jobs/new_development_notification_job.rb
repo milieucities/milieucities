@@ -7,17 +7,17 @@ class NewDevelopmentNotificationJob
     def perform(dev_site_id)
       addresses = dev_site_addresses
       addresses.each do |address|
+        next if address.lat.blank? || address.lon.blank?
         message = prepare_message(address, dev_site_id)
-        send_email(message)
+        send_email(message) if message
       end
     end
 
     private
 
     def prepare_message(address, dev_site_id)
-      next if address.lat.blank? || address.lon.blank?
       user_ids = search_user_ids(address)
-      next unless user_ids.size > 0
+      return unless user_ids.empty?
 
       recipients = convert_users_to_mandrill_recipients(user_ids)
       merge_vars = convert_users_to_mandrill_merge_fields(user_ids)
@@ -49,7 +49,8 @@ class NewDevelopmentNotificationJob
     end
 
     def search_user_ids(address)
-      Address.within(0.15, origin: [address.lat, address.lon])
+      Address
+        .within(0.15, origin: [address.lat, address.lon])
         .where(addressable_type: 'User')
         .pluck(:addressable_id)
     end

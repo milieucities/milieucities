@@ -3,7 +3,7 @@ require 'rake'
 
 describe 'sync dev sites rake task' do
   before :all do
-    Rake.application.rake_require "tasks/sync_devsites"
+    Rake.application.rake_require 'tasks/sync_devsites'
     Rake::Task.define_task(:environment)
   end
 
@@ -17,11 +17,11 @@ describe 'sync dev sites rake task' do
     end
 
     let :run_rake_task do
-      Rake::Task["sync_devsites"].reenable
-      Rake::Task["sync_devsites"].invoke
+      Rake::Task['sync_devsites'].reenable
+      Rake::Task['sync_devsites'].invoke
     end
 
-    it "should call sync" do
+    it 'should call sync' do
       mock_service_instance = instance_double('sync service')
       expect(@mock_service).to receive(:new).and_return(mock_service_instance)
       expect(mock_service_instance).to receive(:sync)

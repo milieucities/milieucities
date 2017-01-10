@@ -31,7 +31,6 @@ gem 'font-awesome-rails', '~> 4.7.0.0'
 gem 'momentjs-rails', '~> 2.11.0'
 gem 'photoswipe-rails'
 gem 'react-rails', '~> 1.6.2'
-gem 'redcarpet'
 gem 'rabl', '~> 0.12.0'
 gem 'cocoon'
 

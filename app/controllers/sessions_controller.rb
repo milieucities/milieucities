@@ -28,9 +28,8 @@ class SessionsController < ApplicationController
   end
 
   def session_time_left
-    # TODO: change to TimeWithZone times
-    expire_time = session[:expires_at] || Time.now
-    (expire_time.to_time - Time.now).to_i
+    expire_time = session[:expires_at] || Time.now.to_f
+    (expire_time.to_f - Time.now.to_f).to_i
   end
 
   def find_user_by_email
