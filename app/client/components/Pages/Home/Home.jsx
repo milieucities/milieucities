@@ -109,7 +109,7 @@ export default class Home extends Component {
             </a>
           </Carousel>
         </div>
-      <Footer />
+      <Footer/>
       </div>
     )
   }

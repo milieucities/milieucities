@@ -13,6 +13,28 @@
   box-sizing: border-box;
   z-index: 10000;
 
+  .skip {
+        position: absolute;
+        top: -2000px;
+        left: -2000px;
+        height: 1px;
+        width: 1px;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    a.skip{
+      &:active,
+      &:focus,
+      &:hover {
+        left: 50px;
+        top: 0;
+        width: auto;
+        height: auto;
+        overflow: visible;
+      }
+    }
+
   .logo {
     img {
       height: 25px;
