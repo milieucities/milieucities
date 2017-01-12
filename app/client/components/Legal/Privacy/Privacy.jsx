@@ -9,7 +9,7 @@ export default class Privacy extends Component {
   render() {
     i18n.setLanguage(document.body.dataset.locale);
     return(
-      <div>
+      <div className={css.root}>
         <Header />
         <div className='container'>
           <a href='/en'><i className='fa fa-long-arrow-left'></i>Back</a>

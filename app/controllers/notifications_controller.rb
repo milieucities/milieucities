@@ -2,7 +2,8 @@ class NotificationsController < ApplicationController
   load_and_authorize_resource :user
   load_and_authorize_resource :notification, through: :user, singleton: true
 
-  def show; end
+  def show
+  end
 
   def edit
     @no_header = true

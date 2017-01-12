@@ -14,6 +14,13 @@ $(document).on('turbolinks:load', function(){
     window.flash('alert', $('#alert').data('alert'));
   }
 
+  $('#verify-role').on("ajax:success", function(){
+    window.flash('notice', 'Verified!');
+    Turbolinks.visit('/users');
+  }).on('ajax:error', function(){
+    window.flash('alert', 'Error verifying');
+  });
+
   $('#contact-councillor').on("ajax:success", function(){
     this.reset();
     window.flash('notice', 'Message successfully sent!');

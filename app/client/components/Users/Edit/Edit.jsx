@@ -15,7 +15,6 @@ export default class Edit extends Component {
     super(props);
 
     this.state = { loading: true, verificationRequested: false };
-    this.currentUserId = parseInt(document.body.dataset.userId);
 
     this.uploadAvatar = (e) => this._uploadAvatar(e);
     this.deleteAvatar = (e) => this._deleteAvatar(e);
@@ -27,7 +26,7 @@ export default class Edit extends Component {
   }
 
   _loadUser() {
-    $.getJSON(`/users/${this.currentUserId}`,
+    $.getJSON(`/users/${document.body.dataset.userSlug}`,
       user => this.setState({ user, loading: false })
     );
   }
@@ -37,7 +36,7 @@ export default class Edit extends Component {
   }
 
   _deleteAvatar(e) {
-    const { locale } = document.body.dataset;
+    const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
     const { avatarDelS, avatarDelF} = i18n;
     let form = new FormData();
@@ -45,7 +44,7 @@ export default class Edit extends Component {
 
     this.setState({ avatarUploading: true });
     $.ajax({
-      url: `/users/${this.currentUserId}/profile`,
+      url: `/users/${userSlug}/profile`,
       dataType: 'JSON',
       type: 'PATCH',
       contentType: false,
@@ -63,15 +62,15 @@ export default class Edit extends Component {
   }
 
   _uploadAvatar(e) {
-    const { locale } = document.body.dataset;
+    const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
-    const {profileUploadF, profileUploadS} = i18n;
+    const { profileUploadF, profileUploadS } = i18n;
     let form = new FormData();
     form.append('profile[avatar]', this.refs.avatar.files[0]);
 
     this.setState({ avatarUploading: true });
     $.ajax({
-      url: `/users/${this.currentUserId}/profile`,
+      url: `/users/${userSlug}/profile`,
       dataType: 'JSON',
       type: 'PATCH',
       contentType: false,
@@ -91,12 +90,12 @@ export default class Edit extends Component {
   _submitForm(e) {
     this.setState({ verificationRequested: false })
     const form = new FormData(document.querySelector('#user-form'));
-    const { locale } = document.body.dataset;
+    const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
     const {profileUploadF, profileUploadS} = i18n;
 
     $.ajax({
-      url: `/users/${this.currentUserId}`,
+      url: `/users/${userSlug}`,
       dataType: 'JSON',
       type: 'PATCH',
       contentType: false,
@@ -114,7 +113,7 @@ export default class Edit extends Component {
   }
 
   _deleteAccount() {
-    const { locale } = document.body.dataset;
+    const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
     const { deleteConfirm, accountDeleteS, accountDeleteF } = i18n;
     if(!confirm(deleteConfirm)){
@@ -122,7 +121,7 @@ export default class Edit extends Component {
     }
 
     $.ajax({
-      url: `/users/${this.currentUserId}`,
+      url: `/users/${userSlug}`,
       dataType: 'JSON',
       type: 'DELETE',
       success: () => {
@@ -137,13 +136,14 @@ export default class Edit extends Component {
 
   render() {
     const { user, avatarUploading, loading, error } = this.state;
-    const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
+    const { userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
     if(user && !user.address) user.address = {}
     return(
       <div>
         <Header/>
         <ProfileHeader
+          parent={this}
           userName={userName}
           userAvatar={userAvatar}
           user={user}
@@ -293,7 +293,7 @@ export default class Edit extends Component {
                         label={i18n.street}
                         defaultValue={user.address.street}
                         form='user-form'
-                        required={true}
+                        required={false}
                       />
                     </div>
                     <div className='row'>

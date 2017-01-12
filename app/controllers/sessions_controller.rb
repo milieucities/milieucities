@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
   before_action :session_expiry, except: [:create]
 
   def create
-    @user = find_user_by_email
-    if @user && @user.authenticate(params[:session][:password])
-      session[:user_id] = @user.id
+    user = find_user_by_email
+    if user && user.authenticate(params[:session][:password])
+      session[:user_id] = user.id
       redirect_to root_path, notice: t('sessions.notice.welcome')
     else
       redirect_to new_session_path, alert: t('sessions.alert.could_not_signin')

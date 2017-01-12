@@ -16,7 +16,6 @@ export default class Verification extends Component {
   }
 
   _sendVerificationRequest() {
-    const userId = document.body.dataset.userId
     const data = {
       user: {
         profile_attributes: {
@@ -26,14 +25,11 @@ export default class Verification extends Component {
       }
     }
     $.ajax({
-      url: `/users/${userId}`,
+      url: `/users/${document.body.dataset.userSlug}`,
       dataType: 'JSON',
       data: data,
       type: 'PATCH',
-      // contentType: false,
-      // processData: false,
       success: (res, status) => {
-        console.log(res)
         if (status === 'success') {
           this.props.verificationCallback();
           window.flash('notice', 'Requested verification');
@@ -42,7 +38,8 @@ export default class Verification extends Component {
         }
       },
       error: error => {
-        window.flash('alert', error.responseText)
+        window.flash('alert', `All required fields must be saved.`);
+        this.props.parent.setState({ error: error.responseJSON });
       }
     });
   }

@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)]
 
-    user_abilities
+    default_abilities
 
     if user.has_role? :admin
       admin_abilities
@@ -15,7 +15,7 @@ class Ability
 
   private
 
-  def user_abilities
+  def default_abilities
     can :read, DevSite
     can :read, Event
     can :read, Profile

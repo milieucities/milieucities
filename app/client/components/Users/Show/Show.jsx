@@ -16,13 +16,13 @@ export default class Show extends Component {
     this.loadUser();
   }
   _loadUser() {
-    $.getJSON(`/users/${document.body.dataset.userId}`,
+    $.getJSON(`/users/${document.body.dataset.userSlug}`,
       user => this.setState({ user, loading: false })
     );
   }
   render() {
     const { user, loading } = this.state;
-    const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
+    const { userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
     return(
       <div>
