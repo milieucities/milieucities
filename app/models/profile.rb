@@ -39,7 +39,7 @@ class Profile < ActiveRecord::Base
   validates :community_role, presence: true, if: :verification_requested?
   validates :name, presence: true, if: :verification_requested?
   validates :bio, presence: true, if: :verification_requested?
-  validates :accepted_terms, acceptance: { accept: true }
+  validates :accepted_terms, acceptance: { accept: true, message: 'Terms of use must be accepted' }
 
   after_save :send_verification_mailer, if: :verification_requested?, on: [:update]
 

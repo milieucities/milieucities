@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path, notice: t('sessions.notice.welcome')
     else
-      flash[:alert] = @user.errors.messages.values.join(' ')
+      flash[:alert] = @user.errors.messages.values.join(', ')
       render :new
     end
   end
