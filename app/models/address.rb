@@ -6,7 +6,6 @@ class Address < ActiveRecord::Base
                    distance_field_name: :distance,
                    lat_column_name: :lat,
                    lng_column_name: :lon
-  validates :street, presence: { message: 'Street is required' }
   after_validation :geocoded, if: :new_street?
 
   def new_street?

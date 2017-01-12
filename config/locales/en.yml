@@ -14,7 +14,8 @@ en:
         neighbourhood: 'NEIGHBOURHOOD'
   users:
     new:
-      terms: "Accept terms of use"
+      accept: "Accept"
+      terms: "terms of use"
       title: "Sign Up"
       submit: "CREATE ACCOUNT"
     alert:
@@ -29,7 +30,7 @@ en:
       new: "New to Mileu?"
       signup: "Sign Up"
       signin: "Sign In"
-      accept: "By signing in, you accept "
+      accept: "By signing up, you accept "
       terms: "Terms of Use"
   sessions:
     alert:

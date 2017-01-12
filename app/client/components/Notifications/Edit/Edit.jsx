@@ -13,7 +13,6 @@ export default class Edit extends Component {
 
     this.state = { loading: true };
     this.locale = document.body.dataset.locale;
-    this.currentUserId = parseInt(document.body.dataset.userId);
 
     this.loadNotification = () => this._loadNotification();
     this.loadUser = () => this._loadUser();
@@ -23,13 +22,13 @@ export default class Edit extends Component {
   }
 
   _loadNotification() {
-    $.getJSON(`/users/${this.currentUserId}/notification`,
+    $.getJSON(`/users/${document.body.dataset.userSlug}/notification`,
       notification => this.setState({ notification, loading: false })
     );
   }
 
   _loadUser() {
-    $.getJSON(`/users/${this.currentUserId}`,
+    $.getJSON(`/users/${document.body.dataset.userSlug}`,
       user => this.setState({ user })
     );
   }
@@ -39,9 +38,9 @@ export default class Edit extends Component {
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
     const { notiUpdateF, notiUpdateS } = i18n;
-    console.log(form.keys());
+
     $.ajax({
-      url: `/users/${this.currentUserId}/notification`,
+      url: `/users/${document.body.dataset.userSlug}/notification`,
       dataType: 'JSON',
       type: 'PATCH',
       contentType: false,
@@ -60,7 +59,7 @@ export default class Edit extends Component {
 
   render() {
     const { user, notification, loading, error } = this.state;
-    const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
+    const { userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
     return(
       <div>

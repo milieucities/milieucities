@@ -18,6 +18,10 @@
     color: $dark-primary-color;
   }
 
+  &.small {
+    padding: 3px 10px;
+  }
+
   &.block {
     display: block;
     text-align: center;
@@ -31,9 +35,13 @@
     }
   }
 
-  &:hover, &:focus {
+  &:hover {
     opacity: 0.8;
     color: $white;
+  }
+
+  &:focus {
+    background-color: $accessibility;
   }
 }
 

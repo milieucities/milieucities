@@ -67,7 +67,8 @@ fr:
         neighbourhood: 'quartier'
   users:
     new:
-      terms: "accepter les conditions d'utilisation"
+      accept: 'Accepter'
+      terms: "conditions d'utilisation"
       title: "Connecter"
       submit: "créer une compte"
     alert:

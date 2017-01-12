@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resources :events
 
     resources :comments, only: [:index]
-    resources :users do
+    resources :users, param: :slug do
       resource :profile, only: [:edit, :update, :show]
       resource :notification, only: [:edit, :update, :show]
       resources :votes, only: [:create, :destroy]

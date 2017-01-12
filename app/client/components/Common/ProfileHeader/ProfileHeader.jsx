@@ -19,11 +19,7 @@ export default class ProfileHeader extends Component {
 
   _verifiedStatus() {
     if (this.props.user && (this.props.user.profile.community_role || this.props.user.profile.organization)) {
-      return (
-        <Verification
-          {... this.props}
-        />
-      )
+      return <Verification {...this.props} />
     }
   }
 

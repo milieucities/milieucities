@@ -21,6 +21,7 @@ class OmniauthController < ApplicationController
                            provider: @user_auth['provider'])
     build_user_profile(new_user)
     new_user.save
+    new_user
   end
 
   def build_user_profile(new_user)

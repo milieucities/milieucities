@@ -17,11 +17,11 @@
           <td><%= user.profile.name  %></td>
           <td><%= user.email %></td>
           <td><%= user.created_at %></td>
-          <td><%= user.profile.try(:receive_newletter) %></td>
-          <td><%= user.verification_status %></td>
+          <td><%= user.notification.newletter %></td>
+          <td><%= user.profile.verification_status %></td>
           <td>
-            <% if user.verification_status === 'pendingVerification' %>
-              <%= link_to 'Verify', user_path(@user, user: {verification_status: 'verified'}), method: :put, class: 'btn' %></td>
+            <% if user.profile.verification_status === 'pendingVerification' %>
+              <%= link_to 'Verify', user_path(user, user: { profile_attributes: { id: user.profile.id, verification_status: 'verified' }}), method: :put, remote: :true, id: 'verify-role', class: 'btn small' %></td>
             <% end %>
         </tr>
         <% end %>

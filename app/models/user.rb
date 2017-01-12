@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :profile
   accepts_nested_attributes_for :address
 
-  validates :accepted_terms, acceptance: true
   validates :email,
             presence: { message: I18n.t('validates.alert.emailIsRequired') },
             uniqueness: { message: I18n.t('validates.alert.emailAlreadyInUse') },
