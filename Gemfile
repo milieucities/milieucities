@@ -9,6 +9,7 @@ gem 'jquery-rails', '~> 4.1.0'
 gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'turbolinks', '~> 5.0.0'
 gem 'rack-cors', '~> 0.4.0'
+gem 'figaro'
 
 # background services gems
 gem 'whenever'
