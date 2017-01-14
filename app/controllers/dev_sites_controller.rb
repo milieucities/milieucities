@@ -29,11 +29,10 @@ class DevSitesController < ApplicationController
   def create
     respond_to do |format|
       if @dev_site.save
-        format.html { redirect_to @dev_site, notice: t('dev-sites.create.created') }
+        format.html { redirect_to @dev_site, notice: 'Development successfully created.' }
         format.json { render :show, status: :created, location: @dev_site }
       else
-        # TODO: alert needs translation
-        format.html { render :new, alert: 'Failed to create development site' }
+        format.html { render :new, alert: 'Failed to create development.' }
         format.json { render json: @dev_site.errors, status: :unprocessable_entity }
       end
     end
@@ -42,7 +41,7 @@ class DevSitesController < ApplicationController
   def update
     respond_to do |format|
       if @dev_site.update(dev_site_params)
-        format.html { redirect_to @dev_site, notice: t('dev_sites.update.updateS') }
+        format.html { redirect_to @dev_site, notice: 'Development successfully updated.' }
         format.json { render :show, status: :accepted, location: @dev_site }
       else
         format.html { render :edit }
@@ -54,7 +53,7 @@ class DevSitesController < ApplicationController
   def destroy
     @dev_site.destroy
     respond_to do |format|
-      format.html { redirect_to dev_sites_path, notice: t('dev_sites.destroy.destroyS') }
+      format.html { redirect_to dev_sites_path, notice: 'Development successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -117,7 +116,7 @@ class DevSitesController < ApplicationController
         images: [],
         files: [],
         likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
-        addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
+        addresses_attributes: [:id, :street, :city, :province_state, :country, :_destroy],
         statuses_attributes: [:id, :status, :status_date, :_destroy]
       )
   end

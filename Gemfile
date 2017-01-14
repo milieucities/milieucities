@@ -16,7 +16,7 @@ gem 'resque', '~> 1.26.0', require: 'resque/server'
 gem 'mandrill-api', '~> 1.0.53'
 
 # model gems
-gem 'carrierwave', '~> 0.10'
+gem 'carrierwave', '~> 1.0.0'
 gem 'fastimage'
 gem 'rolify', '~> 5.1.0'
 gem 'friendly_id', '~> 5.1.0'
