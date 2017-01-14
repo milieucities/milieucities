@@ -4,5 +4,5 @@ class Conversation < ActiveRecord::Base
   validates :address, presence: { message: 'Address is required' }
   validates :topic, presence: { message: 'Topic is required' }
 
-  mount_uploader :images, ImagesUploader
+  mount_uploader :image, ImagesUploader
 end

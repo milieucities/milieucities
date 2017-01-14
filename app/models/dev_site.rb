@@ -1,6 +1,4 @@
 class DevSite < ActiveRecord::Base
-  attr_accessor :images, :files
-
   scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
 
   VALID_APPLICATION_TYPES = [
@@ -104,8 +102,8 @@ class DevSite < ActiveRecord::Base
     where(id: ids).order(order_clause)
   end
 
-  mount_uploader :images, ImagesUploader
-  mount_uploader :files, FilesUploader
+  mount_uploaders :images, ImagesUploader
+  mount_uploaders :files, FilesUploader
 
   after_create do
     Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?

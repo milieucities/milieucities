@@ -56,7 +56,7 @@ export default class Home extends Component {
         <Header />
         <div className={css.landingContainer}>
           <div>
-            <h1>Milieu</h1>
+            <h1 style={{height: 100, margin: 0}}>Milieu</h1>
             <h3>{i18n.heroText1}</h3>
             {
               signedIn == 'false' &&
@@ -104,7 +104,7 @@ export default class Home extends Component {
             </a>
             <a title={'Go to Milieu\'s article of What we learned from pop-up engagement'} href='https://medium.com/@MilieuCities/what-we-learned-from-pop-up-engagement-65cec34fefde#.l84ns3xc6' target='_blank' className={css.article}>
               <div className={css.type}>{i18n.article}</div>
-              <h3 className={css.title}>What we learned from pop-up engagement</h3>
+              <h2 className={css.title}>What we learned from pop-up engagement</h2>
               <div className={css.summary}>Milieu’s on-going goal is to facilitate a human-centered approach to urban planning and development.</div>
             </a>
           </Carousel>

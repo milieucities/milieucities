@@ -33,12 +33,12 @@
 <div class="row">
   <div class="input-field col s12 m6">
     <%= f.label :ward_name, "Ward Name" %>
-    <%= f.select :ward_name, options_for_select(Profile::VALID_NEIGHBOURHOOD_TYPES) %>
+    <%= f.select :ward_name, options_for_select(Profile::VALID_NEIGHBOURHOOD_TYPES), selected: @dev_site.ward_name %>
   </div>
 
   <div class="input-field col s12 m6">
     <%= f.label :ward_num, "Ward Number"%>
-    <%= f.number_field :ward_num, value: 0 %>
+    <%= f.number_field :ward_num %>
   </div>
 </div>
 
