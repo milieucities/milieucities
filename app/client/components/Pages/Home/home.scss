@@ -15,6 +15,15 @@
 
   > div {
     height: 240px;
+
+    > h1 {
+      height: 100px;
+      margin: 0;
+
+      @media #{$small-and-down} {
+        height: 50px;
+      }
+    }
   }
 
   @media #{$medium-and-down} {
@@ -28,11 +37,19 @@
   a {
     color: $white;
     font-size: 18px;
+
+    @media #{$small-and-down} {
+      font-size: 15px;
+    }
   }
 
   .signUpContainer {
     letter-spacing: 1px;
     font-size: 18px;
+
+    @media #{$small-and-down} {
+      font-size: 15px;
+    }
   }
 
   .signUpButton {
@@ -50,6 +67,8 @@
 
     @media #{$small-and-down} {
       margin-right: 20px;
+      padding: 5px 10px;
+      font-size: 18px;
     }
 
     &:hover {
