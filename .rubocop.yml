@@ -20,6 +20,8 @@ Bundler/OrderedGems:
   Enabled: false
 Style/ColonMethodCall:
   Enabled: false
+HttpPositionalArguments:
+  Enabled: false
 AllCops:
   Exclude:
     - 'app/client/node_modules/**/*'
