@@ -61,18 +61,7 @@ Rails.application.routes.draw do
 
 # Backend API Routing
   scope '/api/v1' do
-    resources :dev_sites do
-      resources :comments, module: :dev_sites do
-      end
-      member do
-        get :images
-      end
-
-    end
-  end
-
-  scope '/test' do
-    post '/authenticate', to: 'authentication#authenticate'
+    post '/login', to: 'authentication#authenticate'
     resources :api_dev_sites do
     end
   end

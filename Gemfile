@@ -10,6 +10,7 @@ gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'turbolinks', '~> 5.0.0'
 gem 'rack-cors', '~> 0.4.0'
 gem 'rails-api', require: 'rails-api/action_controller/api'
+gem 'httparty'
 
 # background services gems
 gem 'whenever'
