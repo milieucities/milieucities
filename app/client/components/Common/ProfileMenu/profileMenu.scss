@@ -3,11 +3,30 @@
   min-width: 300px;
   margin-top: 60px;
 
+  @media #{$medium-and-down} {
+    width: 225px;
+    min-width: 225px;
+  }
+
+  @media #{$small-and-down} {
+    width: auto;
+    margin: 0;
+  }
+
   ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
     max-width: 250px;
+
+    @media #{$medium-and-down} {
+      max-width: 200px;
+    }
+
+    @media #{$small-and-down} {
+      max-width: none;
+      text-align: center;
+    }
 
     li {
       border-bottom: 1px solid #ddd;

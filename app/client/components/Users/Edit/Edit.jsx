@@ -184,7 +184,7 @@ export default class Edit extends Component {
                       <input type='hidden' name={'user[profile_attributes][id]'} value={user.profile.id}/>
                       <div className='row'>
                         <TextInputWithLabel
-                          classes='col s12 m8 l6'
+                          classes='col s12 m12 l6'
                           id='profile_name'
                           name='user[profile_attributes][name]'
                           label={i18n.name}
@@ -199,7 +199,7 @@ export default class Edit extends Component {
                           <label htmlFor='profile_anonymous'>I would like all my comments to be anonymous</label>
                         </div>
                         <TextInputWithLabel
-                          classes='col s12 m8 l6'
+                          classes='col s12 m12 l6'
                           id='profile_organization'
                           name='user[profile_attributes][organization]'
                           label={i18n.organization}
@@ -207,7 +207,7 @@ export default class Edit extends Component {
                           required={this.state.verificationRequested}
                         />
                         <TextInputWithLabel
-                          classes='col s12 m8 l6'
+                          classes='col s12 m12 l6'
                           id='profile_community_role'
                           name='user[profile_attributes][community_role]'
                           label={i18n.communityRole}
@@ -244,7 +244,7 @@ export default class Edit extends Component {
                   <div className={css.data}>
                     <div className='row'>
                       <TextInputWithLabel
-                        classes='col s12 m8 l6'
+                        classes='col s12 m12 l6'
                         id='user_email'
                         name='user[email]'
                         label={i18n.email}
@@ -263,14 +263,14 @@ export default class Edit extends Component {
                     </div>
                     <div className={css.data}>
                       <div className='row'>
-                        <div className='input-field col s12 m8 l6'>
+                        <div className='input-field col s12 m12 l6'>
                           <label htmlFor='user_password'>{i18n.newPassword}</label>
                           <input id='user_password' type='password' name='user[password]' form='user-form'/>
                           {error && error.password && <div className='error-message'>{error.password}</div>}
                         </div>
                       </div>
                       <div className='row'>
-                        <div className='input-field col s12 m8 l6'>
+                        <div className='input-field col s12 m12 l6'>
                           <label htmlFor='user_password_confirmation'>{i18n.newPasswordConfirmation}</label>
                           <input id='user_password_confirmation' type='password' name='user[password_confirmation]' form='user-form'/>
                           {error && error.password_confirmation && <div className='error-message'>{error.password_confirmation}</div>}
@@ -287,7 +287,7 @@ export default class Edit extends Component {
                     <input type='hidden' name={'user[address_attributes][id]'} value={user.address.id}/>
                     <div className='row'>
                       <TextInputWithLabel
-                        classes='col s12 m8 l6'
+                        classes='col s12 m12 l6'
                         id='address_street'
                         name='user[address_attributes][street]'
                         label={i18n.street}
@@ -298,7 +298,7 @@ export default class Edit extends Component {
                     </div>
                     <div className='row'>
                       <TextInputWithLabel
-                        classes='col s12 m8 l6'
+                        classes='col s12 m12 l6'
                         id='address_city'
                         name='user[address_attributes][city]'
                         label={i18n.city}

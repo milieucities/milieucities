@@ -48,7 +48,6 @@ export default class Show extends Component {
             {
               !loading &&
               <div className={css.content}>
-                <a href={`/${locale}/users/${userSlug}/edit`} title='Edit your profile' className='btn right'>{i18n.edit}</a>
                 <h2>{i18n.dashboard}</h2>
 
                 <div className={css.meta}>
