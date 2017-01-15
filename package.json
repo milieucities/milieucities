@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "(cd app/client && npm start)",
-    "postinstall": "cd app/client && npm install"
+    "postinstall": "cd app/client && npm install",
+    "lint": "eslint --ext .jsx app/client; exit 0"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,13 @@
   },
   "author": "Milieucitiesrepo",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "3.2.2",
+    "eslint-config-airbnb-base": "5.0.1",
+    "eslint-plugin-import": "1.12.0",
+    "eslint-plugin-react": "^6.9.0"
+  },
   "cacheDirectories": [
     "node_modules",
     "app/client/node_modules"
