@@ -47,7 +47,7 @@ export default class Verification extends Component {
   render() {
     const status = `${i18n.status}${i18n[this.props.user.profile.verification_status]}`
     return(
-      <span className={css.verified}>
+      <div className={css.verified}>
         {status}
         {this.props.showVerificationButton && this.props.user.profile.verification_status === 'notVerified' &&
           <button
@@ -59,7 +59,7 @@ export default class Verification extends Component {
         <Tooltip
           text={i18n.verificationTooltip}
         />
-      </span>
+    </div>
     )
   }
 }

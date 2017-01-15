@@ -25,7 +25,6 @@ export default class ProfileHeader extends Component {
 
   render() {
     const userRole = this._userRoleandOrganization()
-    const verifiedStatusComponent = this._verifiedStatus() || ''
     return(
       <div className={css.info}>
         <div className='container'>
@@ -35,7 +34,7 @@ export default class ProfileHeader extends Component {
           <div className={css.content}>
             <h1 className={css.name}>{this.props.userName}</h1>
             <h3 className={css.role}>{userRole}</h3>
-            {verifiedStatusComponent}
+            {this._verifiedStatus()}
           </div>
         </div>
       </div>
