@@ -2,8 +2,8 @@ FactoryGirl.define do
   factory :dev_site do
     devID { FFaker::Identification.drivers_license }
     application_type 'Site Plan Control'
-    description 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    ward_name { FFaker::Name }
+    description { FFaker::DizzleIpsum.sentence }
+    ward_name { FFaker::Name.name }
     ward_num 13
   end
 end
