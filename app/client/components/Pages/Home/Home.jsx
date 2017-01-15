@@ -56,7 +56,7 @@ export default class Home extends Component {
         <Header />
         <div className={css.landingContainer}>
           <div>
-            <h1 style={{height: 100, margin: 0}}>Milieu</h1>
+            <h1>Milieu</h1>
             <h3>{i18n.heroText1}</h3>
             {
               signedIn == 'false' &&
