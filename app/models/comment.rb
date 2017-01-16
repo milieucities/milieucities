@@ -25,7 +25,7 @@ class Comment < ActiveRecord::Base
 
   def set_sentiment
     create_sentiment if sentiment.blank?
-    sentiment sentiment.update_sentiment(body)
+    sentiment.update_sentiment(body)
     commentable.update_sentiment(sentiment) if commentable_type.eql?('DevSite')
   end
 

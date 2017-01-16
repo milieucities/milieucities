@@ -17,6 +17,6 @@ class Status < ActiveRecord::Base
   ].freeze
 
   def friendly_status_date
-    status_date.strftime('%B %e, %Y')
+    status_date.strftime('%B %e, %Y') if status_date.present?
   end
 end
