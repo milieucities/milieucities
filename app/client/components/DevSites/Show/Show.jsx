@@ -24,8 +24,10 @@ export default class DevSiteShow extends Component {
     this.generateChart = () => this._generateChart();
     this.loadDevSite();
   }
-  componentDidUpdate() {
-    this.generateChart();
+  componentDidUpdate(prevProps, prevState) {
+    if(this.state.devSite && !prevState.devSite) {
+      this.generateChart();
+    }
   }
   _handleEmail(e) {
     e.preventDefault();
@@ -35,7 +37,7 @@ export default class DevSiteShow extends Component {
     i18n.setLanguage(locale);
     const { messageSent, mustSign } = i18n
     $.ajax({
-      url: url,
+      url,
       dataType: 'JSON',
       type: 'POST',
       cache: false,
@@ -70,17 +72,23 @@ export default class DevSiteShow extends Component {
   }
   _generateChart() {
     const { anger, disgust, fear, joy, sadness } = this.state.devSite.sentiment;
-    const chart = document.getElementById('chart')
-    var myChart = new Chart(chart, {
-      type: 'polarArea',
-      animation:{
+    const chart = document.getElementById('chart');
+    new Chart(chart, {
+      type: 'doughnut',
+      animation: {
         animateScale: true
       },
       data: {
         labels: ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness'],
         datasets: [{
           label: 'Emotion',
-          data: [this._formatEmotion(anger), this._formatEmotion(disgust), this._formatEmotion(fear), this._formatEmotion(joy), this._formatEmotion(sadness)],
+          data: [
+            this._formatEmotion(anger),
+            this._formatEmotion(disgust),
+            this._formatEmotion(fear),
+            this._formatEmotion(joy),
+            this._formatEmotion(sadness)
+          ],
           backgroundColor: [
             'rgba(255,99,132,1)',
             'rgba(54, 162, 235, 1)',
