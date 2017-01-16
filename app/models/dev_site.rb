@@ -77,7 +77,7 @@ class DevSite < ActiveRecord::Base
 
   def address
     return if addresses.empty?
-    [addresses.first.street, addresses.first.city, addresses.first.province_state].join(', ')
+    [addresses.first.street, addresses.first.city, addresses.first.province_state].delete_if(&:blank?).join(', ')
   end
 
   def latitude
