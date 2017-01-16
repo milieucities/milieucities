@@ -17,6 +17,8 @@ class Address < ActiveRecord::Base
     return unless lat_and_lng.success
     self.lat = lat_and_lng.lat
     self.lon = lat_and_lng.lng
+
+  rescue
   end
 
   def full_address

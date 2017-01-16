@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import css from './home.scss'
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
-import DevSite from '../../DevSites/Show/Show'
+import DevSitePreview from '../../DevSites/Preview/Preview'
 import Autocomplete from '../../Utility/Autocomplete/Autocomplete'
 import Carousel from '../../Utility/Carousel/Carousel'
 import { debounce } from 'lodash'
@@ -85,9 +85,9 @@ export default class Home extends Component {
           <h2 className={css.title}>{i18n.featuredDevelopments}</h2>
 
           <div className={css.featured}>
-            <a href={`/${locale}/dev_sites?activeDevSiteId=1822`}><DevSite id={1822} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${locale}/dev_sites?activeDevSiteId=1869`}><DevSite id={1869} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${locale}/dev_sites?activeDevSiteId=1870`}><DevSite id={1870} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${locale}/dev_sites?activeDevSiteId=1822`}><DevSitePreview id={1822} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${locale}/dev_sites?activeDevSiteId=1869`}><DevSitePreview id={1869} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${locale}/dev_sites?activeDevSiteId=1870`}><DevSitePreview id={1870} preview={true} horizontal={isMobile} /></a>
           </div>
         </div>
         <div className={css.articleContainer}>

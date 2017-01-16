@@ -1,6 +1,9 @@
 class DevSite < ActiveRecord::Base
   scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
 
+  mount_uploaders :images, ImagesUploader
+  mount_uploaders :files, FilesUploader
+
   VALID_APPLICATION_TYPES = [
     'Site Plan Approval',
     'Condo Approval',
@@ -36,6 +39,7 @@ class DevSite < ActiveRecord::Base
 
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
+  has_one  :sentiment, as: :sentimentable, dependent: :destroy
   has_many :statuses, dependent: :destroy
   has_many :city_files, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -73,7 +77,7 @@ class DevSite < ActiveRecord::Base
 
   def address
     return if addresses.empty?
-    addresses.first.street
+    [addresses.first.street, addresses.first.city, addresses.first.province_state].join(', ')
   end
 
   def latitude
@@ -92,6 +96,28 @@ class DevSite < ActiveRecord::Base
     ActionController::Base.helpers.image_path('mainbg.jpg')
   end
 
+  def update_sentiment(comment_sentiment)
+
+    update({
+      anger_total: comment_sentiment.anger + anger_total,
+      joy_total: comment_sentiment.joy + joy_total,
+      fear_total: comment_sentiment.fear + fear_total,
+      sadness_total: comment_sentiment.sadness + sadness_total,
+      disgust_total: comment_sentiment.disgust + disgust_total
+    })
+
+    create_sentiment if sentiment.blank?
+    comments_count = comments.count
+
+    sentiment.update({
+      anger: anger_total/comments_count,
+      joy: joy_total/comments_count,
+      fear: fear_total/comments_count,
+      sadness: sadness_total/comments_count,
+      disgust: disgust_total/comments_count
+    })
+  end
+
   def self.find_ordered(ids)
     return where(id: ids) if ids.empty?
     order_clause = 'CASE dev_sites.id '
@@ -101,9 +127,6 @@ class DevSite < ActiveRecord::Base
     order_clause << "ELSE #{ids.length} END"
     where(id: ids).order(order_clause)
   end
-
-  mount_uploaders :images, ImagesUploader
-  mount_uploaders :files, FilesUploader
 
   after_create do
     Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?

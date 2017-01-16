@@ -15,4 +15,8 @@ class Status < ActiveRecord::Base
     'Comment Period has Ended/Issue Resolution',
     'Community Information and Comment Session Open'
   ].freeze
+
+  def friendly_status_date
+    status_date.strftime('%B %e, %Y')
+  end
 end

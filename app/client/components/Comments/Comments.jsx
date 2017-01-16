@@ -30,7 +30,7 @@ export default class Comments extends Component {
   _loadComments() {
     $.getJSON(`/dev_sites/${this.props.devSiteId}/comments`,
       { page: this.state.page, limit: this.state.limit },
-      json => this.setState({ comments: List(json.comments), total: json.total })
+      comments => this.setState({ comments: List(comments), total: (comments.length > 0 ? comments[0].total : 0) })
     );
   }
   _hasMoreComments() {
@@ -42,7 +42,7 @@ export default class Comments extends Component {
       () => {
         $.getJSON(`/dev_sites/${this.props.devSiteId}/comments`,
           { page: this.state.page, limit: this.state.limit },
-          json => this.setState({ comments: this.state.comments.push(...json.comments), total: json.total })
+          comments => this.setState({ comments: this.state.comments.push(...comments), total: comments[0].total })
         );
       }
     );
@@ -89,9 +89,9 @@ class CommentForm extends Component {
       type: 'POST',
       cache: false,
       data: {comment: { body }, limit },
-      success: (json) => {
+      success: (comment) => {
         this.parent.setState({
-          comments: this.parent.state.comments.unshift(json),
+          comments: this.parent.state.comments.unshift(comment),
           total: this.parent.state.total + 1
         })
         this.setState({ body: '' });

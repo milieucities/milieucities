@@ -16,11 +16,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.turbolinks
-//= require react
-//= require react_ujs
-//= require_tree ./components
 //= require moment
-//= require photoswipe
 //= require velocity.min
 //= require velocity.uipack
 //= require cocoon

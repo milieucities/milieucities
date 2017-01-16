@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Fill 207</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-Set" transform="translate(-433.000000, -141.000000)" fill="#555555">
+            <path d="M463,151 L435,151 L435,145 C435,143.896 435.896,143 437,143 L443,143 C444.104,143 445,143.896 445,145 L445,147 L461,147 C462.104,147 463,147.896 463,149 L463,151 L463,151 Z M463,169 C463,170.104 462.104,171 461,171 L437,171 C435.896,171 435,170.104 435,169 L435,153 L463,153 L463,169 L463,169 Z M461,145 L447,145 C447,142.791 445.209,141 443,141 L437,141 C434.791,141 433,142.791 433,145 L433,169 C433,171.209 434.791,173 437,173 L461,173 C463.209,173 465,171.209 465,169 L465,149 C465,146.791 463.209,145 461,145 L461,145 Z" id="Fill-207"></path>
+        </g>
+    </g>
+</svg>

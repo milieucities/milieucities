@@ -16,7 +16,10 @@ class DevSitesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @no_header = true
+    @dev_site = DevSite.includes(:addresses, :statuses, :likes).find(params[:id])
+  end
 
   def new
     @dev_site = DevSite.new

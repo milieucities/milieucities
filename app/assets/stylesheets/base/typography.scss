@@ -10,6 +10,10 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3rem;
 
+  @media #{$medium-and-down} {
+    font-size: 2.5rem;
+  }
+
   @media #{$small-and-down} {
     font-size: 2rem;
   }
@@ -17,6 +21,10 @@ h1 {
 
 h2 {
   font-size: 2rem;
+
+  @media #{$medium-and-down} {
+    font-size: 1.75rem;
+  }
 
   @media #{$small-and-down} {
     font-size: 1.5rem;
@@ -26,6 +34,10 @@ h2 {
 h3 {
   font-size: 1.5rem;
   margin: 0;
+
+  @media #{$medium-and-down} {
+    font-size: 1.35rem;
+  }
 
   @media #{$small-and-down} {
     font-size: 1.1rem;

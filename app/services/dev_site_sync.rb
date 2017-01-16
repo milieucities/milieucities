@@ -67,7 +67,7 @@ module Services
         false
       end
 
-      return false if missing_address?(dev_site)
+      return false if dev_site.blank? || missing_address?(dev_site)
 
       dev_site_attributes = parse_attributes(dev_site)
 
@@ -96,7 +96,7 @@ module Services
         puts "Error retrieving updated dev site: #{msg.inspect}"
       end
 
-      return false if missing_address?(dev_site)
+      return false if dev_site.blank? || missing_address?(dev_site)
 
       if current_dev_site.updated == dev_site['updated']
         puts "Latest application - #{dev_site['devid']}"
