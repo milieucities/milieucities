@@ -1,7 +1,7 @@
 module DevSites
   class CommentsController < ApplicationController
     def index
-      all_comments = dev_site.comments
+      all_comments = dev_site.comments.includes(:votes, :user)
       @total = all_comments.count
 
       @comments = paginate? ? paginate(all_comments, 5) : all_comments

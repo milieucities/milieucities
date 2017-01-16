@@ -18,7 +18,6 @@ gem 'mandrill-api', '~> 1.0.53'
 
 # model gems
 gem 'carrierwave', '~> 1.0.0'
-gem 'fastimage'
 gem 'rolify', '~> 5.1.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'cancancan', '~> 1.15.0'
@@ -30,8 +29,6 @@ gem 'rmagick', '~> 2.15.4', require: 'RMagick'
 # view gems
 gem 'font-awesome-rails', '~> 4.7.0.0'
 gem 'momentjs-rails', '~> 2.11.0'
-gem 'photoswipe-rails'
-gem 'react-rails', '~> 1.6.2'
 gem 'rabl', '~> 0.12.0'
 gem 'cocoon'
 

@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
   belongs_to :user
   default_scope { order(created_at: :desc) }
+  has_one  :sentiment, as: :sentimentable, dependent: :destroy
   has_many :votes, dependent: :destroy
   validates :body, presence: { message: 'Comment is required' }
 
@@ -20,6 +21,16 @@ class Comment < ActiveRecord::Base
     time_since_post = "#{time_ago_in_words(updated_at)} ago"
     time_updated_at = updated_at.strftime('%B %e, %Y')
     updated_at > 1.day.ago ? time_since_post : time_updated_at
+  end
+
+  def set_sentiment
+    create_sentiment if sentiment.blank?
+    sentiment sentiment.update_sentiment(body)
+    commentable.update_sentiment(sentiment) if commentable_type.eql?('DevSite')
+  end
+
+  after_save do
+    Resque.enqueue(UpdateCommentSentimentJob, id) unless Rails.env.test?
   end
 
   private

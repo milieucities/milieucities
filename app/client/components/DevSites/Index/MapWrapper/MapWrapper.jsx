@@ -4,7 +4,7 @@ import css from './map-wrapper.scss'
 import MapSearch from '../MapSearch/MapSearch'
 import MapFilter from '../MapFilter/MapFilter'
 import DevSiteList from '../DevSiteList/DevSiteList'
-import DevSite from '../../Show/Show'
+import DevSitePreview from '../../Preview/Preview'
 import MapAwesome from '../Map/Map'
 import { Map } from 'immutable'
 import { debounce, omitBy, isNil } from 'lodash'
@@ -54,7 +54,7 @@ export default class MapWrapper extends Component {
   _search_and_sort() {
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
     $.getJSON(`/dev_sites`, this.params(), json => {
-      this.setState({page: 0, devSites: (json.dev_sites || []), total: json.total }, scrollToTop);
+      this.setState({ page: 0, devSites: (json.dev_sites || []), total: json.total }, scrollToTop);
     });
   }
   render() {
@@ -70,7 +70,7 @@ export default class MapWrapper extends Component {
           <div className={css.content}>
             {
               this.state.activeDevSiteId &&
-              <DevSite id={this.state.activeDevSiteId} parent={this} />
+              <DevSitePreview id={this.state.activeDevSiteId} parent={this} />
             }
             {
               !this.state.isMobile && !this.state.activeDevSiteId &&

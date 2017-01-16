@@ -14,10 +14,8 @@ child(:addresses) { attributes :id, :street }
 
 child(:city_files) { attributes :id, :link, :name }
 
-child(:statuses) { attributes :id, :status, :status_date }
+child(:statuses) { attributes :id, :status, :friendly_status_date }
 
-child(:comments) { attributes :id, :body
-
-  child(:user) { attributes :name, :email }
-
-}
+child :sentiment do
+  attributes :anger, :disgust, :sadness, :joy, :fear
+end

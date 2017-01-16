@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     return if params[:page].blank? || params[:limit].blank?
     limit = item_limit(limit)
     page = page_number
-    collection.limit!(limit).offset!(limit * page)
+    collection = collection.limit(limit).offset(limit * page)
   end
 
   private
