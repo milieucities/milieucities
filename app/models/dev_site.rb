@@ -137,10 +137,9 @@ class DevSite < ActiveRecord::Base
   def streetview_image
     root_url = 'https://maps.googleapis.com/maps/api/streetview'
     image_size = '600x600'
-    street_address = addresses.first.street
     api_key = 'AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw'
 
-    "#{root_url}?size=#{image_size}&location=#{street_address}&key=#{api_key}"
+    "#{root_url}?size=#{image_size}&location=#{address}&key=#{api_key}"
   end
 
   class << self
