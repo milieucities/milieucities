@@ -2,9 +2,6 @@ class ProfilesController < ApplicationController
   load_and_authorize_resource :user
   load_and_authorize_resource :profile, through: :user, singleton: true
 
-  def show
-  end
-
   def edit
     @no_header = true
   end
@@ -20,8 +17,17 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:name, :street, :avatar, :remove_avatar, :city, :bio,
-      :age_range, :field_of_occupation, :receive_newletter, :postal_code)
+    params.require(:profile).permit(
+      :name,
+      :street,
+      :avatar,
+      :remove_avatar,
+      :city,
+      :bio,
+      :age_range,
+      :field_of_occupation,
+      :receive_newletter,
+      :postal_code
+    )
   end
-
 end

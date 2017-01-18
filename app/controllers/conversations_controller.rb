@@ -31,8 +31,16 @@ class ConversationsController < ApplicationController
   end
 
   private
+
   def conversation_params
-    params.require(:conversation).permit(:address, :city, :postal_code,
-      :topic, :body, :conversation_type, :image)
+    params.require(:conversation).permit(
+      :address,
+      :city,
+      :postal_code,
+      :topic,
+      :body,
+      :conversation_type,
+      :image
+    )
   end
 end

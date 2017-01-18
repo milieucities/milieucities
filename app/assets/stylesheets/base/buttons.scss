@@ -6,7 +6,7 @@
   font-size: 1rem;
   cursor: pointer;
   text-transform: uppercase;
-  font-size :0.8em;
+  font-size: 0.8rem;
   border-radius: 2px;
   transition: 200ms;
   color: $white;
@@ -16,6 +16,10 @@
   &.transparent {
     background-color: transparent;
     color: $dark-primary-color;
+  }
+
+  &.small {
+    padding: 3px 10px;
   }
 
   &.block {
@@ -31,9 +35,13 @@
     }
   }
 
-  &:hover, &:focus {
+  &:hover {
     opacity: 0.8;
     color: $white;
+  }
+
+  &:focus {
+    background-color: $accessibility;
   }
 }
 

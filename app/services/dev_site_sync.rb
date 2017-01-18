@@ -6,29 +6,29 @@ module Services
 
     ROOT_URL = 'http://ottwatch.ca/api/devapps/'
     WARDS = {
-      "1" => "ORLEANS",
-      "2" => "INNES",
-      "3" => "BARRHAVEN",
-      "4" => "KANATA NORTH",
-      "5" => "WEST CARLETON-MARCH",
-      "6" => "STITTSVILLE",
-      "7" => "BAY",
-      "8" => "COLLEGE",
-      "9" => "KNOXDALE-MERIVALE",
-      "10" => "GLOUCESTER-SOUTHGATE",
-      "11" => "BEACON HILL-CYRVILLE",
-      "12" => "RIDEAU-VANIER",
-      "13" => "RIDEAU-ROCKCLIFFE",
-      "14" => "SOMERSET",
-      "15" => "KITCHISSIPPI",
-      "16" => "RIVER",
-      "17" => "CAPITAL",
-      "18" => "ALTA VISTA",
-      "19" => "CUMBERLAND",
-      "20" => "OSGOODE",
-      "21" => "RIDEAU-GOULBOURN",
-      "22" => "GLOUCESTER-SOUTH NEPEAN",
-      "23" => "KANATA SOUTH"
+      '1' => 'ORLEANS',
+      '2' => 'INNES',
+      '3' => 'BARRHAVEN',
+      '4' => 'KANATA NORTH',
+      '5' => 'WEST CARLETON-MARCH',
+      '6' => 'STITTSVILLE',
+      '7' => 'BAY',
+      '8' => 'COLLEGE',
+      '9' => 'KNOXDALE-MERIVALE',
+      '10' => 'GLOUCESTER-SOUTHGATE',
+      '11' => 'BEACON HILL-CYRVILLE',
+      '12' => 'RIDEAU-VANIER',
+      '13' => 'RIDEAU-ROCKCLIFFE',
+      '14' => 'SOMERSET',
+      '15' => 'KITCHISSIPPI',
+      '16' => 'RIVER',
+      '17' => 'CAPITAL',
+      '18' => 'ALTA VISTA',
+      '19' => 'CUMBERLAND',
+      '20' => 'OSGOODE',
+      '21' => 'RIDEAU-GOULBOURN',
+      '22' => 'GLOUCESTER-SOUTH NEPEAN',
+      '23' => 'KANATA SOUTH'
     }
 
     def initialize
@@ -41,9 +41,9 @@ module Services
         dev_site = DevSite.find_by(devID: dev_site_id)
         dev_site.present? ? update_dev_site(dev_site) : create_dev_site(dev_site_id)
       end
-      puts "=========================================="
+      puts '=========================================='
       puts "Found and processed #{@counter} dev sites."
-      puts "=========================================="
+      puts '=========================================='
     end
 
 
@@ -58,22 +58,22 @@ module Services
         raise DevSiteSyncError, "Unable to retrieve dev sites from ottwatch: #{e.inspect}"
       end
     end
-    
+
     def create_dev_site(dev_app_id)
       path = "#{dev_app_id}"
-      begin 
+      begin
         dev_site = retrieve_and_parse_data(path)
       rescue Exception
         false
       end
 
-      return false if missing_address?(dev_site)
+      return false if dev_site.blank? || missing_address?(dev_site)
 
       dev_site_attributes = parse_attributes(dev_site)
 
       new_dev_site = DevSite.new(dev_site_attributes)
 
-      update_associations(dev_site, new_dev_site) 
+      update_associations(dev_site, new_dev_site)
 
       begin
         if new_dev_site.save
@@ -96,7 +96,7 @@ module Services
         puts "Error retrieving updated dev site: #{msg.inspect}"
       end
 
-      return false if missing_address?(dev_site)
+      return false if dev_site.blank? || missing_address?(dev_site)
 
       if current_dev_site.updated == dev_site['updated']
         puts "Latest application - #{dev_site['devid']}"
@@ -109,7 +109,7 @@ module Services
 
       destroy_associations(current_dev_site)
 
-      update_associations(dev_site, current_dev_site) 
+      update_associations(dev_site, current_dev_site)
 
       begin
         if current_dev_site.save
@@ -188,7 +188,7 @@ module Services
       dev_site['files'].each do |file|
         file_attrs = parse_file(file)
         app_site.city_files.build(file_attrs)
-      end if dev_site['files'].present? 
+      end if dev_site['files'].present?
     end
 
     def destroy_associations(current_dev_site)

@@ -67,7 +67,8 @@ fr:
         neighbourhood: 'quartier'
   users:
     new:
-      terms: "accepter les conditions d'utilisation"
+      accept: 'Accepter'
+      terms: "conditions d'utilisation"
       title: "Connecter"
       submit: "créer une compte"
     alert:
@@ -141,6 +142,7 @@ fr:
       destroyS: "Événement supprimé."
   validates:
     alert:
+      cityIsRequired: "Ville est requis"
       emailIsRequired: "Courriel est requis"
       emailAlreadyInUse: "Courriel déjà utilisé"
       passwordIsRequired: "Password is required" #TODO: Translate

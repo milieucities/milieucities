@@ -1,8 +1,6 @@
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
-  config.react.addons = true
-  config.react.variant = :production
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -14,7 +12,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
@@ -37,8 +35,6 @@ Rails.application.configure do
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
-
-  # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
@@ -80,20 +76,19 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  #SMTP GMail Settings
-  config.action_mailer.default_url_options = { :host => 'milieu.io' }
+  # SMTP GMail Settings
+  config.action_mailer.default_url_options = { host: 'milieu.io' }
 
   config.action_mailer.delivery_method = :smtp
 
-  #GMAIL SETUP
+  # GMAIL SETUP
   config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
-    :port => 587,
-    :user_name => ENV['SMTP_USER'],
-    :password => ENV['SMTP_PASSWORD'],
-    :authentication => 'plain',
-    :enable_starttls_auto => true,
-    :openssl_verify_mode  => 'none'
+    address: 'smtp.gmail.com',
+    port: 587,
+    user_name: ENV['SMTP_USER'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none'
   }
-
 end

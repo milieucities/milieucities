@@ -5,10 +5,11 @@
 }
 
 .sidebar {
-  width: 50%;
+  width: 40%;
   height: calc(100vh - 50px);
   background-color: #fff;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   float: left;
 
   @media #{$medium-and-down} {
@@ -17,7 +18,7 @@
 }
 
 .content {
-  width: 50%;
+  width: 60%;
   height: calc(100vh - 50px);
   position: relative;
   float: left;

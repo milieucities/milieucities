@@ -71,6 +71,7 @@
   z-index: 50;
   max-height: 270px;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   background-color: #fff;
   box-sizing: border-box;
   border: none;
@@ -94,7 +95,7 @@
     line-height: 14px;
 
     &:hover{
-      background-color: $light-tertiary-color;
+      background-color: $quaternary-color;
     }
 
     &.highlighted{

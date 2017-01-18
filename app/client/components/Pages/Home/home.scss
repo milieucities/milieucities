@@ -13,6 +13,19 @@
   align-items: center;
   justify-content: flex-end;
 
+  > div {
+    height: 240px;
+
+    > h1 {
+      height: 100px;
+      margin: 0;
+
+      @media #{$small-and-down} {
+        height: 50px;
+      }
+    }
+  }
+
   @media #{$medium-and-down} {
     padding: 40px;
   }
@@ -23,10 +36,20 @@
 
   a {
     color: $white;
+    font-size: 18px;
+
+    @media #{$small-and-down} {
+      font-size: 15px;
+    }
   }
 
   .signUpContainer {
     letter-spacing: 1px;
+    font-size: 18px;
+
+    @media #{$small-and-down} {
+      font-size: 15px;
+    }
   }
 
   .signUpButton {
@@ -44,6 +67,8 @@
 
     @media #{$small-and-down} {
       margin-right: 20px;
+      padding: 5px 10px;
+      font-size: 18px;
     }
 
     &:hover {
@@ -61,13 +86,15 @@
     display: flex;
     flex-direction: column;
     margin-left: 100px;
-    justify-content: center;
-    min-height: calc(65vh * 0.8);
-    height: 80%;
+
+    h3 {
+      padding-top: 100px;
+    }
 
     a {
-      margin-top: 30px;
+      margin-top: 42px;
       display: inline-block;
+      font-size: 18px;
     }
   }
 
@@ -79,6 +106,7 @@
   align-items: center;
   flex-direction: column;
   padding: 50px 0;
+  background-color: $white;
 
   .title {
     color: $dark-secondary-color;
@@ -118,7 +146,7 @@
 }
 
 .featuredContainer {
-  background-color: #fff;
+  background-color: $white;
   padding: 10px;
 
   @media #{$small-and-down} {
@@ -204,14 +232,14 @@
     }
 
     .summary {
-      font-size: 14px;
+      font-size: 18px;
       font-weight: 300;
     }
 
     &::after {
       transition: 300ms;
-      height: 200px;
-      background-color: #D5FFFE;
+      height: 225px;
+      background-color: $light-primary-color;
       position: absolute;
       top: 0;
       left: 0;

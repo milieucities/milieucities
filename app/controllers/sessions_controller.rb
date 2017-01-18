@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
   before_action :session_expiry, except: [:create]
 
   def create
-    @user = User.find_by(email: params[:session][:email].downcase)
-    if @user && @user.authenticate(params[:session][:password])
-      session[:user_id] = @user.id
+    user = find_user_by_email
+    if user && user.authenticate(params[:session][:password])
+      session[:user_id] = user.id
       redirect_to root_path, notice: t('sessions.notice.welcome')
     else
       redirect_to new_session_path, alert: t('sessions.alert.could_not_signin')
@@ -24,13 +24,16 @@ class SessionsController < ApplicationController
   end
 
   def session_expiry
-    get_session_time_left
-    log_out if @session_time_left <= 0
+    log_out if session_time_left <= 0
   end
 
-  def get_session_time_left
-    expire_time = session[:expires_at] || Time.now
-    @session_time_left = (expire_time.to_time - Time.now).to_i
+  def session_time_left
+    expire_time = session[:expires_at] || Time.now.to_f
+    (expire_time.to_f - Time.now.to_f).to_i
   end
 
+  def find_user_by_email
+    email = params[:session][:email].downcase
+    User.find_by(email: email)
+  end
 end

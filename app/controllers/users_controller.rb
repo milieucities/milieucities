@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :user
+  before_action :load_user, only: [:show, :edit, :destroy, :update]
 
   def index
-    @users = User.all
+    @users = User.includes(:profile, :notification)
     respond_to do |format|
       format.html
       format.json { render json: @users.to_json }
@@ -22,12 +23,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_path, notice: t('sessions.notice.welcome')
     else
-      flash[:alert] = t('users.alert.mustAcceptTerms') unless @user.profile.accepted_terms
+      flash[:alert] = @user.errors.messages.values.join(', ')
       render :new
     end
   end
@@ -48,6 +48,11 @@ class UsersController < ApplicationController
 
   private
 
+  def load_user
+    @user = User.find_by(slug: params[:slug])
+  end
+
+  # rubocop:disable Metrics/MethodLength
   def user_params
     params.require(:user).permit(
       :email,
@@ -62,10 +67,14 @@ class UsersController < ApplicationController
         :id,
         :name,
         :bio,
+        :web_presence,
         :anonymous_comments,
         :neighbourhood,
         :postal_code,
-        :accepted_terms
+        :accepted_terms,
+        :organization,
+        :community_role,
+        :verification_status
       ]
     )
   end

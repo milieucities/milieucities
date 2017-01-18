@@ -4,12 +4,10 @@ class CommentsController < ApplicationController
   def index
     @comments = Comment.all
     respond_to do |format|
-        format.html
-        format.json
+      format.html
+      format.json
     end
   end
 
-  def show
-  end
-
+  def show; end
 end

@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
+import ProfileHeader from '../../Common/ProfileHeader/ProfileHeader'
+import ProfileMenu from '../../Common/ProfileMenu/ProfileMenu'
+import TextInputWithLabel from '../../Common/FormFields/TextInputWithLabel'
+import TextAreaWithLabel from '../../Common/FormFields/TextAreaWithLabel'
 import i18n from './locale'
 import css from './edit.scss'
 import { debounce } from 'lodash'
@@ -10,23 +14,29 @@ export default class Edit extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { loading: true };
-    this.currentUserId = parseInt(document.body.dataset.userId);
+    this.state = { loading: true, verificationRequested: false };
 
     this.uploadAvatar = (e) => this._uploadAvatar(e);
     this.deleteAvatar = (e) => this._deleteAvatar(e);
     this.submitForm = (e) => this._submitForm(e);
     this.deleteAccount = (e) => this._deleteAccount(e);
     this.loadUser = () => this._loadUser();
+    this.flagVerificationRequested = () => this._flagVerificationRequested();
     this.loadUser();
   }
+
   _loadUser() {
-    $.getJSON(`/users/${this.currentUserId}`,
+    $.getJSON(`/users/${document.body.dataset.userSlug}`,
       user => this.setState({ user, loading: false })
     );
   }
+
+  _flagVerificationRequested() {
+    this.setState({ verificationRequested: true })
+  }
+
   _deleteAvatar(e) {
-    const { locale } = document.body.dataset;
+    const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
     const { avatarDelS, avatarDelF} = i18n;
     let form = new FormData();
@@ -34,7 +44,7 @@ export default class Edit extends Component {
 
     this.setState({ avatarUploading: true });
     $.ajax({
-      url: `/users/${this.currentUserId}/profile`,
+      url: `/users/${userSlug}/profile`,
       dataType: 'JSON',
       type: 'PATCH',
       contentType: false,
@@ -50,16 +60,17 @@ export default class Edit extends Component {
       }
     });
   }
+
   _uploadAvatar(e) {
-    const { locale } = document.body.dataset;
+    const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
-    const {profileUploadF, profileUploadS} = i18n;
+    const { profileUploadF, profileUploadS } = i18n;
     let form = new FormData();
     form.append('profile[avatar]', this.refs.avatar.files[0]);
 
     this.setState({ avatarUploading: true });
     $.ajax({
-      url: `/users/${this.currentUserId}/profile`,
+      url: `/users/${userSlug}/profile`,
       dataType: 'JSON',
       type: 'PATCH',
       contentType: false,
@@ -75,14 +86,16 @@ export default class Edit extends Component {
       }
     });
   }
+
   _submitForm(e) {
+    this.setState({ verificationRequested: false })
     const form = new FormData(document.querySelector('#user-form'));
-    const { locale } = document.body.dataset;
+    const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
     const {profileUploadF, profileUploadS} = i18n;
 
     $.ajax({
-      url: `/users/${this.currentUserId}`,
+      url: `/users/${userSlug}`,
       dataType: 'JSON',
       type: 'PATCH',
       contentType: false,
@@ -98,8 +111,9 @@ export default class Edit extends Component {
       }
     });
   }
+
   _deleteAccount() {
-    const { locale } = document.body.dataset;
+    const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
     const { deleteConfirm, accountDeleteS, accountDeleteF } = i18n;
     if(!confirm(deleteConfirm)){
@@ -107,7 +121,7 @@ export default class Edit extends Component {
     }
 
     $.ajax({
-      url: `/users/${this.currentUserId}`,
+      url: `/users/${userSlug}`,
       dataType: 'JSON',
       type: 'DELETE',
       success: () => {
@@ -119,34 +133,27 @@ export default class Edit extends Component {
       }
     });
   }
+
   render() {
     const { user, avatarUploading, loading, error } = this.state;
-    const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
+    const { userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
     if(user && !user.address) user.address = {}
     return(
       <div>
         <Header/>
-        <div className={css.info}>
-          <div className='container'>
-            <div className={css.imgContainer}>
-              <img alt='Profile Avatar' src={userAvatar || require('./images/default-avatar.png')} />
-            </div>
-            <div className={css.content}>
-              <h1 className={css.name}>{userName}</h1>
-              <h3 className={css.role}>{i18n.role}</h3>
-            </div>
-          </div>
-        </div>
+        <ProfileHeader
+          parent={this}
+          userName={userName}
+          userAvatar={userAvatar}
+          user={user}
+          showVerificationButton={user && user.profile.verification_status === 'notVerified'}
+          flagVerificationRequested={this.flagVerificationRequested}
+          verificationCallback={this.loadUser}
+        />
         <div className={css.container}>
           <div className='container'>
-            <div className={css.menu}>
-              <ul>
-                <li><a href={`/${locale}/users/${userSlug}`}>{i18n.dashboard}</a></li>
-                <li><b><a href={`/${locale}/users/${userSlug}/edit`}>{i18n.settings}</a></b></li>
-                <li><a href={`/${locale}/users/${userSlug}/notification/edit`}>{i18n.notification}</a></li>
-              </ul>
-            </div>
+            <ProfileMenu active='settings' />
             {
               loading &&
               <div className='loading-screen'>
@@ -168,7 +175,7 @@ export default class Edit extends Component {
                       {avatarUploading && <div className={css.loader}><i className='fa fa-spin fa-circle-o-notch fa-3x fa-fw' /></div>}
                       {user && user.profile.avatar && <div className={css.icon} onClick={this.deleteAvatar} ><i className='fa fa-trash-o'/></div>}
                       <input type='file' ref='avatar' id='profile_avatar' onChange={this.uploadAvatar} style={{display: 'none'}} />
-                      <img alt='Editable Profile Avatar' src={ user && user.profile.avatar|| require('./images/default-avatar.png')} />
+                      <img alt='Editable Profile Avatar' src={ user && user.profile.avatar|| require('../../Common/images/default-avatar.png')} />
                       <label htmlFor='profile_avatar' className={css.changePhoto}>{i18n.changePhoto}</label>
                     </div>
                   </div>
@@ -176,11 +183,14 @@ export default class Edit extends Component {
                     <form id='user-form'>
                       <input type='hidden' name={'user[profile_attributes][id]'} value={user.profile.id}/>
                       <div className='row'>
-                        <div className='input-field col s12 m8 l6'>
-                          <label htmlFor='profile_name'>{i18n.name}</label>
-                          <input type='text' id='profile_name' defaultValue={user.profile.name} name='user[profile_attributes][name]'/>
-                          {error && error['profile.name'] && <div className='error-message'>{error['profile.name']}</div>}
-                        </div>
+                        <TextInputWithLabel
+                          classes='col s12 m12 l6'
+                          id='profile_name'
+                          name='user[profile_attributes][name]'
+                          label={i18n.name}
+                          defaultValue={user.profile.name}
+                          required={true}
+                        />
                       </div>
                       <div className='row'>
                         <div className='input-field col s12' style={{display: 'flex', alignItems: 'center'}}>
@@ -188,12 +198,41 @@ export default class Edit extends Component {
                           <input type='checkbox' id='profile_anonymous' defaultChecked={user.profile.anonymous_comments} name='user[profile_attributes][anonymous_comments]'/>
                           <label htmlFor='profile_anonymous'>I would like all my comments to be anonymous</label>
                         </div>
+                        <TextInputWithLabel
+                          classes='col s12 m12 l6'
+                          id='profile_organization'
+                          name='user[profile_attributes][organization]'
+                          label={i18n.organization}
+                          defaultValue={user.profile.organization}
+                          required={this.state.verificationRequested}
+                        />
+                        <TextInputWithLabel
+                          classes='col s12 m12 l6'
+                          id='profile_community_role'
+                          name='user[profile_attributes][community_role]'
+                          label={i18n.communityRole}
+                          defaultValue={user.profile.community_role}
+                          required={this.state.verificationRequested}
+                        />
+                        <TextInputWithLabel
+                          classes='col s12'
+                          id='profile_web_presence'
+                          name='user[profile_attributes][web_presence]'
+                          label={i18n.webPresence}
+                          defaultValue={user.profile.web_presence}
+                          required={false}
+                          tooltipText={i18n.webPresenceTooltipText}
+                        />
                       </div>
                       <div className='row'>
-                        <div className='input-field col s12'>
-                          <label htmlFor='profile_bio'>Bio</label>
-                          <textarea id='profile_bio' defaultValue={user.profile.bio} name='user[profile_attributes][bio]'/>
-                        </div>
+                        <TextAreaWithLabel
+                          classes='col s12'
+                          id='profile_bio'
+                          name='user[profile_attributes][bio]'
+                          label={i18n.bio}
+                          defaultValue={user.profile.bio}
+                          required={this.state.verificationRequested}
+                        />
                       </div>
                     </form>
                   </div>
@@ -204,11 +243,15 @@ export default class Edit extends Component {
                   </div>
                   <div className={css.data}>
                     <div className='row'>
-                      <div className='input-field col s12 m8 l6'>
-                        <label htmlFor='user_email'>{i18n.email}</label>
-                        <input type='text' id='user_email' defaultValue={user.email} name='user[email]' form='user-form'/>
-                        {error && error.email && <div className='error-message'>{error.email}</div>}
-                      </div>
+                      <TextInputWithLabel
+                        classes='col s12 m12 l6'
+                        id='user_email'
+                        name='user[email]'
+                        label={i18n.email}
+                        defaultValue={user.email}
+                        form='user-form'
+                        required={true}
+                      />
                     </div>
                   </div>
                 </div>
@@ -220,14 +263,14 @@ export default class Edit extends Component {
                     </div>
                     <div className={css.data}>
                       <div className='row'>
-                        <div className='input-field col s12 m8 l6'>
+                        <div className='input-field col s12 m12 l6'>
                           <label htmlFor='user_password'>{i18n.newPassword}</label>
                           <input id='user_password' type='password' name='user[password]' form='user-form'/>
                           {error && error.password && <div className='error-message'>{error.password}</div>}
                         </div>
                       </div>
                       <div className='row'>
-                        <div className='input-field col s12 m8 l6'>
+                        <div className='input-field col s12 m12 l6'>
                           <label htmlFor='user_password_confirmation'>{i18n.newPasswordConfirmation}</label>
                           <input id='user_password_confirmation' type='password' name='user[password_confirmation]' form='user-form'/>
                           {error && error.password_confirmation && <div className='error-message'>{error.password_confirmation}</div>}
@@ -243,16 +286,26 @@ export default class Edit extends Component {
                   <div className={css.data}>
                     <input type='hidden' name={'user[address_attributes][id]'} value={user.address.id}/>
                     <div className='row'>
-                      <div className='input-field col s12 m8 l6'>
-                        <label htmlFor='address_street'>{i18n.street}</label>
-                        <input type='text' id='address_street' form='user-form' defaultValue={user.address.street} name='user[address_attributes][street]'/>
-                      </div>
+                      <TextInputWithLabel
+                        classes='col s12 m12 l6'
+                        id='address_street'
+                        name='user[address_attributes][street]'
+                        label={i18n.street}
+                        defaultValue={user.address.street}
+                        form='user-form'
+                        required={false}
+                      />
                     </div>
                     <div className='row'>
-                      <div className='input-field col s12 m8 l6'>
-                        <label htmlFor='address_city'>{i18n.city}</label>
-                        <input type='text' id='address_city' form='user-form' defaultValue={user.address.city} name='user[address_attributes][city]'/>
-                      </div>
+                      <TextInputWithLabel
+                        classes='col s12 m12 l6'
+                        id='address_city'
+                        name='user[address_attributes][city]'
+                        label={i18n.city}
+                        defaultValue={user.address.city}
+                        form='user-form'
+                        required={false}
+                      />
                     </div>
                   </div>
                 </div>

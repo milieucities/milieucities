@@ -21,7 +21,6 @@
 //= require react_ujs
 //= require_tree ./components
 //= require moment
-//= require photoswipe
 //= require velocity.min
 //= require velocity.uipack
 //= require cocoon

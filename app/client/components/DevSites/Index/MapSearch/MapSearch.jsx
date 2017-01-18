@@ -91,4 +91,6 @@ const WARD_TYPES = ['Orleans', 'Innes', 'Barrhaven', 'Kanata North',
                     'West Carleton-March', 'Stittsville', 'Bay', 'College', 'Knoxdale-Merivale',
                     'Gloucester-Southgate', 'Beacon Hill-Cyrville', 'Rideau-Vanier', 'Rideau-Rockcliffe',
                     'Somerset', 'Kitchissippi', 'River', 'Capital', 'Alta Vista', 'Cumberland', 'Osgoode',
-                    'Rideau-Goulbourn', 'Gloucester-South Nepean', 'Kanata South']
+                    'Rideau-Goulbourn', 'Gloucester-South Nepean', 'Kanata South',
+                    'Ward 1', 'Ward 2', 'Ward 3', 'Ward 4', 'Ward 5', 'Ward 6'
+                   ]

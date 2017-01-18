@@ -28,11 +28,11 @@
     font-size: 14px;
 
     &:hover{
-      background-color: $light-tertiary-color;
+      background-color: $quaternary-color;
     }
 
     &.highlighted{
-      background-color: $light-tertiary-color;
+      background-color: $quaternary-color;
     }
   }
 }
@@ -71,12 +71,17 @@
   border-radius: 25px;
   box-shadow: 2px 2px 5px 0 $gray;
   position: absolute;
+  transition: 200ms;
   top: 0;
   right: -80px;
   padding: 14px 30px;
 
   &:focus {
     background-color: $accessibility;
+  }
+
+  &:hover {
+    opacity: 1;
   }
 
   + .dropdown {

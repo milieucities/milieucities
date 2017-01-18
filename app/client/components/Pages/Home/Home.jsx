@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import css from './home.scss'
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
-import DevSite from '../../DevSites/Show/Show'
+import DevSitePreview from '../../DevSites/Preview/Preview'
 import Autocomplete from '../../Utility/Autocomplete/Autocomplete'
 import Carousel from '../../Utility/Carousel/Carousel'
 import { debounce } from 'lodash'
@@ -70,7 +70,7 @@ export default class Home extends Component {
           <div className={`hide-on-small-only ${css.callToAction}`}>
             <h3>{i18n.heroText2}</h3>
             <div>
-              <a href='#'>{i18n.launchProject}</a>
+              <a href='http://about.milieu.io/'>{i18n.launchProject}</a>
             </div>
           </div>
 
@@ -85,9 +85,9 @@ export default class Home extends Component {
           <h2 className={css.title}>{i18n.featuredDevelopments}</h2>
 
           <div className={css.featured}>
-            <a href={`/${locale}/dev_sites?activeDevSiteId=1822`}><DevSite id={1822} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${locale}/dev_sites?activeDevSiteId=1869`}><DevSite id={1869} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${locale}/dev_sites?activeDevSiteId=1870`}><DevSite id={1870} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${locale}/dev_sites?activeDevSiteId=1822`}><DevSitePreview id={1822} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${locale}/dev_sites?activeDevSiteId=1869`}><DevSitePreview id={1869} preview={true} horizontal={isMobile} /></a>
+            <a href={`/${locale}/dev_sites?activeDevSiteId=1870`}><DevSitePreview id={1870} preview={true} horizontal={isMobile} /></a>
           </div>
         </div>
         <div className={css.articleContainer}>
@@ -104,12 +104,12 @@ export default class Home extends Component {
             </a>
             <a title={'Go to Milieu\'s article of What we learned from pop-up engagement'} href='https://medium.com/@MilieuCities/what-we-learned-from-pop-up-engagement-65cec34fefde#.l84ns3xc6' target='_blank' className={css.article}>
               <div className={css.type}>{i18n.article}</div>
-              <h3 className={css.title}>What we learned from pop-up engagement</h3>
+              <h2 className={css.title}>What we learned from pop-up engagement</h2>
               <div className={css.summary}>Milieu’s on-going goal is to facilitate a human-centered approach to urban planning and development.</div>
             </a>
           </Carousel>
         </div>
-      <Footer />
+      <Footer/>
       </div>
     )
   }

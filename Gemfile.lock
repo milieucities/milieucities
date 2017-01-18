@@ -40,10 +40,7 @@ GEM
     addressable (2.3.8)
     ansi (1.5.0)
     arel (6.0.3)
-    babel-source (5.8.35)
-    babel-transpiler (0.7.0)
-      babel-source (>= 4.0, < 6)
-      execjs (~> 2.0)
+    ast (2.3.0)
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -51,18 +48,14 @@ GEM
       rack (>= 0.9.0)
     builder (3.2.2)
     cancancan (1.15.0)
-    carrierwave (0.11.2)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
       mime-types (>= 1.16)
-      mimemagic (>= 0.3.0)
     chronic (0.10.2)
     cocoon (1.2.9)
     coderay (1.1.1)
-    coffee-script-source (1.11.1)
     concurrent-ruby (1.0.2)
-    connection_pool (2.2.0)
     diff-lcs (1.2.5)
     dotenv (2.1.1)
     dotenv-rails (2.1.1)
@@ -78,9 +71,9 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
-    fastimage (1.7.0)
-      addressable (~> 2.3, >= 2.3.5)
     ffaker (2.2.0)
+    figaro (1.1.1)
+      thor (~> 0.14)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.38.0)
@@ -224,8 +217,6 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
-    httparty (0.14.0)
-      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.3)
@@ -253,7 +244,6 @@ GEM
       json (>= 1.7.7, < 2.0)
     method_source (0.8.2)
     mime-types (1.25.1)
-    mimemagic (0.3.2)
     mini_backtrace (0.1.3)
       minitest (> 1.2.0)
       rails (>= 2.3.3)
@@ -298,8 +288,10 @@ GEM
     omniauth-twitter (1.2.1)
       json (~> 1.3)
       omniauth-oauth (~> 1.1)
+    parser (2.3.3.1)
+      ast (~> 2.2)
     pg (0.18.4)
-    photoswipe-rails (4.0.8a)
+    powerpack (0.1.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -324,9 +316,6 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.5.1)
       sprockets-rails
-    rails-api (0.4.0)
-      actionpack (>= 3.2.11)
-      railties (>= 3.2.11)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -340,20 +329,13 @@ GEM
       activesupport (= 4.2.5.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (2.2.1)
     raindrops (0.16.0)
     rake (12.0.0)
     rbvmomi (1.8.2)
       builder
       nokogiri (>= 1.4.1)
       trollop
-    react-rails (1.6.2)
-      babel-transpiler (>= 0.7.0)
-      coffee-script-source (~> 1.8)
-      connection_pool
-      execjs
-      rails (>= 3.2)
-      tilt
-    redcarpet (3.3.4)
     redis (3.2.2)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
@@ -383,6 +365,12 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    rubocop (0.46.0)
+      parser (>= 2.3.1.1, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.7.5)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -393,7 +381,6 @@ GEM
       tilt (>= 1.1, < 3)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
-    simple_command (0.0.9)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -421,6 +408,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    unicode-display_width (1.1.2)
     unicorn (5.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -437,21 +425,19 @@ DEPENDENCIES
   bcrypt (~> 3.1.11)
   better_errors
   cancancan (~> 1.15.0)
-  carrierwave (~> 0.10)
+  carrierwave (~> 1.0.0)
   cocoon
   dotenv-rails (~> 2.1.1)
   factory_girl_rails (~> 4.2.1)
-  fastimage
   ffaker
+  figaro
   fog (~> 1.38)
   font-awesome-rails (~> 4.7.0.0)
   foreman
   friendly_id (~> 5.1.0)
   geokit-rails
-  httparty
   jquery-rails (~> 4.1.0)
   jquery-turbolinks (~> 2.1.0)
-  jwt
   letter_opener
   mandrill-api (~> 1.0.53)
   mini_backtrace (= 0.1.3)
@@ -462,23 +448,19 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-twitter
   pg (~> 0.18.4)
-  photoswipe-rails
   pry
   puma
   rabl (~> 0.12.0)
   rack-cors (~> 0.4.0)
   rails (= 4.2.5.1)
-  rails-api
-  react-rails (~> 1.6.2)
-  redcarpet
   redis (~> 3.2.2)
   resque (~> 1.26.0)
   rmagick (~> 2.15.4)
   rolify (~> 5.1.0)
   rspec-rails (~> 3.3)
+  rubocop (~> 0.46.0)
   sass-rails (~> 5.0)
   shoulda-matchers
-  simple_command
   spring
   therubyracer
   turbolinks (~> 5.0.0)
@@ -490,4 +472,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.13.5
+   1.13.1

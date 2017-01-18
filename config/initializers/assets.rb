@@ -5,8 +5,9 @@ Rails.application.config.assets.version = '1.0'
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
-Rails.application.config.assets.paths << Rails.root.join("app", "assets", "webpack") if Rails.env.production?
+if Rails.env.production?
+  Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'webpack')
+end
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( bundle.js )
+Rails.application.config.assets.precompile += %w(bundle.js)

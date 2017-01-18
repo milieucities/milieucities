@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170115190223) do
+ActiveRecord::Schema.define(version: 20170116064041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,12 @@ ActiveRecord::Schema.define(version: 20170115190223) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "dev_site_id"
+  end
+
+  create_table "city_requests", force: :cascade do |t|
+    t.string   "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -73,8 +79,8 @@ ActiveRecord::Schema.define(version: 20170115190223) do
     t.text     "description"
     t.string   "ward_name"
     t.integer  "ward_num"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "appID"
     t.datetime "received_date"
     t.datetime "updated"
@@ -85,6 +91,11 @@ ActiveRecord::Schema.define(version: 20170115190223) do
     t.string   "build_type"
     t.string   "urban_planner_email"
     t.string   "ward_councillor_email"
+    t.float    "anger_total",           default: 0.0
+    t.float    "joy_total",             default: 0.0
+    t.float    "disgust_total",         default: 0.0
+    t.float    "fear_total",            default: 0.0
+    t.float    "sadness_total",         default: 0.0
   end
 
   create_table "events", force: :cascade do |t|
@@ -145,11 +156,15 @@ ActiveRecord::Schema.define(version: 20170115190223) do
     t.string   "neighbourhood"
     t.string   "postal_code"
     t.boolean  "accepted_terms"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.string   "avatar"
     t.text     "bio"
-    t.boolean  "anonymous_comments", default: false
+    t.boolean  "anonymous_comments",  default: false
+    t.string   "web_presence"
+    t.string   "verification_status", default: "notVerified"
+    t.string   "community_role"
+    t.string   "organization"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -164,6 +179,20 @@ ActiveRecord::Schema.define(version: 20170115190223) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "sentiments", force: :cascade do |t|
+    t.float    "anger",              default: 0.0
+    t.float    "joy",                default: 0.0
+    t.float    "disgust",            default: 0.0
+    t.float    "fear",               default: 0.0
+    t.float    "sadness",            default: 0.0
+    t.integer  "sentimentable_id"
+    t.string   "sentimentable_type"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "sentiments", ["sentimentable_type", "sentimentable_id"], name: "index_sentiments_on_sentimentable_type_and_sentimentable_id", using: :btree
 
   create_table "statuses", force: :cascade do |t|
     t.datetime "status_date"

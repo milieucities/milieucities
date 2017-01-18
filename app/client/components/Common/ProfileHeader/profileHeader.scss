@@ -1,0 +1,97 @@
+.info {
+  background-color: $tertiary-color;
+  padding: 15px 0;
+
+  @media #{$small-and-down} {
+    padding: 10px 0;
+  }
+
+  > div {
+    display: flex;
+
+    @media #{$small-and-down} {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .imgContainer{
+    position: relative;
+    width: 300px;
+    min-width: 300px;
+
+    @media #{$medium-and-down} {
+      width: 200px;
+      min-width: 200px;
+      height: 150px;
+    }
+
+    @media #{$small-and-down} {
+      width: 150px;
+      min-width: 150px;
+      height: 150px;
+    }
+  }
+
+  .container {
+    padding: 20px 10px;
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 3px;
+    object-fit: cover;
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    @media #{$medium-and-down} {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .content {
+    width: 100%;
+
+    .name {
+      color: $white;
+      margin: 0;
+      margin-bottom: 15px;
+
+      @media #{$small-and-down} {
+        margin-top: 15px;
+        margin-bottom: 0px;
+        text-align: center;
+      }
+    }
+
+    .role {
+      color: $light-tertiary-color;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+
+      @media #{$small-and-down} {
+        text-align: center;
+      }
+    }
+
+    .verified {
+      color: $light-tertiary-color;
+      letter-spacing: 1px;
+
+      @media #{$small-and-down} {
+        text-align: center;
+      }
+
+      .verifyBtn {
+        margin-left: 10px;
+        padding: 5px 15px;
+      }
+    }
+  }
+}

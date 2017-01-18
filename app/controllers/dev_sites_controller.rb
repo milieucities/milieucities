@@ -1,4 +1,5 @@
 class DevSitesController < ApplicationController
+  DEFAULT_SITES_LIMIT = 20
   load_and_authorize_resource
 
   def index
@@ -15,14 +16,9 @@ class DevSitesController < ApplicationController
     end
   end
 
-  def map
-  end
-
-  def images
-    render json: { images: @dev_site.image_hash }
-  end
-
   def show
+    @no_header = true
+    @dev_site = DevSite.includes(:addresses, :statuses, :likes).find(params[:id])
   end
 
   def new
@@ -31,16 +27,15 @@ class DevSitesController < ApplicationController
     @dev_site.statuses.build
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     respond_to do |format|
       if @dev_site.save
-        format.html { redirect_to @dev_site, notice: t('dev-sites.create.created') }
+        format.html { redirect_to @dev_site, notice: 'Development successfully created.' }
         format.json { render :show, status: :created, location: @dev_site }
       else
-        format.html { render :new, alert: 'Failed to create development site' }
+        format.html { render :new, alert: 'Failed to create development.' }
         format.json { render json: @dev_site.errors, status: :unprocessable_entity }
       end
     end
@@ -49,7 +44,7 @@ class DevSitesController < ApplicationController
   def update
     respond_to do |format|
       if @dev_site.update(dev_site_params)
-        format.html { redirect_to @dev_site, notice: t('dev_sites.update.updateS') }
+        format.html { redirect_to @dev_site, notice: 'Development successfully updated.' }
         format.json { render :show, status: :accepted, location: @dev_site }
       else
         format.html { render :edit }
@@ -61,42 +56,71 @@ class DevSitesController < ApplicationController
   def destroy
     @dev_site.destroy
     respond_to do |format|
-      format.html { redirect_to dev_sites_path, notice: t('dev_sites.destroy.destroyS') }
+      format.html { redirect_to dev_sites_path, notice: 'Development successfully deleted.' }
       format.json { head :no_content }
     end
   end
 
-
   private
 
-    def paginate
-      if params[:page].present? || params[:limit].present?
-        limit = params[:limit].present? ? params[:limit].to_i : 20
-        page = params[:page].present? ? params[:page].to_i : 0
-        @dev_sites.limit!(limit).offset!(limit * page)
-      end
-    end
+  def paginate
+    limit = dev_sites_limit
+    page = page_number
+    @dev_sites.limit!(limit).offset!(limit * page)
+  end
 
-    def sort?
-      params[:sort].present?
-    end
+  def dev_sites_limit
+    params[:limit].present? ? params[:limit].to_i : DEFAULT_SITES_LIMIT
+  end
 
-    def search?
-      ((params[:latitude].present? && params[:longitude].present?) ||
-      params[:year].present? ||
-      params[:ward].present? ||
-      params[:status].present? )
-    end
+  def page_number
+    params[:page].present? ? params[:page].to_i : 0
+  end
 
-    def search_params
-      params.permit(:latitude, :longitude, :year, :ward, :status)
-    end
+  def sort?
+    params[:sort].present?
+  end
 
-    def dev_site_params
-      params.require(:dev_site).permit(:devID, :application_type, :title, :images_cache, :files_cache, :build_type,
-      :description, :ward_councillor_email, :urban_planner_email, :ward_name, :ward_num, :image_url, :hearts, {images: []}, {files: []},
-      likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
-      addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
-      statuses_attributes: [:id, :status, :status_date, :_destroy] )
-    end
+  def search?
+    location_search_present? || search_term_present?
+  end
+
+  def search_term_present?
+    search_terms = [:year, :status, :ward]
+    search_terms.any? { |query| params[query].present? }
+  end
+
+  def location_search_present?
+    params[:latitude].present? && params[:longitude].present?
+  end
+
+  def search_params
+    params.permit(:latitude, :longitude, :year, :ward, :status)
+  end
+
+  # rubocop:disable Metrics/MethodLength
+  def dev_site_params
+    params
+      .require(:dev_site)
+      .permit(
+        :devID,
+        :application_type,
+        :title,
+        :images_cache,
+        :files_cache,
+        :build_type,
+        :description,
+        :ward_councillor_email,
+        :urban_planner_email,
+        :ward_name,
+        :ward_num,
+        :image_url,
+        :hearts,
+        images: [],
+        files: [],
+        likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
+        addresses_attributes: [:id, :street, :city, :province_state, :country, :_destroy],
+        statuses_attributes: [:id, :status, :status_date, :_destroy]
+      )
+  end
 end

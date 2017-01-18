@@ -14,5 +14,4 @@ class NewsletterSubscriptionsController < ApplicationController
   def newsletter_subscription_params
     params.require(:newsletter_subscription).permit(:email)
   end
-
 end

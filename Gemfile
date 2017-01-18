@@ -11,15 +11,15 @@ gem 'turbolinks', '~> 5.0.0'
 gem 'rack-cors', '~> 0.4.0'
 gem 'rails-api', require: 'rails-api/action_controller/api'
 gem 'httparty'
+gem 'figaro'
 
 # background services gems
 gem 'whenever'
-gem 'resque', '~> 1.26.0', :require => 'resque/server'
+gem 'resque', '~> 1.26.0', require: 'resque/server'
 gem 'mandrill-api', '~> 1.0.53'
 
 # model gems
-gem 'carrierwave', '~> 0.10'
-gem 'fastimage'
+gem 'carrierwave', '~> 1.0.0'
 gem 'rolify', '~> 5.1.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'cancancan', '~> 1.15.0'
@@ -30,13 +30,9 @@ gem 'rmagick', '~> 2.15.4', :require => 'RMagick'
 gem 'simple_command'
 gem 'jwt'
 
-
 # view gems
 gem 'font-awesome-rails', '~> 4.7.0.0'
 gem 'momentjs-rails', '~> 2.11.0'
-gem 'photoswipe-rails'
-gem 'react-rails', '~> 1.6.2'
-gem 'redcarpet'
 gem 'rabl', '~> 0.12.0'
 gem 'cocoon'
 
@@ -51,7 +47,6 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 
-
 group :development, :test do
   gem 'pry'
   gem 'spring'
@@ -60,6 +55,7 @@ group :development, :test do
   gem 'puma'
   gem 'better_errors'
   gem 'foreman'
+  gem 'rubocop', '~> 0.46.0', require: false
 end
 
 group :test do

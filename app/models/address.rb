@@ -6,19 +6,22 @@ class Address < ActiveRecord::Base
                    distance_field_name: :distance,
                    lat_column_name: :lat,
                    lng_column_name: :lon
-  validates :street, presence: { message: "Street is required" }
-  after_validation :geocoded, if: -> (address) { address.street.present? and address.street_changed? }
+  after_validation :geocoded, if: :new_street?
+
+  def new_street?
+    street.present? && street_changed?
+  end
 
   def geocoded
     lat_and_lng = Geokit::Geocoders::GoogleGeocoder.geocode(full_address)
-    if lat_and_lng.success
-      self.lat = lat_and_lng.lat
-      self.lon = lat_and_lng.lng
-    end
+    return unless lat_and_lng.success
+    self.lat = lat_and_lng.lat
+    self.lon = lat_and_lng.lng
+
+  rescue
   end
 
   def full_address
-    [street, city, province_state, country].delete_if { |e| e.blank? }.join(', ')
+    [street, city, province_state, country].delete_if(&:blank?).join(', ')
   end
-
 end
