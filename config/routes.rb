@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/login', to: 'authentication#authenticate'
       #Authentication Example
-      resources :api_dev_sites, only: [:index]
+      resources :dev_sites, only: [:index]
     end
   end
 

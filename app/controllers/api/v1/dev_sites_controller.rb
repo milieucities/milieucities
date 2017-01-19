@@ -1,4 +1,4 @@
-class Api::V1::ApiDevSitesController < Api::V1::ApiController
+class Api::V1::DevSitesController < Api::V1::ApiController
 
   def index
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
