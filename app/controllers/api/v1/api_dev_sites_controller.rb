@@ -1,68 +1,52 @@
-class ApiDevSitesController < ApiController
-  #load_and_authorize_resource
+class Api::V1::ApiDevSitesController < Api::V1::ApiController
 
   def index
-    @api_dev_sites = DevSite.includes(:addresses, :statuses, :comments)
-    @api_dev_sites = @api_dev_sites.search(search_params) if search?
-    @api_dev_sites = @api_dev_sites.send(params[:sort]) if sort?
-    @total = @api_dev_sites.count
+    @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
+    @dev_sites = @dev_sites.search(search_params) if search?
+    @dev_sites = @dev_sites.send(params[:sort]) if sort?
+    @total = @dev_sites.count
     paginate
 
-    render json: @api_dev_sites
-  end
-
-  def map
-  end
-
-  def images
-    render json: { images: @api_dev_site.image_hash }
+    render json: @dev_sites
   end
 
   def show
   end
 
-  def new
-    @api_dev_site = DevSite.new
-    @api_dev_site.addresses.build
-    @api_dev_site.statuses.build
-  end
-
-  def edit
-  end
 
   def create
-    @api_dev_site = DevSite.new(dev_site_params)
-    if @api_dev_site.save
-      render :show, status: :created, location: @api_dev_site
+    @dev_site = DevSite.new(dev_site_params)
+    if @dev_site.save
+      render :show, status: :created, location: @dev_site
     else
-      render json: @api_dev_site.errors, status: :unprocessable_entity
+      render json: @dev_site.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    if @api_dev_site.update(dev_site_params)
-      render :show, status: :accepted, location: @api_dev_site
+    if @dev_site.update(dev_site_params)
+      render :show, status: :accepted, location: @dev_site
     else
-      render json: @api_dev_site.errors, status: :unprocessable_entity
+      render json: @dev_site.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @api_dev_site.destroy
+    @dev_site.destroy
     head :no_content
   end
 
 
   private
     def set_dev_site
-      @api_dev_site = DevSite.find(params[:id])
+      @dev_site = DevSite.find(params[:id])
     end
 
     def paginate
       if params[:page].present? || params[:limit].present?
         limit = params[:limit].present? ? params[:limit].to_i : 20
         page = params[:page].present? ? params[:page].to_i : 0
-        @api_dev_sites.limit!(limit).offset!(limit * page)
+        @dev_sites.limit!(limit).offset!(limit * page)
       end
     end
 

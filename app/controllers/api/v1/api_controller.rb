@@ -1,12 +1,7 @@
-class ApiController < ActionController::API
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  # protect_from_forgery with: :exception
-  before_action :authenticate_request, :if => :is_json
+class Api::V1::ApiController < ActionController::API
+  before_action :authenticate_request, :if => :json_request?
   before_action :set_locale
-  before_action :current_user
 
-  #include SessionsHelper
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -22,11 +17,10 @@ class ApiController < ActionController::API
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
-  def is_json
+  def json_request?
     request.format.json?
   end
 
-  attr_reader :current_user
 
   private
 

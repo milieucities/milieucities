@@ -217,6 +217,8 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.3)
@@ -316,6 +318,9 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.5.1)
       sprockets-rails
+    rails-api (0.4.0)
+      actionpack (>= 3.2.11)
+      railties (>= 3.2.11)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -381,6 +386,7 @@ GEM
       tilt (>= 1.1, < 3)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
+    simple_command (0.0.9)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -436,8 +442,10 @@ DEPENDENCIES
   foreman
   friendly_id (~> 5.1.0)
   geokit-rails
+  httparty
   jquery-rails (~> 4.1.0)
   jquery-turbolinks (~> 2.1.0)
+  jwt
   letter_opener
   mandrill-api (~> 1.0.53)
   mini_backtrace (= 0.1.3)
@@ -453,6 +461,7 @@ DEPENDENCIES
   rabl (~> 0.12.0)
   rack-cors (~> 0.4.0)
   rails (= 4.2.5.1)
+  rails-api
   redis (~> 3.2.2)
   resque (~> 1.26.0)
   rmagick (~> 2.15.4)
@@ -461,6 +470,7 @@ DEPENDENCIES
   rubocop (~> 0.46.0)
   sass-rails (~> 5.0)
   shoulda-matchers
+  simple_command
   spring
   therubyracer
   turbolinks (~> 5.0.0)

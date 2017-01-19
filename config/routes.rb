@@ -41,9 +41,11 @@ Rails.application.routes.draw do
   end
 
   # Backend API Routing
-  scope '/api/v1' do
-    post '/login', to: 'authentication#authenticate'
-    resources :api_dev_sites do
+  namespace :api do
+    namespace :v1 do
+      post '/login', to: 'authentication#authenticate'
+      #Authentication Example
+      resources :api_dev_sites, only: [:index]
     end
   end
 

@@ -28,7 +28,7 @@ module MilieuServer
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       html_tag
     }
-    
+
     # Rspec
     config.generators do |g|
       g.test_framework :rspec, fixture: true
@@ -40,7 +40,6 @@ module MilieuServer
       g.helper = false
     end
 
-    # config.autoload_paths += %W(\#{config.root}/lib)
-    config.eager_load_paths << Rails.root.join('lib')
+    config.autoload_paths += %W(\#{config.root}/lib)
   end
 end
