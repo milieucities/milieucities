@@ -57,12 +57,14 @@ export default class Home extends Component {
         <div className={css.landingContainer}>
           <div>
             <h1>Milieu</h1>
-            <h3>{i18n.heroText1}</h3>
             {
               signedIn == 'false' &&
-              <div className={css.signUpContainer}>
-                <a href={`/${locale}/users/new`} className={css.signUpButton}>{i18n.signUp}</a>
-                {i18n.haveAccount} <a href='#sign-in-modal' className='modal-trigger' style={{marginLeft: 10}} onClick={this.openModal}>{i18n.signIn}</a>
+              <div>
+                <h3>{i18n.heroText1}</h3>
+                <div className={css.signUpContainer}>
+                  <a href={`/${locale}/users/new`} className={css.signUpButton}>{i18n.signUp}</a>
+                  {i18n.haveAccount} <a href='#sign-in-modal' className='modal-trigger' style={{marginLeft: 10}} onClick={this.openModal}>{i18n.signIn}</a>
+                </div>
               </div>
             }
           </div>

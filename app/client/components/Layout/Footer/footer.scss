@@ -76,3 +76,9 @@
     }
   }
 }
+.skip{
+  @media (min-width: $small-screen) {
+    margin-top: -130px;
+    float: left;
+  }
+}
