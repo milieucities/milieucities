@@ -58,6 +58,9 @@ class DevSite < ActiveRecord::Base
     Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?
   end
 
+  mount_uploaders :images, ImagesUploader
+  mount_uploaders :files, FilesUploader
+
   def self.search(search_params)
     @dev_sites = DevSite.all
     @search_params = search_params

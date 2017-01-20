@@ -71,4 +71,39 @@ describe DevSite do
       end
     end
   end
+
+  describe '#search' do
+    before :each do
+      @dev_site1 = FactoryGirl.create(:dev_site)
+      @dev_site2 = FactoryGirl.create(:dev_site)
+      @dev_site3 = FactoryGirl.create(:dev_site)
+      @dev_site4 = FactoryGirl.create(:dev_site)
+
+      @dev_site_1.addresses << FactoryGirl.create(:address)
+    end
+
+    context 'no params passed' do
+      it 'should retrieve all DevSites' do
+        search_params = {}
+
+        result = DevSite.search(search_params)
+
+        expect(result.count).to eq(4)
+        expect(result).to include(@dev_site1)
+        expect(result).to include(@dev_site2)
+        expect(result).to include(@dev_site3)
+        expect(result).to include(@dev_site4)
+      end
+    end
+
+    context 'location search params passed' do
+      it 'should retrieve sites closest sites' do
+        search_params = { latitude: 45.430863, longitude: -75.712344 }
+
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([@dev_site1])
+      end
+    end
+  end
 end
