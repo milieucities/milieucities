@@ -8,7 +8,7 @@ export default class Footer extends Component {
     super()
     this.state = { isMobile: (window.innerWidth < 600) }
     this.handleSubmit = (e) => this._handleSubmit(e);
-    this.goTop = () => this._goTop()
+    this.goTop = (e) => this._goTop(e)
 
     window.addEventListener('resize',
       debounce(() => {
@@ -16,8 +16,9 @@ export default class Footer extends Component {
       }, 100)
     );
   }
-  _goTop() {
-    $(window).scrollTop(0);
+  _goTop(e) {
+    e.preventDefault();
+    window.scrollTo(0,0);
   }
   _handleSubmit(e) {
     const { locale } = document.body.dataset;
