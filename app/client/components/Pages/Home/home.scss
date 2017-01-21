@@ -123,7 +123,7 @@
 
   .search {
     max-width: 400px;
-    width: 100%;
+    width: calc(100% - 20px);
     margin: 0 auto;
     padding-top: 40px;
     position: relative;
@@ -137,6 +137,10 @@
       border-radius: 25px;
       box-shadow: 2px 2px 5px 0 $gray;
       background-color: $light-gray;
+
+      @media #{$small-and-down} {
+        padding-right: 115px;
+      }
 
       &:focus {
         box-shadow: 2px 2px 5px 0 $secondary-color;

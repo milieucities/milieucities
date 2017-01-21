@@ -76,6 +76,10 @@
   right: -80px;
   padding: 14px 30px;
 
+  @media #{$small-and-down} {
+    right: 0px;
+  }
+
   &:focus {
     background-color: $accessibility;
   }
@@ -88,5 +92,9 @@
     width: calc(100% + 40px);
     top: calc(100% + 8px);
     left: 20px;
+
+    @media #{$small-and-down} {
+      width: calc(100% - 40px);
+    }
   }
 }
