@@ -37,7 +37,7 @@ export default class MapSearch extends Component {
       this.parent.setState({ [toLower(type)]: toUpper(value), latitude: null, longitude: null },
         () => this.parent.search_and_sort()
       );
-    }else{
+    } else {
       this.parent.setState({ [toLower(type)]: value },
         () => this.parent.search_and_sort()
       );
