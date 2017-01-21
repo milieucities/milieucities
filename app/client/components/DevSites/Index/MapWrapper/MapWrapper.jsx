@@ -13,11 +13,13 @@ import Header from '../../../Layout/Header/Header'
 export default class MapWrapper extends Component {
   constructor(props) {
     super(props);
+    const devSiteMap = document.querySelector('#dev-site-map');
+    const { userLongitude, userLatitude } = devSiteMap.dataset;
 
     this.state = { page: parseInt(getParameterByName('page')) || 0,
                    devSites: [],
-                   latitude: getParameterByName('latitude') || 45.42435419303618,
-                   longitude: getParameterByName('longitude') || -75.68289194238083,
+                   latitude: getParameterByName('latitude') || userLatitude || 45.42435419303618,
+                   longitude: getParameterByName('longitude') || userLongitude || -75.68289194238083,
                    zoom: getParameterByName('zoom') || 12.5,
                    ward: getParameterByName('ward'),
                    status: getParameterByName('status'),

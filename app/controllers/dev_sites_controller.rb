@@ -1,6 +1,7 @@
 class DevSitesController < ApplicationController
   DEFAULT_SITES_LIMIT = 20
   load_and_authorize_resource
+  geocode_ip_address if Rails.env.production?
 
   def index
     @no_header = true

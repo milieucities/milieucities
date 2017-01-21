@@ -31,7 +31,7 @@ export default class Map extends Component {
       map.flyTo({ center: [longitude, latitude] })
     }
 
-    const features = map.querySourceFeatures('devSites', {filter: ['==', 'id', hoverdDevSiteId]});
+    const features = map.querySourceFeatures('devSites', { filter: ['==', 'id', hoverdDevSiteId] });
     if(!features.length) {
       popup.remove();
       return;
@@ -47,13 +47,13 @@ export default class Map extends Component {
     const map = this.map = new mapboxgl.Map({
       container: 'main-map',
       style: 'mapbox://styles/mtuck063/cim8gs43500449lm1hv082tp2',
-      center: [(longitude || -75.68289194238083) , (latitude || 45.42435419303618)],
+      center: [longitude, latitude],
       zoom: 12.5
     });
     map.dragRotate.disable();
     map.touchZoomRotate.disableRotation();
     map.scrollZoom.disable();
-    map.addControl(new mapboxgl.Navigation({position: 'top-left'}));
+    map.addControl(new mapboxgl.Navigation({ position: 'top-left' }));
     map.on('load', this.loadMap);
 
     const popup = this.popup = new mapboxgl.Popup({
