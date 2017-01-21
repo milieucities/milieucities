@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20170116064041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "addresses", force: :cascade do |t|
     t.float    "lat"
@@ -206,12 +207,13 @@ ActiveRecord::Schema.define(version: 20170116064041) do
     t.string   "username"
     t.string   "email"
     t.string   "role"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "password_digest"
     t.string   "uid"
     t.string   "provider"
     t.string   "slug"
+    t.uuid     "uuid",            default: "uuid_generate_v4()"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

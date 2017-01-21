@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-
   protect_from_forgery with: :exception
   before_action :set_locale
 
@@ -21,6 +20,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end
+
 
   def paginate(collection, limit = 20)
     return if params[:page].blank? || params[:limit].blank?

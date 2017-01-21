@@ -9,6 +9,8 @@ gem 'jquery-rails', '~> 4.1.0'
 gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'turbolinks', '~> 5.0.0'
 gem 'rack-cors', '~> 0.4.0'
+gem 'rails-api', require: 'rails-api/action_controller/api'
+gem 'httparty'
 gem 'figaro'
 
 # background services gems
@@ -24,7 +26,9 @@ gem 'cancancan', '~> 1.15.0'
 gem 'geokit-rails'
 gem 'bcrypt', '~> 3.1.11'
 gem 'fog', '~> 1.38'
-gem 'rmagick', '~> 2.15.4', require: 'RMagick'
+gem 'rmagick', '~> 2.15.4', :require => 'RMagick'
+gem 'simple_command'
+gem 'jwt'
 
 # view gems
 gem 'font-awesome-rails', '~> 4.7.0.0'
