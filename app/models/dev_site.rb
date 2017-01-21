@@ -75,6 +75,11 @@ class DevSite < ActiveRecord::Base
     statuses.order('status_date DESC').first.status_date.strftime('%B %e, %Y')
   end
 
+  def street
+    return if addresses.empty?
+    addresses.first.street
+  end
+
   def address
     return if addresses.empty?
     [addresses.first.street, addresses.first.city, addresses.first.province_state].delete_if(&:blank?).join(', ')
