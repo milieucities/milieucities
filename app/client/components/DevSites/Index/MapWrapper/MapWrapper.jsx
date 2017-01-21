@@ -56,6 +56,9 @@ export default class MapWrapper extends Component {
   _search_and_sort() {
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
     $.getJSON(`/dev_sites`, this.params(), json => {
+      if(json.dev_sites && (!this.state.longitude || !this.state.latitude)) {
+        this.setState({ longitude: json.dev_sites[0].longitude, latitude: json.dev_sites[0].latitude });
+      }
       this.setState({ page: 0, devSites: (json.dev_sites || []), total: json.total }, scrollToTop);
     });
   }

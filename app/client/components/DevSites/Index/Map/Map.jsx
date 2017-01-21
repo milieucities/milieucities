@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import css from './map.scss'
-import WARD_GEO_JSON from './ottawa_ward.geojson'
+import OTTAWA_WARD_GEO_JSON from './ottawa_ward.geojson'
+import GUELPH_WARD_GEO_JSON from './guelph_ward.geojson'
 import { replace } from 'lodash'
 
 export default class Map extends Component {
@@ -113,7 +114,7 @@ export default class Map extends Component {
               title: devSite.title,
               address: devSite.address,
               'marker-symbol': 'consultation',
-              description: `<b>${devSite.address}</b>
+              description: `<b>${devSite.street}</b>
                             <br/>${replace(devSite.application_type, /coa/, 'Committee of Adjustment')}
                             <br/>${devSite.status}`
             }
@@ -131,7 +132,7 @@ export default class Map extends Component {
     }
 
     map.addSource('devSites', this.geoJsonBuilder());
-    if(latitude && longitude){
+    if(latitude && longitude) {
       map.flyTo({ center: [longitude, latitude] });
     }
   }
@@ -145,7 +146,31 @@ export default class Map extends Component {
 
     map.addSource('wards', {
       'type': 'geojson',
-      'data': WARD_GEO_JSON
+      'data': OTTAWA_WARD_GEO_JSON
+    });
+
+    map.addSource('guelph-wards', {
+      type: 'geojson',
+      'data': GUELPH_WARD_GEO_JSON
+    });
+
+    map.addLayer({
+      'id': 'guelph-fill-wards',
+      'type': 'fill',
+      'source': 'guelph-wards',
+      'paint': {
+        'fill-color': '#3E6880',
+        'fill-opacity': 0.3
+      }
+    });
+
+    map.addLayer({
+      'id': 'guelph-line-wards',
+      'type': 'line',
+      'source': 'guelph-wards',
+      'paint': {
+        'line-color': '#3E6880'
+      }
     });
 
     map.addLayer({
