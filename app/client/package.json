@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "http-server": "^0.8.5",
+    "riek": "^1.0.7",
     "webpack-dev-server": "^1.14.1"
   }
 }

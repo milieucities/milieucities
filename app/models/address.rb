@@ -18,10 +18,12 @@ class Address < ActiveRecord::Base
     self.lat = lat_and_lng.lat
     self.lon = lat_and_lng.lng
 
-  rescue
+  rescue # what is this doing?
   end
 
-  def full_address
-    [street, city, province_state, country].delete_if(&:blank?).join(', ')
+  def full_address(with_country: true)
+    address_attributes = [street, city, province_state]
+    address_attributes << country if with_country
+    address_attributes.delete_if(&:blank?).join(', ')
   end
 end

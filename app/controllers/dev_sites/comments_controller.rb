@@ -24,6 +24,42 @@ module DevSites
       end
     end
 
+    def destroy
+      comment = Comment.find(params[:id])
+
+      raise CanCan::AccessDenied unless can? :delete, comment
+
+      respond_to do |format|
+        if comment.destroy
+          format.json { head :no_content, status: 204 }
+        else
+          format.json do
+            render json: {
+              notice: 'Your comment was not deleted. Please try again.'
+            }, status: 500
+          end
+        end
+      end
+    end
+
+    def update
+      comment = Comment.find(params[:id])
+
+      raise CanCan::AccessDenied unless can? :update, comment
+
+      respond_to do |format|
+        if comment.update(body: comment_params[:body])
+          format.json { render json: comment, status: 200 }
+        else
+          format.json do
+            render json: {
+              notice: 'Your comment was not updated. Please try again.'
+            }, status: 500
+          end
+        end
+      end
+    end
+
     private
 
     def paginate?

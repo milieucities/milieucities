@@ -113,3 +113,10 @@
     background-color: $accessibility;
   }
 }
+
+.user_actions {
+  float: right;
+  a {
+    padding: 4px;
+  }
+}

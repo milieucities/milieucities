@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { List } from 'immutable'
+import { RIETextArea } from 'riek'
 import css from './comments.scss'
 import i18n from './locale'
 
@@ -123,6 +124,8 @@ class Comment extends Component {
     this.viewWholeBody = (e) => this._viewWholeBody(e);
     this.voteUp = () => this._voteUp();
     this.voteDown = () => this._voteDown();
+    this.deleteComment = (e) => this._deleteComment(e);
+    this.editComment = (e) => this._editComment(e);
   }
   componentDidMount() {
     if(this.refs.body.scrollHeight > 150) {
@@ -225,10 +228,45 @@ class Comment extends Component {
       });
     }
   }
+
+  _deleteComment(e) {
+    e.preventDefault();
+    const { comment, parent } = this.props;
+    const devSiteId = this.props.parent.props.devSiteId
+    $.ajax({
+      url: `/dev_sites/${devSiteId}/comments/${comment.id}`,
+      dataType: 'JSON',
+      type: 'DELETE',
+      success: (comment) => {
+        parent.loadComments();
+      },
+      error: error => {
+        window.flash('alert', error.responseText)
+      }
+    });
+  }
+
+  _editComment(e) {
+    const { comment, parent } = this.props;
+    const devSiteId = this.props.parent.props.devSiteId
+    $.ajax({
+      url: `/dev_sites/${devSiteId}/comments/${comment.id}`,
+      dataType: 'JSON',
+      data: { comment: { body: e.commentBody }},
+      type: 'PATCH',
+      success: (comment) => {
+        parent.loadComments();
+      },
+      error: error => {
+        window.flash('alert', error.responseText)
+      }
+    });
+  }
   render() {
     const { comment } = this.props;
     const { readMoreClicked, showReadMore } = this.state;
     const { locale } = document.body.dataset;
+    const userOwnsComment = comment.user.id == this.currentUserId;
     i18n.setLanguage(locale);
     return(
       <div className={css.comment}>
@@ -239,10 +277,24 @@ class Comment extends Component {
           <span className={css.date}>
             {moment(comment.created_at).format('MMMM DD, YYYY ')}
           </span>
+          { userOwnsComment &&
+            <span className={css.user_actions}>
+              <a href="#" onClick={this.deleteComment}>{i18n.delete}</a>
+            </span>
+          }
         </div>
         <div className={css.bodyContainer}>
-          <div className={readMoreClicked ? css.wholebody : css.body} ref="body"
-               dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}>
+          <div className={readMoreClicked ? css.wholebody : css.body} ref="body">
+            { userOwnsComment &&
+              <RIETextArea
+                value={comment.body}
+                change={this.editComment}
+                propName="commentBody"
+              />
+            }
+            { !userOwnsComment &&
+              <p dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}></p>
+            }
           </div>
           <div className={css.votesContainer}>
             <i className="fa fa-angle-up fa-2x" onClick={this.voteUp} tabIndex='0'></i>
