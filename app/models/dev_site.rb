@@ -37,6 +37,9 @@ class DevSite < ActiveRecord::Base
     'Additions'
   ].freeze
 
+  mount_uploaders :images, ImagesUploader
+  mount_uploaders :files, FilesUploader
+
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
   has_one  :sentiment, as: :sentimentable, dependent: :destroy
@@ -78,8 +81,8 @@ class DevSite < ActiveRecord::Base
 
   def status_date
     return if statuses.empty?
-    return nil unless statuses.order('status_date DESC').first.status_date
-    statuses.order('status_date DESC').first.status_date.strftime('%B %e, %Y')
+    return nil unless statuses.current.status_date
+    statuses.current.status_date.strftime('%B %e, %Y')
   end
 
   def street

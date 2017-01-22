@@ -16,6 +16,8 @@ class Status < ActiveRecord::Base
     'Community Information and Comment Session Open'
   ].freeze
 
+  scope :current, -> { order(status_date: :desc).first }
+
   def friendly_status_date
     status_date.strftime('%B %e, %Y') if status_date.present?
   end
