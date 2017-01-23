@@ -37,9 +37,6 @@ class DevSite < ActiveRecord::Base
     'Additions'
   ].freeze
 
-  mount_uploaders :images, ImagesUploader
-  mount_uploaders :files, FilesUploader
-
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
   has_one  :sentiment, as: :sentimentable, dependent: :destroy
@@ -60,9 +57,6 @@ class DevSite < ActiveRecord::Base
   after_create do
     Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?
   end
-
-  mount_uploaders :images, ImagesUploader
-  mount_uploaders :files, FilesUploader
 
   def self.search(search_params)
     @dev_sites = DevSite.all
