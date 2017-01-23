@@ -75,8 +75,8 @@ class DevSite < ActiveRecord::Base
 
   def status_date
     return if statuses.empty?
-    return nil unless statuses.order('status_date DESC').first.status_date
-    statuses.order('status_date DESC').first.status_date.strftime('%B %e, %Y')
+    return nil unless statuses.current.status_date
+    statuses.current.status_date.strftime('%B %e, %Y')
   end
 
   def street

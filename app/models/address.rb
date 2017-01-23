@@ -24,6 +24,6 @@ class Address < ActiveRecord::Base
   def full_address(with_country: true)
     address_attributes = [street, city, province_state]
     address_attributes << country if with_country
-    address_attributes.delete_if(&:blank?).join(', ')
+    address_attributes.delete_if(&:blank?).map(&:strip).join(', ')
   end
 end

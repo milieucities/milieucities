@@ -71,4 +71,173 @@ describe DevSite do
       end
     end
   end
+
+  describe '#search' do
+    before :each do
+      @dev_site1 = FactoryGirl.create(:dev_site)
+      @dev_site2 = FactoryGirl.create(:dev_site, updated: DateTime.new(2012, 12, 1).utc)
+      @dev_site3 = FactoryGirl.create(:dev_site, ward_name: 'Orleans')
+      @dev_site4 = FactoryGirl.create(:dev_site)
+
+      @dev_site1.addresses << FactoryGirl.create(:address)
+      @dev_site4.statuses << FactoryGirl.create(:status)
+      @dev_site4.statuses << FactoryGirl.create(:status,
+                                                status_date: DateTime.current - 1.day,
+                                                status: 'Comment Period in Progress')
+    end
+
+    context 'no params passed' do
+      it 'should retrieve all DevSites' do
+        search_params = {}
+
+        result = DevSite.search(search_params)
+
+        expect(result.count).to eq(4)
+        expect(result).to include(@dev_site1)
+        expect(result).to include(@dev_site2)
+        expect(result).to include(@dev_site3)
+        expect(result).to include(@dev_site4)
+      end
+    end
+
+    context 'location search params passed' do
+      it 'should retrieve DevSites within 5km of origin' do
+        search_params = { latitude: 45.430863, longitude: -75.712344 }
+
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([@dev_site1])
+      end
+
+      it 'should not return DevSites over 5km from origin' do
+        search_params = { latitude: 42.430863, longitude: -75.712344 }
+
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([])
+      end
+    end
+
+    context 'year provided as search query' do
+      it 'should retrieve only DevSites matching the year given' do
+        search_params = { year: '2012' }
+
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([@dev_site2])
+      end
+    end
+
+    context 'ward provided as search query' do
+      it 'should retrieve only DevSites matching the ward given' do
+        search_params = { ward: 'Orleans' }
+
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([@dev_site3])
+      end
+    end
+
+    # context 'status provided as search query' do
+    #   it 'should retrieve only DevSites with active status matching the status given' do
+    #     search_params = { status: 'Application File Pending' }
+
+    #     result = DevSite.search(search_params)
+
+    #     expect(result).to eq([@dev_site4])
+    #   end
+    # end
+  end
+
+  describe '#status' do
+    let(:dev_site) { FactoryGirl.create(:dev_site) }
+    let(:test_status) { FactoryGirl.create(:status) }
+
+    it 'should return nil if dev site has no status' do
+      expect(dev_site.status).to be_nil
+    end
+
+    it 'should return the status if dev site has one' do
+      dev_site.statuses << test_status
+      expect(dev_site.status).to eq(test_status.status)
+    end
+  end
+
+  describe '#status_date' do
+    let(:dev_site) { FactoryGirl.create(:dev_site) }
+    let(:test_status_no_date) { FactoryGirl.create(:status, status_date: nil) }
+    let(:test_status_with_date) { FactoryGirl.create(:status) }
+
+    it 'should return nil if dev site has no status' do
+      expect(dev_site.status_date).to be_nil
+    end
+
+    it 'should return nil if the current status has no status date' do
+      dev_site.statuses << test_status_no_date
+      expect(dev_site.status_date).to be_nil
+    end
+
+    it 'should return the status date of the current status' do
+      dev_site.statuses << test_status_with_date
+      expected_date = test_status_with_date.status_date.strftime('%B %e, %Y')
+      expect(dev_site.status_date).to eq(expected_date)
+    end
+  end
+
+  describe 'address methods' do
+    let(:dev_site) { FactoryGirl.create(:dev_site) }
+    let(:address1) { FactoryGirl.create(:address) }
+    let(:address2) { FactoryGirl.create(:address) }
+
+    context 'dev site has no addresses' do
+      it 'should return nil' do
+        methods_to_test = [:address, :latitude, :longitude]
+        methods_to_test.each do |method_name|
+          expect(dev_site.send(method_name)).to be_nil
+        end
+      end
+    end
+
+    context 'dev site has addresses' do
+      before :each do
+        dev_site.addresses << address1
+        dev_site.addresses << address2
+      end
+
+      it '#address returns street, city, and province_state of the first address' do
+        expected_address = "#{address1.street}, #{address1.city}, #{address1.province_state}"
+        expect(dev_site.address).to eq(expected_address)
+      end
+
+      it '#latitude should return the latitude of the first address' do
+        expect(dev_site.latitude).to eq(address1.lat)
+      end
+
+      it '#latitude should return the longitude of the first address' do
+        expect(dev_site.longitude).to eq(address1.lon)
+      end
+    end
+  end
+
+  describe '#find_ordered' do
+    it 'should return an empty ActiveRecord::Relation if ids is empty' do
+      result = DevSite.find_ordered []
+
+      expect(result).to be_a(ActiveRecord::Relation)
+      expect(result.empty?).to be true
+    end
+
+    it 'should return dev sites in order of ids in array' do
+      dev_site1 = FactoryGirl.create(:dev_site)
+      dev_site2 = FactoryGirl.create(:dev_site)
+      dev_site3 = FactoryGirl.create(:dev_site)
+      ids = [dev_site2.id, dev_site3.id, dev_site1.id]
+
+      result = DevSite.find_ordered ids
+
+      expect(result[0]).to eq(dev_site2)
+      expect(result[1]).to eq(dev_site3)
+      expect(result[2]).to eq(dev_site1)
+    end
+  end
 end
