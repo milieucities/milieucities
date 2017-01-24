@@ -23,7 +23,6 @@ class ApplicationController < ActionController::Base
 
 
   def paginate(collection, limit = 20)
-    return if params[:page].blank? || params[:limit].blank?
     limit = item_limit(limit)
     page = page_number
     collection = collection.limit(limit).offset(limit * page)

@@ -63,7 +63,7 @@ export default class MapWrapper extends Component {
       if(json.dev_sites && (!this.state.longitude || !this.state.latitude)) {
         this.setState({ longitude: json.dev_sites[0].longitude, latitude: json.dev_sites[0].latitude });
       }
-      this.setState({ page: 0, devSites: (json.dev_sites || []), total: json.total }, loading: false, scrollToTop);
+      this.setState({ page: 0, devSites: (json.dev_sites || []), total: json.total, loading: false }, scrollToTop);
     });
   }
   render() {

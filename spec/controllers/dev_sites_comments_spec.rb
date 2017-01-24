@@ -15,7 +15,7 @@ module DevSites
 
     describe '#index' do
       it 'should set all comments and total comments' do
-        get :index, dev_site_id: dev_site.id, format: :json
+        get :index, dev_site_id: dev_site.id, limit: 20, format: :json
 
         expect(response.status).to eq(200)
         expect(assigns(:comments)).to eq(dev_site.comments.all)
@@ -24,9 +24,14 @@ module DevSites
     end
 
     describe '#create' do
+      before :each do
+        sign_in user1
+      end
       context 'valid params' do
+
         it 'should create new comment and render show template' do
-          valid_attributes = FactoryGirl.attributes_for(:comment)
+          valid_attributes = attributes_for(:comment)
+          valid_attributes.merge!({ user_id: user1.id })
 
           post :create, dev_site_id: dev_site.id, comment: valid_attributes, format: :json
 
@@ -36,6 +41,7 @@ module DevSites
       end
 
       context 'invalid params' do
+
         it 'should return error status' do
           invalid_attributes = FactoryGirl.attributes_for(:comment).except(:body)
 
@@ -89,7 +95,7 @@ module DevSites
         end
 
         it 'should return error messages if params are not valid' do
-          invalid_attributes = FactoryGirl.attributes_for(:comment).except(:body)
+          invalid_attributes = attributes_for(:comment, body: '')
 
           patch :update, dev_site_id: dev_site.id,
                          id: comment_user2.id,

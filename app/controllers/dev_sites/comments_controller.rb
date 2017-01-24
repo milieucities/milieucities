@@ -1,6 +1,5 @@
 module DevSites
   class CommentsController < ApplicationController
-    load_resource :dev_site
     load_and_authorize_resource :comment
 
     def index
