@@ -5,7 +5,7 @@ class NewDevelopmentNotificationJob
 
   class << self
     def perform(dev_site_id)
-      addresses = dev_site_addresses
+      addresses = dev_site_addresses(dev_site_id)
       addresses.each do |address|
         next if address.lat.blank? || address.lon.blank?
         message = prepare_message(address, dev_site_id)

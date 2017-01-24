@@ -360,6 +360,9 @@
   .content {
     box-sizing: border-box;
     padding: 20px;
+    padding-top: 5px;
+    height: 200px;
+    overflow: hidden;
 
     .address {
       font-weight: 700;
