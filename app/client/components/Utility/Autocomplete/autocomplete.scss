@@ -2,7 +2,7 @@
   width: 100%;
   position: relative;
   color: #555;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .dropdown {
@@ -25,7 +25,7 @@
     cursor: pointer;
     background-color: #fff;
     color: #0a0a0a;
-    font-size: 14px;
+    font-size: 16px;
 
     &:hover{
       background-color: $quaternary-color;
@@ -46,11 +46,9 @@
 }
 
 .textfield {
-  box-sizing: border-box;
   width: 100%;
-  padding: 14px;
-  padding-left: 45px;
-  padding-right: 45px;
+  padding: 14px 45px;
+  margin-left: 0px;
   border: 1px solid $light-gray;
   font-size: 16px;
   color: $black;
@@ -68,13 +66,14 @@
 .searchBtn {
   background-color: $primary-color;
   color: $white !important;
-  border-radius: 25px;
+  border-radius: 2px;
   box-shadow: 2px 2px 5px 0 $gray;
   position: absolute;
+  font-size: 16px;
   transition: 200ms;
   top: 0;
   right: -80px;
-  padding: 14px 30px;
+  padding: 15px 30px;
 
   &:focus {
     background-color: $accessibility;

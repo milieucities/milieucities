@@ -2,7 +2,7 @@ import LocalizedStrings from 'react-localization';
 
 const i18n = new LocalizedStrings({
   en:{
-    heroText1: 'Join the community to discuss, contribute, and co-create a better urban environment together',
+    heroText1: 'Dedicated to democracy and data-driven city building',
     signUp: 'Sign Up',
     haveAccount: 'Have an account?',
     signIn: 'Sign In',
@@ -18,11 +18,11 @@ const i18n = new LocalizedStrings({
     summary2: 'Transportation planning offers huge opportunities to enable equity.'
   },
   fr: {
-    heroText1: 'Rejoignez la communauté pour discuter, contribuer et co-créer un meilleur environnement urbain ensemble',
+    heroText1: 'Obtenez un aperçu communautaire des projets d\'urbanisme et de développement',
     signUp: 'S\'inscrire',
     haveAccount: 'Vous avez une compte?',
     signIn: 'Se connecter',
-    heroText2: 'Obtenez un aperçu communautaire des projets d\'urbanisme et de développement',
+    heroText2: 'Rejoignez la communauté pour discuter, contribuer et co-créer un meilleur environnement urbain ensemble',
     launchProject: 'Lancez votre projet aujourd\'hui',
     title: 'Découvrez Ce Qui Est Construit Dans Votre Ville',
     featuredDevelopments: 'Développements en vedette',
