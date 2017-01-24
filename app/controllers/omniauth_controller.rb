@@ -1,12 +1,18 @@
 class OmniauthController < ApplicationController
   def create
+    @prev_url = previous_url
     @user_auth = request.env['omniauth.auth']
     @user = find_user_by_uid || create_user
 
     update_user_email if @user.email.nil?
 
     session[:user_id] = @user.id
-    redirect_to root_path, notice: t('sessions.notice.welcome')
+    redirect_to @prev_url, notice: t('sessions.notice.welcome')
+  end
+
+  def previous_url
+    # do your authentication stuff here...
+    request.env['omniauth.origin'] || '/default'
   end
 
   private
