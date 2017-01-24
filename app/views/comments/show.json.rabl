@@ -10,4 +10,6 @@ node :voted_up do |comment|
   comment.voted_up(current_user)
 end
 
-child(:user) { attributes :first_name, :last_name, :username, :name, :email, :name }
+child :user do
+  attributes :id, :anonymous_comments, :name
+end

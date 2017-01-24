@@ -5,6 +5,7 @@ import css from './comments.scss'
 import i18n from './locale'
 
 export default class Comments extends Component {
+
   constructor(props) {
     super(props);
     this.state = { comments: List(), page: 0, limit: 5 }
@@ -15,9 +16,11 @@ export default class Comments extends Component {
     this.loadComments();
     this.openModal = () => this._openModal();
   }
+
   componentDidMount() {
     $('.modal-trigger').leanModal();
   }
+
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.devSiteId !== this.props.devSiteId) {
       this.setState({ page: 0, comments: List()},
@@ -25,19 +28,23 @@ export default class Comments extends Component {
       )
     }
   }
+
   _openModal() {
     document.querySelector('#sign-in-modal .modal-content').focus();
   }
+
   _loadComments() {
     $.getJSON(`/dev_sites/${this.props.devSiteId}/comments`,
       { page: this.state.page, limit: this.state.limit },
       comments => this.setState({ comments: List(comments), total: (comments.length > 0 ? comments[0].total : 0) })
     );
   }
+
   _hasMoreComments() {
     const { page, total, limit } = this.state;
     return ( (page + 1) * limit < total );
   }
+
   _appendMoreComments() {
     this.setState({ page: this.state.page + 1 },
       () => {
@@ -48,6 +55,7 @@ export default class Comments extends Component {
       }
     );
   }
+
   render() {
     const { comments, total } = this.state;
     const { locale } = document.body.dataset;
@@ -57,7 +65,7 @@ export default class Comments extends Component {
         {
           this.currentUserId
           ? <CommentForm {...this.props} parent={this} />
-          : <a href="#sign-in-modal" className='modal-trigger btn' onClick={this.openModal}>{i18n.signInToComment}</a>
+        : <a href='#sign-in-modal' className='modal-trigger btn' onClick={this.openModal}>{i18n.signInToComment}</a>
         }
       </div>
       {
@@ -74,22 +82,33 @@ export default class Comments extends Component {
 }
 
 class CommentForm extends Component {
+
   constructor(props) {
     super(props);
     this.state = {};
     this.parent = this.props.parent;
+    this.currentUserId = document.body.dataset.userId;
     this.handleChange = (e) => this.setState({ body: e.target.value });
     this.submitForm = (e) => this._submitForm(e);
   }
+
   _submitForm(e) {
     e.preventDefault();
     const { body, limit } = this.state;
+    const data = {
+                    comment: {
+                      body,
+                      commentable_id: this.props.devSiteId,
+                      commentable_type: 'DevSite',
+                      user_id: this.currentUserId
+                    },
+                    limit
+                  }
     $.ajax({
       url: `/dev_sites/${this.props.devSiteId}/comments`,
       dataType: 'JSON',
       type: 'POST',
-      cache: false,
-      data: {comment: { body }, limit },
+      data: data,
       success: (comment) => {
         this.parent.setState({
           comments: this.parent.state.comments.unshift(comment),
@@ -99,6 +118,7 @@ class CommentForm extends Component {
       }
     });
   }
+
   render() {
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
@@ -117,6 +137,7 @@ class CommentForm extends Component {
 }
 
 class Comment extends Component {
+
   constructor(props) {
     super(props);
     this.state = { showReadMore: false };
@@ -127,15 +148,18 @@ class Comment extends Component {
     this.deleteComment = (e) => this._deleteComment(e);
     this.editComment = (e) => this._editComment(e);
   }
+
   componentDidMount() {
     if(this.refs.body.scrollHeight > 150) {
       this.setState({ showReadMore: true, readMoreClicked: false });
     }
   }
+
   _viewWholeBody(e) {
     e.preventDefault();
     this.setState({ readMoreClicked: true });
   }
+
   _voteUp() {
     const { comment, parent } = this.props;
     const { locale } = document.body.dataset;
@@ -182,6 +206,7 @@ class Comment extends Component {
         });
       }
   }
+
   _voteDown() {
     const { comment, parent } = this.props;
     const { locale } = document.body.dataset;
@@ -254,7 +279,7 @@ class Comment extends Component {
       dataType: 'JSON',
       data: { comment: { body: e.commentBody }},
       type: 'PATCH',
-      success: (comment) => {
+      success: () => {
         parent.loadComments();
       },
       error: error => {
@@ -262,6 +287,7 @@ class Comment extends Component {
       }
     });
   }
+
   render() {
     const { comment } = this.props;
     const { readMoreClicked, showReadMore } = this.state;
@@ -277,34 +303,37 @@ class Comment extends Component {
           <span className={css.date}>
             {moment(comment.created_at).format('MMMM DD, YYYY ')}
           </span>
-          { userOwnsComment &&
+          {
+            userOwnsComment &&
             <span className={css.user_actions}>
-              <a href="#" onClick={this.deleteComment}>{i18n.delete}</a>
+              <a href='#' onClick={this.deleteComment}><i className='fa fa-trash' /></a>
             </span>
           }
         </div>
         <div className={css.bodyContainer}>
-          <div className={readMoreClicked ? css.wholebody : css.body} ref="body">
-            { userOwnsComment &&
+          <div className={readMoreClicked ? css.wholebody : css.body} ref='body'>
+            {
+              userOwnsComment &&
               <RIETextArea
                 value={comment.body}
                 change={this.editComment}
-                propName="commentBody"
+                propName='commentBody'
               />
             }
-            { !userOwnsComment &&
+            {
+              !userOwnsComment &&
               <p dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}></p>
             }
           </div>
           <div className={css.votesContainer}>
-            <i className="fa fa-angle-up fa-2x" onClick={this.voteUp} tabIndex='0'></i>
-            <i className="fa fa-angle-down fa-2x" onClick={this.voteDown} tabIndex='0'></i>
+            <i className='fa fa-angle-up fa-2x' onClick={this.voteUp} tabIndex='0'></i>
+            <i className='fa fa-angle-down fa-2x' onClick={this.voteDown} tabIndex='0'></i>
             { comment.vote_count }
           </div>
         </div>
         {
           showReadMore && !readMoreClicked &&
-          <a href="#" onClick={this.viewWholeBody} className={css.readmore} tabIndex='-1'>{i18n.readMore}</a>
+          <a href='#' onClick={this.viewWholeBody} className={css.readmore} tabIndex='-1'>{i18n.readMore}</a>
         }
       </div>
     )
