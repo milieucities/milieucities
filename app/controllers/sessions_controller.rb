@@ -34,6 +34,6 @@ class SessionsController < ApplicationController
 
   def find_user_by_email
     email = params[:session][:email].downcase
-    User.find_by(email: email)
+    User.find_by(email: email, provider: nil)
   end
 end
