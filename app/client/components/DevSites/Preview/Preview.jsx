@@ -130,7 +130,7 @@ export default class extends Component {
         </div>
         <div className={css.wrapper}>
 
-          <div className={css.title}>{devSite.address}</div>
+          <div className={css.title}>{devSite.street}</div>
           <div className={css.subtitle}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
 
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />

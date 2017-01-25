@@ -54,6 +54,10 @@ class DevSite < ActiveRecord::Base
   validates :ward_name, presence: { message: 'Ward name is required' }
   validates :ward_num, presence: { message: 'Ward number is required' }, numericality: true
 
+  after_create do
+    Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?
+  end
+
   def self.search(search_params)
     @dev_sites = DevSite.all
     @search_params = search_params
@@ -71,13 +75,18 @@ class DevSite < ActiveRecord::Base
 
   def status_date
     return if statuses.empty?
-    return nil unless statuses.order('status_date DESC').first.status_date
-    statuses.order('status_date DESC').first.status_date.strftime('%B %e, %Y')
+    return nil unless statuses.current.status_date
+    statuses.current.status_date.strftime('%B %e, %Y')
+  end
+
+  def street
+    return if addresses.empty?
+    addresses.first.street
   end
 
   def address
     return if addresses.empty?
-    [addresses.first.street, addresses.first.city, addresses.first.province_state].delete_if(&:blank?).join(', ')
+    addresses.first.full_address(with_country: false)
   end
 
   def latitude
@@ -96,26 +105,14 @@ class DevSite < ActiveRecord::Base
     ActionController::Base.helpers.image_path('mainbg.jpg')
   end
 
-  def update_sentiment(comment_sentiment)
-
-    update({
-      anger_total: comment_sentiment.anger + anger_total,
-      joy_total: comment_sentiment.joy + joy_total,
-      fear_total: comment_sentiment.fear + fear_total,
-      sadness_total: comment_sentiment.sadness + sadness_total,
-      disgust_total: comment_sentiment.disgust + disgust_total
-    })
+  def update_sentiment
+    sentiment_totals = calculate_sentiment_totals
+    sentiment_averages = calculate_sentiment_averages(sentiment_totals)
 
     create_sentiment if sentiment.blank?
-    comments_count = comments.count
 
-    sentiment.update({
-      anger: anger_total/comments_count,
-      joy: joy_total/comments_count,
-      fear: fear_total/comments_count,
-      sadness: sadness_total/comments_count,
-      disgust: disgust_total/comments_count
-    })
+    update(sentiment_totals)
+    sentiment.update(sentiment_averages)
   end
 
   def self.find_ordered(ids)
@@ -128,11 +125,36 @@ class DevSite < ActiveRecord::Base
     where(id: ids).order(order_clause)
   end
 
-  after_create do
-    Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?
+  private
+
+  def calculate_sentiment_totals
+    sentiment_totals = {}
+    dev_site_comments = comments.includes(:sentiment)
+
+    Sentiment::NAMES.each do |s_name|
+      total_method_name = "#{s_name}_total"
+      sentiment_totals[total_method_name] = sum_of_comments_sentiment(dev_site_comments, s_name)
+    end
+
+    sentiment_totals
   end
 
-  private
+  def calculate_sentiment_averages(sentiment_totals)
+    sentiment_averages = {}
+    comments_count = comments.count
+
+    Sentiment::NAMES.each do |s_name|
+      total_method_name = "#{s_name}_total"
+      average_for_sentiment = sentiment_totals[total_method_name] / comments_count
+      sentiment_averages[s_name] = average_for_sentiment
+    end
+
+    sentiment_averages
+  end
+
+  def sum_of_comments_sentiment(dev_site_commments, s_name)
+    dev_site_commments.inject(0.0) { |acc, elem| acc + elem.sentiment.send(s_name) }
+  end
 
   def streetview_image
     root_url = 'https://maps.googleapis.com/maps/api/streetview'

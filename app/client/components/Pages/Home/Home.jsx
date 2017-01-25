@@ -55,23 +55,11 @@ export default class Home extends Component {
       <div>
         <Header />
         <div className={css.landingContainer}>
-          <div>
-            <div>
-            <h1>Milieu</h1>
-            <h3>{i18n.heroText1}</h3>
-            </div>
-              <div>
-                <br />
-                <br />
-                <p>{i18n.heroText2}</p>
-                <a href='http://about.milieu.io/' className={css.signUpButton}>{i18n.launchProject}</a>
-              </div>
-          </div>
-
-          <div className={`hide-on-small-only ${css.callToAction}`}>
-
-          </div>
-
+          <h1>Milieu</h1>
+          <h3>{i18n.heroText1}</h3>
+          <br/>
+          <p>{i18n.heroText2}</p>
+          <a href='http://about.milieu.io/' className={css.signUpButton}>{i18n.launchProject}</a>
         </div>
         <div className={css.searchContainer}>
           <h2 className={css.title}>{i18n.title}</h2>

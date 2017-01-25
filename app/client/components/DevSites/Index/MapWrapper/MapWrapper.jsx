@@ -13,17 +13,22 @@ import Header from '../../../Layout/Header/Header'
 export default class MapWrapper extends Component {
   constructor(props) {
     super(props);
+    const devSiteMap = document.querySelector('#dev-site-map');
+    const { userLongitude, userLatitude } = devSiteMap.dataset;
 
-    this.state = { page: parseInt(getParameterByName('page')) || 0,
+    this.state = {
+                   loading: true,
+                   page: parseInt(getParameterByName('page')) || 0,
                    devSites: [],
-                   latitude: getParameterByName('latitude') || 45.42435419303618,
-                   longitude: getParameterByName('longitude') || -75.68289194238083,
+                   latitude: getParameterByName('latitude') || userLatitude || 45.42435419303618,
+                   longitude: getParameterByName('longitude') || userLongitude || -75.68289194238083,
                    zoom: getParameterByName('zoom') || 12.5,
                    ward: getParameterByName('ward'),
                    status: getParameterByName('status'),
                    year: getParameterByName('year'),
                    activeDevSiteId: getParameterByName('activeDevSiteId'),
-                   isMobile: (window.innerWidth < 992) };
+                   isMobile: (window.innerWidth < 992)
+                 };
 
     this.search_and_sort = () => this._search_and_sort();
     this.loadDevSites = () => this._loadDevSites();
@@ -48,13 +53,17 @@ export default class MapWrapper extends Component {
   _loadDevSites() {
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
     $.getJSON(`/dev_sites`, this.params(), json => {
-      this.setState({ devSites: (json.dev_sites || []), total: json.total }, scrollToTop);
+      this.setState({ devSites: (json.dev_sites || []), total: json.total, loading: false }, scrollToTop);
     });
   }
   _search_and_sort() {
     const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
+    this.setState({ loading: true });
     $.getJSON(`/dev_sites`, this.params(), json => {
-      this.setState({ page: 0, devSites: (json.dev_sites || []), total: json.total }, scrollToTop);
+      if(json.dev_sites && (!this.state.longitude || !this.state.latitude)) {
+        this.setState({ longitude: json.dev_sites[0].longitude, latitude: json.dev_sites[0].latitude });
+      }
+      this.setState({ page: 0, devSites: (json.dev_sites || []), total: json.total, loading: false }, scrollToTop);
     });
   }
   render() {

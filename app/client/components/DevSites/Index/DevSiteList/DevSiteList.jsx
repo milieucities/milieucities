@@ -61,7 +61,7 @@ export default class DevSiteList extends Component {
     return(
       <div className={css.container}>
         {
-          this.props.devSites.length === 0 &&
+          this.props.devSites.length === 0 && !this.props.loading &&
           <div className={css.empty}>
             <h3>{i18n.cantFind}</h3>
             <div className={css.inputSuggestion}>
@@ -93,11 +93,14 @@ export default class DevSiteList extends Component {
                               className={this.props.activeDevSiteId == devSite.id ? css.activeitem : css.item}
                               key={devSite.id}
                   >
-                    <h3 className={css.address}>{devSite.address}</h3>
-                    <div className={css.info}>{devSite.devID}</div>
-                    <div className={css.info}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
-                    <div className={css.info} dangerouslySetInnerHTML={{__html: devSite.status}}></div>
-                    <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
+                    <img src={devSite.image_url} className={css.previewImage} />
+                    <div className={css.infoContainer}>
+                      <h3 className={css.address}>{devSite.street}</h3>
+                      <div className={css.info}>{devSite.devID}</div>
+                      <div className={css.info}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
+                      <div className={css.info} dangerouslySetInnerHTML={{__html: devSite.status}}></div>
+                      <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
+                    </div>
                   </a>
                 )
               })

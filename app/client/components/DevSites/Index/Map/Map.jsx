@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import css from './map.scss'
-import WARD_GEO_JSON from './ottawa_ward.geojson'
+import OTTAWA_WARD_GEO_JSON from './ottawa_ward.geojson'
+import GUELPH_WARD_GEO_JSON from './guelph_ward.geojson'
 import { replace } from 'lodash'
 
 export default class Map extends Component {
@@ -31,7 +32,7 @@ export default class Map extends Component {
       map.flyTo({ center: [longitude, latitude] })
     }
 
-    const features = map.querySourceFeatures('devSites', {filter: ['==', 'id', hoverdDevSiteId]});
+    const features = map.querySourceFeatures('devSites', { filter: ['==', 'id', hoverdDevSiteId] });
     if(!features.length) {
       popup.remove();
       return;
@@ -47,13 +48,13 @@ export default class Map extends Component {
     const map = this.map = new mapboxgl.Map({
       container: 'main-map',
       style: 'mapbox://styles/mtuck063/cim8gs43500449lm1hv082tp2',
-      center: [(longitude || -75.68289194238083) , (latitude || 45.42435419303618)],
+      center: [longitude, latitude],
       zoom: 12.5
     });
     map.dragRotate.disable();
     map.touchZoomRotate.disableRotation();
     map.scrollZoom.disable();
-    map.addControl(new mapboxgl.Navigation({position: 'top-left'}));
+    map.addControl(new mapboxgl.Navigation({ position: 'top-left' }));
     map.on('load', this.loadMap);
 
     const popup = this.popup = new mapboxgl.Popup({
@@ -113,7 +114,7 @@ export default class Map extends Component {
               title: devSite.title,
               address: devSite.address,
               'marker-symbol': 'consultation',
-              description: `<b>${devSite.address}</b>
+              description: `<b>${devSite.street}</b>
                             <br/>${replace(devSite.application_type, /coa/, 'Committee of Adjustment')}
                             <br/>${devSite.status}`
             }
@@ -131,7 +132,7 @@ export default class Map extends Component {
     }
 
     map.addSource('devSites', this.geoJsonBuilder());
-    if(latitude && longitude){
+    if(latitude && longitude) {
       map.flyTo({ center: [longitude, latitude] });
     }
   }
@@ -145,7 +146,31 @@ export default class Map extends Component {
 
     map.addSource('wards', {
       'type': 'geojson',
-      'data': WARD_GEO_JSON
+      'data': OTTAWA_WARD_GEO_JSON
+    });
+
+    map.addSource('guelph-wards', {
+      type: 'geojson',
+      'data': GUELPH_WARD_GEO_JSON
+    });
+
+    map.addLayer({
+      'id': 'guelph-fill-wards',
+      'type': 'fill',
+      'source': 'guelph-wards',
+      'paint': {
+        'fill-color': '#3E6880',
+        'fill-opacity': 0.3
+      }
+    });
+
+    map.addLayer({
+      'id': 'guelph-line-wards',
+      'type': 'line',
+      'source': 'guelph-wards',
+      'paint': {
+        'line-color': '#3E6880'
+      }
     });
 
     map.addLayer({

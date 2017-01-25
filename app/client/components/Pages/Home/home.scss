@@ -9,9 +9,6 @@
   background-size: cover;
   color: $white;
   text-shadow: 5px 5px 10px $black;
-  display: flex;
-  align-items: left;
-  justify-content: flex-end;
 
   > div {
     height: 300px;
@@ -122,7 +119,7 @@
 
   .search {
     max-width: 280px;
-    width: 100%;
+    width: calc(100% - 20px);
     margin: 0 auto;
     padding-top: 40px;
     position: relative;
@@ -138,6 +135,10 @@
       box-shadow: 2px 2px 5px 0 $gray;
       background-color: $light-gray;
       margin-left: -100px;
+
+      @media #{$small-and-down} {
+        padding-right: 115px;
+      }
 
       &:focus {
         box-shadow: 2px 2px 5px 0 $secondary-color;

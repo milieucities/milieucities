@@ -3,20 +3,44 @@
 [![Codeship Status for Milieucitiesrepo/m-server](https://codeship.com/projects/35ebcc50-1fd6-0134-d851-7a39504521c1/status?branch=master)](https://codeship.com/projects/160460)
 
 ### Installation & Usage
+#### Start dev env without docker compose
 
 1. Clone the repository to your local machine: `git clone https://github.com/Milieucities/m-server`.
 
 2. Bundle the gemfile `bundle install`. Note you may have to install bundler `gem install bundler`.
 
-3. Set up your `database.yml` to configure with postgres and run `rake db:create && rake db:migrate`.
+3. a(Optional) Either download and start up a postgre db
 
-4. Install node packages `npm install`.
+   b(Optional) Or start up a docker postgres db with command if you familiar with docker
 
-4. You're done! Run `foreman start` or `heroku local` and you're ready to start developing!
+   ```docker run --name postgresDb -p 5432:5432 -e POSTGRES_PASSWORD=somepassword -d postgres````
 
-### Quick Start with Docker (DEVELOPMENT ONLY)
+   where `somepassword` is the password you use for postgres and set in the `config/database.yml` file
+   in Step 4
 
-1. Install Docker
+   When ever you want to nuke the postgres db, run
+
+   ```docker stop postgresDb && docker rm postgresDb```
+
+4. Set up your `config/database.yml` to configure with postgres and run `rake db:create && rake db:migrate`.
+
+5. a(Optional) Either download and start up a redis
+
+   b(Optional) Or start up a docker redis with command if you familiar with docker
+
+   ```docker run --name redis -p 6379:6379 -d redis````
+
+   When ever you want to nuke the postgres db, run
+
+   ```docker stop redis && docker rm redis```
+
+5. Install node packages `npm install`.
+
+6. You're done! Run `foreman start` or `heroku local` and you're ready to start developing!
+
+### Start dev env with docker compose (Temporarily not work)
+
+1. Install Docker on Mac, Linux or Windows 10 (Windows 7, 8 installation is pretty complex)
 
 2. Clone the repository to your local machine: `git clone https://github.com/Milieucities/m-server`.
 

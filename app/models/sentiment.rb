@@ -1,9 +1,12 @@
 class Sentiment < ActiveRecord::Base
   belongs_to :sentimentable, polymorphic: true
 
+  NAMES = [:anger, :joy, :fear, :sadness, :disgust].freeze
+
   def update_sentiment(text)
     params = { outputMode: 'json', text: text }.to_param
-    uri = URI("https://gateway-a.watsonplatform.net/calls/text/TextGetEmotion?apikey=#{ENV['WATSON_ALCHEMY_KEY']}&#{params}")
+    base_uri = 'https://gateway-a.watsonplatform.net/calls/text/TextGetEmotion'
+    uri = URI("#{base_uri}?apikey=#{ENV['WATSON_ALCHEMY_KEY']}&#{params}")
     req = Net::HTTP::Post.new(uri)
     req['Accept-Encoding'] = 'deflate'
 

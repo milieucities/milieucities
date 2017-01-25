@@ -8,8 +8,9 @@ const i18n = new LocalizedStrings({
     whatDoYouThink: "What do you think?",
     failedToVote: "Failed to vote on comment.",
     anoymous: "Anonymous",
-    readMore: "Read More..."
-
+    readMore: "Read More...",
+    delete: 'delete',
+    edit: 'edit'
   },
   fr: {
     signInToComment: "Se connecter pour commenter",
@@ -18,7 +19,9 @@ const i18n = new LocalizedStrings({
     whatDoYouThink: "Qu'est-ce que tu penses?",
     failedToVote: "Vote échoué",
     anoymous: "Anonyme",
-    readMore: "Lire la suite..."
+    readMore: "Lire la suite...",
+    delete: 'supprimer',
+    edit: 'modifier'
   }
 });
 

@@ -37,7 +37,6 @@ class Profile < ActiveRecord::Base
   validates :name, presence: { message: 'Name is required' }
   validates :organization, presence: true, if: :verification_requested?
   validates :community_role, presence: true, if: :verification_requested?
-  validates :name, presence: true, if: :verification_requested?
   validates :bio, presence: true, if: :verification_requested?
   validates :accepted_terms, acceptance: { accept: true, message: 'Terms of use must be accepted' }
 

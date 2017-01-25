@@ -3,6 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'csv'
 require 'rails/all'
 
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -27,7 +28,7 @@ module MilieuServer
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       html_tag
     }
-    
+
     # Rspec
     config.generators do |g|
       g.test_framework :rspec, fixture: true
