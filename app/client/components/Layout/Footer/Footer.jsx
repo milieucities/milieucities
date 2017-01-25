@@ -95,7 +95,9 @@ export default class Footer extends Component {
             </div>
           </div>
         </div>
-        <a href='#' onClick={this.goTop} className={css.skip} title='To the top'><i className='fa fa-arrow-up'></i></a>
+        <div>
+          <a href='#' onClick={this.goTop} className={css.skip} title='To the top'><i className='fa fa-arrow-up'></i></a>
+        </div>
       </div>
     );
   }
