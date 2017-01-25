@@ -292,7 +292,7 @@ class Comment extends Component {
     const { comment } = this.props;
     const { readMoreClicked, showReadMore } = this.state;
     const { locale } = document.body.dataset;
-    const userOwnsComment = comment.user.id == this.currentUserId;
+    const userOwnsComment = (comment.user && comment.user.id == this.currentUserId);
     i18n.setLanguage(locale);
     return(
       <div className={css.comment}>
