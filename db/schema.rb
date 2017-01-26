@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126214822) do
+ActiveRecord::Schema.define(version: 20170126221443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20170126214822) do
     t.float    "fear_total",            default: 0.0
     t.float    "sadness_total",         default: 0.0
     t.integer  "municipality_id"
+    t.integer  "ward_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -239,6 +240,15 @@ ActiveRecord::Schema.define(version: 20170126214822) do
   add_index "votes", ["comment_id"], name: "index_votes_on_comment_id", using: :btree
   add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
+  create_table "wards", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "municipality_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "wards", ["municipality_id"], name: "index_wards_on_municipality_id", using: :btree
+
   add_foreign_key "conversations", "users"
   add_foreign_key "likes", "dev_sites"
   add_foreign_key "likes", "users"
@@ -246,4 +256,5 @@ ActiveRecord::Schema.define(version: 20170126214822) do
   add_foreign_key "profiles", "users"
   add_foreign_key "votes", "comments"
   add_foreign_key "votes", "users"
+  add_foreign_key "wards", "municipalities"
 end
