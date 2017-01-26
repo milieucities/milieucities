@@ -9,6 +9,12 @@ class Comment < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   validates :body, presence: { message: 'Comment is required' }
 
+  after_save do
+    Resque.enqueue(UpdateCommentSentimentJob, id) unless Rails.env.test?
+  end
+
+  after_destroy :update_dev_site_sentiment
+
   def voted_up(current_user)
     !current_user.new_record? && vote_direction(current_user, :up)
   end
@@ -26,11 +32,11 @@ class Comment < ActiveRecord::Base
   def set_sentiment
     create_sentiment if sentiment.blank?
     sentiment.update_sentiment(body)
-    commentable.update_sentiment(sentiment) if commentable_type.eql?('DevSite')
+    update_dev_site_sentiment
   end
 
-  after_save do
-    Resque.enqueue(UpdateCommentSentimentJob, id) unless Rails.env.test?
+  def update_dev_site_sentiment
+    commentable.update_sentiment if commentable_type.eql?('DevSite')
   end
 
   private

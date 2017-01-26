@@ -6,7 +6,7 @@ node :total do
   @total
 end
 
-child(:user) do
+child :user do
   attributes :id, :anonymous_comments, :name
 end
 

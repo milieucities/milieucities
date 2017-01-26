@@ -61,7 +61,7 @@ export default class DevSiteList extends Component {
     return(
       <div className={css.container}>
         {
-          this.props.devSites.length === 0 &&
+          this.props.devSites.length === 0 && !this.props.loading &&
           <div className={css.empty}>
             <h3>{i18n.cantFind}</h3>
             <div className={css.inputSuggestion}>

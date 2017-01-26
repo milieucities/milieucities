@@ -15,7 +15,7 @@ child(:comments) do
   end
 
   child(:user) do
-    attributes :first_name, :last_name, :username, :name,  :email, :name
+    attributes :id, :anonymous_comments, :name
   end
 
 end
