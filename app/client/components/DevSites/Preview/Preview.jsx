@@ -115,8 +115,8 @@ export default class extends Component {
 
               <linearGradient id='gradients'>
                 <stop offset='0' stopColor='#92c7c6' />
-                <stop offset='0.4' stopColor='#ddd' />
-                <stop offset='1' stopColor='#ddd'/>
+                {devSite.general_status == 'Active Development' && <stop offset='0.4' stopColor='#ddd' />}
+                {(devSite.general_status == 'Comment Period' || devSite.general_status == 'Active Development') && <stop offset='1' stopColor='#ddd'/>}
               </linearGradient>
 
               <rect height='40' width='100%' fill='url(#gradients)' mask='url(#circles)'></rect>
