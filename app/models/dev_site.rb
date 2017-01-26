@@ -37,6 +37,7 @@ class DevSite < ActiveRecord::Base
     'Additions'
   ].freeze
 
+  belongs_to :municipality
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
   has_one  :sentiment, as: :sentimentable, dependent: :destroy
@@ -53,6 +54,7 @@ class DevSite < ActiveRecord::Base
   validates :description, presence: { message: 'Description is required' }
   validates :ward_name, presence: { message: 'Ward name is required' }
   validates :ward_num, presence: { message: 'Ward number is required' }, numericality: true
+  validates :municipality_id, presence: { message: 'Municipality is required' }
 
   after_create do
     Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?
