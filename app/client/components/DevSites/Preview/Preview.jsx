@@ -135,7 +135,23 @@ export default class extends Component {
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
             <svg height='40' width='100%'>
-              <circle r='10' />
+              <mask id='circles'>
+                <circle cx='10%' cy='20' r='15' fill='#aaa' />
+                <circle cx='50%' cy='20' r='15' fill='#aaa' />
+                <circle cx='90%' cy='20' r='15' fill='#aaa' />
+                <circle cx='10%' cy='20' r='10' fill='#fff' />
+                <circle cx='50%' cy='20' r='10' fill='#fff' />
+                <circle cx='90%' cy='20' r='10' fill='#fff' />
+                <line x1='10%' x2='90%' y1='20' y2='20' stroke='#fff' strokeWidth='2' />
+              </mask>
+
+              <linearGradient id='gradients'>
+                <stop offset='0' stopColor='#92c7c6' />
+                {devSite.general_status == 'Active Development' && <stop offset='0.4' stopColor='#ddd' />}
+                {(devSite.general_status == 'Comment Period' || devSite.general_status == 'Active Development') && <stop offset='1' stopColor='#ddd'/>}
+              </linearGradient>
+
+              <rect height='40' width='100%' fill='url(#gradients)' mask='url(#circles)'></rect>
             </svg>
             <h3 className={css.address}>{devSite.address}</h3>
             <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }} tabIndex='-1'></div>

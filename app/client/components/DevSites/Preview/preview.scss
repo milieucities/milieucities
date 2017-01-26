@@ -390,9 +390,12 @@
   width: 600px;
   height: 175px;
   display: flex;
-  border: 1px solid $gray;
+  border: 1px solid $light-gray;
   overflow: hidden;
   position: relative;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 10px;
 
   @media #{$small-and-down} {
     width: 100%;
@@ -436,6 +439,8 @@
     box-sizing: border-box;
     padding: 10px;
     width: 100%;
+    height: calc(100% - 10px);
+    overflow: hidden;
 
     .address {
       font-weight: 700;
