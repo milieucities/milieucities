@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+    def previous_url
+      request.referrer
+    end
+
   def page_number
     params[:page].present? ? params[:page].to_i : 0
   end
