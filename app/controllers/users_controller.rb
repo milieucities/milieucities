@@ -24,7 +24,6 @@ class UsersController < ApplicationController
 
   def create
     if @user.save
-      @prev_path = previous_url
       session[:user_id] = @user.id
       redirect_to root_path, notice: t('sessions.notice.welcome')
     else
@@ -48,10 +47,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def previous_url
-    request.path
-  end
 
   def load_user
     @user = User.find_by(slug: params[:slug])
