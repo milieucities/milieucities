@@ -5,7 +5,7 @@ class DataMigrationDevSiteToMunicipalities < ActiveRecord::Migration
 
     DevSite.includes(:addresses).each do |dev_site|
       if dev_site.addresses.present?
-        if dev_site.addresses.first.province_state.eql? 'Guelph'
+        if dev_site.addresses.first.city.eql? 'Guelph'
           dev_site.update(municipality_id: guelph_municipality.id)
         else
           dev_site.update(municipality_id: ottawa_municipality.id)
