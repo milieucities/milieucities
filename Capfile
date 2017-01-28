@@ -4,10 +4,10 @@ require 'capistrano/deploy'
 
 require 'capistrano/rails'
 require 'capistrano/rvm'
-require 'capistrano3/unicorn'
-require "capistrano/scm/git"
+require 'capistrano-resque'
+require 'capistrano/scm/git'
 
 install_plugin Capistrano::SCM::Git
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
-Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
+Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
