@@ -36,4 +36,8 @@ class DataMigrationAddAllOttawaAndGuelphWards < ActiveRecord::Migration
     Ward.find_or_create_by(name: 'Ward 5', municipality_id: guelph_municipality.id)
     Ward.find_or_create_by(name: 'Ward 6', municipality_id: guelph_municipality.id)
   end
+
+  def down
+    raise ActiveRecord::IrreversibleMigration
+  end
 end
