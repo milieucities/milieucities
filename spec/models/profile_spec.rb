@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Profile do
-  let(:new_profile) { FactoryGirl.build(:profile) }
+  let(:new_profile) { build(:profile) }
 
   describe 'model validations' do
     it 'should have a valid factory' do
