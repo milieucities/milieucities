@@ -15,4 +15,8 @@ class DataMigrationDevSiteToMunicipalities < ActiveRecord::Migration
       end
     end
   end
+
+  def down
+    raise ActiveRecord::IrreversibleMigration
+  end
 end
