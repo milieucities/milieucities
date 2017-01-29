@@ -5,11 +5,13 @@ const i18n = new LocalizedStrings({
     dashboard: 'Dashboard',
     settings: 'Account Settings',
     notification: 'Notifications',
+    organizations: 'Organizations',
   },
   fr: {
     dashboard: 'Tableau de bord',
     settings: 'Paramètres du compte',
     notification: 'Notifications',
+    organizations: 'Organisations',
   }
 });
 

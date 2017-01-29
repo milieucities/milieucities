@@ -7,7 +7,8 @@ export default class ProfileMenu extends Component {
     const sections = [
       { title: 'dashboard', path: '' },
       { title: 'settings', path: '/edit' },
-      { title: 'notification', path: '/notification/edit' }
+      { title: 'notification', path: '/notification/edit' },
+      { title: 'organizations', path: '/organizations' },
     ]
     const locale = document.body.dataset.locale
     const userSlug = document.body.dataset.userSlug

@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       resource :profile, only: [:edit, :update, :show]
       resource :notification, only: [:edit, :update, :show]
       resources :votes, only: [:create, :destroy]
+      resources :organizations, only: [:index, :create, :destroy, :update]
     end
     resources :sessions, only: [:new, :create, :destroy]
   end
@@ -44,7 +45,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/login', to: 'authentication#authenticate'
-      #Authentication Example
+      # Authentication Example
       resources :dev_sites, only: [:index]
     end
   end

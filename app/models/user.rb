@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   has_one :address, as: :addressable, dependent: :destroy
   has_many :comments
+  has_many :memberships
+  has_many :organizations, through: :memberships
   accepts_nested_attributes_for :profile
   accepts_nested_attributes_for :address
 
