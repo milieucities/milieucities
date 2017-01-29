@@ -105,6 +105,8 @@ class DevSitesController < ApplicationController
       .permit(
         :devID,
         :application_type,
+        :municipality_id,
+        :ward_id,
         :title,
         :images_cache,
         :files_cache,

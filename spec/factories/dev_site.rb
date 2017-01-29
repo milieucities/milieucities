@@ -5,5 +5,7 @@ FactoryGirl.define do
     description { FFaker::DizzleIpsum.sentence }
     ward_name { FFaker::Name.name }
     ward_num 13
+    municipality_id 1
+    ward_id 1
   end
 end
