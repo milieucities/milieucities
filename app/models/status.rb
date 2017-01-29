@@ -81,7 +81,7 @@ class Status < ActiveRecord::Base
 
   def general_status
     GENERAL_STATUS.each do |key, array|
-      return key if GENERAL_STATUS[key].include? status
+      return key.to_s if GENERAL_STATUS[key].include? status
     end
     return 'Comment Period Closed'
   end
