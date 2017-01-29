@@ -8,9 +8,9 @@ set :use_sudo, false
 set :deploy_via, :remote_cache
 set :ssh_options, { forward_agent: true }
 set :keep_releases, 5
+set :rvm_ruby_version, '2.3.0'
 set :pty, true
 set :linked_files, fetch(:linked_files, []).push('config/database.yml')
-set :workers, { '*' => 5 }
 set :resque_environment_task, true
 
 task :npm_install do
@@ -34,18 +34,4 @@ task :restart_unicorn do
 end
 after 'deploy:published', 'restart_unicorn'
 
-# task :kill_resque do
-#   on roles(:web) do
-#     execute "kill $(ps aux | grep 'resque' | awk '{print $2}')"
-#   end
-# end
-# after 'restart_unicorn', 'kill_resque'
-#
-# namespace :deploy do
-#   task :start_resque do
-#     on roles(:web) do
-#       execute "cd #{deploy_to}; bundle exec rake resque:work QUEUE='*' PIDFILE=./tmp/pids/resque.pid BACKGROUND=yes env TERM_CHILD=1"
-#     end
-#   end
-# end
-# after 'kill_resque', 'deploy:start_resque'
+after 'deploy:published', 'resque:restart'
