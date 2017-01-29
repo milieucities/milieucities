@@ -72,9 +72,14 @@ class DevSite < ActiveRecord::Base
     @dev_sites
   end
 
+  def general_status
+    return if statuses.empty?
+    statuses.current.general_status
+  end
+
   def status
     return if statuses.empty?
-    statuses.order('status_date DESC').first.status
+    statuses.current.status
   end
 
   def status_date
