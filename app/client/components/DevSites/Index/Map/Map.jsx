@@ -169,7 +169,7 @@ export default class Map extends Component {
       'type': 'line',
       'source': 'guelph-wards',
       'paint': {
-        'line-color': '#3E6880'
+        'line-color': '#3A7496'
       }
     });
 
@@ -188,7 +188,7 @@ export default class Map extends Component {
       'type': 'line',
       'source': 'wards',
       'paint': {
-        'line-color': '#3E6880'
+        'line-color': '#3A7496'
       }
     });
 
