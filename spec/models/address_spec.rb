@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Address do
-  let(:new_address) { FactoryGirl.create(:address) }
+  let(:new_address) { create(:address) }
 
   describe '#new_street?' do
     it 'should return true when street has changed' do
@@ -58,7 +58,7 @@ describe Address do
 
     context 'missing address attributes' do
       it 'should generate an address string with street missing' do
-        incomplete_address = FactoryGirl.build(:address, street: '')
+        incomplete_address = build(:address, street: '')
 
         expected_address = "#{incomplete_address.city.strip}, #{incomplete_address.province_state}, #{incomplete_address.country}"
 
@@ -66,7 +66,7 @@ describe Address do
       end
 
       it 'should generate an address string with city missing' do
-        incomplete_address = FactoryGirl.build(:address, city: '')
+        incomplete_address = build(:address, city: '')
 
         expected_address = "#{incomplete_address.street}, #{incomplete_address.province_state}, #{incomplete_address.country}"
 
@@ -74,7 +74,7 @@ describe Address do
       end
 
       it 'should generate an address string with province_state missing' do
-        incomplete_address = FactoryGirl.build(:address, province_state: '')
+        incomplete_address = build(:address, province_state: '')
 
         expected_address = "#{incomplete_address.street}, #{incomplete_address.city.strip}, #{incomplete_address.country}"
 
@@ -82,7 +82,7 @@ describe Address do
       end
 
       it 'should generate an address string with country missing' do
-        incomplete_address = FactoryGirl.build(:address, country: '')
+        incomplete_address = build(:address, country: '')
 
         expected_address = "#{incomplete_address.street}, #{incomplete_address.city.strip}, #{incomplete_address.province_state}"
 
