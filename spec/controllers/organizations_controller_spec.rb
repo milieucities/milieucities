@@ -1,98 +1,110 @@
 require 'spec_helper'
 
 describe OrganizationsController do
-  let(:user) { create(:user) }
+  let(:admin_user) { create(:admin_user) }
   let(:other_user) { create(:user) }
-  let(:org1) { create(:organization) }
-  let(:org2) { create(:organization) }
-  let(:org3) { create(:organization) }
+  let(:organization) { create(:organization) }
 
-  before :each do
-    user.memberships.create(organization_id: org1.id, admin: true)
-    user.memberships.create(organization_id: org2.id, admin: false)
-    other_user.memberships.create(organization_id: org3.id, admin: false)
-    sign_in user
-  end
-
-  describe '#index' do
-    it 'should render index template for html request' do
-      get :index, user_slug: user.slug
-
-      expect(response).to render_template(:index)
+  context 'user is authorized' do
+    before :each do
+      sign_in admin_user
     end
 
-    it 'should return user organizations as json for json request' do
-      get :index, user_slug: user.slug, format: :json
+    describe '#index' do
+      before :each do
+        @org1 = create(:organization)
+        @org2 = create(:organization)
+      end
 
-      result = JSON.parse(response.body)
+      it 'should render index template for html request' do
+        get :index
 
-      expect(result.count).to eq(2)
-      expect(result[0]['name']).to eq(org1.name)
-      expect(result[1]['name']).to eq(org2.name)
-    end
-  end
+        expect(assigns(:organizations)).to eq([@org1, @org2])
+        expect(response).to render_template(:index)
+      end
 
-  describe '#show' do
-    it 'should return organization members as json' do
-      get :show, user_slug: user.slug, id: org1.id, format: :json
+      it 'should render index template for json request' do
+        get :index, format: :json
 
-      result = JSON.parse(response.body)
-
-      expect(result['members'].count).to eq(1)
-      expect(result['members'][0]['email']).to eq(user.email)
-    end
-  end
-
-  describe '#create' do
-    let(:valid_params) { attributes_for(:organization) }
-
-    context 'valid params' do
-      it 'should create organization with current user as admin' do
-        post :create, user_slug: user.slug, organization: valid_params, format: :json
-
-        new_organization = user.organizations.last
-        membership = new_organization.memberships.last
-
-        expect(response.status).to eq(201)
-        expect(new_organization.name).to eq(valid_params[:name])
-        expect(membership.user_id).to eq(user.id)
-        expect(membership.admin).to be true
+        expect(assigns(:organizations)).to eq([@org1, @org2])
+        expect(response).to render_template(:index)
       end
     end
 
-    context 'invalid params' do
-      it 'should return the error message' do
-        post :create, user_slug: user.slug, organization: { name: '' }, format: :json
+    describe '#show' do
+      it 'should return organization members as json' do
+        get :show, id: organization.id, format: :json
 
-        expect(response.status).to eq(422)
+        expect(assigns(:organization)).to eq(organization)
+        expect(response).to render_template(:show)
+      end
+    end
+
+    describe '#create' do
+      let(:valid_params) { attributes_for(:organization) }
+
+      context 'valid params' do
+        it 'should create organization with current user as admin' do
+          post :create, organization: valid_params, format: :json
+
+          expect(response.status).to eq(201)
+          expect(assigns(:organization).name).to eq(valid_params[:name])
+        end
+      end
+
+      context 'invalid params' do
+        it 'should return the error message' do
+          post :create, organization: { name: '' }, format: :json
+
+          expect(response.status).to eq(422)
+        end
+      end
+    end
+
+    describe '#destroy' do
+      it 'should delete the organization' do
+        delete :destroy, id: organization.id, format: :json
+
+        expect { organization.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
 
-  describe '#update' do
-    context 'valid params' do
-      it 'should add the user to the organization' do
-        valid_params = { user: { email: other_user.email } }
-
-        patch :update, user_slug: user.slug, id: org1.id, organization: valid_params
-
-        expect(response.status).to eq(200)
-        expect(org3.users).to include(other_user)
-      end
+  context 'user is not authorized' do
+    before do
+      sign_in other_user
     end
 
-    context 'email is not associated with any user account' do
-      it 'should return an error message' do
-        invalid_params = { user: { email: 'random@email.com' } }
+    it '#index should redirect to root path when html request' do
+      get :index
 
-        patch :update, user_slug: user.slug, id: org1.id, organization: invalid_params
+      expect(response).to redirect_to(root_path)
+    end
 
-        result = JSON.parse(response.body)
-        expected_message = 'There is no user with this email address'
+    it '#index should redirect to root path when json request' do
+      get :index, format: :json
 
-        expect(response.status).to eq(200)
-        expect(result['message']).to eq(expected_message)
-      end
+      expect(response.status).to eq(403)
+    end
+
+    it '#show should return unauthorized status' do
+      get :show, id: organization.id, format: :json
+
+      expect(response.status).to eq(403)
+    end
+
+    it '#create should return unauthorized status' do
+      params = attributes_for(:organization)
+
+      post :create, organization: params, format: :json
+
+      expect(response.status).to eq(403)
+    end
+
+    it '#destroy should return unauthorized status' do
+      delete :destroy, id: organization.id, format: :json
+
+      expect(response.status).to eq(403)
     end
   end
 end

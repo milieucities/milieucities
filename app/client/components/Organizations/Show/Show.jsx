@@ -14,20 +14,20 @@ export default class Show extends Component {
   }
 
   _loadMembers() {
-    const url = `/users/${this.userSlug}/organizations/${this.props.organization.id}`
+    const url = `/organizations/${this.props.organization.id}`
     $.getJSON(url,
-      data => this.setState({ members: JSON.parse(data.members), loading: false })
+      organization => this.setState({ members: organization.users, loading: false })
     );
   }
 
   _addMemberToOrganization(e) {
-    const email = document.getElementById('member_email').value
+    const email = document.getElementById('user_email').value
 
     $.ajax({
-      url: `/users/${this.userSlug}/organizations/${this.props.organization.id}`,
+      url: `/organizations/${this.props.organization.id}/memberships`,
       dataType: 'JSON',
-      type: 'PATCH',
-      data: { organization: { user: { email } } },
+      type: 'POST',
+      data: { membership: { user: { email } } },
       success: res => {
         if (res.status === 'unprocessable_entity') {
           window.flash('alert', res.message);
@@ -53,8 +53,8 @@ export default class Show extends Component {
             <div className='row'>
               <TextInputWithLabel
                 classes='col s12 m12 l12'
-                id='member_email'
-                name='organization[member_attributes][email]'
+                id='user_email'
+                name='user[email]'
                 label="Email address"
               />
             </div>
@@ -71,14 +71,20 @@ export default class Show extends Component {
             </div>
           </div>
         </div>
+        {
+          !this.state.loading && this.state.members.length > 0 &&
           <div className="organization-members">
             <h3>Members</h3>
-            { !this.state.loading &&
+            {
               this.state.members.map((member, index) => (
-                <p key={index}>{member.email}</p>
+                <p key={index}>
+                  {member.email}
+                  {member.admin && <span> (admin) </span>}
+                </p>
               ))
             }
           </div>
+        }
       </div>
     )
   }

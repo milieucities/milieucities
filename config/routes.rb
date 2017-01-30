@@ -36,9 +36,11 @@ Rails.application.routes.draw do
       resource :profile, only: [:edit, :update, :show]
       resource :notification, only: [:edit, :update, :show]
       resources :votes, only: [:create, :destroy]
-      resources :organizations, only: [:index, :show, :create, :destroy, :update]
     end
     resources :sessions, only: [:new, :create, :destroy]
+    resources :organizations, only: [:index, :show, :create, :destroy] do
+      resources :memberships, only: [:create, :destroy]
+    end
   end
 
   # Backend API Routing

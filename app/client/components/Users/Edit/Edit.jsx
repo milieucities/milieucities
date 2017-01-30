@@ -153,7 +153,7 @@ export default class Edit extends Component {
         />
         <div className={css.container}>
           <div className='container'>
-            <ProfileMenu active='settings' />
+            <ProfileMenu active='dashboard' user={user} />
             {
               loading &&
               <div className='loading-screen'>

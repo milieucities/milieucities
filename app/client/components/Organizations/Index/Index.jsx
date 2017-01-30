@@ -31,7 +31,7 @@ export default class Index extends Component {
   }
 
   _loadOrganizations() {
-    $.getJSON(`/users/${this.userSlug}/organizations`,
+    $.getJSON(`/organizations`,
       organizations => this.setState({ organizations, loading: false })
     );
   }
@@ -40,7 +40,7 @@ export default class Index extends Component {
     const orgName = document.getElementById('organization_name').value
 
     $.ajax({
-      url: `/users/${this.userSlug}/organizations`,
+      url: `/organizations`,
       dataType: 'JSON',
       type: 'POST',
       data: { organization: { name: orgName } },
@@ -72,7 +72,7 @@ export default class Index extends Component {
         />
         <div className={css.container}>
           <div className='container'>
-            <ProfileMenu active='dashboard' />
+            <ProfileMenu active='dashboard' user={user} />
             {
               loading &&
               <div className='loading-screen'>
