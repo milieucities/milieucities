@@ -1,5 +1,9 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Organization, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Organization do
+  before { @organization = build(:organization) }
+  subject { @organization }
+
+  it { should respond_to(:name) }
+  it { should be_valid }
 end

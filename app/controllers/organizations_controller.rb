@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   load_and_authorize_resource :user
-  load_and_authorize_resource :organization
+  load_and_authorize_resource through: :user
 
   def index
     respond_to do |format|
@@ -11,19 +11,17 @@ class OrganizationsController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json { render json: { members: @organization.users.to_json } }
+      format.json { render json: { members: @organization.users } }
     end
   end
 
   def create
-    org_name = organization_params[:name]
-    organization = Organization.create(name: org_name)
-    org = @user.memberships.create(organization_id: organization.id, admin: true)
+    @user.memberships.last.admin = true
 
-    if org.save && @user.save
-      render json: org, status: :created
+    if @user.save
+      render json: @organization, status: :created
     else
-      render json: org.errors, status: :unprocessable_entity
+      render json: @organization.errors, status: :unprocessable_entity
     end
   end
 

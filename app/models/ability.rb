@@ -6,6 +6,8 @@ class Ability
 
     default_abilities
 
+    organization_admin_abilities if user.has_role? :organization_admin
+
     if user.has_role? :admin
       admin_abilities
     elsif !user.new_record?
@@ -30,6 +32,10 @@ class Ability
     can :manage, :all
   end
 
+  def organization_admin_abilities
+    can :manage, Organization, memberships: { user: { id: user.id } }
+  end
+
   def regular_user_abilities(user)
     can :read, DevSite
     can :read, Event
@@ -40,5 +46,6 @@ class Ability
     can :read, Comment
     can :manage, Vote, user_id: user.id
     can :manage, Conversation, user_id: user.id
+    can :manage, Organization, memberships: { user: { id: user.id } }
   end
 end
