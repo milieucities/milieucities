@@ -24,6 +24,7 @@ class Ability
     can :read, Conversation
     can :create, NewsletterSubscription
     can :create, CityRequest
+    can :index, Municipality
   end
 
   def admin_abilities

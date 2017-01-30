@@ -4,9 +4,9 @@ import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
 import ProfileHeader from '../../Common/ProfileHeader/ProfileHeader'
 import ProfileMenu from '../../Common/ProfileMenu/ProfileMenu'
+import Loader from '../../Common/Loader/Loader'
 import i18n from './locale'
 import css from './show.scss'
-import { debounce } from 'lodash'
 
 export default class Show extends Component {
   constructor(props) {
@@ -35,16 +35,7 @@ export default class Show extends Component {
         <div className={css.container}>
           <div className='container'>
             <ProfileMenu active='dashboard' />
-            {
-              loading &&
-              <div className='loading-screen'>
-                <div className='spinner'>
-                  <div className='bounce1'></div>
-                  <div className='bounce2'></div>
-                  <div className='bounce3'></div>
-                </div>
-              </div>
-            }
+            <Loader loading={loading} />
             {
               !loading &&
               <div className={css.content}>

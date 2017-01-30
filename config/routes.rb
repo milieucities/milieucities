@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
 
     resources :events
+    resources :municipalities, only: [:index]
 
     resources :comments, only: [:index]
     resources :users, param: :slug do
