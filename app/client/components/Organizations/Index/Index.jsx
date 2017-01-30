@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
+import Collapse, { Panel } from 'rc-collapse'
+
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
 import ProfileHeader from '../../Common/ProfileHeader/ProfileHeader'
@@ -17,6 +19,7 @@ export default class Index extends Component {
     this.loadUser = () => this._loadUser();
     this.loadOrganizations = () => this._loadOrganizations();
     this.createOrganization = (e) => this._createOrganization(e);
+    this.onAccordionChange = (e) => this._onAccordionChange(e);
     this.loadUser();
     this.loadOrganizations();
   }
@@ -51,6 +54,10 @@ export default class Index extends Component {
     });
   }
 
+  _onAccordionChange(activeKey) {
+    this.setState({ activeKey });
+  }
+
   render() {
     const { user, organizations, loading } = this.state;
     const { userSlug, userAvatar, userName, locale } = document.body.dataset;
@@ -83,11 +90,18 @@ export default class Index extends Component {
                 <New
                   onCreate={this.createOrganization}
                 />
+                <Collapse
+                  accordion={true}
+                  activeKey={this.state.activeKey}
+                  onChange={this.onAccordionChange}>
                 {
                   organizations.map((org, index) => (
-                    <Show organization={org} key={index} />
+                    <Panel header={org.name} key={index}>
+                      <Show organization={org} />
+                    </Panel>
                   ))
                 }
+                </Collapse>
               </div>
             }
           </div>

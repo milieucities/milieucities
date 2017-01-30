@@ -20,13 +20,15 @@ export default class New extends Component {
             />
           </div>
           <div className='row'>
-            <button
-              name='commit'
-              type='submit'
-              className='btn'
-              onClick={this.props.onCreate}>
-              Add Organization
-            </button>
+            <div className='col'>
+              <button
+                name='commit'
+                type='submit'
+                className='btn'
+                onClick={this.props.onCreate}>
+                Add Organization
+              </button>
+            </div>
           </div>
         </div>
       </div>
