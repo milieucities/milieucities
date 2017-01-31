@@ -72,7 +72,7 @@ group :test do
   gem 'mini_backtrace', '0.1.3'
 end
 
-group :production, :test do
+group :production, :staging do
   gem 'unicorn', '5.1.0'
 end
 
