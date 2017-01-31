@@ -6,18 +6,25 @@ export default class ProfileMenu extends Component {
   _generateLinks() {
     const locale = document.body.dataset.locale
     const userSlug = document.body.dataset.userSlug
-    const url = `/${locale}/users/${userSlug}`
+    const userRole = document.body.dataset.userRole
 
     const sections = [
-      { title: 'dashboard', path: url },
-      { title: 'settings', path: `${url}/edit` },
-      { title: 'notification', path: `${url}/notification/edit` },
-      { title: 'manage_dev_site', path: `/${locale}/dev_sites/new` }
+      { title: 'dashboard', path: `/${locale}/users/${userSlug}` },
+      { title: 'settings', path: `/${locale}/users/${userSlug}/edit` },
+      { title: 'notification', path: `/${locale}/users/${userSlug}/notification/edit` },
+      { title: 'manage_dev_site', path: `/${locale}/dev_sites/new` },
+      { title: 'organizations', path: `/${locale}/organizations`, admin: true },
     ]
 
     return sections.map((section) => {
+      const url = section.path
       const anchorText = i18n[section.title]
       const styles = this.props.active === section.title ? {fontWeight: 'bold'} : {}
+      const restricted = section.admin && this.props.user && section.admin !== this.props.user.admin
+
+      if (restricted) {
+        return ''
+      }
 
       return(
         <li style={styles} key={section.title}>

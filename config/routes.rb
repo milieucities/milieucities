@@ -39,13 +39,16 @@ Rails.application.routes.draw do
       resources :votes, only: [:create, :destroy]
     end
     resources :sessions, only: [:new, :create, :destroy]
+    resources :organizations, only: [:index, :show, :create, :destroy] do
+      resources :memberships, only: [:create, :destroy]
+    end
   end
 
   # Backend API Routing
   namespace :api do
     namespace :v1 do
       post '/login', to: 'authentication#authenticate'
-      #Authentication Example
+      # Authentication Example
       resources :dev_sites, only: [:index]
     end
   end

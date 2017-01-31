@@ -34,7 +34,7 @@ export default class Show extends Component {
         />
         <div className={css.container}>
           <div className='container'>
-            <ProfileMenu active='dashboard' />
+            <ProfileMenu active='dashboard' user={user} />
             <Loader loading={loading} />
             {
               !loading &&
