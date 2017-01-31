@@ -122,10 +122,10 @@ export default class DevSiteShow extends Component {
                   <img src={devSite.image_url} className={css.image} />
 
                   <div className={css.share}>
-                    <FacebookShareButton url={devSite.url} title={devSite.address} media={devSite.image_url}>
+                    <FacebookShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
                       <FacebookIcon size={32} round />
                     </FacebookShareButton>
-                    <TwitterShareButton url={devSite.url} title={devSite.address} media={devSite.image_url}>
+                    <TwitterShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
                       <TwitterIcon size={32} round />
                     </TwitterShareButton>
                   </div>
