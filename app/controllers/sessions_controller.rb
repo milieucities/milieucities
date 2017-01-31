@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   def create
     user = find_user_by_email
     if user && user.authenticate(params[:session][:password])
+      reset_session
       session[:user_id] = user.id
       redirect_to request.referrer, notice: t('sessions.notice.welcome')
     else
@@ -14,6 +15,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id) if signed_in?
+    reset_session
     redirect_to root_path
   end
 

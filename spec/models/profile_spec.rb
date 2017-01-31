@@ -49,7 +49,7 @@ describe Profile do
 
   describe '#send_verification_mailer' do
     before do
-      @user = FactoryGirl.create(:user, profile: new_profile)
+      @user = create(:user, profile: new_profile)
     end
 
     it 'should send request_role_verification mailer with user object' do
