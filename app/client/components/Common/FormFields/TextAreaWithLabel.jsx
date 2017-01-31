@@ -4,7 +4,7 @@ export default class TextAreaWithLabel extends Component {
   constructor(props) {
     super(props)
     const valid = this.props.defaultValue && this.props.defaultValue.length > 0
-    const errorText = this.props.error || `${this.props.label} is a required field.`
+    const errorText = `${this.props.label} is a required field.`
 
     this.state = { valid, errorText }
     this.validate = (e) => this._validate(e)
@@ -19,6 +19,7 @@ export default class TextAreaWithLabel extends Component {
   }
 
   render() {
+
     return(
       <div className={`input-field ${this.props.classes}`}>
         <label htmlFor={this.props.id}>{this.props.label}</label>
@@ -29,7 +30,10 @@ export default class TextAreaWithLabel extends Component {
           form={this.props.form}
           onBlur={this.props.required && this.validate}
         />
-      {(this.error || this.props.required && !this.state.valid) && <div className='error-message'>{this.state.errorText}</div>}
+        {
+          (this.props.error || this.props.required && !this.state.valid) &&
+          <div className='error-message'>{this.props.error || this.state.errorText}</div>
+        }
       </div>
     )
   }

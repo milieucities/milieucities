@@ -3,9 +3,6 @@ import React, { Component } from 'react'
 export default class SelectWithLabel extends Component {
   constructor(props) {
     super(props)
-    const errorText = this.props.error || `${this.props.label} is a required field.`
-    this.state = { errorText }
-
     this.handleChange = (e) => this._handleChange(e)
   }
 
@@ -35,7 +32,10 @@ export default class SelectWithLabel extends Component {
             })
           }
         </select>
-        {this.props.error && <div className='error-message'>{this.props.error}</div>}
+        {
+          this.props.error &&
+          <div className='error-message'>{this.props.error}</div>
+        }
       </div>
     )
   }

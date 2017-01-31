@@ -5,7 +5,7 @@ export default class TextInputWithLabel extends Component {
   constructor(props) {
     super(props)
     const valid = this.props.defaultValue && this.props.defaultValue.length > 0
-    const errorText = this.props.error || `${this.props.label} is a required field.`
+    const errorText = `${this.props.label} is a required field.`
 
     this.state = { valid, errorText }
     this.validate = (e) => this._validate(e)
@@ -34,7 +34,10 @@ export default class TextInputWithLabel extends Component {
           form={this.props.form}
           onBlur={this.validate}
         />
-        {(this.props.error || this.props.required && !this.state.valid) && <div className='error-message'>{this.state.errorText}</div>}
+        {
+          (this.props.error || this.props.required && !this.state.valid) &&
+          <div className='error-message'>{this.props.error || this.state.errorText}</div>
+        }
       </div>
     )
   }

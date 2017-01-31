@@ -1,4 +1,5 @@
 class Status < ActiveRecord::Base
+  scope :current, -> { order(status_date: :desc).first }
   belongs_to :dev_site, foreign_key: 'dev_site_id'
 
   VALID_STATUS_TYPES = [
@@ -16,7 +17,8 @@ class Status < ActiveRecord::Base
     'Community Information and Comment Session Open'
   ].freeze
 
-  scope :current, -> { order(status_date: :desc).first }
+  validates :status, presence: { message: 'Status is required' }
+  validates :status_date, presence: { message: 'Status date is required' }
 
   def friendly_status_date
     status_date.strftime('%B %e, %Y') if status_date.present?

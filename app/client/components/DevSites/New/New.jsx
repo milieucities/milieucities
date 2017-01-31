@@ -51,7 +51,7 @@ export default class DevSiteNew extends Component {
     this.state = {
       loading: true,
       activeMunicipalityIndex: 0,
-      statusDate: moment(),
+      statusDate: null,
       error: {}
     };
     this.loadUser = () => this._loadUser();
@@ -122,136 +122,173 @@ export default class DevSiteNew extends Component {
             {
               !loading &&
               <div className={css.content}>
-                <h2>New Development Site</h2>
-                <form encType='multipart/form-data' onSubmit={this.handleSubmit} acceptCharset='UTF-8'>
-                  <div className='row'>
-                    <TextInputWithLabel
-                      classes='col s12 m6'
-                      id='dev_site_devID'
-                      name='dev_site[devID]'
-                      label='Development Id'
-                      error={error.devID}
-                    />
+                <h2>{i18n.newDevelopmentSite}</h2>
 
-                    <SelectWithLabel
-                      classes='col s12 m6'
-                      id='dev_site_application_type'
-                      name='dev_site[application_type]'
-                      label='Application Type'
-                      options={APPLICATION_TYPES.map(a => [a,a])}
-                    />
+                <form encType='multipart/form-data' id='new-form' onSubmit={this.handleSubmit} acceptCharset='UTF-8'>
+                  <div className={css.meta}>
+                    <div className={css.label}>
+                      {i18n.basicInfo}
+                    </div>
+                    <div className={css.data}>
+                      <div className='row'>
+                        <SelectWithLabel
+                          classes='col s12 m12 l6'
+                          id='dev_site_municipality'
+                          name='dev_site[municipality_id]'
+                          label={i18n.municipality}
+                          value={municipalities[activeMunicipalityIndex].id}
+                          onChange={this.handleChangeMunicipality}
+                          options={municipalities.map(m => [m.id,m.name])}
+                          />
+
+                        <SelectWithLabel
+                          classes='col s12 m12 l6'
+                          id='dev_site_ward_id'
+                          name='dev_site[ward_id]'
+                          label={i18n.ward}
+                          options={municipalities[activeMunicipalityIndex].wards.map(w => [w.id, w.name])}
+                          />
+                      </div>
+
+                      <div className='row'>
+                        <TextInputWithLabel
+                          classes='col s12 m12 l6'
+                          id='dev_site_devID'
+                          name='dev_site[devID]'
+                          label={i18n.developmentId}
+                          error={error.devID}
+                          />
+
+                        <SelectWithLabel
+                          classes='col s12 m12 l6'
+                          id='dev_site_application_type'
+                          name='dev_site[application_type]'
+                          label={i18n.applicationType}
+                          options={APPLICATION_TYPES.map(a => [a,a])}
+                          />
+                      </div>
+
+                      <div className='row'>
+                        <TextAreaWithLabel
+                          classes='col s12'
+                          id='dev_site_description'
+                          name='dev_site[description]'
+                          label={i18n.description}
+                          error={error.description}
+                          />
+                      </div>
+                    </div>
                   </div>
 
-                  <div className='row'>
-                    <SelectWithLabel
-                      classes='col s12 m6'
-                      id='dev_site_municipality'
-                      name='dev_site[municipality_id]'
-                      label='Municipality'
-                      value={municipalities[activeMunicipalityIndex].id}
-                      onChange={this.handleChangeMunicipality}
-                      options={municipalities.map(m => [m.id,m.name])}
-                    />
+                  <div className={css.meta}>
+                    <div className={css.label}>
+                      {i18n.primaryAddress}
+                    </div>
+                    <div className={css.data}>
+                      <div className='row'>
+                        <TextInputWithLabel
+                          classes='col s12'
+                          id='address_street'
+                          name='dev_site[addresses_attributes][0][street]'
+                          label={i18n.street}
+                          error={error['addresses.street']}
+                          />
+                      </div>
 
-                    <SelectWithLabel
-                      classes='col s12 m6'
-                      id='dev_site_ward_id'
-                      name='dev_site[ward_id]'
-                      label='Ward'
-                      options={municipalities[activeMunicipalityIndex].wards.map(w => [w.id, w.name])}
-                    />
+                      <div className='row'>
+                        <TextInputWithLabel
+                          classes='col s12 m12 l4'
+                          id='address_city'
+                          name='dev_site[addresses_attributes][0][city]'
+                          label={i18n.city}
+                          />
+                        <TextInputWithLabel
+                          classes='col s12 m12 l4'
+                          id='address_province_state'
+                          name='dev_site[addresses_attributes][0][province_state]'
+                          label={i18n.province}
+                          />
+                        <TextInputWithLabel
+                          classes='col s12 m12 l4'
+                          id='address_country'
+                          name='dev_site[addresses_attributes][0][country]'
+                          label={i18n.country}
+                          />
+                      </div>
+                    </div>
                   </div>
 
-                  <div className='row'>
-                    <TextInputWithLabel
-                      classes='col s12'
-                      id='address_street'
-                      name='dev_site[addresses_attributes][0][street]'
-                      label='Street'
-                      error={error.devID}
-                    />
+                  <div className={css.meta}>
+                    <div className={css.label}>
+                      {i18n.currentStatus}
+                    </div>
+                    <div className={css.data}>
+                      <div className='row'>
+                        <SelectWithLabel
+                          classes='col s12 m12 l6'
+                          id='status_name'
+                          name='dev_site[statuses_attributes][0][status]'
+                          label={i18n.status}
+                          options={STATUSES.map(s => [s,s])}
+                          />
+
+                        <div className='input-field col s12 m12 l6'>
+                          <label htmlFor='status_date'>{i18n.statusDate}</label>
+                          <DatePicker selected={statusDate} dateFormat='MMMM DD, YYYY' name='dev_site[statuses_attributes][0][status_date]' onChange={this.handleStatusDate} />
+                          {
+                            this.state.error['statuses.status_date'] &&
+                            <div className='error-message'>{this.state.error['statuses.status_date']}</div>
+                          }
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className='row'>
-                    <TextInputWithLabel
-                      classes='col s12 m4'
-                      id='address_city'
-                      name='dev_site[addresses_attributes][0][city]'
-                      label='City'
-                    />
-                    <TextInputWithLabel
-                      classes='col s12 m4'
-                      id='address_province_state'
-                      name='dev_site[addresses_attributes][0][province_state]'
-                      label='Province'
-                    />
-                    <TextInputWithLabel
-                      classes='col s12 m4'
-                      id='address_country'
-                      name='dev_site[addresses_attributes][0][country]'
-                      label='Country'
-                    />
+                  <div className={css.meta}>
+                    <div className={css.label}>
+                      {i18n.contact}
+                    </div>
+                    <div className={css.data}>
+                      <div className='row'>
+                        <TextInputWithLabel
+                          classes='col s12 m12 l6'
+                          id='dev_site_urban_planner_email'
+                          name='dev_site[urban_planner_email]'
+                          label={i18n.urbanPlannerEmail}
+                          />
+                        <TextInputWithLabel
+                          classes='col s12 m12 l6'
+                          id='dev_site_ward_councillor_email'
+                          name='dev_site[ward_councillor_email]'
+                          label={i18n.wardCouncillorEmail}
+                          />
+                      </div>
+                    </div>
                   </div>
 
-                  <div className='row'>
-                    <SelectWithLabel
-                      classes='col s12 m6'
-                      id='status_name'
-                      name='dev_site[statuses_attributes][0][status]'
-                      label='Status'
-                      options={STATUSES.map(s => [s,s])}
-                    />
+                  <div className={css.meta}>
+                    <div className={css.label}>
+                      {i18n.attachments}
+                    </div>
+                    <div className={css.data}>
+                      <div className='row'>
+                        <div className='file-field input-field col s12'>
+                          <label htmlFor='dev_site_files'>{i18n.files}</label>
+                          <input multiple='multiple' type='file' name='dev_site[files][]' id='dev_site_files' />
+                        </div>
+                      </div>
 
-                    <div className='input-field col s12 m6'>
-                      <label htmlFor='status_date'>Status Date</label>
-                      <DatePicker selected={statusDate} dateFormat='MMMM DD, YYYY' name='dev_site[statuses_attributes][0][status_date]' onChange={this.handleStatusDate} />
+                      <div className='row'>
+                        <div className='file-field input-field col s12'>
+                          <label htmlFor='dev_site_images'>{i18n.images}</label>
+                          <input multiple='multiple' type='file' name='dev_site[images][]' id='dev_site_images' />
+                        </div>
+                      </div>
                     </div>
                   </div>
 
                   <div className='row'>
-                    <TextInputWithLabel
-                      classes='col s12 m6'
-                      id='dev_site_urban_planner_email'
-                      name='dev_site[urban_planner_email]'
-                      label='Urban Planner Email'
-                    />
-
-                    <TextInputWithLabel
-                      classes='col s12 m6'
-                      id='dev_site_ward_councillor_email'
-                      name='dev_site[ward_councillor_email]'
-                      label='Ward Councillor Email'
-                    />
-                  </div>
-
-                  <div className='row'>
-                    <TextAreaWithLabel
-                      classes='col s12'
-                      id='dev_site_description'
-                      name='dev_site[description]'
-                      label='Description'
-                      error={error.description}
-                    />
-                  </div>
-
-                  <div className='row'>
-                    <div className='file-field input-field col s12'>
-                      <label htmlFor='dev_site_files'>Files</label>
-                      <input multiple='multiple' type='file' name='dev_site[files][]' id='dev_site_files' />
-                    </div>
-                  </div>
-
-                  <div className='row'>
-                    <div className='file-field input-field col s12'>
-                      <label htmlFor='dev_site_images'>Images</label>
-                      <input multiple='multiple' type='file' name='dev_site[images][]' id='dev_site_images' />
-                    </div>
-                  </div>
-
-                  <div className='row'>
-                    <div className='file-field input-field col s12'>
-                      <input type='submit' name='commit' value='Save' className='btn submit' />
-                    </div>
+                    <input type='submit' value={i18n.save} className='btn submit' />
                   </div>
                 </form>
               </div>

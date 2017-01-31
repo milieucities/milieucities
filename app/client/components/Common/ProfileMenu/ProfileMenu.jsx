@@ -12,7 +12,7 @@ export default class ProfileMenu extends Component {
       { title: 'dashboard', path: url },
       { title: 'settings', path: `${url}/edit` },
       { title: 'notification', path: `${url}/notification/edit` },
-      { title: 'manage_dev_site', path: '/dev_sites/new' }
+      { title: 'manage_dev_site', path: `/${locale}/dev_sites/new` }
     ]
 
     return sections.map((section) => {

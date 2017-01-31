@@ -6,6 +6,7 @@ import ProfileHeader from '../../Common/ProfileHeader/ProfileHeader'
 import ProfileMenu from '../../Common/ProfileMenu/ProfileMenu'
 import TextInputWithLabel from '../../Common/FormFields/TextInputWithLabel'
 import TextAreaWithLabel from '../../Common/FormFields/TextAreaWithLabel'
+import Loader from '../../Common/Loader/Loader'
 import i18n from './locale'
 import css from './edit.scss'
 import { debounce } from 'lodash'
@@ -154,16 +155,7 @@ export default class Edit extends Component {
         <div className={css.container}>
           <div className='container'>
             <ProfileMenu active='settings' />
-            {
-              loading &&
-              <div className='loading-screen'>
-                <div className='spinner'>
-                  <div className='bounce1'></div>
-                  <div className='bounce2'></div>
-                  <div className='bounce3'></div>
-                </div>
-              </div>
-            }
+            <Loader loading={loading} />
             {
               !loading &&
               <div className={css.content}>
