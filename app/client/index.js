@@ -12,3 +12,5 @@ import './components/Pages/Home/Home'
 
 import './components/Users/Show/Show'
 import './components/Users/Edit/Edit'
+
+import './components/Organizations/Index/Index'
