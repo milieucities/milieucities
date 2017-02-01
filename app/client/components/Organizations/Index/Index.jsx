@@ -72,7 +72,7 @@ export default class Index extends Component {
         />
         <div className={css.container}>
           <div className='container'>
-            <ProfileMenu active='dashboard' user={user} />
+            <ProfileMenu active='organizations' user={user} />
             {
               loading &&
               <div className='loading-screen'>
