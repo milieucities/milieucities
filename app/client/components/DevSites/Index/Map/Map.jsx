@@ -159,7 +159,7 @@ export default class Map extends Component {
       'type': 'fill',
       'source': 'guelph-wards',
       'paint': {
-        'fill-color': '#3E6880',
+        'fill-color': '#fff',
         'fill-opacity': 0.3
       }
     });
@@ -169,7 +169,7 @@ export default class Map extends Component {
       'type': 'line',
       'source': 'guelph-wards',
       'paint': {
-        'line-color': '#3E6880'
+        'line-color': '#3A7496'
       }
     });
 
@@ -178,7 +178,7 @@ export default class Map extends Component {
       'type': 'fill',
       'source': 'wards',
       'paint': {
-        'fill-color': '#3E6880',
+        'fill-color': '#fff',
         'fill-opacity': 0.3
       }
     });
@@ -188,7 +188,7 @@ export default class Map extends Component {
       'type': 'line',
       'source': 'wards',
       'paint': {
-        'line-color': '#3E6880'
+        'line-color': '#3A7496'
       }
     });
 

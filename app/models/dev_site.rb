@@ -53,8 +53,6 @@ class DevSite < ActiveRecord::Base
   validates :devID, uniqueness: { message: 'Dev Id must be unique' }
   validates :application_type, presence: { message: 'Application type is required' }
   validates :description, presence: { message: 'Description is required' }
-  validates :ward_name, presence: { message: 'Ward name is required' }
-  validates :ward_num, presence: { message: 'Ward number is required' }, numericality: true
   validates :municipality_id, presence: { message: 'Municipality is required' }
   validates :ward_id, presence: { message: 'Ward is required' }
 
