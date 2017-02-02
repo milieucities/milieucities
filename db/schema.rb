@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170128212509) do
+ActiveRecord::Schema.define(version: 20170205155435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20170128212509) do
     t.text     "description"
     t.string   "ward_name"
     t.integer  "ward_num"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "appID"
     t.datetime "received_date"
     t.datetime "updated"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20170128212509) do
     t.float    "sadness_total",         default: 0.0
     t.integer  "municipality_id"
     t.integer  "ward_id"
+    t.boolean  "featured",              default: false
   end
 
   create_table "events", force: :cascade do |t|
