@@ -1,5 +1,4 @@
 class Api::V1::ApiController < ActionController::API
-  before_action :authenticate_request, :if => :json_request?
   before_action :set_locale
 
 
@@ -17,15 +16,11 @@ class Api::V1::ApiController < ActionController::API
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
-  def json_request?
-    request.format.json?
-  end
-
 
   private
 
   def authenticate_request
     @current_user = AuthorizeApiRequest.call(request.headers).result
-    render json: {error: 'Not Authorized' }, status: 401 unless @current_user
+    render json: {error: 401, description: 'Not Authorized'}, status: 401 unless @current_user
   end
 end
