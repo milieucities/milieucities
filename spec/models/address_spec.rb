@@ -1,7 +1,19 @@
 require 'spec_helper'
 
 describe Address do
+  let(:address) { build(:address) }
   let(:new_address) { create(:address) }
+
+  describe 'model validations' do
+    it 'should have a valid factory' do
+      expect(address).to be_valid
+    end
+
+    context 'when street is not present' do
+      before { address.street = '' }
+      it { should_not be_valid }
+    end
+  end
 
   describe '#new_street?' do
     it 'should return true when street has changed' do

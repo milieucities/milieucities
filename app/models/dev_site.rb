@@ -50,7 +50,9 @@ class DevSite < ActiveRecord::Base
   accepts_nested_attributes_for :statuses, allow_destroy: true
   accepts_nested_attributes_for :likes, allow_destroy: true
 
-  validates :devID, uniqueness: { message: 'Dev Id must be unique' }
+  validates :devID,
+            uniqueness: { message: 'Development Id must be unique' },
+            presence: { message: 'Development Id is required' }
   validates :application_type, presence: { message: 'Application type is required' }
   validates :description, presence: { message: 'Description is required' }
   validates :municipality_id, presence: { message: 'Municipality is required' }
@@ -104,6 +106,10 @@ class DevSite < ActiveRecord::Base
   def longitude
     return if addresses.empty?
     addresses.first.lon
+  end
+
+  def ward_name
+    ward.name
   end
 
   def image_url

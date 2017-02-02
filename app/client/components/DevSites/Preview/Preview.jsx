@@ -238,15 +238,23 @@ export default class extends Component {
             })
           }
 
-          <div className={css.emailofficials}>
-            <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Urban Planner'>
-              <i className={css.mail}></i> Urban Planner
-            </a>
-            <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Councillor'>
-              <i className={css.mail}></i> Councillor
-            </a>
-          </div>
-
+          {
+            devSite.urban_planner_email || devSite.ward_councillor_email &&
+            <div className={css.emailofficials}>
+              {
+                devSite.urban_planner_email &&
+                <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Urban Planner'>
+                  <i className={css.mail}></i> Urban Planner
+                </a>
+              }
+              {
+                devSite.ward_councillor_email &&
+                <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Councillor'>
+                  <i className={css.mail}></i> Councillor
+                </a>
+              }
+            </div>
+          }
         </div>
 
         <Comments devSiteId={devSite.id} />
