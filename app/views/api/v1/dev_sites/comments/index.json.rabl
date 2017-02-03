@@ -1,4 +1,4 @@
-collection @dev_sites
+object @dev_site
 
 attributes :address
 

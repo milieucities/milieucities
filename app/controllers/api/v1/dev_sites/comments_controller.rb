@@ -1,75 +1,42 @@
 class Api::V1::DevSites::CommentsController < Api::V1::ApiController
   before_action :authenticate_request
-  before_action :load_comment, only: [:show]
   load_resource :dev_site
   load_and_authorize_resource :comment, through: :dev_site
 
   def index
-    render json: comment_list()
   end
 
   def show
-    if @comment.present?
-      render json: comment_single(@comment)
+  end
+
+  def create
+    @comment = @dev_site.comments.build(user_id: current_user.id, body: params[:comment][:body])
+    if @comment.save
+      render :show, status: :ok
     else
-      error = RespMsg.new(404, "Requested comment does not exist")
-      render json: error.to_json, status: 404
+      render json: @comment.errors, status: 406
     end
   end
 
   def update
-    comment = Comment.find(params[:id])
-    if comment.user_id == @current_user.id
-      comment.body = params[:body]
-      comment.save
-      render json: comment_list()
+    if @comment.update(comment_params)
+      render :show, status: :ok
     else
-      error = RespMsg.new(401, "You are not allowed to edit this comment")
-      render json: error.to_json, status: 401
+      render json: @comment.errors, status: 406
     end
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    if comment.user_id == @current_user.id
-      comment.destroy
-      render json: comment_list()
+    if @comment.destroy
+      head :no_content, status: 204
     else
-      error = RespMsg.new(401, "You are not allowed to destroy this comment")
-      render json: error.to_json, status: 401
+      render json: { notice: 'Your comment was not deleted. Please try again.' }, status: 500
     end
-  end
-
-  def create
-    dev_site = DevSite.find(params[:dev_site_id])
-    comment = Comment.create(:commentable => dev_site, :user => @current_user, :body => params[:body])
-    render json: comment_list()
   end
 
   private
 
-  def load_comment
-    @comment = Comment.find(params[:id])
-  end
-
-
-  def comment_list()
-    comments = Comment.where(commentable_id: params[:dev_site_id])
-    reformat_comment(comments)
-  end
-
-  def comment_single(comment)
-    reformat_comment(comment)
-  end
-
-  def reformat_comment(comment)
-    comment.as_json(
-      :include =>
-        {:user =>
-          {:include =>
-            {:profile =>
-              {:only => [:name, :anonymous_comments]}},
-        :only => :id}},
-      :only => [:id, :body, :created_at, :vote_count, :total])
+  def comment_params
+    params.require(:comment).permit(:body)
   end
 end
