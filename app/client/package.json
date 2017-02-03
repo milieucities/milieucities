@@ -37,6 +37,7 @@
     "postcss-loader": "^0.9.1",
     "rc-collapse": "^1.6.12",
     "react": "^15.2.1",
+    "react-datepicker": "^0.40.0",
     "react-collapsible": "^1.2.1",
     "react-dom": "^15.2.1",
     "react-localization": "^0.0.8",

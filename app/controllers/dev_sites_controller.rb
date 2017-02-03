@@ -22,9 +22,7 @@ class DevSitesController < ApplicationController
   end
 
   def new
-    @dev_site = DevSite.new
-    @dev_site.addresses.build
-    @dev_site.statuses.build
+    @no_header = true
   end
 
   def edit; end
@@ -107,17 +105,9 @@ class DevSitesController < ApplicationController
         :application_type,
         :municipality_id,
         :ward_id,
-        :title,
-        :images_cache,
-        :files_cache,
-        :build_type,
         :description,
         :ward_councillor_email,
         :urban_planner_email,
-        :ward_name,
-        :ward_num,
-        :image_url,
-        :hearts,
         images: [],
         files: [],
         likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],

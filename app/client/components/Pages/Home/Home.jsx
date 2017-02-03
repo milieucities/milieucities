@@ -83,7 +83,6 @@ export default class Home extends Component {
         </div>
         <div className={css.featuredContainer}>
           <h2 className={css.title}>{i18n.featuredDevelopments}</h2>
-
           <div className={css.featured}>
             <a href={`/${locale}/dev_sites?activeDevSiteId=1822`}><DevSitePreview id={1822} preview={true} horizontal={isMobile} /></a>
             <a href={`/${locale}/dev_sites?activeDevSiteId=1869`}><DevSitePreview id={1869} preview={true} horizontal={isMobile} /></a>

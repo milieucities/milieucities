@@ -1,9 +1,10 @@
 class Status < ActiveRecord::Base
+  scope :current, -> { order(status_date: :desc).first }
   belongs_to :dev_site, foreign_key: 'dev_site_id'
   scope :current, -> { order(status_date: :desc).first }
 
-  validates :status, presence: true
-  validates :status_date, presence: true
+  validates :status, presence: { message: 'Status is required' }
+  validates :status_date, presence: { message: 'Status date is required' }
 
   VALID_STATUS_TYPES = [
     'Unknown',

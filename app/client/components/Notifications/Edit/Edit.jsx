@@ -4,6 +4,7 @@ import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
 import ProfileHeader from '../../Common/ProfileHeader/ProfileHeader'
 import ProfileMenu from '../../Common/ProfileMenu/ProfileMenu'
+import Loader from '../../Common/Loader/Loader'
 import i18n from './locale'
 import css from './edit.scss'
 
@@ -72,16 +73,7 @@ export default class Edit extends Component {
         <div className={css.container}>
           <div className='container'>
             <ProfileMenu active='notification' />
-            {
-              loading &&
-              <div className='loading-screen'>
-                <div className='spinner'>
-                  <div className='bounce1'></div>
-                  <div className='bounce2'></div>
-                  <div className='bounce3'></div>
-                </div>
-              </div>
-            }
+            <Loader loading={loading} />
             {
               !loading &&
               <div className={css.content}>

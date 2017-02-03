@@ -3,6 +3,7 @@ class OrganizationsController < ApplicationController
   load_and_authorize_resource :organization
 
   def index
+    @no_header = true
     respond_to do |format|
       format.html
       format.json
