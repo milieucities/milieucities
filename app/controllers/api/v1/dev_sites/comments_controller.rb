@@ -1,14 +1,16 @@
-class Api::V1::CommentsController < Api::V1::ApiController
+class Api::V1::DevSites::CommentsController < Api::V1::ApiController
   before_action :authenticate_request
+  before_action :load_comment, only: [:show]
+  load_resource :dev_site
+  load_and_authorize_resource :comment, through: :dev_site
 
   def index
     render json: comment_list()
   end
 
   def show
-    comment = Comment.find(params[:id])
-    if comment.present?
-      render json: comment_single(comment)
+    if @comment.present?
+      render json: comment_single(@comment)
     else
       error = RespMsg.new(404, "Requested comment does not exist")
       render json: error.to_json, status: 404
@@ -45,6 +47,12 @@ class Api::V1::CommentsController < Api::V1::ApiController
   end
 
   private
+
+  def load_comment
+    @comment = Comment.find(params[:id])
+  end
+
+
   def comment_list()
     comments = Comment.where(commentable_id: params[:dev_site_id])
     reformat_comment(comments)

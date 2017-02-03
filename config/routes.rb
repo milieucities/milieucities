@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/login', to: 'authentication#authenticate'
       resources :dev_sites, only: [:index] do
-        resources :comments, only: [:index, :show, :create, :update, :destroy]
+        resources :comments, only: [:index, :show, :create, :update, :destroy], module: :dev_sites
       end
     end
   end
