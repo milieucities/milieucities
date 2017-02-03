@@ -12,7 +12,7 @@ describe MembershipsController do
       it 'should add the user to the organization' do
         valid_params = { user: { email: other_user.email } }
 
-        post :create, id: organization.id, membership: valid_params
+        post :create, organization_id: organization.id, membership: valid_params
 
         expect(response.status).to eq(200)
         expect(organization.users).to include(other_user)
@@ -23,7 +23,7 @@ describe MembershipsController do
       it 'should return an error message' do
         invalid_params = { user: { email: 'random@email.com' } }
 
-        post :create, id: organization.id, membership: invalid_params
+        post :create, organization_id: organization.id, membership: invalid_params
 
         result = JSON.parse(response.body)
         expected_message = 'There is no user with this email address'
@@ -33,5 +33,4 @@ describe MembershipsController do
       end
     end
   end
-
 end
