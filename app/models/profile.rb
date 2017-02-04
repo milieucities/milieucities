@@ -49,6 +49,6 @@ class Profile < ActiveRecord::Base
   end
 
   def send_verification_mailer
-    VerificationMailer.request_role_verification(user).deliver_now
+    VerificationMailer.request_role_verification(user).deliver_now if verification_status_changed?
   end
 end
