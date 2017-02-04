@@ -10,7 +10,7 @@ export default class ProfileMenu extends Component {
       { title: 'dashboard', path: `/${locale}/users/${userSlug}` },
       { title: 'settings', path: `/${locale}/users/${userSlug}/edit` },
       { title: 'notification', path: `/${locale}/users/${userSlug}/notification/edit` },
-      { title: 'manage_dev_site', path: `/${locale}/dev_sites/new` },
+      { title: 'manage_dev_site', path: `/${locale}/dev_sites/new`, validRole: 'admin'  },
       { title: 'organizations', path: `/${locale}/organizations`, validRole: 'admin' },
     ]
 
