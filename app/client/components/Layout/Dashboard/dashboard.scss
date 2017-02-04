@@ -115,8 +115,8 @@
         }
 
         img {
-          width: 200px;
-          height: 200px;
+          width: 175px;
+          height: 175px;
           object-fit: cover;
           border-radius: 3px;
           display: block;
@@ -147,7 +147,17 @@
         }
 
         .entry {
-          padding-bottom: 10px;
+          padding-bottom: 20px;
+
+          @media #{$small-and-down} {
+            padding: 20px 0.75rem 0;
+          }
+
+          .date {
+            font-size: 12px;
+            padding-bottom: 5px;
+            font-style: italic;
+          }
         }
       }
     }

@@ -4,27 +4,23 @@ import css from './profileMenu.scss'
 
 export default class ProfileMenu extends Component {
   _generateLinks() {
-    const locale = document.body.dataset.locale
-    const userSlug = document.body.dataset.userSlug
-    const userRole = document.body.dataset.userRole
+    const { userName, userSlug, userRoles, locale } = document.body.dataset;
 
     const sections = [
       { title: 'dashboard', path: `/${locale}/users/${userSlug}` },
       { title: 'settings', path: `/${locale}/users/${userSlug}/edit` },
       { title: 'notification', path: `/${locale}/users/${userSlug}/notification/edit` },
       { title: 'manage_dev_site', path: `/${locale}/dev_sites/new` },
-      { title: 'organizations', path: `/${locale}/organizations`, admin: true },
+      { title: 'organizations', path: `/${locale}/organizations`, validRole: 'admin' },
     ]
 
     return sections.map((section) => {
       const url = section.path
       const anchorText = i18n[section.title]
-      const styles = this.props.active === section.title ? {fontWeight: 'bold'} : {}
-      const restricted = section.admin && this.props.user && section.admin !== this.props.user.admin
+      const styles = this.props.active === section.title ? { fontWeight: 700 } : {}
+      const restricted = section.validRole && !userRoles.split(',').includes(section.validRole)
 
-      if (restricted) {
-        return ''
-      }
+      if (restricted) return false;
 
       return(
         <li style={styles} key={section.title}>
@@ -35,13 +31,10 @@ export default class ProfileMenu extends Component {
   }
 
   render() {
-    const locale = document.body.dataset.locale
-    i18n.setLanguage(locale);
-    const children = this._generateLinks()
     return(
       <div className={css.menu}>
         <ul>
-          {children}
+          {this._generateLinks()}
         </ul>
       </div>
     )
