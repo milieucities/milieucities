@@ -3,6 +3,7 @@ require 'capistrano/setup'
 require 'capistrano/deploy'
 
 require 'capistrano/rails'
+require 'capistrano/npm'
 require 'capistrano/rvm'
 require 'capistrano-resque'
 require 'capistrano/scm/git'

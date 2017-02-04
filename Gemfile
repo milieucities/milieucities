@@ -49,6 +49,7 @@ gem 'omniauth-google-oauth2'
 
 group :development do
   gem 'capistrano', '3.7.1', require: false
+  gem 'capistrano-npm', '~> 1.0.2', require: false
   gem 'capistrano-rails', '~> 1.2.2', require: false
   gem 'capistrano-rvm', '~> 0.1.2', require: false
   gem 'capistrano-bundler', '~> 1.2.0', require: false
