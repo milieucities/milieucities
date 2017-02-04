@@ -16,7 +16,7 @@ export default class Dashboard extends Component {
     return(
       <div>
         <Header/>
-        <ProfileHeader />
+        <ProfileHeader active={activeComponent} />
         <div className={css.container}>
           <div className='container'>
             <ProfileMenu active={activeComponent} />

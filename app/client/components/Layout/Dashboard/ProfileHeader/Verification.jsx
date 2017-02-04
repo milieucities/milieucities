@@ -44,7 +44,7 @@ export default class Verification extends Component {
       <div className={css.verified}>
         {`${i18n.status}${i18n[verificationStatus]}`}
         {
-          verificationStatus === 'notVerified' &&
+          this.props.active === 'settings' && verificationStatus === 'notVerified' &&
           <button className={`btn ${css.verifyBtn}`} onClick={this.sendVerificationRequest}>
             {i18n.requestVerification}
           </button>
