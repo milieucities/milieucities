@@ -10,27 +10,28 @@ set :ssh_options, { forward_agent: true }
 set :keep_releases, 5
 set :rvm_ruby_version, '2.3.0'
 set :pty, true
+set :npm_target_path, -> { release_path.join('app', 'client') }
+set :npm_flags, '--production'
+set :linked_dirs, fetch(:linked_dirs, []).push('app/client/node_modules')
 set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 set :resque_environment_task, true
 
 namespace :git do
   task :pull do
     on roles(:app) do
-      execute "cd #{fetch(:deploy_to)} && git pull origin #{fetch(:branch)}"
+      within release_path do
+        execute :git, :pull, :origin, "#{fetch(:branch)}"
+      end
     end
   end
 end
 
 namespace :npm do
-  task :install do
-    on roles(:app) do
-      execute "cd #{fetch(:deploy_to)} && npm install --unsafe-perm"
-    end
-  end
-
   task :start do
     on roles(:app) do
-      execute "cd #{fetch(:deploy_to)} && npm start"
+      within release_path do
+        execute :npm, :start
+      end
     end
   end
 end
@@ -38,13 +39,12 @@ end
 namespace :unicorn do
   task :restart do
     on roles(:web) do
-      execute :service, 'unicorn restart'
+      execute :service, :unicorn, :restart
     end
   end
 end
 
-after 'git:update', 'git:pull'
-before 'deploy:assets:precompile', 'npm:install'
+# before 'bundler:install', 'git:pull'
 after 'npm:install', 'npm:start'
 after 'deploy:published', 'unicorn:restart'
 after 'deploy:published', 'resque:restart'
