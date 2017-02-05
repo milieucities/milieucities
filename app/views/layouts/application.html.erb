@@ -6,8 +6,12 @@
       <% if signed_in? %>
       data-user-id="<%= current_user.id %>"
       data-user-slug="<%= current_user.slug %>"
-      data-user-roles="<%= current_user.roles %>"
+      data-user-roles="<%= current_user.roles.pluck(:name).join(',') %>"
       data-user-name="<%= current_user.profile.name %>"
+      data-user-profile-id="<%= current_user.profile.id %>"
+      data-user-organization="<%= current_user.profile.organization %>"
+      data-user-community-role="<%= current_user.profile.community_role %>"
+      data-user-verification-status="<%= current_user.profile.verification_status %>"
       data-user-avatar="<%= current_user.profile.avatar.web.preview.url %>"
       <% end %>
       >
