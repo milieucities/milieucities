@@ -82,7 +82,7 @@ class DevSitesController < ApplicationController
   end
 
   def search_term_present?
-    search_terms = [:year, :status, :ward, :municipality]
+    search_terms = [:year, :status, :ward, :municipality, :featured]
     search_terms.any? { |query| params[query].present? }
   end
 
@@ -91,7 +91,7 @@ class DevSitesController < ApplicationController
   end
 
   def search_params
-    params.permit(:latitude, :longitude, :year, :ward, :status, :municipality)
+    params.permit(:latitude, :longitude, :year, :ward, :status, :municipality, :featured)
   end
 
   def retrieve_dev_sites
@@ -113,6 +113,7 @@ class DevSitesController < ApplicationController
         :description,
         :ward_councillor_email,
         :urban_planner_email,
+        :featured,
         images: [],
         files: [],
         likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],

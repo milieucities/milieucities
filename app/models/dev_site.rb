@@ -222,5 +222,9 @@ class DevSite < ActiveRecord::Base
                  from statuses where statuses.dev_site_id = dev_sites.id)")
         .where!(statuses: { status: @search_params[:status] })
     end
+
+    def search_by_featured
+      @dev_sites.where!(featured: true)
+    end
   end
 end

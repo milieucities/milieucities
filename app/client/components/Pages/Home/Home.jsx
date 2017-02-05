@@ -12,10 +12,12 @@ import i18n from './locale'
 export default class Home extends Component {
   constructor() {
     super()
-    this.state = { isMobile: (window.innerWidth < 600) }
+    this.state = { isMobile: (window.innerWidth < 600), featuredSites: [] }
     this.autocompleteCallback = (address, autocomplete) => this._autocompleteCallback(address, autocomplete)
     this.handleAutocompleteSelect = (address) => this._handleAutocompleteSelect(address)
     this.openModal = () => this._openModal();
+    this.loadFeaturedSites = () => this._loadFeaturedSites();
+    this.loadFeaturedSites();
 
     window.addEventListener('resize',
       debounce(() => {
@@ -23,9 +25,11 @@ export default class Home extends Component {
       }, 100)
     );
   }
+
   _openModal() {
     document.querySelector('#sign-in-modal .modal-content').focus();
   }
+
   _autocompleteCallback(address, autocomplete) {
     const googleLocationAutocomplete = new google.maps.places.AutocompleteService()
     const request = { input: address, types: ['address'], componentRestrictions: {country: 'ca'} }
@@ -34,6 +38,7 @@ export default class Home extends Component {
       autocomplete.setState({ suggestions })
     })
   }
+
   _handleAutocompleteSelect(address) {
     const { locale } = document.body.dataset;
     const geocoder = new google.maps.Geocoder()
@@ -46,6 +51,13 @@ export default class Home extends Component {
       }
     })
   }
+
+  _loadFeaturedSites() {
+    $.getJSON('/dev_sites/?featured=true&limit=3',
+      response => this.setState({ featuredSites: response.dev_sites })
+    );
+  }
+
   render() {
     const { isMobile } = this.state;
     const { locale, signedIn } = document.body.dataset;
@@ -84,9 +96,19 @@ export default class Home extends Component {
         <div className={css.featuredContainer}>
           <h2 className={css.title}>{i18n.featuredDevelopments}</h2>
           <div className={css.featured}>
-            <a href={`/${locale}/dev_sites?activeDevSiteId=1822`}><DevSitePreview id={1822} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${locale}/dev_sites?activeDevSiteId=1869`}><DevSitePreview id={1869} preview={true} horizontal={isMobile} /></a>
-            <a href={`/${locale}/dev_sites?activeDevSiteId=1870`}><DevSitePreview id={1870} preview={true} horizontal={isMobile} /></a>
+            {
+              this.state.featuredSites.map((site, index) => {
+                return(
+                  <a href={`/${locale}/dev_sites?activeDevSiteId=${site.id}`} key={index}>
+                    <DevSitePreview
+                      id={site.id}
+                      preview={true}
+                      horizontal={isMobile}
+                    />
+                  </a>
+                )
+              })
+            }
           </div>
         </div>
         <div className={css.articleContainer}>
@@ -115,6 +137,6 @@ export default class Home extends Component {
 }
 
 document.addEventListener('turbolinks:load', () => {
-  const home = document.querySelector('#home')
+  const home = document.querySelector('#home');
   home && render(<Home/>, home)
 })
