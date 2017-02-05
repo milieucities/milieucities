@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import TextInputWithLabel from '../../Common/FormFields/TextInputWithLabel'
-import css from '../Index/index.scss'
+import css from '../../Layout/Dashboard/dashboard.scss'
 
 export default class New extends Component {
   render() {
