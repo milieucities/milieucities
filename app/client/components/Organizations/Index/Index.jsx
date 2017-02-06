@@ -12,14 +12,22 @@ export default class Index extends Component {
     super(props);
     this.state = { loading: true };
     this.loadOrganizations = () => this._loadOrganizations();
+    this.loadMunicipalities = () => this._loadMunicipalities()
     this.createOrganization = (e) => this._createOrganization(e);
     this.onAccordionChange = (e) => this._onAccordionChange(e);
     this.loadOrganizations();
+    this.loadMunicipalities()
   }
 
   _loadOrganizations() {
     $.getJSON(`/organizations`,
       organizations => this.setState({ organizations, loading: false })
+    );
+  }
+
+  _loadMunicipalities() {
+    $.getJSON('/municipalities',
+      municipalities => this.setState({ municipalities })
     );
   }
 
@@ -46,7 +54,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { organizations, loading } = this.state;
+    const { organizations, municipalities, loading } = this.state;
     i18n.setLanguage(document.body.dataset.locale);
     return(
       <Dashboard loading={loading} activeComponent='organizations'>
@@ -60,9 +68,9 @@ export default class Index extends Component {
               activeKey={this.state.activeKey}
               onChange={this.onAccordionChange}>
             {
-              organizations.map((org, index) => (
-                <Panel header={org.name} key={index}>
-                  <Show organization={org} />
+              organizations.map(organization => (
+                <Panel header={organization.name} key={`organization-${organization.id}`}>
+                  <Show organizationId={organization.id} municipalities={municipalities} />
                 </Panel>
               ))
             }

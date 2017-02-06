@@ -14,6 +14,10 @@ child :profile do
   end
 end
 
+child :organizations do
+  attributes :id, :name
+end
+
 child :address do
   attributes :id, :street, :city
 end
@@ -21,4 +25,3 @@ end
 child :comments do
   attributes :id, :body, :last_posted
 end
-
