@@ -16,10 +16,6 @@
     color: $white;
     background-color: $primary-color;
     box-sizing: border-box;
-
-    &:hover {
-      background-color: $secondary-color;
-    }
   }
 
   .clearButton {
@@ -36,12 +32,11 @@
     box-sizing: border-box;
 
     &.selected {
-      background-color: $secondary-color;
-      color: $white;
+      border: 2px solid $primary-color;
     }
 
     &:hover {
-      background-color: $secondary-color;
+      background-color: $primary-color;
       color: $white;
     }
   }

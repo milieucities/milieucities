@@ -4,7 +4,6 @@ import Dashboard from '../../../Layout/Dashboard/Dashboard'
 import DevSitePreview from '../../../DevSites/Preview/Preview'
 import css from '../../../Layout/Dashboard/dashboard.scss'
 import Pagination from '../../../Utility/Pagination/Pagination'
-import i18n from './locale'
 
 export default class Index extends Component {
   constructor(props) {
@@ -32,8 +31,6 @@ export default class Index extends Component {
   render() {
     const { devSites, loading, page, total } = this.state
     const { locale } = document.body.dataset
-    i18n.setLanguage(locale)
-
     return(
       <Dashboard loading={loading} activeComponent='manage_dev_site'>
         {
