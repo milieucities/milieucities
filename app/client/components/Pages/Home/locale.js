@@ -2,12 +2,12 @@ import LocalizedStrings from 'react-localization';
 
 const i18n = new LocalizedStrings({
   en:{
-    heroText1: 'Dedicated to democracy and data-driven city building',
+    heroText1: 'Dedicated to Democracy and Data-driven City Building.',
     signUp: 'Sign Up',
     haveAccount: 'Have an account?',
     signIn: 'Sign In',
     heroText2: 'Get community insight for urban planning and development projects',
-    launchProject: 'Launch your project today',
+    launchProject: 'Launch Your Project',
     title: 'Discover What is Being Built in Your City',
     featuredDevelopments: 'Featured Developments',
     enterAddress: 'Enter an address',

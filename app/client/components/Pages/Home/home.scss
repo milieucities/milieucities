@@ -1,7 +1,7 @@
 .landingContainer {
-  min-height: 55vh;
+  min-height: 40vh;
   width: 100vw;
-  padding: 5% 10% 10%;
+  padding: 10% 30% 10% 30%;
   box-sizing: border-box;
   position: relative;
   box-shadow: 0 5px 10px 0 $gray;
@@ -11,16 +11,21 @@
   text-shadow: 5px 5px 10px $black;
 
   > div {
-    height: 300px;
+    height: 130px;
 
     > h1 {
-      height: 100px;
-      margin: 0;
+      height: 70px;
+      margin-bottom: 0px;
+      padding: 0;
 
       @media #{$small-and-down} {
         height: 50px;
       }
     }
+    > h3 {
+      padding-top: 0px;
+    }
+
   }
 
   @media #{$medium-and-down} {
@@ -54,7 +59,7 @@
     box-shadow: 1px 1px 15px 0px #000;
     border-radius: 2px;
     padding: 12px 20px;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 16px;
     margin-top: 30px;
     margin-right: 40px;
@@ -64,12 +69,13 @@
 
     @media #{$small-and-down} {
       margin-right: 20px;
-      padding: 5px 10px;
+      padding: 12px 20px;
       font-size: 16px;
     }
 
     &:hover {
       opacity: 1;
+      background-color: $dark-secondary-color;
     }
 
     &:focus {

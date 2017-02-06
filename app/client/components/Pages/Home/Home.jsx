@@ -55,9 +55,11 @@ export default class Home extends Component {
       <div>
         <Header />
         <div className={css.landingContainer}>
-          <h1>Milieu</h1>
-          <h3>{i18n.heroText1}</h3>
-          <br/>
+          <div>
+            <h1>Milieu</h1>
+            <h3>{i18n.heroText1}</h3>
+          </div>
+          <br />
           <p>{i18n.heroText2}</p>
           <a href='http://about.milieu.io/' className={css.signUpButton}>{i18n.launchProject}</a>
         </div>
