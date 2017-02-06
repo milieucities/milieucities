@@ -234,8 +234,4 @@ describe DevSite do
       expect(result[2]).to eq(dev_site1)
     end
   end
-
-  describe '#prune_dead_links' do
-    # pending
-  end
 end
