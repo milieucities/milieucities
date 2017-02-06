@@ -109,7 +109,7 @@ class DevSite < ActiveRecord::Base
   end
 
   def ward_name
-    ward.name
+    ward.name if ward.present?
   end
 
   def image_url
