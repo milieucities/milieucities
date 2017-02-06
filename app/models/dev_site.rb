@@ -109,7 +109,7 @@ class DevSite < ActiveRecord::Base
   end
 
   def ward_name
-    ward.name
+    ward.name if ward.present?
   end
 
   def image_url
@@ -221,6 +221,10 @@ class DevSite < ActiveRecord::Base
         .where!("statuses.status_date = (select max(statuses.status_date) \
                  from statuses where statuses.dev_site_id = dev_sites.id)")
         .where!(statuses: { status: @search_params[:status] })
+    end
+
+    def search_by_featured
+      @dev_sites.where!(featured: true)
     end
   end
 end
