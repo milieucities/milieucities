@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       resources :dev_sites, only: [:index] do
         resources :comments, only: [:index, :show, :create, :update, :destroy], module: :dev_sites
       end
+      resources :votes, only: [:create, :destroy]
     end
   end
 

@@ -149,6 +149,20 @@
     cursor: pointer;
   }
 
+  .featuredContainer {
+    align-items: center;
+    cursor: pointer;
+    font-size: 26px;
+
+    .featured {
+      color: $dark-primary-color;
+    }
+
+    .unfeatured {
+      color: $gray;
+    }
+  }
+
   .delimiter {
     position: relative;
     height: 50px;

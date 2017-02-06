@@ -22,26 +22,33 @@ export default class extends Component {
     this.openEmailModal = (e) => this._openEmailModal(e);
     this.handleEmail = (e) => this._handleEmail(e);
     this.toggleLike = () => this._toggleLike();
+    this.toggleFeatured = () => this._toggleFeatured();
+    this.userAdmin = () => this._userAdmin();
 
     if(!props.devSite) {
       this.loadDevSite();
     }
+
   }
+
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.id !== this.props.id) this.loadDevSite();
     this.refs.container &&  this.refs.container.focus();
   }
+
   _loadDevSite() {
     $.getJSON(`/dev_sites/${this.props.id}`,
       devSite => this.setState({ devSite })
     );
   }
+
   _openEmailModal(e) {
     e.preventDefault();
     const { urban_planner_email, ward_councillor_email } = this.state.devSite;
     const contact = e.currentTarget.innerText;
     this.setState({ showModal: true, contact });
   }
+
   _handleEmail(e) {
     e.preventDefault();
     const { contact } = this.state;
@@ -63,6 +70,7 @@ export default class extends Component {
       }
     });
   }
+
   _toggleLike() {
     const { devSite } = this.state;
     const data = devSite.like ?
@@ -83,14 +91,39 @@ export default class extends Component {
       }
     });
   }
+
+  _toggleFeatured() {
+    const { devSite } = this.state;
+    const featured = !devSite.featured;
+    const data = { dev_site: { featured }};
+    $.ajax({
+      url: `/dev_sites/${devSite.id}`,
+      dataType: 'JSON',
+      type: 'PATCH',
+      data: data,
+      success: devSiteJson => {
+        this.setState({ devSite: devSiteJson })
+      },
+      error: error => {
+        window.flash('alert', error)
+      }
+    });
+  }
+
+  _userAdmin() {
+    return document.body.dataset.userRoles && (document.body.dataset.userRoles.indexOf('admin') !== -1)
+  }
+
   _closeDevSite(e) {
     e.preventDefault();
     this.parent.setState({ activeDevSiteId: null });
   }
+
   _toggleShowFiles(e) {
     e.preventDefault();
     this.setState({ showFiles: !this.state.showFiles });
   }
+
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
@@ -185,6 +218,12 @@ export default class extends Component {
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
             </div>
+            {
+              this.userAdmin() &&
+              <div className={css.featuredContainer}>
+                <i className={`fa fa-star ${devSite.featured ? css.featured : css.unfeatured}`} onClick={this.toggleFeatured}></i>
+              </div>
+            }
             <div className={css.likecontainer}>
               <i className={devSite.like ? css.liked : css.like} onClick={this.toggleLike}></i>
               { devSite.likes_count }

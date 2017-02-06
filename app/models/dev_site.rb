@@ -184,7 +184,7 @@ class DevSite < ActiveRecord::Base
     end
 
     def query_search
-      query_params = [:year, :ward, :status]
+      query_params = [:municipality, :ward, :year, :status, :featured]
       query_params.each do |param|
         send("search_by_#{param}") if @search_params[param].present?
       end
@@ -206,8 +206,14 @@ class DevSite < ActiveRecord::Base
       @dev_sites.where!('extract(year from updated) = ?', @search_params[:year])
     end
 
+    def search_by_municipality
+      municipality = @search_params[:municipality]
+      @dev_sites.where!(municipalities: { name: municipality })
+    end
+
     def search_by_ward
-      @dev_sites.where!('lower(ward_name) = lower(?)', @search_params[:ward])
+      ward = @search_params[:ward]
+      @dev_sites.where!(wards: { name: ward })
     end
 
     def search_by_status
@@ -215,6 +221,10 @@ class DevSite < ActiveRecord::Base
         .where!("statuses.status_date = (select max(statuses.status_date) \
                  from statuses where statuses.dev_site_id = dev_sites.id)")
         .where!(statuses: { status: @search_params[:status] })
+    end
+
+    def search_by_featured
+      @dev_sites.where!(featured: true)
     end
   end
 end
