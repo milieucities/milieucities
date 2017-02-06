@@ -184,7 +184,7 @@ class DevSite < ActiveRecord::Base
     end
 
     def query_search
-      query_params = [:municipality, :ward, :year, :status]
+      query_params = [:municipality, :ward, :year, :status, :featured]
       query_params.each do |param|
         send("search_by_#{param}") if @search_params[param].present?
       end
