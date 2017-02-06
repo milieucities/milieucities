@@ -95,14 +95,15 @@ export default class Map extends Component {
         const feature = features[0];
         this.parent.setState({ activeDevSiteId: feature.properties.id });
       }
-    });    
+    });
   }
+
   _geoJsonBuilder() {
     const keys = {
-      'Active Development': 'activedev', 
-      'Comment Period': 'commentopen', 
-      'Comment Comment Period Closed' : 'inactivedev' 
-    };
+      'Active Development': 'activedev',
+      'Comment Period': 'commentopen',
+      'Comment Period Closed': 'inactivedev'
+    }
     return {
       type: 'geojson',
       data: {
@@ -120,15 +121,14 @@ export default class Map extends Component {
               address: devSite.address,
               'marker-symbol': keys[devSite.general_status],
               description: `<b>${devSite.street}</b>
-                            <br/>${replace(devSite.application_type, /coa/, 'Committee of Adjustment')}
-                            <br/>${devSite.status}`
+                            <br/>${devSite.general_status}`
             }
           }
         })
       }
-    }   
+    }
   }
-  
+
   _loadDevSites() {
     const { map } = this;
     const { latitude, longitude } = this.props;
