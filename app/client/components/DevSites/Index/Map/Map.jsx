@@ -118,7 +118,7 @@ export default class Map extends Component {
               id: `${devSite.id}`,
               title: devSite.title,
               address: devSite.address,
-              'marker-symbol': 'activedev',
+              'marker-symbol': keys[devSite.general_status],
               description: `<b>${devSite.street}</b>
                             <br/>${replace(devSite.application_type, /coa/, 'Committee of Adjustment')}
                             <br/>${devSite.status}`
