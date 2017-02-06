@@ -26,7 +26,7 @@ export default class DevSiteShow extends Component {
     this.loadDevSite();
   }
   componentDidUpdate(prevProps, prevState) {
-    if(this.state.devSite && !prevState.devSite) {
+    if(this.state.devSite && !prevState.devSite && this.state.devSite.sentiment) {
       this.generateChart();
     }
   }

@@ -186,9 +186,6 @@
         width: 100%;
         word-break: break-word;
       }
-      &:focus{
-        background-color: $accessibility;
-      }
     }
 
     @media #{$medium-and-down} {

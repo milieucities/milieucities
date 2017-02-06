@@ -127,9 +127,6 @@
     width: 25px;
     height: 25px;
     display: block;
-    &:focus{
-      background-color: $accessibility;
-    }
   }
 
   .like {
@@ -374,13 +371,14 @@
   .content {
     box-sizing: border-box;
     padding: 20px;
-    padding-top: 5px;
+    padding-top: 10px;
     height: 200px;
     overflow: hidden;
 
     .address {
       font-weight: 700;
       font-size: 18px;
+      padding-top: 10px;
       padding-bottom: 15px;
       margin: 0;
     }

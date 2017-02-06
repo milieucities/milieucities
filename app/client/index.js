@@ -15,3 +15,4 @@ import './components/Users/Show/Show'
 import './components/Users/Edit/Edit'
 
 import './components/Organizations/Index/Index'
+import './components/Organizations/DevSites/Index/Index'

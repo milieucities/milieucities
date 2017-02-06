@@ -13,7 +13,7 @@ const TwitterIcon = generateShareIcon('twitter');
 export default class extends Component {
   constructor(props) {
     super(props);
-    this.state = { showFiles: false }
+    this.state = { showFiles: false, devSite: props.devSite }
     this.parent = this.props.parent;
     this.currentUserId = parseInt(document.body.dataset.userId);
     this.loadDevSite = () => this._loadDevSite();
@@ -23,8 +23,12 @@ export default class extends Component {
     this.handleEmail = (e) => this._handleEmail(e);
     this.toggleLike = () => this._toggleLike();
     this.toggleFeatured = () => this._toggleFeatured();
-    this.userAdmin = () => this._userAdmin()
-    this.loadDevSite();
+    this.userAdmin = () => this._userAdmin();
+
+    if(!props.devSite) {
+      this.loadDevSite();
+    }
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -130,7 +134,7 @@ export default class extends Component {
 
     if(preview && !horizontal) {
       return(
-        <div className={css.verticalPreviewContainer} title={`Development Site at ${devSite.address}`}>
+        <div className={css.verticalPreviewContainer} style={{width: this.props.width}} title={`Development Site at ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
