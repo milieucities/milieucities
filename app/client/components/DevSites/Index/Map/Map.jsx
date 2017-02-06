@@ -103,20 +103,58 @@ export default class Map extends Component {
       data: {
         type: 'FeatureCollection',
         features: this.props.devSites.map(devSite => {
-          return {
-            type: 'Feature',
-            geometry: {
-              type: 'Point',
-              coordinates: [devSite.longitude, devSite.latitude]
-            },
-            properties: {
-              id: `${devSite.id}`,
-              title: devSite.title,
-              address: devSite.address,
-              'marker-symbol': 'activedev',
-              description: `<b>${devSite.street}</b>
-                            <br/>${replace(devSite.application_type, /coa/, 'Committee of Adjustment')}
-                            <br/>${devSite.status}`
+          if (devSite.general_status == 'Active Development') {
+            return {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: [devSite.longitude, devSite.latitude]
+              },
+              properties: {
+                id: `${devSite.id}`,
+                title: devSite.title,
+                address: devSite.address,
+                'marker-symbol': 'activedev',
+                description: `<b>${devSite.street}</b>
+                              <br/>${replace(devSite.application_type, /coa/, 'Committee of Adjustment')}
+                              <br/>${devSite.status}`
+              }
+            }
+          }
+          else if (devSite.general_status == 'Comment Period') {
+            return {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: [devSite.longitude, devSite.latitude]
+              },
+              properties: {
+                id: `${devSite.id}`,
+                title: devSite.title,
+                address: devSite.address,
+                'marker-symbol': 'commentopen',
+                description: `<b>${devSite.street}</b>
+                              <br/>${replace(devSite.application_type, /coa/, 'Committee of Adjustment')}
+                              <br/>${devSite.status}`
+              }
+            }
+          }
+          else if (devSite.general_status == 'Comment Period Closed') {
+            return {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: [devSite.longitude, devSite.latitude]
+              },
+              properties: {
+                id: `${devSite.id}`,
+                title: devSite.title,
+                address: devSite.address,
+                'marker-symbol': 'inactivedev',
+                description: `<b>${devSite.street}</b>
+                              <br/>${replace(devSite.application_type, /coa/, 'Committee of Adjustment')}
+                              <br/>${devSite.status}`
+              }
             }
           }
         })
