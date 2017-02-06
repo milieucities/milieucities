@@ -114,16 +114,19 @@ export default class Home extends Component {
         <div className={css.articleContainer}>
           <Carousel>
             <a title={'Go to Milieu\'s article of Zoning 101'} href='https://medium.com/@MilieuCities/zoning-101-a88c1e397455#.du6yt0qgk' target='_blank' className={css.article}>
+              <img src={require('./images/zoning.jpeg')}/>
               <div className={css.type}>{i18n.article}</div>
               <h2 className={css.title}>{i18n.title1}</h2>
               <div className={css.summary}>{i18n.summary1}</div>
             </a>
             <a title={'Go to Milieu\'s article of Whose streets are we planning?'} href='https://medium.com/@MilieuCities/whose-streets-are-we-planning-88f3ed1bc613#.hv858aafk' target='_blank' className={css.article}>
+              <img src={require('./images/street-planning.jpeg')}/>
               <div className={css.type}>{i18n.article}</div>
               <h2 className={css.title}>{i18n.title2}</h2>
               <div className={css.summary}>{i18n.summary2}</div>
             </a>
             <a title={'Go to Milieu\'s article of What we learned from pop-up engagement'} href='https://medium.com/@MilieuCities/what-we-learned-from-pop-up-engagement-65cec34fefde#.l84ns3xc6' target='_blank' className={css.article}>
+              <img src={require('./images/pop-up-engagement.jpeg')}/>
               <div className={css.type}>{i18n.article}</div>
               <h2 className={css.title}>What we learned from pop-up engagement</h2>
               <div className={css.summary}>Milieu’s on-going goal is to facilitate a human-centered approach to urban planning and development.</div>
