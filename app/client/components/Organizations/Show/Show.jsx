@@ -6,25 +6,43 @@ import css from '../../Layout/Dashboard/dashboard.scss'
 export default class Show extends Component {
   constructor(props) {
     super(props)
-    this.userSlug = document.body.dataset.userSlug;
-    this.addMemberToOrganization = (e) => this._addMemberToOrganization(e);
-    this.loadMembers = () => this._loadMembers();
-    this.state = { loading: true }
-    this.loadMembers()
+    this.addMemberToOrganization = (e) => this._addMemberToOrganization(e)
+    this.toggleMunicipality = (e) => this._toggleMunicipality(e)
+    this.loadOrganization = () => this._loadOrganization()
+    this.state = { loading: true, organization: {} }
+    this.loadOrganization()
   }
 
-  _loadMembers() {
-    const url = `/organizations/${this.props.organization.id}`
+  _loadOrganization() {
+    const url = `/organizations/${this.props.organizationId}`
     $.getJSON(url,
-      organization => this.setState({ members: organization.users, loading: false })
+      organization => this.setState({ organization, loading: false })
     );
+  }
+
+  _toggleMunicipality(e) {
+    const municipalityIds = this.state.organization.municipalities.map(m => m.id)
+    const municipalityId = parseInt(e.currentTarget.value)
+    const type = municipalityIds.includes(municipalityId) ? 'DELETE' : 'PATCH'
+
+    $.ajax({
+      url: `/organizations/${this.props.organizationId}/municipalities/${e.currentTarget.value}`,
+      dataType: 'JSON',
+      type,
+      success: organization => {
+        this.setState({ organization })
+      },
+      error: () => {
+        window.flash('alert', 'Failed to modify municipality.')
+      }
+    });
   }
 
   _addMemberToOrganization(e) {
     const email = document.getElementById('user_email').value
 
     $.ajax({
-      url: `/organizations/${this.props.organization.id}/memberships`,
+      url: `/organizations/${this.props.organizationId}/memberships`,
       dataType: 'JSON',
       type: 'POST',
       data: { membership: { user: { email } } },
@@ -32,7 +50,7 @@ export default class Show extends Component {
         if (res.status === 'unprocessable_entity') {
           window.flash('alert', res.message);
         } else {
-          this._loadMembers();
+          this._loadOrganization();
           window.flash('notice', 'Member added');
         }
       },
@@ -43,8 +61,33 @@ export default class Show extends Component {
   }
 
   render() {
+    const { loading, organization } = this.state;
+
     return(
-      <div className="organizations-show">
+      <div className='organizations-show'>
+        <div className={css.meta}>
+          <div className={css.label}>
+            Manageable Municipalities
+          </div>
+          <div className={css.data}>
+            <div className='row'>
+              {
+                !loading && this.props.municipalities.map(municipality => (
+                  <label style={{display: 'block'}} key={`${organization.id}-${municipality.id}`}>
+                    <input
+                      type='checkbox'
+                      value={municipality.id}
+                      defaultChecked={organization.municipalities.map(m => m.id).includes(municipality.id)}
+                      onChange={this.toggleMunicipality}
+                      />
+                    {municipality.name}
+                  </label>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
         <div className={css.meta}>
           <div className={css.label}>
             Add a Member
@@ -55,7 +98,7 @@ export default class Show extends Component {
                 classes='col s12 m12 l12'
                 id='user_email'
                 name='user[email]'
-                label="Email address"
+                label='Email address'
               />
             </div>
             <div className='row'>
@@ -72,12 +115,12 @@ export default class Show extends Component {
           </div>
         </div>
         {
-          !this.state.loading && this.state.members.length > 0 &&
-          <div className="organization-members">
+          !loading && organization.members.length > 0 &&
+          <div>
             <h3>Members</h3>
             {
-              this.state.members.map((member, index) => (
-                <p key={index}>
+              organization.members.map(member => (
+                <p key={`member-${member.id}`}>
                   {member.email}
                   {member.admin && <span> (admin) </span>}
                 </p>

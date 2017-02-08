@@ -4,27 +4,32 @@ import css from './profileMenu.scss'
 
 export default class ProfileMenu extends Component {
   _generateLinks() {
-    const { userName, userSlug, userRoles, locale } = document.body.dataset;
+    const { userName, userSlug, userRoles, userPrimaryOrganizationId, locale } = document.body.dataset;
+    i18n.setLanguage(locale);
 
     const sections = [
       { title: 'dashboard', path: `/${locale}/users/${userSlug}` },
       { title: 'settings', path: `/${locale}/users/${userSlug}/edit` },
       { title: 'notification', path: `/${locale}/users/${userSlug}/notification/edit` },
-      { title: 'manage_dev_site', path: `/${locale}/dev_sites/new`, validRole: 'admin'  },
-      { title: 'organizations', path: `/${locale}/organizations`, validRole: 'admin' },
+      {
+        title: 'manage_dev_site',
+        path: `/${locale}/organizations/${userPrimaryOrganizationId}/dev_sites`,
+        restricted: (userPrimaryOrganizationId.length === 0)
+      },
+      {
+        title: 'organizations',
+        path: `/${locale}/organizations`,
+        restricted: (userRoles.indexOf('admin') === -1)
+      },
     ]
 
     return sections.map((section) => {
-      const url = section.path
-      const anchorText = i18n[section.title]
       const styles = this.props.active === section.title ? { fontWeight: 700 } : {}
-      const restricted = section.validRole && !userRoles.split(',').includes(section.validRole)
-
-      if (restricted) return false;
+      if (section.restricted) return false;
 
       return(
         <li style={styles} key={section.title}>
-          <a href={section.path}>{anchorText}</a>
+          <a href={section.path}>{i18n[section.title]}</a>
         </li>
       )
     })
