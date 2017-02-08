@@ -2,7 +2,30 @@
   width: 100%;
   position: relative;
   color: #555;
-  font-size: 16px;
+  font-size: 16px;    
+}
+.frontWrapper {
+  width: 100%;
+  position: relative;
+  color: #555;
+  font-size: 16px;  
+  @media #{$small-and-down}{
+    width: 50%;
+    margin: 0 auto;
+  }
+  .textfield{
+    @media #{$small-and-down}{
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+  .searchBtn {
+    @media #{$small-and-down}{
+      width: 32%;
+      left: 100%;
+      overflow: hidden;
+    }
+  }
 }
 
 .dropdown {

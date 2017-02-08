@@ -97,8 +97,16 @@ export default class Autocomplete extends Component {
     this.closeDropdown();
   }
   render() {
+    let searchWrap;
+    if (this.props.frontPage == true) {
+      searchWrap = css.frontWrapper;
+    }
+    else {
+      searchWrap = css.wrapper;
+    }
+
     return(
-      <div className={css.wrapper}>
+      <div className={searchWrap}>
         <i className={`fa fa-map-marker ${css.searchicon}`}></i>
         <input type='text' className={css.textfield}
           autoComplete='off'
