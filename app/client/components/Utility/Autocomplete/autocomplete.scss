@@ -2,30 +2,7 @@
   width: 100%;
   position: relative;
   color: #555;
-  font-size: 16px;    
-}
-.frontWrapper {
-  width: 100%;
-  position: relative;
-  color: #555;
-  font-size: 16px;  
-  @media #{$small-and-down}{
-    width: 50%;
-    margin: 0 auto;
-  }
-  .textfield{
-    @media #{$small-and-down}{
-      width: 100%;
-      margin: 0 auto;
-    }
-  }
-  .searchBtn {
-    @media #{$small-and-down}{
-      width: 32%;
-      left: 100%;
-      overflow: hidden;
-    }
-  }
+  font-size: 16px;
 }
 
 .dropdown {
@@ -94,8 +71,10 @@
   font-size: 16px;
   transition: 200ms;
   top: 0;
-  right: -102px;
-  padding: 15px 30px;
+  height: 48px;
+  box-sizing: border-box;
+  padding: 15px 25px;
+  right: 0;
 
   @media #{$small-and-down} {
     right: 0px;
@@ -110,12 +89,11 @@
   }
 
   + .dropdown {
-    width: calc(100% + 40px);
+    width: calc(100% - 110px);
     top: calc(100% + 8px);
-    left: 20px;
 
     @media #{$small-and-down} {
-      width: calc(100% - 40px);
+      width: 100%;
     }
   }
 }

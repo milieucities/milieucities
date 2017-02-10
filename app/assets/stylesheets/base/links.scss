@@ -3,7 +3,6 @@ a{
   text-decoration: none;
   transition: opacity 250ms;
   cursor: pointer;
-  transition: background-color 0s linear 100ms;
   background-color: inherit;
 
   &.btn {
@@ -12,9 +11,5 @@ a{
 
   &:visited {
     color: $black;
-  }
-
-  &:hover {
-    opacity: 0.8;
   }
 }

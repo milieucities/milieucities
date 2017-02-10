@@ -78,7 +78,7 @@ export default class Home extends Component {
         <div className={css.searchContainer}>
           <h2 className={css.title}>{i18n.title}</h2>
           <div className={css.search}>
-            <Autocomplete searchBtn callback={this.autocompleteCallback} placeholder={i18n.enterAddress} type='autocomplete' onSelect={this.handleAutocompleteSelect} frontPage={true}/>
+            <Autocomplete searchBtn callback={this.autocompleteCallback} placeholder={i18n.enterAddress} type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
           </div>
         </div>
         <div className={css.featuredContainer}>

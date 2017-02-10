@@ -80,23 +80,6 @@
     }
   }
 
-  .callToAction {
-    padding-left:  50px;
-    display: flex;
-    flex-direction: column;
-    margin-left: 300px;
-
-    h3 {
-      padding-top: 100px;
-    }
-
-    a {
-      margin-top: 42px;
-      display: inline-block;
-      font-size: 16px;
-    }
-  }
-
 }
 
 .searchContainer {
@@ -121,26 +104,21 @@
   }
 
   .search {
-    max-width: 280px;
+    max-width: 500px;
     width: calc(100% - 20px);
-    margin: 0 auto;
-    padding-top: 40px;
+    margin: 40px auto 0;
     position: relative;
     z-index: 2;
 
     i {
       color: $primary-color;
-      margin-left: -100px;
     }
 
     input {
       border-radius: 2px;
       background-color: $white;
-      margin-left: -100px;
-
-      @media #{$small-and-down} {
-        padding-right: 115px;
-      }
+      box-sizing: border-box;
+      width: calc(100% - 110px);
 
       &:focus {
         box-shadow: 2px 2px 5px 0 $secondary-color;

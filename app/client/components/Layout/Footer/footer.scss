@@ -1,6 +1,6 @@
 .container {
   width: 100vw;
-  background-color: #fafafa;
+  background-color: $pale-gray;
 
   > div {
     margin: 0 auto;
@@ -70,9 +70,14 @@
     }
   }
 }
+
 .skip{
-  @media (min-width: $small-screen) {
-    margin-top: -130px;
-    float: left;
+  position: absolute;
+  opacity: 0;
+  left: -100vh;
+
+  &:focus {
+    opacity: 1;
+    left: inherit;;
   }
 }
