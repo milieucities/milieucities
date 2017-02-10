@@ -1,11 +1,11 @@
 .container {
   width: 100vw;
-  background-color: #fafafa;
+  background-color: $pale-gray;
 
   > div {
     margin: 0 auto;
     max-width: 1170px;
-    padding: 50px 20px;
+    padding: 50px 20px 100px;
 
     @media #{$small-and-down} {
       padding: 20px 10px;
@@ -66,7 +66,18 @@
       padding: 10px 20px;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      font-size: 18px;
+      font-size: 16px;
     }
+  }
+}
+
+.skip{
+  position: absolute;
+  opacity: 0;
+  left: -100vh;
+
+  &:focus {
+    opacity: 1;
+    left: inherit;;
   }
 }

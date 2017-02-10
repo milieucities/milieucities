@@ -70,22 +70,10 @@ export default class Home extends Component {
           <div>
             <h1>Milieu</h1>
             <h3>{i18n.heroText1}</h3>
-            {
-              signedIn == 'false' &&
-              <div className={css.signUpContainer}>
-                <a href={`/${locale}/users/new`} className={css.signUpButton}>{i18n.signUp}</a>
-                {i18n.haveAccount} <a href='#sign-in-modal' className='modal-trigger' style={{marginLeft: 10}} onClick={this.openModal}>{i18n.signIn}</a>
-              </div>
-            }
           </div>
-
-          <div className={`hide-on-small-only ${css.callToAction}`}>
-            <h3>{i18n.heroText2}</h3>
-            <div>
-              <a href='http://about.milieu.io/'>{i18n.launchProject}</a>
-            </div>
-          </div>
-
+          <br />
+          <p>{i18n.heroText2}</p>
+          <a href='http://about.milieu.io/' className={css.signUpButton}>{i18n.launchProject}</a>
         </div>
         <div className={css.searchContainer}>
           <h2 className={css.title}>{i18n.title}</h2>
