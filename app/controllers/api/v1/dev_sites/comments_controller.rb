@@ -30,7 +30,7 @@ class Api::V1::DevSites::CommentsController < Api::V1::ApiController
     if @comment.destroy
       head :no_content, status: 204
     else
-      render json: { notice: 'Your comment was not deleted. Please try again.' }, status: 500
+      render json: { code: 500, description: 'Your comment was not deleted. Please try again.' }, status: 500
     end
   end
 
