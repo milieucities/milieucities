@@ -279,17 +279,16 @@
       border-radius: 2px;
     }
 
-
-        @media only screen and (min-width: #{$small-screen-up}) and (max-width: #{$large-screen})  {
-          background-color: $white;
+    @media only screen and (min-width: #{$small-screen-up}) and (max-width: #{$large-screen})  {
+      background-color: $white;
       margin-top: 0;
       margin-bottom: 5%;
       padding: 5% 5% 10% 5%;
       width: 80%;
       position: relative;
       border-radius: 2px;
-          background-size: 700px auto;
-        }
+      background-size: 700px auto;
+    }
 
     @media #{$small-and-down} {
       padding: 5% 5% 30% 5%;
