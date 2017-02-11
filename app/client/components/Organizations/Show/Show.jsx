@@ -7,13 +7,13 @@ import css from '../../Layout/Dashboard/dashboard.scss'
 export default class Show extends Component {
   constructor(props) {
     super(props)
-    this.addMemberToOrganization = (e) => this._addMemberToOrganization(e)
-    this.toggleMunicipality = (e) => this._toggleMunicipality(e)
-    this.loadOrganization = () => this._loadOrganization()
-    this.handleInputChange = (e) => this._handleInputChange(e);
-    this.handleDeleteMember = (e) => this._handleDeleteMember(e);
-    this.state = { loading: true, organization: {} }
-    this.loadOrganization()
+    this.addMemberToOrganization = (e) => this._addMemberToOrganization(e);
+    this.toggleMunicipality = (e) => this._toggleMunicipality(e);
+    this.loadOrganization = () => this._loadOrganization();
+    this.handleInputChange = (value) => this._handleInputChange(value);
+    this.handleDeleteMember = (id) => this._deleteMemberFromOrganization(id);
+    this.state = { loading: true, organization: {} };
+    this.loadOrganization();
   }
 
   _loadOrganization() {
@@ -64,14 +64,13 @@ export default class Show extends Component {
     });
   }
 
-  _deleteMemberFromOrganization(e) {
-    const userId = 1;
+  _deleteMemberFromOrganization(id) {
+    const membershipId = id;
 
     $.ajax({
-      url: `/organizations/${this.props.organizationId}/memberships/`,
+      url: `/organizations/${this.props.organizationId}/memberships/${membershipId}`,
       dataType: 'JSON',
       type: 'DELETE',
-      data: { membership: { user: { email } } },
       success: res => {
         if (res.status === 'unprocessable_entity') {
           window.flash('alert', res.message);
@@ -130,8 +129,7 @@ export default class Show extends Component {
                 id='user_email'
                 name='user[email]'
                 label='Email address'
-                value={this.state.userEmail}
-                changeHandler={this.handleInputChange}
+                onInputChange={this.handleInputChange}
               />
             </div>
             <div className='row'>
@@ -156,7 +154,7 @@ export default class Show extends Component {
                 <ShowMember
                   key={member.id}
                   member={member}
-                  onDelete={ this.handleDeleteMember }
+                  handleDeleteMember={ this.handleDeleteMember }
                 />
               ))
             }

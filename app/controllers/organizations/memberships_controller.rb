@@ -7,7 +7,7 @@ module Organizations
 
       member = User.find_by(email: member_email)
 
-      if !member
+      unless member
         message = 'There is no user with this email address'
         render(json: { message: message, status: :unprocessable_entity }) && return
       end
@@ -25,6 +25,15 @@ module Organizations
         render json: { status: :ok }
       else
         error_message = @organization.errors.full_messages.join(', ')
+        render json: { message: error_message, status: :unprocessable_entity }
+      end
+    end
+
+    def destroy
+      if @organization.memberships.find_by(id: params[:id]).destroy
+        render json: { status: :ok }
+      else
+        error_message = 'Unable to delete member, please try again.'
         render json: { message: error_message, status: :unprocessable_entity }
       end
     end
