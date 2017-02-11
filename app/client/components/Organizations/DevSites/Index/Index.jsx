@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import Dashboard from '../../../Layout/Dashboard/Dashboard'
 import DevSitePreview from '../../../DevSites/Preview/Preview'
 import css from '../../../Layout/Dashboard/dashboard.scss'
+import indexCss from './index.scss'
 import Pagination from '../../../Utility/Pagination/Pagination'
 
 export default class Index extends Component {
@@ -10,6 +11,7 @@ export default class Index extends Component {
     super(props)
     this.state = { loading: true, page: 0 }
     this.loadDevSites = () => this._loadDevSites()
+    this.handleDelete = (e) => this._handleDelete(e)
     this.loadDevSites()
   }
 
@@ -28,6 +30,22 @@ export default class Index extends Component {
     );
   }
 
+  _handleDelete(e) {
+    e.preventDefault();
+    $.ajax({
+      url: `/dev_sites/${e.currentTarget.dataset.id}`,
+      dataType: 'JSON',
+      type: 'DELETE',
+      success: () => {
+        window.flash('notice', 'Development site successfully deleted')
+        this.loadDevSites();
+      },
+      error: () => {
+        window.flash('alert', 'Failed to delete development site')
+      }
+    });
+  }
+
   render() {
     const { devSites, loading, page, total } = this.state
     const { locale } = document.body.dataset
@@ -41,7 +59,13 @@ export default class Index extends Component {
             <div className='row'>
               {
                 devSites && devSites.map(devSite => (
-                  <div className={`col s12 m6 l4 ${css.devSite}`} key={`preview-${devSite.id}`}>
+                  <div className={`col s12 m6 l4 ${indexCss.devSite}`} key={`preview-${devSite.id}`}>
+                    <a href={`/${locale}/dev_sites/${devSite.id}/edit`} className={`btn icon ${indexCss.edit}`}>
+                      <i className='fa fa-pencil'></i>
+                    </a>
+                    <a href='#' onClick={this.handleDelete} data-id={devSite.id} className={`btn icon ${indexCss.delete}`}>
+                      <i className='fa fa-trash'></i>
+                    </a>
                     <a href={`/${locale}/dev_sites/${devSite.id}`}>
                       <DevSitePreview id={devSite.id} width={250} devSite={devSite} preview={true} />
                     </a>

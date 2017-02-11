@@ -41,26 +41,36 @@ const STATUSES = [
   'Unknown'
 ]
 
-export default class DevSiteNew extends Component {
+export default class DevSiteEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loadingMunicipalities: true,
+      loadingDevSite: true,
       activeMunicipalityIndex: 0,
       statusDate: null,
       error: {}
     };
+
     this.loadMunicipalities = () => this._loadMunicipalities();
+    this.loadDevSite = () => this._loadDevSite();
     this.handleChangeMunicipality = (e) => this._handleChangeMunicipality(e);
     this.handleStatusDate = (date) => this._handleStatusDate(date);
     this.handleSubmit = (e) => this._handleSubmit(e);
     this.loadMunicipalities();
+    this.loadDevSite();
   }
 
   _loadMunicipalities() {
     const { userPrimaryOrganizationId } = document.body.dataset;
     $.getJSON(`/organizations/${userPrimaryOrganizationId}/municipalities`, municipalities => {
-      this.setState({ municipalities, loading: false })
+      this.setState({ municipalities, loadingMunicipalities: false })
+    });
+  }
+
+  _loadDevSite() {
+    $.getJSON(`/dev_sites/${document.querySelector('#dev-site-edit').dataset.id}`, devSite => {
+      this.setState({ devSite, loadingDevSite: false })
     });
   }
 
@@ -85,26 +95,26 @@ export default class DevSiteNew extends Component {
       data: new FormData(e.currentTarget),
       success: devSite => {
         this.setState({ devSite })
-        window.flash('notice', 'Development Successfully Created!')
+        window.flash('notice', 'Development Successfully Updated!')
         Turbolinks.visit(`/${locale}/dev_sites/${devSite.id}`);
       },
       error: error => {
-        window.flash('alert', 'Development Unsuccessfully Created!')
+        window.flash('alert', 'Development Unsuccessfully Updated!')
         this.setState({ error: error.responseJSON })
       }
     });
   }
 
   render() {
-    const { loading, municipalities, activeMunicipalityIndex, statusDate, error } = this.state;
+    const { loadingMunicipalities, devSite, loadingDevSite, municipalities, activeMunicipalityIndex, statusDate, error } = this.state;
     i18n.setLanguage(document.body.dataset.locale);
 
     return(
-      <Dashboard loading={loading} activeComponent='manage_dev_site'>
+      <Dashboard loading={loadingMunicipalities || loadingDevSite} activeComponent='manage_dev_site'>
         {
-          !loading &&
+          !loadingMunicipalities && !loadingDevSite &&
           <div className={css.content}>
-            <h2>{i18n.newDevelopmentSite}</h2>
+            <h2>{i18n.editDevelopmentSite}</h2>
 
             <form encType='multipart/form-data' id='new-form' onSubmit={this.handleSubmit} acceptCharset='UTF-8'>
               <div className={css.meta}>
@@ -128,6 +138,7 @@ export default class DevSiteNew extends Component {
                       id='dev_site_ward_id'
                       name='dev_site[ward_id]'
                       label={i18n.ward}
+                      defaultValue={devSite.ward_id}
                       options={municipalities[activeMunicipalityIndex].wards.map(w => [w.id, w.name])}
                       />
                   </div>
@@ -137,6 +148,7 @@ export default class DevSiteNew extends Component {
                       classes='col s12 m12 l6'
                       id='dev_site_devID'
                       name='dev_site[devID]'
+                      defaultValue={devSite.devID}
                       label={i18n.developmentId}
                       error={error.devID}
                       />
@@ -146,6 +158,7 @@ export default class DevSiteNew extends Component {
                       id='dev_site_application_type'
                       name='dev_site[application_type]'
                       label={i18n.applicationType}
+                      defaultValue={devSite.application_type}
                       options={APPLICATION_TYPES.map(a => [a,a])}
                       />
                   </div>
@@ -155,6 +168,7 @@ export default class DevSiteNew extends Component {
                       classes='col s12'
                       id='dev_site_description'
                       name='dev_site[description]'
+                      defaultValue={devSite.description}
                       label={i18n.description}
                       error={error.description}
                       />
@@ -172,6 +186,7 @@ export default class DevSiteNew extends Component {
                       classes='col s12'
                       id='address_street'
                       name='dev_site[addresses_attributes][0][street]'
+                      defaultValue={devSite.addresses.length > 0 ? devSite.addresses[0].street : null}
                       label={i18n.street}
                       error={error['addresses.street']}
                       />
@@ -182,18 +197,21 @@ export default class DevSiteNew extends Component {
                       classes='col s12 m12 l4'
                       id='address_city'
                       name='dev_site[addresses_attributes][0][city]'
+                      defaultValue={devSite.addresses.length > 0 ? devSite.addresses[0].city : null}
                       label={i18n.city}
                       />
                     <TextInputWithLabel
                       classes='col s12 m12 l4'
                       id='address_province_state'
                       name='dev_site[addresses_attributes][0][province_state]'
+                      defaultValue={devSite.addresses.length > 0 ? devSite.addresses[0].province_state : null}
                       label={i18n.province}
                       />
                     <TextInputWithLabel
                       classes='col s12 m12 l4'
                       id='address_country'
                       name='dev_site[addresses_attributes][0][country]'
+                      defaultValue={devSite.addresses.length > 0 ? devSite.addresses[0].country : null}
                       label={i18n.country}
                       />
                   </div>
@@ -236,12 +254,14 @@ export default class DevSiteNew extends Component {
                       classes='col s12 m12 l6'
                       id='dev_site_urban_planner_email'
                       name='dev_site[urban_planner_email]'
+                      defaultValue={devSite.urban_planner_email}
                       label={i18n.urbanPlannerEmail}
                       />
                     <TextInputWithLabel
                       classes='col s12 m12 l6'
                       id='dev_site_ward_councillor_email'
                       name='dev_site[ward_councillor_email]'
+                      defaultValue={devSite.ward_councillor_email}
                       label={i18n.wardCouncillorEmail}
                       />
                   </div>
@@ -281,6 +301,6 @@ export default class DevSiteNew extends Component {
 }
 
 document.addEventListener('turbolinks:load', () => {
-  const devSiteNew = document.querySelector('#dev-site-new');
-  devSiteNew && render(<DevSiteNew/>, devSiteNew)
+  const devSiteEdit = document.querySelector('#dev-site-edit');
+  devSiteEdit && render(<DevSiteEdit/>, devSiteEdit)
 })

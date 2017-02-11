@@ -6,6 +6,11 @@ body{
   margin:0;
 }
 
+.turbolinks-progress-bar {
+  background-color: $secondary-color !important;
+  height: 4px !important;
+}
+
 div:focus,
 button:focus,
 input:focus:not([type="checkbox"]):not([type="radio"]),

@@ -23,7 +23,9 @@ class DevSitesController < ApplicationController
     @no_header = true
   end
 
-  def edit; end
+  def edit
+    @no_header = true
+  end
 
   def create
     respond_to do |format|

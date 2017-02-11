@@ -3,6 +3,7 @@ import './components/Conversations/New/New'
 import './components/DevSites/Index/MapWrapper/MapWrapper'
 import './components/DevSites/Show/Show'
 import './components/DevSites/New/New'
+import './components/DevSites/Edit/Edit'
 
 import './components/Legal/Privacy/Privacy'
 import './components/Legal/TermsOfUse/TermsOfUse'

@@ -3,6 +3,11 @@ module Organizations
     load_resource :organization
     load_and_authorize_resource :municipality
 
+    def index
+      @municipalities = @organization.municipalities
+      render 'municipalities/index'
+    end
+
     def update
       @organization.municipalities << @municipality
       render 'organizations/show'

@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
     resources :organizations, only: [:index, :show, :create, :destroy] do
       resources :memberships, only: [:create, :destroy], module: :organizations
-      resources :municipalities, only: [:update, :destroy], module: :organizations
+      resources :municipalities, only: [:index, :update, :destroy], module: :organizations
       resources :dev_sites, only: [:index], module: :organizations
     end
   end
