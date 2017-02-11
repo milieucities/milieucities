@@ -1,23 +1,49 @@
 .landingContainer {
   min-height: 40vh;
   width: 100vw;
-  padding: 2% 30% 5% 30%;
+  padding: 2% 20% 5% 20%;
   box-sizing: border-box;
   position: relative;
-  box-shadow: 0 2px 6px 0 $gray;
   color: $black;
+
+  .headlineLink {
+    height: 70px;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 60px;
+    padding-top: 20%;
+    margin-bottom: 0px;
+    padding: 0;
+    color:$dark-secondary-color;
+
+    @media #{$small-and-down} {
+      font-size: 36px;
+    }
+
+    &:hover {
+      text-decoration: none;
+      border-bottom: 3px solid;
+    }
+
+    &:focus {
+      background-color: $accessibility;
+    }
+  }
 
   > div {
     height: 130px;
 
     > h1 {
-      height: 70px;
-      font-weight: 700;
+      height: 60px;
+      font-size: 36px;
+      font-weight: 300;
+      float: left;
       margin-bottom: 0px;
       padding: 0;
 
       @media #{$small-and-down} {
         height: 50px;
+        font-size: 24px;
       }
     }
     > h3 {
@@ -48,31 +74,31 @@
     font-size: 16px;
 
     @media #{$small-and-down} {
-      font-size: 15px;
+      font-size: 16px;
     }
   }
 
   .signUpButton {
-    background-color: $primary-color;
-    border-radius: 2px;
-    padding: 12px 20px;
     font-weight: 400;
     font-size: 16px;
     margin-top: 30px;
     margin-right: 40px;
     text-shadow: none;
-    color: $white;
+    text-decoration: none;
+    border-bottom: 1px solid;
+    color: $dark-secondary-color;
     display: inline-block;
 
     @media #{$small-and-down} {
-      margin-right: 20px;
-      padding: 12px 20px;
-      font-size: 16px;
+          font-size: 16px;
+
     }
 
     &:hover {
       opacity: 1;
-      background-color: $dark-secondary-color;
+      font-weight: 700;
+      border-bottom: 2px solid;
+
     }
 
     &:focus {
@@ -95,11 +121,11 @@
     font-size: 36px;
     text-align: center;
     position: relative;
-    font-weight: 700;
+    font-weight: 400;
     margin: 0;
 
     @media #{$small-and-down} {
-      font-size: 36px;
+      font-size: 24px;
     }
   }
 
@@ -127,6 +153,170 @@
   }
 }
 
+.guelphContainer{
+  background-image: url('./images/guelph.png');
+  background-position: top right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 2% 20% 20% 20%;
+
+
+  @media #{$medium-and-down} {
+    background-position: top right;
+    background-size: 700px auto;
+  }
+
+  @media #{$small-and-down} {
+    background-position: top right;
+    background-size: 700px auto;
+    height: 360px;
+
+  }
+
+  .milieuCityTag {
+    background: #a3c1b1;
+    background: -moz-linear-gradient(45deg,  #a3c1b1 0%, #5791b4 100%);
+    background: -webkit-linear-gradient(45deg,  #a3c1b1 0%,#5791b4 100%);
+    background: linear-gradient(45deg,  #a3c1b1 0%,#5791b4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a3c1b1', endColorstr='#5791b4',GradientType=1 );
+    padding: 6px 10px;
+    margin-bottom: 36px;
+    font-weight: 400;
+    font-size: 16px;
+    text-shadow: none;
+    color: $white;
+    display: inline-block;
+
+    @media #{$small-and-down} {
+      margin-right: 20px;
+      padding: 6px 10px;
+      font-size: 16px;
+    }
+
+    &:hover {
+      box-shadow: 2px 2px 5px 0 $secondary-color;
+    }
+
+    &:focus {
+      background-color: $accessibility;
+    }
+  }
+
+  .cityLink {
+    height: 70px;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 60px;
+    padding-top: 20%;
+    margin-bottom: 0px;
+    padding: 0;
+    color:$dark-secondary-color;
+
+    @media #{$small-and-down} {
+      font-size: 36px;
+    }
+
+    &:hover {
+      text-decoration: none;
+      border-bottom: 3px solid;
+    }
+
+    &:focus {
+      background-color: $accessibility;
+    }
+  }
+
+  > div {
+    height: 120px;
+    min-height: inherit;
+    width: 50%;
+
+    .partnerBlock {
+
+      width: 80%;
+      padding-top: 5%;
+      padding-bottom: 5%;
+      float: left;
+
+
+      @media #{$medium-and-down} {
+            padding-top: 0;
+            font-size: 16px;
+            display: none;
+            visibility: hidden;
+      }
+      .partnerLink {
+        font-weight: 400;
+        font-size: 16px;
+        text-shadow: none;
+        color:inherit;
+        text-decoration: none;
+        display: inline-block;
+
+        &:hover {
+          opacity: 1;
+          font-weight: 700;
+          border-bottom: 2px solid;
+        }
+
+        &:focus {
+          background-color: $accessibility;
+        }
+      }
+    }
+
+    @media #{$medium-and-down} {
+      background-color: $white;
+      margin-top: 0;
+      margin-bottom: 5%;
+      padding: 5% 5% 10% 5%;
+      width: 80%;
+      position: relative;
+      border-radius: 2px;
+    }
+
+    @media #{$small-and-down} {
+      padding: 5% 5% 30% 5%;
+
+    }
+
+
+    > h1 {
+      height: 70px;
+      font-weight: 700;
+      margin-bottom: 0px;
+      padding: 0;
+      color:$dark-secondary-color;
+
+      @media #{$small-and-down} {
+        height: 50px;
+      }
+    }
+    > h3 {
+      padding-top: 0px;
+    }
+
+  }
+  @media #{$medium-and-down} {
+    padding: 40px;
+  }
+
+  @media #{$small-and-down} {
+    padding: 20px;
+  }
+
+  a {
+    color: $white;
+    font-size: 16px;
+
+    @media #{$small-and-down} {
+      font-size: 16px;
+    }
+  }
+
+}
+
 .featuredContainer {
   background-color: $white;
   padding: 10px;
@@ -138,13 +328,13 @@
   .title {
     padding: 25px 0;
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 400;
     color: $dark-secondary-color;
     text-align: center;
     margin: 0;
 
     @media #{$small-and-down} {
-      font-size: 20px;
+      font-size: 24px;
     }
   }
 
