@@ -68,8 +68,10 @@ export default class Home extends Component {
         <Header />
         <div className={css.landingContainer}>
           <div>
-            <h1>Milieu</h1>
-            <h3>{i18n.heroText1}</h3>
+            <h1>
+              <a href='https://about.milieu.io' className={css.headlineLink}>Milieu, </a>
+              <span>{i18n.heroText1}</span>
+            </h1>
           </div>
           <br />
           <p>{i18n.heroText2}</p>
@@ -80,6 +82,24 @@ export default class Home extends Component {
           <div className={css.search}>
             <Autocomplete searchBtn callback={this.autocompleteCallback} placeholder={i18n.enterAddress} type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
           </div>
+        </div>
+        <div className={css.guelphContainer}>
+          <a href='https://about.milieu.io/discover-milieu' className={css.milieuCityTag}> Disvcover Milieu City</a>
+           <div>
+             <a href='https://about.milieu.io/city-of-guelph' className={css.cityLink} >Guelph, ON</a>
+             <p>{i18n.guelphDescription}</p>
+             <br />
+             <div className={css.partnerBlock}>
+               <h3>{i18n.guelphPartner}</h3>
+               <p>
+                 <a href='http://guelph.ca/' className={css.partnerLink}>City of Guelph, </a>
+                 <a href='http://www.innovationguelph.ca/' className={css.partnerLink}>  Innovation Guelph, </a>
+                 <a href='http://www.guelphchamber.com/' className={css.partnerLink}>  Guelph Chamber of Commerce, </a>
+                 <a href='http://codx.ca/' className={css.partnerLink}>  Canada’s Open Data Exchange, </a>
+                 <a href='http://www.uoguelph.ca/cbase/' className={css.partnerLink}>  CBaSE, University of Guelph</a>
+               </p>
+             </div>
+           </div>
         </div>
         <div className={css.featuredContainer}>
           <h2 className={css.title}>{i18n.featuredDevelopments}</h2>
