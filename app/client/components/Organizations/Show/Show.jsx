@@ -9,6 +9,7 @@ export default class Show extends Component {
     this.addMemberToOrganization = (e) => this._addMemberToOrganization(e)
     this.toggleMunicipality = (e) => this._toggleMunicipality(e)
     this.loadOrganization = () => this._loadOrganization()
+    this.handleInputChange = (e) => this._handleInputChange(e);
     this.state = { loading: true, organization: {} }
     this.loadOrganization()
   }
@@ -39,7 +40,8 @@ export default class Show extends Component {
   }
 
   _addMemberToOrganization(e) {
-    const email = document.getElementById('user_email').value
+    const email = this.state.userEmail;
+    console.log(email)
 
     $.ajax({
       url: `/organizations/${this.props.organizationId}/memberships`,
@@ -58,6 +60,11 @@ export default class Show extends Component {
         window.flash('alert', error.message);
       }
     });
+  }
+
+  _handleInputChange(event) {
+    console.log('change', event.target.value )
+    this.setState({ userEmail: event.target.value })
   }
 
   render() {
@@ -99,6 +106,7 @@ export default class Show extends Component {
                 id='user_email'
                 name='user[email]'
                 label='Email address'
+                changeHandler={this.handleInputChange}
               />
             </div>
             <div className='row'>
@@ -120,7 +128,7 @@ export default class Show extends Component {
             <h3>Members</h3>
             {
               organization.members.map(member => (
-                <p key={`member-${member.id}`}>
+                <p key={`organization-${organization.id}-member-${member.id}`}>
                   {member.email}
                   {member.admin && <span> (admin) </span>}
                 </p>
