@@ -3,7 +3,7 @@ class Api::V1::ApiController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
-      format.json { render json: { message: 'Forbidden' }, status: 403 }
+      format.json { render json: { code: 403, description: 'Forbidden' }, status: 403 }
     end
   end
 
@@ -23,6 +23,6 @@ class Api::V1::ApiController < ActionController::Base
 
   def authenticate_request
     @current_user = AuthorizeApiRequest.call(request.headers).result
-    render json: { error: 401, description: 'Not Authorized' }, status: 401 unless @current_user
+    render json: { code: 401, description: 'Not Authorized' }, status: 401 unless @current_user
   end
 end

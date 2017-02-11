@@ -56,6 +56,7 @@ export default class Footer extends Component {
       <div className={css.container}>
         <div className='row'>
           <div className='col s12 m3'>
+            <a href='#' onClick={this.goTop} className={css.skip} title='To the top'><i className='fa fa-arrow-up'></i></a>
             <h3 className={css.title}>
               {i18n.about}
             </h3>
@@ -94,7 +95,6 @@ export default class Footer extends Component {
               <button onClick={this.handleSubmit} className='btn' title='Subscribe your email'><i className='fa fa-envelope-o'></i></button>
             </div>
           </div>
-          <a href="#" onClick={this.goTop} className={css.skip} title='To the top'><i className="fa fa-arrow-up"></i></a>
         </div>
       </div>
     );

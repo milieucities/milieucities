@@ -108,6 +108,8 @@ export default class DevSiteShow extends Component {
   }
   render() {
     const { devSite, loading, showModal, contact } = this.state;
+    const { locale } = document.body.dataset;
+    i18n.setLanguage(locale);
     return(
       <div className={css.root}>
         <Header />
@@ -151,7 +153,7 @@ export default class DevSiteShow extends Component {
                 <div className='col s12 m6'>
                   <div className='row'>
                     <div className='col s6'>
-                      Development Id:
+                      {i18n.devId}:
                     </div>
                     <div className='col s6'>
                       {devSite.devID}
@@ -159,7 +161,7 @@ export default class DevSiteShow extends Component {
                   </div>
                   <div className='row'>
                     <div className='col s6'>
-                      Application Type:
+                      {i18n.appType}:
                     </div>
                     <div className='col s6'>
                       {devSite.application_type.replace(/coa/, 'Committee of Adjustment')}
@@ -167,14 +169,14 @@ export default class DevSiteShow extends Component {
                   </div>
                   <div className='row'>
                     <div className='col s6'>
-                      Ward Name:
+                      {i18n.wardName}:
                     </div>
                     <div className='col s6'>
                       {devSite.ward_name}
                     </div>
                   </div>
 
-                  <h3 style={{padding: '0 0.75rem'}}><b>Status</b></h3>
+                  <h3 style={{padding: '0 0.75rem'}}><b>{i18n.status}</b></h3>
                   {
                     devSite.statuses.map(status => {
                       return(
@@ -189,11 +191,11 @@ export default class DevSiteShow extends Component {
               </div>
               <div className='row'>
                 <div className='col s12 m6'>
-                  <h3><b>Description</b></h3>
+                  <h3><b>{i18n.description}</b></h3>
                   <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
                   {
                     (devSite.city_files.length > 0 || devSite.files.length > 0) &&
-                    <h3><b>Files</b></h3>
+                    <h3><b>{i18n.file}</b></h3>
                   }
                   {
                     devSite.city_files.map((file, i) => {
@@ -223,7 +225,7 @@ export default class DevSiteShow extends Component {
                   }
                 </div>
                 <div className='col s12 m6'>
-                  <h3><b>Comments</b></h3>
+                  <h3><b>{i18n.comments}</b></h3>
 
                   <Comments devSiteId={devSite.id} />
                 </div>
