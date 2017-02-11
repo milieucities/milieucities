@@ -2,7 +2,7 @@ import LocalizedStrings from 'react-localization';
 
 const i18n = new LocalizedStrings({
   en: {
-    editDevelopmentSite: 'Edit Development Site',
+    developmentSite: 'Development Site',
     basicInfo: 'Basic Info',
     municipality: 'Municipality',
     ward: 'Ward',
@@ -26,7 +26,7 @@ const i18n = new LocalizedStrings({
     save: 'Save'
   },
   fr: {
-    editDevelopmentSite: 'Modifier le site de développement',
+    developmentSite: 'Site de développement',
     basicInfo: 'Informations de base',
     municipality: 'Municipalité',
     ward: 'Quartier',
