@@ -14,6 +14,8 @@ export default class Index extends Component {
     this.loadOrganizations = () => this._loadOrganizations();
     this.loadMunicipalities = () => this._loadMunicipalities()
     this.createOrganization = (e) => this._createOrganization(e);
+    this.updateOrganization = (form, id) => this._updateOrganization(form, id);
+    this.deleteOrganization = (id) => this._deleteOrganization(id);
     this.onAccordionChange = (e) => this._onAccordionChange(e);
     this.loadOrganizations();
     this.loadMunicipalities()
@@ -40,12 +42,53 @@ export default class Index extends Component {
       type: 'POST',
       data: { organization: { name: orgName } },
       success: () => {
-        this.loadOrganizations();
-        window.flash('notice', 'Organization added');
+        if (res.status === 'unprocessable_entity') {
+          window.flash('alert', res.message);
+        } else {
+          this.loadOrganizations();
+          window.flash('notice', 'Organization created');
+        }
       },
       error: error => {
-        window.flash('alert', error);
+        window.flash('alert', 'Unable to create organization');
       }
+    });
+  }
+
+  _updateOrganization(form, id) {
+    const fd = new FormData(form);
+
+    $.ajax({
+      url: `/organizations/${id}`,
+      dataType: 'JSON',
+      contentType: false,
+      processData: false,
+      type: 'PATCH',
+      data: fd,
+      success: res => {
+        if (res.status === 'unprocessable_entity') {
+          window.flash('alert', res.message);
+        } else {
+          this.loadOrganizations();
+          window.flash('notice', 'Organization updated');
+        }
+      },
+      error: error => {
+        window.flash('alert', 'Unable to update organization');
+      }
+    });
+  }
+
+  _deleteOrganization(id) {
+    $.ajax({
+      url: `/organizations/${id}`,
+      dataType: 'JSON',
+      type: 'DELETE',
+      success: () => {
+        window.flash('alert', 'Organization deleted.')
+        this.loadOrganizations();
+      },
+      error: () => window.flash('alert', 'Unable to delete organization.')
     });
   }
 
@@ -70,7 +113,12 @@ export default class Index extends Component {
             {
               organizations.map(organization => (
                 <Panel header={organization.name} key={`organization-${organization.id}`}>
-                  <Show organizationId={organization.id} municipalities={municipalities} />
+                  <Show
+                    organizationId={organization.id}
+                    municipalities={municipalities}
+                    onUpdate={this.updateOrganization}
+                    onDelete={this.deleteOrganization}
+                  />
                 </Panel>
               ))
             }

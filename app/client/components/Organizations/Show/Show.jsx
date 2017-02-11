@@ -10,8 +10,10 @@ export default class Show extends Component {
     this.addMemberToOrganization = (e) => this._addMemberToOrganization(e);
     this.toggleMunicipality = (e) => this._toggleMunicipality(e);
     this.loadOrganization = () => this._loadOrganization();
-    this.handleInputChange = (value) => this._handleInputChange(value);
+    this.handleUserEmailInputChange = (value) => this._handleUserEmailInputChange(value);
     this.handleDeleteMember = (id) => this._deleteMemberFromOrganization(id);
+    this.updateOrganization = (e) => this._updateOrganization(e);
+    this.deleteOrganization = (e) => this._deleteOrganization(e);
     this.state = { loading: true, organization: {} };
     this.loadOrganization();
   }
@@ -42,13 +44,17 @@ export default class Show extends Component {
   }
 
   _addMemberToOrganization(e) {
-    const email = this.state.userEmail;
+    e.preventDefault()
+    const form = e.target;
+    const fd = new FormData(form);
 
     $.ajax({
       url: `/organizations/${this.props.organizationId}/memberships`,
       dataType: 'JSON',
       type: 'POST',
-      data: { membership: { user: { email } } },
+      data: fd,
+      contentType: false,
+      processData: false,
       success: res => {
         if (res.status === 'unprocessable_entity') {
           window.flash('alert', res.message);
@@ -81,13 +87,20 @@ export default class Show extends Component {
         }
       },
       error: error => {
-        window.flash('alert', error.message);
+        window.flash('alert', 'Unable to delete member');
       }
     });
   }
 
-  _handleInputChange(event) {
-    this.setState({ userEmail: event.target.value })
+  _deleteOrganization(event) {
+    this.props.onDelete(this.props.organizationId)
+  }
+
+  _updateOrganization(event) {
+    event.preventDefault()
+    const form = event.target;
+
+    this.props.onUpdate(form, this.props.organizationId)
   }
 
   render() {
@@ -95,6 +108,52 @@ export default class Show extends Component {
 
     return(
       <div className='organizations-show'>
+        <div className={css.meta}>
+          <div className={css.label}>
+            Edit Organization
+          </div>
+          <div className={css.data}>
+            <form onSubmit={ this.updateOrganization } >
+              <div className='row'>
+                <TextInputWithLabel
+                  classes='col s12 m12 l12'
+                  id='organization_name'
+                  name='organization[name]'
+                  label='Name of Organization'
+                  defaultValue={organization.name}
+                />
+              </div>
+              <div className='row'>
+                <div className='col'>
+                  <button
+                    name='commit'
+                    type='submit'
+                    className='btn'>
+                    Save
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div className={css.meta}>
+          <div className={css.label}>
+            Delete Organization
+          </div>
+          <div className={css.data}>
+            <div className='row'>
+              <div className='col'>
+                <button
+                  className='btn cancel'
+                  onClick={this.deleteOrganization}>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className={css.meta}>
           <div className={css.label}>
             Manageable Municipalities
@@ -123,26 +182,26 @@ export default class Show extends Component {
             Add a Member
           </div>
           <div className={css.data}>
-            <div className='row'>
-              <TextInputWithLabel
-                classes='col s12 m12 l12'
-                id='user_email'
-                name='user[email]'
-                label='Email address'
-                onInputChange={this.handleInputChange}
-              />
-            </div>
-            <div className='row'>
-              <div className='col'>
-                <button
-                  name='commit'
-                  type='submit'
-                  className='btn'
-                  onClick={this.addMemberToOrganization}>
-                  Add member
-                </button>
+            <form onSubmit={ this.addMemberToOrganization } >
+              <div className='row'>
+                <TextInputWithLabel
+                  classes='col s12 m12 l12'
+                  id='user_email'
+                  name='membership[user][email]'
+                  label='Email address'
+                />
               </div>
-            </div>
+              <div className='row'>
+                <div className='col'>
+                  <button
+                    name='commit'
+                    type='submit'
+                    className='btn'>
+                    Add member
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
         {
