@@ -161,7 +161,6 @@
   position: relative;
   padding: 2% 20% 20% 20%;
 
-
   @media #{$medium-and-down} {
     background-position: top right;
     background-size: 700px auto;
@@ -171,7 +170,6 @@
     background-position: top right;
     background-size: 700px auto;
     height: 360px;
-
   }
 
   .milieuCityTag {
@@ -246,6 +244,11 @@
             display: none;
             visibility: hidden;
       }
+
+      @media only screen and (min-width: #{$small-screen-up}) and (max-width: #{$large-screen})  {
+        display: none;
+      }
+
       .partnerLink {
         font-weight: 400;
         font-size: 16px;
@@ -276,11 +279,21 @@
       border-radius: 2px;
     }
 
+
+        @media only screen and (min-width: #{$small-screen-up}) and (max-width: #{$large-screen})  {
+          background-color: $white;
+      margin-top: 0;
+      margin-bottom: 5%;
+      padding: 5% 5% 10% 5%;
+      width: 80%;
+      position: relative;
+      border-radius: 2px;
+          background-size: 700px auto;
+        }
+
     @media #{$small-and-down} {
       padding: 5% 5% 30% 5%;
-
     }
-
 
     > h1 {
       height: 70px;
