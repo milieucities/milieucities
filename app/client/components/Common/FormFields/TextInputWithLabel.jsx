@@ -9,6 +9,7 @@ export default class TextInputWithLabel extends Component {
 
     this.state = { valid, errorText }
     this.validate = (e) => this._validate(e);
+    this.handleChange = (e) => this._handleChange(e);
   }
 
   _validate(e) {
@@ -30,11 +31,10 @@ export default class TextInputWithLabel extends Component {
           type='text'
           id={this.props.id}
           defaultValue={this.props.defaultValue}
-          value={this.props.value}
           name={this.props.name}
           form={this.props.form}
           onBlur={this.validate}
-          onChange={this.props.changeHandler}
+          onChange={this.props.onInputChange}
         />
         {
           (this.props.error || this.props.required && !this.state.valid) &&
