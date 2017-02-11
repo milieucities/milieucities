@@ -9,14 +9,14 @@ module Organizations
 
       if !member
         message = 'There is no user with this email address'
-        render json: { message: message, status: :unprocessable_entity } && return
+        render(json: { message: message, status: :unprocessable_entity }) && return
       end
 
       membership_exists = @organization.users.find_by(id: member.id)
 
       if membership_exists
         message = 'This user is already a member of the organization'
-        render json: { message: message, status: :unprocessable_entity } && return
+        render(json: { message: message, status: :unprocessable_entity }) && return
       end
 
       @organization.users << member
