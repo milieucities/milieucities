@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import TextInputWithLabel from '../../Common/FormFields/TextInputWithLabel'
+import { ShowMember } from '../../Members/ShowMember'
 import css from '../../Layout/Dashboard/dashboard.scss'
 
 export default class Show extends Component {
@@ -10,6 +11,7 @@ export default class Show extends Component {
     this.toggleMunicipality = (e) => this._toggleMunicipality(e)
     this.loadOrganization = () => this._loadOrganization()
     this.handleInputChange = (e) => this._handleInputChange(e);
+    this.handleDeleteMember = (e) => this._handleDeleteMember(e);
     this.state = { loading: true, organization: {} }
     this.loadOrganization()
   }
@@ -41,7 +43,6 @@ export default class Show extends Component {
 
   _addMemberToOrganization(e) {
     const email = this.state.userEmail;
-    console.log(email)
 
     $.ajax({
       url: `/organizations/${this.props.organizationId}/memberships`,
@@ -54,6 +55,30 @@ export default class Show extends Component {
         } else {
           this._loadOrganization();
           window.flash('notice', 'Member added');
+          this.setState({ userEmail: '' })
+        }
+      },
+      error: error => {
+        window.flash('alert', error.message);
+      }
+    });
+  }
+
+  _deleteMemberFromOrganization(e) {
+    const userId = 1;
+
+    $.ajax({
+      url: `/organizations/${this.props.organizationId}/memberships/`,
+      dataType: 'JSON',
+      type: 'DELETE',
+      data: { membership: { user: { email } } },
+      success: res => {
+        if (res.status === 'unprocessable_entity') {
+          window.flash('alert', res.message);
+        } else {
+          this._loadOrganization();
+          window.flash('notice', 'Member deleted');
+          this.setState({ userEmail: '' })
         }
       },
       error: error => {
@@ -63,7 +88,6 @@ export default class Show extends Component {
   }
 
   _handleInputChange(event) {
-    console.log('change', event.target.value )
     this.setState({ userEmail: event.target.value })
   }
 
@@ -106,6 +130,7 @@ export default class Show extends Component {
                 id='user_email'
                 name='user[email]'
                 label='Email address'
+                value={this.state.userEmail}
                 changeHandler={this.handleInputChange}
               />
             </div>
@@ -124,14 +149,15 @@ export default class Show extends Component {
         </div>
         {
           !loading && organization.members.length > 0 &&
-          <div>
+          <div className={ css.members }>
             <h3>Members</h3>
             {
               organization.members.map(member => (
-                <p key={`organization-${organization.id}-member-${member.id}`}>
-                  {member.email}
-                  {member.admin && <span> (admin) </span>}
-                </p>
+                <ShowMember
+                  key={member.id}
+                  member={member}
+                  onDelete={ this.handleDeleteMember }
+                />
               ))
             }
           </div>
