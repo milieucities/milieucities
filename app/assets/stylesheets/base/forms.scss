@@ -53,9 +53,10 @@ select {
   border: 1px solid $light-gray;
   background-color: $white;
   width: 100%;
-  font-size: 13px;
+  font-size: 16px;
   height: 39px;
   border-radius: 3px;
+  color: $black;
 }
 
 .input-field {

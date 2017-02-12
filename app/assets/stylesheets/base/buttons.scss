@@ -18,7 +18,15 @@
   }
 
   &.icon {
-    padding: 10px 15px;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $secondary-color;
   }
 
   &.small {
