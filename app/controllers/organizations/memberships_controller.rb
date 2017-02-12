@@ -4,19 +4,37 @@ module Organizations
 
     def create
       member_email = membership_params[:user][:email]
+
       member = User.find_by(email: member_email)
 
-      if !member
+      unless member
         message = 'There is no user with this email address'
-        render json: { message: message, status: :unprocessable_entity }
-      else
-        @organization.users << member
+        render(json: { message: message, status: :unprocessable_entity }) && return
+      end
 
-        if @organization.save
-          render json: { status: :ok }
-        else
-          render json: { message: @organization.errors, status: :unprocessable_entity }
-        end
+      membership_exists = @organization.users.find_by(id: member.id)
+
+      if membership_exists
+        message = 'This user is already a member of the organization'
+        render(json: { message: message, status: :unprocessable_entity }) && return
+      end
+
+      @organization.users << member
+
+      if @organization.save
+        render json: { status: :ok }
+      else
+        error_message = @organization.errors.full_messages.join(', ')
+        render json: { message: error_message, status: :unprocessable_entity }
+      end
+    end
+
+    def destroy
+      if @organization.memberships.find_by(id: params[:id]).destroy
+        render json: { status: :ok }
+      else
+        error_message = 'Unable to delete member, please try again.'
+        render json: { message: error_message, status: :unprocessable_entity }
       end
     end
 
