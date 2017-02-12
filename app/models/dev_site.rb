@@ -62,6 +62,10 @@ class DevSite < ActiveRecord::Base
     Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?
   end
 
+  after_save do
+    Resque.enqueue(PruneDeadLinksJob, id) unless Rails.env.test?
+  end
+
   def self.search(search_params)
     @dev_sites = DevSite.all
     @search_params = search_params
@@ -137,6 +141,7 @@ class DevSite < ActiveRecord::Base
     order_clause << "ELSE #{ids.length} END"
     where(id: ids).order(order_clause)
   end
+
 
   private
 

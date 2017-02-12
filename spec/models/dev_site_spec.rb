@@ -82,8 +82,8 @@ describe DevSite do
       @dev_site1.addresses << create(:address)
       @dev_site4.statuses << create(:status)
       @dev_site4.statuses << create(:status,
-                                                status_date: DateTime.current - 1.day,
-                                                status: 'Comment Period in Progress')
+                                     status_date: DateTime.current - 1.day,
+                                     status: 'Comment Period in Progress')
     end
 
     context 'no params passed' do
