@@ -15,11 +15,21 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def update
+    if @organization.update(name: organization_params[:name])
+      render json: @organization, status: :ok
+    else
+      error_message = @organization.errors.full_messages.join(', ')
+      render json: { message: error_message }, status: :unprocessable_entity
+    end
+  end
+
   def create
     if @organization.save
       render json: @organization, status: :created
     else
-      render json: @organization.errors, status: :unprocessable_entity
+      error_message = @organization.errors.full_messages.join(', ')
+      render json: { message: error_message }, status: :unprocessable_entity
     end
   end
 

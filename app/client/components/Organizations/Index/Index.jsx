@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
-import i18n from './locale'
+import i18n from '../locale.js'
 import Collapse, { Panel } from 'rc-collapse'
 import Show from '../Show/Show'
 import New from '../New/New'
@@ -14,6 +14,8 @@ export default class Index extends Component {
     this.loadOrganizations = () => this._loadOrganizations();
     this.loadMunicipalities = () => this._loadMunicipalities()
     this.createOrganization = (e) => this._createOrganization(e);
+    this.updateOrganization = (form, id) => this._updateOrganization(form, id);
+    this.deleteOrganization = (id) => this._deleteOrganization(id);
     this.onAccordionChange = (e) => this._onAccordionChange(e);
     this.loadOrganizations();
     this.loadMunicipalities()
@@ -39,13 +41,54 @@ export default class Index extends Component {
       dataType: 'JSON',
       type: 'POST',
       data: { organization: { name: orgName } },
-      success: () => {
-        this.loadOrganizations();
-        window.flash('notice', 'Organization added');
+      success: res => {
+        if (res.status === 'unprocessable_entity') {
+          window.flash('alert', res.message);
+        } else {
+          this.loadOrganizations();
+          window.flash('notice', i18n.organizationCreated);
+        }
       },
       error: error => {
-        window.flash('alert', error);
+        window.flash('alert', i18n.organizationNotCreated);
       }
+    });
+  }
+
+  _updateOrganization(form, id) {
+    const fd = new FormData(form);
+
+    $.ajax({
+      url: `/organizations/${id}`,
+      dataType: 'JSON',
+      contentType: false,
+      processData: false,
+      type: 'PATCH',
+      data: fd,
+      success: res => {
+        if (res.status === 'unprocessable_entity') {
+          window.flash('alert', res.message);
+        } else {
+          this.loadOrganizations();
+          window.flash('notice', i18n.organizationUpdated);
+        }
+      },
+      error: error => {
+        window.flash('alert', i18n.organisationNotUpdated);
+      }
+    });
+  }
+
+  _deleteOrganization(id) {
+    $.ajax({
+      url: `/organizations/${id}`,
+      dataType: 'JSON',
+      type: 'DELETE',
+      success: () => {
+        window.flash('alert', i18n.organizationDeleted)
+        this.loadOrganizations();
+      },
+      error: () => window.flash('alert', i18n.organizationNotDeleted)
     });
   }
 
@@ -70,7 +113,12 @@ export default class Index extends Component {
             {
               organizations.map(organization => (
                 <Panel header={organization.name} key={`organization-${organization.id}`}>
-                  <Show organizationId={organization.id} municipalities={municipalities} />
+                  <Show
+                    organizationId={organization.id}
+                    municipalities={municipalities}
+                    onUpdate={this.updateOrganization}
+                    onDelete={this.deleteOrganization}
+                  />
                 </Panel>
               ))
             }
