@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
-import i18n from './locale'
+import i18n from '../locale.js'
 import Collapse, { Panel } from 'rc-collapse'
 import Show from '../Show/Show'
 import New from '../New/New'
@@ -41,16 +41,16 @@ export default class Index extends Component {
       dataType: 'JSON',
       type: 'POST',
       data: { organization: { name: orgName } },
-      success: () => {
+      success: res => {
         if (res.status === 'unprocessable_entity') {
           window.flash('alert', res.message);
         } else {
           this.loadOrganizations();
-          window.flash('notice', 'Organization created');
+          window.flash('notice', i18n.organizationCreated);
         }
       },
       error: error => {
-        window.flash('alert', 'Unable to create organization');
+        window.flash('alert', i18n.organizationNotCreated);
       }
     });
   }
@@ -70,11 +70,11 @@ export default class Index extends Component {
           window.flash('alert', res.message);
         } else {
           this.loadOrganizations();
-          window.flash('notice', 'Organization updated');
+          window.flash('notice', i18n.organizationUpdated);
         }
       },
       error: error => {
-        window.flash('alert', 'Unable to update organization');
+        window.flash('alert', i18n.organisationNotUpdated);
       }
     });
   }
@@ -85,10 +85,10 @@ export default class Index extends Component {
       dataType: 'JSON',
       type: 'DELETE',
       success: () => {
-        window.flash('alert', 'Organization deleted.')
+        window.flash('alert', i18n.organizationDeleted)
         this.loadOrganizations();
       },
-      error: () => window.flash('alert', 'Unable to delete organization.')
+      error: () => window.flash('alert', i18n.organizationNotDeleted)
     });
   }
 

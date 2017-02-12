@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import TextInputWithLabel from '../../Common/FormFields/TextInputWithLabel'
 import { ShowMember } from '../../Members/ShowMember'
+import { Edit } from '../Edit/Edit'
 import css from '../../Layout/Dashboard/dashboard.scss'
+import i18n from '../locale.js'
 
 export default class Show extends Component {
   constructor(props) {
@@ -10,7 +12,6 @@ export default class Show extends Component {
     this.addMemberToOrganization = (e) => this._addMemberToOrganization(e);
     this.toggleMunicipality = (e) => this._toggleMunicipality(e);
     this.loadOrganization = () => this._loadOrganization();
-    this.handleUserEmailInputChange = (value) => this._handleUserEmailInputChange(value);
     this.handleDeleteMember = (id) => this._deleteMemberFromOrganization(id);
     this.updateOrganization = (e) => this._updateOrganization(e);
     this.deleteOrganization = (e) => this._deleteOrganization(e);
@@ -38,7 +39,7 @@ export default class Show extends Component {
         this.setState({ organization })
       },
       error: () => {
-        window.flash('alert', 'Failed to modify municipality.')
+        window.flash('alert', i18n.municipalityNotUpdated)
       }
     });
   }
@@ -60,7 +61,7 @@ export default class Show extends Component {
           window.flash('alert', res.message);
         } else {
           this._loadOrganization();
-          window.flash('notice', 'Member added');
+          window.flash('notice', i18n.memberAdded);
           this.setState({ userEmail: '' })
         }
       },
@@ -82,12 +83,11 @@ export default class Show extends Component {
           window.flash('alert', res.message);
         } else {
           this._loadOrganization();
-          window.flash('notice', 'Member deleted');
-          this.setState({ userEmail: '' })
+          window.flash('notice', i18n.memberDeleted);
         }
       },
       error: error => {
-        window.flash('alert', 'Unable to delete member');
+        window.flash('alert', i18n.memberNotDeleted);
       }
     });
   }
@@ -105,41 +105,14 @@ export default class Show extends Component {
 
   render() {
     const { loading, organization } = this.state;
+    i18n.setLanguage(document.body.dataset.locale);
 
     return(
       <div className='organizations-show'>
+        <Edit organization={organization} updateOrganization={this.updateOrganization} />
         <div className={css.meta}>
           <div className={css.label}>
-            Edit Organization
-          </div>
-          <div className={css.data}>
-            <form onSubmit={ this.updateOrganization } >
-              <div className='row'>
-                <TextInputWithLabel
-                  classes='col s12 m12 l12'
-                  id='organization_name'
-                  name='organization[name]'
-                  label='Name of Organization'
-                  defaultValue={organization.name}
-                />
-              </div>
-              <div className='row'>
-                <div className='col'>
-                  <button
-                    name='commit'
-                    type='submit'
-                    className='btn'>
-                    Save
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <div className={css.meta}>
-          <div className={css.label}>
-            Delete Organization
+            {i18n.deleteOrganization}
           </div>
           <div className={css.data}>
             <div className='row'>
@@ -147,7 +120,7 @@ export default class Show extends Component {
                 <button
                   className='btn cancel'
                   onClick={this.deleteOrganization}>
-                  Delete
+                  {i18n.delete}
                 </button>
               </div>
             </div>
@@ -156,7 +129,7 @@ export default class Show extends Component {
 
         <div className={css.meta}>
           <div className={css.label}>
-            Manageable Municipalities
+            {i18n.manageableMunicipalities}
           </div>
           <div className={css.data}>
             <div className='row'>
@@ -179,7 +152,7 @@ export default class Show extends Component {
 
         <div className={css.meta}>
           <div className={css.label}>
-            Add a Member
+            {i18n.addMember}
           </div>
           <div className={css.data}>
             <form onSubmit={ this.addMemberToOrganization } >
@@ -188,7 +161,7 @@ export default class Show extends Component {
                   classes='col s12 m12 l12'
                   id='user_email'
                   name='membership[user][email]'
-                  label='Email address'
+                  label={i18n.emailAddress}
                 />
               </div>
               <div className='row'>
@@ -197,7 +170,7 @@ export default class Show extends Component {
                     name='commit'
                     type='submit'
                     className='btn'>
-                    Add member
+                    {i18n.save}
                   </button>
                 </div>
               </div>
@@ -207,7 +180,7 @@ export default class Show extends Component {
         {
           !loading && organization.members.length > 0 &&
           <div className={ css.members }>
-            <h3>Members</h3>
+            <h3>{i18n.members}</h3>
             {
               organization.members.map(member => (
                 <ShowMember
