@@ -40,6 +40,6 @@ module MilieuServer
       g.helper = false
     end
 
-    config.autoload_paths += %W(\#{config.root}/lib)
+    config.autoload_paths += %W(\#{config.root}/lib \#{config.root}/app/services)
   end
 end

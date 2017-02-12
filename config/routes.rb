@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /en|fr/ do
     root to: 'pages#home'
 
+    get 'wakefield', to: 'pages#wakefield'
+
     namespace :pages, path: '/', as: nil do
       get :wakefield
       post :contact_milieu
@@ -56,6 +58,10 @@ Rails.application.routes.draw do
       end
       resources :votes, only: [:create, :destroy]
     end
+  end
+
+  namespace :custom_surveys do
+    post :typeform
   end
 
   mount Resque::Server, at: '/resque'

@@ -28,6 +28,8 @@ class PagesController < ApplicationController
 
   def about; end
 
+  def wakefield; end
+
   private
 
   def contact_milieu_params
