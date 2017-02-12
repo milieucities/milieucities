@@ -102,7 +102,7 @@ export default class Home extends Component {
             {
               this.state.featuredSites.map((site, index) => {
                 return(
-                  <a href={`/${locale}/dev_sites?activeDevSiteId=${site.id}`} key={index}>
+                  <a href={`/${locale}/dev_sites/${site.id}`} key={index}>
                     <DevSitePreview
                       id={site.id}
                       preview={true}

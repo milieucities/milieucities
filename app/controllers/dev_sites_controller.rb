@@ -17,6 +17,7 @@ class DevSitesController < ApplicationController
   def show
     @no_header = true
     @dev_site = DevSite.includes(:addresses, :statuses, :likes).find(params[:id])
+    return redirect_to wakefield_path if @dev_site.devID.eql?('wakefield-1') && request.format.html?
   end
 
   def new
