@@ -10,6 +10,33 @@
   }
 }
 
+.flex {
+  display: flex;
+
+  &.justify {
+    justify-content: space-between;
+  }
+
+  &.m-col {
+    @media #{$medium-and-down} {
+      flex-direction: column;
+    }
+  }
+
+  &.col {
+    flex-direction: column;
+  }
+
+  &.h-center {
+    justify-content: center;
+  }
+
+  &.v-center {
+    align-items: center;
+  }
+
+}
+
 .row {
   margin-left: auto;
   margin-right: auto;

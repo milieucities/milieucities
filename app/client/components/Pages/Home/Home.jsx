@@ -15,7 +15,6 @@ export default class Home extends Component {
     this.state = { isMobile: (window.innerWidth < 600), featuredSites: [] }
     this.autocompleteCallback = (address, autocomplete) => this._autocompleteCallback(address, autocomplete)
     this.handleAutocompleteSelect = (address) => this._handleAutocompleteSelect(address)
-    this.openModal = () => this._openModal();
     this.loadFeaturedSites = () => this._loadFeaturedSites();
     this.loadFeaturedSites();
 
@@ -24,10 +23,6 @@ export default class Home extends Component {
         this.setState({ isMobile: (window.innerWidth < 600) })
       }, 100)
     );
-  }
-
-  _openModal() {
-    document.querySelector('#sign-in-modal .modal-content').focus();
   }
 
   _autocompleteCallback(address, autocomplete) {

@@ -3,6 +3,11 @@ class PagesController < ApplicationController
     @no_header = true
   end
 
+  def wakefield
+    @dev_site = DevSite.find_by(devID: 'wakefield-1')
+    @no_header = true
+  end
+
   def contact_milieu
     message = contact_milieu_params
     ContactMailer.contact_milieu(message).deliver_now

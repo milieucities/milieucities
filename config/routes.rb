@@ -4,10 +4,10 @@ Rails.application.routes.draw do
     root to: 'pages#home'
 
     namespace :pages, path: '/', as: nil do
-      post 'contact_citizencity'
-      post 'contact_milieu'
-      post 'contact_file_lead'
-      post 'contact_councillor'
+      get :wakefield
+      post :contact_milieu
+      post :contact_file_lead
+      post :contact_councillor
     end
 
     namespace :legal do

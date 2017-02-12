@@ -275,7 +275,7 @@ export default class extends Component {
             showFiles &&
             devSite.files.map(file => {
               return(
-                <a key={file.id} href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
+                <a key={file.id} href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
               )
             })
           }

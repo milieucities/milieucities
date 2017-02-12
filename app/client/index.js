@@ -10,6 +10,7 @@ import './components/Legal/TermsOfUse/TermsOfUse'
 import './components/Notifications/Edit/Edit'
 
 import './components/Pages/Home/Home'
+import './components/Pages/Wakefield/Wakefield'
 
 import './components/Users/Show/Show'
 import './components/Users/Edit/Edit'
