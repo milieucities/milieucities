@@ -4,7 +4,7 @@ class DevSitesController < ApplicationController
 
   def index
     @no_header = true
-    @dev_sites = retrieve_dev_sites
+    @dev_sites = DevSite.search(search_params)
     @total = @dev_sites.count
     paginate
 
@@ -75,32 +75,8 @@ class DevSitesController < ApplicationController
     params[:page].present? ? params[:page].to_i : 0
   end
 
-  def sort?
-    params[:sort].present?
-  end
-
-  def search?
-    location_search_present? || search_term_present?
-  end
-
-  def search_term_present?
-    search_terms = [:year, :status, :ward, :municipality, :featured]
-    search_terms.any? { |query| params[query].present? }
-  end
-
-  def location_search_present?
-    params[:latitude].present? && params[:longitude].present?
-  end
-
   def search_params
     params.permit(:latitude, :longitude, :year, :ward, :status, :municipality, :featured)
-  end
-
-  def retrieve_dev_sites
-    dev_sites = DevSite.joins(:ward, :municipality).includes(:addresses, :statuses, :comments)
-    dev_sites = dev_sites.search(search_params) if search?
-    dev_sites = dev_sites.send(params[:sort]) if sort?
-    dev_sites
   end
 
   # rubocop:disable Metrics/MethodLength
