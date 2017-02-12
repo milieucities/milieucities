@@ -1,0 +1,150 @@
+.root {
+  background-color: $white;
+  min-height: calc(100vh - 50px);
+
+  .container {
+
+    @media #{$medium-and-down} {
+      padding: 20px 50px;
+    }
+
+    @media #{$small-and-down} {
+      padding: 20px;
+    }
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    padding-bottom: 25px;
+  }
+
+  .content {
+    min-width: 450px;
+    max-width: 450px;
+
+    @media #{$medium-and-down} {
+      min-width: 100%;
+      max-width: none;
+    }
+  }
+
+  .media {
+    margin-left: 50px;
+    width: 100%;
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+
+    @media #{$medium-and-down} {
+      order: -1;
+      margin: 0;
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: center;
+    }
+
+    @media #{$small-and-down} {
+      height: 295px;
+    }
+  }
+
+  iframe {
+    border: 0;
+    height: 350px;
+    width: 100%;
+    border-radius: 5px;
+
+    @media #{$small-and-down} {
+      height: 200px;
+    }
+  }
+}
+
+.carouselContainer {
+  width: 100%;
+}
+
+.carouselItemsContainer {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 166.66%;
+  left: -33.33%;
+
+  img:nth-child(3) {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  img:nth-child(5) {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+.carouselDisplay {
+  width: 100%;
+  height: 350px;
+  margin-bottom: 20px;
+  background-color: $light-gray;
+
+  @media #{$small-and-down} {
+    height: 200px;
+  }
+
+  img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 5px;
+
+    @media #{$small-and-down} {
+      height: 200px;
+    }
+  }
+}
+
+.carouselNextItem, .carouselPreviousItem {
+  position: absolute;
+  top: 0;
+  width: 75px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  font-size: 50px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  color: $white;
+  opacity: 0;
+  transition: 200ms;
+  border-radius: 5px;
+
+  @media #{$small-and-down} {
+    height: 75px;
+    font-size: 40px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.carouselNextItem {
+  right: 20%;
+  justify-content: flex-end;
+}
+
+.carouselPreviousItem {
+  left: 20%;
+}
+
+.carouselItem {
+  height: 150px;
+  width: 19%;
+  object-fit: cover;
+
+  @media #{$small-and-down} {
+    height: 75px;
+  }
+}
