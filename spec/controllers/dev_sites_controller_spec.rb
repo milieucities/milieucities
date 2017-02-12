@@ -166,7 +166,7 @@ describe DevSitesController do
 
       it 'returns search result when search query present in params' do
         search_result = [@mock_results[0]]
-        expect(@mock_results).to receive(:search).and_return(search_result)
+        expect(DevSite).to receive(:search).and_return(search_result)
         allow(search_result).to receive(:limit!).and_return(search_result)
         allow(search_result).to receive(:offset!).and_return(search_result)
 
