@@ -94,7 +94,7 @@
 
   .timeline {
     width: 100%;
-    max-width: 900px;
+    max-width: 750px;
     margin: 50px auto 25px;
     display: block;
 
@@ -205,6 +205,12 @@
 
   h2 {
     margin-top: 0;
+  }
+
+  h4 {
+    margin: 0 auto;
+    display: block;
+    max-width: 450px;
   }
 
   .logo {

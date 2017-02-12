@@ -94,8 +94,16 @@ export default class Wakefield extends Component {
 
               <h2>{i18n.communityTimeline}</h2>
 
-              <img className={`hide-on-small-only ${css.timeline}`} src={require(`./images/timeline-horizontal-${locale}.svg`)} />
-              <img className={`hide-on-med-and-up ${css.timeline}`} src={require(`./images/timeline-vertical-${locale}.svg`)} />
+              <img
+                className={`hide-on-small-only ${css.timeline}`}
+                src={require(`./images/timeline-horizontal-${locale}.svg`)}
+                alt={i18n.timeline}
+              />
+              <img
+                className={`hide-on-med-and-up ${css.timeline}`}
+                src={require(`./images/timeline-vertical-${locale}.svg`)}
+                alt={i18n.timeline}
+              />
 
               <div className='flex m-col'>
                 <div className={css.content}>
@@ -133,6 +141,10 @@ export default class Wakefield extends Component {
 
               <div className={css.partners}>
                 <h2 className='center-align'>{i18n.partners}</h2>
+                <h4 className='center-align'><i>{i18n.partnersText}</i></h4>
+
+                <br/>
+
                 <div className='flex h-center v-center'>
                   <img className={css.logo} src={require('./images/cld_logo.png')} />
                   <img className={css.logo} src={require('./images/munilettre.png')} />

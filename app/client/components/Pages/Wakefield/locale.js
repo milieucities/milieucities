@@ -15,6 +15,8 @@ const i18n = new LocalizedStrings({
     attachments: 'Attachments',
     comment: 'Comment',
     partners: 'Partners',
+    partnersText: 'The redesign of the Spring wouldn’t be possible without the generous support of the following partners',
+    timeline: 'February 15, 2017 Online Engagement Open. March 22, 2017 World Water Day Design Charrette Time: 9am-11am (session 1) 2pm-4pm (session 2) Location: Centre Wakefield La Pêche. April 22, 2017 Earth Day Design Presentation and Community Input Session Time: 9am-11am (session 1) 2pm-4pm (session 2) Location: Centre Wakefield La Pêche. April 30, 2017 Online Engagement Close. Summer 2017 Wakefield Spring Redesign.',
   },
   fr: {
     aboutProject: 'À propos de ce projet',
@@ -30,6 +32,8 @@ const i18n = new LocalizedStrings({
     attachments: 'Pièce attachée',
     comment: 'Commentair',
     partners: 'Partenaires',
+    partnersText: 'La refonte de la Source ne serait pas possible sans le soutien généreux des organisations suivantes',
+    timeline: '15 février 2017 Engagement en ligne. 22 mars 2017 Journée mondiale de l\'eau Atelier de design Heure: 9h-11h (séance 1) 14h-16h (séance 2) Lieu: Centre Wakefield La Pêche. 22 avril 2017 Jour de la Terre Présentation de la conception et session de saisie de la communauté Heure: à être déterminé Lieu: Centre Wakefield La Pêche. 30 avril 2017 Fermeture de l’engagement en ligne Été 2017 Refonte de la Source Wakefield',
   }
 });
 
