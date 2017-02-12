@@ -377,10 +377,32 @@
 
 .articleContainer {
   background-color: #3a7496;
-  padding: 20vh 20px;
+  padding: 2vh 20px 10vh;
 
   @media #{$small-and-down} {
-    padding: 20vh 10px;
+    padding: 5vh 0px 5vh;
+  }
+
+  @media #{$medium-only} {
+    padding: 2vh 20px 15vh;
+  }
+
+  .articleTitle {
+    padding: 25px 0;
+    font-size: 36px;
+    font-weight: 400;
+    color: $white;
+    text-align: center;
+    margin: 0;
+
+    @media #{$small-and-down} {
+      font-size: 24px;
+      padding-top: 10px;
+    }
+
+    @media #{$medium-only} {
+      padding: 2vh 20px 15vh;
+    }
   }
 
   .article {
