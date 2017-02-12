@@ -62,14 +62,16 @@ class DevSite < ActiveRecord::Base
     Resque.enqueue(NewDevelopmentNotificationJob, id) unless Rails.env.test?
   end
 
+  after_save do
+    Resque.enqueue(PruneDeadLinksJob, id) unless Rails.env.test?
+  end
+
   def self.search(search_params)
-    @dev_sites = DevSite.all
-    @search_params = search_params
+    result = DevSite.joins(:ward, :municipality).includes(:addresses, :statuses, :comments)
 
-    location_search
-    query_search
-
-    @dev_sites
+    result = location_search(result, search_params)
+    result = query_search(result, search_params)
+    result
   end
 
   def general_status
@@ -138,6 +140,7 @@ class DevSite < ActiveRecord::Base
     where(id: ids).order(order_clause)
   end
 
+
   private
 
   def calculate_sentiment_totals
@@ -178,53 +181,49 @@ class DevSite < ActiveRecord::Base
   end
 
   class << self
-    def location_search
-      location_search_params = [:latitude, :longitude]
-      search_by_location if location_search_params.all? { |param| @search_params[param].present? }
-    end
+    def location_search(collection, search_params)
+      lat = search_params[:latitude]
+      lon = search_params[:longitude]
 
-    def query_search
-      query_params = [:municipality, :ward, :year, :status, :featured]
-      query_params.each do |param|
-        send("search_by_#{param}") if @search_params[param].present?
-      end
-    end
+      return collection unless lat && lon
 
-    def search_by_location
       dev_site_ids = []
-      lat = @search_params[:latitude]
-      lon = @search_params[:longitude]
       dev_site_ids
         .push(Address.within(5, origin: [lat, lon])
         .closest(origin: [lat, lon])
         .limit(150)
         .pluck(:addressable_id))
-      @dev_sites = DevSite.find_ordered(dev_site_ids.flatten.uniq)
+      collection.find_ordered(dev_site_ids.flatten.uniq)
     end
 
-    def search_by_year
-      @dev_sites.where!('extract(year from updated) = ?', @search_params[:year])
+    def query_search(result, search_params)
+      search_params.except(:latitude, :longitude).map do |param, value|
+        result = send("search_by_#{param}", result, value)
+      end
+      result
     end
 
-    def search_by_municipality
-      municipality = @search_params[:municipality]
-      @dev_sites.where!(municipalities: { name: municipality })
+    def search_by_year(collection, value)
+      collection.where('extract(year from updated) = ?', value)
     end
 
-    def search_by_ward
-      ward = @search_params[:ward]
-      @dev_sites.where!(wards: { name: ward })
+    def search_by_municipality(collection, value)
+      collection.where(municipalities: { name: value })
     end
 
-    def search_by_status
-      @dev_sites
-        .where!("statuses.status_date = (select max(statuses.status_date) \
+    def search_by_ward(collection, value)
+      collection.where(wards: { name: value })
+    end
+
+    def search_by_status(collection, value)
+      collection
+        .where("statuses.status_date = (select max(statuses.status_date) \
                  from statuses where statuses.dev_site_id = dev_sites.id)")
-        .where!(statuses: { status: @search_params[:status] })
+        .where(statuses: { status: value })
     end
 
-    def search_by_featured
-      @dev_sites.where!(featured: true)
+    def search_by_featured(collection, value)
+      collection.where(featured: value)
     end
   end
 end

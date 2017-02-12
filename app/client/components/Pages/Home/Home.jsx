@@ -63,18 +63,38 @@ export default class Home extends Component {
         <Header />
         <div className={css.landingContainer}>
           <div>
-            <h1>Milieu</h1>
-            <h3>{i18n.heroText1}</h3>
+            <h1>
+              <a href='https://about.milieu.io' className={css.headlineLink}>Milieu, </a>
+              <span>{i18n.heroText1}</span>
+            </h1>
           </div>
           <br />
           <p>{i18n.heroText2}</p>
-          <a href='http://about.milieu.io/' className={css.signUpButton}>{i18n.launchProject}</a>
+          <a href='https://about.milieu.io/explore-milieu' className={css.signUpButton}>{i18n.launchProject}</a>
         </div>
         <div className={css.searchContainer}>
           <h2 className={css.title}>{i18n.title}</h2>
           <div className={css.search}>
             <Autocomplete searchBtn callback={this.autocompleteCallback} placeholder={i18n.enterAddress} type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
           </div>
+        </div>
+        <div className={css.guelphContainer}>
+          <a href='https://about.milieu.io/explore-milieu' className={css.milieuCityTag}> Discover Milieu City</a>
+           <div>
+             <a href='https://about.milieu.io/city-of-guelph' className={css.cityLink} >Guelph, ON</a>
+             <p>{i18n.guelphDescription}</p>
+             <br />
+             <div className={css.partnerBlock}>
+               <h3>{i18n.guelphPartner}</h3>
+               <p>
+                 <a href='http://guelph.ca/' className={css.partnerLink}>City of Guelph, </a>
+                 <a href='http://www.innovationguelph.ca/' className={css.partnerLink}>  Innovation Guelph, </a>
+                 <a href='http://www.guelphchamber.com/' className={css.partnerLink}>  Guelph Chamber of Commerce, </a>
+                 <a href='http://codx.ca/' className={css.partnerLink}>  Canada’s Open Data Exchange, </a>
+                 <a href='http://www.uoguelph.ca/cbase/' className={css.partnerLink}>  CBaSE, University of Guelph</a>
+               </p>
+             </div>
+           </div>
         </div>
         <div className={css.featuredContainer}>
           <h2 className={css.title}>{i18n.featuredDevelopments}</h2>
@@ -95,22 +115,20 @@ export default class Home extends Component {
           </div>
         </div>
         <div className={css.articleContainer}>
+          <h2 className={css.articleTitle}>{i18n.articles}</h2>
           <Carousel>
             <a title={'Go to Milieu\'s article of Zoning 101'} href='https://medium.com/@MilieuCities/zoning-101-a88c1e397455#.du6yt0qgk' target='_blank' className={css.article}>
               <img src={require('./images/zoning.jpeg')}/>
-              <div className={css.type}>{i18n.article}</div>
               <h2 className={css.title}>{i18n.title1}</h2>
               <div className={css.summary}>{i18n.summary1}</div>
             </a>
             <a title={'Go to Milieu\'s article of Whose streets are we planning?'} href='https://medium.com/@MilieuCities/whose-streets-are-we-planning-88f3ed1bc613#.hv858aafk' target='_blank' className={css.article}>
               <img src={require('./images/street-planning.jpeg')}/>
-              <div className={css.type}>{i18n.article}</div>
               <h2 className={css.title}>{i18n.title2}</h2>
               <div className={css.summary}>{i18n.summary2}</div>
             </a>
             <a title={'Go to Milieu\'s article of What we learned from pop-up engagement'} href='https://medium.com/@MilieuCities/what-we-learned-from-pop-up-engagement-65cec34fefde#.l84ns3xc6' target='_blank' className={css.article}>
               <img src={require('./images/pop-up-engagement.jpeg')}/>
-              <div className={css.type}>{i18n.article}</div>
               <h2 className={css.title}>What we learned from pop-up engagement</h2>
               <div className={css.summary}>Milieu’s on-going goal is to facilitate a human-centered approach to urban planning and development.</div>
             </a>

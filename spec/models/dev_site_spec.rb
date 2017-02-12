@@ -74,16 +74,23 @@ describe DevSite do
 
   describe '#search' do
     before :each do
+      @ward = create(:ward, name: 'Orleans')
+      @guelph = create(:municipality, name: 'Guelph')
+      @ottawa = create(:municipality, name: 'Ottawa')
       @dev_site1 = create(:dev_site)
       @dev_site2 = create(:dev_site, updated: DateTime.new(2012, 12, 1).utc)
-      @dev_site3 = create(:dev_site, ward_name: 'Orleans')
-      @dev_site4 = create(:dev_site)
+      @dev_site3 = create(:dev_site, ward: @ward)
+      @dev_site4 = create(:dev_site, municipality: @guelph)
+      @dev_site5 = create(:dev_site, municipality: @ottawa, updated: DateTime.new(2013, 12, 1).utc)
+      @dev_site6 = create(:dev_site)
 
       @dev_site1.addresses << create(:address)
       @dev_site4.statuses << create(:status)
       @dev_site4.statuses << create(:status,
-                                                status_date: DateTime.current - 1.day,
-                                                status: 'Comment Period in Progress')
+                                    status_date: DateTime.current - 1.day,
+                                    status: 'Comment Period in Progress')
+      @dev_site6.addresses << create(:address)
+      @dev_site6.statuses << create(:status, status: 'Comment Period in Progress')
     end
 
     context 'no params passed' do
@@ -92,11 +99,13 @@ describe DevSite do
 
         result = DevSite.search(search_params)
 
-        expect(result.count).to eq(4)
+        expect(result.count).to eq(6)
         expect(result).to include(@dev_site1)
         expect(result).to include(@dev_site2)
         expect(result).to include(@dev_site3)
         expect(result).to include(@dev_site4)
+        expect(result).to include(@dev_site5)
+        expect(result).to include(@dev_site6)
       end
     end
 
@@ -106,7 +115,7 @@ describe DevSite do
 
         result = DevSite.search(search_params)
 
-        expect(result).to eq([@dev_site1])
+        expect(result).to eq([@dev_site1, @dev_site6])
       end
 
       it 'should not return DevSites over 5km from origin' do
@@ -138,15 +147,49 @@ describe DevSite do
       end
     end
 
-    # context 'status provided as search query' do
-    #   it 'should retrieve only DevSites with active status matching the status given' do
-    #     search_params = { status: 'Application File Pending' }
+    context 'municipality provided as search query' do
+      it 'should retrieve only DevSites matching the municipality given' do
+        search_params = { municipality: 'Guelph' }
 
-    #     result = DevSite.search(search_params)
+        result = DevSite.search(search_params)
 
-    #     expect(result).to eq([@dev_site4])
-    #   end
-    # end
+        expect(result).to eq([@dev_site4])
+      end
+    end
+
+    context 'status provided as search query' do
+      it 'should retrieve only DevSites with active status matching the status given' do
+        search_params = { status: 'Application File Pending' }
+
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([@dev_site4])
+      end
+    end
+
+    context 'multiple search params provided' do
+      it 'should retrieve only the DevSites that match the query params' do
+        search_params = { municipality: 'Ottawa', year: '2013' }
+
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([@dev_site5])
+      end
+    end
+
+    context 'location and search params provided' do
+      it 'should retrieve only the DevSites that match the location and query params' do
+        search_params = {
+          latitude: 45.430863,
+          longitude: -75.712344,
+          status: 'Comment Period in Progress'
+        }
+
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([@dev_site6])
+      end
+    end
   end
 
   describe '#status' do

@@ -13,15 +13,6 @@
   .content {
     width: 100%;
 
-    .devSite {
-      margin: 20px 0;
-      padding: 0;
-      display: flex;
-      @media #{$small-and-down} {
-        justify-content: center;
-      }
-    }
-
     > h2 {
       @media #{$small-and-down} {
         text-align: center;
@@ -168,6 +159,13 @@
             font-style: italic;
           }
         }
+      }
+    }
+
+    .members {
+      .member {
+        padding: 10px 0;
+        border-bottom: 1px solid $light-gray;
       }
     }
   }
