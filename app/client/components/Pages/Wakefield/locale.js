@@ -13,6 +13,8 @@ const i18n = new LocalizedStrings({
     communityTimeline: 'Community Engagement Timeline',
     newsAndUpdates: 'News and updates',
     attachments: 'Attachments',
+    comment: 'Comment',
+    partners: 'Partners',
   },
   fr: {
     aboutProject: 'À propos de ce projet',
@@ -26,6 +28,8 @@ const i18n = new LocalizedStrings({
     communityTimeline: 'Calendrier de la participation communautaire',
     newsAndUpdates: 'Nouvelles et mises à jour',
     attachments: 'Pièce attachée',
+    comment: 'Commentair',
+    partners: 'Partenaires',
   }
 });
 

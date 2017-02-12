@@ -6,6 +6,7 @@ import Footer from '../../Layout/Footer/Footer'
 import Modal from '../../Utility/Modal/Modal'
 import Comments from '../../Comments/Comments'
 import Loader from '../../Common/Loader/Loader'
+import Sentiment from '../../Common/Sentiment/Sentiment'
 import i18n from './locale'
 import Chart from 'chart.js'
 import { ShareButtons, generateShareIcon } from 'react-share';
@@ -22,14 +23,24 @@ export default class DevSiteShow extends Component {
     this.loadDevSite = () => this._loadDevSite();
     this.handleEmail = (e) => this._handleEmail(e);
     this.openEmailModal = (e) => this._openEmailModal(e);
-    this.generateChart = () => this._generateChart();
+  }
+
+  componentDidMount() {
     this.loadDevSite();
   }
-  componentDidUpdate(prevProps, prevState) {
-    if(this.state.devSite && !prevState.devSite && this.state.devSite.sentiment) {
-      this.generateChart();
-    }
+
+  _loadDevSite() {
+    $.ajax({
+      url: `/dev_sites/${this.devSiteId}`,
+      dataType: 'JSON',
+      type: 'GET',
+      success: devSite => this.setState({ devSite, loading: false }),
+      error: () => {
+        window.flash('alert', 'Failed to load Development Site. Reload the page and try again.')
+      }
+    })
   }
+
   _handleEmail(e) {
     e.preventDefault();
     const { contact } = this.state;
@@ -51,61 +62,14 @@ export default class DevSiteShow extends Component {
       }
     })
   }
-  _loadDevSite() {
-    $.ajax({
-      url: `/dev_sites/${this.devSiteId}`,
-      dataType: 'JSON',
-      type: 'GET',
-      success: devSite => this.setState({ devSite, loading: false }),
-      error: () => {
-        window.flash('alert', 'Failed to load Development Site. Reload the page and try again.')
-      }
-    })
-  }
+
   _openEmailModal(e) {
     e.preventDefault();
     const { urban_planner_email, ward_councillor_email } = this.state.devSite;
     const contact = e.currentTarget.innerText;
     this.setState({ showModal: true, contact });
   }
-  _formatEmotion(str) {
-    return (parseFloat(str) * 100).toFixed(0)
-  }
-  _generateChart() {
-    const { anger, disgust, fear, joy, sadness } = this.state.devSite.sentiment;
-    const chart = document.getElementById('chart');
-    new Chart(chart, {
-      type: 'doughnut',
-      animation: {
-        animateScale: true
-      },
-      data: {
-        labels: ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness'],
-        datasets: [{
-          label: 'Emotion',
-          data: [
-            this._formatEmotion(anger),
-            this._formatEmotion(disgust),
-            this._formatEmotion(fear),
-            this._formatEmotion(joy),
-            this._formatEmotion(sadness)
-          ],
-          backgroundColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(255, 159, 64, 1)'
-          ]
-        }]
-      },
-      options: {
-        legend: {
-          position: 'left'
-        }
-      }
-    });
-  }
+
   render() {
     const { devSite, loading, showModal, contact } = this.state;
     return(
@@ -208,7 +172,7 @@ export default class DevSiteShow extends Component {
                     devSite.files.map((file, i) => {
                       return(
                         <div key={i}>
-                          <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
+                          <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
                         </div>
                       )
                     })
@@ -219,7 +183,13 @@ export default class DevSiteShow extends Component {
                   }
                   {
                     devSite.sentiment &&
-                    <canvas id='chart' width='500' height='300'></canvas>
+                    <Sentiment
+                      anger={devSite.sentiment.anger}
+                      disgust={devSite.sentiment.disgust}
+                      fear={devSite.sentiment.fear}
+                      joy={devSite.sentiment.joy}
+                      sadness={devSite.sentiment.sadness}
+                      />
                   }
                 </div>
                 <div className='col s12 m6'>

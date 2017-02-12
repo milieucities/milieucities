@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   end
 
   def wakefield
+    @dev_site = DevSite.find_by(devID: 'wakefield-1')
     @no_header = true
   end
 

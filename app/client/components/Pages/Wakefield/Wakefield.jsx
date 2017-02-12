@@ -3,21 +3,43 @@ import { render } from 'react-dom'
 import css from './wakefield.scss'
 import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
+import Comments from '../../Comments/Comments'
+import Loader from '../../Common/Loader/Loader'
+import Sentiment from '../../Common/Sentiment/Sentiment'
 import { debounce, uniqueId } from 'lodash'
 import i18n from './locale'
+import { ShareButtons, generateShareIcon } from 'react-share';
+
+const { FacebookShareButton, TwitterShareButton } = ShareButtons;
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
 
 export default class Wakefield extends Component {
   constructor() {
     super()
-    this.state = { isMobile: (window.innerWidth < 600) }
+    this.state = { loading: true };
+    this.devSiteId = document.querySelector('#wakefield').dataset.id;
+    this.loadDevSite = () => this._loadDevSite();
+  }
 
-    window.addEventListener('resize', debounce(() => {
-      this.setState({ isMobile: (window.innerWidth < 600) })
-    }, 100));
+  componentDidMount() {
+    this.loadDevSite();
+  }
+
+  _loadDevSite() {
+    $.ajax({
+      url: `/dev_sites/${this.devSiteId}`,
+      dataType: 'JSON',
+      type: 'GET',
+      success: devSite => this.setState({ devSite, loading: false }),
+      error: () => {
+        window.flash('alert', 'Failed to load Development Site. Reload the page and try again.')
+      }
+    })
   }
 
   render() {
-    const { isMobile } = this.state;
+    const { loading, devSite } = this.state;
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
 
@@ -26,40 +48,101 @@ export default class Wakefield extends Component {
         <Header />
         <div className={`${css.container} container`}>
           <h1>Lorne Shoudice Spring, Le Pêche, Quebec, Canada</h1>
+          <Loader loading={loading} />
 
-          <div className='flex m-col'>
-            <div className={css.content}>
-              <h2 style={{marginTop: 0}}>{i18n.aboutProject}</h2>
-
-              <p>{i18n.aboutProjectP1}</p>
-              <p>{i18n.aboutProjectP2}</p>
-              <p>{i18n.aboutProjectP3}</p>
-              <p>{i18n.aboutProjectP4}</p>
-
-              <h2>{i18n.whatDoYouThink}</h2>
-
-              <p>{i18n.whatDoYouThinkP1}</p>
-              <p>{i18n.whatDoYouThinkP2}</p>
-            </div>
-
-            <div className={css.media}>
-              <Carousel />
-            </div>
-          </div>
-
-          <h2>{i18n.communityTimeline}</h2>
-
-          <div className='flex m-col'>
+          {
+            !loading &&
             <div>
-              <h2>{i18n.newsAndUpdates}</h2>
-              <p>March 1, 2017 - Visiting Wakefield Spring</p>
-              <p>March 1, 2017 - Visiting Wakefield Spring</p>
-              <p>March 1, 2017 - Visiting Wakefield Spring</p>
-              <p>March 1, 2017 - Visiting Wakefield Spring</p>
-            </div>
-          </div>
+              <div className={css.share}>
+                <FacebookShareButton
+                  url={`${window.location.origin}/wakefield`}
+                  title='Lorne Shoudice Spring, Le Pêche, Quebec'
+                  description='The Lorne Shouldice Spring ( Wakefield Spring) is a treasured source of potable freshwater maintained by the municipality of La Pêche and local non-profit group Friends of the Wakefield Spring.'
+                  picture='https://s3.ca-central-1.amazonaws.com/milieu-production/wakefield.jpg'
+                  >
+                  <FacebookIcon size={40} round />
+                </FacebookShareButton>
+                <br/>
+                <TwitterShareButton
+                  url={`${window.location.origin}/wakefield`}
+                  title='Lorne Shoudice Spring, Le Pêche, Quebec'
+                  picture='https://s3.ca-central-1.amazonaws.com/milieu-production/wakefield.jpg'
+                  >
+                  <TwitterIcon size={40} round />
+                </TwitterShareButton>
+              </div>
 
+              <div className='flex m-col'>
+                <div className={css.content}>
+                  <h2 style={{marginTop: 0}}>{i18n.aboutProject}</h2>
+
+                  <p>{i18n.aboutProjectP1}</p>
+                  <p>{i18n.aboutProjectP2}</p>
+                  <p>{i18n.aboutProjectP3}</p>
+                  <p>{i18n.aboutProjectP4}</p>
+
+                  <h2>{i18n.whatDoYouThink}</h2>
+
+                  <p>{i18n.whatDoYouThinkP1}</p>
+                  <p>{i18n.whatDoYouThinkP2}</p>
+                </div>
+
+                <div className={css.media}>
+                  <Carousel />
+                </div>
+              </div>
+
+              <h2>{i18n.communityTimeline}</h2>
+
+              <img className={`hide-on-small-only ${css.timeline}`} src={require(`./images/timeline-horizontal-${locale}.svg`)} />
+              <img className={`hide-on-med-and-up ${css.timeline}`} src={require(`./images/timeline-vertical-${locale}.svg`)} />
+
+              <div className='flex m-col'>
+                <div className={css.content}>
+                  <h2>{i18n.comment}</h2>
+                  <Comments devSiteId={this.devSiteId} />
+                </div>
+                <div className={css.sentiment}>
+                  {
+                    devSite.sentiment &&
+                    <h2>Sentiment</h2>
+                  }
+                  {
+                    devSite.sentiment &&
+                    <Sentiment
+                      anger={devSite.sentiment.anger}
+                      disgust={devSite.sentiment.disgust}
+                      fear={devSite.sentiment.fear}
+                      joy={devSite.sentiment.joy}
+                      sadness={devSite.sentiment.sadness}
+                      />
+                  }
+                  <h2>{i18n.attachments}</h2>
+                  {
+                    devSite.files.map((file, i) => {
+                      return(
+                        <a key={`file-${i}`} target='_blank' className={css.attachment} href={file.url}>
+                          <span className={css.extension}>{file.extension}</span>
+                          {file.name.replace(/_/g, ' ')}
+                        </a>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+
+              <div className={css.partners}>
+                <h2 className='center-align'>{i18n.partners}</h2>
+                <div className='flex h-center v-center'>
+                  <img className={css.logo} src={require('./images/cld_logo.png')} />
+                  <img className={css.logo} src={require('./images/munilettre.png')} />
+                  <img className={css.logo} src={require('./images/desjardin.png')} />
+                </div>
+              </div>
+            </div>
+          }
         </div>
+        <Footer />
       </div>
     )
   }
@@ -73,7 +156,7 @@ const CAROUSEL_ITEMS = [
   {
     src: './images/wakefield-video.jpg',
     image: false,
-    iframe: 'https://drive.google.com/file/d/0B7ZsD-DSn7XYSkN5Y1FLNDNEaHM/preview'
+    iframe: 'https://www.youtube.com/embed/-Fm-Y9EqfFo?rel=0&amp;showinfo=0'
   },
   {
     src: './images/discover.jpg',
@@ -133,7 +216,7 @@ class Carousel extends Component {
           }
           {
             !currentItem.image &&
-            <iframe src={currentItem.iframe} />
+            <iframe src={currentItem.iframe} frameBorder='0' allowFullScreen />
           }
         </div>
         <div ref='container' className={css.carouselItemsContainer}>
