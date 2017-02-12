@@ -17,39 +17,39 @@
             <circle id="Oval" fill="#92C7C6" cx="369" cy="174" r="10"></circle>
             <circle id="Oval" fill="#92C7C6" cx="80" cy="173" r="10"></circle>
             <circle id="Oval" fill="#92C7C6" cx="625.5" cy="174.5" r="5.5"></circle>
-            <text id="15-Février-2017" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+            <text id="15-Février-2017" font-family="Lato-Bold, Lato, Serif" font-size="14" font-weight="bold" fill="#555555">
                 <tspan x="2" y="226">15 Février 2017</tspan>
             </text>
-            <text id="30-Avril,-2017" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+            <text id="30-Avril,-2017" font-family="Lato-Bold, Lato, Serif" font-size="14" font-weight="bold" fill="#555555">
                 <tspan x="407" y="226">30 Avril, 2017</tspan>
             </text>
-            <text id="Été-2017" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+            <text id="Été-2017" font-family="Lato-Bold, Lato, Serif" font-size="14" font-weight="bold" fill="#555555">
                 <tspan x="620" y="226">Été 2017</tspan>
             </text>
-            <text id="22-Mars-2017---Journ" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+            <text id="22-Mars-2017---Journ" font-family="Lato-Bold, Lato, Serif" font-size="14" font-weight="bold" fill="#555555">
                 <tspan x="79" y="14">22 Mars 2017 - Journée Mondiale de L’eau</tspan>
             </text>
-            <text id="22-Avril,-2017---Jou" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+            <text id="22-Avril,-2017---Jou" font-family="Lato-Bold, Lato, Serif" font-size="14" font-weight="bold" fill="#555555">
                 <tspan x="364" y="14">22 Avril, 2017 - Jour de la Terre</tspan>
             </text>
-            <text id="Engagement-en-Ligne" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+            <text id="Engagement-en-Ligne" font-family="Lato-Regular, Lato, Serif" font-size="14" font-weight="normal" fill="#555555">
                 <tspan x="2" y="248">Engagement en Ligne</tspan>
             </text>
-            <text id="Fermeture-de-L’engag" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+            <text id="Fermeture-de-L’engag" font-family="Lato-Regular, Lato, Serif" font-size="14" font-weight="normal" fill="#555555">
                 <tspan x="407" y="248">Fermeture de </tspan>
                 <tspan x="407" y="265">L’engagement en Ligne </tspan>
             </text>
-            <text id="Refonte-de-la-Source" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+            <text id="Refonte-de-la-Source" font-family="Lato-Regular, Lato, Serif" font-size="14" font-weight="normal" fill="#555555">
                 <tspan x="621" y="248">Refonte de la Source Wakefield</tspan>
             </text>
-            <text id="Atelier-de-Design" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+            <text id="Atelier-de-Design" font-family="Lato-Regular, Lato, Serif" font-size="14" font-weight="normal" fill="#555555">
                 <tspan x="79" y="35">Atelier de Design</tspan>
             </text>
-            <text id="Présentation-de-la-c" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+            <text id="Présentation-de-la-c" font-family="Lato-Regular, Lato, Serif" font-size="14" font-weight="normal" fill="#555555">
                 <tspan x="364" y="38">Présentation de la conception et session </tspan>
                 <tspan x="364" y="55">de saisie de la communauté</tspan>
             </text>
-            <g id="Group" transform="translate(79.000000, 43.000000)" font-size="14" font-family="Lato-Regular, Lato" fill="#555555" font-weight="normal">
+            <g id="Group" transform="translate(79.000000, 43.000000)" font-size="14" font-family="Lato-Regular, Lato, Serif" fill="#555555" font-weight="normal">
                 <text id="Heure:">
                     <tspan x="1" y="14">Heure:</tspan>
                 </text>
@@ -61,7 +61,7 @@
                     <tspan x="0" y="51">Lieu: Centre Wakefield La Pêche</tspan>
                 </text>
             </g>
-            <g id="Group" transform="translate(364.000000, 64.000000)" font-size="14" font-family="Lato-Regular, Lato" fill="#555555" font-weight="normal">
+            <g id="Group" transform="translate(364.000000, 64.000000)" font-size="14" font-family="Lato-Regular, Lato, Serif" fill="#555555" font-weight="normal">
                 <text id="Heure:">
                     <tspan x="1" y="14">Heure:</tspan>
                 </text>
