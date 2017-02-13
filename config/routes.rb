@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /en|fr/ do
     root to: 'pages#home'
 
-    get 'wakefield', to: 'pages#wakefield'
-
     namespace :pages, path: '/', as: nil do
       get :wakefield
       post :contact_milieu

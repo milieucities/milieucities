@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe CustomSurveysController do
+  before do
+    CustomSurvey.create(title: 'Wakefield Spring Survey', typeform_id: 'HHlHgX', form_fields: {})
+  end
+
   let(:typeform_response) do
     {
       "event_id": "2cbSGSWG9y",

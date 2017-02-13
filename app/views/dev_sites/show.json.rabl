@@ -30,5 +30,5 @@ child(:city_files) { attributes :id, :link, :name }
 child(:statuses) { attributes :id, :status, :friendly_status_date }
 
 child :sentiment do
-  attributes :anger, :disgust, :sadness, :joy, :fear
+  attributes :anger, :disgust, :sadness, :joy, :fear, :id
 end

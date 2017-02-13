@@ -1,8 +1,6 @@
-require 'watson'
 require 'data_analysis'
 
 class DevSite < ActiveRecord::Base
-  include Services::Watson
   include Services::DataAnalysis
 
   scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
@@ -127,6 +125,8 @@ class DevSite < ActiveRecord::Base
   end
 
   def update_sentiment
+    return unless comments.present?
+
     results = overall_sentiments(comments.includes(:sentiment))
 
     create_sentiment if sentiment.blank?

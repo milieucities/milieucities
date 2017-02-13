@@ -19,11 +19,18 @@ export default class Wakefield extends Component {
     super()
     this.state = { loading: true };
     this.devSiteId = document.querySelector('#wakefield').dataset.id;
+    this.surveySentiment = document.querySelector('#wakefield').dataset.surveySentiment;
     this.loadDevSite = () => this._loadDevSite();
+    this.typeformScript = () => this._typeformScript();
   }
 
   componentDidMount() {
     this.loadDevSite();
+    this.typeformScript();
+  }
+
+  _typeformScript() {
+    (function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'widget.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}})()
   }
 
   _loadDevSite() {
@@ -41,6 +48,7 @@ export default class Wakefield extends Component {
   render() {
     const { loading, devSite } = this.state;
     const { locale } = document.body.dataset;
+    const surveySentiment = JSON.parse(this.surveySentiment) || null
     i18n.setLanguage(locale);
 
     return (
@@ -92,6 +100,28 @@ export default class Wakefield extends Component {
                 </div>
               </div>
 
+              <div className="typeform-widget" data-url="https://milieu.typeform.com/to/HHlHgX" data-text="Wakefield Spring Survey" style={{width: '100%', height: 'auto'}}>
+              </div>
+
+
+              <div className={css.sentiment}>
+                {
+                  surveySentiment &&
+                  <h2>Survey Sentiment</h2>
+                }
+                {
+                  surveySentiment &&
+                  <Sentiment
+                    chartId={`chart-sentiment-${surveySentiment.id}`}
+                    anger={surveySentiment.anger}
+                    disgust={surveySentiment.disgust}
+                    fear={surveySentiment.fear}
+                    joy={surveySentiment.joy}
+                    sadness={surveySentiment.sadness}
+                  />
+                }
+              </div>
+
               <h2>{i18n.communityTimeline}</h2>
 
               <img className={`hide-on-small-only ${css.timeline}`} src={require(`./images/timeline-horizontal-${locale}.svg`)} />
@@ -105,11 +135,12 @@ export default class Wakefield extends Component {
                 <div className={css.sentiment}>
                   {
                     devSite.sentiment &&
-                    <h2>Sentiment</h2>
+                    <h2>Comment Sentiment</h2>
                   }
                   {
                     devSite.sentiment &&
                     <Sentiment
+                      chartId={`chart-sentiment-${devSite.sentiment.id}`}
                       anger={devSite.sentiment.anger}
                       disgust={devSite.sentiment.disgust}
                       fear={devSite.sentiment.fear}

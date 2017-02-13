@@ -28,9 +28,10 @@ class CreateWakefieldCustomSurvey < ActiveRecord::Migration
         "type"=>"textarea"},
        {"id"=>"42471743",
         "title"=>"As a community member, can you tell us what the spring means to you outside of being a water source?",
-        "type"=>"textarea"}]
+        "type"=>"textarea"}],
+      "fields_for_analysis"=>["42471743"]
       }
-    wakefield_survey = CustomSurvey.create(title: 'Wakefield Spring Survey', typeform_id: 'HHlHgX', form_fields: form_fields)
+    CustomSurvey.create(title: 'Wakefield Spring Survey', typeform_id: 'HHlHgX', form_fields: form_fields)
   end
 
   def down
