@@ -168,7 +168,10 @@ const CAROUSEL_ITEMS = [
   {
     src: './images/wakefield-video.jpg',
     image: false,
-    iframe: 'https://www.youtube.com/embed/-Fm-Y9EqfFo?rel=0&amp;showinfo=0'
+    iframe: {
+      en: 'https://www.youtube.com/embed/Qd5-BAoTMnk?rel=0&amp;showinfo=0',
+      fr: 'https://www.youtube.com/embed/LWatPVfdrqA?rel=0&amp;showinfo=0'
+    }
   },
   {
     src: './images/discover.jpg',
@@ -208,6 +211,7 @@ class Carousel extends Component {
   }
 
   render() {
+    const { locale } = document.body.dataset;
     const { itemIndex } = this.state;
     const currentItem = CAROUSEL_ITEMS[(itemIndex + 1) % CAROUSEL_ITEMS.length]
     let items = [];
@@ -228,7 +232,7 @@ class Carousel extends Component {
           }
           {
             !currentItem.image &&
-            <iframe src={currentItem.iframe} frameBorder='0' allowFullScreen />
+            <iframe src={currentItem.iframe[locale]} frameBorder='0' allowFullScreen />
           }
         </div>
         <div ref='container' className={css.carouselItemsContainer}>
