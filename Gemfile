@@ -78,8 +78,4 @@ group :production, :staging do
   gem 'unicorn', '5.1.0'
 end
 
-group :development, :test do
-  gem 'pry-rails', :group => :development
-end
-
 ruby '2.3.0'
