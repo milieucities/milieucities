@@ -59,6 +59,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :custom_surveys do
+    post :typeform
+  end
+
   mount Resque::Server, at: '/resque'
 
   root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root

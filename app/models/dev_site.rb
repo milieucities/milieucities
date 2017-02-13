@@ -1,4 +1,8 @@
+require 'data_analysis'
+
 class DevSite < ActiveRecord::Base
+  include Services::DataAnalysis
+
   scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
 
   mount_uploaders :images, ImagesUploader
@@ -121,13 +125,14 @@ class DevSite < ActiveRecord::Base
   end
 
   def update_sentiment
-    sentiment_totals = calculate_sentiment_totals
-    sentiment_averages = calculate_sentiment_averages(sentiment_totals)
+    return unless comments.present?
+
+    results = overall_sentiments(comments.includes(:sentiment))
 
     create_sentiment if sentiment.blank?
 
-    update(sentiment_totals)
-    sentiment.update(sentiment_averages)
+    update(add_total_suffix(results[:totals]))
+    sentiment.update(results[:averages])
   end
 
   def self.find_ordered(ids)
@@ -143,33 +148,13 @@ class DevSite < ActiveRecord::Base
 
   private
 
-  def calculate_sentiment_totals
-    sentiment_totals = {}
-    dev_site_comments = comments.includes(:sentiment)
-
-    Sentiment::NAMES.each do |s_name|
-      total_method_name = "#{s_name}_total"
-      sentiment_totals[total_method_name] = sum_of_comments_sentiment(dev_site_comments, s_name)
+  def add_total_suffix(totals)
+    new_totals = {}
+    totals.map do |key, value|
+      new_key = "#{key}_total".to_sym
+      new_totals[new_key] = value
     end
-
-    sentiment_totals
-  end
-
-  def calculate_sentiment_averages(sentiment_totals)
-    sentiment_averages = {}
-    comments_count = comments.count
-
-    Sentiment::NAMES.each do |s_name|
-      total_method_name = "#{s_name}_total"
-      average_for_sentiment = sentiment_totals[total_method_name] / comments_count
-      sentiment_averages[s_name] = average_for_sentiment
-    end
-
-    sentiment_averages
-  end
-
-  def sum_of_comments_sentiment(dev_site_commments, s_name)
-    dev_site_commments.inject(0.0) { |acc, elem| acc + elem.sentiment.send(s_name) }
+    new_totals
   end
 
   def streetview_image

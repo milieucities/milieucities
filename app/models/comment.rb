@@ -1,5 +1,8 @@
 require 'action_view'
+require 'watson'
+
 include ActionView::Helpers::DateHelper
+include Services::Watson
 
 class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
@@ -31,7 +34,8 @@ class Comment < ActiveRecord::Base
 
   def set_sentiment
     create_sentiment if sentiment.blank?
-    sentiment.update_sentiment(body)
+    sentiment_params = sentiment_analysis(body)
+    sentiment.update(sentiment_params) if sentiment_params
     update_dev_site_sentiment
   end
 

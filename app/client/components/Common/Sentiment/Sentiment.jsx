@@ -16,8 +16,8 @@ export default class Sentiment extends Component {
   }
 
   _generateChart() {
-    const { anger, disgust, fear, joy, sadness } = this.props;
-    const chart = document.getElementById('chart');
+    const { anger, disgust, fear, joy, sadness, chartId } = this.props;
+    const chart = document.getElementById(chartId);
     new Chart(chart, {
       type: 'doughnut',
       animation: {
@@ -53,11 +53,12 @@ export default class Sentiment extends Component {
 
   render() {
     const { locale } = document.body.dataset;
+    const chartId = this.props.chartId;
     i18n.setLanguage(locale);
 
     return(
-      <div style={{maxWidth: 500}}>
-        <canvas id='chart' width='500' height='300'></canvas>
+      <div style={{maxWidth: '500px'}}>
+        <canvas id={chartId} style={{width: '500px', height: '300px'}}></canvas>
         <br/>
         <p>{i18n.sentiment}</p>
       </div>
