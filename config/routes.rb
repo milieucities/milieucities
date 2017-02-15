@@ -51,11 +51,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/login', to: 'authentication#authenticate'
-      get '/user', to: 'user#show'
+      get '/users', to: 'users#show'
+      resources :votes, only: [:create, :destroy]
       resources :dev_sites, only: [:index] do
         resources :comments, only: [:index, :show, :create, :update, :destroy], module: :dev_sites
       end
-      resources :votes, only: [:create, :destroy]
     end
   end
 
