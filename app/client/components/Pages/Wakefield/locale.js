@@ -3,7 +3,7 @@ import LocalizedStrings from 'react-localization';
 const i18n = new LocalizedStrings({
   en:{
     aboutProject: 'About this project',
-    aboutProjectP1: 'The Lorne Shouldice Spring ( Wakefield Spring) is a treasured source of potable freshwater maintained by the municipality of La Pêche With the support from local non-profit group Friends of the Wakefield Spring.',
+    aboutProjectP1: 'The Lorne Shouldice Spring ( Wakefield Spring) is a treasured source of potable freshwater maintained by the municipality of La Pêche with the support from local non-profit group Friends of the Wakefield Spring.',
     aboutProjectP2: 'A series of public events aim to collectively reimagine the Spring, upgrade the infrastructure and address community concerns.',
     aboutProjectP3: 'Members of the community who use the Spring are welcome and encouraged to submit their feedback here.',
     aboutProjectP4: 'For updates, follow Friends of the Wakefield Spring on Twitter and Facebook.',
