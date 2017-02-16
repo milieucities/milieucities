@@ -17,7 +17,7 @@ const i18n = new LocalizedStrings({
     summary1: 'Zoning regulations are the rules of the game if you — or a developer — want to construct a building.',
     title2: 'Whose streets are we planning?',
     summary2: 'Transportation planning offers huge opportunities to enable equity.',
-    guelphDescription: 'Launching February 22, 2017, Milieu will be deployed city-wide as part of the Guelph Civic Accelerator. Citizens of Guelph can find out what’s being built and participate in the future planning and development of the city. ',
+    guelphDescription: 'Milieu will be deployed city-wide as part of the Guelph Civic Accelerator. Citizens of Guelph can find out what’s being built and participate in the future planning and development of the city. ',
     guelphPartner: 'Partners'
   },
   fr: {
@@ -36,7 +36,7 @@ const i18n = new LocalizedStrings({
     summary1: 'Les régulations de zonage sont les règles pour quand quelqu’un (tels que vous ou un développeur) veut construire un bâtiment.',
     title2: 'À qui sont les rues que nous planifions ?',
     summary2: 'La planification des transports offre d’énormes possibilités d’équité.',
-    guelphDescription: 'Lancé le 22 février 2017, Milieu sera déployé dans l\'ensemble de la ville dans le cadre de l\'accélérateur civique Guelph. Les citoyens de Geulph pourront découvrir les projects urbains à venir, et participer à la planification et au développement de leur ville.',
+    guelphDescription: 'Milieu sera déployé dans l\'ensemble de la ville dans le cadre de l\'accélérateur civique Guelph. Les citoyens de Geulph pourront découvrir les projects urbains à venir, et participer à la planification et au développement de leur ville.',
     guelphPartner: 'Les partenaires'
   }
 });
