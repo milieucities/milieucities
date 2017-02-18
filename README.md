@@ -36,7 +36,10 @@
 
 5. Install node packages `npm install`.
 
-6. You're done! Run `foreman start` or `heroku local` and you're ready to start developing!
+6. You're done! Run `foreman start` or `heroku local`
+
+7. Run the `rake sync_devsites` to get some devsites. Whenever you feel the devsites are enough,
+run Ctrl+C to stop the process.  Now you're ready to start developing!
 
 ### Start dev env with docker compose (Temporarily not work)
 
