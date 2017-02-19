@@ -32,16 +32,19 @@ export default class Map extends Component {
       map.flyTo({ center: [longitude, latitude] })
     }
 
-    const features = map.querySourceFeatures('devSites', { filter: ['==', 'id', hoverdDevSiteId] });
-    if(!features.length) {
-      popup.remove();
-      return;
+    if(hoverdDevSiteId) {
+      const features = map.querySourceFeatures('devSites', { filter: ['==', 'id', hoverdDevSiteId] });
+      if(!features.length) {
+        popup.remove();
+        return;
+      }
+
+      const feature = features[0];
+      popup.setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.description)
+        .addTo(map);
     }
 
-    const feature = features[0];
-    popup.setLngLat(feature.geometry.coordinates)
-      .setHTML(feature.properties.description)
-      .addTo(map);
   }
   componentDidMount() {
     const { latitude, longitude } = this.props;
@@ -54,7 +57,7 @@ export default class Map extends Component {
     map.dragRotate.disable();
     map.touchZoomRotate.disableRotation();
     map.scrollZoom.disable();
-    map.addControl(new mapboxgl.Navigation({ position: 'top-left' }));
+    map.addControl(new mapboxgl.NavigationControl({ position: 'top-left' }));
     map.on('load', this.loadMap);
 
     const popup = this.popup = new mapboxgl.Popup({
@@ -63,7 +66,7 @@ export default class Map extends Component {
     });
 
     map.on('mousemove', e => {
-      const features = map.queryRenderedFeatures(e.point, { layers: ['devSites'] });
+      const features = map.queryRenderedFeatures(e.point, { layers: ['unclustered-points'] });
       map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 
       if(!features.length) {
@@ -89,7 +92,7 @@ export default class Map extends Component {
     });
 
     map.on('click', e => {
-      const features = map.queryRenderedFeatures(e.point, { layers: ['devSites'] });
+      const features = map.queryRenderedFeatures(e.point, { layers: ['unclustered-points'] });
 
       if(features.length) {
         const feature = features[0];
@@ -106,6 +109,8 @@ export default class Map extends Component {
     }
     return {
       type: 'geojson',
+      cluster: true,
+      clusterMaxZoom: 13,
       data: {
         type: 'FeatureCollection',
         features: this.props.devSites.map(devSite => {
@@ -156,7 +161,7 @@ export default class Map extends Component {
     });
 
     map.addSource('guelph-wards', {
-      type: 'geojson',
+      'type': 'geojson',
       'data': GUELPH_WARD_GEO_JSON
     });
 
@@ -201,9 +206,10 @@ export default class Map extends Component {
     map.addSource('devSites', this.geoJsonBuilder());
 
     map.addLayer({
-      'id': 'devSites',
+      'id': 'unclustered-points',
       'type': 'symbol',
       'source': 'devSites',
+      "filter": ["!has", "point_count"],
       'layout': {
         'icon-image': '{marker-symbol}',
         'icon-size': 1,
@@ -213,6 +219,43 @@ export default class Map extends Component {
         'text-offset': [0, 0.6],
         'text-anchor': 'bottom'
       }
+    });
+
+    const layers = [
+      { limit: 60, color: '#c7817d' },
+      { limit: 30, color: '#e9967a' },
+      { limit: 0, color: '#b0c4de' },
+    ];
+
+    layers.forEach(function (layer, i) {
+        map.addLayer({
+            "id": "cluster-" + i,
+            "type": "circle",
+            "source": "devSites",
+            "paint": {
+                "circle-color": layer.color,
+                "circle-radius": 18
+            },
+            "filter": i === 0 ?
+                [">=", "point_count", layer['limit']] :
+                ["all",
+                    [">=", "point_count", layer['limit']],
+                    ["<", "point_count", layers[i - 1]['limit']]]
+        });
+    });
+
+    map.addLayer({
+        "id": "cluster-count",
+        "type": "symbol",
+        "source": "devSites",
+        "layout": {
+            "text-field": "{point_count}",
+            "text-font": [
+                "DIN Offc Pro Medium",
+                "Arial Unicode MS Bold"
+            ],
+            "text-size": 12
+        }
     });
 
   }
