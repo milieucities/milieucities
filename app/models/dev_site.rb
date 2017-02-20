@@ -73,6 +73,9 @@ class DevSite < ActiveRecord::Base
   def self.search(search_params)
     result = DevSite.joins(:ward, :municipality).includes(:addresses, :statuses, :comments)
 
+    # TODO: remove when Guelph goes live
+    result = result.where(municipalities: { name: 'Ottawa' })
+
     result = location_search(result, search_params)
     result = query_search(result, search_params)
     result
@@ -144,7 +147,6 @@ class DevSite < ActiveRecord::Base
     order_clause << "ELSE #{ids.length} END"
     where(id: ids).order(order_clause)
   end
-
 
   private
 
