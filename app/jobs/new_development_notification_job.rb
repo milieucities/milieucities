@@ -28,7 +28,7 @@ class NewDevelopmentNotificationJob
 
     def send_email(message)
       mandrill = Mandrill::API.new(ENV['MANDRILL_API_KEY'])
-      result = mandrill.messages.send message
+      mandrill.messages.send message
     end
 
     def dev_site_addresses(dev_site_id)
