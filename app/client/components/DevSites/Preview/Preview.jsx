@@ -55,7 +55,7 @@ export default class extends Component {
     const url = contact === 'Urban Planner' ? '/contact_file_lead' : '/contact_councillor';
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
-    const { messageSent, mustSign } = i18n
+    const { messageSent, messageNotSent, mustSign } = i18n
     $.ajax({
       url: url,
       dataType: 'JSON',
@@ -66,6 +66,9 @@ export default class extends Component {
       data: new FormData(e.currentTarget),
       success: () => {
         window.flash('notice', messageSent)
+        this.setState({ showModal: false });
+      }, error: () => {
+        window.flash('alert', messageNotSent)
         this.setState({ showModal: false });
       }
     });
@@ -285,14 +288,14 @@ export default class extends Component {
             <div className={css.emailofficials}>
               {
                 devSite.urban_planner_email &&
-                <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Urban Planner'>
-                  <i className={css.mail}></i> Urban Planner
+                <a href='#' onClick={this.openEmailModal} className={css.email} title={i18n.emailUrbanPlanner}>
+                  <i className={css.mail}></i> {i18n.urbanPlanner}
                 </a>
               }
               {
                 devSite.ward_councillor_email &&
-                <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Councillor'>
-                  <i className={css.mail}></i> Councillor
+                <a href='#' onClick={this.openEmailModal} className={css.email} title={i18n.emailConcillor}>
+                  <i className={css.mail}></i> {i18n.councillor}
                 </a>
               }
             </div>
@@ -313,7 +316,7 @@ export default class extends Component {
 
 const EmailModal = (props) => {
   return <div className={css.emailmodal} tabIndex='-1'>
-    <div className={css.contact} >Contact {props.contact}</div>
+    <div className={css.contact} >{i18n.contact} {props.contact}</div>
     <div className={css.address}>{props.address}</div>
 
     <form onSubmit={props.handleEmail} acceptCharset='UTF-8' >
