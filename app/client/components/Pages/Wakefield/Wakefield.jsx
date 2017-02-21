@@ -6,6 +6,7 @@ import Footer from '../../Layout/Footer/Footer'
 import Comments from '../../Comments/Comments'
 import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
+import TypeformSurvey from './TypeformSurvey'
 import { debounce, uniqueId } from 'lodash'
 import i18n from './locale'
 import { ShareButtons, generateShareIcon } from 'react-share';
@@ -21,16 +22,10 @@ export default class Wakefield extends Component {
     this.devSiteId = document.querySelector('#wakefield').dataset.id;
     this.surveySentiment = document.querySelector('#wakefield').dataset.surveySentiment;
     this.loadDevSite = () => this._loadDevSite();
-    this.typeformScript = () => this._typeformScript();
   }
 
   componentDidMount() {
     this.loadDevSite();
-    this.typeformScript();
-  }
-
-  _typeformScript() {
-    (function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'widget.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}})()
   }
 
   _loadDevSite() {
@@ -100,9 +95,7 @@ export default class Wakefield extends Component {
                 </div>
               </div>
 
-              <div className="typeform-widget" data-url="https://milieu.typeform.com/to/HHlHgX" data-text="Wakefield Spring Survey" style={{width: '100%', height: 'auto'}}>
-              </div>
-
+              <TypeformSurvey />
 
               <div className={css.sentiment}>
                 {
@@ -282,3 +275,5 @@ document.addEventListener('turbolinks:load', () => {
   const wakefield = document.querySelector('#wakefield');
   wakefield && render(<Wakefield/>, wakefield)
 })
+
+
