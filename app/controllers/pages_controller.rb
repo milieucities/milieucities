@@ -14,20 +14,18 @@ class PagesController < ApplicationController
     @no_header = true
   end
 
-  def contact_milieu
-    message = contact_milieu_params
-    ContactMailer.contact_milieu(message).deliver_now
-    render nothing: true
-  end
-
   def contact_file_lead
-    message = contact_planner_params
+    message = contact_form_params
+    raise ArgumentError, 'No DevSite id provided' unless message[:dev_site_id].present?
+
     ContactMailer.contact_file_lead(message).deliver_now
     render json: {}
   end
 
   def contact_councillor
-    message = contact_planner_params
+    message = contact_form_params
+    raise ArgumentError, 'No DevSite id provided' unless message[:dev_site_id].present?
+
     ContactMailer.contact_councillor(message).deliver_now
     render json: {}
   end
@@ -36,11 +34,7 @@ class PagesController < ApplicationController
 
   private
 
-  def contact_milieu_params
-    params.required(:contact_milieu).permit(:name, :email, :message)
-  end
-
-  def contact_planner_params
+  def contact_form_params
     params.permit(:name, :email, :message, :dev_site_id)
   end
 
