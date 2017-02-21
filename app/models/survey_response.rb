@@ -1,3 +1,5 @@
+require 'pry'
+
 class SurveyResponse < ActiveRecord::Base
   belongs_to :custom_survey
   has_many :comments, as: :commentable, dependent: :destroy
@@ -15,7 +17,8 @@ class SurveyResponse < ActiveRecord::Base
     # answers would associates sentiments if a sentiment analysis is specified for the
     # question. That way we'll be able to see the sentiment averages per question.
 
-    response = response_body.find { |res| res['field']['id'] == WAKEFIELD_FIELD_FOR_ANALYSIS }
+    response = response_body['answers'].find { |res| res['field']['id'] == WAKEFIELD_FIELD_FOR_ANALYSIS }
+    return unless response
     response_text = response['text']
     comments << Comment.create(body: response_text)
   end
