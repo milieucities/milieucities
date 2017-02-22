@@ -13,7 +13,7 @@ class SurveyResponse < ActiveRecord::Base
     # question. That way we'll be able to see the sentiment averages per question.
 
     responses = response_body['answers'].select { |res| res['field']['type'] == 'long_text' }
-    return unless responses.length > 0
+    return if responses.empty?
     responses.each do |response|
       response_text = response['text']
       comments << Comment.create(body: response_text)
