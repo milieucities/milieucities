@@ -40,11 +40,13 @@ class PagesController < ApplicationController
 
   def generate_survey_sentiment(typeform_id)
     survey = CustomSurvey.find_by(typeform_id: typeform_id)
-    comments = survey.survey_responses.map(&:comments).flatten
 
-    return unless comments.present? && comments.count > 5
+    return unless survey.present? && survey.survey_responses.count > 5
 
+    survey_responses_ids = survey.survey_responses.map(&:id)
+    comments = Comment.includes(:sentiment).where(commentable_id: survey_responses_ids)
     results = overall_sentiments(comments)
+
     Sentiment.create(results[:averages])
   end
 end
