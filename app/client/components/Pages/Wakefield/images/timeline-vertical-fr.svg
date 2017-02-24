@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="335px" height="496px" viewBox="0 0 335 496" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="344px" height="495px" viewBox="0 0 344 495" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
-    <title>Group 8</title>
+    <title>Group 2</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1-Copy-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-8" transform="translate(0.000000, -2.000000)">
-            <g id="Group-2" transform="translate(54.000000, 0.000000)" font-size="14" fill="#555555">
-                <text id="15-Février-2017" font-family="Lato-Bold, Lato" font-weight="bold">
-                    <tspan x="0" y="14">15 Février 2017</tspan>
-                </text>
-                <text id="Engagement-en-Ligne" font-family="Lato-Regular, Lato" font-weight="normal">
-                    <tspan x="0" y="36">Engagement en Ligne</tspan>
-                </text>
-            </g>
-            <g id="Group-6" transform="translate(56.000000, 368.000000)" font-size="14" fill="#555555">
-                <text id="30-Avril,-2017" font-family="Lato-Bold, Lato" font-weight="bold">
-                    <tspan x="0" y="14">30 Avril, 2017</tspan>
-                </text>
-                <text id="Fermeture-de-L’engag" font-family="Lato-Regular, Lato" font-weight="normal">
-                    <tspan x="0" y="36">Fermeture de </tspan>
-                    <tspan x="0" y="53">L’engagement en Ligne </tspan>
-                </text>
-            </g>
-            <g id="Group-7" transform="translate(56.000000, 461.000000)" font-size="14" fill="#555555">
-                <text id="Été-2017" font-family="Lato-Bold, Lato" font-weight="bold">
-                    <tspan x="0" y="14">Été 2017</tspan>
-                </text>
-                <text id="Refonte-de-la-Source" font-family="Lato-Regular, Lato" font-weight="normal">
-                    <tspan x="1" y="36">Refonte de la Source Wakefield</tspan>
-                </text>
-            </g>
-            <g id="Group-4" transform="translate(72.000000, 87.000000)" font-size="14" font-family="Lato-Bold, Lato" fill="#555555" font-weight="bold">
-                <text id="22-Mars-2017---Journ">
-                    <tspan x="0" y="14">22 Mars 2017 - Journée Mondiale de L’eau</tspan>
-                </text>
-            </g>
-            <g id="Group-3" transform="translate(0.000000, 2.000000)">
+        <g id="Group-2">
+            <g id="Group-3">
                 <path d="M10.5,6.5 L10.5,468.5" id="Line" stroke="#DDDDDD" stroke-linecap="square"></path>
                 <path d="M10.5,6.5 L45.5,6.5" id="Line" stroke="#DDDDDD" stroke-linecap="square"></path>
                 <path d="M9.5,373.5 L44.5,373.5" id="Line" stroke="#DDDDDD" stroke-linecap="square"></path>
@@ -49,26 +19,54 @@
                 <circle id="Oval" fill="#92C7C6" cx="10" cy="94" r="10"></circle>
                 <circle id="Oval" fill="#92C7C6" cx="10.5" cy="469.5" r="5.5"></circle>
             </g>
-            <g id="Group-9" transform="translate(72.000000, 219.000000)" font-size="14" fill="#555555">
-                <g id="Group-5">
-                    <text id="22-Avril,-2017---Jou" font-family="Lato-Bold, Lato" font-weight="bold">
-                        <tspan x="0" y="14">22 Avril, 2017 - Jour de la Terre</tspan>
-                    </text>
-                    <text id="Présentation-de-la-c" font-family="Lato-Regular, Lato" font-weight="normal">
-                        <tspan x="0" y="38">Présentation de la conception et session </tspan>
-                        <tspan x="0" y="55">de saisie de la communauté</tspan>
-                    </text>
-                </g>
-                <g id="Group" transform="translate(1.000000, 62.000000)" font-family="Lato-Regular, Lato" font-weight="normal">
-                    <text id="Heure:">
-                        <tspan x="0" y="14">Heure:</tspan>
-                    </text>
-                    <text id="Lieu:-à-être-détermi">
-                        <tspan x="0" y="35">Lieu:  à être déterminé</tspan>
-                    </text>
-                </g>
-                <text id="à-être-déterminé" font-family="Lato-Regular, Lato" font-weight="normal">
-                    <tspan x="52" y="76">à être déterminé</tspan>
+            <text id="15-Février-2017" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+                <tspan x="62" y="14">15 Février 2017</tspan>
+            </text>
+            <text id="30-Avril,-2017" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+                <tspan x="62" y="381">30 Avril, 2017</tspan>
+            </text>
+            <text id="Été-2017" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+                <tspan x="62" y="470">Été 2017</tspan>
+            </text>
+            <text id="22-Mars-2017---Journ" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+                <tspan x="83" y="105">22 Mars 2017 - Journée Mondiale de l’eau</tspan>
+            </text>
+            <text id="22-Avril,-2017---Jou" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
+                <tspan x="83" y="236">22 Avril, 2017 - Jour de la terre</tspan>
+            </text>
+            <text id="Participation-en-lig" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="62" y="36">Participation en ligne</tspan>
+            </text>
+            <text id="Fermeture-de-la-part" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="62" y="403">Fermeture de </tspan>
+                <tspan x="62" y="420">la participation en ligne  </tspan>
+            </text>
+            <text id="Réaménagement-de-la" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="62" y="492">Réaménagement de la Source Wakefield</tspan>
+            </text>
+            <text id="Atelier-de-design" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="83" y="126">Atelier de design</tspan>
+            </text>
+            <text id="Présentation-du-proj" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="83" y="260">Présentation du projet et </tspan>
+                <tspan x="83" y="277">session de consultation communautaire </tspan>
+            </text>
+            <g id="Group" transform="translate(83.000000, 134.000000)" font-size="14" font-family="Lato-Regular, Lato" fill="#555555" font-weight="normal">
+                <text id="Heure:-9h30---11h30">
+                    <tspan x="1" y="14">Heure: 9h30 - 11h30</tspan>
+                </text>
+                <text id="Lieu:-Centre-Wakefie">
+                    <tspan x="0" y="36">Lieu: Centre Wakefield La Pêche </tspan>
+                    <tspan x="0" y="53">38 Chemin de la Vallée de Wakefield, </tspan>
+                    <tspan x="0" y="70">La Pêche (Wakefield), QC J0X 3G0</tspan>
+                </text>
+            </g>
+            <g id="Group" transform="translate(83.000000, 285.000000)" font-size="14" font-family="Lato-Regular, Lato" fill="#555555" font-weight="normal">
+                <text id="Heure:-à-être-déterm">
+                    <tspan x="1" y="14">Heure: à être déterminé</tspan>
+                </text>
+                <text id="Lieu:-Centre-Wakefie">
+                    <tspan x="0" y="39">Lieu: Centre Wakefield La Pêche</tspan>
                 </text>
             </g>
         </g>
