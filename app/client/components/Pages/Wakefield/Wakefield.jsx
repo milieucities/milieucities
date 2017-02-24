@@ -59,7 +59,7 @@ export default class Wakefield extends Component {
               <div className={css.share}>
                 <FacebookShareButton
                   url={`${window.location.origin}/wakefield`}
-                  title='Lorne Shoudice Spring, Le Pêche, Quebec'
+                  title='Lorne Shoudice Spring, La Pêche, Quebec'
                   description='The Lorne Shouldice Spring ( Wakefield Spring) is a treasured source of potable freshwater maintained by the municipality of La Pêche and local non-profit group Friends of the Wakefield Spring.'
                   picture='https://s3.ca-central-1.amazonaws.com/milieu-production/wakefield.jpg'
                   >
@@ -193,8 +193,8 @@ const CAROUSEL_ITEMS = [
     src: './images/wakefield-video.jpg',
     image: false,
     iframe: {
-      en: 'https://www.youtube.com/embed/Qd5-BAoTMnk?rel=0&amp;showinfo=0',
-      fr: 'https://www.youtube.com/embed/LWatPVfdrqA?rel=0&amp;showinfo=0'
+      en: 'https://www.youtube.com/embed/6D_cBmkHP4g?rel=0&amp;showinfo=0',
+      fr: 'https://www.youtube.com/embed/eih8WV-6F_I?rel=0&amp;showinfo=0'
     }
   },
   {
@@ -275,5 +275,3 @@ document.addEventListener('turbolinks:load', () => {
   const wakefield = document.querySelector('#wakefield');
   wakefield && render(<Wakefield/>, wakefield)
 })
-
-
