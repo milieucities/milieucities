@@ -83,13 +83,17 @@
 
   iframe {
     border: 0;
-    height: 450px;
+    height: 350px;
     width: 100%;
     border-radius: 5px;
 
     @media #{$small-and-down} {
       height: 200px;
     }
+  }
+
+  #typeform_survey {
+    height: 450px;
   }
 
   .timeline {

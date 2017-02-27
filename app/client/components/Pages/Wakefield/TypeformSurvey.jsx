@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import i18n from './locale'
+import css from './wakefield.scss'
 
 export default class TypeformSurvey extends Component {
   constructor() {
@@ -23,7 +24,7 @@ export default class TypeformSurvey extends Component {
       }
       {
         !this.mobile &&
-        <iframe src={this.props.surveyUrl} id="typeform_survey" autoFocus></iframe>
+        <iframe src={this.props.surveyUrl} id={css.typeform_survey} autoFocus></iframe>
       }
       </div>
     );
