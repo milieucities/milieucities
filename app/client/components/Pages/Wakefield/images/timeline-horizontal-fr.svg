@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="812px" height="265px" viewBox="0 0 812 265" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="866px" height="265px" viewBox="0 0 866 265" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
     <title>Group 2</title>
     <desc>Created with Sketch.</desc>
@@ -27,34 +27,31 @@
                 <tspan x="620" y="226">Été 2017</tspan>
             </text>
             <text id="22-Mars-2017---Journ" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
-                <tspan x="79" y="14">22 Mars 2017 - Journée Mondiale de L’eau</tspan>
+                <tspan x="79" y="14">22 Mars 2017 - Journée Mondiale de l’eau</tspan>
             </text>
             <text id="22-Avril,-2017---Jou" font-family="Lato-Bold, Lato" font-size="14" font-weight="bold" fill="#555555">
-                <tspan x="364" y="14">22 Avril, 2017 - Jour de la Terre</tspan>
+                <tspan x="364" y="14">22 Avril, 2017 - Jour de la terre</tspan>
             </text>
-            <text id="Engagement-en-Ligne" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
-                <tspan x="2" y="248">Engagement en Ligne</tspan>
+            <text id="Participation-en-lig" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="2" y="248">Participation en ligne</tspan>
             </text>
-            <text id="Fermeture-de-L’engag" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+            <text id="Fermeture-de-la-part" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
                 <tspan x="407" y="248">Fermeture de </tspan>
-                <tspan x="407" y="265">L’engagement en Ligne </tspan>
+                <tspan x="407" y="265">la participation en ligne  </tspan>
             </text>
-            <text id="Refonte-de-la-Source" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
-                <tspan x="621" y="248">Refonte de la Source Wakefield</tspan>
+            <text id="Réaménagement-de-la" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="621" y="248">Réaménagement de la Source Wakefield</tspan>
             </text>
-            <text id="Atelier-de-Design" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
-                <tspan x="79" y="35">Atelier de Design</tspan>
+            <text id="Atelier-de-design" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="79" y="35">Atelier de design</tspan>
             </text>
-            <text id="Présentation-de-la-c" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
-                <tspan x="364" y="38">Présentation de la conception et session </tspan>
-                <tspan x="364" y="55">de saisie de la communauté</tspan>
+            <text id="Présentation-du-proj" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="364" y="38">Présentation du projet et </tspan>
+                <tspan x="364" y="55">session de consultation communautaire </tspan>
             </text>
             <g id="Group" transform="translate(79.000000, 43.000000)" font-size="14" font-family="Lato-Regular, Lato" fill="#555555" font-weight="normal">
-                <text id="Heure:">
-                    <tspan x="1" y="14">Heure:</tspan>
-                </text>
-                <text id="9.30h---11.30h">
-                    <tspan x="62" y="14">9.30h - 11.30h</tspan>
+                <text id="Heure:-9h30---11h30">
+                    <tspan x="1" y="14">Heure: 9h30 - 11h30</tspan>
                 </text>
                 <text id="Lieu:-Centre-Wakefie">
                     <tspan x="0" y="36">Lieu: Centre Wakefield La Pêche </tspan>
@@ -63,11 +60,11 @@
                 </text>
             </g>
             <g id="Group" transform="translate(364.000000, 63.000000)" font-size="14" font-family="Lato-Regular, Lato" fill="#555555" font-weight="normal">
-                <text id="Heure:">
-                    <tspan x="1" y="14">Heure:</tspan>
+                <text id="Heure:-à-être-déterm">
+                    <tspan x="1" y="14">Heure: à être déterminé</tspan>
                 </text>
-                <text id="Lieu:-à-être-détermi">
-                    <tspan x="0" y="39">Lieu:  à être déterminé</tspan>
+                <text id="Lieu:-Centre-Wakefie">
+                    <tspan x="0" y="39">Lieu: Centre Wakefield La Pêche</tspan>
                 </text>
             </g>
         </g>

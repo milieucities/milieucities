@@ -39,10 +39,10 @@
                 <tspan x="52" y="399">Online Engagement Closed</tspan>
             </text>
             <text id="Wakefield-Spring-Red" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
-                <tspan x="52" y="491">Wakefield Spring Redesign</tspan>
+                <tspan x="56" y="491">Wakefield Spring Redesign</tspan>
             </text>
-            <text id="Design-Charrette" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
-                <tspan x="69" y="122">Design Charrette</tspan>
+            <text id="Design-Workshop" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
+                <tspan x="69" y="122">Design Workshop</tspan>
                 <tspan x="69" y="139"></tspan>
             </text>
             <text id="Design-Presentation" font-family="Lato-Regular, Lato" font-size="14" font-weight="normal" fill="#555555">
@@ -63,8 +63,8 @@
                 <text id="TBD">
                     <tspan x="61" y="14">TBD</tspan>
                 </text>
-                <text id="Location:-TBD">
-                    <tspan x="0" y="34">Location:  TBD</tspan>
+                <text id="Location:-Centre-Wak">
+                    <tspan x="0" y="34">Location:  Centre Wakefield La Pêche</tspan>
                 </text>
             </g>
         </g>
