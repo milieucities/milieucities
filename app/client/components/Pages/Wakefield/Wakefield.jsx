@@ -43,9 +43,12 @@ export default class Wakefield extends Component {
   render() {
     const { loading, devSite } = this.state;
     const { locale } = document.body.dataset;
-    const surveySentiment = JSON.parse(this.surveySentiment) || null
-    i18n.setLanguage(locale);
+    const surveyUrl = locale == 'en' ? 'https://milieu.typeform.com/to/HHlHgX' : 'https://milieu.typeform.com/to/COiraX';
 
+    // TODO: update this when we decide how to analyze survey sentiment
+    const surveySentiment = null;
+
+    i18n.setLanguage(locale);
     return (
       <div className={css.root}>
         <Header />
@@ -95,7 +98,7 @@ export default class Wakefield extends Component {
                 </div>
               </div>
 
-              <TypeformSurvey surveyUrl='https://milieu.typeform.com/to/HHlHgX'/>
+              <TypeformSurvey surveyUrl={surveyUrl}/>
 
               <div className={css.sentiment}>
                 {
