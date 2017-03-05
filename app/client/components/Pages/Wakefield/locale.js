@@ -2,6 +2,7 @@ import LocalizedStrings from 'react-localization';
 
 const i18n = new LocalizedStrings({
   en:{
+    title: 'Lorne Shoudice Spring, La Pêche, Quebec, Canada',
     aboutProject: 'About this project',
     aboutProjectP1: 'The Lorne Shouldice Spring ( Wakefield Spring) is a treasured source of potable freshwater maintained by the municipality of La Pêche with the support from local non-profit group Friends of the Wakefield Spring.',
     aboutProjectP2: 'A series of public events aim to collectively reimagine the Spring, upgrade the infrastructure and address community concerns.',
@@ -20,6 +21,7 @@ const i18n = new LocalizedStrings({
     startSurvey: 'Start the Survey',
   },
   fr: {
+    title: 'La Source Lorne Shouldice, La Pêche, Quebec, Canada',
     aboutProject: 'À propos de ce projet',
     aboutProjectP1: 'La Source Lorne Shouldice est une source précieuse d’eau potable qui est entretenue par la municipalité de La Pêche avec l\'appui du groupe communautaire Les amis de la Source de Wakefield.',
     aboutProjectP2: 'Une série d\'événements publics visant à ré-imaginer collectivement la Source, à améliorer son infrastructure et à répondre aux préoccupations de la communauté,  se déroulera du 15 février au 30 avril 2017.',

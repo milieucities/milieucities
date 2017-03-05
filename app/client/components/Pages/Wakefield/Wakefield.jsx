@@ -53,7 +53,7 @@ export default class Wakefield extends Component {
       <div className={css.root}>
         <Header />
         <div className={`${css.container} container`}>
-          <h1>Lorne Shoudice Spring, La Pêche, Quebec, Canada</h1>
+          <h1>{i18n.title}</h1>
           <Loader loading={loading} />
 
           {
