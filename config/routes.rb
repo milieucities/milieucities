@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   scope '(:locale)', locale: /en|fr/ do
-    root to: 'pages#home'
+    root to: 'dev_sites#index'
 
     namespace :pages, path: '/', as: nil do
       get :wakefield
