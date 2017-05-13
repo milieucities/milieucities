@@ -1,5 +1,6 @@
 require 'action_view'
 require 'watson'
+require 'pry'
 
 include ActionView::Helpers::DateHelper
 include Services::Watson
@@ -11,6 +12,8 @@ class Comment < ActiveRecord::Base
   has_one  :sentiment, as: :sentimentable, dependent: :destroy
   has_many :votes, dependent: :destroy
   validates :body, presence: { message: 'Comment is required' }
+
+  after_save :flag_offensive_comments
 
   after_save do
     Resque.enqueue(UpdateCommentSentimentJob, id) unless Rails.env.test?
@@ -43,7 +46,27 @@ class Comment < ActiveRecord::Base
     commentable.update_sentiment if commentable_type.eql?('DevSite')
   end
 
+  def flag_offensive_comments
+    return unless commentable_type.eql?('DevSite') && !flagged_as_offensive && contains_offensive_language?
+    mark_as_flagged
+    notify_admin
+  end
+
   private
+
+  def contains_offensive_language?
+    blacklist_path = Rails.root.join('lib', 'fixtures', 'blacklist.csv')
+    blacklisted_words = IO.readlines(blacklist_path).map(&:strip)
+    blacklisted_words.any? { |word| body.include? word }
+  end
+
+  def mark_as_flagged
+    update(flagged_as_offensive: true)
+  end
+
+  def notify_admin
+    CommentNotificationMailer.flagged_comment_notification(self).deliver_later
+  end
 
   def vote_direction(current_user, direction)
     up = direction == :up

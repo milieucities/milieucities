@@ -110,11 +110,15 @@ class CommentForm extends Component {
       type: 'POST',
       data: data,
       success: (comment) => {
-        this.parent.setState({
-          comments: this.parent.state.comments.unshift(comment),
-          total: this.parent.state.total + 1
-        })
-        this.setState({ body: '' });
+        if (comment.flagged_as_offensive) {
+          alert('Comment flagged!')
+        } else {
+          this.parent.setState({
+            comments: this.parent.state.comments.unshift(comment),
+            total: this.parent.state.total + 1
+          })
+          this.setState({ body: '' });
+        }
       }
     });
   }
