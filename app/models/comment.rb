@@ -6,6 +6,10 @@ include ActionView::Helpers::DateHelper
 include Services::Watson
 
 class Comment < ActiveRecord::Base
+  UNFLAGGED_STATUS = 'UNFLAGGED'.freeze
+  FLAGGED_STATUS = 'FLAGGED'.freeze
+  APPROVED_STATUS = 'APPROVED'.freeze
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
   default_scope { order(created_at: :desc) }
@@ -47,7 +51,8 @@ class Comment < ActiveRecord::Base
   end
 
   def flag_offensive_comments
-    return unless commentable_type.eql?('DevSite') && !flagged_as_offensive && contains_offensive_language?
+    return unless commentable_type.eql?('DevSite') && flagged_as_offensive == UNFLAGGED_STATUS
+    return unless contains_offensive_language?
     mark_as_flagged
     notify_admin
   end
@@ -55,17 +60,32 @@ class Comment < ActiveRecord::Base
   private
 
   def contains_offensive_language?
-    blacklist_path = Rails.root.join('lib', 'fixtures', 'blacklist.csv')
-    blacklisted_words = IO.readlines(blacklist_path).map(&:strip)
+    blacklist_en_path = Rails.root.join('lib', 'fixtures', 'blacklist_en.txt')
+    blacklist_fr_path = Rails.root.join('lib', 'fixtures', 'blacklist_fr.txt')
+
+    blacklisted_en_words = IO.readlines(blacklist_en_path).map(&:strip)
+    blacklisted_fr_words = IO.readlines(blacklist_fr_path).map(&:strip)
+
+    blacklisted_words = blacklisted_en_words + blacklisted_fr_words
     blacklisted_words.any? { |word| body.include? word }
   end
 
   def mark_as_flagged
-    update(flagged_as_offensive: true)
+    update(flagged_as_offensive: FLAGGED_STATUS)
   end
 
   def notify_admin
-    CommentNotificationMailer.flagged_comment_notification(self).deliver_later
+    dev_site = commentable
+    planner_email = dev_site.urban_planner_email
+    milieu_email = ApplicationMailer::MILIEU_EMAIL_ADDRESS
+    recipients = [planner_email, milieu_email]
+
+    recipients.each do |recipient|
+      user = User.find_by(email: recipient)
+      next unless user.present?
+
+      CommentNotificationMailer.flagged_comment_notification(user, self, dev_site).deliver_later
+    end
   end
 
   def vote_direction(current_user, direction)

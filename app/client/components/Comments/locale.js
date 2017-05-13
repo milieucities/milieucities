@@ -10,7 +10,8 @@ const i18n = new LocalizedStrings({
     anoymous: "Anonymous",
     readMore: "Read More...",
     delete: 'delete',
-    edit: 'edit'
+    edit: 'edit',
+    flaggedNotification: 'Your commment has been flagged as offensive and will be reviewed by a moderator.',
   },
   fr: {
     signInToComment: "Se connecter pour commenter",
@@ -21,7 +22,8 @@ const i18n = new LocalizedStrings({
     anoymous: "Anonyme",
     readMore: "Lire la suite...",
     delete: 'supprimer',
-    edit: 'modifier'
+    edit: 'modifier',
+    flaggedNotification: 'Votre commentaire a été signalé comme grossier et sera revisé par un(e) modérateur(trice).'
   }
 });
 

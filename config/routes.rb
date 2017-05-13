@@ -36,7 +36,10 @@ Rails.application.routes.draw do
     end
 
     resources :dev_sites do
-      resources :comments, module: :dev_sites
+      resources :comments, module: :dev_sites do
+        get :approve, to: 'comments#update'
+        get :reject, to: 'comments#destroy'
+      end
     end
 
     resources :organizations, only: [:index, :show, :update, :create, :destroy] do

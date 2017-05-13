@@ -4,5 +4,9 @@
 <p><%= @comment.body %></p>
 <br>
 <p>The comment is not currently published. You can choose to publish the comment here: </p>
+<a href=<%= @approve_comment_url %>>Approve Comment</a>
+
+<p>If the comment is inappropriate, you can delete it here:</p>
+<a href=<%= @reject_comment_url %>>Delete Comment</a>
 <br>
 <p>Keep up the good work!</p>

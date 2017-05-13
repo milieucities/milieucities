@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :conversations, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :authentication_tokens, dependent: :destroy
   has_one :notification, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_one :address, as: :addressable, dependent: :destroy
@@ -54,5 +55,11 @@ class User < ActiveRecord::Base
 
   def admin?
     has_role? :admin
+  end
+
+  def generate_auth_token
+    token = SecureRandom.uuid
+    authentication_tokens.create(token: token)
+    token
   end
 end
