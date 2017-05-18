@@ -1,7 +1,7 @@
 module DevSites
   class CommentsController < ApplicationController
     load_resource :dev_site
-    around_action :authenticate_with_token, if: :contains_token
+    around_action :authenticate_with_token, only: [:update, :destroy], if: :contains_token
     load_and_authorize_resource :comment, through: :dev_site
     before_action :load_resource, only: [:update, :destroy]
 
@@ -68,10 +68,6 @@ module DevSites
                                       :commentable_type,
                                       :user_id,
                                       :flagged_as_offensive)
-    end
-
-    def contains_token
-      params[:token].present?
     end
 
     def load_resource

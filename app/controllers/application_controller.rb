@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     collection.limit(limit).offset(limit * page)
   end
 
+  def contains_token
+    params[:token].present?
+  end
+
   def authenticate_with_token
     user = User.find_by(email: params[:email])
     token = params[:token]
@@ -36,16 +40,19 @@ class ApplicationController < ActionController::Base
     if valid_token
       sign_in_with_token(user, valid_token)
       yield
+    else
+      raise CanCan::AccessDenied
     end
 
-    sign_out(user)
+    sign_out
   end
 
   def validate_token(user, token)
     return false unless user.present?
 
     authentication_token = user.authentication_tokens.find_by(token: token)
-    return unless authentication_token && authentication_token.expires_at > DateTime.current
+    return false unless authentication_token && authentication_token.expires_at > DateTime.current
+
     authentication_token
   end
 
