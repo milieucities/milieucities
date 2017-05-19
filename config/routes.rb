@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/login', to: 'authentication#authenticate'
       get '/users', to: 'users#show'
+      post '/dev_sites/sync', to: 'dev_sites#sync'
       resources :votes, only: [:create, :destroy]
       resources :dev_sites, only: [:index] do
         resources :comments, only: [:index, :show, :create, :update, :destroy], module: :dev_sites

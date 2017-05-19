@@ -1,0 +1,17 @@
+{
+  "dev_sites": [
+    {
+      "devID": "test-id",
+      "application_type": "Site Plan Approval",
+      "build_type": "Derelict",
+      "title": "this is a test",
+      "description": "blah blah blah",
+      "ward_councillor_email": "wardcouncillor@mailinator.com",
+      "urban_planner_email": "urbanplanner@mailinator.com",
+      "ward_name": "Orleans",
+      "ward_number": "1",
+      "municipal_id": "1",
+      "ward_id": "1"
+    }
+  ]
+}

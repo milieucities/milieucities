@@ -1,5 +1,7 @@
+require 'pry'
+
 class Api::V1::DevSitesController < Api::V1::ApiController
-  before_action :authenticate_request
+  before_action :authenticate_request, except: [:sync]
 
   def index
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
@@ -37,40 +39,75 @@ class Api::V1::DevSitesController < Api::V1::ApiController
     head :no_content
   end
 
+  def sync
+    # authenticate with token
+
+    dev_sites = params[:dev_sites]
+    dev_sites.each do |site|
+      dev_site = DevSite.find_by(devID: site[:devID]) || DevSite.create(devID: site[:devID])
+      update_params = build_update_params(site)
+      dev_site.update(update_params)
+    end
+
+    head :ok
+  end
+
 
   private
-    def set_dev_site
-      @dev_site = DevSite.find(params[:id])
-    end
 
-    def paginate
-      if params[:page].present? || params[:limit].present?
-        limit = params[:limit].present? ? params[:limit].to_i : 20
-        page = params[:page].present? ? params[:page].to_i : 0
-        @dev_sites.limit!(limit).offset!(limit * page)
-      end
-    end
+  def set_dev_site
+    @dev_site = DevSite.find(params[:id])
+  end
 
-    def sort?
-      params[:sort].present?
+  def paginate
+    if params[:page].present? || params[:limit].present?
+      limit = params[:limit].present? ? params[:limit].to_i : 20
+      page = params[:page].present? ? params[:page].to_i : 0
+      @dev_sites.limit!(limit).offset!(limit * page)
     end
+  end
 
-    def search?
-      ((params[:latitude].present? && params[:longitude].present?) ||
-      params[:year].present? ||
-      params[:ward].present? ||
-      params[:status].present? )
-    end
+  def sort?
+    params[:sort].present?
+  end
 
-    def search_params
-      params.permit(:latitude, :longitude, :year, :ward, :status)
-    end
+  def search?
+    ((params[:latitude].present? && params[:longitude].present?) ||
+    params[:year].present? ||
+    params[:ward].present? ||
+    params[:status].present? )
+  end
 
-    def dev_site_params
-      params.require(:dev_site).permit(:devID, :application_type, :title, :images_cache, :files_cache, :build_type,
-      :description, :ward_councillor_email, :urban_planner_email, :ward_name, :ward_num, :image_url, :hearts, {images: []}, {files: []},
-      likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
-      addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
-      statuses_attributes: [:id, :status, :status_date, :_destroy] )
-    end
+  def search_params
+    params.permit(:latitude, :longitude, :year, :ward, :status)
+  end
+
+  def dev_site_params
+    params.require(:dev_site).permit(:devID,
+                                     :application_type,
+                                     :title,
+                                     :images_cache,
+                                     :files_cache,
+                                     :build_type,
+                                     :description,
+                                     :ward_councillor_email,
+                                     :urban_planner_email,
+                                     :ward_name,
+                                     :ward_num,
+                                     :image_url,
+                                     :hearts,
+                                     {images: []},
+                                     {files: []},
+                                     likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
+                                     addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
+                                     statuses_attributes: [:id, :status, :status_date, :_destroy] )
+  end
+
+  def build_update_params(dev_site)
+    whitelisted_params = [:application_type, :title, :build_type, :description, :ward_councillor_email, :urban_planner_email, :ward_name, :ward_num]
+
+    update_params = {}
+    whitelisted_params.each { |param| update_params[param] = dev_site[param] if dev_site[param] }
+    update_params
+  end
 end
