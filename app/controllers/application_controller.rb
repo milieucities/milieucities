@@ -52,7 +52,6 @@ class ApplicationController < ActionController::Base
 
     authentication_token = user.authentication_tokens.find_by(token: token)
     return false unless authentication_token && authentication_token.expires_at > DateTime.current
-
     authentication_token
   end
 

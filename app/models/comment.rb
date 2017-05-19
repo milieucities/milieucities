@@ -1,6 +1,5 @@
 require 'action_view'
 require 'watson'
-require 'pry'
 
 include ActionView::Helpers::DateHelper
 include Services::Watson
@@ -60,13 +59,15 @@ class Comment < ActiveRecord::Base
   private
 
   def contains_offensive_language?
-    blacklist_en_path = Rails.root.join('lib', 'fixtures', 'blacklist_en.txt')
-    blacklist_fr_path = Rails.root.join('lib', 'fixtures', 'blacklist_fr.txt')
+    blacklisted_words = Rails.cache.fetch('blacklisted_words') do
+      blacklist_en_path = Rails.root.join('lib', 'fixtures', 'blacklist_en.txt')
+      blacklist_fr_path = Rails.root.join('lib', 'fixtures', 'blacklist_fr.txt')
 
-    blacklisted_en_words = IO.readlines(blacklist_en_path).map(&:strip)
-    blacklisted_fr_words = IO.readlines(blacklist_fr_path).map(&:strip)
+      blacklisted_en_words = IO.readlines(blacklist_en_path).map(&:strip)
+      blacklisted_fr_words = IO.readlines(blacklist_fr_path).map(&:strip)
 
-    blacklisted_words = blacklisted_en_words + blacklisted_fr_words
+      blacklisted_en_words + blacklisted_fr_words
+    end
     blacklisted_words.any? { |word| body.include? word }
   end
 

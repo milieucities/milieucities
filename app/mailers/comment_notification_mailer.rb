@@ -7,12 +7,12 @@ class CommentNotificationMailer < ApplicationMailer
       dev_site_id: @dev_site.id,
       comment_id: @comment.id,
       email: recipient.email,
-      token: recipient.generate_auth_token
+      token: recipient.generate_auth_token.token
     }
 
     @approve_comment_url = Services::UrlGenerator.generate_approve_comment_url(url_opts)
     @reject_comment_url = Services::UrlGenerator.generate_reject_comment_url(url_opts)
-    @name = recipient.name_from_profile
+    @name = recipient.name_from_profile || 'Milieu admin'
 
     mail(to: recipient.email, subject: 'Comment flagged as offensive')
   end

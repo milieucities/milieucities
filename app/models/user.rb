@@ -60,6 +60,5 @@ class User < ActiveRecord::Base
   def generate_auth_token
     token = SecureRandom.uuid
     authentication_tokens.create(token: token)
-    token
   end
 end
