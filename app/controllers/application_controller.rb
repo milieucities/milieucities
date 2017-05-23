@@ -21,11 +21,43 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
-
   def paginate(collection, limit = 20)
     limit = item_limit(limit)
     page = page_number
-    collection = collection.limit(limit).offset(limit * page)
+    collection.limit(limit).offset(limit * page)
+  end
+
+  def contains_token
+    params[:token].present?
+  end
+
+  def authenticate_with_token
+    user = User.find_by(email: params[:email])
+    token = params[:token]
+
+    valid_token = validate_token user, token
+
+    if valid_token
+      sign_in_with_token(user, valid_token)
+      yield
+    else
+      raise CanCan::AccessDenied
+    end
+
+    sign_out
+  end
+
+  def validate_token(user, token)
+    return false unless user.present?
+
+    authentication_token = user.authentication_tokens.find_by(token: token)
+    return false unless authentication_token && authentication_token.expires_at > DateTime.current
+    authentication_token
+  end
+
+  def sign_in_with_token(user, valid_token)
+    sign_in(user)
+    valid_token.destroy
   end
 
   private

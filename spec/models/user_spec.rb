@@ -45,4 +45,13 @@ describe User do
       end
     end
   end
+
+  describe 'generate_auth_token' do
+    it 'should generate a new authentication token' do
+      token = user.generate_auth_token
+
+      expect(user.authentication_tokens.count).to eq(1)
+      expect(user.authentication_tokens.last).to eq(token)
+    end
+  end
 end

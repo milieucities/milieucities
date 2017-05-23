@@ -1,6 +1,6 @@
 object @comment
 
-attributes :id, :body, :created_at, :vote_count
+attributes :id, :body, :created_at, :vote_count, :flagged_as_offensive
 
 node :voted_down do |comment|
   comment.voted_down(current_user)
