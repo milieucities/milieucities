@@ -199,3 +199,15 @@ Returns a event.
 }
 
 ```
+
+to deploy
+
+Merge master into production: `git push origin master:production`
+SSH into production server: `ssh rails@milieu.io`
+Log in as the root user: `su -`
+Go the to m-server directory: `cd /home/rails/m-server`
+Pull the production code: `git pull origin production`
+Migrate: `rake db:migrate`
+Compile the node code: `npm start`
+Compile all the assets: `rake assets:precompile`
+Restart unicorn: `service unicorn restart`

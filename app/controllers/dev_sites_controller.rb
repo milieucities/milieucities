@@ -1,5 +1,5 @@
 class DevSitesController < ApplicationController
-  DEFAULT_SITES_LIMIT = 20
+  DEFAULT_SITES_LIMIT = 80
   load_and_authorize_resource
 
   def index

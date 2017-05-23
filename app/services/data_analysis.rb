@@ -5,10 +5,12 @@ module Services
         totals: {},
         averages: {}
       }
-      count = comments.count
+
+      eligible_comments = comments.select { |comment| comment.sentiment.present? }
+      count = eligible_comments.count
 
       Sentiment::NAMES.each do |s_name|
-        sentiment_total = sum_of_comments_sentiment(comments, s_name)
+        sentiment_total = sum_of_comments_sentiment(eligible_comments, s_name)
         sentiment_average = sentiment_total / count
 
         results[:totals][s_name] = sentiment_total
@@ -20,8 +22,7 @@ module Services
 
     def sum_of_comments_sentiment(comments, s_name)
       comments.inject(0.0) do |acc, elem|
-        raise StandardError, 'Comment must have associated Sentiment' unless elem.sentiment
-        acc + elem.sentiment.send(s_name)
+        elem.sentiment.present? ? acc + elem.sentiment.send(s_name) : acc + 0
       end
     end
   end

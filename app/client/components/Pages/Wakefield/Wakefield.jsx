@@ -6,6 +6,7 @@ import Footer from '../../Layout/Footer/Footer'
 import Comments from '../../Comments/Comments'
 import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
+import TypeformSurvey from './TypeformSurvey'
 import { debounce, uniqueId } from 'lodash'
 import i18n from './locale'
 import { ShareButtons, generateShareIcon } from 'react-share';
@@ -21,16 +22,10 @@ export default class Wakefield extends Component {
     this.devSiteId = document.querySelector('#wakefield').dataset.id;
     this.surveySentiment = document.querySelector('#wakefield').dataset.surveySentiment;
     this.loadDevSite = () => this._loadDevSite();
-    this.typeformScript = () => this._typeformScript();
   }
 
   componentDidMount() {
     this.loadDevSite();
-    this.typeformScript();
-  }
-
-  _typeformScript() {
-    (function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'widget.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}})()
   }
 
   _loadDevSite() {
@@ -48,14 +43,17 @@ export default class Wakefield extends Component {
   render() {
     const { loading, devSite } = this.state;
     const { locale } = document.body.dataset;
-    const surveySentiment = JSON.parse(this.surveySentiment) || null
-    i18n.setLanguage(locale);
+    const surveyUrl = locale == 'en' ? 'https://milieu.typeform.com/to/HHlHgX' : 'https://milieu.typeform.com/to/COiraX';
 
+    // TODO: update this when we decide how to analyze survey sentiment
+    const surveySentiment = null;
+
+    i18n.setLanguage(locale);
     return (
       <div className={css.root}>
         <Header />
         <div className={`${css.container} container`}>
-          <h1>Lorne Shoudice Spring, Le Pêche, Quebec, Canada</h1>
+          <h1>{i18n.title}</h1>
           <Loader loading={loading} />
 
           {
@@ -64,7 +62,7 @@ export default class Wakefield extends Component {
               <div className={css.share}>
                 <FacebookShareButton
                   url={`${window.location.origin}/wakefield`}
-                  title='Lorne Shoudice Spring, Le Pêche, Quebec'
+                  title='Lorne Shoudice Spring, La Pêche, Quebec'
                   description='The Lorne Shouldice Spring ( Wakefield Spring) is a treasured source of potable freshwater maintained by the municipality of La Pêche and local non-profit group Friends of the Wakefield Spring.'
                   picture='https://s3.ca-central-1.amazonaws.com/milieu-production/wakefield.jpg'
                   >
@@ -99,10 +97,6 @@ export default class Wakefield extends Component {
                   <Carousel />
                 </div>
               </div>
-
-              <div className="typeform-widget" data-url="https://milieu.typeform.com/to/HHlHgX" data-text="Wakefield Spring Survey" style={{width: '100%', height: 'auto'}}>
-              </div>
-
 
               <div className={css.sentiment}>
                 {
@@ -200,8 +194,8 @@ const CAROUSEL_ITEMS = [
     src: './images/wakefield-video.jpg',
     image: false,
     iframe: {
-      en: 'https://www.youtube.com/embed/Qd5-BAoTMnk?rel=0&amp;showinfo=0',
-      fr: 'https://www.youtube.com/embed/LWatPVfdrqA?rel=0&amp;showinfo=0'
+      en: 'https://www.youtube.com/embed/6D_cBmkHP4g?rel=0&amp;showinfo=0',
+      fr: 'https://www.youtube.com/embed/eih8WV-6F_I?rel=0&amp;showinfo=0'
     }
   },
   {
