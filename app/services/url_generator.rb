@@ -3,7 +3,8 @@ module Services
     HOST_MAP = {
       'development' => 'http://localhost:3000',
       'test' => 'http://localhost:3000',
-      'production' => 'https://cities.milieu.io'
+      'production' => 'https://cities.milieu.io',
+      'staging' => 'http://test.milieu.io'
     }.freeze
 
     def self.generate_approve_comment_url(opts)
