@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170212195921) do
+ActiveRecord::Schema.define(version: 20170606185836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20170212195921) do
     t.string   "province_state"
     t.string   "country"
   end
+
+  create_table "application_types", force: :cascade do |t|
+    t.string "name", null: false
+  end
+
+  create_table "application_types_dev_sites", id: false, force: :cascade do |t|
+    t.integer "application_type_id"
+    t.integer "dev_site_id"
+  end
+
+  add_index "application_types_dev_sites", ["application_type_id"], name: "index_application_types_dev_sites_on_application_type_id", using: :btree
+  add_index "application_types_dev_sites", ["dev_site_id"], name: "index_application_types_dev_sites_on_dev_site_id", using: :btree
 
   create_table "city_files", force: :cascade do |t|
     t.string   "name"
@@ -107,7 +119,17 @@ ActiveRecord::Schema.define(version: 20170212195921) do
     t.integer  "municipality_id"
     t.integer  "ward_id"
     t.boolean  "featured",              default: false
+    t.datetime "active_at"
+    t.string   "applicant"
+    t.string   "urban_planner_name"
   end
+
+  create_table "dev_sites_to_application_types", force: :cascade do |t|
+    t.integer "dev_site_id"
+    t.integer "application_type_id"
+  end
+
+  add_index "dev_sites_to_application_types", ["application_type_id"], name: "index_dev_sites_to_application_types_on_application_type_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -144,6 +166,15 @@ ActiveRecord::Schema.define(version: 20170212195921) do
 
   add_index "likes", ["dev_site_id"], name: "index_likes_on_dev_site_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+
+  create_table "meetings", force: :cascade do |t|
+    t.string   "meeting_type"
+    t.datetime "time"
+    t.string   "location"
+    t.integer  "dev_site_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "memberships", force: :cascade do |t|
     t.integer "user_id"

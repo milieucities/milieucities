@@ -8,24 +8,6 @@ class DevSite < ActiveRecord::Base
   mount_uploaders :images, ImagesUploader
   mount_uploaders :files, FilesUploader
 
-  VALID_APPLICATION_TYPES = [
-    'Site Plan Approval',
-    'Condo Approval',
-    'Subdivision Approval',
-    'Zoning Amendment',
-    'Registered Condominium',
-    'Site Plan Control',
-    'Official Plan Amendment',
-    'Zoning By-law Amendment',
-    'Demolition Control',
-    'Cash-in-lieu of Parking',
-    'Plan of Subdivision',
-    'Plan of Condominium',
-    'Derelict',
-    'Vacant',
-    'Master Plan'
-  ].freeze
-
   VALID_BUILDING_TYPES = [
     'Not Applicable',
     'Derelict',
@@ -49,6 +31,8 @@ class DevSite < ActiveRecord::Base
   has_many :statuses, dependent: :destroy
   has_many :city_files, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :meetings, dependent: :destroy
+  has_and_belongs_to_many :application_types
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :statuses, allow_destroy: true
@@ -57,7 +41,6 @@ class DevSite < ActiveRecord::Base
   validates :devID,
             uniqueness: { message: 'Development Id must be unique' },
             presence: { message: 'Development Id is required' }
-  validates :application_type, presence: { message: 'Application type is required' }
   validates :description, presence: { message: 'Description is required' }
   validates :municipality_id, presence: { message: 'Municipality is required' }
   validates :ward_id, presence: { message: 'Ward is required' }
