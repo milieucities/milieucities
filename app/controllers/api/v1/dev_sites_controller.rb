@@ -42,14 +42,18 @@ class Api::V1::DevSitesController < Api::V1::ApiController
   def sync
     # authenticate with token
 
-    dev_sites = params[:dev_sites]
-    dev_sites.each do |site|
-      dev_site = DevSite.find_by(devID: site[:devID]) || DevSite.create(devID: site[:devID])
-      update_params = build_update_params(site)
-      dev_site.update(update_params)
+    dev_sites = sync_params[:dev_sites]
+    dev_sites.each do |site_params|
+      dev_site = DevSite.find_by(devID: site_params[:devID]) || DevSite.new(devID: site_params[:devID])
+      site_params[:municipality_id] = 2
+      site_params[:ward_id] = 1
+      raise ArgumentError unless dev_site.update_attributes(site_params)
     end
 
     head :ok
+
+  rescue ArgumentError => e
+    head :bad_request
   end
 
 
@@ -92,6 +96,7 @@ class Api::V1::DevSitesController < Api::V1::ApiController
                                      :description,
                                      :ward_councillor_email,
                                      :urban_planner_email,
+                                     :urban_planner_name,
                                      :ward_name,
                                      :ward_num,
                                      :image_url,
@@ -103,11 +108,32 @@ class Api::V1::DevSitesController < Api::V1::ApiController
                                      statuses_attributes: [:id, :status, :status_date, :_destroy] )
   end
 
-  def build_update_params(dev_site)
-    whitelisted_params = [:application_type, :title, :build_type, :description, :ward_councillor_email, :urban_planner_email, :ward_name, :ward_num]
-
-    update_params = {}
-    whitelisted_params.each { |param| update_params[param] = dev_site[param] if dev_site[param] }
-    update_params
+  def sync_params
+    params.permit(dev_sites: [
+      :devID,
+      :title,
+      :build_type,
+      :description,
+      :urban_planner_name,
+      :urban_planner_email,
+      :ward_councillor_email,
+      application_types_attributes: [
+        :name
+      ],
+      meetings_attributes: [
+        :meeting_type,
+        :time,
+        :location,
+      ],
+      addresses_attributes: [
+        :street,
+        :lat,
+        :lon
+      ],
+      statuses_attributes: [
+        :status,
+        :status_date
+      ]
+    ])
   end
 end

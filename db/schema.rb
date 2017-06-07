@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.boolean  "featured",              default: false
     t.datetime "active_at"
     t.string   "applicant"
+    t.string   "on_behalf_of"
     t.string   "urban_planner_name"
   end
 

@@ -37,6 +37,9 @@ class DevSite < ActiveRecord::Base
   accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :statuses, allow_destroy: true
   accepts_nested_attributes_for :likes, allow_destroy: true
+  accepts_nested_attributes_for :application_types, allow_destroy: true
+  accepts_nested_attributes_for :meetings, allow_destroy: true
+
 
   validates :devID,
             uniqueness: { message: 'Development Id must be unique' },
