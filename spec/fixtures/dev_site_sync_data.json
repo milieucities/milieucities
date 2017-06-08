@@ -1,0 +1,39 @@
+{
+  "dev_sites": [{
+    "devID": "test-id",
+    "application_types_attributes": [{
+        "name": "Site Plan Approval"
+      },
+      {
+        "name": "Plan of Subdivision"
+      }
+    ],
+    "meetings_attributes": [{
+        "meeting_type": "public",
+        "time": "Tue, 27 Jun 2017 19:15:54 +0000",
+        "location": "123 Fake St."
+      },
+      {
+        "meeting_type": "council",
+        "time": "Tue, 27 Jun 2017 19:15:54 +0000",
+        "location": "123 Fake St."
+      }
+    ],
+    "statuses_attributes": [{
+      "status": "Application File Pending",
+      "status_date": "June 7, 2017"
+    }],
+    "addresses_attributes": [
+      { "street": "987 Fake St" }
+    ],
+    "build_type": "Derelict",
+    "title": "this is a test",
+    "description": "blah blah blah",
+    "ward_councillor_email": "wardcouncillor@mailinator.com",
+    "urban_planner_email": "urbanplanner@mailinator.com",
+    "urban_planner_name": "Jane Planner",
+    "applicant": "Awesome Applicant",
+    "on_behalf_of": "Buildings & Co",
+    "received_date": "June 20, 2017"
+  }]
+}
