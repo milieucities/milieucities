@@ -32,11 +32,8 @@
     "ward_councillor_email": "wardcouncillor@mailinator.com",
     "urban_planner_email": "urbanplanner@mailinator.com",
     "urban_planner_name": "Jane Planner",
-    "ward_name": "Orleans",
-    "ward_number": "1",
-    "municipal_id": "1",
-    "ward_id": "1",
     "applicant": "Awesome Applicant",
-    "on_behalf_of": "Buildings & Co"
+    "on_behalf_of": "Buildings & Co",
+    "received_date": "June 20, 2017"
   }]
 }

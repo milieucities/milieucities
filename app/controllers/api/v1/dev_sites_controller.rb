@@ -1,5 +1,3 @@
-require 'pry'
-
 class Api::V1::DevSitesController < Api::V1::ApiController
   before_action :authenticate_request, except: [:sync]
 
@@ -42,18 +40,18 @@ class Api::V1::DevSitesController < Api::V1::ApiController
   def sync
     # authenticate with token
 
-    dev_sites = sync_params[:dev_sites]
-    dev_sites.each do |site_params|
-      dev_site = DevSite.find_by(devID: site_params[:devID]) || DevSite.new(devID: site_params[:devID])
-      site_params[:municipality_id] = 2
-      site_params[:ward_id] = 1
-      raise ArgumentError unless dev_site.update_attributes(site_params)
-    end
+  #   dev_sites = sync_params[:dev_sites]
+  #   dev_sites.each do |site_params|
+  #     dev_site = DevSite.find_by(devID: site_params[:devID]) || DevSite.new(devID: site_params[:devID])
+  #     site_params[:municipality_id] = 2
+  #     site_params[:ward_id] = 1
+  #     raise ArgumentError unless dev_site.update_attributes(site_params)
+  #   end
 
-    head :ok
+  #   head :ok
 
-  rescue ArgumentError => e
-    head :bad_request
+  # rescue ArgumentError => e
+  #   head :bad_request
   end
 
 
@@ -117,6 +115,8 @@ class Api::V1::DevSitesController < Api::V1::ApiController
       :urban_planner_name,
       :urban_planner_email,
       :ward_councillor_email,
+      :applicant,
+      :on_behalf_of,
       application_types_attributes: [
         :name
       ],

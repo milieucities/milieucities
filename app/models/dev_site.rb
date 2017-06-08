@@ -60,7 +60,7 @@ class DevSite < ActiveRecord::Base
     result = DevSite.joins(:ward, :municipality).includes(:addresses, :statuses, :comments)
 
     # TODO: remove when Guelph goes live
-    result = result.where.not(municipalities: { name: 'Guelph' })
+    # result = result.where.not(municipalities: { name: 'Guelph' })
 
     result = location_search(result, search_params)
     result = query_search(result, search_params)
@@ -197,6 +197,15 @@ class DevSite < ActiveRecord::Base
 
     def search_by_featured(collection, value)
       collection.where(featured: value)
+    end
+
+    def self.sync_from_json(dev_sites)
+      dev_sites.each do |site_params|
+        dev_site = DevSite.find_by(devID: site_params[:devID]) || DevSite.new(devID: site_params[:devID])
+        site_params[:municipality_id] = 2
+        site_params[:ward_id] = 1
+        raise ArgumentError unless dev_site.update_attributes(site_params)
+      end
     end
   end
 end
