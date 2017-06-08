@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Api::V1::DevSitesController do
   let(:json_data) do
     filepath = Rails.root.join 'spec', 'fixtures', 'dev_site_sync_data.json'
