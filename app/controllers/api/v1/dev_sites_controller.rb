@@ -1,3 +1,5 @@
+require 'pry'
+
 class Api::V1::DevSitesController < Api::V1::ApiController
   before_action :authenticate_request
 
@@ -40,8 +42,13 @@ class Api::V1::DevSitesController < Api::V1::ApiController
     dev_sites.each do |site_params|
       dev_id = site_params[:devID]
       dev_site = DevSite.find_by(devID: dev_id) || DevSite.new(devID: dev_id)
-      site_params[:municipality_id] = 2
-      site_params[:ward_id] = 1
+
+      ward = Ward.find_or_create_by(name: site_params[:ward])
+      site_params[:ward] = ward
+
+      municipality = Municipality.find_or_create_by(name: site_params[:municipality])
+      site_params[:municipality] = municipality
+
       raise ArgumentError unless dev_site.update_attributes(site_params)
     end
 
@@ -114,6 +121,8 @@ class Api::V1::DevSitesController < Api::V1::ApiController
       :ward_councillor_email,
       :applicant,
       :on_behalf_of,
+      :ward,
+      :municipality,
       application_types_attributes: [
         :name
       ],

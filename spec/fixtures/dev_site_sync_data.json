@@ -26,6 +26,8 @@
     "addresses_attributes": [
       { "street": "987 Fake St" }
     ],
+    "ward": "Ward 1",
+    "municipality": "Guelph",
     "build_type": "Derelict",
     "title": "this is a test",
     "description": "blah blah blah",
