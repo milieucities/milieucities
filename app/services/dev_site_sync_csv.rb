@@ -1,19 +1,17 @@
 module Services
   class DevSiteSyncCsv
     DEV_SITE_KEY_MAP = {
-      'REFERENCEF' => "devID",
+      'ADDRESS' => 'address',
       'FOLDERNAME' => 'title',
+      'FOLDERDESC' => 'application_type',
+      'REFERENCEF' => "devID",
       'INDATE' => 'received_date',
       'SUBDESC' => 'build_type',
+      'STATUSDESC' => 'status',
       'FOLDERDE_1' => 'description',
       'USERNAME' => 'urban_planner_name',
       'EMAILADDRE' => 'urban_planner_email',
-      'ORGANIZATI' => 'on_behalf_of',
-      'FOLDERYEAR' => 'year',
-      'ADDRESS' => 'address',
-      'FOLDERDESC' => 'application_type',
-      'STATUSDESC' => 'status',
-
+      'ORGANIZATI' => 'on_behalf_of'
     }
 
     ASSOCIATIONS_TO_UPDATE = [
