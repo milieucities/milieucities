@@ -1,12 +1,18 @@
 class GenerateApiToken
   prepend SimpleCommand
 
-  def call(user, expires_at)
+  def initialize(user, organization, expires_at)
+    @user = user
+    @organization = organization
+    @expires_at = expires_at
+  end
+
+  def call
     payload = {
-      user_id: user.uuid,
-      organization_id: organization.id,
+      user_id: @user.id,
+      organization_id: @organization.id
     }
 
-    JsonWebToken.encode(payload, expires_at)
+    JsonWebToken.encode(payload, @expires_at)
   end
 end

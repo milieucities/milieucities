@@ -1,5 +1,5 @@
 class Api::V1::DevSitesController < Api::V1::ApiController
-  before_action :authenticate_request, except: [:sync]
+  before_action :authenticate_request
 
   def index
     @dev_sites = DevSite.includes(:addresses, :statuses, :comments)
@@ -11,9 +11,7 @@ class Api::V1::DevSitesController < Api::V1::ApiController
     render json: @dev_sites
   end
 
-  def show
-  end
-
+  def show; end
 
   def create
     @dev_site = DevSite.new(dev_site_params)
@@ -38,22 +36,20 @@ class Api::V1::DevSitesController < Api::V1::ApiController
   end
 
   def sync
-    # authenticate with token
+    dev_sites = sync_params[:dev_sites]
+    dev_sites.each do |site_params|
+      dev_id = site_params[:devID]
+      dev_site = DevSite.find_by(devID: dev_id) || DevSite.new(devID: dev_id)
+      site_params[:municipality_id] = 2
+      site_params[:ward_id] = 1
+      raise ArgumentError unless dev_site.update_attributes(site_params)
+    end
 
-  #   dev_sites = sync_params[:dev_sites]
-  #   dev_sites.each do |site_params|
-  #     dev_site = DevSite.find_by(devID: site_params[:devID]) || DevSite.new(devID: site_params[:devID])
-  #     site_params[:municipality_id] = 2
-  #     site_params[:ward_id] = 1
-  #     raise ArgumentError unless dev_site.update_attributes(site_params)
-  #   end
+    head :ok
 
-  #   head :ok
-
-  # rescue ArgumentError => e
-  #   head :bad_request
+  rescue ArgumentError
+    head :bad_request
   end
-
 
   private
 
@@ -62,11 +58,11 @@ class Api::V1::DevSitesController < Api::V1::ApiController
   end
 
   def paginate
-    if params[:page].present? || params[:limit].present?
-      limit = params[:limit].present? ? params[:limit].to_i : 20
-      page = params[:page].present? ? params[:page].to_i : 0
-      @dev_sites.limit!(limit).offset!(limit * page)
-    end
+    return unless params[:page].present? || params[:limit].present?
+
+    limit = params[:limit].present? ? params[:limit].to_i : 20
+    page = params[:page].present? ? params[:page].to_i : 0
+    @dev_sites.limit!(limit).offset!(limit * page)
   end
 
   def sort?
@@ -77,13 +73,14 @@ class Api::V1::DevSitesController < Api::V1::ApiController
     ((params[:latitude].present? && params[:longitude].present?) ||
     params[:year].present? ||
     params[:ward].present? ||
-    params[:status].present? )
+    params[:status].present?)
   end
 
   def search_params
     params.permit(:latitude, :longitude, :year, :ward, :status)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def dev_site_params
     params.require(:dev_site).permit(:devID,
                                      :application_type,
@@ -99,11 +96,11 @@ class Api::V1::DevSitesController < Api::V1::ApiController
                                      :ward_num,
                                      :image_url,
                                      :hearts,
-                                     {images: []},
-                                     {files: []},
+                                     { images: [] },
+                                     { files: [] },
                                      likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
                                      addresses_attributes: [:id, :lat, :lon, :street, :_destroy],
-                                     statuses_attributes: [:id, :status, :status_date, :_destroy] )
+                                     statuses_attributes: [:id, :status, :status_date, :_destroy])
   end
 
   def sync_params
@@ -120,10 +117,11 @@ class Api::V1::DevSitesController < Api::V1::ApiController
       application_types_attributes: [
         :name
       ],
-      meetings_attributes: [
+      meetings_attributes:
+      [
         :meeting_type,
         :time,
-        :location,
+        :location
       ],
       addresses_attributes: [
         :street,
