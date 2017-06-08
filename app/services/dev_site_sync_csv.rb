@@ -9,7 +9,6 @@ module Services
       'USERNAME' => 'urban_planner_name',
       'EMAILADDRE' => 'urban_planner_email',
       'ORGANIZATI' => 'on_behalf_of',
-      'FOLDERYEAR' => 'year',
       'ADDRESS' => 'address',
       'FOLDERDESC' => 'application_type',
       'STATUSDESC' => 'status',
@@ -27,8 +26,11 @@ module Services
     def initialize(csv_file)
       @lines = read_csv(csv_file).delete_if { |arr| arr.empty? }
       headers = @lines.delete(@lines.first)
-      @keys = headers.map { |key| DEV_SITE_KEY_MAP[key] }.compact
-      @dev_sites = @lines.map { |values| Hash[@keys.zip(values)] }
+      @keys = headers.map { |key| DEV_SITE_KEY_MAP[key] }
+      @dev_sites = @lines.map do |values|
+        obj = Hash[@keys.zip(values)]
+        obj.delete_if { |key, value| key.nil? }
+      end
     end
 
     def sync
@@ -79,7 +81,7 @@ module Services
     end
 
     def update_address(dev_site, address)
-      dev_site.addresses << Address.create(street: address)
+      dev_site.addresses << Address.create(street: "#{address.titleize}, Guelph, ON")
     end
   end
 end
