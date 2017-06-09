@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe SurveyResponse do
   describe '#process_answers' do
