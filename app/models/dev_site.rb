@@ -39,9 +39,6 @@ class DevSite < ActiveRecord::Base
   accepts_nested_attributes_for :likes, allow_destroy: true
   accepts_nested_attributes_for :application_types, allow_destroy: true
   accepts_nested_attributes_for :meetings, allow_destroy: true
-  accepts_nested_attributes_for :ward
-  accepts_nested_attributes_for :municipality
-
 
   validates :devID,
             uniqueness: { message: 'Development Id must be unique' },
@@ -60,10 +57,6 @@ class DevSite < ActiveRecord::Base
 
   def self.search(search_params)
     result = DevSite.joins(:ward, :municipality).includes(:addresses, :statuses, :comments)
-
-    # TODO: remove when Guelph goes live
-    # result = result.where.not(municipalities: { name: 'Guelph' })
-
     result = location_search(result, search_params)
     result = query_search(result, search_params)
     result

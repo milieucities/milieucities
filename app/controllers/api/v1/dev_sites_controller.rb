@@ -36,24 +36,13 @@ class Api::V1::DevSitesController < Api::V1::ApiController
   end
 
   def sync
-    dev_sites = sync_params[:dev_sites]
-    dev_sites.each do |site_params|
-      dev_id = site_params[:devID]
-      dev_site = DevSite.find_by(devID: dev_id) || DevSite.new(devID: dev_id)
+    command = UpdateDevSiteFromJson.call(sync_params[:dev_sites])
 
-      ward = Ward.find_or_create_by(name: site_params[:ward])
-      site_params[:ward] = ward
-
-      municipality = Municipality.find_or_create_by(name: site_params[:municipality])
-      site_params[:municipality] = municipality
-
-      raise ArgumentError unless dev_site.update_attributes(site_params)
+    if command.success?
+      render json: { results: command.result }, status: :ok
+    else
+      render json: { errors: command.errors[:sync] }, status: :unprocessable_entity
     end
-
-    head :ok
-
-  rescue ArgumentError
-    head :bad_request
   end
 
   private
@@ -109,38 +98,39 @@ class Api::V1::DevSitesController < Api::V1::ApiController
   end
 
   def sync_params
-    params.permit(dev_sites: [
-      :devID,
-      :title,
-      :build_type,
-      :description,
-      :urban_planner_name,
-      :urban_planner_email,
-      :ward_councillor_email,
-      :applicant,
-      :on_behalf_of,
-      :ward,
-      :municipality,
-      :received_date,
-      :active_at,
-      application_types_attributes: [
-        :name
-      ],
-      meetings_attributes:
-      [
-        :meeting_type,
-        :time,
-        :location
-      ],
-      addresses_attributes: [
-        :street,
-        :lat,
-        :lon
-      ],
-      statuses_attributes: [
-        :status,
-        :status_date
-      ]
-    ])
+    params.permit(dev_sites: [:dev_site_id,
+                              :title,
+                              :address,
+                              :build_type,
+                              :description,
+                              :urban_planner_name,
+                              :urban_planner_email,
+                              :ward_councillor_email,
+                              :applicant,
+                              :on_behalf_of,
+                              :ward,
+                              :municipality,
+                              :received_date,
+                              :active_at,
+                              application_types_attributes: [
+                                :name
+                              ],
+                              meetings_attributes:
+                              [
+                                :meeting_type,
+                                :time,
+                                :location
+                              ],
+                              statuses_attributes: [
+                                :status,
+                                :status_date
+                              ],
+                              addresses_attributes: [
+                                :street,
+                                :city,
+                                :province_state,
+                                :country
+                              ]
+                            ])
   end
 end

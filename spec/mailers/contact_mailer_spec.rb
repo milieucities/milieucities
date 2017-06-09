@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe ContactMailer do
   let(:dev_site) do

@@ -1,6 +1,6 @@
 {
   "dev_sites": [{
-    "devID": "test-id",
+    "dev_site_id": "test-id",
     "ward": "Ward 1",
     "municipality": "Guelph",
     "build_type": "Derelict",
@@ -35,8 +35,11 @@
       "status": "Application File Pending",
       "status_date": "June 7, 2017"
     }],
-    "addresses_attributes": [
-      { "street": "987 Fake St" }
-    ]
+    "addresses_attributes": [{
+      "street": "987 Fake St",
+      "city": "Guelph",
+      "province_state": "Ontario",
+      "country": "Canada"
+    }]
   }]
 }

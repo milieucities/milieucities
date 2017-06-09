@@ -16,7 +16,7 @@ The body of your request must include the following field:
 - `dev_sites` (*required*): the array of objects that represent the dev sites to be added or updated.
 
 Each dev site object should contain the following fields:
-- `devID` (*required*): a unique ID or file number for the site
+- `dev_site_id` (*required*): a unique ID or file number for the site
 - `ward` (*required*): the name of the ward where the site is located
 - `municipality` (*required*): the name of the municipality where the dev site is located
 - `build_type` (*optional*): the building type
@@ -31,8 +31,9 @@ Each dev site object should contain the following fields:
 - `active_at` (*optional*): the date on which the application is deemed complete DD/MM/YYYY
 - `addresses_attributes` (*required*): an array of one object representing the address of the site
     - `street` (*required*): the street address
-    - `lat` (*optional*): the latitude of the location
-    - `lon` (*optional*): the longitude of the location
+    - `city` (*required*): the name of the city
+    - `province_state` (*optional*): the name of the province or state
+    - `country` (*optional*): the name of the country
 - `application_types_attributes` (*required*): an array of objects containing the `name` of the application types applying to this site.
 - `meetings_attributes` (*optional*): an array of objects containing the meetings relevant to this site. Each meeting object should contain:
     - `meeting_type` (*required*): either `public` or `council`
@@ -47,7 +48,7 @@ Each dev site object should contain the following fields:
 ```json
 {
   "dev_sites": [{
-    "devID": "S987Z7",
+    "dev_site_id": "S987Z7",
     "ward": "Ward 1",
     "municipality": "Guelph",
     "build_type": "Derelict",
@@ -91,7 +92,21 @@ Each dev site object should contain the following fields:
 
 ###### Result
 
-Status 200 if successful or status 400 if unsuccessful.
+The response will contain a `results` object that has a `failed` array and `success` array. For each site that was successfully updated, there will be an object in the `success` array that has the `dev_site_id`, and `status` of the site (either `created` or `updated`. The failed array contains objects representing any sites that were not updated. The object contains the `dev_site_id`, `status` (it will be `error`), and `message` which explains the error.
+
+### Example of result
+
+```json
+{
+  "results": {
+    "failed": [],
+    "success": [{
+      "dev_site_id": "test-id",
+      "status": "created"
+    }]
+  }
+}
+```
 
 
 ## No authentication necessary
