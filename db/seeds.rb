@@ -26,57 +26,57 @@ Ward.find_or_create_by(name: 'Gloucester-South Nepean', municipality_id: ottawa_
 Ward.find_or_create_by(name: 'Kanata South', municipality_id: ottawa_municipality.id)
 
 
-answers = [
-  {
-    "type": "text",
-    "text": "happy times i love water springs are great and so useful!",
-    "field": {
-      "id": "42471743",
-      "type": "long_text"
-    }
-  },
-  {
-    "type": "text",
-    "text": "039475",
-    "field": {
-      "id": "42471734",
-      "type": "short_text"
-    }
-  },
-  {
-    "type": "text",
-    "text": "Sharon",
-    "field": {
-      "id": "42471732",
-      "type": "short_text"
-    }
-  },
-  {
-    "type": "choices",
-    "choices": {
-      "labels": [
-        "for my daily drinking water needs year round"
-      ]
-    },
-    "field": {
-      "id": "42471736",
-      "type": "multiple_choice"
-    }
-  },
-  {
-    "type": "text",
-    "text": "There are so many ways i can't even remember",
-    "field": {
-      "id": "42471738",
-      "type": "long_text"
-    }
-  }
-]
+# answers = [
+#   {
+#     "type": "text",
+#     "text": "happy times i love water springs are great and so useful!",
+#     "field": {
+#       "id": "42471743",
+#       "type": "long_text"
+#     }
+#   },
+#   {
+#     "type": "text",
+#     "text": "039475",
+#     "field": {
+#       "id": "42471734",
+#       "type": "short_text"
+#     }
+#   },
+#   {
+#     "type": "text",
+#     "text": "Sharon",
+#     "field": {
+#       "id": "42471732",
+#       "type": "short_text"
+#     }
+#   },
+#   {
+#     "type": "choices",
+#     "choices": {
+#       "labels": [
+#         "for my daily drinking water needs year round"
+#       ]
+#     },
+#     "field": {
+#       "id": "42471736",
+#       "type": "multiple_choice"
+#     }
+#   },
+#   {
+#     "type": "text",
+#     "text": "There are so many ways i can't even remember",
+#     "field": {
+#       "id": "42471738",
+#       "type": "long_text"
+#     }
+#   }
+# ]
 
-survey = CustomSurvey.find_by(typeform_id: 'HHlHgX')
+# survey = CustomSurvey.find_by(typeform_id: 'HHlHgX')
 
-survey_response = SurveyResponse.create(response_body: answers,
-                                        custom_survey_id: 'HHlHgX')
+# survey_response = SurveyResponse.create(response_body: answers,
+#                                         custom_survey_id: 'HHlHgX')
 
-survey.survey_responses << survey_response if survey_response.valid?
-survey.save
+# survey.survey_responses << survey_response if survey_response.valid?
+# survey.save

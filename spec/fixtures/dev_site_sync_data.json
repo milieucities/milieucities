@@ -1,6 +1,19 @@
 {
   "dev_sites": [{
-    "devID": "test-id",
+    "dev_site_id": "test-id",
+    "ward": "Ward 1",
+    "municipality": "Guelph",
+    "build_type": "Derelict",
+    "title": "this is a test",
+    "description": "blah blah blah",
+    "ward_councillor_email": "wardcouncillor@mailinator.com",
+    "urban_planner_email": "urbanplanner@mailinator.com",
+    "urban_planner_name": "Jane Planner",
+    "applicant": "Awesome Applicant",
+    "on_behalf_of": "Buildings & Co",
+    "received_date": "June 1, 2017",
+    "active_at": "June 8, 2017",
+    "url_full_notice": "www.example.com",
     "application_types_attributes": [{
         "name": "Site Plan Approval"
       },
@@ -23,17 +36,11 @@
       "status": "Application File Pending",
       "status_date": "June 7, 2017"
     }],
-    "addresses_attributes": [
-      { "street": "987 Fake St" }
-    ],
-    "build_type": "Derelict",
-    "title": "this is a test",
-    "description": "blah blah blah",
-    "ward_councillor_email": "wardcouncillor@mailinator.com",
-    "urban_planner_email": "urbanplanner@mailinator.com",
-    "urban_planner_name": "Jane Planner",
-    "applicant": "Awesome Applicant",
-    "on_behalf_of": "Buildings & Co",
-    "received_date": "June 20, 2017"
+    "addresses_attributes": [{
+      "street": "987 Fake St",
+      "city": "Guelph",
+      "province_state": "Ontario",
+      "country": "Canada"
+    }]
   }]
 }

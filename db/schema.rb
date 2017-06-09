@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.string   "applicant"
     t.string   "on_behalf_of"
     t.string   "urban_planner_name"
+    t.string   "url_full_notice"
   end
 
   create_table "dev_sites_to_application_types", force: :cascade do |t|

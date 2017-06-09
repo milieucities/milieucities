@@ -18,7 +18,6 @@ class NewDevelopmentNotificationJob
     def prepare_message(address, dev_site_id)
       user_ids = search_user_ids(address)
       return if user_ids.empty?
-
       recipients = convert_users_to_mandrill_recipients(user_ids)
       merge_vars = convert_users_to_mandrill_merge_fields(user_ids)
       body = email_body

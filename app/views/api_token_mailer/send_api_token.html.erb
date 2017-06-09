@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hi <%= @user.name_from_profile %>,</p>
+    <p>Here is your API token for the Milieu platform: <strong><%= @token %></strong></p>
+
+    <p>This token is valid for your account with the organization <%= @org.name %>. The token will expire on <%= @expires_at.to_s %>. Please contact us to request a new token before the expiry date.</p>
+
+    <p>To learn more about using our API, please see our <%= link_to 'documentation page', 'https://github.com/Milieucitiesrepo/m-server' %>. Feel free to contact us if you have any questions.</p>
+
+    <p>Best wishes from the team at Milieu</p>
+  </body>
+</html>
