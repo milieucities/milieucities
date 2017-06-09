@@ -13,6 +13,7 @@
     "on_behalf_of": "Buildings & Co",
     "received_date": "June 1, 2017",
     "active_at": "June 8, 2017",
+    "url_full_notice": "www.example.com",
     "application_types_attributes": [{
         "name": "Site Plan Approval"
       },

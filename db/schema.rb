@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(version: 20170606185836) do
   add_index "application_types_dev_sites", ["application_type_id"], name: "index_application_types_dev_sites_on_application_type_id", using: :btree
   add_index "application_types_dev_sites", ["dev_site_id"], name: "index_application_types_dev_sites_on_dev_site_id", using: :btree
 
+  create_table "authentication_tokens", force: :cascade do |t|
+    t.string   "token",      null: false
+    t.datetime "expires_at"
+    t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "city_files", force: :cascade do |t|
     t.string   "name"
     t.string   "link"
@@ -61,12 +69,13 @@ ActiveRecord::Schema.define(version: 20170606185836) do
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.string   "title"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "user_id"
     t.string   "commentable_type"
     t.integer  "commentable_id"
     t.integer  "vote_count"
+    t.string   "flagged_as_offensive", default: "UNFLAGGED"
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -123,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.string   "applicant"
     t.string   "on_behalf_of"
     t.string   "urban_planner_name"
+    t.string   "url_full_notice"
   end
 
   create_table "dev_sites_to_application_types", force: :cascade do |t|

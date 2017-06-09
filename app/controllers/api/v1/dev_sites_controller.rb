@@ -112,6 +112,7 @@ class Api::V1::DevSitesController < Api::V1::ApiController
                               :municipality,
                               :received_date,
                               :active_at,
+                              :url_full_notice,
                               application_types_attributes: [
                                 :name
                               ],
