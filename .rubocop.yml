@@ -1,3 +1,9 @@
+AllCops:
+  Exclude:
+    - 'app/client/node_modules/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/**/*'
+    - 'bin/**/*'
 Rails:
   Enabled: true
 Documentation:
@@ -22,9 +28,3 @@ Style/ColonMethodCall:
   Enabled: false
 HttpPositionalArguments:
   Enabled: false
-AllCops:
-  Exclude:
-    - 'app/client/node_modules/**/*'
-    - 'db/schema.rb'
-    - 'db/migrate/**/*'
-    - 'bin/**/*'
