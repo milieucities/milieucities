@@ -29,6 +29,7 @@ gem 'fog', '~> 1.38'
 gem 'rmagick', '~> 2.15.4', :require => 'RMagick'
 gem 'simple_command'
 gem 'jwt'
+gem 'ancestry', '~> 3.0.0'
 
 # view gems
 gem 'font-awesome-rails', '~> 4.7.0.0'

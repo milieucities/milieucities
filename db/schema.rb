@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606185836) do
+ActiveRecord::Schema.define(version: 20170609193421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,10 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.integer  "commentable_id"
     t.integer  "vote_count"
     t.string   "flagged_as_offensive", default: "UNFLAGGED"
+    t.string   "ancestry"
   end
+
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "user_id"
@@ -132,6 +135,7 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.string   "applicant"
     t.string   "on_behalf_of"
     t.string   "urban_planner_name"
+    t.string   "url_full_notice"
   end
 
   create_table "dev_sites_to_application_types", force: :cascade do |t|
