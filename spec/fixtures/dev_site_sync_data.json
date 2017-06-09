@@ -1,6 +1,18 @@
 {
   "dev_sites": [{
     "devID": "test-id",
+    "ward": "Ward 1",
+    "municipality": "Guelph",
+    "build_type": "Derelict",
+    "title": "this is a test",
+    "description": "blah blah blah",
+    "ward_councillor_email": "wardcouncillor@mailinator.com",
+    "urban_planner_email": "urbanplanner@mailinator.com",
+    "urban_planner_name": "Jane Planner",
+    "applicant": "Awesome Applicant",
+    "on_behalf_of": "Buildings & Co",
+    "received_date": "June 1, 2017",
+    "active_at": "June 8, 2017",
     "application_types_attributes": [{
         "name": "Site Plan Approval"
       },
@@ -25,17 +37,6 @@
     }],
     "addresses_attributes": [
       { "street": "987 Fake St" }
-    ],
-    "ward": "Ward 1",
-    "municipality": "Guelph",
-    "build_type": "Derelict",
-    "title": "this is a test",
-    "description": "blah blah blah",
-    "ward_councillor_email": "wardcouncillor@mailinator.com",
-    "urban_planner_email": "urbanplanner@mailinator.com",
-    "urban_planner_name": "Jane Planner",
-    "applicant": "Awesome Applicant",
-    "on_behalf_of": "Buildings & Co",
-    "received_date": "June 1, 2017"
+    ]
   }]
 }

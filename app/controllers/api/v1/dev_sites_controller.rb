@@ -1,5 +1,3 @@
-require 'pry'
-
 class Api::V1::DevSitesController < Api::V1::ApiController
   before_action :authenticate_request
 
@@ -123,6 +121,8 @@ class Api::V1::DevSitesController < Api::V1::ApiController
       :on_behalf_of,
       :ward,
       :municipality,
+      :received_date,
+      :active_at,
       application_types_attributes: [
         :name
       ],
