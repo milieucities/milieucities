@@ -79,7 +79,7 @@ class Comment < ActiveRecord::Base
     dev_site = commentable
     planner_email = dev_site.urban_planner_email
     milieu_email = ApplicationMailer::MILIEU_EMAIL_ADDRESS
-    users = User.where(email: [planner_email, milieu_email])
+    users = User.where(email: [planner_email, milieu_email].compact)
 
 
     FlaggedCommentNotificationJob.perform(users, self, dev_site)
