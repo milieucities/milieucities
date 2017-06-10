@@ -4,7 +4,7 @@ module Services
       'ADDRESS' => 'address',
       'FOLDERNAME' => 'title',
       'FOLDERDESC' => 'application_type',
-      'REFERENCEF' => "devID",
+      'REFERENCEF' => 'devID',
       'INDATE' => 'received_date',
       'SUBDESC' => 'build_type',
       'STATUSDESC' => 'status',
@@ -12,42 +12,37 @@ module Services
       'USERNAME' => 'urban_planner_name',
       'EMAILADDRE' => 'urban_planner_email',
       'ORGANIZATI' => 'on_behalf_of'
-    }
+    }.freeze
 
-    ASSOCIATIONS_TO_UPDATE = [
-      'application_type', 'status', 'address'
-    ]
+    ASSOCIATIONS_TO_UPDATE = %w(application_type status address).freeze
 
-    ATTRIBUTES_TO_UPDATE = [
-      'title', 'date_received', 'build_type', 'description', 'urban_planner_name', 'urban_planner_email', 'on_behalf_of'
-    ]
+    ATTRIBUTES_TO_UPDATE = %w(title date_received build_type description urban_planner_name urban_planner_email on_behalf_of).freeze
 
     def initialize(csv_file)
-      @lines = read_csv(csv_file).delete_if { |arr| arr.empty? }
+      @lines = read_csv(csv_file).delete_if(&:empty?)
       headers = @lines.delete(@lines.first)
       @keys = headers.map { |key| DEV_SITE_KEY_MAP[key] }
       @dev_sites = @lines.map do |values|
         obj = Hash[@keys.zip(values)]
-        obj.delete_if { |key, value| key.nil? }
+        obj.delete_if { |key, _value| key.nil? }
       end
     end
 
     def sync
       @dev_sites.each do |site_params|
-        dev_site = DevSite.find_by(devID: site_params['devID']) || DevSite.new(devID: site_params['devID'])
+        dev_site_id = site_params['devID']
+        dev_site = DevSite.find_by(devID: dev_site_id) || DevSite.new(devID: dev_site_id)
 
         valid = update_dev_site_attributes(dev_site, site_params)
 
-        if !valid
-          puts "Unable to sync dev site #{site_params['devID']}: #{dev_site.errors.full_messages}"
+        unless valid
+          Rails.logger.info "Unable to sync dev site #{dev_site_id}: #{dev_site.errors.full_messages}"
           next
         end
 
         valid = update_dev_site_associations(dev_site, site_params)
 
-        if valid
-          puts "Synced dev site #{site_params['devID']}"
-        end
+        Rails.logger.info "Synced dev site #{site_params['devID']}" if valid
       end
     end
 
@@ -57,8 +52,10 @@ module Services
 
     def update_dev_site_attributes(dev_site, site_params)
       attributes_to_update = site_params.slice(*ATTRIBUTES_TO_UPDATE)
-      attributes_to_update[:"municipality_id"] = 2
-      attributes_to_update[:ward_id] = 1
+      guelph = Municipality.find_by(name: 'Guelph')
+      ward = Ward.find_or_create_by(name: '[N/A]')
+      attributes_to_update[:municipality_id] = guelph.id
+      attributes_to_update[:ward_id] = ward.id
 
       dev_site.update_attributes(attributes_to_update)
     end
