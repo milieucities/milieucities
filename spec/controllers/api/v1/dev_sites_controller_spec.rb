@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe Api::V1::DevSitesController do
   let(:json_data) do
