@@ -73,7 +73,7 @@ class FlaggedCommentNotificationJob
         merge_vars: merge_vars,
         preserve_recipients: false,
         global_merge_vars: [
-          { name: 'dev_site_id', content: dev_site.id },
+          { name: 'dev_site_id', content: dev_site.devID },
           { name: 'comment_body', content: comment.body }
         ]
       }
