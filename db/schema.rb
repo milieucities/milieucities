@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609193421) do
+ActiveRecord::Schema.define(version: 20170610223704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(version: 20170609193421) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comment_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+  end
+
+  add_index "comment_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_idx", unique: true, using: :btree
+  add_index "comment_hierarchies", ["descendant_id"], name: "comment_desc_idx", using: :btree
+
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.string   "title"
@@ -76,10 +85,8 @@ ActiveRecord::Schema.define(version: 20170609193421) do
     t.integer  "commentable_id"
     t.integer  "vote_count"
     t.string   "flagged_as_offensive", default: "UNFLAGGED"
-    t.string   "ancestry"
+    t.integer  "parent_id"
   end
-
-  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "user_id"

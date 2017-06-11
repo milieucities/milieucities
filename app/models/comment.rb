@@ -9,13 +9,13 @@ class Comment < ActiveRecord::Base
   FLAGGED_STATUS = 'FLAGGED'.freeze
   APPROVED_STATUS = 'APPROVED'.freeze
 
-  has_ancestry
   belongs_to :commentable, polymorphic: true
   belongs_to :user
   default_scope { order(created_at: :desc) }
   has_one  :sentiment, as: :sentimentable, dependent: :destroy
   has_many :votes, dependent: :destroy
   validates :body, presence: { message: 'Comment is required' }
+  has_closure_tree
 
   after_save :flag_offensive_comments
 

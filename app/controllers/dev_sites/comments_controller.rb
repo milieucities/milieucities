@@ -67,6 +67,7 @@ module DevSites
                                       :commentable_id,
                                       :commentable_type,
                                       :user_id,
+                                      :parent_id,
                                       :flagged_as_offensive)
     end
 
