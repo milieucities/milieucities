@@ -109,7 +109,7 @@ export default class Comments extends Component {
         total > 0 &&
         <div className={css.number}> {total} responses</div>
       }
-      {comments.map(comment => <Comment comment={comment} key={comment.id} parent={this} saveComment={this.saveComment}/>)}
+      {comments.map(comment => <Comment comment={comment} key={comment.id} parent={this} saveComment={this.saveComment} devSiteId={this.props.devSiteId} />)}
       {
         this.hasMoreComments() &&
         <a onClick={this.appendMoreComments} className={css.loadmore}>{i18n.loadMore}</a>

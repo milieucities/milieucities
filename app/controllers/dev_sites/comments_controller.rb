@@ -3,12 +3,11 @@ module DevSites
     load_resource :dev_site
     around_action :authenticate_with_token, only: [:update, :destroy], if: :contains_token
     load_and_authorize_resource :comment, through: :dev_site
-    before_action :load_resource, only: [:update, :destroy]
+    before_action :load_resource, only: [:update, :destroy, :children]
 
     def index
-      @comments = @comments.includes(:votes, :user)
-                           .where.not(flagged_as_offensive: Comment::FLAGGED_STATUS)
       @total = @comments.count
+      @comments = @comments.root.clean.includes(:votes, :user)
       @comments = paginate(@comments, 5)
     end
 
@@ -57,6 +56,13 @@ module DevSites
             }, status: 500
           end
         end
+      end
+    end
+
+    def children
+      @comments = @comment.children
+      respond_to do |format|
+        format.json { render :index, status: 200 }
       end
     end
 

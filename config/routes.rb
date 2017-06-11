@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       resources :comments, module: :dev_sites do
         get :approve, to: 'comments#update'
         get :reject, to: 'comments#destroy'
+        get :children, to: 'comments#children'
       end
     end
 
