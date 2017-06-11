@@ -127,50 +127,22 @@ export default class Comment extends Component {
 
   _deleteComment(e) {
     e.preventDefault();
-    const { comment, parent } = this.props;
-    const devSiteId = this.props.devSiteId
-    $.ajax({
-      url: `/dev_sites/${devSiteId}/comments/${comment.id}`,
-      dataType: 'JSON',
-      type: 'DELETE',
-      success: (comment) => {
-        parent.loadComments();
-      },
-      error: error => {
-        window.flash('alert', error.responseText)
-      }
-    });
+    this.props.deleteComment(this.props.comment);
   }
 
   _editComment(e) {
-    const { comment, parent } = this.props;
-    const devSiteId = this.props.devSiteId
-    $.ajax({
-      url: `/dev_sites/${devSiteId}/comments/${comment.id}`,
-      dataType: 'JSON',
-      data: { comment: { body: e.commentBody }},
-      type: 'PATCH',
-      success: () => {
-        parent.loadComments();
-      },
-      error: error => {
-        window.flash('alert', error.responseText)
-      }
-    });
+    this.props.editComment(this.props.comment, e.commentBody)
   }
 
   _fetchChildren() {
     const { comment } = this.props;
     const devSiteId = this.props.devSiteId
-    console.log('FETCH CHILDREN')
-    console.log('comment', comment)
 
     $.ajax({
       url: `/dev_sites/${devSiteId}/comments/${comment.id}/children`,
       dataType: 'JSON',
       type: 'GET',
       success: (res) => {
-        console.log('RESPONSE', res)
         this.setState({ children: res })
       },
       error: (error) => {
@@ -185,14 +157,13 @@ export default class Comment extends Component {
 
   _generateChildren() {
     return this.state.children.map((child) => {
-      console.log('CHILD', child)
       return(
         <Comment
+          { ...this.props }
           comment={child}
           key={child.id}
           parent={this}
-          saveComment={this.props.saveComment}
-          devSiteId={this.props.devSiteId}
+          deleteComment={this.props.deleteComment}
         />
       )
     })
@@ -204,7 +175,6 @@ export default class Comment extends Component {
     const { locale } = document.body.dataset;
     const userOwnsComment = (comment.user && comment.user.id == this.currentUserId);
     const children = this.generateChildren();
-    console.log('CHILDREN', children)
     i18n.setLanguage(locale);
 
     return(
@@ -254,7 +224,8 @@ export default class Comment extends Component {
         </div>
         {
           showCommentForm &&
-          <CommentForm {...this.props}
+          <CommentForm
+            {...this.props}
             parentId={this.props.comment.id}
             saveComment={this.props.saveComment}
             toggleCommentForm={this.toggleCommentForm}

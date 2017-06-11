@@ -24,9 +24,10 @@ module DevSites
     end
 
     def update
+      @comments = Comment.root.clean.includes(:votes, :user)
       respond_to do |format|
         if @comment.update(comment_params)
-          format.json { render json: @comment, status: 200 }
+          format.json { render :index, status: 200 }
           format.html do
             flash[:notice] = 'The comment has been updated.'
             redirect_to dev_site_path(@dev_site)
@@ -42,9 +43,10 @@ module DevSites
     end
 
     def destroy
+      @comments = Comment.root.clean.includes(:votes, :user)
       respond_to do |format|
         if @comment.destroy
-          format.json { head :no_content, status: 204 }
+          format.json { render :index, status: 204 }
           format.html do
             flash[:notice] = 'The comment has been deleted.'
             redirect_to dev_site_path(@dev_site)

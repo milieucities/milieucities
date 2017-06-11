@@ -16,8 +16,11 @@ export default class CommentForm extends Component {
     const commentBody = this.state.body;
     const parentId = this.props.parentId;
     this.setState({ body: '' });
-    this.props.toggleCommentForm();
     this.props.saveComment(parentId, commentBody);
+
+    if (this.props.toggleCommentForm) {
+      this.props.toggleCommentForm();
+    }
   }
 
   render() {

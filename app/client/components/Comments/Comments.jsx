@@ -18,6 +18,8 @@ export default class Comments extends Component {
     this.loadComments();
     this.openModal = () => this._openModal();
     this.saveComment = (p,b) => this._saveComment(p,b);
+    this.editComment = (c,b) => this._editComment(c,b);
+    this.deleteComment = (c) => this._deleteComment(c);
   }
 
   componentDidMount() {
@@ -37,6 +39,7 @@ export default class Comments extends Component {
   }
 
   _loadComments() {
+    console.log('RELOADING COMMENTS!')
     $.getJSON(`/dev_sites/${this.props.devSiteId}/comments`,
       { page: this.state.page, limit: this.state.limit },
       comments => this.setState({ comments: List(comments), total: (comments.length > 0 ? comments[0].total : 0) })
@@ -93,6 +96,40 @@ export default class Comments extends Component {
     });
   }
 
+  _deleteComment(comment) {
+    console.log('DELETE COMMENT', comment)
+    const devSiteId = this.props.devSiteId
+    $.ajax({
+      url: `/dev_sites/${devSiteId}/comments/${comment.id}`,
+      dataType: 'JSON',
+      type: 'DELETE',
+      success: (res) => {
+        console.log('DELETED COMMENT', res)
+        this.loadComments()
+      },
+      error: error => {
+        window.flash('alert', error.responseText)
+      }
+    });
+  }
+
+  _editComment(comment, body) {
+    const devSiteId = this.props.devSiteId
+
+    $.ajax({
+      url: `/dev_sites/${devSiteId}/comments/${comment.id}`,
+      dataType: 'JSON',
+      data: { comment: { body }},
+      type: 'PATCH',
+      success: () => {
+        this.loadComments();
+      },
+      error: error => {
+        window.flash('alert', error.responseText)
+      }
+    });
+  }
+
   render() {
     const { comments, total } = this.state;
     const { locale } = document.body.dataset;
@@ -109,7 +146,17 @@ export default class Comments extends Component {
         total > 0 &&
         <div className={css.number}> {total} responses</div>
       }
-      {comments.map(comment => <Comment comment={comment} key={comment.id} parent={this} saveComment={this.saveComment} devSiteId={this.props.devSiteId} />)}
+      {comments.map(comment =>
+        <Comment
+          comment={comment}
+          key={comment.id}
+          parent={this}
+          saveComment={this.saveComment}
+          editComment={this.editComment}
+          deleteComment={this.deleteComment}
+          devSiteId={this.props.devSiteId}
+        />)
+      }
       {
         this.hasMoreComments() &&
         <a onClick={this.appendMoreComments} className={css.loadmore}>{i18n.loadMore}</a>
