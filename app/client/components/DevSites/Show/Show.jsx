@@ -10,6 +10,7 @@ import Sentiment from '../../Common/Sentiment/Sentiment'
 import i18n from './locale'
 import Chart from 'chart.js'
 import { ShareButtons, generateShareIcon } from 'react-share';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
@@ -73,6 +74,7 @@ export default class DevSiteShow extends Component {
   render() {
     const { devSite, loading, showModal, contact } = this.state;
     const { locale } = document.body.dataset;
+    const latestStatus = devSite.statuses.slice(-1).pop()
     i18n.setLanguage(locale);
     return(
       <div className={css.root}>
@@ -82,20 +84,31 @@ export default class DevSiteShow extends Component {
           {
             !loading &&
             <div>
-              <h1>{devSite.address}</h1>
-              <div className='row'>
                 <div className='col s12 m6'>
-                  <img src={devSite.image_url} className={css.image} />
+                  <div className='row'>
+                    <div className='col s4'>
+                      <div>{latestStatus}</div>
+                      <h3>{devSite.address}</h3>
+                      {i18n.devId}: {devSite.devID} <br/>
+                      {devSite.application_type.replace(/coa/, 'Committee of Adjustment')} <br/>
+                      <span className={css.button}>
+                        link to full notice
+                      </span>
+                    </div>
+                    <div className='col s12 m6'>
+                      <img src={devSite.image_url} className={css.image} />
 
-                  <div className={css.share}>
-                    <FacebookShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
-                      <FacebookIcon size={32} round />
-                    </FacebookShareButton>
-                    <TwitterShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
-                      <TwitterIcon size={32} round />
-                    </TwitterShareButton>
-                  </div>
+                      <div className={css.share}>
+                        <FacebookShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
+                          <FacebookIcon size={32} round />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
+                          <TwitterIcon size={32} round />
+                        </TwitterShareButton>
+                      </div>
+                    </div>
 
+              <div className='row'>
                   {
                     devSite.urban_planner_email || devSite.ward_councillor_email &&
                     <div className={css.emailofficials}>
@@ -114,31 +127,7 @@ export default class DevSiteShow extends Component {
                     </div>
                   }
                 </div>
-                <div className='col s12 m6'>
-                  <div className='row'>
-                    <div className='col s6'>
-                      {i18n.devId}:
-                    </div>
-                    <div className='col s6'>
-                      {devSite.devID}
-                    </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col s6'>
-                      {i18n.appType}:
-                    </div>
-                    <div className='col s6'>
-                      {devSite.application_type.replace(/coa/, 'Committee of Adjustment')}
-                    </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col s6'>
-                      {i18n.wardName}:
-                    </div>
-                    <div className='col s6'>
-                      {devSite.ward_name}
-                    </div>
-                  </div>
+
 
                   <h3 style={{padding: '0 0.75rem'}}><b>{i18n.status}</b></h3>
                   {
@@ -195,6 +184,11 @@ export default class DevSiteShow extends Component {
                   }
                 </div>
                 <div className='col s12 m6'>
+                  <h3><b>{i18n.comments}</b></h3>
+
+                  <Comments devSiteId={devSite.id} />
+                </div>
+                              <div className='col s12 m6'>
                   <h3><b>{i18n.comments}</b></h3>
 
                   <Comments devSiteId={devSite.id} />
