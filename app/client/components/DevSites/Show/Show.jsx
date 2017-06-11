@@ -85,89 +85,60 @@ export default class DevSiteShow extends Component {
           {
             !loading &&
             <div>
-                <div className='col s12 m6'>
+              <h3 className={css.status}>{latestStatus}</h3>
                   <div className='row'>
-                    <div className='col s4'>
-                      <div>{latestStatus}</div>
+                    <div className='col m12 s4'>
+                    <img src={devSite.image_url} className={css.image} />
                       <h3>{devSite.address}</h3>
                       {i18n.devId}: {devSite.devID} <br/>
-                      <span className={css.button}>
+                      {devSite.application_type.replace(/coa/, 'Committee of Adjustment')} <br/>
+                      <div className={css.button}>
                         link to full notice
-                      </span>
-                    </div>
-                    <div className='col s12 m6'>
-                      <img src={devSite.image_url} className={css.image} />
-
-                      <div className={css.share}>
-                        <FacebookShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
-                          <FacebookIcon size={32} round />
-                        </FacebookShareButton>
-                        <TwitterShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
-                          <TwitterIcon size={32} round />
-                        </TwitterShareButton>
                       </div>
-                    </div>
 
-              <div className='row'>
-                  {
-                    devSite.urban_planner_email || devSite.ward_councillor_email &&
-                    <div className={css.emailofficials}>
-                      {
-                        devSite.urban_planner_email &&
-                        <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Urban Planner'>
-                          <i className={css.mail}></i> Urban Planner
-                        </a>
-                      }
-                      {
-                        devSite.ward_councillor_email &&
-                        <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Councillor'>
-                          <i className={css.mail}></i> Councillor
-                        </a>
-                      }
-                    </div>
-                  }
-                </div>
+                      <div className={css.tabs}>
+                          <Tabs className={css.tab}>
+                            <TabList className={css.tab.list}>
+                              <Tab className={css.tab}>{i18n.description}</Tab>
+                              <Tab className={css.tab}>Attachments</Tab>
+                            </TabList>
 
-
-                  <h3 style={{padding: '0 0.75rem'}}><b>{i18n.status}</b></h3>
-                  {
-                    devSite.statuses.map(status => {
-                      return(
-                        <div className='row' key={status.id}>
-                          <div className='col s12 m6'>{status.status}</div>
-                          <div className='col s12 m6'>{status.friendly_status_date}</div>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
+                            <TabPanel className={css.tab.panel}>
+                              <h3 className={css.description}>Project Description</h3>
+                              <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+                            </TabPanel>
+                            <TabPanel className={css.tab.panel}>
+                              {
+                                (devSite.city_files.length > 0 || devSite.files.length > 0) &&
+                                <h3 className={css.description}>{i18n.file}</h3>
+                              }
+                              {
+                                devSite.city_files.map((file, i) => {
+                                  return(
+                                    <div key={i}>
+                                      <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
+                                    </div>
+                                  )
+                                })
+                              }
+                              {
+                                devSite.files.map((file, i) => {
+                                  return(
+                                    <div key={i}>
+                                      <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
+                                    </div>
+                                  )
+                                })
+                              }
+                            </TabPanel>
+                          </Tabs>
+                     </div>
+                  <h3 className={css.timeline}>Project Timeline</h3>  
+                  </div>
               </div>
               <div className='row'>
                 <div className='col s12 m6'>
-                  <h3><b>{i18n.description}</b></h3>
-                  <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
-                  {
-                    (devSite.city_files.length > 0 || devSite.files.length > 0) &&
-                    <h3><b>{i18n.file}</b></h3>
-                  }
-                  {
-                    devSite.city_files.map((file, i) => {
-                      return(
-                        <div key={i}>
-                          <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
-                        </div>
-                      )
-                    })
-                  }
-                  {
-                    devSite.files.map((file, i) => {
-                      return(
-                        <div key={i}>
-                          <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
-                        </div>
-                      )
-                    })
-                  }
+                  
                   {
                     devSite.sentiment &&
                     <h3><b>Sentiment</b></h3>
@@ -184,11 +155,6 @@ export default class DevSiteShow extends Component {
                   }
                 </div>
                 <div className='col s12 m6'>
-                  <h3><b>{i18n.comments}</b></h3>
-
-                  <Comments devSiteId={devSite.id} />
-                </div>
-                              <div className='col s12 m6'>
                   <h3><b>{i18n.comments}</b></h3>
 
                   <Comments devSiteId={devSite.id} />
