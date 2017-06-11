@@ -74,7 +74,8 @@ export default class DevSiteShow extends Component {
   render() {
     const { devSite, loading, showModal, contact } = this.state;
     const { locale } = document.body.dataset;
-    const latestStatus = devSite.statuses.slice(-1).pop()
+    console.log('devSite', devSite );
+    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
     i18n.setLanguage(locale);
     return(
       <div className={css.root}>
@@ -90,7 +91,6 @@ export default class DevSiteShow extends Component {
                       <div>{latestStatus}</div>
                       <h3>{devSite.address}</h3>
                       {i18n.devId}: {devSite.devID} <br/>
-                      {devSite.application_type.replace(/coa/, 'Committee of Adjustment')} <br/>
                       <span className={css.button}>
                         link to full notice
                       </span>
