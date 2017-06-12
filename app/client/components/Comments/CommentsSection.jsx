@@ -14,6 +14,8 @@ export default class CommentsSection extends Component {
     this.deleteComment = (c) => this._deleteComment(c);
     this.handleDeleteRootComment = (c) => this._handleDeleteRootComment(c);
     this.updateCommentsState = (c) => this._updateCommentsState(c);
+    this.editComment = (c,b) => this._editComment(c,b);
+    this.handleEditRootComment = (c,b) => this._handleEditRootComment(c,b);
     this.fetchComments();
   }
 
@@ -99,6 +101,36 @@ export default class CommentsSection extends Component {
     })
   }
 
+  _editComment(comment, body) {
+    return new Promise((resolve, reject) => {
+      const devSiteId = this.props.devSiteId;
+
+      $.ajax({
+        url: `/dev_sites/${devSiteId}/comments/${comment.id}`,
+        dataType: 'JSON',
+        data: { comment: { body }},
+        type: 'PATCH',
+        success: (comment) => {
+          console.log(comment)
+          resolve(comment);
+        },
+        error: error => {
+          reject(error);
+        }
+      });
+    })
+  }
+
+  _handleEditRootComment(comment, body) {
+    this.editComment(comment, body).then((comment) => {
+      window.flash('notice', 'Your comment was updated');
+      this.fetchComments();
+    }).catch((error) => {
+      window.flash('alert', 'Your comment was not saved. Please try again.')
+      console.log(error);
+    })
+  }
+
   render() {
     const totalComments = this.state.comments ? this.state.comments.length : 0;
     const comments = this.state.comments;
@@ -120,6 +152,8 @@ export default class CommentsSection extends Component {
             children={comments}
             saveComment={this.saveComment}
             deleteComment={this.deleteComment}
+            editComment={this.editComment}
+            handleEditRootComment={this.handleEditRootComment}
             handleDeleteRootComment={this.handleDeleteRootComment}
           />
         }

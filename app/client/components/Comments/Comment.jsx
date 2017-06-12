@@ -22,6 +22,7 @@ export default class Comment extends Component {
     this.deleteComment = () => this._deleteComment();
     this.handleDeleteChildComment = (c) => this._handleDeleteChildComment(c);
     this.handleSave = (b, p) => this._handleSave(b, p);
+    this.handleEditChildComment = (c,b) => this._handleEditChildComment(c,b);
   }
 
   componentDidMount() {
@@ -143,6 +144,7 @@ export default class Comment extends Component {
   _handleDelete(e) {
     e.preventDefault();
     const deleteHandler = this.props.handleDeleteRootComment || this.props.handleDeleteChildComment
+
     deleteHandler(this.props.comment)
   }
 
@@ -162,8 +164,20 @@ export default class Comment extends Component {
     })
   }
 
+  _handleEditChildComment(comment, body) {
+    this.props.editComment(comment, body).then((comment) => {
+      window.flash('notice', 'Your comment was updated');
+      this.fetchChildren();
+    }).catch((error) => {
+      window.flash('alert', 'Your comment was not saved. Please try again.')
+      console.log(error);
+    })
+  }
+
   _editComment(e) {
-    this.props.editComment(this.props.comment, e.commentBody)
+    const editHandler = this.props.handleEditRootComment || this.props.handleEditChildComment;
+
+    editHandler(this.props.comment, e.commentBody);
   }
 
   _toggleCommentForm() {
@@ -262,7 +276,9 @@ export default class Comment extends Component {
             children={children}
             deleteComment={this.props.deleteComment}
             saveComment={this.props.saveComment}
+            editComment={this.props.editComment}
             handleDeleteChildComment={this.handleDeleteChildComment}
+            handleEditChildComment={this.handleEditChildComment}
           />
         }
       </div>

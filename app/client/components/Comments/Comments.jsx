@@ -60,23 +60,6 @@ export default class Comments extends Component {
     );
   }
 
-  _editComment(comment, body) {
-    const devSiteId = this.props.devSiteId
-
-    $.ajax({
-      url: `/dev_sites/${devSiteId}/comments/${comment.id}`,
-      dataType: 'JSON',
-      data: { comment: { body }},
-      type: 'PATCH',
-      success: () => {
-        this.loadComments();
-      },
-      error: error => {
-        window.flash('alert', error.responseText)
-      }
-    });
-  }
-
   render() {
     const { locale } = document.body.dataset;
     const children = this.props.children;
@@ -89,11 +72,14 @@ export default class Comments extends Component {
           comment={comment}
           key={comment.id}
           parent={this}
-          editComment={this.editComment}
+          editComment={this.props.editComment}
+          handleEdit={this.props.handleEdit}
           saveComment={this.props.saveComment}
           deleteComment={this.props.deleteComment}
           handleDeleteRootComment={this.props.handleDeleteRootComment}
           handleDeleteChildComment={this.props.handleDeleteChildComment}
+          handleEditRootComment={this.props.handleEditRootComment}
+          handleEditChildComment={this.props.handleEditChildComment}
           devSiteId={this.props.devSiteId}
         />)
       }
