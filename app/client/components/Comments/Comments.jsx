@@ -71,7 +71,7 @@ export default class Comments extends Component {
         <Comment
           comment={comment}
           key={comment.id}
-          parent={this}
+          parentCommentAuthor={this.props.parentCommentAuthor}
           editComment={this.props.editComment}
           handleEdit={this.props.handleEdit}
           saveComment={this.props.saveComment}

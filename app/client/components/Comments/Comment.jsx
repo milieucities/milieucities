@@ -23,6 +23,7 @@ export default class Comment extends Component {
     this.handleDeleteChildComment = (c) => this._handleDeleteChildComment(c);
     this.handleSave = (b, p) => this._handleSave(b, p);
     this.handleEditChildComment = (c,b) => this._handleEditChildComment(c,b);
+    this.replyTo = () => this._replyTo();
   }
 
   componentDidMount() {
@@ -202,20 +203,28 @@ export default class Comment extends Component {
     });
   }
 
+  _replyTo() {
+    if (this.props.parentCommentAuthor) {
+      return <span className='reply-to'>@{this.props.parentCommentAuthor}</span>
+    } else {
+      return ''
+    }
+  }
+
   render() {
     const { comment } = this.props;
     const { readMoreClicked, showReadMore, showCommentForm } = this.state;
     const { locale } = document.body.dataset;
     const userOwnsComment = (comment.user && comment.user.id == this.currentUserId);
     const children = this.state.children;
-    console.log("children in comment", children)
+    const author = comment.user ? (!comment.user.anonymous_comments && comment.user.name || i18n.anoymous) : i18n.anoymous;
     i18n.setLanguage(locale);
 
     return(
       <div className={css.comment}>
         <div className={css.info}>
           <span className={css.name}>
-            {comment.user ? (!comment.user.anonymous_comments && comment.user.name || i18n.anoymous) : i18n.anoymous}
+            {author}
           </span>
           <span className={css.date}>
             {moment(comment.created_at).format('MMMM DD, YYYY ')}
@@ -231,15 +240,21 @@ export default class Comment extends Component {
           <div className={readMoreClicked ? css.wholebody : css.body} ref='body'>
             {
               userOwnsComment &&
-              <RIETextArea
-                value={comment.body}
-                change={this.editComment}
-                propName='commentBody'
-              />
+              <p>
+                {this.replyTo()}
+                <RIETextArea
+                  value={comment.body}
+                  change={this.editComment}
+                  propName='commentBody'
+                />
+              </p>
             }
             {
               !userOwnsComment &&
-              <p dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}></p>
+              <p>
+                <span>{this.replyTo()}</span>
+                <span dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}></span>
+              </p>
             }
           </div>
           <div className={css.votesContainer}>
@@ -279,6 +294,7 @@ export default class Comment extends Component {
             editComment={this.props.editComment}
             handleDeleteChildComment={this.handleDeleteChildComment}
             handleEditChildComment={this.handleEditChildComment}
+            parentCommentAuthor={author}
           />
         }
       </div>
