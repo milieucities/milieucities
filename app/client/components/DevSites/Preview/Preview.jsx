@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import css from './preview.scss'
 import { capitalize, replace } from 'lodash'
 import i18n from './locale'
-import Comments from '../../Comments/Comments'
+import CommentsSection from '../../Comments/CommentsSection'
 import Modal from '../../Utility/Modal/Modal'
 import { ShareButtons, generateShareIcon } from 'react-share';
 
@@ -302,7 +302,10 @@ export default class extends Component {
           }
         </div>
 
-        <Comments devSiteId={devSite.id} />
+        <CommentsSection
+          devSiteId={devSite.id}
+        />
+
         {
           showModal &&
           <Modal parent={this}>

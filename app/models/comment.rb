@@ -9,7 +9,6 @@ class Comment < ActiveRecord::Base
   FLAGGED_STATUS = 'FLAGGED'.freeze
   APPROVED_STATUS = 'APPROVED'.freeze
 
-  has_closure_tree
 
   belongs_to :commentable, polymorphic: true
   belongs_to :user
@@ -21,6 +20,8 @@ class Comment < ActiveRecord::Base
   default_scope { order(created_at: :desc) }
   scope :root, -> { where(parent_id: nil) }
   scope :clean, -> { where.not(flagged_as_offensive: FLAGGED_STATUS) }
+
+  has_closure_tree
 
   after_save do
     Resque.enqueue(UpdateCommentSentimentJob, id) unless Rails.env.test?

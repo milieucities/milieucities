@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CommentForm from './CommentForm'
+import Comments from './Comments'
 import { RIETextArea } from 'riek'
 import css from './comments.scss'
 import i18n from './locale'
@@ -8,7 +9,7 @@ export default class Comment extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { showReadMore: false, showCommentForm: false, children: [] };
+    this.state = { showReadMore: false, showCommentForm: false };
     this.currentUserId = document.body.dataset.userId;
     this.viewWholeBody = (e) => this._viewWholeBody(e);
     this.voteUp = () => this._voteUp();
@@ -16,8 +17,7 @@ export default class Comment extends Component {
     this.deleteComment = (e) => this._deleteComment(e);
     this.editComment = (e) => this._editComment(e);
     this.toggleCommentForm = (e) => this._toggleCommentForm(e);
-    this.fetchChildren = () => this._fetchChildren();
-    this.generateChildren = () => this._generateChildren();
+    this.fetchChildren = () => this._fetchChildren()
   }
 
   componentDidMount() {
@@ -134,15 +134,20 @@ export default class Comment extends Component {
     this.props.editComment(this.props.comment, e.commentBody)
   }
 
+  _toggleCommentForm() {
+    this.setState({ showCommentForm: !this.state.showCommentForm })
+  }
+
   _fetchChildren() {
-    const { comment } = this.props;
     const devSiteId = this.props.devSiteId
+    const comment = this.props.comment
 
     $.ajax({
       url: `/dev_sites/${devSiteId}/comments/${comment.id}/children`,
       dataType: 'JSON',
       type: 'GET',
       success: (res) => {
+        console.log(res);
         this.setState({ children: res })
       },
       error: (error) => {
@@ -151,30 +156,13 @@ export default class Comment extends Component {
     });
   }
 
-  _toggleCommentForm() {
-    this.setState({ showCommentForm: !this.state.showCommentForm })
-  }
-
-  _generateChildren() {
-    return this.state.children.map((child) => {
-      return(
-        <Comment
-          { ...this.props }
-          comment={child}
-          key={child.id}
-          parent={this}
-          deleteComment={this.props.deleteComment}
-        />
-      )
-    })
-  }
-
   render() {
     const { comment } = this.props;
     const { readMoreClicked, showReadMore, showCommentForm } = this.state;
     const { locale } = document.body.dataset;
     const userOwnsComment = (comment.user && comment.user.id == this.currentUserId);
-    const children = this.generateChildren();
+    const children = this.state.children;
+    console.log("children in comment", children)
     i18n.setLanguage(locale);
 
     return(
@@ -235,7 +223,10 @@ export default class Comment extends Component {
           (comment.replies > 0) &&
           <a onClick={this.fetchChildren}>Show all {comment.replies} replies</a>
         }
-        { children }
+        {
+          (children &&
+           <Comments devSiteId={this.props.devSiteId} children={children} />)
+        }
       </div>
     )
   }

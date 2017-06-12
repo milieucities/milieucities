@@ -13,10 +13,8 @@ export default class CommentForm extends Component {
 
   _submitForm(e) {
     e.preventDefault();
-    const commentBody = this.state.body;
-    const parentId = this.props.parentId;
+    this.props.saveComment(this.state.body);
     this.setState({ body: '' });
-    this.props.saveComment(parentId, commentBody);
 
     if (this.props.toggleCommentForm) {
       this.props.toggleCommentForm();
