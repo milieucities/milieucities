@@ -24,6 +24,8 @@ export default class Comment extends Component {
     this.handleSave = (b, p) => this._handleSave(b, p);
     this.handleEditChildComment = (c,b) => this._handleEditChildComment(c,b);
     this.replyTo = () => this._replyTo();
+    this.author = () => this._author();
+    this.displayReplies = () => this._displayReplies();
   }
 
   componentDidMount() {
@@ -135,10 +137,10 @@ export default class Comment extends Component {
     this.props.deleteComment(comment).then(res => {
       const newComments = _.without(this.state.children, comment);
       this.setState({ children: newComments});
-      window.flash('notice', 'Your comment has been deleted.');
+      window.flash('notice', i18n.commentDeletedSuccess);
     }).catch(err => {
       console.log(err);
-      window.flash('alert', 'Your comment was not deleted. Please try again.');
+      window.flash('alert', i18n.commentDeletedFailed);
     })
   }
 
@@ -150,27 +152,26 @@ export default class Comment extends Component {
   }
 
   _handleSave(body, parentId) {
-    console.log('HANDLE SAVE IN COMMENT');
     this.props.saveComment(body, parentId).then((comment) => {
       if (comment.flagged_as_offensive === 'FLAGGED') {
         window.flash('notice', i18n.flaggedNotification);
       } else {
         console.log('saved child comment', comment)
-        window.flash('notice', 'Your comment has been saved.')
+        window.flash('notice', i18n.commentSavedSuccess)
         this.state.children.unshift(comment);
         this.setState({ children: this.state.children });
       }
     }).catch((error) => {
-      window.flash('alert', 'Your comment was not saved. Please try again.')
+      window.flash('alert', i18n.commentSavedFailed)
     })
   }
 
   _handleEditChildComment(comment, body) {
     this.props.editComment(comment, body).then((comment) => {
-      window.flash('notice', 'Your comment was updated');
+      window.flash('notice', i18n.commentSavedSuccess);
       this.fetchChildren();
     }).catch((error) => {
-      window.flash('alert', 'Your comment was not saved. Please try again.')
+      window.flash('alert', i18n.commentSavedFailed)
       console.log(error);
     })
   }
@@ -205,9 +206,20 @@ export default class Comment extends Component {
 
   _replyTo() {
     if (this.props.parentCommentAuthor) {
-      return <span className='reply-to'>@{this.props.parentCommentAuthor}</span>
+      return <span className={css.replyTo}>@{this.props.parentCommentAuthor}</span>
     } else {
       return ''
+    }
+  }
+
+  _author() {
+    const comment = this.props.comment;
+    return comment.user ? (!comment.user.anonymous_comments && comment.user.name || i18n.anoymous) : i18n.anoymous;
+  }
+
+  _displayReplies() {
+    if (this.props.comment.replies > 0) {
+      return <a onClick={this.fetchChildren}>{i18n.formatString(i18n.seeReplies, this.props.comment.replies)}</a>
     }
   }
 
@@ -217,15 +229,13 @@ export default class Comment extends Component {
     const { locale } = document.body.dataset;
     const userOwnsComment = (comment.user && comment.user.id == this.currentUserId);
     const children = this.state.children;
-    const author = comment.user ? (!comment.user.anonymous_comments && comment.user.name || i18n.anoymous) : i18n.anoymous;
+    const author = this.author();
     i18n.setLanguage(locale);
 
     return(
       <div className={css.comment}>
         <div className={css.info}>
-          <span className={css.name}>
-            {author}
-          </span>
+          <span className={css.name}>{author}</span>
           <span className={css.date}>
             {moment(comment.created_at).format('MMMM DD, YYYY ')}
           </span>
@@ -269,7 +279,7 @@ export default class Comment extends Component {
           <a href='#' onClick={this.viewWholeBody} className={css.readmore} tabIndex='-1'>{i18n.readMore}</a>
         }
         <div className="reply-link">
-          <a onClick={this.toggleCommentForm}>Reply</a>
+          <a onClick={this.toggleCommentForm}>{i18n.reply}</a>
         </div>
         {
           showCommentForm &&
@@ -280,21 +290,15 @@ export default class Comment extends Component {
             toggleCommentForm={this.toggleCommentForm}
           />
         }
-        {
-          (comment.replies > 0) &&
-          <a onClick={this.fetchChildren}>Show all {comment.replies} replies</a>
-        }
+        { this.displayReplies() }
         {
           children &&
           <Comments
-            devSiteId={this.props.devSiteId}
-            children={children}
-            deleteComment={this.props.deleteComment}
-            saveComment={this.props.saveComment}
-            editComment={this.props.editComment}
+            { ...this.props }
             handleDeleteChildComment={this.handleDeleteChildComment}
             handleEditChildComment={this.handleEditChildComment}
             parentCommentAuthor={author}
+            children={children}
           />
         }
       </div>

@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
 import Comment from './Comment'
-import CommentForm from './CommentForm'
-import { List } from 'immutable'
-import { RIETextArea } from 'riek'
 import css from './comments.scss'
 import i18n from './locale'
 
@@ -16,28 +12,9 @@ export default class Comments extends Component {
     this.loadComments = () => this._loadComments();
     this.hasMoreComments = () => this._hasMoreComments();
     this.appendMoreComments = () => this._appendMoreComments();
-    this.openModal = () => this._openModal();
-    this.editComment = (c,b) => this._editComment(c,b);
-  }
-
-  componentDidMount() {
-    $('.modal-trigger').leanModal();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if(prevProps.devSiteId !== this.props.devSiteId) {
-      this.setState({ page: 0, children: List()},
-        () => this.loadComments()
-      )
-    }
-  }
-
-  _openModal() {
-    document.querySelector('#sign-in-modal .modal-content').focus();
   }
 
   _loadComments() {
-    console.log('LOADING OCMMETS FROM COMMENTS')
     $.getJSON(`/dev_sites/${this.props.devSiteId}/comments`,
       { page: this.state.page, limit: this.state.limit },
       comments => this.setState({ children: comments })
@@ -69,18 +46,9 @@ export default class Comments extends Component {
 
       {children && children.map(comment =>
         <Comment
+          { ...this.props }
           comment={comment}
           key={comment.id}
-          parentCommentAuthor={this.props.parentCommentAuthor}
-          editComment={this.props.editComment}
-          handleEdit={this.props.handleEdit}
-          saveComment={this.props.saveComment}
-          deleteComment={this.props.deleteComment}
-          handleDeleteRootComment={this.props.handleDeleteRootComment}
-          handleDeleteChildComment={this.props.handleDeleteChildComment}
-          handleEditRootComment={this.props.handleEditRootComment}
-          handleEditChildComment={this.props.handleEditChildComment}
-          devSiteId={this.props.devSiteId}
         />)
       }
       {
