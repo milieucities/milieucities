@@ -11,7 +11,6 @@ export default class Comments extends Component {
 
   constructor(props) {
     super(props);
-    console.log('children in constructor', this.props.children)
     this.state = { page: 0, limit: 5, total: this.props.total }
     this.currentUserId = document.body.dataset.userId;
     this.loadComments = () => this._loadComments();
@@ -93,6 +92,8 @@ export default class Comments extends Component {
           editComment={this.editComment}
           saveComment={this.props.saveComment}
           deleteComment={this.props.deleteComment}
+          handleDeleteRootComment={this.props.handleDeleteRootComment}
+          handleDeleteChildComment={this.props.handleDeleteChildComment}
           devSiteId={this.props.devSiteId}
         />)
       }

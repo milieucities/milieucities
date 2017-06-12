@@ -44,7 +44,7 @@ module DevSites
     def destroy
       respond_to do |format|
         if @comment.destroy
-          format.json { render json: @comments, status: 204 }
+          format.json { render json: @comment, status: 204 }
           format.html do
             flash[:notice] = 'The comment has been deleted.'
             redirect_to dev_site_path(@dev_site)

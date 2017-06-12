@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import CommentForm from './CommentForm'
 import Comments from './Comments'
 import { RIETextArea } from 'riek'
@@ -9,15 +10,18 @@ export default class Comment extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { showReadMore: false, showCommentForm: false };
+    this.state = { showReadMore: false, showCommentForm: false, children: [] };
     this.currentUserId = document.body.dataset.userId;
     this.viewWholeBody = (e) => this._viewWholeBody(e);
     this.voteUp = () => this._voteUp();
     this.voteDown = () => this._voteDown();
-    this.deleteComment = (e) => this._deleteComment(e);
+    this.handleDelete = (e) => this._handleDelete(e);
     this.editComment = (e) => this._editComment(e);
     this.toggleCommentForm = (e) => this._toggleCommentForm(e);
     this.fetchChildren = () => this._fetchChildren()
+    this.deleteComment = () => this._deleteComment();
+    this.handleDeleteChildComment = (c) => this._handleDeleteChildComment(c);
+    this.handleSave = (b, p) => this._handleSave(b, p);
   }
 
   componentDidMount() {
@@ -125,9 +129,37 @@ export default class Comment extends Component {
     }
   }
 
-  _deleteComment(e) {
+  _handleDeleteChildComment(comment) {
+    this.props.deleteComment(comment).then(res => {
+      const newComments = _.without(this.state.children, comment);
+      this.setState({ children: newComments});
+      window.flash('notice', 'Your comment has been deleted.');
+    }).catch(err => {
+      console.log(err);
+      window.flash('alert', 'Your comment was not deleted. Please try again.');
+    })
+  }
+
+  _handleDelete(e) {
     e.preventDefault();
-    this.props.deleteComment(this.props.comment);
+    const deleteHandler = this.props.handleDeleteRootComment || this.props.handleDeleteChildComment
+    deleteHandler(this.props.comment)
+  }
+
+  _handleSave(body, parentId) {
+    console.log('HANDLE SAVE IN COMMENT');
+    this.props.saveComment(body, parentId).then((comment) => {
+      if (comment.flagged_as_offensive === 'FLAGGED') {
+        window.flash('notice', i18n.flaggedNotification);
+      } else {
+        console.log('saved child comment', comment)
+        window.flash('notice', 'Your comment has been saved.')
+        this.state.children.unshift(comment);
+        this.setState({ children: this.state.children });
+      }
+    }).catch((error) => {
+      window.flash('alert', 'Your comment was not saved. Please try again.')
+    })
   }
 
   _editComment(e) {
@@ -177,7 +209,7 @@ export default class Comment extends Component {
           {
             userOwnsComment &&
             <span className={css.user_actions}>
-              <a href='#' onClick={this.deleteComment}><i className='fa fa-trash' /></a>
+              <a href='#' onClick={this.handleDeleteRootComment || this.handleDelete}><i className='fa fa-trash' /></a>
             </span>
           }
         </div>
@@ -215,7 +247,7 @@ export default class Comment extends Component {
           <CommentForm
             {...this.props}
             parentId={this.props.comment.id}
-            saveComment={this.props.saveComment}
+            handleSave={this.handleSave}
             toggleCommentForm={this.toggleCommentForm}
           />
         }
@@ -224,8 +256,14 @@ export default class Comment extends Component {
           <a onClick={this.fetchChildren}>Show all {comment.replies} replies</a>
         }
         {
-          (children &&
-           <Comments devSiteId={this.props.devSiteId} children={children} />)
+          children &&
+          <Comments
+            devSiteId={this.props.devSiteId}
+            children={children}
+            deleteComment={this.props.deleteComment}
+            saveComment={this.props.saveComment}
+            handleDeleteChildComment={this.handleDeleteChildComment}
+          />
         }
       </div>
     )
