@@ -10,22 +10,29 @@ export default class Comment extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { showReadMore: false, showCommentForm: false, children: [] };
+    this.state = {
+      showReadMore: false,
+      showCommentForm: false,
+      children: [],
+      showChildren: false
+    };
     this.currentUserId = document.body.dataset.userId;
-    this.viewWholeBody = (e) => this._viewWholeBody(e);
+    this.toggleWholeBody = (e) => this._toggleWholeBody(e);
     this.voteUp = () => this._voteUp();
     this.voteDown = () => this._voteDown();
     this.handleDelete = (e) => this._handleDelete(e);
-    this.editComment = (e) => this._editComment(e);
+    this.handleEdit = (e) => this._handleEdit(e);
     this.toggleCommentForm = (e) => this._toggleCommentForm(e);
     this.fetchChildren = () => this._fetchChildren()
-    this.deleteComment = () => this._deleteComment();
     this.handleDeleteChildComment = (c) => this._handleDeleteChildComment(c);
     this.handleSave = (b, p) => this._handleSave(b, p);
     this.handleEditChildComment = (c,b) => this._handleEditChildComment(c,b);
     this.replyTo = () => this._replyTo();
     this.author = () => this._author();
-    this.displayReplies = () => this._displayReplies();
+    this.controlReplies = () => this._controlReplies();
+    this.controlViewMore = () => this._controlViewMore();
+    this.hideChildren = () => this._hideChildren();
+    this.renderComment = () => this._renderComment();
   }
 
   componentDidMount() {
@@ -34,9 +41,9 @@ export default class Comment extends Component {
     }
   }
 
-  _viewWholeBody(e) {
+  _toggleWholeBody(e) {
     e.preventDefault();
-    this.setState({ readMoreClicked: true });
+    this.setState({ readMoreClicked: !this.state.readMoreClicked });
   }
 
   _voteUp() {
@@ -154,12 +161,11 @@ export default class Comment extends Component {
   _handleSave(body, parentId) {
     this.props.saveComment(body, parentId).then((comment) => {
       if (comment.flagged_as_offensive === 'FLAGGED') {
-        window.flash('notice', i18n.flaggedNotification);
+        window.flash('alert', i18n.flaggedNotification);
       } else {
-        console.log('saved child comment', comment)
         window.flash('notice', i18n.commentSavedSuccess)
         this.state.children.unshift(comment);
-        this.setState({ children: this.state.children });
+        this.setState({ children: this.state.children, showChildren: true });
       }
     }).catch((error) => {
       window.flash('alert', i18n.commentSavedFailed)
@@ -176,7 +182,7 @@ export default class Comment extends Component {
     })
   }
 
-  _editComment(e) {
+  _handleEdit(e) {
     const editHandler = this.props.handleEditRootComment || this.props.handleEditChildComment;
 
     editHandler(this.props.comment, e.commentBody);
@@ -196,12 +202,16 @@ export default class Comment extends Component {
       type: 'GET',
       success: (res) => {
         console.log(res);
-        this.setState({ children: res })
+        this.setState({ children: res, showChildren: true })
       },
       error: (error) => {
         console.log(error)
       }
     });
+  }
+
+  _hideChildren() {
+    this.setState({ showChildren: false })
   }
 
   _replyTo() {
@@ -217,19 +227,54 @@ export default class Comment extends Component {
     return comment.user ? (!comment.user.anonymous_comments && comment.user.name || i18n.anoymous) : i18n.anoymous;
   }
 
-  _displayReplies() {
-    if (this.props.comment.replies > 0) {
-      return <a onClick={this.fetchChildren}>{i18n.formatString(i18n.seeReplies, this.props.comment.replies)}</a>
+  _controlReplies() {
+    const replyCount = Math.max(this.state.children.length, this.props.comment.replies);
+    if (replyCount > 0) {
+      if (!this.state.showChildren) {
+        return(
+          <a onClick={this.fetchChildren}>{i18n.formatString(i18n.seeReplies, replyCount)}</a>
+        )
+      } else {
+        return(
+          <a onClick={this.hideChildren}>{i18n.hideReplies}</a>
+        )
+      }
+    }
+  }
+
+  _controlViewMore() {
+    const { showReadMore, readMoreClicked } = this.state;
+
+    if (showReadMore && !readMoreClicked) {
+      return <a href='#' onClick={this.toggleWholeBody} tabIndex='-1'>{i18n.readMore}</a>
+    } else if (showReadMore && readMoreClicked) {
+      return <a href='#' onClick={this.toggleWholeBody} tabIndex='-1'>Show less</a>
+    }
+  }
+
+  _renderComment() {
+    const comment = this.props.comment;
+    if (comment.user && comment.user.id == this.currentUserId) {
+      return(
+        <RIETextArea
+          value={comment.body}
+          change={this.handleEdit}
+          propName='commentBody'
+        />
+      )
+    } else {
+      return (
+        <span dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}></span>
+      )
     }
   }
 
   render() {
     const { comment } = this.props;
-    const { readMoreClicked, showReadMore, showCommentForm } = this.state;
-    const { locale } = document.body.dataset;
-    const userOwnsComment = (comment.user && comment.user.id == this.currentUserId);
-    const children = this.state.children;
+    const { readMoreClicked, showCommentForm, children, showChildren } = this.state;
+    const userOwnsComment = (comment.user.id == this.currentUserId);
     const author = this.author();
+    const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
 
     return(
@@ -241,46 +286,28 @@ export default class Comment extends Component {
           </span>
           {
             userOwnsComment &&
-            <span className={css.user_actions}>
-              <a href='#' onClick={this.handleDeleteRootComment || this.handleDelete}><i className='fa fa-trash' /></a>
-            </span>
+            <a className={css.user_actions} onClick={this.handleDeleteRootComment || this.handleDelete}>
+              <i className='fa fa-trash' />
+            </a>
           }
         </div>
+
         <div className={css.bodyContainer}>
           <div className={readMoreClicked ? css.wholebody : css.body} ref='body'>
-            {
-              userOwnsComment &&
-              <p>
-                {this.replyTo()}
-                <RIETextArea
-                  value={comment.body}
-                  change={this.editComment}
-                  propName='commentBody'
-                />
-              </p>
-            }
-            {
-              !userOwnsComment &&
-              <p>
-                <span>{this.replyTo()}</span>
-                <span dangerouslySetInnerHTML={{__html: comment.body.replace(/\n\r?/g, '<br>') }}></span>
-              </p>
-            }
+            <p>{this.replyTo()}{this.renderComment()}</p>
           </div>
-          <div className={css.votesContainer}>
-            <i className='fa fa-angle-up fa-2x' onClick={this.voteUp} tabIndex='0'></i>
-            <i className='fa fa-angle-down fa-2x' onClick={this.voteDown} tabIndex='0'></i>
-            { comment.vote_count }
+          <div className={css.commentActions}>
+            <a className={css.replyLink} onClick={this.toggleCommentForm}>{i18n.reply}</a>
+            { this.controlReplies() }
+            { this.controlViewMore() }
+            <span className={css.votesContainer}>
+              <i className='fa fa-angle-up fa-2x' onClick={this.voteUp} tabIndex='0'></i>
+              <i className='fa fa-angle-down fa-2x' onClick={this.voteDown} tabIndex='0'></i>
+              { comment.vote_count }
+            </span>
           </div>
+        </div>
 
-        </div>
-        {
-          showReadMore && !readMoreClicked &&
-          <a href='#' onClick={this.viewWholeBody} className={css.readmore} tabIndex='-1'>{i18n.readMore}</a>
-        }
-        <div className="reply-link">
-          <a onClick={this.toggleCommentForm}>{i18n.reply}</a>
-        </div>
         {
           showCommentForm &&
           <CommentForm
@@ -290,11 +317,12 @@ export default class Comment extends Component {
             toggleCommentForm={this.toggleCommentForm}
           />
         }
-        { this.displayReplies() }
+
         {
-          children &&
+          (children && showChildren) &&
           <Comments
             { ...this.props }
+            handleDeleteRootComment={null}
             handleDeleteChildComment={this.handleDeleteChildComment}
             handleEditChildComment={this.handleEditChildComment}
             parentCommentAuthor={author}

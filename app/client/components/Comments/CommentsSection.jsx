@@ -8,7 +8,7 @@ import i18n from './locale'
 export default class CommentsSection extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { page: 0, limit: 5, comments: [] };
     this.currentUserId = parseInt(document.body.dataset.userId);
     this.fetchComments = () => this._fetchComments();
     this.saveComment = (b, p) => this._saveComment(b, p);
@@ -18,6 +18,8 @@ export default class CommentsSection extends Component {
     this.handleDeleteRootComment = (c) => this._handleDeleteRootComment(c);
     this.handleEditRootComment = (c,b) => this._handleEditRootComment(c,b);
     this.openModal = () => this._openModal();
+    this.hasMoreComments = () => this._hasMoreComments();
+    this.appendMoreComments = () => this._appendMoreComments();
 
     this.fetchComments();
   }
@@ -28,10 +30,19 @@ export default class CommentsSection extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.devSiteId !== this.props.devSiteId) {
-      this.setState({ page: 0, comments: []},
+      this.setState({ page: 0, limit: 5, comments: []},
         () => this.fetchComments()
       )
     }
+  }
+
+  _hasMoreComments() {
+    const { page, total, limit } = this.state;
+    return ( (page + 1) * limit < total );
+  }
+
+  _appendMoreComments() {
+    this.setState({ page: this.state.page + 1 }, this.fetchComments());
   }
 
   _openModal() {
@@ -40,10 +51,9 @@ export default class CommentsSection extends Component {
 
   _fetchComments() {
     $.getJSON(`/dev_sites/${this.props.devSiteId}/comments`,
-      { page: 0, limit: 5 },
+      { page: this.state.page, limit: this.state.limit },
       comments => {
-        console.log(comments)
-        this.setState({ comments })
+        this.setState({ comments: comments, total: comments[0].total })
       }
     );
   }
@@ -158,7 +168,7 @@ export default class CommentsSection extends Component {
     i18n.setLanguage(locale);
 
     return(
-      <div className={css.commentsSection}>
+      <div className={css.container}>
         <h3>{i18n.makePublicComment}</h3>
         <CommentForm { ...this.props } handleSave={this.handleSave} />
 
@@ -176,6 +186,10 @@ export default class CommentsSection extends Component {
             handleEditRootComment={this.handleEditRootComment}
             handleDeleteRootComment={this.handleDeleteRootComment}
           />
+        }
+        {
+          this.hasMoreComments() &&
+          <a onClick={this.appendMoreComments} className={css.loadmore}>{i18n.loadMore}</a>
         }
       </div>
     )

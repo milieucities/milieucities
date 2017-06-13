@@ -10,6 +10,7 @@ const i18n = new LocalizedStrings({
     failedToVote: "Failed to vote on comment.",
     anoymous: "Anonymous",
     readMore: "Read More...",
+    showLess: "Show less",
     delete: 'Delete',
     edit: 'Edit',
     reply: 'Reply',
@@ -19,6 +20,7 @@ const i18n = new LocalizedStrings({
     commentSavedSuccess: 'Your comment has been saved.',
     commentSavedFailed:'Your comment was not saved. Please try again.',
     seeReplies: "See all {0} replies",
+    hideReplies: "Hide replies",
   },
   fr: {
     makePublicComment: 'Faire un commentaire publique',
@@ -29,6 +31,7 @@ const i18n = new LocalizedStrings({
     failedToVote: "Vote échoué",
     anoymous: "Anonyme",
     readMore: "Lire la suite...",
+    showLess: "Cacher",
     delete: 'Supprimer',
     edit: 'Modifier',
     reply: 'Répondre',
@@ -38,6 +41,7 @@ const i18n = new LocalizedStrings({
     commentSavedSuccess: 'Votre commentaire a été enregistré.',
     commentSavedFailed:'Votre commentaire n\'a pas été enregistré, veuillez réessayer.',
     seeReplies: "Voir tout les {0} réponses",
+    hideReplies: "Cacher réponses",
   }
 });
 

@@ -302,9 +302,7 @@ export default class extends Component {
           }
         </div>
 
-        <CommentsSection
-          devSiteId={devSite.id}
-        />
+        <CommentsSection devSiteId={devSite.id} />
 
         {
           showModal &&

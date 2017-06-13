@@ -26,15 +26,18 @@ export default class CommentForm extends Component {
     i18n.setLanguage(locale);
 
     return(
-      <form id='new_comment' onSubmit={this.submitForm}>
+      <form id='new_comment' onSubmit={this.submitForm} className={css.commentForm}>
         <input name='utf8' type='hidden' value='✓' />
         <div className={css.wrapper}>
-          <textarea className={css.textarea}
-                    value={this.state.body}
-                    onChange={this.handleChange}
-                    placeholder={i18n.whatDoYouThink}>
+          <textarea
+            className={css.textarea}
+            value={this.state.body}
+            onChange={this.handleChange}
+            placeholder={i18n.whatDoYouThink}>
           </textarea>
-          <input type='submit' value={i18n.comment} className={css.submit}/>
+        </div>
+        <div className={css.submitBtn}>
+          <input type='submit' value={i18n.comment} className={`${css.submit} btn`}/>
         </div>
       </form>
     )
