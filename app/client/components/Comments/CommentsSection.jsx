@@ -9,7 +9,7 @@ export default class CommentsSection extends Component {
   constructor(props) {
     super(props);
     this.state = { page: 0, limit: 5, comments: [] };
-    this.currentUserId = parseInt(document.body.dataset.userId);
+    this.currentUserId = document.body.dataset.userId;
     this.fetchComments = () => this._fetchComments();
     this.saveComment = (b, p) => this._saveComment(b, p);
     this.deleteComment = (c) => this._deleteComment(c);
@@ -36,11 +36,6 @@ export default class CommentsSection extends Component {
     }
   }
 
-  _hasMoreComments() {
-    const { page, total, limit } = this.state;
-    return ( (page + 1) * limit < total );
-  }
-
   _appendMoreComments() {
     this.setState({ page: this.state.page + 1 }, this.fetchComments());
   }
@@ -53,7 +48,7 @@ export default class CommentsSection extends Component {
     $.getJSON(`/dev_sites/${this.props.devSiteId}/comments`,
       { page: this.state.page, limit: this.state.limit },
       comments => {
-        this.setState({ comments: comments, total: comments[0].total })
+        this.setState({ comments: comments })
       }
     );
   }
@@ -169,8 +164,20 @@ export default class CommentsSection extends Component {
 
     return(
       <div className={css.container}>
-        <h3>{i18n.makePublicComment}</h3>
-        <CommentForm { ...this.props } handleSave={this.handleSave} />
+        {
+          this.currentUserId &&
+          <div>
+            <h3>{i18n.makePublicComment}</h3>
+            <CommentForm { ...this.props } handleSave={this.handleSave} />
+          </div>
+        }
+
+        {
+          !this.currentUserId &&
+          <div className={css.nouser}>
+            <a href='#sign-in-modal' className='modal-trigger btn' onClick={this.openModal}>{i18n.signInToComment}</a>
+          </div>
+        }
 
         <div className={css.commentCount}>
           <p>{totalComments} responses</p>
@@ -186,10 +193,6 @@ export default class CommentsSection extends Component {
             handleEditRootComment={this.handleEditRootComment}
             handleDeleteRootComment={this.handleDeleteRootComment}
           />
-        }
-        {
-          this.hasMoreComments() &&
-          <a onClick={this.appendMoreComments} className={css.loadmore}>{i18n.loadMore}</a>
         }
       </div>
     )
