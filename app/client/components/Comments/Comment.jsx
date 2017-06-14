@@ -96,6 +96,17 @@ export default class Comment extends Component {
     })
   }
 
+  _handleDeleteChildComment(comment) {
+    this.props.deleteComment(comment).then(res => {
+      const newComments = _.without(this.state.children, comment);
+      this.setState({ children: newComments});
+      window.flash('notice', i18n.commentDeletedSuccess);
+    }).catch(err => {
+      console.log(err);
+      window.flash('alert', i18n.commentDeletedFailed);
+    })
+  }
+
   _handleEdit(e) {
     const editHandler = this.props.handleEditRootComment || this.props.handleEditChildComment;
 
