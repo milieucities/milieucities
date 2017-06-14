@@ -13,3 +13,7 @@ end
 child :user do
   attributes :id, :anonymous_comments, :name
 end
+
+node :author_name do |comment|
+  comment.user.name_from_profile
+end

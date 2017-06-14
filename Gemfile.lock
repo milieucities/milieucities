@@ -77,6 +77,9 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     chronic (0.10.2)
+    closure_tree (6.5.0)
+      activerecord (>= 4.1.0)
+      with_advisory_lock (>= 3.0.0)
     cocoon (1.2.9)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
@@ -461,6 +464,9 @@ GEM
       rack (>= 1.0.0)
     whenever (0.9.7)
       chronic (>= 0.6.3)
+    with_advisory_lock (3.1.0)
+      activerecord (>= 3.2)
+      thread_safe
     xml-simple (1.1.5)
 
 PLATFORMS
@@ -477,6 +483,7 @@ DEPENDENCIES
   capistrano-resque (~> 0.2.2)
   capistrano-rvm (~> 0.1.2)
   carrierwave (~> 1.0.0)
+  closure_tree (~> 6.5.0)
   cocoon
   dotenv-rails (~> 2.1.1)
   factory_girl_rails (~> 4.2.1)

@@ -9,19 +9,25 @@ class Comment < ActiveRecord::Base
   FLAGGED_STATUS = 'FLAGGED'.freeze
   APPROVED_STATUS = 'APPROVED'.freeze
 
+
   belongs_to :commentable, polymorphic: true
   belongs_to :user
-  default_scope { order(created_at: :desc) }
   has_one  :sentiment, as: :sentimentable, dependent: :destroy
   has_many :votes, dependent: :destroy
+
   validates :body, presence: { message: 'Comment is required' }
 
-  after_save :flag_offensive_comments
+  default_scope { order(created_at: :desc) }
+  scope :root, -> { where(parent_id: nil) }
+  scope :clean, -> { where.not(flagged_as_offensive: FLAGGED_STATUS) }
+
+  has_closure_tree
 
   after_save do
     Resque.enqueue(UpdateCommentSentimentJob, id) unless Rails.env.test?
   end
 
+  after_save :flag_offensive_comments
   after_destroy :update_dev_site_sentiment
 
   def voted_up(current_user)

@@ -3,12 +3,11 @@ module DevSites
     load_resource :dev_site
     around_action :authenticate_with_token, only: [:update, :destroy], if: :contains_token
     load_and_authorize_resource :comment, through: :dev_site
-    before_action :load_resource, only: [:update, :destroy]
+    before_action :load_resource, only: [:update, :destroy, :children]
 
     def index
-      @comments = @comments.includes(:votes, :user)
-                           .where.not(flagged_as_offensive: Comment::FLAGGED_STATUS)
       @total = @comments.count
+      @comments = @comments.root.clean.includes(:votes, :user)
       @comments = paginate(@comments, 5)
     end
 
@@ -27,7 +26,7 @@ module DevSites
     def update
       respond_to do |format|
         if @comment.update(comment_params)
-          format.json { render json: @comment, status: 200 }
+          format.json { render json: @comments, status: 200 }
           format.html do
             flash[:notice] = 'The comment has been updated.'
             redirect_to dev_site_path(@dev_site)
@@ -45,7 +44,7 @@ module DevSites
     def destroy
       respond_to do |format|
         if @comment.destroy
-          format.json { head :no_content, status: 204 }
+          format.json { render json: @comment, status: 204 }
           format.html do
             flash[:notice] = 'The comment has been deleted.'
             redirect_to dev_site_path(@dev_site)
@@ -60,6 +59,13 @@ module DevSites
       end
     end
 
+    def children
+      @comments = @comment.children
+      respond_to do |format|
+        format.json { render :index, status: 200 }
+      end
+    end
+
     private
 
     def comment_params
@@ -67,6 +73,7 @@ module DevSites
                                       :commentable_id,
                                       :commentable_type,
                                       :user_id,
+                                      :parent_id,
                                       :flagged_as_offensive)
     end
 
