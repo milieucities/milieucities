@@ -1,6 +1,7 @@
 class DevSitesController < ApplicationController
   DEFAULT_SITES_LIMIT = 80
   load_and_authorize_resource
+  after_action :allow_iframe, only: [:index]
 
   def index
     @no_header = true
@@ -99,5 +100,10 @@ class DevSitesController < ApplicationController
         addresses_attributes: [:id, :street, :city, :province_state, :country, :_destroy],
         statuses_attributes: [:id, :status, :status_date, :_destroy]
       )
+  end
+
+  def allow_iframe
+    response.headers.except! 'X-Frame-Options'
+    # response.headers['X-Frame-Options'] = 'ALLOW-FROM http://guelph.ca'
   end
 end
