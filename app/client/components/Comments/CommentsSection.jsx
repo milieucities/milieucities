@@ -20,6 +20,10 @@ export default class CommentsSection extends Component {
     this.openModal = () => this._openModal();
     this.hasMoreComments = () => this._hasMoreComments();
     this.appendMoreComments = () => this._appendMoreComments();
+    this.vote = (c,d) => this._vote(c,d);
+    this.createVote = (a,b,c,d) => this._createVote(a,b,c,d);
+    this.destroyVote = (a,b,c,d) => this._destroyVote(a,b,c,d);
+    this.handleVoteRootComment = (c,d) => this._handleVoteRootComment(c,d);
 
     this.fetchComments();
   }
@@ -136,7 +140,6 @@ export default class CommentsSection extends Component {
         data: { comment: { body }},
         type: 'PATCH',
         success: (comment) => {
-          console.log(comment)
           resolve(comment);
         },
         error: error => {
@@ -153,6 +156,62 @@ export default class CommentsSection extends Component {
     }).catch((error) => {
       window.flash('alert', i18n.commentSavedFailed)
       console.log(error);
+    })
+  }
+
+  _createVote(commentId, up, resolve, reject) {
+    $.ajax({
+      url: `/users/${this.currentUserId}/votes`,
+      dataType: 'JSON',
+      type: 'POST',
+      data: { vote: { up: up, comment_id: commentId } },
+      success: () => {
+        resolve();
+      },
+      error: error => {
+        reject({ message: error });
+      }
+    });
+  }
+
+  _destroyVote(commentId, voteId, resolve, reject) {
+    $.ajax({
+      url: `/users/${this.currentUserId}/votes/${voteId}`,
+      dataType: 'JSON',
+      type: 'DELETE',
+      data: { vote: { comment_id: commentId } },
+      success: () => {
+        resolve();
+      },
+      error: error => {
+        reject({ message: error });
+      }
+    });
+  }
+
+  _vote(comment, direction) {
+    return new Promise((resolve, reject) => {
+      const up = direction === 'up';
+
+      if (up && comment.voted_up) {
+        reject({ message: i18n.alreadyVotedUp })
+      } else if (!up && comment.voted_down) {
+        reject({ message: i18n.alreadyVotedDown })
+      } else if (up && comment.voted_down) {
+        this.destroyVote(comment.id, comment.voted_down, resolve, reject);
+      } else if (!up && comment.voted_up) {
+        this.destroyVote(comment.id, comment.voted_up, resolve, reject);
+      } else  {
+        this.createVote(comment.id, up, resolve, reject);
+      };
+    })
+  }
+
+  _handleVoteRootComment(comment, direction) {
+    this.vote(comment, direction).then(() => {
+      this.fetchComments();
+    }).catch((err) => {
+      window.flash('alert', err.message);
     })
   }
 
@@ -190,8 +249,10 @@ export default class CommentsSection extends Component {
             saveComment={this.saveComment}
             deleteComment={this.deleteComment}
             editComment={this.editComment}
+            vote={this.vote}
             handleEditRootComment={this.handleEditRootComment}
             handleDeleteRootComment={this.handleDeleteRootComment}
+            handleVoteRootComment={this.handleVoteRootComment}
           />
         }
       </div>

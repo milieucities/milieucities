@@ -14,12 +14,13 @@ export default class Comment extends Component {
       showReadMore: false,
       showCommentForm: false,
       children: [],
-      showChildren: false
+      showChildren: false,
     };
     this.currentUserId = document.body.dataset.userId;
     this.toggleWholeBody = (e) => this._toggleWholeBody(e);
     this.voteUp = () => this._voteUp();
     this.voteDown = () => this._voteDown();
+    this.handleVoteChildComment = (c,d) => this._handleVoteChildComment(c,d);
     this.handleDelete = (e) => this._handleDelete(e);
     this.handleEdit = (e) => this._handleEdit(e);
     this.toggleCommentForm = (e) => this._toggleCommentForm(e);
@@ -47,107 +48,20 @@ export default class Comment extends Component {
   }
 
   _voteUp() {
-    const { comment, parent } = this.props;
-    const { locale } = document.body.dataset;
-    i18n.setLanguage(locale);
-    const { failedToVote } = i18n;
-    if(comment.voted_up) {
-      $.ajax({
-        url: `/users/${this.currentUserId}/votes/${comment.voted_up}`,
-        dataType: 'JSON',
-        type: 'DELETE',
-        data: { vote: { comment_id: this.props.comment.id } },
-        success: () => {
-          parent.loadComments();
-        },
-        error: error => {
-          window.flash('alert', failedToVote)
-        }
-      });
-    } else if(comment.voted_down) {
-        $.ajax({
-          url: `/users/${this.currentUserId}/votes/${comment.voted_down}`,
-          dataType: 'JSON',
-          type: 'DELETE',
-          data: { vote: { comment_id: this.props.comment.id } },
-          success: () => {
-            parent.loadComments();
-          },
-          error: error => {
-            window.flash('alert', failedToVote)
-          }
-        });
-      } else {
-        $.ajax({
-          url: `/users/${this.currentUserId}/votes`,
-          dataType: 'JSON',
-          type: 'POST',
-          data: { vote: { up: true, comment_id: this.props.comment.id } },
-          success: () => {
-            parent.loadComments();
-          },
-          error: error => {
-            window.flash('alert', failedToVote)
-          }
-        });
-      }
+    const voteHandler = this.props.handleVoteRootComment || this.props.handleVoteChildComment;
+    voteHandler(this.props.comment, "up");
   }
 
   _voteDown() {
-    const { comment, parent } = this.props;
-    const { locale } = document.body.dataset;
-    i18n.setLanguage(locale);
-    const { failedToVote } = i18n;
-    if(comment.voted_down) {
-      $.ajax({
-        url: `/users/${this.currentUserId}/votes/${comment.voted_down}`,
-        dataType: 'JSON',
-        type: 'DELETE',
-        data: { vote: { comment_id: this.props.comment.id } },
-        success: () => {
-          parent.loadComments();
-        },
-        error: error => {
-          window.flash('alert', failedToVote)
-        }
-      });
-    } else if(comment.voted_up) {
-      $.ajax({
-        url: `/users/${this.currentUserId}/votes/${comment.voted_up}`,
-        dataType: 'JSON',
-        type: 'DELETE',
-        data: { vote: { comment_id: this.props.comment.id } },
-        success: () => {
-          parent.loadComments();
-        },
-        error: error => {
-          window.flash('alert', failedToVote)
-        }
-      });
-    } else {
-      $.ajax({
-        url: `/users/${this.currentUserId}/votes`,
-        dataType: 'JSON',
-        type: 'POST',
-        data: { vote: { up: false, comment_id: this.props.comment.id } },
-        success: () => {
-          parent.loadComments();
-        },
-        error: error => {
-          window.flash('alert', failedToVote)
-        }
-      });
-    }
+    const voteHandler = this.props.handleVoteRootComment || this.props.handleVoteChildComment;
+    voteHandler(this.props.comment, "down");
   }
 
-  _handleDeleteChildComment(comment) {
-    this.props.deleteComment(comment).then(res => {
-      const newComments = _.without(this.state.children, comment);
-      this.setState({ children: newComments});
-      window.flash('notice', i18n.commentDeletedSuccess);
-    }).catch(err => {
-      console.log(err);
-      window.flash('alert', i18n.commentDeletedFailed);
+  _handleVoteChildComment(comment, direction) {
+    this.props.vote(comment, direction).then(() => {
+      this.fetchChildren()
+    }).catch((err) => {
+      window.flash('alert', err.message);
     })
   }
 
@@ -201,7 +115,6 @@ export default class Comment extends Component {
       dataType: 'JSON',
       type: 'GET',
       success: (res) => {
-        console.log(res);
         this.setState({ children: res, showChildren: true })
       },
       error: (error) => {
@@ -323,8 +236,10 @@ export default class Comment extends Component {
           <Comments
             { ...this.props }
             handleDeleteRootComment={null}
+            handleVoteRootComment={null}
             handleDeleteChildComment={this.handleDeleteChildComment}
             handleEditChildComment={this.handleEditChildComment}
+            handleVoteChildComment={this.handleVoteChildComment}
             parentCommentAuthor={author}
             children={children}
           />

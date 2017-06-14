@@ -21,5 +21,11 @@ module Users
     def vote_params
       params.require(:vote).permit(:comment_id, :up)
     end
+
+    def vote_exists
+      Vote.find_by(user_id: current_user.id,
+                   comment_id: vote_params[:comment_id],
+                   up: vote_params[:up]).exists?
+    end
   end
 end

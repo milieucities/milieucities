@@ -21,6 +21,8 @@ const i18n = new LocalizedStrings({
     commentSavedFailed:'Your comment was not saved. Please try again.',
     seeReplies: "See all {0} replies",
     hideReplies: "Hide replies",
+    alreadyVotedUp: 'You have already voted up this comment.',
+    alreadyVotedDown: 'You have already voted down this comment.'
   },
   fr: {
     makePublicComment: 'Faire un commentaire publique',
@@ -42,6 +44,8 @@ const i18n = new LocalizedStrings({
     commentSavedFailed:'Votre commentaire n\'a pas été enregistré, veuillez réessayer.',
     seeReplies: "Voir tout les {0} réponses",
     hideReplies: "Cacher réponses",
+    alreadyVotedUp: 'Vous avez déjà voté pour ce commentaire.',
+    alreadyVotedDown: 'Vous avez déjà voté contre ce commentaire.'
   }
 });
 
