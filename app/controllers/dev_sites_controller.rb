@@ -86,19 +86,52 @@ class DevSitesController < ApplicationController
     params
       .require(:dev_site)
       .permit(
-        :devID,
-        :application_type,
-        :municipality_id,
-        :ward_id,
+        :title,
+        :address,
+        :build_type,
         :description,
-        :ward_councillor_email,
+        :urban_planner_name,
         :urban_planner_email,
-        :featured,
+        :ward_councillor_email,
+        :applicant,
+        :on_behalf_of,
+        :ward,
+        :municipality,
+        :received_date,
+        :active_at,
+        :url_full_notice,
+        application_types_attributes: [
+          :id,
+          :name,
+          :_destroy,
+        ],
+        meetings_attributes:
+        [
+          :id,
+          :meeting_type,
+          :title,
+          :time,
+          :date,
+          :location,
+          :_destroy,
+        ],
+        statuses_attributes: [
+          :id,
+          :status,
+          :status_date,
+          :_destroy,
+        ],
+        addresses_attributes: [
+          :id,
+          :street,
+          :city,
+          :province_state,
+          :country,
+          :_destroy,
+        ],
         images: [],
         files: [],
-        likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
-        addresses_attributes: [:id, :street, :city, :province_state, :country, :_destroy],
-        statuses_attributes: [:id, :status, :status_date, :_destroy]
+        likes_attributes: [:id, :user_id, :dev_site_id, :_destroy]
       )
   end
 
