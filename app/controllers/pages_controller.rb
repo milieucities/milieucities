@@ -7,6 +7,9 @@ class PagesController < ApplicationController
     @no_header = true
   end
 
+  def entreenord
+  end
+
   def wakefield
     typeform_id = 'HHlHgX'
     @dev_site = DevSite.find_by(devID: 'wakefield-1')

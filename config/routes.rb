@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
     namespace :pages, path: '/', as: nil do
       get :wakefield
+      get :entreenord
       post :contact_file_lead
       post :contact_councillor
     end
