@@ -145,13 +145,6 @@ ActiveRecord::Schema.define(version: 20170610223704) do
     t.string   "url_full_notice"
   end
 
-  create_table "dev_sites_to_application_types", force: :cascade do |t|
-    t.integer "dev_site_id"
-    t.integer "application_type_id"
-  end
-
-  add_index "dev_sites_to_application_types", ["application_type_id"], name: "index_dev_sites_to_application_types_on_application_type_id", using: :btree
-
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "description"

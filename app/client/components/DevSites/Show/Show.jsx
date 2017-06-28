@@ -88,26 +88,24 @@ export default class DevSiteShow extends Component {
               <h3 className={css.status}>{latestStatus}</h3>
                   <div className='row'>
                     <div className='col m12 s4'>
-                    <img src={devSite.image_url} className={css.image} />
+                      <img src={devSite.image_url} className={css.image} />
                       <h3>{devSite.address}</h3>
                       {i18n.devId}: {devSite.devID} <br/>
                       {devSite.application_type.replace(/coa/, 'Committee of Adjustment')} <br/>
-                      <div className={css.button}>
-                        link to full notice
-                      </div>
 
-                      <div className={css.tabs}>
-                          <Tabs className={css.tab}>
-                            <TabList className={css.tab.list}>
-                              <Tab className={css.tab}>{i18n.description}</Tab>
-                              <Tab className={css.tab}>Attachments</Tab>
+                      <div>
+                          <Tabs>
+                            <TabList>
+                              <Tab>{i18n.description}</Tab>
+                              <Tab>Attachments</Tab>
+                              <Tab>Notices</Tab>
                             </TabList>
 
-                            <TabPanel className={css.tab.panel}>
+                            <TabPanel>
                               <h3 className={css.description}>Project Description</h3>
                               <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
                             </TabPanel>
-                            <TabPanel className={css.tab.panel}>
+                            <TabPanel>
                               {
                                 (devSite.city_files.length > 0 || devSite.files.length > 0) &&
                                 <h3 className={css.description}>{i18n.file}</h3>
@@ -130,6 +128,8 @@ export default class DevSiteShow extends Component {
                                   )
                                 })
                               }
+                            </TabPanel>
+                            <TabPanel>
                             </TabPanel>
                           </Tabs>
                      </div>
