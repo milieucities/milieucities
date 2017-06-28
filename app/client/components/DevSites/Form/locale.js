@@ -34,6 +34,8 @@ const i18n = new LocalizedStrings({
     applicant: 'Applicant name',
     organization: 'Organization',
     attachments: 'Attachments',
+    links: 'Links',
+    linkToFullNotice: 'Link to full notice',
     files: 'Files',
     images: 'Images',
     save: 'Save'
@@ -71,6 +73,8 @@ const i18n = new LocalizedStrings({
     organization: 'Organization',
     applicant: 'Applicant',
     attachments: 'Pièces Jointes',
+    links: 'Liens',
+    linkToFullNotice: 'Lien au préavis complet',
     files: 'Ficher',
     images: 'Images',
     save: 'Sauvegarder'

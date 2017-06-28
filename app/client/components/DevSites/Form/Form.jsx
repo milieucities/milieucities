@@ -184,10 +184,10 @@ export default class DevSiteForm extends Component {
                   <div className='row'>
                     <SelectWithLabel
                       classes='col s12 m12 l6'
-                      id='dev_site_building_type'
-                      name='dev_site[building_type]'
+                      id='dev_site_build_type'
+                      name='dev_site[build_type]'
                       label={i18n.buildingType}
-                      defaultValue={devSite.building_type}
+                      defaultValue={devSite.build_type}
                       options={BUILDING_TYPES.map(a => [a,a])}
                       />
 
@@ -196,7 +196,7 @@ export default class DevSiteForm extends Component {
                       id='dev_site_application_type'
                       name='dev_site[application_types_attributes][0][name]'
                       label={i18n.applicationType}
-                      defaultValue={devSite.application_type}
+                      defaultValue={devSite.application_type_name}
                       options={APPLICATION_TYPES.map(a => [a,a])}
                       />
                   </div>
@@ -274,15 +274,119 @@ export default class DevSiteForm extends Component {
                       classes='col s12 m12 l4'
                       id='address_province_state'
                       name='dev_site[addresses_attributes][0][province_state]'
-                      defaultValue={hasAddress ? devSite.addresses[0].province_state : ''}
+                      defaultValue={hasAddress ? devSite.addresses[0].province_state : 'ON'}
                       label={i18n.province}
                       />
                     <TextInputWithLabel
                       classes='col s12 m12 l4'
                       id='address_country'
                       name='dev_site[addresses_attributes][0][country]'
-                      defaultValue={hasAddress ? devSite.addresses[0].country : ''}
+                      defaultValue={hasAddress ? devSite.addresses[0].country : 'Canada'}
                       label={i18n.country}
+                      />
+                  </div>
+                </div>
+              </div>
+
+              <div className={css.meta}>
+                <div className={css.label}>
+                  {i18n.urbanPlanner}
+                </div>
+                <div className={css.data}>
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12 m12 l6'
+                      id='dev_site_urban_planner_name'
+                      name='dev_site[urban_planner_name]'
+                      defaultValue={devSite.urban_planner_name}
+                      label={i18n.name}
+                      />
+
+                    <TextInputWithLabel
+                      classes='col s12 m12 l6'
+                      id='dev_site_urban_planner_email'
+                      name='dev_site[urban_planner_email]'
+                      defaultValue={devSite.urban_planner_email}
+                      label={i18n.email}
+                      />
+                  </div>
+                </div>
+              </div>
+
+              <div className={css.meta}>
+                <div className={css.label}>
+                  {i18n.wardCouncillor}
+                </div>
+                <div className={css.data}>
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12'
+                      id='dev_site_ward_councillor_email'
+                      name='dev_site[ward_councillor_email]'
+                      defaultValue={devSite.ward_councillor_email}
+                      label={i18n.email}
+                      />
+                  </div>
+                </div>
+              </div>
+
+              <div className={css.meta}>
+                <div className={css.label}>
+                  {i18n.applicant}
+                </div>
+                <div className={css.data}>
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12 m12 l6'
+                      id='dev_site_applicant'
+                      name='dev_site[applicant]'
+                      defaultValue={devSite.applicant}
+                      label={i18n.applicant}
+                      />
+                    <TextInputWithLabel
+                      classes='col s12 m12 l6'
+                      id='dev_site_on_behalf_of'
+                      name='dev_site[on_behalf_of]'
+                      defaultValue={devSite.on_behalf_of}
+                      label={i18n.organization}
+                      />
+                  </div>
+                </div>
+              </div>
+
+              <div className={css.meta}>
+                <div className={css.label}>
+                  {i18n.attachments}
+                </div>
+                <div className={css.data}>
+                  <div className='row'>
+                    <div className='file-field input-field col s12'>
+                      <label htmlFor='dev_site_files'>{i18n.files}</label>
+                      <input multiple='multiple' type='file' name='dev_site[files][]' id='dev_site_files' />
+                    </div>
+                  </div>
+
+                  <div className='row'>
+                    <div className='file-field input-field col s12'>
+                      <label htmlFor='dev_site_images'>{i18n.images}</label>
+                      <input multiple='multiple' type='file' name='dev_site[images][]' id='dev_site_images' />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={css.meta}>
+                <div className={css.label}>
+                  {i18n.links}
+                </div>
+                <div className={css.data}>
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12'
+                      id='dev_site_url_full_notice'
+                      name='dev_site[url_full_notice]'
+                      defaultValue={devSite.url_full_notice}
+                      label={i18n.linkToFullNotice}
                       />
                   </div>
                 </div>
@@ -374,92 +478,6 @@ export default class DevSiteForm extends Component {
                 </div>
               </div>
 
-              <div className={css.meta}>
-                <div className={css.label}>
-                  {i18n.urbanPlanner}
-                </div>
-                <div className={css.data}>
-                  <div className='row'>
-                    <TextInputWithLabel
-                      classes='col s12 m12 l6'
-                      id='dev_site_urban_planner_name'
-                      name='dev_site[urban_planner_name]'
-                      defaultValue={devSite.urban_planner_name}
-                      label={i18n.name}
-                      />
-
-                    <TextInputWithLabel
-                      classes='col s12 m12 l6'
-                      id='dev_site_urban_planner_email'
-                      name='dev_site[urban_planner_email]'
-                      defaultValue={devSite.urban_planner_email}
-                      label={i18n.email}
-                      />
-                  </div>
-                </div>
-              </div>
-
-              <div className={css.meta}>
-                <div className={css.label}>
-                  {i18n.wardCouncillor}
-                </div>
-                <div className={css.data}>
-                  <div className='row'>
-                    <TextInputWithLabel
-                      classes='col s12'
-                      id='dev_site_ward_councillor_email'
-                      name='dev_site[ward_councillor_email]'
-                      defaultValue={devSite.ward_councillor_email}
-                      label={i18n.email}
-                      />
-                  </div>
-                </div>
-              </div>
-
-              <div className={css.meta}>
-                <div className={css.label}>
-                  {i18n.applicant}
-                </div>
-                <div className={css.data}>
-                  <div className='row'>
-                    <TextInputWithLabel
-                      classes='col s12 m12 l6'
-                      id='dev_site_applicant'
-                      name='dev_site[applicant]'
-                      defaultValue={devSite.applicant}
-                      label={i18n.applicant}
-                      />
-                    <TextInputWithLabel
-                      classes='col s12 m12 l6'
-                      id='dev_site_on_behalf_of'
-                      name='dev_site[on_behalf_of]'
-                      defaultValue={devSite.on_behalf_of}
-                      label={i18n.organization}
-                      />
-                  </div>
-                </div>
-              </div>
-
-              <div className={css.meta}>
-                <div className={css.label}>
-                  {i18n.attachments}
-                </div>
-                <div className={css.data}>
-                  <div className='row'>
-                    <div className='file-field input-field col s12'>
-                      <label htmlFor='dev_site_files'>{i18n.files}</label>
-                      <input multiple='multiple' type='file' name='dev_site[files][]' id='dev_site_files' />
-                    </div>
-                  </div>
-
-                  <div className='row'>
-                    <div className='file-field input-field col s12'>
-                      <label htmlFor='dev_site_images'>{i18n.images}</label>
-                      <input multiple='multiple' type='file' name='dev_site[images][]' id='dev_site_images' />
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               <div className='row'>
                 <input type='submit' value={i18n.save} className='btn submit' />

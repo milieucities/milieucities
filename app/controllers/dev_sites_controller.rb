@@ -86,17 +86,19 @@ class DevSitesController < ApplicationController
     params
       .require(:dev_site)
       .permit(
+        :devID,
         :title,
         :address,
         :build_type,
         :description,
+        :short_description,
         :urban_planner_name,
         :urban_planner_email,
         :ward_councillor_email,
         :applicant,
         :on_behalf_of,
-        :ward,
-        :municipality,
+        :ward_id,
+        :municipality_id,
         :received_date,
         :active_at,
         :url_full_notice,

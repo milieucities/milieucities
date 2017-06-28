@@ -129,6 +129,10 @@ class DevSite < ActiveRecord::Base
     where(id: ids).order(order_clause)
   end
 
+  def application_type_name
+    application_types.last.name
+  end
+
   private
 
   def add_total_suffix(totals)
