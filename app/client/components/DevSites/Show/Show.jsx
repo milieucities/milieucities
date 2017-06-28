@@ -10,6 +10,7 @@ import Sentiment from '../../Common/Sentiment/Sentiment'
 import i18n from './locale'
 import Chart from 'chart.js'
 import { ShareButtons, generateShareIcon } from 'react-share';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
@@ -73,6 +74,8 @@ export default class DevSiteShow extends Component {
   render() {
     const { devSite, loading, showModal, contact } = this.state;
     const { locale } = document.body.dataset;
+    console.log('devSite', devSite );
+    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
     i18n.setLanguage(locale);
     return(
       <div className={css.root}>
@@ -82,103 +85,60 @@ export default class DevSiteShow extends Component {
           {
             !loading &&
             <div>
-              <h1>{devSite.address}</h1>
-              <div className='row'>
-                <div className='col s12 m6'>
-                  <img src={devSite.image_url} className={css.image} />
-
-                  <div className={css.share}>
-                    <FacebookShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
-                      <FacebookIcon size={32} round />
-                    </FacebookShareButton>
-                    <TwitterShareButton url={devSite.url} title={devSite.address} picture={devSite.image_url}>
-                      <TwitterIcon size={32} round />
-                    </TwitterShareButton>
-                  </div>
-
-                  {
-                    devSite.urban_planner_email || devSite.ward_councillor_email &&
-                    <div className={css.emailofficials}>
-                      {
-                        devSite.urban_planner_email &&
-                        <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Urban Planner'>
-                          <i className={css.mail}></i> Urban Planner
-                        </a>
-                      }
-                      {
-                        devSite.ward_councillor_email &&
-                        <a href='#' onClick={this.openEmailModal} className={css.email} title='Email the Councillor'>
-                          <i className={css.mail}></i> Councillor
-                        </a>
-                      }
-                    </div>
-                  }
-                </div>
-                <div className='col s12 m6'>
+              <h3 className={css.status}>{latestStatus}</h3>
                   <div className='row'>
-                    <div className='col s6'>
-                      {i18n.devId}:
-                    </div>
-                    <div className='col s6'>
-                      {devSite.devID}
-                    </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col s6'>
-                      {i18n.appType}:
-                    </div>
-                    <div className='col s6'>
-                      {devSite.application_type.replace(/coa/, 'Committee of Adjustment')}
-                    </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col s6'>
-                      {i18n.wardName}:
-                    </div>
-                    <div className='col s6'>
-                      {devSite.ward_name}
-                    </div>
-                  </div>
+                    <div className='col m12 s4'>
+                      <img src={devSite.image_url} className={css.image} />
+                      <h3>{devSite.address}</h3>
+                      {i18n.devId}: {devSite.devID} <br/>
+                      {devSite.application_type.replace(/coa/, 'Committee of Adjustment')} <br/>
 
-                  <h3 style={{padding: '0 0.75rem'}}><b>{i18n.status}</b></h3>
-                  {
-                    devSite.statuses.map(status => {
-                      return(
-                        <div className='row' key={status.id}>
-                          <div className='col s12 m6'>{status.status}</div>
-                          <div className='col s12 m6'>{status.friendly_status_date}</div>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
+                      <div>
+                          <Tabs>
+                            <TabList>
+                              <Tab>{i18n.description}</Tab>
+                              <Tab>Attachments</Tab>
+                              <Tab>Notices</Tab>
+                            </TabList>
+
+                            <TabPanel>
+                              <h3 className={css.description}>Project Description</h3>
+                              <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+                            </TabPanel>
+                            <TabPanel>
+                              {
+                                (devSite.city_files.length > 0 || devSite.files.length > 0) &&
+                                <h3 className={css.description}>{i18n.file}</h3>
+                              }
+                              {
+                                devSite.city_files.map((file, i) => {
+                                  return(
+                                    <div key={i}>
+                                      <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
+                                    </div>
+                                  )
+                                })
+                              }
+                              {
+                                devSite.files.map((file, i) => {
+                                  return(
+                                    <div key={i}>
+                                      <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
+                                    </div>
+                                  )
+                                })
+                              }
+                            </TabPanel>
+                            <TabPanel>
+                            </TabPanel>
+                          </Tabs>
+                     </div>
+                  <h3 className={css.timeline}>Project Timeline</h3>  
+                  </div>
               </div>
               <div className='row'>
                 <div className='col s12 m6'>
-                  <h3><b>{i18n.description}</b></h3>
-                  <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
-                  {
-                    (devSite.city_files.length > 0 || devSite.files.length > 0) &&
-                    <h3><b>{i18n.file}</b></h3>
-                  }
-                  {
-                    devSite.city_files.map((file, i) => {
-                      return(
-                        <div key={i}>
-                          <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
-                        </div>
-                      )
-                    })
-                  }
-                  {
-                    devSite.files.map((file, i) => {
-                      return(
-                        <div key={i}>
-                          <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
-                        </div>
-                      )
-                    })
-                  }
+                  
                   {
                     devSite.sentiment &&
                     <h3><b>Sentiment</b></h3>

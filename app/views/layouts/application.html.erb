@@ -3,7 +3,7 @@
 <%= render "layouts/head"%>
 <body data-locale="<%= I18n.locale %>"
       data-signed-in="<%= signed_in? %>"
-      <% if signed_in? %>
+      <% if current_user && current_user.profile %>
       data-user-id="<%= current_user.id %>"
       data-user-slug="<%= current_user.slug %>"
       data-user-roles="<%= current_user.roles.pluck(:name).join(',') %>"
