@@ -3,7 +3,7 @@ require 'data_analysis'
 class DevSite < ActiveRecord::Base
   include Services::DataAnalysis
 
-  scope :latest, -> { joins(:statuses).order('statuses.status_date DESC') }
+  scope :latest, -> { joins(:statuses).order('statuses.start_date DESC') }
 
   mount_uploaders :images, ImagesUploader
   mount_uploaders :files, FilesUploader
@@ -23,7 +23,7 @@ class DevSite < ActiveRecord::Base
     'Additions'
   ].freeze
 
-  belongs_to :municipality
+  belongs_to :municipality, foreign_key: 'municipality_id'
   belongs_to :ward
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
@@ -74,8 +74,16 @@ class DevSite < ActiveRecord::Base
 
   def status_date
     return if statuses.empty?
-    return nil unless statuses.current.status_date
-    statuses.current.status_date.strftime('%B %e, %Y')
+    return nil unless statuses.current.start_date
+    statuses.current.start_date.strftime('%B %e, %Y')
+  end
+
+  def valid_statuses
+    return Status::GUELPH_STATUSES unless municipality
+
+    city = municipality.name
+    status_set = "#{city.upcase}_STATUSES"
+    Status.const_get(status_set)
   end
 
   def street
@@ -127,6 +135,10 @@ class DevSite < ActiveRecord::Base
     end
     order_clause << "ELSE #{ids.length} END"
     where(id: ids).order(order_clause)
+  end
+
+  def application_type_name
+    application_types.last.name
   end
 
   private
@@ -185,7 +197,7 @@ class DevSite < ActiveRecord::Base
 
     def search_by_status(collection, value)
       collection
-        .where("statuses.status_date = (select max(statuses.status_date) \
+        .where("statuses.start_date = (select max(statuses.start_date) \
                  from statuses where statuses.dev_site_id = dev_sites.id)")
         .where(statuses: { status: value })
     end

@@ -133,12 +133,41 @@ export default class DevSiteShow extends Component {
                             </TabPanel>
                           </Tabs>
                      </div>
-                  <h3 className={css.timeline}>Project Timeline</h3>  
+                  <h3 className={css.timeline}>Project Timeline</h3>
                   </div>
+                  <div className='row'>
+                    <div className='col s6'>
+                      {i18n.appType}:
+                    </div>
+                    <div className='col s6'>
+                      {devSite.application_type_name.replace(/coa/, 'Committee of Adjustment')}
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col s6'>
+                      {i18n.wardName}:
+                    </div>
+                    <div className='col s6'>
+                      {devSite.ward_name}
+                    </div>
+                  </div>
+
+                  <h3 style={{padding: '0 0.75rem'}}><b>{i18n.status}</b></h3>
+                  {
+                    devSite.statuses.map(status => {
+                      return(
+                        <div className='row' key={status.id}>
+                          <div className='col s12 m6'>{status.status}</div>
+                          <div className='col s12 m6'>{status.friendly_status_date}</div>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
               </div>
               <div className='row'>
                 <div className='col s12 m6'>
-                  
+
                   {
                     devSite.sentiment &&
                     <h3><b>Sentiment</b></h3>

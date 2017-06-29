@@ -22,10 +22,14 @@ class DevSitesController < ApplicationController
   end
 
   def new
+    @application_types = ApplicationType::VALID_APPLICATION_TYPES
+    @statuses = @dev_site.valid_statuses
     @no_header = true
   end
 
   def edit
+    @application_types = ApplicationType::VALID_APPLICATION_TYPES
+    @statuses = @dev_site.valid_statuses
     @no_header = true
   end
 
@@ -86,24 +90,26 @@ class DevSitesController < ApplicationController
     params
       .require(:dev_site)
       .permit(
+        :devID,
         :title,
         :address,
         :build_type,
         :description,
+        :short_description,
         :urban_planner_name,
         :urban_planner_email,
         :ward_councillor_email,
         :applicant,
         :on_behalf_of,
-        :ward,
-        :municipality,
+        :ward_id,
+        :municipality_id,
         :received_date,
         :active_at,
         :url_full_notice,
         application_types_attributes: [
           :id,
           :name,
-          :_destroy,
+          :_destroy
         ],
         meetings_attributes:
         [
@@ -113,13 +119,14 @@ class DevSitesController < ApplicationController
           :time,
           :date,
           :location,
-          :_destroy,
+          :_destroy
         ],
         statuses_attributes: [
           :id,
           :status,
-          :status_date,
-          :_destroy,
+          :start_date,
+          :end_date,
+          :_destroy
         ],
         addresses_attributes: [
           :id,
@@ -127,7 +134,7 @@ class DevSitesController < ApplicationController
           :city,
           :province_state,
           :country,
-          :_destroy,
+          :_destroy
         ],
         images: [],
         files: [],

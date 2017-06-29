@@ -4,42 +4,11 @@ import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
 import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
+import MeetingSection from '../../Meetings/Index/MeetingSection'
+import StatusSection from '../../Statuses/Index/StatusSection'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
-
-const APPLICATION_TYPES = [
-  'Site Plan Approval',
-  'Condo Approval',
-  'Subdivision Approval',
-  'Zoning Amendment',
-  'Registered Condominium',
-  'Site Plan Control',
-  'Official Plan Amendment',
-  'Zoning By-law Amendment',
-  'Demolition Control',
-  'Cash-in-lieu of Parking',
-  'Plan of Subdivision',
-  'Plan of Condominium',
-  'Derelict',
-  'Vacant',
-  'Master Plan'
-]
-
-const STATUSES = [
-  'Application File Pending',
-  'Application Reactivated',
-  'Application Approved',
-  'Community Information and Comment Session Open',
-  'Application Approved by Committee',
-  'Application Recommended to Council',
-  'Draft Report sent to Councillor and Applicant for Response',
-  'In Appeal Period',
-  'Comment Period in Progress',
-  'Community Information and Comment Session Held',
-  'Comment Period has Ended/Issue Resolution',
-  'Unknown'
-]
 
 const BUILDING_TYPES = [
   'Derelict',
@@ -53,11 +22,6 @@ const BUILDING_TYPES = [
   'Commercial/Hotel',
   'Mixed-use',
   'Additions'
-]
-
-const MEETING_TYPES = [
-  'Public',
-  'Council'
 ]
 
 export default class DevSiteForm extends Component {
@@ -76,7 +40,9 @@ export default class DevSiteForm extends Component {
     this.loadMunicipalities = () => this._loadMunicipalities();
     this.loadDevSite = () => this._loadDevSite();
     this.handleChangeMunicipality = (e) => this._handleChangeMunicipality(e);
-    this.handleStatusDate = (date) => this._handleStatusDate(date);
+    this.handleStartDate = (date) => this._handleStartDate(date);
+    this.handleEndDate = (date) => this._handleEndDate(date);
+    this.handleMeetingDate = (date) => this._handleMeetingDate(date);
     this.handleSubmit = (e) => this._handleSubmit(e);
   }
 
@@ -100,8 +66,8 @@ export default class DevSiteForm extends Component {
     }
 
     $.getJSON(`/dev_sites/${this.state.devSiteId}`, devSite => {
-      let statusDate = devSite.statuses.length > 0 ? moment(devSite.statuses[0].status_date) : null
-      this.setState({ devSite, loadingDevSite: false, statusDate })
+      let startDate = devSite.statuses.length > 0 ? moment(devSite.statuses[0].status_date) : null
+      this.setState({ devSite, loadingDevSite: false, startDate })
     });
   }
 
@@ -109,8 +75,42 @@ export default class DevSiteForm extends Component {
     this.setState({ activeMunicipalityIndex: e.currentTarget.selectedIndex });
   }
 
-  _handleStatusDate(date) {
-    this.setState({ statusDate: date });
+  _handleStartDate(date) {
+    this.setState({ startDate: date });
+  }
+
+  _handleEndDate(date) {
+    this.setState({ endDate: date });
+  }
+
+  _handleMeetingDate(date) {
+    this.setState({ meetingDate: date });
+  }
+
+  _handleSaveMeeting(data, meetingId) {
+    const { locale } = document.body.dataset;
+    let [url, type] = [`/dev_sites/${this.state.devSiteId}/meetings`, 'POST'];
+
+    if(meetingId) {
+      [url, type] = [`/dev_sites/${this.state.devSiteId}/meeting/${meetinId}`, 'PATCH']
+    }
+
+    $.ajax({
+      url,
+      type,
+      data,
+      dataType: 'JSON',
+      contentType: false,
+      processData: false,
+      success: devSite => {
+        window.flash('notice', 'Successfully saved!')
+        Turbolinks.visit(`/${locale}/dev_sites/${devSite.id}`);
+      },
+      error: error => {
+        window.flash('alert', 'Failed to save!')
+        this.setState({ error: error.responseJSON })
+      }
+    });
   }
 
   _handleSubmit(e) {
@@ -141,7 +141,7 @@ export default class DevSiteForm extends Component {
   }
 
   render() {
-    const { loadingMunicipalities, devSite, loadingDevSite, municipalities, activeMunicipalityIndex, statusDate, error } = this.state;
+    const { loadingMunicipalities, devSite, loadingDevSite, municipalities, activeMunicipalityIndex, startDate, endDate, meetingDate, error } = this.state;
     const hasAddress = devSite.addresses && devSite.addresses.length > 0
     const hasStatus = devSite.statuses && devSite.statuses.length > 0
     i18n.setLanguage(document.body.dataset.locale);
@@ -184,10 +184,10 @@ export default class DevSiteForm extends Component {
                   <div className='row'>
                     <SelectWithLabel
                       classes='col s12 m12 l6'
-                      id='dev_site_building_type'
-                      name='dev_site[building_type]'
+                      id='dev_site_build_type'
+                      name='dev_site[build_type]'
                       label={i18n.buildingType}
-                      defaultValue={devSite.building_type}
+                      defaultValue={devSite.build_type}
                       options={BUILDING_TYPES.map(a => [a,a])}
                       />
 
@@ -196,8 +196,8 @@ export default class DevSiteForm extends Component {
                       id='dev_site_application_type'
                       name='dev_site[application_types_attributes][0][name]'
                       label={i18n.applicationType}
-                      defaultValue={devSite.application_type}
-                      options={APPLICATION_TYPES.map(a => [a,a])}
+                      defaultValue={devSite.application_type_name}
+                      options={this.props.applicationTypes.map(a => [a,a])}
                       />
                   </div>
 
@@ -274,102 +274,16 @@ export default class DevSiteForm extends Component {
                       classes='col s12 m12 l4'
                       id='address_province_state'
                       name='dev_site[addresses_attributes][0][province_state]'
-                      defaultValue={hasAddress ? devSite.addresses[0].province_state : ''}
+                      defaultValue={hasAddress ? devSite.addresses[0].province_state : 'ON'}
                       label={i18n.province}
                       />
                     <TextInputWithLabel
                       classes='col s12 m12 l4'
                       id='address_country'
                       name='dev_site[addresses_attributes][0][country]'
-                      defaultValue={hasAddress ? devSite.addresses[0].country : ''}
+                      defaultValue={hasAddress ? devSite.addresses[0].country : 'Canada'}
                       label={i18n.country}
                       />
-                  </div>
-                </div>
-              </div>
-
-              <div className={css.meta}>
-                <div className={css.label}>
-                  {i18n.statuses}
-                </div>
-                <div className={css.data}>
-                  <div className='row'>
-                    <SelectWithLabel
-                      classes='col s12'
-                      id='status_name'
-                      name='dev_site[statuses_attributes][0][status]'
-                      label={i18n.status}
-                      defaultValue={hasStatus ? devSite.status[0].status : ''}
-                      options={STATUSES.map(s => [s,s])}
-                      />
-
-                    <div className='input-field col s12'>
-                      <label htmlFor='status_date'>{i18n.statusDate}</label>
-                      <DatePicker selected={statusDate} dateFormat='MMMM DD, YYYY' name='dev_site[statuses_attributes][0][status_date]' onChange={this.handleStatusDate} />
-                      {
-                        this.state.error['statuses.status_date'] &&
-                        <div className='error-message'>{this.state.error['statuses.status_date']}</div>
-                      }
-                    </div>
-
-                    <div className="col">
-                      <button className='btn' onClick={this.addStatusForm}>Add status</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className={css.meta}>
-                <div className={css.label}>
-                  {i18n.meetings}
-                </div>
-                <div className={css.data}>
-                  <div className='row'>
-                    <SelectWithLabel
-                      classes='col s12'
-                      id='meeting_type'
-                      name='dev_site[meetings_attributes][0][meeting_type]'
-                      label={i18n.meeting}
-                      defaultValue={hasStatus ? devSite.status[0].status : ''}
-                      options={MEETING_TYPES.map(s => [s,s])}
-                      />
-
-                    <div className='input-field col s12 m12 l6'>
-                      <label htmlFor='meeting_date'>{i18n.meetingDate}</label>
-                      <DatePicker selected={statusDate} dateFormat='MMMM DD, YYYY' name='dev_site[meetings_attributes][0][date]' onChange={this.handleMeetingDate} />
-                      {
-                        this.state.error['meetings.date'] &&
-                        <div className='error-message'>{this.state.error['meetings.date']}</div>
-                      }
-                    </div>
-
-                    <TextInputWithLabel
-                      classes='col s12 m12 l6'
-                      id='dev_site_urban_meeting_time'
-                      name='dev_site[meetings_attributes][0][time]'
-                      defaultValue={devSite.meeting_time}
-                      label={i18n.meetingTime}
-                      />
-
-                    <TextInputWithLabel
-                      classes='col s12'
-                      id='dev_site_urban_meeting_title'
-                      name='dev_site[meetings_attributes][0][title]'
-                      defaultValue={devSite.meeting_title}
-                      label={i18n.title}
-                      />
-
-                    <TextInputWithLabel
-                      classes='col s12'
-                      id='dev_site_urban_meeting_location'
-                      name='dev_site[meetings_attributes][0][location]'
-                      defaultValue={devSite.meeting_location}
-                      label={i18n.location}
-                      />
-
-                    <div className="col">
-                      <button className='btn' onClick={this.addMeetingForm}>Add meeting</button>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -461,10 +375,48 @@ export default class DevSiteForm extends Component {
                 </div>
               </div>
 
+              <div className={css.meta}>
+                <div className={css.label}>
+                  {i18n.links}
+                </div>
+                <div className={css.data}>
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12'
+                      id='dev_site_url_full_notice'
+                      name='dev_site[url_full_notice]'
+                      defaultValue={devSite.url_full_notice}
+                      label={i18n.linkToFullNotice}
+                      />
+                  </div>
+                </div>
+              </div>
+
               <div className='row'>
                 <input type='submit' value={i18n.save} className='btn submit' />
               </div>
             </form>
+
+            {
+              devSite.id &&
+              <div>
+                <h2>{i18n.meetings}</h2>
+                <MeetingSection
+                  devSite={ devSite }
+                />
+              </div>
+            }
+
+            {
+              devSite.id &&
+              <div>
+                <h2>{i18n.statuses}</h2>
+                <StatusSection
+                  devSite={ devSite }
+                  statusOptions={ this.props.statusOptions }
+                />
+              </div>
+            }
           </div>
         }
       </Dashboard>
@@ -474,5 +426,15 @@ export default class DevSiteForm extends Component {
 
 document.addEventListener('turbolinks:load', () => {
   const devSiteForm = document.querySelector('#dev-site-form');
-  devSiteForm && render(<DevSiteForm/>, devSiteForm)
+
+  if (devSiteForm) {
+    const applicationTypes = JSON.parse(devSiteForm.dataset.applicationTypes);
+    const statusOptions = JSON.parse(devSiteForm.dataset.statuses);
+
+    render(
+      <DevSiteForm
+        applicationTypes={ applicationTypes }
+        statusOptions={ statusOptions }
+      />, devSiteForm)
+  }
 })
