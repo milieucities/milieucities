@@ -5,6 +5,7 @@ import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
 import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
 import MeetingSection from '../../Meetings/Index/MeetingSection'
+import StatusSection from '../../Statuses/Index/StatusSection'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
@@ -396,12 +397,25 @@ export default class DevSiteForm extends Component {
               </div>
             </form>
 
-            <h2>{i18n.meetings}</h2>
             {
               devSite.id &&
-              <MeetingSection
-                devSite={ devSite }
-              />
+              <div>
+                <h2>{i18n.meetings}</h2>
+                <MeetingSection
+                  devSite={ devSite }
+                />
+              </div>
+            }
+
+            {
+              devSite.id &&
+              <div>
+                <h2>{i18n.statuses}</h2>
+                <StatusSection
+                  devSite={ devSite }
+                  statusOptions={ this.props.statusOptions }
+                />
+              </div>
             }
           </div>
         }
@@ -412,14 +426,15 @@ export default class DevSiteForm extends Component {
 
 document.addEventListener('turbolinks:load', () => {
   const devSiteForm = document.querySelector('#dev-site-form');
-  const applicationTypes = JSON.parse(devSiteForm.dataset.applicationTypes);
-  const statuses = JSON.parse(devSiteForm.dataset.statuses);
 
   if (devSiteForm) {
+    const applicationTypes = JSON.parse(devSiteForm.dataset.applicationTypes);
+    const statusOptions = JSON.parse(devSiteForm.dataset.statuses);
+
     render(
       <DevSiteForm
         applicationTypes={ applicationTypes }
-        statuses={ statuses }
+        statusOptions={ statusOptions }
       />, devSiteForm)
   }
 })

@@ -13,18 +13,19 @@ const MEETING_TYPES = [
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    const meetingDate = this.props.meeting ? moment(this.props.meeting.date) : null
+    const meetingDate = this.props.meeting ? moment(this.props.meeting.date).utc() : null
     this.state = { meetingDate };
     this.handleMeetingDate = (d) => this._handleMeetingDate(d)
-    this.onDelete = (d) => this._onDelete(d)
-    this.onSave = (d) => this._onSave(d)
+    this.onDelete = (e) => this._onDelete(e)
+    this.onSave = (e) => this._onSave(e)
   }
 
   _handleMeetingDate(date) {
     this.setState({ meetingDate: date });
   }
 
-  _onDelete() {
+  _onDelete(e) {
+    e.preventDefault();
     this.props.handleDelete(this.props.meeting.id);
   }
 
@@ -39,7 +40,7 @@ export default class Edit extends Component {
     return (
       <div className={css.meta}>
         <div className={css.label}>
-          {i18n.newMeeting}
+          {i18n.meeting}
         </div>
         <div className={css.data}>
           <form encType='multipart/form-data' onSubmit={this.onSave} acceptCharset='UTF-8'>
@@ -90,9 +91,12 @@ export default class Edit extends Component {
                 <input type='submit' value={i18n.save} className='btn submit' />
               </div>
 
-              <div className="col">
-                <button className='btn' onClick={this.onDelete}>Delete</button>
-              </div>
+              {
+                this.props.meeting.id &&
+                <div className="col">
+                  <button className='btn cancel' onClick={this.onDelete}>Delete</button>
+                </div>
+              }
             </div>
           </form>
         </div>

@@ -12,16 +12,21 @@ class MeetingsController < ApplicationController
     end
   end
 
-  def edit
-    if @meeting.save
-      render json: @meeting, status: :ok
-    else
-      render json: @meeting.errors, status: :unprocessable_entity
+  def update
+    respond_to do |format|
+      if @meeting.update(meeting_params)
+        format.json { render json: @meeting, status: :created }
+      else
+        format.json { render json: @meeting.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
-    head :no_content
+    @meeting.destroy
+    respond_to do |format|
+      format.json { head :no_content }
+    end
   end
 
   private

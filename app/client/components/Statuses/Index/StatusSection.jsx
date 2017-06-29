@@ -5,7 +5,7 @@ import Edit from '../Edit/Edit'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from '../../DevSites/Form/locale.js'
 
-export default class MeetingSection extends Component {
+export default class StatusSection extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -13,13 +13,12 @@ export default class MeetingSection extends Component {
     this.handleDelete = (m) => this._handleDelete(m);
   }
 
-  _handleSave(data, meetingId) {
-
+  _handleSave(data, statusId) {
     const { locale } = document.body.dataset;
-    let [url, type] = [`/dev_sites/${this.props.devSite.id}/meetings`, 'POST'];
+    let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses`, 'POST'];
 
-    if(meetingId) {
-      [url, type] = [`/dev_sites/${this.props.devSite.id}/meetings/${meetingId}`, 'PATCH']
+    if(statusId) {
+      [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}`, 'PATCH']
     }
 
     $.ajax({
@@ -41,15 +40,15 @@ export default class MeetingSection extends Component {
     });
   }
 
-  _handleDelete(meetingId) {
+  _handleDelete(statusId) {
     const { locale } = document.body.dataset;
-    let [url, type] = [`/dev_sites/${this.props.devSite.id}/meetings/${meetingId}`, 'DELETE'];
+    let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}`, 'DELETE'];
 
     $.ajax({
       url,
       type,
       dataType: 'JSON',
-      success: meeting => {
+      success: status => {
         window.flash('notice', 'Successfully deleted!')
         Turbolinks.visit(`/${locale}/dev_sites/${this.props.devSite.id}`);
       },
@@ -61,19 +60,20 @@ export default class MeetingSection extends Component {
   }
 
   render() {
-    const meetings = this.props.devSite.meetings || [];
+    console.log('this.props.devSite', this.props.devSite)
+    const statuses = this.props.devSite.statuses || [];
 
     return(
       <div>
         <Index
           { ...this.props }
-          meetings={ meetings }
+          statuses={ statuses }
           handleSave={ this.handleSave }
           handleDelete={ this.handleDelete }
         />
         <Edit
           { ...this.props }
-          meeting={ {} }
+          status={ {} }
           handleSave={ this.handleSave }
           handleDelete={ this.handleDelete }
           error={ this.state.error }

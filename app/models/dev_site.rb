@@ -79,7 +79,7 @@ class DevSite < ActiveRecord::Base
   end
 
   def valid_statuses
-    return Status::GUELPH_STATUSES if !municipality
+    return Status::GUELPH_STATUSES unless municipality
 
     city = municipality.name
     status_set = "#{city.upcase}_STATUSES"

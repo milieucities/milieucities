@@ -124,7 +124,8 @@ class DevSitesController < ApplicationController
         statuses_attributes: [
           :id,
           :status,
-          :status_date,
+          :start_date,
+          :end_date,
           :_destroy
         ],
         addresses_attributes: [

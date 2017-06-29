@@ -27,7 +27,7 @@ child(:addresses) { attributes :id, :street, :city, :province_state, :country }
 
 child(:city_files) { attributes :id, :link, :name }
 
-child(:statuses) { attributes :id, :status, :friendly_status_date }
+child(:statuses) { attributes :id, :status, :start_date, :end_date }
 
 child :sentiment do
   attributes :anger, :disgust, :sadness, :joy, :fear, :id
