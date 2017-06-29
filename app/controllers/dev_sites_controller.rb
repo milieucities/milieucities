@@ -22,6 +22,8 @@ class DevSitesController < ApplicationController
   end
 
   def new
+    @application_types = ApplicationType::VALID_APPLICATION_TYPES
+    @statuses = @dev_site.valid_statuses
     @no_header = true
   end
 

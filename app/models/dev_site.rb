@@ -79,6 +79,8 @@ class DevSite < ActiveRecord::Base
   end
 
   def valid_statuses
+    return Status::GUELPH_STATUSES if !municipality
+
     city = municipality.name
     status_set = "#{city.upcase}_STATUSES"
     Status.const_get(status_set)

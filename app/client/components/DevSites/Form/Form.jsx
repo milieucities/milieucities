@@ -4,8 +4,7 @@ import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
 import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
-import MeetingForm from '../../Meetings/Edit/MeetingForm'
-import MeetingList from '../../Meetings/Index/Index'
+import MeetingSection from '../../Meetings/Index/MeetingSection'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
@@ -87,6 +86,32 @@ export default class DevSiteForm extends Component {
     this.setState({ meetingDate: date });
   }
 
+  _handleSaveMeeting(data, meetingId) {
+    const { locale } = document.body.dataset;
+    let [url, type] = [`/dev_sites/${this.state.devSiteId}/meetings`, 'POST'];
+
+    if(meetingId) {
+      [url, type] = [`/dev_sites/${this.state.devSiteId}/meeting/${meetinId}`, 'PATCH']
+    }
+
+    $.ajax({
+      url,
+      type,
+      data,
+      dataType: 'JSON',
+      contentType: false,
+      processData: false,
+      success: devSite => {
+        window.flash('notice', 'Successfully saved!')
+        Turbolinks.visit(`/${locale}/dev_sites/${devSite.id}`);
+      },
+      error: error => {
+        window.flash('alert', 'Failed to save!')
+        this.setState({ error: error.responseJSON })
+      }
+    });
+  }
+
   _handleSubmit(e) {
     e.preventDefault();
     const { locale } = document.body.dataset;
@@ -119,8 +144,6 @@ export default class DevSiteForm extends Component {
     const hasAddress = devSite.addresses && devSite.addresses.length > 0
     const hasStatus = devSite.statuses && devSite.statuses.length > 0
     i18n.setLanguage(document.body.dataset.locale);
-    const applicationTypes = JSON.parse(this.props.applicationTypes);
-    const statuses = JSON.parse(this.props.statuses);
 
     return(
       <Dashboard loading={loadingMunicipalities || loadingDevSite} activeComponent='manage_dev_site'>
@@ -173,7 +196,7 @@ export default class DevSiteForm extends Component {
                       name='dev_site[application_types_attributes][0][name]'
                       label={i18n.applicationType}
                       defaultValue={devSite.application_type_name}
-                      options={applicationTypes.map(a => [a,a])}
+                      options={this.props.applicationTypes.map(a => [a,a])}
                       />
                   </div>
 
@@ -374,16 +397,12 @@ export default class DevSiteForm extends Component {
             </form>
 
             <h2>{i18n.meetings}</h2>
-
-            <MeetingList
-              devSite={ devSite }
-            />
-            <MeetingForm
-              devSite={ devSite }
-              handleSave={ this.handleSave }
-              handleDelete={ this.handleDelete }
-              error={ this.state.error }
-            />
+            {
+              devSite.id &&
+              <MeetingSection
+                devSite={ devSite }
+              />
+            }
           </div>
         }
       </Dashboard>
@@ -393,11 +412,14 @@ export default class DevSiteForm extends Component {
 
 document.addEventListener('turbolinks:load', () => {
   const devSiteForm = document.querySelector('#dev-site-form');
+  const applicationTypes = JSON.parse(devSiteForm.dataset.applicationTypes);
+  const statuses = JSON.parse(devSiteForm.dataset.statuses);
+
   if (devSiteForm) {
     render(
       <DevSiteForm
-        applicationTypes={ devSiteForm.dataset.applicationTypes }
-        statuses={ devSiteForm.dataset.statuses }
+        applicationTypes={ applicationTypes }
+        statuses={ statuses }
       />, devSiteForm)
   }
 })

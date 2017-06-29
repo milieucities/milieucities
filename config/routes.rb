@@ -41,6 +41,7 @@ Rails.application.routes.draw do
         get :reject, to: 'comments#destroy'
         get :children, to: 'comments#children'
       end
+      resources :meetings, only: [:create, :edit, :destroy]
     end
 
     resources :organizations, only: [:index, :show, :update, :create, :destroy] do
