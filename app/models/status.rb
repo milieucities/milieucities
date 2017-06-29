@@ -1,12 +1,13 @@
 class Status < ActiveRecord::Base
   scope :current, -> { order(status_date: :desc).first }
   belongs_to :dev_site, foreign_key: 'dev_site_id'
+  belongs_to :municipality, foreign_key: 'municipality_id'
   scope :current, -> { order(status_date: :desc).first }
 
   validates :status, presence: { message: 'Status is required' }
   validates :status_date, presence: { message: 'Status date is required' }
 
-  VALID_STATUS_TYPES = [
+  OTTAWA_STATUSES = [
     'Unknown',
     'Application File Pending',
     'Application Reactivated',
@@ -79,6 +80,13 @@ class Status < ActiveRecord::Base
       'Zoning By-law in Effect'
     ]
   }.freeze
+
+  GUELPH_STATUSES = [
+    'Application Complete, Comment Period Open',
+    'Planning Review Stage',
+    'Revision',
+    'Decision'
+  ].freeze
 
   def general_status
     GENERAL_STATUS.each do |key, array|

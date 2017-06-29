@@ -26,6 +26,8 @@ class DevSitesController < ApplicationController
   end
 
   def edit
+    @application_types = ApplicationType::VALID_APPLICATION_TYPES
+    @statuses = @dev_site.valid_statuses
     @no_header = true
   end
 
@@ -105,7 +107,7 @@ class DevSitesController < ApplicationController
         application_types_attributes: [
           :id,
           :name,
-          :_destroy,
+          :_destroy
         ],
         meetings_attributes:
         [
@@ -115,13 +117,13 @@ class DevSitesController < ApplicationController
           :time,
           :date,
           :location,
-          :_destroy,
+          :_destroy
         ],
         statuses_attributes: [
           :id,
           :status,
           :status_date,
-          :_destroy,
+          :_destroy
         ],
         addresses_attributes: [
           :id,
@@ -129,7 +131,7 @@ class DevSitesController < ApplicationController
           :city,
           :province_state,
           :country,
-          :_destroy,
+          :_destroy
         ],
         images: [],
         files: [],

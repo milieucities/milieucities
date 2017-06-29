@@ -145,6 +145,8 @@ export default class DevSiteForm extends Component {
     const hasAddress = devSite.addresses && devSite.addresses.length > 0
     const hasStatus = devSite.statuses && devSite.statuses.length > 0
     i18n.setLanguage(document.body.dataset.locale);
+    const applicationTypes = JSON.parse(this.props.applicationTypes);
+    const statuses = JSON.parse(this.props.statuses);
 
     return(
       <Dashboard loading={loadingMunicipalities || loadingDevSite} activeComponent='manage_dev_site'>
@@ -197,7 +199,7 @@ export default class DevSiteForm extends Component {
                       name='dev_site[application_types_attributes][0][name]'
                       label={i18n.applicationType}
                       defaultValue={devSite.application_type_name}
-                      options={APPLICATION_TYPES.map(a => [a,a])}
+                      options={applicationTypes.map(a => [a,a])}
                       />
                   </div>
 
@@ -404,7 +406,7 @@ export default class DevSiteForm extends Component {
                       name='dev_site[statuses_attributes][0][status]'
                       label={i18n.status}
                       defaultValue={hasStatus ? devSite.status[0].status : ''}
-                      options={STATUSES.map(s => [s,s])}
+                      options={statuses.map(s => [s,s])}
                       />
 
                     <div className='input-field col s12'>
@@ -492,5 +494,11 @@ export default class DevSiteForm extends Component {
 
 document.addEventListener('turbolinks:load', () => {
   const devSiteForm = document.querySelector('#dev-site-form');
-  devSiteForm && render(<DevSiteForm/>, devSiteForm)
+  if (devSiteForm) {
+    render(
+      <DevSiteForm
+        applicationTypes={ devSiteForm.dataset.applicationTypes }
+        statuses={ devSiteForm.dataset.statuses }
+      />, devSiteForm)
+  }
 })

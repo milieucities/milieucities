@@ -23,7 +23,7 @@ class DevSite < ActiveRecord::Base
     'Additions'
   ].freeze
 
-  belongs_to :municipality
+  belongs_to :municipality, foreign_key: 'municipality_id'
   belongs_to :ward
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
@@ -76,6 +76,12 @@ class DevSite < ActiveRecord::Base
     return if statuses.empty?
     return nil unless statuses.current.status_date
     statuses.current.status_date.strftime('%B %e, %Y')
+  end
+
+  def valid_statuses
+    city = municipality.name
+    status_set = "#{city.upcase}_STATUSES"
+    Status.const_get(status_set)
   end
 
   def street
