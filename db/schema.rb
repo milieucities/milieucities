@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628204750) do
+ActiveRecord::Schema.define(version: 20170629020944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,12 +280,13 @@ ActiveRecord::Schema.define(version: 20170628204750) do
   add_index "sentiments", ["sentimentable_type", "sentimentable_id"], name: "index_sentiments_on_sentimentable_type_and_sentimentable_id", using: :btree
 
   create_table "statuses", force: :cascade do |t|
-    t.datetime "status_date"
+    t.datetime "start_date"
     t.string   "status"
     t.datetime "created"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "dev_site_id"
+    t.datetime "end_date"
   end
 
   create_table "survey_responses", force: :cascade do |t|

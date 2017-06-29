@@ -9,7 +9,9 @@ child(@dev_sites) {
 
   child(:addresses) { attributes :id, :street }
 
-  child(:statuses) { attributes :id, :status, :status_date }
+  child(:statuses) { attributes :id, :status, :start_date, :end_date }
 
   child(:comments) { attributes :id, :body }
+
+  child(:meetings) { attributes :id, :title, :date, :time, :meeting_type, :location }
 }

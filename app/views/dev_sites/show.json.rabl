@@ -32,3 +32,5 @@ child(:statuses) { attributes :id, :status, :friendly_status_date }
 child :sentiment do
   attributes :anger, :disgust, :sadness, :joy, :fear, :id
 end
+
+child(:meetings) { attributes :id, :title, :date, :time, :meeting_type, :location }
