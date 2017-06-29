@@ -85,13 +85,14 @@ export default class DevSiteShow extends Component {
           {
             !loading &&
             <div>
-              <h3 className={css.status}>{latestStatus}</h3>
+              <div>
+                <h3 className={css.status}>{latestStatus}</h3>
                   <div className='row'>
                     <div className='col m12 s4'>
                       <img src={devSite.image_url} className={css.image} />
                       <h3>{devSite.address}</h3>
                       {i18n.devId}: {devSite.devID} <br/>
-                      {devSite.application_type.replace(/coa/, 'Committee of Adjustment')} <br/>
+                      {devSite.application_type_name.replace(/coa/, 'Committee of Adjustment')} <br/>
 
                       <div>
                           <Tabs>
