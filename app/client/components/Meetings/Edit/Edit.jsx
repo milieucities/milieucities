@@ -13,7 +13,7 @@ const MEETING_TYPES = [
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    const meetingDate = this.props.meeting ? moment(this.props.meeting.date).utc() : null
+    const meetingDate = this.props.meeting && this.props.meeting.date ? moment(this.props.meeting.date).utc() : null
     this.state = { meetingDate };
     this.handleMeetingDate = (d) => this._handleMeetingDate(d)
     this.onDelete = (e) => this._onDelete(e)

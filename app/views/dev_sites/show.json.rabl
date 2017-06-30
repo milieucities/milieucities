@@ -28,7 +28,7 @@ child(:city_files) { attributes :id, :link, :name }
 child :statuses do
   attributes :id, :status, :start_date, :end_date, :send_notification_at
   child(:meeting) { attributes :id, :title, :date, :time, :meeting_type, :location }
-  child(notice: :notice) do
+  child(:notice, if: lambda { |status| status.notice.url }) do
     attributes :url
 
     node :name do |f|

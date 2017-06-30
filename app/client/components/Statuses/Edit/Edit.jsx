@@ -9,9 +9,9 @@ import moment from 'moment'
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    const startDate = this.props.status ? moment(this.props.status.start_date).utc() : null
-    const endDate = this.props.status ? moment(this.props.status.end_date).utc() : null
-    const scheduledOn = this.props.status ? moment(this.props.status.send_notification_at).utc() : null
+    const startDate = this.props.status && this.props.status.start_date ? moment(this.props.status.start_date).utc() : null
+    const endDate = this.props.status && this.props.status.end_date ? moment(this.props.status.end_date).utc() : null
+    const scheduledOn = this.props.status && this.props.status.send_notification_at ? moment(this.props.status.send_notification_at).utc() : null
     this.state = { startDate, endDate, scheduledOn };
     this.handleStartDate = (d) => this._handleStartDate(d)
     this.handleEndDate = (d) => this._handleEndDate(d)
@@ -83,15 +83,15 @@ export default class Edit extends Component {
 
               <div className='row'>
                 {
-                  this.props.status.notice &&
+                  this.props.status.filesuploader &&
                   <div className='col s12 m12 l6'>
                     <label htmlFor='status_notice'>{i18n.notice}</label>
-                    <p><a href={this.props.status.notice.url}>{i18n.uploadedDocument}</a></p>
+                    <p><a href={this.props.status.filesuploader.url}>{i18n.uploadedDocument}</a></p>
                   </div>
                 }
 
                 {
-                  !this.props.status.notice &&
+                  !this.props.status.filesuploader &&
                   <div className='file-field input-field col s12 m12 l6'>
                     <label htmlFor='status_notice'>{i18n.notice}</label>
                     <input type='file' name='status[notice]' id='status_notice' />
