@@ -5,4 +5,5 @@ class Meeting < ActiveRecord::Base
   ].freeze
 
   belongs_to :dev_site
+  belongs_to :status
 end

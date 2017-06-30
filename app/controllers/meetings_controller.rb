@@ -1,6 +1,7 @@
 class MeetingsController < ApplicationController
   load_resource :dev_site
-  load_and_authorize_resource :meeting, through: :dev_site
+  load_resource :status, through: :dev_site
+  load_and_authorize_resource :meeting, through: :status, :singleton => true
 
   def create
     respond_to do |format|

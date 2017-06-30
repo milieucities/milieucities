@@ -1,10 +1,15 @@
 class Status < ActiveRecord::Base
+  mount_uploader :notice, FilesUploader
+
   scope :current, -> { order(start_date: :desc).first }
   belongs_to :dev_site, foreign_key: 'dev_site_id'
   belongs_to :municipality, foreign_key: 'municipality_id'
+  has_one :meeting, dependent: :destroy
 
   validates :status, presence: { message: 'Status is required' }
   validates :start_date, presence: { message: 'Status date is required' }
+
+  accepts_nested_attributes_for :meeting, allow_destroy: true
 
   OTTAWA_STATUSES = [
     'Unknown',

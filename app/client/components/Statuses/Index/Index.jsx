@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Collapse, { Panel } from 'rc-collapse'
-import Edit from '../Edit/Edit'
+import EditStatus from '../Edit/Edit'
+import EditMeeting from '../../Meetings/Edit/Edit'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from '../../DevSites/Form/locale.js'
 
@@ -18,7 +19,9 @@ export default class Index extends Component {
     this.setState({ activeKey });
   }
 
+
   render() {
+    console.log(this.props.statuses)
     return(
       <Collapse
         accordion={true}
@@ -27,8 +30,13 @@ export default class Index extends Component {
       {
         this.props.statuses.map(status => (
           <Panel header={status.status} key={`status-${status.id}`}>
-            <Edit
+            <EditStatus
               { ...this.props }
+              status={ status }
+            />
+            <EditMeeting
+              { ...this.props }
+              meeting={ status.meeting }
               status={ status }
             />
           </Panel>

@@ -4,7 +4,6 @@ import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
 import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
-import MeetingSection from '../../Meetings/Index/MeetingSection'
 import StatusSection from '../../Statuses/Index/StatusSection'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
@@ -338,13 +337,24 @@ export default class DevSiteForm extends Component {
                   <div className='row'>
                     <TextInputWithLabel
                       classes='col s12 m12 l6'
-                      id='dev_site_applicant'
-                      name='dev_site[applicant]'
-                      defaultValue={devSite.applicant}
-                      label={i18n.applicant}
+                      id='dev_site_applicant_first_name'
+                      name='dev_site[applicant_first_name]'
+                      defaultValue={devSite.applicant_first_name}
+                      label={i18n.applicantFirstName}
                       />
+
                     <TextInputWithLabel
                       classes='col s12 m12 l6'
+                      id='dev_site_applicant_last_name'
+                      name='dev_site[applicant_last_name]'
+                      defaultValue={devSite.applicant_last_name}
+                      label={i18n.applicantLastName}
+                      />
+                  </div>
+
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12'
                       id='dev_site_on_behalf_of'
                       name='dev_site[on_behalf_of]'
                       defaultValue={devSite.on_behalf_of}
@@ -396,16 +406,6 @@ export default class DevSiteForm extends Component {
                 <input type='submit' value={i18n.save} className='btn submit' />
               </div>
             </form>
-
-            {
-              devSite.id &&
-              <div>
-                <h2>{i18n.meetings}</h2>
-                <MeetingSection
-                  devSite={ devSite }
-                />
-              </div>
-            }
 
             {
               devSite.id &&
