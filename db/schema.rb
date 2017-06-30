@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630045239) do
+ActiveRecord::Schema.define(version: 20170630151416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,11 +140,11 @@ ActiveRecord::Schema.define(version: 20170630045239) do
     t.boolean  "featured",              default: false
     t.string   "short_description"
     t.datetime "active_at"
-    t.string   "applicant_first_name"
-    t.string   "applicant_last_name"
     t.string   "on_behalf_of"
     t.string   "urban_planner_name"
     t.string   "url_full_notice"
+    t.string   "applicant_first_name"
+    t.string   "applicant_last_name"
   end
 
   create_table "dev_sites_to_application_types", force: :cascade do |t|
