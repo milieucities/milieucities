@@ -138,13 +138,21 @@ ActiveRecord::Schema.define(version: 20170629020944) do
     t.integer  "municipality_id"
     t.integer  "ward_id"
     t.boolean  "featured",              default: false
+    t.string   "short_description"
     t.datetime "active_at"
-    t.string   "applicant"
+    t.string   "applicant_first_name"
+    t.string   "applicant_last_name"
     t.string   "on_behalf_of"
     t.string   "urban_planner_name"
     t.string   "url_full_notice"
-    t.string   "short_description"
   end
+
+  create_table "dev_sites_to_application_types", force: :cascade do |t|
+    t.integer "dev_site_id"
+    t.integer "application_type_id"
+  end
+
+  add_index "dev_sites_to_application_types", ["application_type_id"], name: "index_dev_sites_to_application_types_on_application_type_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "title"

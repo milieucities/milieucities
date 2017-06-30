@@ -5,18 +5,23 @@ module Services
       'FOLDERNAME' => 'title',
       'FOLDERDESC' => 'application_type',
       'REFERENCEF' => 'devID',
-      'INDATE' => 'received_date',
+      'INDATE' => 'status_date',
       'SUBDESC' => 'build_type',
       'STATUSDESC' => 'status',
-      'FOLDERDE_1' => 'description',
+      'FOLDERDE_1' => 'short_description',
       'USERNAME' => 'urban_planner_name',
       'EMAILADDRE' => 'urban_planner_email',
-      'ORGANIZATI' => 'on_behalf_of'
+      'ORGANIZATI' => 'on_behalf_of',
+      'WARD' => 'ward',
+      'MUNICIPALITY' => 'municipality',
+      'NAMEFIRST' => 'applicant_first_name',
+      'NAMELAST' => 'applicant_last_name',
+
     }.freeze
 
-    ASSOCIATIONS_TO_UPDATE = %w(application_type status address).freeze
+    ASSOCIATIONS_TO_UPDATE = %w(application_type status address ward municipality).freeze
 
-    ATTRIBUTES_TO_UPDATE = %w(title date_received build_type description urban_planner_name urban_planner_email on_behalf_of).freeze
+    ATTRIBUTES_TO_UPDATE = %w(title build_type short_description urban_planner_name urban_planner_email on_behalf_of applicant_first_name applicant_last_name).freeze
 
     def initialize(csv_file)
       @lines = read_csv(csv_file).delete_if(&:empty?)
@@ -52,32 +57,38 @@ module Services
 
     def update_dev_site_attributes(dev_site, site_params)
       attributes_to_update = site_params.slice(*ATTRIBUTES_TO_UPDATE)
-      guelph = Municipality.find_by(name: 'Guelph')
-      ward = Ward.find_or_create_by(name: '[N/A]')
-      attributes_to_update[:municipality_id] = guelph.id
-      attributes_to_update[:ward_id] = ward.id
 
       dev_site.update_attributes(attributes_to_update)
     end
 
     def update_dev_site_associations(dev_site, site_params)
-      associations_to_update = site_params.slice(*ASSOCIATIONS_TO_UPDATE)
-
       ASSOCIATIONS_TO_UPDATE.each do |association|
-        send("update_#{association}", dev_site, associations_to_update[association])
+        send("update_#{association}", dev_site, site_params)
       end
     end
 
-    def update_application_type(dev_site, name)
-      dev_site.application_types << ApplicationType.create(name: name)
+    def update_application_type(dev_site, site_params)
+      dev_site.application_types << ApplicationType.create(name: site_params['application_type'])
     end
 
     def update_status(dev_site, status)
-      dev_site.statuses << Status.create(status: status, status_date: DateTime.current)
+      dev_site.statuses << Status.create(status: site_params['status'], start_date: site_params[
+        'status_date'] )
     end
 
-    def update_address(dev_site, address)
-      dev_site.addresses << Address.create(street: "#{address.titleize}, Guelph, ON")
+    def update_address(dev_site, site_params)
+      address = site_params['address'].titleize
+      dev_site.addresses << Address.create(street: "#{address}, Guelph, ON")
+    end
+
+    def update_ward(dev_site, site_params)
+      ward = Ward.find_or_create_by(name: site_params['ward'])
+      dev_site.update_attributes(ward_id: ward.id)
+    end
+
+    def update_municipality(dev_site, site_params)
+      municipality = Municipality.find_or_create_by(name: site_params['municipality'])
+      dev_site.update_attributes(municipality_id: municipality.id)
     end
   end
 end
