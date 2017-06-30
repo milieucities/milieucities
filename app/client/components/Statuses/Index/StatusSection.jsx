@@ -9,11 +9,13 @@ export default class StatusSection extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleSave = (d,m) => this._handleSave(d,m);
-    this.handleDelete = (m) => this._handleDelete(m);
+    this.handleSaveStatus = (d,m) => this._handleSaveStatus(d,m);
+    this.handleDeleteStatus = (m) => this._handleDeleteStatus(m);
+    this.handleSaveMeeting = (d,m) => this._handleSaveMeeting(d,m);
+    this.handleDeleteMeeting = (m) => this._handleDeleteMeeting(m);
   }
 
-  _handleSave(data, statusId) {
+  _handleSaveStatus(data, statusId) {
     const { locale } = document.body.dataset;
     let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses`, 'POST'];
 
@@ -40,7 +42,7 @@ export default class StatusSection extends Component {
     });
   }
 
-  _handleDelete(statusId) {
+  _handleDeleteStatus(statusId) {
     const { locale } = document.body.dataset;
     let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}`, 'DELETE'];
 
@@ -49,6 +51,54 @@ export default class StatusSection extends Component {
       type,
       dataType: 'JSON',
       success: status => {
+        window.flash('notice', 'Successfully deleted!')
+        Turbolinks.visit(`/${locale}/dev_sites/${this.props.devSite.id}`);
+      },
+      error: error => {
+        window.flash('alert', 'Failed to delete!')
+        this.setState({ error: error.responseJSON })
+      }
+    });
+  }
+
+
+  _handleSaveMeeting(data, statusId, meetingId) {
+
+    const { locale } = document.body.dataset;
+    let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}/meetings`, 'POST'];
+
+    if(meetingId) {
+      [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}/meetings/${meetingId}`, 'PATCH']
+    }
+
+    $.ajax({
+      url,
+      type,
+      data,
+      dataType: 'JSON',
+      contentType: false,
+      processData: false,
+      success: meeting => {
+        window.flash('notice', 'Successfully saved!')
+        Turbolinks.visit(`/${locale}/dev_sites/${this.props.devSite.id}`);
+      },
+      error: error => {
+        window.flash('alert', 'Failed to save!')
+        console.log(error.responseJSON)
+        this.setState({ error: error.responseJSON })
+      }
+    });
+  }
+
+  _handleDeleteMeeting(statusId, meetingId) {
+    const { locale } = document.body.dataset;
+    let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}/meetings/${meetingId}`, 'DELETE'];
+
+    $.ajax({
+      url,
+      type,
+      dataType: 'JSON',
+      success: meeting => {
         window.flash('notice', 'Successfully deleted!')
         Turbolinks.visit(`/${locale}/dev_sites/${this.props.devSite.id}`);
       },
@@ -68,14 +118,16 @@ export default class StatusSection extends Component {
         <Index
           { ...this.props }
           statuses={ statuses }
-          handleSave={ this.handleSave }
-          handleDelete={ this.handleDelete }
+          handleSaveStatus={ this.handleSaveStatus }
+          handleDeleteStatus={ this.handleDeleteStatus }
+          handleSaveMeeting={ this.handleSaveMeeting }
+          handleDeleteMeeting={ this.handleDeleteMeeting }
         />
         <Edit
           { ...this.props }
           status={ {} }
-          handleSave={ this.handleSave }
-          handleDelete={ this.handleDelete }
+          handleSaveStatus={ this.handleSaveStatus }
+          handleDeleteStatus={ this.handleDeleteStatus }
           error={ this.state.error }
         />
       </div>

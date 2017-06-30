@@ -26,13 +26,14 @@ export default class Edit extends Component {
 
   _onDelete(e) {
     e.preventDefault();
-    this.props.handleDelete(this.props.meeting.id);
+    this.props.handleDeleteMeeting(this.props.status.id, this.props.meeting.id);
   }
 
   _onSave(e) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    this.props.handleSave(data, this.props.meeting.id);
+    const meetingId = this.props.meeting ? this.props.meeting.id : null;
+    this.props.handleSaveMeeting(data, this.props.status.id, meetingId);
   }
 
 
@@ -92,7 +93,7 @@ export default class Edit extends Component {
               </div>
 
               {
-                this.props.meeting.id &&
+                this.props.meeting &&
                 <div className="col">
                   <button className='btn cancel' onClick={this.onDelete}>Delete</button>
                 </div>

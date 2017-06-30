@@ -32,6 +32,22 @@ class StatusesController < ApplicationController
   private
 
   def status_params
-    params.require(:status).permit(:id, :status, :start_date, :end_date, :_destroy)
+    params.require(:status)
+    .permit(:id,
+            :status,
+            :start_date,
+            :end_date,
+            :notice,
+            :_destroy,
+            meeting_attributes:
+            [
+              :id,
+              :meeting_type,
+              :title,
+              :time,
+              :date,
+              :location,
+              :_destroy
+            ])
   end
 end

@@ -4,7 +4,6 @@ import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
 import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
-import MeetingSection from '../../Meetings/Index/MeetingSection'
 import StatusSection from '../../Statuses/Index/StatusSection'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
@@ -407,16 +406,6 @@ export default class DevSiteForm extends Component {
                 <input type='submit' value={i18n.save} className='btn submit' />
               </div>
             </form>
-
-            {
-              devSite.id &&
-              <div>
-                <h2>{i18n.meetings}</h2>
-                <MeetingSection
-                  devSite={ devSite }
-                />
-              </div>
-            }
 
             {
               devSite.id &&

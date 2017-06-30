@@ -74,7 +74,6 @@ export default class DevSiteShow extends Component {
   render() {
     const { devSite, loading, showModal, contact } = this.state;
     const { locale } = document.body.dataset;
-    console.log('devSite', devSite );
     const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
     i18n.setLanguage(locale);
     return(
@@ -98,8 +97,8 @@ export default class DevSiteShow extends Component {
                           <Tabs>
                             <TabList>
                               <Tab>{i18n.description}</Tab>
-                              <Tab>Attachments</Tab>
-                              <Tab>Notices</Tab>
+                              <Tab>{i18n.attachments}</Tab>
+                              <Tab>{i18n.notices}</Tab>
                             </TabList>
 
                             <TabPanel>
@@ -131,6 +130,19 @@ export default class DevSiteShow extends Component {
                               }
                             </TabPanel>
                             <TabPanel>
+                              <h3 className={css.description}>{i18n.notices}</h3>
+                              {
+                                devSite.statuses &&
+                                devSite.statuses.map((status, i) => {
+                                  if (status.notice) {
+                                    return(
+                                      <div key={i}>
+                                        <a href={status.notice.link} target='_blank' className={css.filelink}>{status.notice.name}</a>
+                                      </div>
+                                    )
+                                  }
+                                })
+                              }
                             </TabPanel>
                           </Tabs>
                      </div>
