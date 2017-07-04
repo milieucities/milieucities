@@ -99,7 +99,7 @@ export default class Edit extends Component {
                 }
 
                 <div className='input-field col s12 m12 l6'>
-                  <label htmlFor='end_date'>{i18n.scheduledOn}</label>
+                  <label htmlFor='send_notification_at'>{i18n.scheduledOn}</label>
                   <DatePicker selected={this.state.scheduledOn} dateFormat='MMMM DD, YYYY' utcOffset={-12} name='status[send_notification_at]' onChange={this.handleScheduledOn} />
                   {
                     this.props.error &&

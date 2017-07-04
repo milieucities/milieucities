@@ -86,32 +86,6 @@ export default class DevSiteForm extends Component {
     this.setState({ meetingDate: date });
   }
 
-  _handleSaveMeeting(data, meetingId) {
-    const { locale } = document.body.dataset;
-    let [url, type] = [`/dev_sites/${this.state.devSiteId}/meetings`, 'POST'];
-
-    if(meetingId) {
-      [url, type] = [`/dev_sites/${this.state.devSiteId}/meeting/${meetinId}`, 'PATCH']
-    }
-
-    $.ajax({
-      url,
-      type,
-      data,
-      dataType: 'JSON',
-      contentType: false,
-      processData: false,
-      success: devSite => {
-        window.flash('notice', 'Successfully saved!')
-        Turbolinks.visit(`/${locale}/dev_sites/${devSite.id}`);
-      },
-      error: error => {
-        window.flash('alert', 'Failed to save!')
-        this.setState({ error: error.responseJSON })
-      }
-    });
-  }
-
   _handleSubmit(e) {
     e.preventDefault();
     const { locale } = document.body.dataset;
