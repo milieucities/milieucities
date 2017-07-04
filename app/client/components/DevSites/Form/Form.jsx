@@ -150,8 +150,18 @@ export default class DevSiteForm extends Component {
         {
           !loadingMunicipalities && !loadingDevSite &&
           <div className={css.content}>
-            <h2>{i18n.developmentSite}</h2>
+            {
+              devSite.id &&
+              <div>
+                <h2>{i18n.statuses}</h2>
+                <StatusSection
+                  devSite={ devSite }
+                  statusOptions={ this.props.statusOptions }
+                />
+              </div>
+            }
 
+            <h2>{i18n.developmentSite}</h2>
             <form encType='multipart/form-data' id='new-form' onSubmit={this.handleSubmit} acceptCharset='UTF-8'>
               <div className={css.meta}>
                 <div className={css.label}>
@@ -406,17 +416,6 @@ export default class DevSiteForm extends Component {
                 <input type='submit' value={i18n.save} className='btn submit' />
               </div>
             </form>
-
-            {
-              devSite.id &&
-              <div>
-                <h2>{i18n.statuses}</h2>
-                <StatusSection
-                  devSite={ devSite }
-                  statusOptions={ this.props.statusOptions }
-                />
-              </div>
-            }
           </div>
         }
       </Dashboard>
