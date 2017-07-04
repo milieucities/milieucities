@@ -144,7 +144,7 @@ class DevSitesController < ApplicationController
   end
 
   def allow_iframe
-    response.headers.except! 'X-Frame-Options'
+    response.headers.delete 'X-Frame-Options'
     # response.headers['X-Frame-Options'] = 'ALLOW-FROM http://guelph.ca'
   end
 end
