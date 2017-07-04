@@ -111,7 +111,12 @@ export default class Edit extends Component {
               <div className="col">
                 <input type='submit' value={i18n.save} className='btn submit' />
               </div>
-
+              {
+                !this.props.status.id &&
+                <div className="col">
+                  <button className='btn cancel' onClick={this.props.toggleStatusForm}>Cancel</button>
+                </div>
+              }
               {
                 this.props.status.id &&
                 <div className="col">

@@ -8,11 +8,12 @@ import i18n from '../../DevSites/Form/locale.js'
 export default class StatusSection extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { openStatusForm: false };
     this.handleSaveStatus = (d,m) => this._handleSaveStatus(d,m);
     this.handleDeleteStatus = (m) => this._handleDeleteStatus(m);
     this.handleSaveMeeting = (d,m) => this._handleSaveMeeting(d,m);
     this.handleDeleteMeeting = (m) => this._handleDeleteMeeting(m);
+    this.toggleStatusForm = () => this._toggleStatusForm();
   }
 
   _handleSaveStatus(data, statusId) {
@@ -109,6 +110,10 @@ export default class StatusSection extends Component {
     });
   }
 
+  _toggleStatusForm() {
+    this.setState({ openStatusForm: !this.state.openStatusForm });
+  }
+
   render() {
     console.log('this.props.devSite', this.props.devSite)
     const statuses = this.props.devSite.statuses || [];
@@ -123,13 +128,23 @@ export default class StatusSection extends Component {
           handleSaveMeeting={ this.handleSaveMeeting }
           handleDeleteMeeting={ this.handleDeleteMeeting }
         />
-        <Edit
-          { ...this.props }
-          status={ {} }
-          handleSaveStatus={ this.handleSaveStatus }
-          handleDeleteStatus={ this.handleDeleteStatus }
-          error={ this.state.error }
-        />
+        {
+          !this.state.openStatusForm &&
+          <div className="col">
+            <button onClick={this.toggleStatusForm} className='btn'>Add Status</button>
+          </div>
+        }
+        {
+          this.state.openStatusForm &&
+          <Edit
+            { ...this.props }
+            status={ {} }
+            handleSaveStatus={ this.handleSaveStatus }
+            handleDeleteStatus={ this.handleDeleteStatus }
+            toggleStatusForm={ this.toggleStatusForm }
+            error={ this.state.error }
+          />
+        }
       </div>
     )
   }

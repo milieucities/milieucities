@@ -24,6 +24,7 @@ export default class Index extends Component {
     console.log(this.props.statuses)
     return(
       <Collapse
+        className={css.collapse}
         accordion={true}
         activeKey={this.state.activeKey}
         onChange={this.onAccordionChange}>
