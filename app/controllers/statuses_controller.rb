@@ -37,6 +37,7 @@ class StatusesController < ApplicationController
             :status,
             :start_date,
             :end_date,
+            :send_notification_at,
             :notice,
             :_destroy,
             meeting_attributes:
