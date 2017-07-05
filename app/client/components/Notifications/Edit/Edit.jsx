@@ -15,25 +15,25 @@ export default class Edit extends Component {
   }
 
   _loadNotification() {
-    $.getJSON(`/users/${document.body.dataset.userSlug}/notification`,
-      notification => this.setState({ notification, loading: false })
+    $.getJSON(`/users/${document.body.dataset.userSlug}/notification_setting`,
+      notification_setting => this.setState({ notification_setting, loading: false })
     );
   }
 
   _submitForm(e) {
-    const form = new FormData(document.querySelector('#notification-form'));
+    const form = new FormData(document.querySelector('#notification-setting-form'));
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
 
     $.ajax({
-      url: `/users/${document.body.dataset.userSlug}/notification`,
+      url: `/users/${document.body.dataset.userSlug}/notification_setting`,
       dataType: 'JSON',
       type: 'PATCH',
       contentType: false,
       processData: false,
       data: form,
-      success: notification => {
-        this.setState({ notification, error: {}});
+      success: notification_setting => {
+        this.setState({ notification_setting, error: {}});
         window.flash('notice', i18n.notiUpdateS);
       },
       error: error => {
@@ -44,11 +44,11 @@ export default class Edit extends Component {
   }
 
   render() {
-    const { notification, loading, error } = this.state;
+    const { notification_setting, loading, error } = this.state;
     i18n.setLanguage(document.body.dataset.locale);
 
     return(
-      <Dashboard loading={loading} activeComponent='notification'>
+      <Dashboard loading={loading} activeComponent='notification_setting'>
         {
           !loading &&
           <div className={css.content}>
@@ -63,15 +63,15 @@ export default class Edit extends Component {
                   <div className='input-field col s12'>
                     {i18n.emailQ1}
                   </div>
-                  <form id='notification-form'>
+                  <form id='notification-setting-form'>
                     <div className='input-field col s12'>
-                      <input type='hidden' name='notification[updated_dev_site_near_me]' value={false} />
-                      <input type='checkbox' defaultChecked={notification.updated_dev_site_near_me} id='notification_updated_dev_site_near_me' name='notification[updated_dev_site_near_me]'/>
+                      <input type='hidden' name='notification_setting[updated_dev_site_near_me]' value={false} />
+                      <input type='checkbox' defaultChecked={notification_setting.updated_dev_site_near_me} id='notification_updated_dev_site_near_me' name='notification_setting[updated_dev_site_near_me]'/>
                       <label htmlFor='notification_updated_dev_site_near_me'>{i18n.emailQ1S1}</label>
                     </div>
                     <div className='input-field col s12'>
-                      <input type='hidden' name='notification[newletter]' value={false} />
-                      <input type='checkbox' defaultChecked={notification.newletter} id='notification_newsletter' name='notification[newletter]'/>
+                      <input type='hidden' name='notification_setting[newletter]' value={false} />
+                      <input type='checkbox' defaultChecked={notification_setting.newletter} id='notification_newsletter' name='notification_setting[newletter]'/>
                       <label htmlFor='notification_newsletter'>{i18n.emailQ1S2}</label>
                     </div>
                   </form>

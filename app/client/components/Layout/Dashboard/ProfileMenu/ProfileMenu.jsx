@@ -10,7 +10,7 @@ export default class ProfileMenu extends Component {
     const sections = [
       { title: 'dashboard', path: `/${locale}/users/${userSlug}` },
       { title: 'settings', path: `/${locale}/users/${userSlug}/edit` },
-      { title: 'notification', path: `/${locale}/users/${userSlug}/notification/edit` },
+      { title: 'notification_setting', path: `/${locale}/users/${userSlug}/notification_setting/edit` },
       {
         title: 'manage_dev_site',
         path: `/${locale}/organizations/${userPrimaryOrganizationId}/dev_sites`,

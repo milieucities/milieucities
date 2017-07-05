@@ -43,7 +43,7 @@ class Ability
     can :read, Event
     can [:new, :create, :update, :edit, :destroy, :show], User, id: user.id
     can :manage, Profile, user_id: user.id
-    can :manage, Notification, user_id: user.id
+    can :manage, NotificationSetting, user_id: user.id
     can :manage, Comment, user_id: user.id
     can :read, Comment
     can :manage, Vote, user_id: user.id
