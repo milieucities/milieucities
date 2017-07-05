@@ -9,13 +9,13 @@ import moment from 'moment'
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    const startDate = this.props.status && this.props.status.start_date ? moment(this.props.status.start_date).utc() : null
-    const endDate = this.props.status && this.props.status.end_date ? moment(this.props.status.end_date).utc() : null
-    const scheduledOn = this.props.status && this.props.status.send_notification_at ? moment(this.props.status.send_notification_at).utc() : null
-    this.state = { startDate, endDate, scheduledOn };
+    const startDate = this.props.status && this.props.status.start_date ? moment(this.props.status.start_date).utc() : null;
+    const endDate = this.props.status && this.props.status.end_date ? moment(this.props.status.end_date).utc() : null;
+
+    this.state = { startDate, endDate };
+
     this.handleStartDate = (d) => this._handleStartDate(d)
     this.handleEndDate = (d) => this._handleEndDate(d)
-    this.handleScheduledOn = (d) => this._handleScheduledOn(d)
     this.handleSaveMeeting = (d,m) => this._handleSaveMeeting(d,m)
     this.handleDeleteMeeting = (m) => this._handleDeleteMeeting(m)
     this.handleChangeStatusType = (data) => this._handleChangeStatusType(data);
@@ -35,8 +35,8 @@ export default class Edit extends Component {
     this.setState({ scheduledOn: date });
   }
 
-  _handleChangeStatusType(data) {
-    this.setState({ seletedApplicationType: data.value })
+  _handleChangeStatusType(value) {
+    this.setState({ selectedStatus: value })
   }
 
   _onDelete(e) {
@@ -86,45 +86,6 @@ export default class Edit extends Component {
                   <div className='error-message'>{this.props.error['status.start_date']}</div>
                 }
               </div>
-
-              <div className='row'>
-                {
-                  this.props.status.filesuploader &&
-                  <div className='col s12'>
-                    <label htmlFor='status_notice'>{i18n.notice}</label>
-                    <p><a href={this.props.status.filesuploader.url}>{i18n.uploadedDocument}</a></p>
-                  </div>
-                }
-
-                {
-                  !this.props.status.filesuploader &&
-                  <div className='file-field input-field col s12'>
-                    <label htmlFor='status_notice'>{i18n.notice}</label>
-                    <input type='file' name='status[notice]' id='status_notice' />
-                  </div>
-                }
-              </div>
-
-              <div className='row'>
-                <div className='input-field col s12 m12 l6'>
-                  <label htmlFor='send_notification_at'>{i18n.scheduledOn}</label>
-                  <DatePicker selected={this.state.scheduledOn} dateFormat='MMMM DD, YYYY' utcOffset={-12} name='status[send_notification_at]' onChange={this.handleScheduledOn} />
-                  {
-                    this.props.error &&
-                    <div className='error-message'>{this.props.error['status.start_date']}</div>
-                  }
-                </div>
-              </div>
-
-              <SelectWithLabel
-                classes='col s12 m12 l6'
-                id='notification_type'
-                name='status[notification_type]'
-                label={i18n.status}
-                defaultValue={this.props.status.status}
-                options={this.props.statusOptions.map(s => [s,s])}
-                onChange={this.handleChangeStatusType}
-              />
 
               <div className="col">
                 <input type='submit' value={i18n.save} className='btn submit' />

@@ -3,6 +3,7 @@ class StatusesController < ApplicationController
   load_and_authorize_resource :status, through: :dev_site
 
   def create
+    Rails.logger.info "PARAMS => #{params}"
     respond_to do |format|
       if @status.save
         format.json { render json: @status, status: :created }
@@ -13,6 +14,7 @@ class StatusesController < ApplicationController
   end
 
   def update
+    Rails.logger.info "PARAMS => #{params}"
     respond_to do |format|
       if @status.update(status_params)
         format.json { render json: @status, status: :created }
@@ -33,22 +35,10 @@ class StatusesController < ApplicationController
 
   def status_params
     params.require(:status)
-    .permit(:id,
-            :status,
-            :start_date,
-            :end_date,
-            :send_notification_at,
-            :notice,
-            :_destroy,
-            meeting_attributes:
-            [
-              :id,
-              :meeting_type,
-              :title,
-              :time,
-              :date,
-              :location,
-              :_destroy
-            ])
+          .permit(:id,
+                  :status,
+                  :start_date,
+                  :end_date,
+                  :_destroy)
   end
 end

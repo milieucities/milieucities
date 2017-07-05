@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import Collapse, { Panel } from 'rc-collapse'
 import EditStatus from '../Edit/Edit'
 import EditMeeting from '../../Meetings/Edit/Edit'
+import EditNotification from '../../Notifications/Edit/Edit'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from '../../DevSites/Form/locale.js'
 
@@ -38,6 +39,11 @@ export default class Index extends Component {
             <EditMeeting
               { ...this.props }
               meeting={ status.meeting }
+              status={ status }
+            />
+            <EditNotification
+              { ...this.props }
+              notification={ status.notification }
               status={ status }
             />
           </Panel>

@@ -131,6 +131,7 @@ export default class DevSiteForm extends Component {
                 <StatusSection
                   devSite={ devSite }
                   statusOptions={ this.props.statusOptions }
+                  notificationOptions={ this.props.notificationOptions }
                 />
               </div>
             }
@@ -403,11 +404,13 @@ document.addEventListener('turbolinks:load', () => {
   if (devSiteForm) {
     const applicationTypes = JSON.parse(devSiteForm.dataset.applicationTypes);
     const statusOptions = JSON.parse(devSiteForm.dataset.statuses);
+    const notificationOptions = JSON.parse(devSiteForm.dataset.notificationOptions)
 
     render(
       <DevSiteForm
         applicationTypes={ applicationTypes }
         statusOptions={ statusOptions }
+        notificationOptions={ notificationOptions }
       />, devSiteForm)
   }
 })

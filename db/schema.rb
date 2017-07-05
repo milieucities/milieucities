@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705162149) do
+ActiveRecord::Schema.define(version: 20170705184320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,6 +238,18 @@ ActiveRecord::Schema.define(version: 20170705162149) do
 
   add_index "notification_settings", ["user_id"], name: "index_notification_settings_on_user_id", using: :btree
 
+  create_table "notifications", force: :cascade do |t|
+    t.datetime "send_at"
+    t.string   "notification_type"
+    t.string   "notice"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id", using: :btree
+
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -292,12 +304,10 @@ ActiveRecord::Schema.define(version: 20170705162149) do
     t.datetime "start_date"
     t.string   "status"
     t.datetime "created"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "dev_site_id"
     t.datetime "end_date"
-    t.string   "notice"
-    t.datetime "send_notification_at"
   end
 
   create_table "survey_responses", force: :cascade do |t|

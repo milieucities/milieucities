@@ -7,7 +7,7 @@ import './components/DevSites/Form/Form'
 import './components/Legal/Privacy/Privacy'
 import './components/Legal/TermsOfUse/TermsOfUse'
 
-import './components/Notifications/Edit/Edit'
+import './components/NotificationSettings/Edit/Edit'
 
 import './components/Pages/Home/Home'
 import './components/Pages/Wakefield/Wakefield'

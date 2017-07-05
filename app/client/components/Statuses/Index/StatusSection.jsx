@@ -111,9 +111,7 @@ export default class StatusSection extends Component {
   }
 
   render() {
-    console.log('this.props.devSite', this.props.devSite)
     const statuses = this.props.devSite.statuses || [];
-
     return(
       <div>
         <Index
