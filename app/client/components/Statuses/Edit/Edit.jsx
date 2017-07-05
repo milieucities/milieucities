@@ -18,6 +18,7 @@ export default class Edit extends Component {
     this.handleScheduledOn = (d) => this._handleScheduledOn(d)
     this.handleSaveMeeting = (d,m) => this._handleSaveMeeting(d,m)
     this.handleDeleteMeeting = (m) => this._handleDeleteMeeting(m)
+    this.handleChangeStatusType = (data) => this._handleChangeStatusType(data);
     this.onDelete = (d) => this._onDelete(d)
     this.onSave = (d) => this._onSave(d)
   }
@@ -32,6 +33,10 @@ export default class Edit extends Component {
 
   _handleScheduledOn(date) {
     this.setState({ scheduledOn: date });
+  }
+
+  _handleChangeStatusType(data) {
+    this.setState({ seletedApplicationType: data.value })
   }
 
   _onDelete(e) {
@@ -61,6 +66,7 @@ export default class Edit extends Component {
                 label={i18n.status}
                 defaultValue={this.props.status.status}
                 options={this.props.statusOptions.map(s => [s,s])}
+                onChange={this.handleChangeStatusType}
                 />
 
               <div className='input-field col s12 m12 l6'>
@@ -84,7 +90,7 @@ export default class Edit extends Component {
               <div className='row'>
                 {
                   this.props.status.filesuploader &&
-                  <div className='col s12 m12 l6'>
+                  <div className='col s12'>
                     <label htmlFor='status_notice'>{i18n.notice}</label>
                     <p><a href={this.props.status.filesuploader.url}>{i18n.uploadedDocument}</a></p>
                   </div>
@@ -92,12 +98,14 @@ export default class Edit extends Component {
 
                 {
                   !this.props.status.filesuploader &&
-                  <div className='file-field input-field col s12 m12 l6'>
+                  <div className='file-field input-field col s12'>
                     <label htmlFor='status_notice'>{i18n.notice}</label>
                     <input type='file' name='status[notice]' id='status_notice' />
                   </div>
                 }
+              </div>
 
+              <div className='row'>
                 <div className='input-field col s12 m12 l6'>
                   <label htmlFor='send_notification_at'>{i18n.scheduledOn}</label>
                   <DatePicker selected={this.state.scheduledOn} dateFormat='MMMM DD, YYYY' utcOffset={-12} name='status[send_notification_at]' onChange={this.handleScheduledOn} />
@@ -107,6 +115,16 @@ export default class Edit extends Component {
                   }
                 </div>
               </div>
+
+              <SelectWithLabel
+                classes='col s12 m12 l6'
+                id='notification_type'
+                name='status[notification_type]'
+                label={i18n.status}
+                defaultValue={this.props.status.status}
+                options={this.props.statusOptions.map(s => [s,s])}
+                onChange={this.handleChangeStatusType}
+              />
 
               <div className="col">
                 <input type='submit' value={i18n.save} className='btn submit' />
