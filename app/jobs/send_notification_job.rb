@@ -17,7 +17,7 @@ class SendNotificationJob
 
     def send_email(template_name, template_content, message, async, ip_pool, send_at)
       mandrill = Mandrill::API.new(ENV['MANDRILL_API_KEY'])
-      result = mandrill.messages.send message, async, ip_pool, send_at
+      result = mandrill.messages.send_template template_name, template_content, message, async, ip_pool, send_at
       Rails.logger.info "RESULT FROM MANDRILL => #{result}"
     end
   end

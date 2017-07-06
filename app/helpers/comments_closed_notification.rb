@@ -1,0 +1,2 @@
+class CommentsClosedNotification < GenericNotification
+end

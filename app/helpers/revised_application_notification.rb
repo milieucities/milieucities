@@ -1,0 +1,2 @@
+class RevisedApplicationNotification < GenericNotification
+end

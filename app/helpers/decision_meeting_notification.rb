@@ -1,0 +1,2 @@
+class DecisionMeetingNotification < GenericNotification
+end

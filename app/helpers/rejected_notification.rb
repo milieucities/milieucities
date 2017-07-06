@@ -1,0 +1,2 @@
+class RejectedNotification < GenericNotification
+end

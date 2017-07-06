@@ -3,7 +3,7 @@ class GenericNotification
 
   class NotificationError < StandardError; end
 
-  GLOBAL_MERGE_VARS = [:file_number, :date_sent, :application_type, :application_address, :link_to_full_notice]
+  GLOBAL_MERGE_VARS = [:file_number, :date_sent, :application_type, :application_address, :dev_url]
 
   MERGE_VARS = [:recipient_name, :recipient_email]
 
@@ -117,7 +117,7 @@ class GenericNotification
     @dev_site.address
   end
 
-  def link_to_full_notice
+  def dev_url
     @dev_site.url_full_notice
   end
 
