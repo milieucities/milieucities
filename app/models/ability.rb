@@ -36,6 +36,10 @@ class Ability
 
   def organization_admin_abilities(user)
     can :manage, Organization, memberships: { user: { id: user.id } }
+    can :manage, DevSite
+    can :manage, Status
+    can :manage, Meeting
+    can :manage, Notification
   end
 
   def regular_user_abilities(user)

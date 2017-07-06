@@ -139,7 +139,7 @@ class DevSite < ActiveRecord::Base
   end
 
   def application_type_name
-    application_types.last.name
+    application_types.last.name if application_types.any?
   end
 
   private
