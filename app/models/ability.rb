@@ -6,7 +6,7 @@ class Ability
 
     default_abilities
 
-    organization_admin_abilities if user.has_role? :organization_admin
+    organization_admin_abilities(user) if user.has_role? :organization_admin
 
     if user.admin?
       admin_abilities
@@ -34,7 +34,7 @@ class Ability
     can :manage, :all
   end
 
-  def organization_admin_abilities
+  def organization_admin_abilities(user)
     can :manage, Organization, memberships: { user: { id: user.id } }
   end
 

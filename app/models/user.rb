@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   delegate :name, :bio, :web_presence, :anonymous_comments, to: :profile, allow_nil: true
   friendly_id :slug_candidates, use: :slugged
 
-  after_create :create_notification
+  after_create :create_notification_setting
 
   def slug_candidates
     [
