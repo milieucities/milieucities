@@ -48,6 +48,9 @@ class Notification < ActiveRecord::Base
   }.freeze
 
   def send_notification
-    mandrill_email_object = Services::GenerateNotificationForMandrill.call(self)
+    notification_generator = GenerateNotificationForMandrill.new
+    mandrill_email_object = notification_generator.generate(self)
+
+    Resque.enqueue(SendNotificationJob, mandrill_email_object) unless Rails.env.test?
   end
 end

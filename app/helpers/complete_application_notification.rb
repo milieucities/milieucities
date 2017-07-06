@@ -1,0 +1,2 @@
+class CompleteApplicationNotification < GenericNotification
+end

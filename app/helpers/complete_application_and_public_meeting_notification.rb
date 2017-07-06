@@ -1,0 +1,2 @@
+class CompleteApplicationAndPublicMeetingNotification < GenericNotification
+end

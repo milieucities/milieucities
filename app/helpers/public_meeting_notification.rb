@@ -1,0 +1,2 @@
+class PublicMeetingNotification < GenericNotification
+end
