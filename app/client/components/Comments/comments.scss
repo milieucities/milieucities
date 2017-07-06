@@ -36,6 +36,17 @@
   .submitBtn {
     margin-top: 20px;
   }
+
+  .privacy {
+    input + label, label {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 16px;
+      color: $dark-primary-color;
+    }
+  }
 }
 
 .commentCount {
@@ -151,3 +162,4 @@
     padding: 4px;
   }
 }
+
