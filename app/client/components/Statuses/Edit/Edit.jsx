@@ -36,7 +36,7 @@ export default class Edit extends Component {
   }
 
   _handleChangeStatusType(value) {
-    this.setState({ selectedStatus: value })
+    this.props.handleUpdateStatus(value);
   }
 
   _onDelete(e) {

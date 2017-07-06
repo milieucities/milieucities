@@ -4,7 +4,7 @@ import i18n from '../../DevSites/Form/locale.js'
 export default class RadioButtonsWithLabel extends Component {
   constructor(props) {
     super(props)
-    this.state = { selectedOption: null }
+    this.state = { selectedOption: this.props.defaultValue }
     this.handleChange = (e) => this._handleChange(e);
     this.generateRadioButtonGroup = () => this._generateRadioButtonGroup();
   }
@@ -18,7 +18,7 @@ export default class RadioButtonsWithLabel extends Component {
   _generateRadioButtonGroup() {
     return this.props.options.map((option, index) => (
       <div key={index}>
-        <input name={this.props.name} type='radio' value={ option } checked={ option === this.state.selectedOption } onClick={this.handleChange}/>
+        <input name={this.props.name} type='radio' value={ option } checked={ option === this.state.selectedOption } onChange={this.handleChange}/>
         <span className='radio-label'>{ i18n[option] }</span>
       </div>
     ))
@@ -30,6 +30,7 @@ export default class RadioButtonsWithLabel extends Component {
         <label htmlFor={this.props.id}>
           {this.props.label}
         </label>
+        { this.generateRadioButtonGroup() }
       </div>
     )
   }

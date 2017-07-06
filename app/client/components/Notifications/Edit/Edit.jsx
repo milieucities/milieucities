@@ -17,6 +17,7 @@ export default class Edit extends Component {
     this.handleChangeNotificationType = (data) => this._handleChangeNotificationType(data);
     this.onDelete = (d) => this._onDelete(d)
     this.onSave = (d) => this._onSave(d)
+    this.generateUploadComponent = () => this._generateUploadComponent();
   }
 
   _handleScheduledOn(date) {
@@ -38,7 +39,27 @@ export default class Edit extends Component {
     this.props.handleSaveNotification(data, this.props.status.id);
   }
 
+  _generateUploadComponent() {
+    if (this.props.notification && this.props.notification.filesuploader) {
+      return(
+        <div className='col s12 m12 l6'>
+          <label htmlFor='status_notice'>{i18n.notice}</label>
+          <p><a href={this.props.notification.filesuploader.url}>{i18n.uploadedDocument}</a></p>
+        </div>
+      )
+    } else {
+      return(
+        <div className='file-field input-field col s12 m12 l6'>
+          <label htmlFor='notification_notice'>{i18n.notice}</label>
+          <input type='file' name='notification[notice]' id='notification_notice' />
+        </div>
+      )
+    }
+  }
+
   render() {
+    const options = this.props.notificationOptions[this.props.selectedStatus];
+
     return(
       <div className={css.meta}>
         <div className={css.label}>
@@ -48,21 +69,7 @@ export default class Edit extends Component {
           <form encType='multipart/form-data' onSubmit={this.onSave} acceptCharset='UTF-8'>
             <div className='row'>
               <div className='row'>
-                {
-                  this.props.notification && this.props.notification.filesuploader &&
-                  <div className='col s12 m12 l6'>
-                    <label htmlFor='status_notice'>{i18n.notice}</label>
-                    <p><a href={this.props.notification.filesuploader.url}>{i18n.uploadedDocument}</a></p>
-                  </div>
-                }
-
-                {
-                  this.props.notification && !this.props.notification.filesuploader &&
-                  <div className='file-field input-field col s12 m12 l6'>
-                    <label htmlFor='notification_notice'>{i18n.notice}</label>
-                    <input type='file' name='notification[notice]' id='notification_notice' />
-                  </div>
-                }
+                {this.generateUploadComponent()}
 
                 <div className='input-field col s12 m12 l6'>
                   <label htmlFor='send_notification_at'>{i18n.scheduledOn}</label>
@@ -80,8 +87,8 @@ export default class Edit extends Component {
                   id='notification_type'
                   name='notification[notification_type]'
                   label={i18n.notificationType}
-                  defaultValue={this.props.status.status}
-                  options={this.props.notificationOptions[this.props.selectedStatus]}
+                  defaultValue={this.props.status.notification ? this.props.status.notification.notification_type : null}
+                  options={options}
                   onChange={this.handleChangeNotificationType}
                 />
               </div>

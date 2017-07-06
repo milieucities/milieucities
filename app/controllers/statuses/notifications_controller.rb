@@ -1,12 +1,13 @@
 module Statuses
   class NotificationsController < ApplicationController
-    load_resource :status
-    load_and_authorize_resource :notification, through: :status
+    load_resource :dev_site
+    load_resource :status, through: :dev_site
+    before_action :load_notification
 
     def create
       respond_to do |format|
         if @notification.save
-          format.json { render :show, status: :ok }
+          format.json { render json: @notification, status: :created }
         else
           format.json { render json: @notification.errors, status: 406 }
         end
@@ -15,44 +16,18 @@ module Statuses
 
     def update
       respond_to do |format|
-        if @notification.update(comment_params)
-          format.json { render json: @comments, status: 200 }
-          format.html do
-            flash[:notice] = 'The notification has been updated.'
-            redirect_to dev_site_path(@dev_site)
-          end
+        if @notification.update(meeting_params)
+          format.json { render json: @notification, status: :created }
         else
-          format.json do
-            render json: {
-              notice: 'Your notification was not updated. Please try again.'
-            }, status: 500
-          end
+          format.json { render json: @notification.errors, status: :unprocessable_entity }
         end
       end
     end
 
     def destroy
+      @notification.destroy
       respond_to do |format|
-        if @notification.destroy
-          format.json { render json: @notification, status: 204 }
-          format.html do
-            flash[:notice] = 'The notification has been deleted.'
-            redirect_to dev_site_path(@dev_site)
-          end
-        else
-          format.json do
-            render json: {
-              notice: 'Your notification was not deleted. Please try again.'
-            }, status: 500
-          end
-        end
-      end
-    end
-
-    def children
-      @comments = @notification.children
-      respond_to do |format|
-        format.json { render :index, status: 200 }
+        format.json { head :no_content }
       end
     end
 
@@ -60,6 +35,13 @@ module Statuses
 
     def notification_params
       params.require(:notification).permit(:id, :send_at, :notification_type, :notice)
+    end
+
+    def load_notification
+      if notification_params[:id]
+        @notification = Notification.find_by(id: notification_params[:id])
+      end
+      @notification ||= @status.build_notification(notification_params)
     end
   end
 end

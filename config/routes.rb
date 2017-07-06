@@ -43,7 +43,7 @@ Rails.application.routes.draw do
       end
       resources :statuses, only: [:create, :update, :destroy] do
         resources :meetings, only: [:create, :update, :destroy]
-        resources :notifications, only: [:create, :update, :destroy]
+        resources :notifications, only: [:create, :update, :destroy], module: :statuses
       end
     end
 

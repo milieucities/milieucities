@@ -30,14 +30,14 @@ child :statuses do
   child(:meeting) { attributes :id, :title, :date, :time, :meeting_type, :location }
   child(:notification) do
     attributes :id, :notification_type, :send_at
-  end
-  # child(:notice, if: lambda { |status| status.notice.url }) do
-  #   attributes :url
+    child(:notice, if: lambda { |notification| notification.notice.url }) do
+      attributes :url
 
-  #   node :name do |f|
-  #     f.file.filename.split('/').last
-  #   end
-  # end
+      node :name do |f|
+        f.file.filename.split('/').last
+      end
+    end
+  end
 end
 
 child :sentiment do
