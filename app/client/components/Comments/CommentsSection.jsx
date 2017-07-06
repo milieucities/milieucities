@@ -11,10 +11,10 @@ export default class CommentsSection extends Component {
     this.state = { page: 0, limit: 5, comments: [] };
     this.currentUserId = document.body.dataset.userId;
     this.fetchComments = () => this._fetchComments();
-    this.saveComment = (b, p) => this._saveComment(b, p);
+    this.saveComment = (b,id,p) => this._saveComment(b,id,p);
     this.deleteComment = (c) => this._deleteComment(c);
     this.editComment = (c,b) => this._editComment(c,b);
-    this.handleSave = (b) => this._handleSave(b);
+    this.handleSave = (b,id,p) => this._handleSave(b,id,p);
     this.handleDeleteRootComment = (c) => this._handleDeleteRootComment(c);
     this.handleEditRootComment = (c,b) => this._handleEditRootComment(c,b);
     this.openModal = () => this._openModal();
@@ -87,7 +87,7 @@ export default class CommentsSection extends Component {
     })
   }
 
-  _saveComment(body, parentId = null) {
+  _saveComment(body, parentId, acceptedPrivacyPolicy) {
     return new Promise((resolve, reject) => {
       const limit = this.state.limit;
       const data = {
@@ -98,7 +98,10 @@ export default class CommentsSection extends Component {
           user_id: this.currentUserId,
           parent_id: parentId
         },
-        limit
+        limit,
+        user: {
+          accepted_privacy_policy: acceptedPrivacyPolicy
+        }
       };
 
       $.ajax({
@@ -110,14 +113,14 @@ export default class CommentsSection extends Component {
           resolve(comment)
         },
         error: (error) => {
-          reject(comment)
+          reject(error)
         }
       })
     })
   }
 
-  _handleSave(body) {
-    this.saveComment(body).then((comment) => {
+  _handleSave(body, parentId, acceptedPrivacyPolicy) {
+    this.saveComment(body, parentId, acceptedPrivacyPolicy).then((comment) => {
       if (comment.flagged_as_offensive === 'FLAGGED') {
         window.flash('notice', i18n.flaggedNotification);
       } else {

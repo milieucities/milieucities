@@ -14,6 +14,7 @@ module DevSites
     def show; end
 
     def create
+      update_user if user_params[:accepted_privacy_policy].present?
       respond_to do |format|
         if @comment.save
           format.json { render :show, status: :ok }
@@ -68,6 +69,12 @@ module DevSites
 
     private
 
+    def update_user
+      user = current_user
+      Rails.logger.info "ACCEPTED => #{user_params[:accepted_privacy_policy]}"
+      user.update(accepted_privacy_policy: user_params[:accepted_privacy_policy])
+    end
+
     def comment_params
       params.require(:comment).permit(:body,
                                       :commentable_id,
@@ -75,6 +82,10 @@ module DevSites
                                       :user_id,
                                       :parent_id,
                                       :flagged_as_offensive)
+    end
+
+    def user_params
+      params.require(:user).permit(:accepted_privacy_policy)
     end
 
     def load_resource
