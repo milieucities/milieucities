@@ -1,6 +1,7 @@
 class Notification < ActiveRecord::Base
   mount_uploader :notice, FilesUploader
   belongs_to :notifiable, polymorphic: true
+  after_create :send_notification
 
   FROM_EMAIL = 'notifications@milieu.io'.freeze
 
@@ -13,6 +14,18 @@ class Notification < ActiveRecord::Base
   COMMENTS_CLOSED = 'comments_closed'.freeze
   PASSING = 'passing'.freeze
   REJECTED = 'rejected'.freeze
+
+  GUELPH_NOTIFICATION_TYPES = [
+    COMPLETE_APPLICATION,
+    PUBLIC_MEETING,
+    COMPLETE_APPLICATION_AND_PUBLIC_MEETING,
+    REVISED_APPLICATION,
+    REVISED_APPLICATION_AND_PUBLIC_MEETING,
+    DECISION_MEETING,
+    COMMENTS_CLOSED,
+    PASSING,
+    REJECTED
+  ]
 
   NOTIFICATION_TYPE_TO_TEMPLATE_MAP = {
     COMPLETE_APPLICATION_AND_PUBLIC_MEETING => 'NOTICE OF COMPLETE APPLICATION AND PUBLIC MEETING',
@@ -33,4 +46,8 @@ class Notification < ActiveRecord::Base
     Status::REVISION_STATUS => [REVISED_APPLICATION, REVISED_APPLICATION_AND_PUBLIC_MEETING],
     Status::DECISION_STATUS => [PASSING, REJECTED]
   }.freeze
+
+  def send_notification
+    mandrill_email_object = Services::GenerateNotificationForMandrill.call(self)
+  end
 end
