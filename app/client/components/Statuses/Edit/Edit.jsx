@@ -19,6 +19,7 @@ export default class Edit extends Component {
     this.handleSaveMeeting = (d,m) => this._handleSaveMeeting(d,m)
     this.handleDeleteMeeting = (m) => this._handleDeleteMeeting(m)
     this.handleChangeStatusType = (data) => this._handleChangeStatusType(data);
+    this.handleStatusUpdate = (v) => this._handleStatusUpdate(v);
     this.onDelete = (d) => this._onDelete(d)
     this.onSave = (d) => this._onSave(d)
   }
@@ -35,8 +36,16 @@ export default class Edit extends Component {
     this.setState({ scheduledOn: date });
   }
 
+  _handleStatusUpdate(value) {
+    this.setState({ selectedState: value })
+  }
+
   _handleChangeStatusType(value) {
-    this.props.handleUpdateStatus(value);
+    if (this.props.handleUpdateStatus) {
+      this.props.handleUpdateStatus(value);
+    } else {
+      this.handleStatusUpdate(value);
+    }
   }
 
   _onDelete(e) {

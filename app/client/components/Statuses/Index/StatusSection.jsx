@@ -35,6 +35,7 @@ export default class StatusSection extends Component {
       processData: false,
       success: meeting => {
         window.flash('notice', 'Successfully saved!')
+        window.location.reload(true)
       },
       error: error => {
         window.flash('alert', 'Failed to save!')
@@ -54,6 +55,7 @@ export default class StatusSection extends Component {
       dataType: 'JSON',
       success: status => {
         window.flash('notice', 'Successfully deleted!')
+        window.location.reload(true)
       },
       error: error => {
         window.flash('alert', 'Failed to delete!')
