@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Collapse, { Panel } from 'rc-collapse'
-import EditStatus from '../Edit/Edit'
-import EditMeeting from '../../Meetings/Edit/Edit'
+import StatusForms from './StatusForms'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from '../../DevSites/Form/locale.js'
 
@@ -21,7 +20,6 @@ export default class Index extends Component {
 
 
   render() {
-    console.log(this.props.statuses)
     return(
       <Collapse
         className={css.collapse}
@@ -31,15 +29,7 @@ export default class Index extends Component {
       {
         this.props.statuses.map(status => (
           <Panel header={status.status} key={`status-${status.id}`}>
-            <EditStatus
-              { ...this.props }
-              status={ status }
-            />
-            <EditMeeting
-              { ...this.props }
-              meeting={ status.meeting }
-              status={ status }
-            />
+            <StatusForms { ...this.props } status={status} />
           </Panel>
         ))
       }

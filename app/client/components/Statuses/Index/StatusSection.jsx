@@ -13,6 +13,8 @@ export default class StatusSection extends Component {
     this.handleDeleteStatus = (m) => this._handleDeleteStatus(m);
     this.handleSaveMeeting = (d,m) => this._handleSaveMeeting(d,m);
     this.handleDeleteMeeting = (m) => this._handleDeleteMeeting(m);
+    this.handleSaveNotification = (d,m) => this._handleSaveNotification(d,m);
+    this.handleDeleteNotification = (m) => this._handleDeleteNotification(m);
     this.toggleStatusForm = () => this._toggleStatusForm();
   }
 
@@ -106,14 +108,57 @@ export default class StatusSection extends Component {
     });
   }
 
+  _handleSaveNotification(data, statusId, notificationId) {
+
+    const { locale } = document.body.dataset;
+    let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}/notifications`, 'POST'];
+
+    if(notificationId) {
+      [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}/notifications/${notificationId}`, 'PATCH']
+    }
+
+    $.ajax({
+      url,
+      type,
+      data,
+      dataType: 'JSON',
+      contentType: false,
+      processData: false,
+      success: notification => {
+        window.flash('notice', 'Successfully saved!')
+      },
+      error: error => {
+        window.flash('alert', 'Failed to save!')
+        console.log(error.responseJSON)
+        this.setState({ error: error.responseJSON })
+      }
+    });
+  }
+
+  _handleDeleteMeeting(statusId, notificationId) {
+    const { locale } = document.body.dataset;
+    let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}/notifications/${notificationId}`, 'DELETE'];
+
+    $.ajax({
+      url,
+      type,
+      dataType: 'JSON',
+      success: notification => {
+        window.flash('notice', 'Successfully deleted!')
+      },
+      error: error => {
+        window.flash('alert', 'Failed to delete!')
+        this.setState({ error: error.responseJSON })
+      }
+    });
+  }
+
   _toggleStatusForm() {
     this.setState({ openStatusForm: !this.state.openStatusForm });
   }
 
   render() {
-    console.log('this.props.devSite', this.props.devSite)
     const statuses = this.props.devSite.statuses || [];
-
     return(
       <div>
         <Index
@@ -123,6 +168,8 @@ export default class StatusSection extends Component {
           handleDeleteStatus={ this.handleDeleteStatus }
           handleSaveMeeting={ this.handleSaveMeeting }
           handleDeleteMeeting={ this.handleDeleteMeeting }
+          handleSaveNotification={ this.handleSaveNotification }
+          handleDeleteNotification={ this.handleDeleteNotification }
         />
         {
           !this.state.openStatusForm &&

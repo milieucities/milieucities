@@ -22,14 +22,16 @@ class DevSitesController < ApplicationController
   end
 
   def new
-    @application_types = ApplicationType::VALID_APPLICATION_TYPES
+  @application_types = ApplicationType::VALID_APPLICATION_TYPES
     @statuses = @dev_site.valid_statuses
+    @notification_options = Notification::STATUS_TO_NOTIFICATION_TYPES_MAP.to_json
     @no_header = true
   end
 
   def edit
     @application_types = ApplicationType::VALID_APPLICATION_TYPES
     @statuses = @dev_site.valid_statuses
+    @notification_options = Notification::STATUS_TO_NOTIFICATION_TYPES_MAP.to_json
     @no_header = true
   end
 

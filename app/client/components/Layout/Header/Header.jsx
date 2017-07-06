@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import css from './header.scss'
 import { debounce } from 'lodash'
 import i18n from './locale'
-import CookiesNotification from '../../Notifications/Cookies/CookiesNotification'
+import CookiesNotification from '../../NotificationSettings/Cookies/CookiesNotification'
 
 export default class Header extends Component {
   constructor() {

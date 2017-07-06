@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :conversations, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :authentication_tokens, dependent: :destroy
-  has_one :notification, dependent: :destroy
+  has_one :notification_setting, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_one :address, as: :addressable, dependent: :destroy
   has_many :comments

@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
     resources :users, param: :slug do
       resource :profile, only: [:edit, :update, :show], module: :users
-      resource :notification, only: [:edit, :update, :show], module: :users
+      resource :notification_setting, only: [:edit, :update, :show], module: :users
       resources :votes, only: [:create, :destroy], module: :users
     end
 
@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       end
       resources :statuses, only: [:create, :update, :destroy] do
         resources :meetings, only: [:create, :update, :destroy]
+        resources :notifications, only: [:create, :update, :destroy], module: :statuses
       end
     end
 

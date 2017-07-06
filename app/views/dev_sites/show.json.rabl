@@ -26,13 +26,16 @@ child(:addresses) { attributes :id, :street, :city, :province_state, :country }
 child(:city_files) { attributes :id, :link, :name }
 
 child :statuses do
-  attributes :id, :status, :start_date, :end_date, :send_notification_at
+  attributes :id, :status, :start_date, :end_date
   child(:meeting) { attributes :id, :title, :date, :time, :meeting_type, :location }
-  child(:notice, if: lambda { |status| status.notice.url }) do
-    attributes :url
+  child(:notification) do
+    attributes :id, :notification_type, :send_at
+    child(:notice, if: lambda { |notification| notification.notice.url }) do
+      attributes :url
 
-    node :name do |f|
-      f.file.filename.split('/').last
+      node :name do |f|
+        f.file.filename.split('/').last
+      end
     end
   end
 end

@@ -1,15 +1,19 @@
 class Status < ActiveRecord::Base
-  mount_uploader :notice, FilesUploader
-
   scope :current, -> { order(start_date: :desc).first }
   belongs_to :dev_site, foreign_key: 'dev_site_id'
   belongs_to :municipality, foreign_key: 'municipality_id'
   has_one :meeting, dependent: :destroy
+  has_one :notification, as: :notifiable, dependent: :destroy
 
   validates :status, presence: { message: 'Status is required' }
   validates :start_date, presence: { message: 'Status date is required' }
 
   accepts_nested_attributes_for :meeting, allow_destroy: true
+
+  APPLICATION_COMPLETE_STATUS = 'Application Complete, Comment Period Open'.freeze
+  PLANNING_REVIEW_STATUS = 'Planning Review Stage'.freeze
+  REVISION_STATUS = 'Revision'.freeze
+  DECISION_STATUS = 'Decision'.freeze
 
   OTTAWA_STATUSES = [
     'Unknown',
@@ -86,10 +90,10 @@ class Status < ActiveRecord::Base
   }.freeze
 
   GUELPH_STATUSES = [
-    'Application Complete, Comment Period Open',
-    'Planning Review Stage',
-    'Revision',
-    'Decision'
+    APPLICATION_COMPLETE_STATUS,
+    PLANNING_REVIEW_STATUS,
+    REVISION_STATUS,
+    DECISION_STATUS
   ].freeze
 
   def general_status
