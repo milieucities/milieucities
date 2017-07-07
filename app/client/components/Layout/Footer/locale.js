@@ -12,7 +12,7 @@ const i18n = new LocalizedStrings({
     blog: "Blog",
     privacy: "Privacy",
     subscribe: "SUBSCRIBE TO NEWSLETTER",
-    subscribeS: "Thank you for subscribing to our newletter",
+    subscribeS: "Thank you for subscribing to our newsletter",
     subscribeF: "An error occured while attempting to subscribe your email. Refresh the page and try again.",
     twitter: "Find us on Twitter",
     instagram: "Find us on Instagram",

@@ -45,6 +45,7 @@ export default class Edit extends Component {
 
   render() {
     const { notification_setting, loading, error } = this.state;
+    console.log(notification_setting)
     i18n.setLanguage(document.body.dataset.locale);
 
     return(
@@ -52,32 +53,124 @@ export default class Edit extends Component {
         {
           !loading &&
           <div className={css.content}>
-            <h2>{i18n.notifications}</h2>
+            <form id='notification-setting-form'>
+              <h2>{i18n.notifications}</h2>
 
-            <div className={css.meta}>
-              <div className={css.label}>
-                Email
-              </div>
-              <div className={css.data}>
-                <div className='row'>
-                  <div className='input-field col s12'>
-                    {i18n.emailQ1}
-                  </div>
-                  <form id='notification-setting-form'>
+              <div className={css.meta}>
+                <div className={css.label}>
+                  Subscribe to the Milieu Civic Engagement Platform
+                </div>
+                <div className={css.data}>
+                  <div className='row'>
+
                     <div className='input-field col s12'>
-                      <input type='hidden' name='notification_setting[updated_dev_site_near_me]' value={false} />
-                      <input type='checkbox' defaultChecked={notification_setting.updated_dev_site_near_me} id='notification_updated_dev_site_near_me' name='notification_setting[updated_dev_site_near_me]'/>
-                      <label htmlFor='notification_updated_dev_site_near_me'>{i18n.emailQ1S1}</label>
+                      <input
+                        type='hidden'
+                        name='notification_setting[project_comments]'
+                        value={false}
+                      />
+                      <input
+                        type='checkbox'
+                        defaultChecked={notification_setting.project_comments}
+                        id='notification_project_comments'
+                        name='notification_setting[project_comments]'
+                      />
+                      <label htmlFor='notification_project_comments'>{i18n.projectComments}</label>
                     </div>
+
                     <div className='input-field col s12'>
-                      <input type='hidden' name='notification_setting[newletter]' value={false} />
-                      <input type='checkbox' defaultChecked={notification_setting.newletter} id='notification_newsletter' name='notification_setting[newletter]'/>
+                      <input
+                        type='hidden'
+                        name='notification_setting[comment_replies]'
+                        value={false}
+                      />
+                      <input
+                        type='checkbox'
+                        defaultChecked={notification_setting.comment_replies}
+                        id='notification_comment_replies'
+                        name='notification_setting[comment_replies]'
+                      />
+                      <label htmlFor='notification_comment_replies'>{i18n.commentReplies}</label>
+                    </div>
+
+                    <div className='input-field col s12'>
+                      <input
+                        type='hidden'
+                        name='notification_setting[newsletter]'
+                        value={false} />
+                      <input
+                        type='checkbox'
+                        defaultChecked={notification_setting.newsletter}
+                        id='notification_newsletter'
+                        name='notification_setting[newsletter]'
+                      />
                       <label htmlFor='notification_newsletter'>{i18n.emailQ1S2}</label>
                     </div>
-                  </form>
+
                 </div>
               </div>
             </div>
+
+
+
+            <div className={css.meta}>
+              <div className={css.label}>
+                Subscribe to Municipal Planning Notices
+                <div><small>Only available to residents of Milieu Cities</small></div>
+              </div>
+              <div className={css.data}>
+                <div className='row'>
+
+                    <div className='input-field col s12'>
+                      <input
+                        type='hidden'
+                        name='notification_setting[immediate_vicinity_scope]'
+                        value={true}
+                      />
+                      <input
+                        type='checkbox'
+                        defaultChecked={true}
+                        id='notification_immediate_vicinity_scope'
+                        name='notification_setting[immediate_vicinity_scope]'
+                        disabled={true}
+                      />
+                      <label htmlFor='notification_immediate_vicinity_scope'>{i18n.immediateVicinityScope}</label>
+                    </div>
+
+                    <div className='input-field col s12'>
+                      <input
+                        type='hidden'
+                        name='notification_setting[ward_scope]'
+                        value={false}
+                      />
+                      <input
+                        type='checkbox'
+                        defaultChecked={notification_setting.ward_scope}
+                        id='notification_ward_scope'
+                        name='notification_setting[ward_scope]'
+                      />
+                      <label htmlFor='notification_ward_scope'>{i18n.wardScope}</label>
+                    </div>
+
+                    <div className='input-field col s12'>
+                      <input
+                        type='hidden'
+                        name='notification_setting[municipality_scope]'
+                        value={false}
+                      />
+                      <input
+                        type='checkbox'
+                        defaultChecked={notification_setting.municipality_scope}
+                        id='notification_municipality_scope'
+                        name='notification_setting[municipality_scope]'
+                      />
+                      <label htmlFor='notification_municipality_scope'>{i18n.municipalityScope}</label>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
             <div className='row'>
               <button name='commit' type='submit' className='btn' onClick={this.submitForm}>{i18n.save}</button>
             </div>

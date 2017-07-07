@@ -20,7 +20,7 @@ module Users
     private
 
     def notification_setting_params
-      params.require(:notification_setting).permit(:newletter, :updated_dev_site_near_me)
+      params.require(:notification_setting).permit(:newsletter, :immediate_vicinity_scope, :ward_scope, :municipality_scope, :project_comments, :comment_replies)
     end
   end
 end
