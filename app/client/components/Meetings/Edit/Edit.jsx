@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
-import DatePicker from 'react-datepicker'
+import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel, MilieuDatePicker } from '../../Common/FormFields/Form'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from '../../DevSites/Form/locale.js'
 import moment from 'moment'
@@ -13,7 +12,7 @@ const MEETING_TYPES = [
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    const meetingDate = this.props.meeting && this.props.meeting.date ? moment(this.props.meeting.date).utc() : null
+    const meetingDate = this.props.meeting ? this.props.meeting.date : null;
     this.state = { meetingDate };
     this.handleMeetingDate = (d) => this._handleMeetingDate(d)
     this.onDelete = (e) => this._onDelete(e)
@@ -65,7 +64,12 @@ export default class Edit extends Component {
 
               <div className='input-field col s12 m12 l6'>
                 <label htmlFor='meeting_date'>{ i18n.meetingDate }</label>
-                <DatePicker selected={ this.state.meetingDate } dateFormat='MMMM DD, YYYY' name='meeting[date]' onChange={ this.handleMeetingDate } />
+                <MilieuDatePicker
+                  selected={ this.state.meetingDate }
+                  dateFormat='MMMM DD, YYYY'
+                  name='meeting[date]'
+                  onChange={ this.handleMeetingDate }
+                />
                 {
                   this.props.error &&
                   <div className='error-message'>{this.props.error['meetings.date']}</div>

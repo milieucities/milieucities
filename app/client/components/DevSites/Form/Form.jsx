@@ -5,7 +5,6 @@ import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
 import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
 import StatusSection from '../../Statuses/Index/StatusSection'
-import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 

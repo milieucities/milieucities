@@ -134,10 +134,10 @@ export default class DevSiteShow extends Component {
                               {
                                 devSite.statuses &&
                                 devSite.statuses.map((status, i) => {
-                                  if (status.filesuploader) {
+                                  if (status.notification && status.notification.filesuploader) {
                                     return(
                                       <div key={i}>
-                                        <a href={status.filesuploader.url} target='_blank' className={css.filelink}>{status.filesuploader.name}</a>
+                                        <a href={status.notification.filesuploader} target='_blank' className={css.filelink}>{status.notification.filesuploader.name}</a>
                                       </div>
                                     )
                                   }

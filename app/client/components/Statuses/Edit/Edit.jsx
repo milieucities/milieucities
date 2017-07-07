@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
-import DatePicker from 'react-datepicker'
+import { TextInputWithLabel, SelectWithLabel, MilieuDatePicker } from '../../Common/FormFields/Form'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from '../../DevSites/Form/locale.js'
 import moment from 'moment'
@@ -9,8 +8,10 @@ import moment from 'moment'
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    const startDate = this.props.status && this.props.status.start_date ? moment(this.props.status.start_date).utc() : null;
-    const endDate = this.props.status && this.props.status.end_date ? moment(this.props.status.end_date).utc() : null;
+    const startDate = this.props.status ? this.props.status.start_date : null;
+    const endDate = this.props.status ? this.props.status.end_date : null;
+    console.log('this.props.status', this.props.status)
+
 
     this.state = { startDate, endDate };
 
@@ -25,6 +26,7 @@ export default class Edit extends Component {
   }
 
   _handleStartDate(date) {
+    console.log(date)
     this.setState({ startDate: date });
   }
 
@@ -80,7 +82,11 @@ export default class Edit extends Component {
 
               <div className='input-field col s12 m12 l6'>
                 <label htmlFor='start_date'>{i18n.startDate}</label>
-                <DatePicker selected={this.state.startDate} dateFormat='MMMM DD, YYYY' utcOffset={-12} name='status[start_date]' onChange={this.handleStartDate} />
+                <MilieuDatePicker
+                  selected={this.state.startDate}
+                  dateFormat='MMMM DD, YYYY'
+                  name='status[start_date]'
+                  onChange={this.handleStartDate} />
                 {
                   this.props.error &&
                   <div className='error-message'>{this.props.error['status.start_date']}</div>
@@ -89,7 +95,11 @@ export default class Edit extends Component {
 
               <div className='input-field col s12 m12 l6'>
                 <label htmlFor='end_date'>{i18n.endDate}</label>
-                <DatePicker selected={this.state.endDate} dateFormat='MMMM DD, YYYY' utcOffset={-12} name='status[end_date]' onChange={this.handleEndDate} />
+                <MilieuDatePicker
+                  selected={this.state.endDate}
+                  dateFormat='MMMM DD, YYYY'
+                  name='status[end_date]'
+                  onChange={this.handleEndDate} />
                 {
                   this.props.error &&
                   <div className='error-message'>{this.props.error['status.start_date']}</div>
