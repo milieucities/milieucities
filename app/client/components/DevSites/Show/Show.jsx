@@ -137,7 +137,7 @@ export default class DevSiteShow extends Component {
                                   if (status.notification && status.notification.filesuploader) {
                                     return(
                                       <div key={i}>
-                                        <a href={status.notification.filesuploader} target='_blank' className={css.filelink}>{status.notification.filesuploader.name}</a>
+                                        <a href={status.notification.filesuploader.url} target='_blank' className={css.filelink}>{status.notification.filesuploader.name}</a>
                                       </div>
                                     )
                                   }
