@@ -74,7 +74,7 @@ class Comment < ActiveRecord::Base
 
       blacklisted_en_words + blacklisted_fr_words
     end
-    blacklisted_words.any? { |word| body.include? word }
+    blacklisted_words.any? { |word| body.downcase.include? word }
   end
 
   def mark_as_flagged

@@ -17,6 +17,7 @@ export default class CommentForm extends Component {
       window.flash('alert', 'You must accept the Privacy Policy in order to comment.')
     } else {
       this.props.handleSave(this.state.body, this.props.parentId);
+      this.setState({ body: '' })
 
       if (this.props.toggleCommentForm) {
         this.props.toggleCommentForm();
@@ -51,6 +52,10 @@ export default class CommentForm extends Component {
           </div>
         }
         <div className={css.submitBtn}>
+          {
+            !this.props.currentUser &&
+            <p>You must be logged in to comment.</p>
+          }
           <input type='submit' value={i18n.comment} className={`${css.submit} btn`}/>
         </div>
       </form>

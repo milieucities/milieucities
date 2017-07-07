@@ -8,7 +8,7 @@ import i18n from './locale'
 export default class CommentsSection extends Component {
   constructor(props) {
     super(props);
-    const acceptedPrivacyPolicy = JSON.parse(document.body.dataset.userAcceptedPrivacyPolicy);
+    const acceptedPrivacyPolicy = this._parseJsonData(document.body.dataset.userAcceptedPrivacyPolicy);
     this.state = { page: 0, limit: 5, comments: [], acceptedPrivacyPolicy };
     this.currentUserId = document.body.dataset.userId;
     this.fetchComments = () => this._fetchComments();
@@ -40,6 +40,10 @@ export default class CommentsSection extends Component {
         () => this.fetchComments()
       )
     }
+  }
+
+  _parseJsonData(data) {
+    return data ? JSON.parse(data) : null;
   }
 
   _appendMoreComments() {
@@ -122,9 +126,14 @@ export default class CommentsSection extends Component {
   }
 
   _handleSave(body, parentId) {
+    if (!this.currentUserId) {
+      $('#sign-in-modal').openModal();
+      return false
+    }
+
     this.saveComment(body, parentId).then((comment) => {
       if (comment.flagged_as_offensive === 'FLAGGED') {
-        window.flash('notice', i18n.flaggedNotification);
+        window.flash('alert', i18n.flaggedNotification);
       } else {
         window.flash('notice', i18n.commentSavedSuccess)
         this.state.comments.unshift(comment);
@@ -243,25 +252,16 @@ export default class CommentsSection extends Component {
 
       return(
         <div className={css.container}>
-          {
-            this.currentUserId &&
-            <div>
-              <h3>{i18n.makePublicComment}</h3>
-              <CommentForm
-                { ...this.props }
-                handleSave={this.handleSave}
-                acceptedPrivacyPolicy={this.state.acceptedPrivacyPolicy}
-                handleChangePrivacyPolicy={this.handleChangePrivacyPolicy}
-              />
-            </div>
-          }
-
-          {
-            !this.currentUserId &&
-            <div className={css.nouser}>
-              <a href='#sign-in-modal' className='modal-trigger btn' onClick={this.openModal}>{i18n.signInToComment}</a>
-            </div>
-          }
+          <div>
+            <h3>{i18n.makePublicComment}</h3>
+            <CommentForm
+              { ...this.props }
+              handleSave={this.handleSave}
+              acceptedPrivacyPolicy={this.state.acceptedPrivacyPolicy}
+              handleChangePrivacyPolicy={this.handleChangePrivacyPolicy}
+              currentUser={this.currentUserId}
+            />
+          </div>
 
           <div className={css.commentCount}>
             <p>{totalComments} responses</p>
@@ -280,6 +280,7 @@ export default class CommentsSection extends Component {
               handleVoteRootComment={this.handleVoteRootComment}
               acceptedPrivacyPolicy={this.state.acceptedPrivacyPolicy}
               handleChangePrivacyPolicy={this.handleChangePrivacyPolicy}
+              currentUser={this.currentUserId}
             />
           }
         </div>
