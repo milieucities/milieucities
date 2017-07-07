@@ -193,5 +193,14 @@ class DevSite < ActiveRecord::Base
     def search_by_featured(collection, value)
       collection.where(featured: value)
     end
+
+    def search_by_devID(collection, value)
+      collection.where(devID: value)
+    end
+
+    def search_by_address(collection, value)
+      collection
+        .where(addresses: { street: value } )
+    end
   end
 end

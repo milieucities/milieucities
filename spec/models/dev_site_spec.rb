@@ -83,6 +83,8 @@ describe DevSite do
       @dev_site4 = create(:dev_site, municipality: @guelph)
       @dev_site5 = create(:dev_site, municipality: @ottawa, updated: DateTime.new(2013, 12, 1).utc)
       @dev_site6 = create(:dev_site)
+      @dev_site7 = create(:dev_site, devID: 9999)
+      @dev_site8 = create(:dev_site, municipality: @guelph, updated: DateTime.new(2016, 10, 7).utc)
 
       @dev_site1.addresses << create(:address)
       @dev_site4.statuses << create(:status)
@@ -91,6 +93,7 @@ describe DevSite do
                                     status: 'Comment Period in Progress')
       @dev_site6.addresses << create(:address)
       @dev_site6.statuses << create(:status, status: 'Comment Period in Progress')
+      @dev_site8.addresses << create(:address, street: '123 Queen Street')
     end
 
     context 'no params passed' do
@@ -99,13 +102,15 @@ describe DevSite do
 
         result = DevSite.search(search_params)
 
-        expect(result.count).to eq(6)
+        expect(result.count).to eq(8)
         expect(result).to include(@dev_site1)
         expect(result).to include(@dev_site2)
         expect(result).to include(@dev_site3)
         expect(result).to include(@dev_site4)
         expect(result).to include(@dev_site5)
         expect(result).to include(@dev_site6)
+        expect(result).to include(@dev_site7)
+        expect(result).to include(@dev_site8)
       end
     end
 
@@ -188,6 +193,30 @@ describe DevSite do
         result = DevSite.search(search_params)
 
         expect(result).to eq([@dev_site6])
+      end
+    end
+
+    context 'devID provided as search query' do
+      it 'should retrieve only the DevSites that match the devID and query params' do
+        search_params = {
+          devID: 9999
+        }
+      
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([@dev_site7])
+      end
+    end
+
+    context 'address provided as search query' do
+      it 'should retrieve only the DevSites that match the address and query params' do
+        search_params = {
+          address: "123 Queen Street" 
+        }
+      
+        result = DevSite.search(search_params)
+
+        expect(result).to eq([@dev_site8])
       end
     end
   end

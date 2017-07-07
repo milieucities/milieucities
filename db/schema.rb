@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606185836) do
+ActiveRecord::Schema.define(version: 20170706145514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,13 +134,6 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.string   "urban_planner_name"
     t.string   "url_full_notice"
   end
-
-  create_table "dev_sites_to_application_types", force: :cascade do |t|
-    t.integer "dev_site_id"
-    t.integer "application_type_id"
-  end
-
-  add_index "dev_sites_to_application_types", ["application_type_id"], name: "index_dev_sites_to_application_types_on_application_type_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
