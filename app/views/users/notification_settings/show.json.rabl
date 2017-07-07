@@ -1,3 +1,3 @@
 object @notification_setting
 
-attributes :id, :newletter, :updated_dev_site_near_me
+attributes :id, :newletter, :immediate_vicinity_scope, :ward_scope, :municipality_scope, :project_comments, :comment_replies

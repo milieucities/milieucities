@@ -39,6 +39,10 @@
         font-weight: 700;
         margin-right: 25px;
 
+        small {
+          font-weight: 400;
+        }
+
         @media #{$small-and-down} {
           margin-right: 0;
           margin-bottom: 30px;

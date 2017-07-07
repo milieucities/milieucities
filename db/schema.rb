@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705184320) do
+ActiveRecord::Schema.define(version: 20170707033849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,10 +230,14 @@ ActiveRecord::Schema.define(version: 20170705184320) do
 
   create_table "notification_settings", force: :cascade do |t|
     t.integer  "user_id"
-    t.boolean  "newletter",                default: true
+    t.boolean  "newsletter",               default: true
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
-    t.boolean  "updated_dev_site_near_me"
+    t.boolean  "immediate_vicinity_scope"
+    t.boolean  "ward_scope"
+    t.boolean  "municipality_scope"
+    t.boolean  "project_comments"
+    t.boolean  "comment_replies"
   end
 
   add_index "notification_settings", ["user_id"], name: "index_notification_settings_on_user_id", using: :btree
@@ -323,13 +327,14 @@ ActiveRecord::Schema.define(version: 20170705184320) do
     t.string   "username"
     t.string   "email"
     t.string   "role"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.string   "password_digest"
     t.string   "uid"
     t.string   "provider"
     t.string   "slug"
-    t.uuid     "uuid",            default: "uuid_generate_v4()"
+    t.uuid     "uuid",                    default: "uuid_generate_v4()"
+    t.boolean  "accepted_privacy_policy", default: false
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
