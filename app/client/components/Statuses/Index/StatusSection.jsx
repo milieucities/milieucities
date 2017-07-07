@@ -12,9 +12,9 @@ export default class StatusSection extends Component {
     this.handleSaveStatus = (d,m) => this._handleSaveStatus(d,m);
     this.handleDeleteStatus = (m) => this._handleDeleteStatus(m);
     this.handleSaveMeeting = (d,m) => this._handleSaveMeeting(d,m);
-    this.handleDeleteMeeting = (m) => this._handleDeleteMeeting(m);
+    this.handleDeleteMeeting = (s,m) => this._handleDeleteMeeting(s,m);
     this.handleSaveNotification = (d,m) => this._handleSaveNotification(d,m);
-    this.handleDeleteNotification = (m) => this._handleDeleteNotification(m);
+    this.handleDeleteNotification = (s,n) => this._handleDeleteNotification(s,n);
     this.toggleStatusForm = () => this._toggleStatusForm();
   }
 
@@ -137,7 +137,7 @@ export default class StatusSection extends Component {
     });
   }
 
-  _handleDeleteMeeting(statusId, notificationId) {
+  _handleDeleteNotification(statusId, notificationId) {
     const { locale } = document.body.dataset;
     let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}/notifications/${notificationId}`, 'DELETE'];
 
