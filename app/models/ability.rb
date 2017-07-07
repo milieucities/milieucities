@@ -40,6 +40,7 @@ class Ability
     can :manage, Status
     can :manage, Meeting
     can :manage, Notification
+    can :manage, Comment
   end
 
   def regular_user_abilities(user)
