@@ -6,20 +6,17 @@ export default class CommentForm extends Component {
 
   constructor(props) {
     super(props);
-    const showPrivacyPolicy = !(JSON.parse(document.body.dataset.userAcceptedPrivacyPolicy));
-    this.state = { showPrivacyPolicy };
+    this.state = {};
     this.handleChange = (e) => this.setState({ body: e.target.value });
-    this.handleChangePrivacyPolicy = (e) => this._handleChangePrivacyPolicy(e);
     this.submitForm = (e) => this._submitForm(e);
   }
 
   _submitForm(e) {
     e.preventDefault();
-    if (!this.state.acceptedPrivacyPolicy) {
+    if (!this.props.acceptedPrivacyPolicy) {
       window.flash('alert', 'You must accept the Privacy Policy in order to comment.')
     } else {
-      this.props.handleSave(this.state.body, this.props.parentId, this.state.acceptedPrivacyPolicy);
-      this.setState({ body: '', showPrivacyPolicy: false });
+      this.props.handleSave(this.state.body, this.props.parentId);
 
       if (this.props.toggleCommentForm) {
         this.props.toggleCommentForm();
@@ -27,12 +24,8 @@ export default class CommentForm extends Component {
     }
   }
 
-  _handleChangePrivacyPolicy(e) {
-    this.setState({ acceptedPrivacyPolicy: e.currentTarget.checked })
-  }
-
   render() {
-    const { locale, userAcceptedPrivacyPolicy } = document.body.dataset;
+    const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
 
     return(
@@ -50,10 +43,10 @@ export default class CommentForm extends Component {
           </textarea>
         </div>
         {
-          this.state.showPrivacyPolicy &&
+          !this.props.acceptedPrivacyPolicy &&
           <div className={css.privacy}>
             <p>{i18n.privacyPolicy}</p>
-            <input type="checkbox" id='accept_privacy_policy' onChange={ this.handleChangePrivacyPolicy } />
+            <input type="checkbox" id='accept_privacy_policy' onChange={ this.props.handleChangePrivacyPolicy } />
             <label htmlFor="accept_privacy_policy">{i18n.acceptPrivacyPolicy}</label>
           </div>
         }
