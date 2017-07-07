@@ -65,7 +65,7 @@ class NewDevelopmentNotificationJob
       dev_site_url = "https://milieu.io/dev_sites/#{dev_site_id}"
       {
         from_name: 'Milieu',
-        from_email: 'info@milieu.io',
+        from_email: ApplicationMailer::NOTIFICATION_EMAIL_ADDRESS,
         to: recipients,
         subject: 'New develpment site built near you',
         html: body,
