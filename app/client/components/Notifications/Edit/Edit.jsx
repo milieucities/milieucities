@@ -29,7 +29,7 @@ export default class Edit extends Component {
 
   _onDelete(e) {
     e.preventDefault();
-    this.props.handleDeleteNotification(this.props.status.id);
+    this.props.handleDeleteNotification(this.props.status.id, this.props.notification.id);
   }
 
   _onSave(e) {

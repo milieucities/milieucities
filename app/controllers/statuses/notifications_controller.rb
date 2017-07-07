@@ -38,8 +38,8 @@ module Statuses
     end
 
     def load_notification
-      if notification_params[:id]
-        @notification = Notification.find_by(id: notification_params[:id])
+      if params[:id]
+        @notification = Notification.find_by(id: params[:id])
       end
       @notification ||= @status.build_notification(notification_params)
     end
