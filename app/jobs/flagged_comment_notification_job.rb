@@ -66,7 +66,7 @@ class FlaggedCommentNotificationJob
     def generate_message_object(recipients, body, merge_vars, comment, dev_site)
       {
         from_name: 'Milieu',
-        from_email: 'info@milieu.io',
+        from_email: ApplicationMailer::NOTIFICATION_EMAIL_ADDRESS,
         to: recipients,
         subject: 'Comment flagged as offensive',
         html: body,

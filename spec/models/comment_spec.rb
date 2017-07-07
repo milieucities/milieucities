@@ -5,7 +5,7 @@ describe Comment do
 
   context 'comment contains offensive language' do
     before do
-      create :user, email: 'info@milieu.io'
+      create :user, email: ApplicationMailer::NOTIFICATION_EMAIL_ADDRESS
     end
 
     it 'should mark the comment as flagged and notify admin' do
