@@ -8,13 +8,14 @@ import i18n from './locale'
 export default class CommentsSection extends Component {
   constructor(props) {
     super(props);
-    this.state = { page: 0, limit: 5, comments: [] };
+    const acceptedPrivacyPolicy = JSON.parse(document.body.dataset.userAcceptedPrivacyPolicy);
+    this.state = { page: 0, limit: 5, comments: [], acceptedPrivacyPolicy };
     this.currentUserId = document.body.dataset.userId;
     this.fetchComments = () => this._fetchComments();
-    this.saveComment = (b,id,p) => this._saveComment(b,id,p);
+    this.saveComment = (b,id) => this._saveComment(b,id);
     this.deleteComment = (c) => this._deleteComment(c);
     this.editComment = (c,b) => this._editComment(c,b);
-    this.handleSave = (b,id,p) => this._handleSave(b,id,p);
+    this.handleSave = (b,id) => this._handleSave(b,id);
     this.handleDeleteRootComment = (c) => this._handleDeleteRootComment(c);
     this.handleEditRootComment = (c,b) => this._handleEditRootComment(c,b);
     this.openModal = () => this._openModal();
@@ -24,6 +25,7 @@ export default class CommentsSection extends Component {
     this.createVote = (a,b,c,d) => this._createVote(a,b,c,d);
     this.destroyVote = (a,b,c,d) => this._destroyVote(a,b,c,d);
     this.handleVoteRootComment = (c,d) => this._handleVoteRootComment(c,d);
+    this.handleChangePrivacyPolicy = (e) => this._handleChangePrivacyPolicy(e);
 
     this.fetchComments();
   }
@@ -87,7 +89,7 @@ export default class CommentsSection extends Component {
     })
   }
 
-  _saveComment(body, parentId, acceptedPrivacyPolicy) {
+  _saveComment(body, parentId) {
     return new Promise((resolve, reject) => {
       const limit = this.state.limit;
       const data = {
@@ -100,7 +102,7 @@ export default class CommentsSection extends Component {
         },
         limit,
         user: {
-          accepted_privacy_policy: acceptedPrivacyPolicy
+          accepted_privacy_policy: this.state.acceptedPrivacyPolicy
         }
       };
 
@@ -119,8 +121,8 @@ export default class CommentsSection extends Component {
     })
   }
 
-  _handleSave(body, parentId, acceptedPrivacyPolicy) {
-    this.saveComment(body, parentId, acceptedPrivacyPolicy).then((comment) => {
+  _handleSave(body, parentId) {
+    this.saveComment(body, parentId).then((comment) => {
       if (comment.flagged_as_offensive === 'FLAGGED') {
         window.flash('notice', i18n.flaggedNotification);
       } else {
@@ -218,47 +220,71 @@ export default class CommentsSection extends Component {
     })
   }
 
+  _handleChangePrivacyPolicy(e) {
+    this.setState({ acceptedPrivacyPolicy: e.currentTarget.checked })
+  }
+
   render() {
     const totalComments = this.state.comments ? this.state.comments.length : 0;
     const comments = this.state.comments;
     const { locale } = document.body.dataset;
+    const showSitePlanText = /Site Plan/.test(this.props.applicationType);
     i18n.setLanguage(locale);
 
-    return(
-      <div className={css.container}>
-        {
-          this.currentUserId &&
-          <div>
-            <h3>{i18n.makePublicComment}</h3>
-            <CommentForm { ...this.props } handleSave={this.handleSave} />
-          </div>
-        }
+    if (showSitePlanText) {
 
-        {
-          !this.currentUserId &&
-          <div className={css.nouser}>
-            <a href='#sign-in-modal' className='modal-trigger btn' onClick={this.openModal}>{i18n.signInToComment}</a>
-          </div>
-        }
-
-        <div className={css.commentCount}>
-          <p>{totalComments} responses</p>
+      return(
+        <div className={css.container}>
+          <p>{i18n.sitePlanText}</p>
         </div>
+      )
 
-        { comments &&
-          <Comments
-            { ...this.props }
-            children={comments}
-            saveComment={this.saveComment}
-            deleteComment={this.deleteComment}
-            editComment={this.editComment}
-            vote={this.vote}
-            handleEditRootComment={this.handleEditRootComment}
-            handleDeleteRootComment={this.handleDeleteRootComment}
-            handleVoteRootComment={this.handleVoteRootComment}
-          />
-        }
-      </div>
-    )
+    } else {
+
+      return(
+        <div className={css.container}>
+          {
+            this.currentUserId &&
+            <div>
+              <h3>{i18n.makePublicComment}</h3>
+              <CommentForm
+                { ...this.props }
+                handleSave={this.handleSave}
+                acceptedPrivacyPolicy={this.state.acceptedPrivacyPolicy}
+                handleChangePrivacyPolicy={this.handleChangePrivacyPolicy}
+              />
+            </div>
+          }
+
+          {
+            !this.currentUserId &&
+            <div className={css.nouser}>
+              <a href='#sign-in-modal' className='modal-trigger btn' onClick={this.openModal}>{i18n.signInToComment}</a>
+            </div>
+          }
+
+          <div className={css.commentCount}>
+            <p>{totalComments} responses</p>
+          </div>
+
+          { comments &&
+            <Comments
+              { ...this.props }
+              children={comments}
+              saveComment={this.saveComment}
+              deleteComment={this.deleteComment}
+              editComment={this.editComment}
+              vote={this.vote}
+              handleEditRootComment={this.handleEditRootComment}
+              handleDeleteRootComment={this.handleDeleteRootComment}
+              handleVoteRootComment={this.handleVoteRootComment}
+              acceptedPrivacyPolicy={this.state.acceptedPrivacyPolicy}
+              handleChangePrivacyPolicy={this.handleChangePrivacyPolicy}
+            />
+          }
+        </div>
+      )
+    }
+
   }
 }

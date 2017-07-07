@@ -14,7 +14,7 @@ module DevSites
     def show; end
 
     def create
-      update_user if user_params[:accepted_privacy_policy].present?
+      update_user if params[:user].present?
       respond_to do |format|
         if @comment.save
           format.json { render :show, status: :ok }
@@ -71,8 +71,7 @@ module DevSites
 
     def update_user
       user = current_user
-      Rails.logger.info "ACCEPTED => #{user_params[:accepted_privacy_policy]}"
-      user.update(accepted_privacy_policy: user_params[:accepted_privacy_policy])
+      user.update(user_params)
     end
 
     def comment_params
