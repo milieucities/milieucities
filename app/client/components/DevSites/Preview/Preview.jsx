@@ -129,11 +129,12 @@ export default class extends Component {
 
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
+    if(!devSite) return <div></div>;
+
     const { horizontal, preview } = this.props;
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
 
-    if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
       return(
@@ -302,7 +303,7 @@ export default class extends Component {
           }
         </div>
 
-        <CommentsSection devSiteId={devSite.id} />
+        <CommentsSection devSiteId={devSite.id} applicationType={devSite.application_type_name}/>
 
         {
           showModal &&

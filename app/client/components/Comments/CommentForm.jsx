@@ -33,12 +33,14 @@ export default class CommentForm extends Component {
 
   render() {
     const { locale, userAcceptedPrivacyPolicy } = document.body.dataset;
-    console.log('showPrivacyPolicy', this.state.showPrivacyPolicy)
     i18n.setLanguage(locale);
 
     return(
       <form id='new_comment' onSubmit={this.submitForm} className={css.commentForm}>
         <input name='utf8' type='hidden' value='✓' />
+        <div className={css.privacy}>
+          <p>{i18n.disclaimer}</p>
+        </div>
         <div className={css.wrapper}>
           <textarea
             className={css.textarea}

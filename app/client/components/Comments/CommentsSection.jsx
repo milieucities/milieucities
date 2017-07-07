@@ -222,43 +222,56 @@ export default class CommentsSection extends Component {
     const totalComments = this.state.comments ? this.state.comments.length : 0;
     const comments = this.state.comments;
     const { locale } = document.body.dataset;
+    const showSitePlanText = /Site Plan/.test(this.props.applicationType);
     i18n.setLanguage(locale);
 
-    return(
-      <div className={css.container}>
-        {
-          this.currentUserId &&
-          <div>
-            <h3>{i18n.makePublicComment}</h3>
-            <CommentForm { ...this.props } handleSave={this.handleSave} />
-          </div>
-        }
+    if (showSitePlanText) {
 
-        {
-          !this.currentUserId &&
-          <div className={css.nouser}>
-            <a href='#sign-in-modal' className='modal-trigger btn' onClick={this.openModal}>{i18n.signInToComment}</a>
-          </div>
-        }
-
-        <div className={css.commentCount}>
-          <p>{totalComments} responses</p>
+      return(
+        <div className={css.container}>
+          <p>{i18n.sitePlanText}</p>
         </div>
+      )
 
-        { comments &&
-          <Comments
-            { ...this.props }
-            children={comments}
-            saveComment={this.saveComment}
-            deleteComment={this.deleteComment}
-            editComment={this.editComment}
-            vote={this.vote}
-            handleEditRootComment={this.handleEditRootComment}
-            handleDeleteRootComment={this.handleDeleteRootComment}
-            handleVoteRootComment={this.handleVoteRootComment}
-          />
-        }
-      </div>
-    )
+    } else {
+
+      return(
+        <div className={css.container}>
+          {
+            this.currentUserId &&
+            <div>
+              <h3>{i18n.makePublicComment}</h3>
+              <CommentForm { ...this.props } handleSave={this.handleSave} />
+            </div>
+          }
+
+          {
+            !this.currentUserId &&
+            <div className={css.nouser}>
+              <a href='#sign-in-modal' className='modal-trigger btn' onClick={this.openModal}>{i18n.signInToComment}</a>
+            </div>
+          }
+
+          <div className={css.commentCount}>
+            <p>{totalComments} responses</p>
+          </div>
+
+          { comments &&
+            <Comments
+              { ...this.props }
+              children={comments}
+              saveComment={this.saveComment}
+              deleteComment={this.deleteComment}
+              editComment={this.editComment}
+              vote={this.vote}
+              handleEditRootComment={this.handleEditRootComment}
+              handleDeleteRootComment={this.handleDeleteRootComment}
+              handleVoteRootComment={this.handleVoteRootComment}
+            />
+          }
+        </div>
+      )
+    }
+
   }
 }

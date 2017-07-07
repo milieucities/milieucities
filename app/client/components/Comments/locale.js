@@ -24,7 +24,9 @@ const i18n = new LocalizedStrings({
     alreadyVotedUp: 'You have already voted up this comment.',
     alreadyVotedDown: 'You have already voted down this comment.',
     privacyPolicy: 'Personal information, as defined by the Municipal Freedom of Information and Protection of Privacy Act (MFIPPA) is collected under the authority of the Municipal Act, 2001, and in accordance with the provisions of MFIPPA. Personal information on this tool will be used for the purpose of consultations under the Ontario Planning Act. If you have questions about this collection, use, and disclosure of this information, contact the City of Guelph’s Information and Access Coordinator at 519-822-1260 ext. 2349 or privacy@guelph.ca.',
-    acceptPrivacyPolicy: 'I accept the Privacy Policy'
+    acceptPrivacyPolicy: 'I accept the Privacy Policy',
+    disclaimer: 'Your comments, including any personal information you provide, will become part of the decision making process of the application and may be posted on the internet. Pursuant to Section 27 of the Municipal Freedom of Information and Protection of Privacy Act, public feedback to planning proposals is considered a public record and will be disclosed to any individual upon request. For questions regarding the collection, use, and disclosure of personal information please contact the City of Guelph\'s Information and Access Coordinator at 519-822-1260 ext. 2349 or privacy@guelph.ca.',
+    sitePlanText: "Please note that site plan applications are shown for information purposes only. Site plan applications are reviewed and approved by City staff."
   },
   fr: {
     makePublicComment: 'Faire un commentaire publique',
@@ -48,7 +50,10 @@ const i18n = new LocalizedStrings({
     hideReplies: "Cacher réponses",
     alreadyVotedUp: 'Vous avez déjà voté pour ce commentaire.',
     alreadyVotedDown: 'Vous avez déjà voté contre ce commentaire.',
-    privacyPolicy: 'Personal information, as defined by the Municipal Freedom of Information and Protection of Privacy Act (MFIPPA) is collected under the authority of the Municipal Act, 2001, and in accordance with the provisions of MFIPPA. Personal information on this tool will be used for the purpose of consultations under the Ontario Planning Act. If you have questions about this collection, use, and disclosure of this information, contact the City of Guelph’s Information and Access Coordinator at 519-822-1260 ext. 2349 or privacy@guelph.ca.'
+    privacyPolicy: 'Personal information, as defined by the Municipal Freedom of Information and Protection of Privacy Act (MFIPPA) is collected under the authority of the Municipal Act, 2001, and in accordance with the provisions of MFIPPA. Personal information on this tool will be used for the purpose of consultations under the Ontario Planning Act. If you have questions about this collection, use, and disclosure of this information, contact the City of Guelph’s Information and Access Coordinator at 519-822-1260 ext. 2349 or privacy@guelph.ca.',
+    acceptPrivacyPolicy: 'I accept the Privacy Policy',
+    disclaimer: 'Your comments, including any personal information you provide, will become part of the decision making process of the application and may be posted on the internet. Pursuant to Section 27 of the Municipal Freedom of Information and Protection of Privacy Act, public feedback to planning proposals is considered a public record and will be disclosed to any individual upon request. For questions regarding the collection, use, and disclosure of personal information please contact the City of Guelph\'s Information and Access Coordinator at 519-822-1260 ext. 2349 or privacy@guelph.ca.',
+    sitePlanText: "Please note that site plan applications are shown for information purposes only. Site plan applications are reviewed and approved by City staff."
   }
 });
 
