@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :conversations, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :authentication_tokens, dependent: :destroy
-  has_one :notification, dependent: :destroy
+  has_one :notification_setting, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_one :address, as: :addressable, dependent: :destroy
   has_many :comments
@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   delegate :name, :bio, :web_presence, :anonymous_comments, to: :profile, allow_nil: true
   friendly_id :slug_candidates, use: :slugged
 
-  after_create :create_notification
+  after_create :create_notification_setting
 
   def slug_candidates
     [

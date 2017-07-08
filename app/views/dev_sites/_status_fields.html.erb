@@ -2,7 +2,7 @@
 
   <div class="input-field col s12 m6">
     <%= f.label :status %>
-    <%= f.select :status, options_for_select(Status::VALID_STATUS_TYPES, selected: f.object.status) %>
+    <%= f.select :status, options_for_select(@dev_site.valid_statuses, selected: f.object.status) %>
   </div>
 
   <div class="input-field col s12 m6">

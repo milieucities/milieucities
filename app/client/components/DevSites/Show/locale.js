@@ -21,7 +21,9 @@ const i18n = new LocalizedStrings({
     councillor: "Councillor",
     name: "Name",
     email: "Email",
-    message: "Message"
+    message: "Message",
+    notices: 'Notices',
+    attachments: 'Attachments',
 
   },
   fr: {

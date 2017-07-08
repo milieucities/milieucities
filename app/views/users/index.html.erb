@@ -17,7 +17,7 @@
           <td><%= user.profile.name  %></td>
           <td><%= user.email %></td>
           <td><%= user.created_at %></td>
-          <td><%= user.notification.newletter %></td>
+          <td><%= user.notification_setting.newsletter %></td>
           <td><%= user.profile.verification_status %></td>
           <td>
             <% if user.profile.verification_status === 'pendingVerification' %>

@@ -3,18 +3,18 @@ module DevSites
     load_resource :dev_site
     around_action :authenticate_with_token, only: [:update, :destroy], if: :contains_token
     load_and_authorize_resource :comment, through: :dev_site
-    before_action :load_resource, only: [:update, :destroy]
+    before_action :load_resource, only: [:update, :destroy, :children]
 
     def index
-      @comments = @comments.includes(:votes, :user)
-                           .where.not(flagged_as_offensive: Comment::FLAGGED_STATUS)
       @total = @comments.count
+      @comments = @comments.root.clean.includes(:votes, :user)
       @comments = paginate(@comments, 5)
     end
 
     def show; end
 
     def create
+      update_user if params[:user].present?
       respond_to do |format|
         if @comment.save
           format.json { render :show, status: :ok }
@@ -27,7 +27,7 @@ module DevSites
     def update
       respond_to do |format|
         if @comment.update(comment_params)
-          format.json { render json: @comment, status: 200 }
+          format.json { render json: @comments, status: 200 }
           format.html do
             flash[:notice] = 'The comment has been updated.'
             redirect_to dev_site_path(@dev_site)
@@ -45,7 +45,7 @@ module DevSites
     def destroy
       respond_to do |format|
         if @comment.destroy
-          format.json { head :no_content, status: 204 }
+          format.json { render json: @comment, status: 204 }
           format.html do
             flash[:notice] = 'The comment has been deleted.'
             redirect_to dev_site_path(@dev_site)
@@ -60,14 +60,31 @@ module DevSites
       end
     end
 
+    def children
+      @comments = @comment.children
+      respond_to do |format|
+        format.json { render :index, status: 200 }
+      end
+    end
+
     private
+
+    def update_user
+      user = current_user
+      user.update(user_params)
+    end
 
     def comment_params
       params.require(:comment).permit(:body,
                                       :commentable_id,
                                       :commentable_type,
                                       :user_id,
+                                      :parent_id,
                                       :flagged_as_offensive)
+    end
+
+    def user_params
+      params.require(:user).permit(:accepted_privacy_policy)
     end
 
     def load_resource

@@ -7,7 +7,7 @@ export default class SelectWithLabel extends Component {
   }
 
   _handleChange(e) {
-    if(this.props.onChange instanceof Function) { this.props.onChange(e) }
+    if(this.props.onChange instanceof Function) { this.props.onChange(e.currentTarget.value) }
   }
 
   render() {

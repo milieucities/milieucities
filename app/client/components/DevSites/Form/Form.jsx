@@ -4,41 +4,22 @@ import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
 import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
-import DatePicker from 'react-datepicker'
+import StatusSection from '../../Statuses/Index/StatusSection'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 
-const APPLICATION_TYPES = [
-  'Site Plan Approval',
-  'Condo Approval',
-  'Subdivision Approval',
-  'Zoning Amendment',
-  'Registered Condominium',
-  'Site Plan Control',
-  'Official Plan Amendment',
-  'Zoning By-law Amendment',
-  'Demolition Control',
-  'Cash-in-lieu of Parking',
-  'Plan of Subdivision',
-  'Plan of Condominium',
+const BUILDING_TYPES = [
   'Derelict',
-  'Vacant',
-  'Master Plan'
-]
-
-const STATUSES = [
-  'Application File Pending',
-  'Application Reactivated',
-  'Application Approved',
-  'Community Information and Comment Session Open',
-  'Application Approved by Committee',
-  'Application Recommended to Council',
-  'Draft Report sent to Councillor and Applicant for Response',
-  'In Appeal Period',
-  'Comment Period in Progress',
-  'Community Information and Comment Session Held',
-  'Comment Period has Ended/Issue Resolution',
-  'Unknown'
+  'Demolition',
+  'Residential Apartment',
+  'Low-rise Residential',
+  'Mid-rise Residential',
+  'Hi-rise Residential',
+  'Mixed-use Residential/Community',
+  'Commercial',
+  'Commercial/Hotel',
+  'Mixed-use',
+  'Additions'
 ]
 
 export default class DevSiteForm extends Component {
@@ -57,7 +38,9 @@ export default class DevSiteForm extends Component {
     this.loadMunicipalities = () => this._loadMunicipalities();
     this.loadDevSite = () => this._loadDevSite();
     this.handleChangeMunicipality = (e) => this._handleChangeMunicipality(e);
-    this.handleStatusDate = (date) => this._handleStatusDate(date);
+    this.handleStartDate = (date) => this._handleStartDate(date);
+    this.handleEndDate = (date) => this._handleEndDate(date);
+    this.handleMeetingDate = (date) => this._handleMeetingDate(date);
     this.handleSubmit = (e) => this._handleSubmit(e);
   }
 
@@ -68,6 +51,7 @@ export default class DevSiteForm extends Component {
 
   _loadMunicipalities() {
     const { userPrimaryOrganizationId } = document.body.dataset;
+
     $.getJSON(`/organizations/${userPrimaryOrganizationId}/municipalities`, municipalities => {
       this.setState({ municipalities, loadingMunicipalities: false })
     });
@@ -80,8 +64,8 @@ export default class DevSiteForm extends Component {
     }
 
     $.getJSON(`/dev_sites/${this.state.devSiteId}`, devSite => {
-      let statusDate = devSite.statuses.length > 0 ? moment(devSite.statuses[0].status_date) : null
-      this.setState({ devSite, loadingDevSite: false, statusDate })
+      let startDate = devSite.statuses.length > 0 ? moment(devSite.statuses[0].status_date) : null
+      this.setState({ devSite, loadingDevSite: false, startDate })
     });
   }
 
@@ -89,8 +73,16 @@ export default class DevSiteForm extends Component {
     this.setState({ activeMunicipalityIndex: e.currentTarget.selectedIndex });
   }
 
-  _handleStatusDate(date) {
-    this.setState({ statusDate: date });
+  _handleStartDate(date) {
+    this.setState({ startDate: date });
+  }
+
+  _handleEndDate(date) {
+    this.setState({ endDate: date });
+  }
+
+  _handleMeetingDate(date) {
+    this.setState({ meetingDate: date });
   }
 
   _handleSubmit(e) {
@@ -121,7 +113,7 @@ export default class DevSiteForm extends Component {
   }
 
   render() {
-    const { loadingMunicipalities, devSite, loadingDevSite, municipalities, activeMunicipalityIndex, statusDate, error } = this.state;
+    const { loadingMunicipalities, devSite, loadingDevSite, municipalities, activeMunicipalityIndex, startDate, endDate, meetingDate, error } = this.state;
     const hasAddress = devSite.addresses && devSite.addresses.length > 0
     const hasStatus = devSite.statuses && devSite.statuses.length > 0
     i18n.setLanguage(document.body.dataset.locale);
@@ -131,8 +123,19 @@ export default class DevSiteForm extends Component {
         {
           !loadingMunicipalities && !loadingDevSite &&
           <div className={css.content}>
-            <h2>{i18n.developmentSite}</h2>
+            {
+              devSite.id &&
+              <div>
+                <h2>{i18n.statuses}</h2>
+                <StatusSection
+                  devSite={ devSite }
+                  statusOptions={ this.props.statusOptions }
+                  notificationOptions={ this.props.notificationOptions }
+                />
+              </div>
+            }
 
+            <h2>{i18n.developmentSite}</h2>
             <form encType='multipart/form-data' id='new-form' onSubmit={this.handleSubmit} acceptCharset='UTF-8'>
               <div className={css.meta}>
                 <div className={css.label}>
@@ -140,43 +143,55 @@ export default class DevSiteForm extends Component {
                 </div>
                 <div className={css.data}>
                   <div className='row'>
-                    <SelectWithLabel
-                      classes='col s12 m12 l6'
-                      id='dev_site_municipality'
-                      name='dev_site[municipality_id]'
-                      label={i18n.municipality}
-                      value={municipalities[activeMunicipalityIndex].id}
-                      onChange={this.handleChangeMunicipality}
-                      options={municipalities.map(m => [m.id,m.name])}
-                      />
-
-                    <SelectWithLabel
-                      classes='col s12 m12 l6'
-                      id='dev_site_ward_id'
-                      name='dev_site[ward_id]'
-                      label={i18n.ward}
-                      defaultValue={devSite.ward_id}
-                      options={municipalities[activeMunicipalityIndex].wards.map(w => [w.id, w.name])}
-                      />
+                    <TextInputWithLabel
+                      classes='col s12'
+                      id='dev_site_title'
+                      name='dev_site[title]'
+                      defaultValue={devSite.title}
+                      label='Project title'
+                      error={error.title}
+                    />
                   </div>
 
                   <div className='row'>
                     <TextInputWithLabel
-                      classes='col s12 m12 l6'
+                      classes='col s12'
                       id='dev_site_devID'
                       name='dev_site[devID]'
                       defaultValue={devSite.devID}
                       label={i18n.developmentId}
                       error={error.devID}
                       />
+                  </div>
+
+                  <div className='row'>
+                    <SelectWithLabel
+                      classes='col s12 m12 l6'
+                      id='dev_site_build_type'
+                      name='dev_site[build_type]'
+                      label={i18n.buildingType}
+                      defaultValue={devSite.build_type}
+                      options={BUILDING_TYPES.map(a => [a,a])}
+                      />
 
                     <SelectWithLabel
                       classes='col s12 m12 l6'
                       id='dev_site_application_type'
-                      name='dev_site[application_type]'
+                      name='dev_site[application_types_attributes][0][name]'
                       label={i18n.applicationType}
-                      defaultValue={devSite.application_type}
-                      options={APPLICATION_TYPES.map(a => [a,a])}
+                      defaultValue={devSite.application_type_name}
+                      options={this.props.applicationTypes.map(a => [a,a])}
+                      />
+                  </div>
+
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12'
+                      id='dev_site_short_description'
+                      name='dev_site[short_description]'
+                      defaultValue={devSite.short_description}
+                      label={i18n.shortDescription}
+                      error={error.devID}
                       />
                   </div>
 
@@ -209,6 +224,27 @@ export default class DevSiteForm extends Component {
                       />
                   </div>
 
+                  <div className="row">
+                    <SelectWithLabel
+                      classes='col s12 m12 l6'
+                      id='dev_site_municipality'
+                      name='dev_site[municipality_id]'
+                      label={i18n.municipality}
+                      value={municipalities[activeMunicipalityIndex].id}
+                      onChange={this.handleChangeMunicipality}
+                      options={municipalities.map(m => [m.id,m.name])}
+                      />
+
+                    <SelectWithLabel
+                      classes='col s12 m12 l6'
+                      id='dev_site_ward_id'
+                      name='dev_site[ward_id]'
+                      label={i18n.ward}
+                      defaultValue={devSite.ward_id}
+                      options={municipalities[activeMunicipalityIndex].wards.map(w => [w.id, w.name])}
+                      />
+                  </div>
+
                   <div className='row'>
                     <TextInputWithLabel
                       classes='col s12 m12 l4'
@@ -221,14 +257,14 @@ export default class DevSiteForm extends Component {
                       classes='col s12 m12 l4'
                       id='address_province_state'
                       name='dev_site[addresses_attributes][0][province_state]'
-                      defaultValue={hasAddress ? devSite.addresses[0].province_state : ''}
+                      defaultValue={hasAddress ? devSite.addresses[0].province_state : 'ON'}
                       label={i18n.province}
                       />
                     <TextInputWithLabel
                       classes='col s12 m12 l4'
                       id='address_country'
                       name='dev_site[addresses_attributes][0][country]'
-                      defaultValue={hasAddress ? devSite.addresses[0].country : ''}
+                      defaultValue={hasAddress ? devSite.addresses[0].country : 'Canada'}
                       label={i18n.country}
                       />
                   </div>
@@ -237,50 +273,76 @@ export default class DevSiteForm extends Component {
 
               <div className={css.meta}>
                 <div className={css.label}>
-                  {i18n.currentStatus}
+                  {i18n.urbanPlanner}
                 </div>
                 <div className={css.data}>
                   <div className='row'>
-                    <SelectWithLabel
+                    <TextInputWithLabel
                       classes='col s12 m12 l6'
-                      id='status_name'
-                      name='dev_site[statuses_attributes][0][status]'
-                      label={i18n.status}
-                      defaultValue={hasStatus ? devSite.status[0].status : ''}
-                      options={STATUSES.map(s => [s,s])}
+                      id='dev_site_urban_planner_name'
+                      name='dev_site[urban_planner_name]'
+                      defaultValue={devSite.urban_planner_name}
+                      label={i18n.name}
                       />
 
-                    <div className='input-field col s12 m12 l6'>
-                      <label htmlFor='status_date'>{i18n.statusDate}</label>
-                      <DatePicker selected={statusDate} dateFormat='MMMM DD, YYYY' name='dev_site[statuses_attributes][0][status_date]' onChange={this.handleStatusDate} />
-                      {
-                        this.state.error['statuses.status_date'] &&
-                        <div className='error-message'>{this.state.error['statuses.status_date']}</div>
-                      }
-                    </div>
+                    <TextInputWithLabel
+                      classes='col s12 m12 l6'
+                      id='dev_site_urban_planner_email'
+                      name='dev_site[urban_planner_email]'
+                      defaultValue={devSite.urban_planner_email}
+                      label={i18n.email}
+                      />
                   </div>
                 </div>
               </div>
 
               <div className={css.meta}>
                 <div className={css.label}>
-                  {i18n.contact}
+                  {i18n.wardCouncillor}
+                </div>
+                <div className={css.data}>
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12'
+                      id='dev_site_ward_councillor_email'
+                      name='dev_site[ward_councillor_email]'
+                      defaultValue={devSite.ward_councillor_email}
+                      label={i18n.email}
+                      />
+                  </div>
+                </div>
+              </div>
+
+              <div className={css.meta}>
+                <div className={css.label}>
+                  {i18n.applicant}
                 </div>
                 <div className={css.data}>
                   <div className='row'>
                     <TextInputWithLabel
                       classes='col s12 m12 l6'
-                      id='dev_site_urban_planner_email'
-                      name='dev_site[urban_planner_email]'
-                      defaultValue={devSite.urban_planner_email}
-                      label={i18n.urbanPlannerEmail}
+                      id='dev_site_applicant_first_name'
+                      name='dev_site[applicant_first_name]'
+                      defaultValue={devSite.applicant_first_name}
+                      label={i18n.applicantFirstName}
                       />
+
                     <TextInputWithLabel
                       classes='col s12 m12 l6'
-                      id='dev_site_ward_councillor_email'
-                      name='dev_site[ward_councillor_email]'
-                      defaultValue={devSite.ward_councillor_email}
-                      label={i18n.wardCouncillorEmail}
+                      id='dev_site_applicant_last_name'
+                      name='dev_site[applicant_last_name]'
+                      defaultValue={devSite.applicant_last_name}
+                      label={i18n.applicantLastName}
+                      />
+                  </div>
+
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12'
+                      id='dev_site_on_behalf_of'
+                      name='dev_site[on_behalf_of]'
+                      defaultValue={devSite.on_behalf_of}
+                      label={i18n.organization}
                       />
                   </div>
                 </div>
@@ -307,6 +369,23 @@ export default class DevSiteForm extends Component {
                 </div>
               </div>
 
+              <div className={css.meta}>
+                <div className={css.label}>
+                  {i18n.links}
+                </div>
+                <div className={css.data}>
+                  <div className='row'>
+                    <TextInputWithLabel
+                      classes='col s12'
+                      id='dev_site_url_full_notice'
+                      name='dev_site[url_full_notice]'
+                      defaultValue={devSite.url_full_notice}
+                      label={i18n.linkToFullNotice}
+                      />
+                  </div>
+                </div>
+              </div>
+
               <div className='row'>
                 <input type='submit' value={i18n.save} className='btn submit' />
               </div>
@@ -320,5 +399,17 @@ export default class DevSiteForm extends Component {
 
 document.addEventListener('turbolinks:load', () => {
   const devSiteForm = document.querySelector('#dev-site-form');
-  devSiteForm && render(<DevSiteForm/>, devSiteForm)
+
+  if (devSiteForm) {
+    const applicationTypes = JSON.parse(devSiteForm.dataset.applicationTypes);
+    const statusOptions = JSON.parse(devSiteForm.dataset.statuses);
+    const notificationOptions = JSON.parse(devSiteForm.dataset.notificationOptions)
+
+    render(
+      <DevSiteForm
+        applicationTypes={ applicationTypes }
+        statusOptions={ statusOptions }
+        notificationOptions={ notificationOptions }
+      />, devSiteForm)
+  }
 })

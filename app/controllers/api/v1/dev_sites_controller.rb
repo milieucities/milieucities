@@ -106,7 +106,8 @@ class Api::V1::DevSitesController < Api::V1::ApiController
                               :urban_planner_name,
                               :urban_planner_email,
                               :ward_councillor_email,
-                              :applicant,
+                              :applicant_first_name,
+                              :applicant_last_name,
                               :on_behalf_of,
                               :ward,
                               :municipality,
@@ -120,11 +121,14 @@ class Api::V1::DevSitesController < Api::V1::ApiController
                               [
                                 :meeting_type,
                                 :time,
+                                :date,
+                                :title,
                                 :location
                               ],
                               statuses_attributes: [
                                 :status,
-                                :status_date
+                                :start_date,
+                                :end_date
                               ],
                               addresses_attributes: [
                                 :street,

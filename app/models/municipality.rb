@@ -1,6 +1,7 @@
 class Municipality < ActiveRecord::Base
   has_many :wards, dependent: :destroy
   has_many :dev_sites
+  has_many :statuses
   has_and_belongs_to_many :organizations
 
   validates :name,

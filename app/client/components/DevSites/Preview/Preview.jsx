@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import css from './preview.scss'
 import { capitalize, replace } from 'lodash'
 import i18n from './locale'
-import Comments from '../../Comments/Comments'
+import CommentsSection from '../../Comments/CommentsSection'
 import Modal from '../../Utility/Modal/Modal'
 import { ShareButtons, generateShareIcon } from 'react-share';
 
@@ -129,11 +129,12 @@ export default class extends Component {
 
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
+    if(!devSite) return <div></div>;
+
     const { horizontal, preview } = this.props;
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
 
-    if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
       return(
@@ -302,7 +303,8 @@ export default class extends Component {
           }
         </div>
 
-        <Comments devSiteId={devSite.id} />
+        <CommentsSection devSiteId={devSite.id} applicationType={devSite.application_type_name}/>
+
         {
           showModal &&
           <Modal parent={this}>

@@ -1,6 +1,7 @@
 class DevSitesController < ApplicationController
   DEFAULT_SITES_LIMIT = 80
   load_and_authorize_resource
+  after_action :allow_iframe, only: [:index]
 
   def index
     @no_header = true
@@ -21,10 +22,16 @@ class DevSitesController < ApplicationController
   end
 
   def new
+    @application_types = ApplicationType::VALID_APPLICATION_TYPES
+    @statuses = @dev_site.valid_statuses
+    @notification_options = Notification::STATUS_TO_NOTIFICATION_TYPES_MAP.to_json
     @no_header = true
   end
 
   def edit
+    @application_types = ApplicationType::VALID_APPLICATION_TYPES
+    @statuses = @dev_site.valid_statuses
+    @notification_options = Notification::STATUS_TO_NOTIFICATION_TYPES_MAP.to_json
     @no_header = true
   end
 
@@ -86,18 +93,60 @@ class DevSitesController < ApplicationController
       .require(:dev_site)
       .permit(
         :devID,
-        :application_type,
-        :municipality_id,
-        :ward_id,
+        :title,
+        :address,
+        :build_type,
         :description,
-        :ward_councillor_email,
+        :short_description,
+        :urban_planner_name,
         :urban_planner_email,
-        :featured,
+        :ward_councillor_email,
+        :applicant_first_name,
+        :applicant_last_name,
+        :on_behalf_of,
+        :ward_id,
+        :municipality_id,
+        :received_date,
+        :active_at,
+        :url_full_notice,
+        application_types_attributes: [
+          :id,
+          :name,
+          :_destroy
+        ],
+        meetings_attributes:
+        [
+          :id,
+          :meeting_type,
+          :title,
+          :time,
+          :date,
+          :location,
+          :_destroy
+        ],
+        statuses_attributes: [
+          :id,
+          :status,
+          :start_date,
+          :end_date,
+          :_destroy
+        ],
+        addresses_attributes: [
+          :id,
+          :street,
+          :city,
+          :province_state,
+          :country,
+          :_destroy
+        ],
         images: [],
         files: [],
-        likes_attributes: [:id, :user_id, :dev_site_id, :_destroy],
-        addresses_attributes: [:id, :street, :city, :province_state, :country, :_destroy],
-        statuses_attributes: [:id, :status, :status_date, :_destroy]
+        likes_attributes: [:id, :user_id, :dev_site_id, :_destroy]
       )
+  end
+
+  def allow_iframe
+    response.headers.delete 'X-Frame-Options'
+    # response.headers['X-Frame-Options'] = 'ALLOW-FROM http://guelph.ca'
   end
 end

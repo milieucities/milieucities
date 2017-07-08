@@ -17,3 +17,7 @@ end
 node :voted_up do |comment|
   comment.voted_up(current_user)
 end
+
+node :replies do |comment|
+  comment.children.count
+end

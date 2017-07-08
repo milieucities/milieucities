@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606185836) do
+ActiveRecord::Schema.define(version: 20170707033849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comment_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+  end
+
+  add_index "comment_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_idx", unique: true, using: :btree
+  add_index "comment_hierarchies", ["descendant_id"], name: "comment_desc_idx", using: :btree
+
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.string   "title"
@@ -76,6 +85,7 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.integer  "commentable_id"
     t.integer  "vote_count"
     t.string   "flagged_as_offensive", default: "UNFLAGGED"
+    t.integer  "parent_id"
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -128,11 +138,13 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.integer  "municipality_id"
     t.integer  "ward_id"
     t.boolean  "featured",              default: false
+    t.string   "short_description"
     t.datetime "active_at"
-    t.string   "applicant"
     t.string   "on_behalf_of"
     t.string   "urban_planner_name"
     t.string   "url_full_notice"
+    t.string   "applicant_first_name"
+    t.string   "applicant_last_name"
   end
 
   create_table "events", force: :cascade do |t|
@@ -172,12 +184,15 @@ ActiveRecord::Schema.define(version: 20170606185836) do
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
   create_table "meetings", force: :cascade do |t|
+    t.string   "title"
     t.string   "meeting_type"
-    t.datetime "time"
+    t.string   "time"
+    t.datetime "date"
     t.string   "location"
     t.integer  "dev_site_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "status_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -206,15 +221,31 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "notification_settings", force: :cascade do |t|
     t.integer  "user_id"
-    t.boolean  "newletter",                default: true
+    t.boolean  "newsletter",               default: true
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
-    t.boolean  "updated_dev_site_near_me"
+    t.boolean  "immediate_vicinity_scope"
+    t.boolean  "ward_scope"
+    t.boolean  "municipality_scope"
+    t.boolean  "project_comments"
+    t.boolean  "comment_replies"
   end
 
-  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+  add_index "notification_settings", ["user_id"], name: "index_notification_settings_on_user_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.datetime "send_at"
+    t.string   "notification_type"
+    t.string   "notice"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id", using: :btree
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
@@ -267,12 +298,13 @@ ActiveRecord::Schema.define(version: 20170606185836) do
   add_index "sentiments", ["sentimentable_type", "sentimentable_id"], name: "index_sentiments_on_sentimentable_type_and_sentimentable_id", using: :btree
 
   create_table "statuses", force: :cascade do |t|
-    t.datetime "status_date"
+    t.datetime "start_date"
     t.string   "status"
     t.datetime "created"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "dev_site_id"
+    t.datetime "end_date"
   end
 
   create_table "survey_responses", force: :cascade do |t|
@@ -288,13 +320,14 @@ ActiveRecord::Schema.define(version: 20170606185836) do
     t.string   "username"
     t.string   "email"
     t.string   "role"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.string   "password_digest"
     t.string   "uid"
     t.string   "provider"
     t.string   "slug"
-    t.uuid     "uuid",            default: "uuid_generate_v4()"
+    t.uuid     "uuid",                    default: "uuid_generate_v4()"
+    t.boolean  "accepted_privacy_policy", default: false
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
@@ -325,7 +358,7 @@ ActiveRecord::Schema.define(version: 20170606185836) do
   add_foreign_key "conversations", "users"
   add_foreign_key "likes", "dev_sites"
   add_foreign_key "likes", "users"
-  add_foreign_key "notifications", "users"
+  add_foreign_key "notification_settings", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "votes", "comments"
   add_foreign_key "votes", "users"

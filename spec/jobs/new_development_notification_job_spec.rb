@@ -18,7 +18,7 @@ describe NewDevelopmentNotificationJob do
 
         @expected_message_object = {
           from_name: 'Milieu',
-          from_email: 'info@milieu.io',
+          from_email: ApplicationMailer::NOTIFICATION_EMAIL_ADDRESS,
           to: [email: user.email],
           subject: 'New develpment site built near you',
           html: expected_body,
