@@ -235,13 +235,13 @@ export default class extends Component {
               {devSite.application_type_name.replace(/coa/, 'Committee of Adjustment')} <br/>
             </div>
 
-            <div className='col m6 s4'>
+            <div className='col m8 s6'>
               <img src={devSite.image_url} className={css.image} />
             </div>
             </div>
           <div className='row'>
             <div className='col m11 s4'>
-              <div>
+              <div className={css.tabs}>
                   <Tabs>
                     <TabList>
                       <Tab>{i18n.description}</Tab>
@@ -305,11 +305,12 @@ export default class extends Component {
             </div>
             <div className='col m2 s2'>
             <div className={css.sharecontainer}>
-              <FacebookShareButton url={devSite.url} title={devSite.address} media={devSite.image_url}>
-                <FacebookIcon size={32} round />
+              share on<br/>
+              <FacebookShareButton url={devSite.url} title={devSite.address} media={devSite}>
+                <FacebookIcon size={45} round />
               </FacebookShareButton><br/>
               <TwitterShareButton url={devSite.url} title={devSite.address} media={devSite.image_url}>
-                <TwitterIcon size={32} round />
+                <TwitterIcon size={45} round />
               </TwitterShareButton>
             </div>
           </div>
