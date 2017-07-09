@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Dashboard from '../../../Layout/Dashboard/Dashboard'
 import DevSitePreview from '../../../DevSites/Preview/Preview'
+import SearchForm from './SearchForm'
 import css from '../../../Layout/Dashboard/dashboard.scss'
 import indexCss from './index.scss'
 import Pagination from '../../../Utility/Pagination/Pagination'
@@ -10,7 +11,7 @@ export default class Index extends Component {
   constructor(props) {
     super(props)
     this.state = { loading: true, page: 0 }
-    this.loadDevSites = () => this._loadDevSites()
+    this.loadDevSites = (q) => this._loadDevSites(q)
     this.handleDelete = (e) => this._handleDelete(e)
     this.loadDevSites()
   }
@@ -22,11 +23,15 @@ export default class Index extends Component {
     }
   }
 
-  _loadDevSites() {
+  _loadDevSites(query) {
+    console.log('query', query)
     const { userPrimaryOrganizationId } = document.body.dataset;
     $.getJSON(`/organizations/${userPrimaryOrganizationId}/dev_sites`,
-      { page: this.state.page, limit: this.state.limit },
-      json => this.setState({ devSites: json.dev_sites, total: json.total, loading: false })
+      { page: this.state.page, limit: this.state.limit, query },
+      (json) => {
+        console.log('json', json)
+        this.setState({ devSites: json.dev_sites, total: json.total, loading: false })
+      }
     );
   }
 
@@ -55,7 +60,10 @@ export default class Index extends Component {
           !loading &&
           <div className={css.content}>
             <h2>Manage Development Sites</h2>
-            <a href={`/${locale}/dev_sites/new`} className='btn'>Add Development Site</a>
+            <div className="actions">
+              <a href={`/${locale}/dev_sites/new`} className='btn'>Add Development Site</a>
+              <SearchForm handleSubmit={this.loadDevSites} />
+            </div>
             <div className='row'>
               {
                 devSites && devSites.map(devSite => (

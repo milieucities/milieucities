@@ -3,8 +3,12 @@ module Organizations
     load_and_authorize_resource :organization
 
     def index
+      Rails.logger.info "---------------------------------------------_"
+      Rails.logger.info "PARAMS => #{params}"
+      Rails.logger.info "---------------------------------------------_"
       @no_header = true
       @dev_sites = @organization.dev_sites.includes(:addresses, :statuses, :comments)
+      @dev_sites = @dev_sites.search(params[:query]) if params[:query]
       @total = @dev_sites.count
       paginate
 
