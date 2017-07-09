@@ -82,7 +82,7 @@ export default class DevSiteList extends Component {
               <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
             </div>
             {
-              this.props.devSites.map(devSite => {
+              this.props.devSites.map((devSite, index) => {
                 return(
                   <a href="#" onClick={this.handleDevSiteClick}
                               onFocus={this.handleDevSiteMouseEnter}
@@ -91,7 +91,7 @@ export default class DevSiteList extends Component {
                               onMouseLeave={this.handleDevSiteMouseLeave}
                               data-id={devSite.id}
                               className={this.props.activeDevSiteId == devSite.id ? css.activeitem : css.item}
-                              key={devSite.id}
+                              key={index}
                   >
                     <img src={devSite.image_url} className={css.previewImage} />
                     <div className={css.infoContainer}>
