@@ -30,6 +30,7 @@ export default class extends Component {
     this.toggleLike = () => this._toggleLike();
     this.toggleFeatured = () => this._toggleFeatured();
     this.userAdmin = () => this._userAdmin();
+    this.loadTimeline = () => this._loadTimeline();
 
     if(!props.devSite) {
       this.loadDevSite();
@@ -40,6 +41,17 @@ export default class extends Component {
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.id !== this.props.id) this.loadDevSite();
     this.refs.container &&  this.refs.container.focus();
+
+    if (!this.state.loading) {
+      this.loadTimeline();
+    }
+  }
+
+  _loadTimeline() {
+    const { devSite } = this.state;
+    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
+    var data = latestStatus;
+    $('.tl').empty().timeline(data);
   }
 
   _loadDevSite() {
@@ -289,29 +301,13 @@ export default class extends Component {
           <div className='row'>
             <div className='col m10 s6'>
               <h3 className={css.timelinehead}>Project Timeline</h3>
-              <div className={css.checkoutwrap}>
-                <ul className={css.checkoutbar}>
-
-                  <li className={css.visited}>
-                    <a href="#">Comment Period</a>
-                  </li>
-                  
-                  <li className={css.visited}>Public Meeting</li>
-                  
-                  <li className={css.active}>Revision</li>
-
-                  
-                  <li className="">Decision Meeting</li>
-                  
-                  <li className="">Decision</li>
-                </ul>
-            </div>
+                <div className='tl'></div>
             </div>
             <div className='col m2 s2'>
             <div className={css.sharecontainer}>
               <FacebookShareButton url={devSite.url} title={devSite.address} media={devSite.image_url}>
                 <FacebookIcon size={32} round />
-              </FacebookShareButton>
+              </FacebookShareButton><br/>
               <TwitterShareButton url={devSite.url} title={devSite.address} media={devSite.image_url}>
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
