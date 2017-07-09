@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
+import moment from 'moment'
+
 import EditStatus from '../Edit/Edit'
 import EditMeeting from '../../Meetings/Edit/Edit'
 import EditNotification from '../../Notifications/Edit/Edit'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from '../../DevSites/Form/locale.js'
-import moment from 'moment'
+import { DEFAULT_STATUS } from '../../Common/constants'
 
 export default class StatusForms extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedStatus: 'Application Complete, Comment Period Open' };
+    this.state = { selectedStatus: DEFAULT_STATUS };
     this.handleUpdateStatus = (v) => this._handleUpdateStatus(v);
   }
 

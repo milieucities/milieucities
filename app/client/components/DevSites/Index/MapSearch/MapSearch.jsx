@@ -4,7 +4,7 @@ import i18n from './locale'
 import Autocomplete from '../../../Utility/Autocomplete/Autocomplete'
 import Select from '../../../Utility/Select/Select'
 import { flatten } from 'lodash'
-import { YEARS, STATUS_TYPES } from '../constants'
+import { YEARS, STATUS_TYPES } from '../../../Common/constants'
 
 export default class MapSearch extends Component {
   constructor(props) {
