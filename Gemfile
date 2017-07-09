@@ -30,6 +30,7 @@ gem 'rmagick', '~> 2.15.4', :require => 'RMagick'
 gem 'simple_command'
 gem 'jwt'
 gem 'closure_tree', '~> 6.5.0'
+gem 'textacular', '~> 4.0'
 
 # view gems
 gem 'font-awesome-rails', '~> 4.7.0.0'
