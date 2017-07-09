@@ -73,7 +73,7 @@ class DevSite < ActiveRecord::Base
     statuses.current.status
   end
 
-  def status_date
+  def start_date
     return if statuses.empty?
     return nil unless statuses.current.start_date
     statuses.current.start_date.strftime('%B %e, %Y')
@@ -212,8 +212,7 @@ class DevSite < ActiveRecord::Base
     end
 
     def search_by_address(collection, value)
-      collection
-        .where(addresses: { street: value } )
+      collection.where(addresses: { street: value } )
     end
   end
 end

@@ -84,12 +84,12 @@ describe DevSite do
       @dev_site5 = create(:dev_site, municipality: @ottawa, updated: DateTime.new(2013, 12, 1).utc)
       @dev_site6 = create(:dev_site)
       @dev_site7 = create(:dev_site, devID: 9999)
-      @dev_site8 = create(:dev_site, municipality: @guelph, updated: DateTime.new(2016, 10, 7).utc)
+      @dev_site8 = create(:dev_site)
 
       @dev_site1.addresses << create(:address)
       @dev_site4.statuses << create(:status)
       @dev_site4.statuses << create(:status,
-                                    status_date: DateTime.current - 1.day,
+                                    start_date: DateTime.current - 1.day,
                                     status: 'Comment Period in Progress')
       @dev_site6.addresses << create(:address)
       @dev_site6.statuses << create(:status, status: 'Comment Period in Progress')
@@ -235,18 +235,18 @@ describe DevSite do
     end
   end
 
-  describe '#status_date' do
+  describe '#start_date' do
     let(:dev_site) { create(:dev_site) }
     let(:test_status_with_date) { create(:status) }
 
     it 'should return nil if dev site has no status' do
-      expect(dev_site.status_date).to be_nil
+      expect(dev_site.start_date).to be_nil
     end
 
     it 'should return the status date of the current status' do
       dev_site.statuses << test_status_with_date
-      expected_date = test_status_with_date.status_date.strftime('%B %e, %Y')
-      expect(dev_site.status_date).to eq(expected_date)
+      expected_date = test_status_with_date.start_date.strftime('%B %e, %Y')
+      expect(dev_site.start_date).to eq(expected_date)
     end
   end
 
