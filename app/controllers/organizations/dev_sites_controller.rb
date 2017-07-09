@@ -1,15 +1,14 @@
 module Organizations
   class DevSitesController < ApplicationController
     load_and_authorize_resource :organization
+    SEARCH_SIMILARITY_LIMIT = 0.2
 
     def index
-      Rails.logger.info "---------------------------------------------_"
-      Rails.logger.info "PARAMS => #{params}"
-      Rails.logger.info "---------------------------------------------_"
       @no_header = true
+      set_pg_similarity_threshold(SEARCH_SIMILARITY_LIMIT)
       @dev_sites = @organization.dev_sites.includes(:addresses, :statuses, :comments)
-      @dev_sites = @dev_sites.search(params[:query]) if params[:query]
-      @total = @dev_sites.count
+      @dev_sites = DevSite.search_by_query(@dev_sites, params[:query]) if params[:query]
+      @total = @dev_sites.count(:all)
       paginate
 
       respond_to do |format|
@@ -32,6 +31,10 @@ module Organizations
 
     def page_number
       params[:page].present? ? params[:page].to_i : 0
+    end
+
+    def set_pg_similarity_threshold(limit)
+      ActiveRecord::Base.connection.execute("SELECT set_limit(#{limit});")
     end
   end
 end

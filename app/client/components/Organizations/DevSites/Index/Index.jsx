@@ -24,14 +24,10 @@ export default class Index extends Component {
   }
 
   _loadDevSites(query) {
-    console.log('query', query)
     const { userPrimaryOrganizationId } = document.body.dataset;
     $.getJSON(`/organizations/${userPrimaryOrganizationId}/dev_sites`,
       { page: this.state.page, limit: this.state.limit, query },
-      (json) => {
-        console.log('json', json)
-        this.setState({ devSites: json.dev_sites, total: json.total, loading: false })
-      }
+      json => this.setState({ devSites: json.dev_sites, total: json.total, loading: false })
     );
   }
 
@@ -60,10 +56,12 @@ export default class Index extends Component {
           !loading &&
           <div className={css.content}>
             <h2>Manage Development Sites</h2>
-            <div className="actions">
-              <a href={`/${locale}/dev_sites/new`} className='btn'>Add Development Site</a>
-              <SearchForm handleSubmit={this.loadDevSites} />
+            <div className={`row ${indexCss.addSites}`}>
+              <div className="col s12">
+                <a href={`/${locale}/dev_sites/new`} className='btn'>Add Development Site</a>
+              </div>
             </div>
+            <SearchForm handleSubmit={this.loadDevSites} />
             <div className='row'>
               {
                 devSites && devSites.map(devSite => (

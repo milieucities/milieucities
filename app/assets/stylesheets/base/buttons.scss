@@ -11,6 +11,7 @@
   color: $white;
   background-color: $primary-color;
   box-sizing: border-box;
+  margin-right: 6px;
 
   &.transparent {
     background-color: transparent;
@@ -53,11 +54,5 @@
   &:hover {
     opacity: 0.8;
     color: $white;
-  }
-}
-
-button {
-  &:focus {
-    outline: -webkit-focus-ring-color auto 5px;
   }
 }
