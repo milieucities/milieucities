@@ -28,6 +28,10 @@
     }
   }
 
+  .tabs {
+    padding: 20px 0;
+  }
+
   .expand {
     background: url('./icons/expand.svg');
     background-repeat: no-repeat;
@@ -136,6 +140,9 @@
     width: 80px;
     justify-content: space-around;
     align-items: center;
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #477393;
   }
 
   .likecontainer {
@@ -143,15 +150,6 @@
     width: 80px;
     justify-content: space-around;
     align-items: center;
-  }
-
-  .share {
-    background: url('./icons/share.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 25px;
-    height: 25px;
-    display: block;
   }
 
   .like {
