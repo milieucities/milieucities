@@ -32,9 +32,12 @@ export default class CommentForm extends Component {
     return(
       <form id='new_comment' onSubmit={this.submitForm} className={css.commentForm}>
         <input name='utf8' type='hidden' value='✓' />
-        <div className={css.privacy}>
-          <p>{i18n.disclaimer}</p>
-        </div>
+        {
+          this.props.devSite.guelph &&
+          <div className={css.privacy}>
+            <p>{i18n.disclaimer}</p>
+          </div>
+        }
         <div className={css.wrapper}>
           <textarea
             className={css.textarea}
@@ -44,7 +47,7 @@ export default class CommentForm extends Component {
           </textarea>
         </div>
         {
-          !this.props.acceptedPrivacyPolicy &&
+          this.props.devSite.guelph && !this.props.acceptedPrivacyPolicy &&
           <div className={css.privacy}>
             <p>{i18n.privacyPolicy}</p>
             <input type="checkbox" id='accept_privacy_policy' onChange={ this.props.handleChangePrivacyPolicy } />
@@ -54,7 +57,7 @@ export default class CommentForm extends Component {
         <div className={css.submitBtn}>
           {
             !this.props.currentUser &&
-            <p>You must be logged in to comment.</p>
+            <p>{i18n.logInToComment}</p>
           }
           <input type='submit' value={i18n.comment} className={`${css.submit} btn`}/>
         </div>

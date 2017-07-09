@@ -43,3 +43,7 @@ end
 child :sentiment do
   attributes :anger, :disgust, :sadness, :joy, :fear, :id
 end
+
+node :guelph do |dev_site|
+  dev_site.municipality_id == Municipality.find_by(name: 'Guelph').id
+end
