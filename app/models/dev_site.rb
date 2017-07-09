@@ -212,7 +212,9 @@ class DevSite < ActiveRecord::Base
     end
 
     def search_by_address(collection, value)
-      collection.where(addresses: { street: value } )
+      collection
+      .where("addresses.street like ?", "%#{value}%")
+      .where(addresses: { street: value } )
     end
   end
 end
