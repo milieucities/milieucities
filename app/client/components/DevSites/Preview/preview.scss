@@ -136,12 +136,11 @@
   }
 
   .sharecontainer {
-    display: flex;
     width: 80px;
     justify-content: space-around;
     align-items: center;
     font-weight: bold;
-    font-size: 0.8em;
+    font-size: 0.6em;
     color: #477393;
   }
 
@@ -150,6 +149,21 @@
     width: 80px;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .message {
+    width: 40px;
+    text-align: center;
+  }
+
+  .share {
+    padding: 2px 0;
+    margin: 0;
+  }
+
+  .commentimage {
+    height: 38px;
+    border: 0;
   }
 
   .like {
@@ -384,12 +398,6 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     font-weight: 300;
-  }
-
-  .image {
-    height: 175px;
-    object-fit: cover;
-    width: 100%;
   }
 
   .content {
