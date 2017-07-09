@@ -1,20 +1,47 @@
 .btn {
-  display: inline-block;
-  padding: 10px 30px;
-  text-decoration: none;
-  border :none;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  border-radius: 2px;
-  transition: 200ms;
-  color: $white;
-  background-color: $primary-color;
-  box-sizing: border-box;
+      -moz-box-shadow: 1px 1px 2px 0px #3a7496;
+    -webkit-box-shadow: 1px 1px 2px 0px #3a7496;
+    box-shadow: 1px 1px 2px 0px #3a7496;
+    background-color:#e5eee9;
+    -webkit-border-top-left-radius:2px;
+    -moz-border-radius-topleft:2px;
+    border-top-left-radius:2px;
+    -webkit-border-top-right-radius:2px;
+    -moz-border-radius-topright:2px;
+    border-top-right-radius:2px;
+    -webkit-border-bottom-right-radius:2px;
+    -moz-border-radius-bottomright:2px;
+    border-bottom-right-radius:2px;
+    -webkit-border-bottom-left-radius:2px;
+    -moz-border-radius-bottomleft:2px;
+    border-bottom-left-radius:2px;
+    text-indent:0;
+    border:1px solid #e5eee9;
+    display:inline-block;
+    color:#477393;
+    font-size:15px;
+    font-weight:bold;
+    font-family: 'Avenir Next','Lato',sans-serif;
+    font-style:normal;
+    height:35px;
+    line-height:35px;
+    width:250px;
+    text-decoration:none;
+    text-align:center;
+    margin: 0.75rem 0;
+
+  &:hover {
+    color: #5d9bc0;
+  }
+
+  &:active {
+    position:relative;
+    top:1px;
+  }
 
   &.transparent {
     background-color: transparent;
-    color: $dark-primary-color;
+
   }
 
   &.icon {
@@ -39,10 +66,12 @@
   }
 
   &.cancel {
-    background-color: $error;
+    background-color: #e5eee9;
+
 
     &:hover{
-      background-color: $light-error;
+      background-color: #5d9bc0;
+
     }
   }
 
@@ -52,7 +81,7 @@
 
   &:hover {
     opacity: 0.8;
-    color: $white;
+    color: #5d9bc0;
   }
 }
 

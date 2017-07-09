@@ -57,7 +57,7 @@ class DevSite < ActiveRecord::Base
 
   def self.search(search_params)
     result = DevSite.joins(:ward, :municipality).includes(:addresses, :statuses, :comments)
-    result = result.where.not(municipalities: { name: 'Guelph' }) # remove when Guelph goes live
+    #result = result.where.not(municipalities: { name: 'Guelph' }) # remove when Guelph goes live
     result = location_search(result, search_params)
     result = query_search(result, search_params)
     result
