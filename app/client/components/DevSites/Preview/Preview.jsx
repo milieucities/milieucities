@@ -240,7 +240,7 @@ export default class extends Component {
             </div>
             </div>
           <div className='row'>
-            <div className='col m11 s4'>
+            <div className='col m12 s4'>
               <div className={css.tabs}>
                   <Tabs>
                     <TabList>
@@ -299,25 +299,40 @@ export default class extends Component {
           </div>
 
           <div className='row'>
-            <div className='col m10 s6'>
+            <div className='col m11 s6'>
               <h3 className={css.timelinehead}>Project Timeline</h3>
                 <div className='tl'></div>
             </div>
-            <div className='col m2 s2'>
+            <div className='col m1 s2'>
             <div className={css.sharecontainer}>
               share on<br/>
+              <div className={css.share}>
               <FacebookShareButton url={devSite.url} title={devSite.address} media={devSite}>
-                <FacebookIcon size={45} round />
-              </FacebookShareButton><br/>
+                <FacebookIcon size={38} round />
+              </FacebookShareButton>
+              </div>
+              <div className={css.share}>
               <TwitterShareButton url={devSite.url} title={devSite.address} media={devSite.image_url}>
-                <TwitterIcon size={45} round />
+                <TwitterIcon size={38} round />
               </TwitterShareButton>
+              </div>
+              <br/>
+              <div className={css.message}>
+              message<br/>
+              planner<br/>
+              </div>
+              <div className={css.share}>
+              <a href={`mailto:${devSite.urban_planner_email}`}>
+                <img src={require('./images/messageplanner.svg')} className={css.commentimage} />
+              </a>
+              </div>              
             </div>
           </div>
         </div>
       <div className='row'>
         <div className='col s12 m6'>
           <h3><b>{i18n.comments}</b></h3>
+          <a name={`comments`}></a>
 
           <Comments devSiteId={devSite.id} />
         </div>

@@ -65,7 +65,6 @@
       -webkit-animation: myanimation 3s 0;
       background-size: 35px 35px;
       background-color: #9CC6C5;
-      /*this is the active one */
       content: "";
       height: 8px;
       width: 100%;
@@ -80,7 +79,6 @@
     ul.checkoutbar {
       background-size: 35px 35px;
       background-color: #ffffff;
-      /*greyed out*/
       border-radius: 15px;
       height: 10px;
       margin: 0 auto;
@@ -90,7 +88,6 @@
       &:before {
         background-size: 35px 35px;
         background-color: #477393;
-        /*first*/
         border-radius: 15px;
         content: " ";
         height: 8px;
