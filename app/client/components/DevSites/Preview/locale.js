@@ -20,6 +20,8 @@ const i18n = new LocalizedStrings({
     name: "Name",
     email: "Email",
     message: "Message",
+    notices: 'Notices',
+    attachments: 'Attachments',
     contact: "Contact",
     emailCouncillor: "Email the Councillor",
     emailUrbanPlanner: "Email the Urban Planner"
