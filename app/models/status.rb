@@ -10,6 +10,7 @@ class Status < ActiveRecord::Base
 
   accepts_nested_attributes_for :meeting, allow_destroy: true
 
+  APPLICATION_RECEIVED_STATUS = 'Application Received'.freeze
   APPLICATION_COMPLETE_STATUS = 'Application Complete, Comment Period Open'.freeze
   PLANNING_REVIEW_STATUS = 'Planning Review Stage'.freeze
   REVISION_STATUS = 'Revision'.freeze
@@ -90,6 +91,7 @@ class Status < ActiveRecord::Base
   }.freeze
 
   GUELPH_STATUSES = [
+    APPLICATION_RECEIVED_STATUS,
     APPLICATION_COMPLETE_STATUS,
     PLANNING_REVIEW_STATUS,
     REVISION_STATUS,

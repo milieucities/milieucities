@@ -7,20 +7,8 @@ import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Co
 import StatusSection from '../../Statuses/Index/StatusSection'
 import moment from 'moment'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css'
+import { BUILDING_TYPES } from '../../Common/constants'
 
-const BUILDING_TYPES = [
-  'Derelict',
-  'Demolition',
-  'Residential Apartment',
-  'Low-rise Residential',
-  'Mid-rise Residential',
-  'Hi-rise Residential',
-  'Mixed-use Residential/Community',
-  'Commercial',
-  'Commercial/Hotel',
-  'Mixed-use',
-  'Additions'
-]
 
 export default class DevSiteForm extends Component {
   constructor(props) {

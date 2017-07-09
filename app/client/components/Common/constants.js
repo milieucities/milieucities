@@ -54,3 +54,20 @@ exports.STATUS_TYPES = [
   'Unknown',
   'Zoning By-law in Effect'
 ]
+
+exports.BUILDING_TYPES = [
+  'Derelict',
+  'Demolition',
+  'Residential Apartment',
+  'Low-rise Residential',
+  'Mid-rise Residential',
+  'Hi-rise Residential',
+  'Mixed-use Residential/Community',
+  'Commercial',
+  'Commercial/Hotel',
+  'Mixed-use',
+  'Additions'
+]
+
+exports.DEFAULT_STATUS = 'Application Received'
+

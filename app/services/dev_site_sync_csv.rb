@@ -22,6 +22,8 @@ module Services
 
     ATTRIBUTES_TO_UPDATE = %w(title build_type short_description urban_planner_name urban_planner_email on_behalf_of applicant_first_name applicant_last_name).freeze
 
+    DEFAULT_STATUS = Status::APPLICATION_RECEIVED_STATUS
+
     def initialize(csv_file)
       @lines = read_csv(csv_file).delete_if(&:empty?)
       headers = @lines.delete(@lines.first)
@@ -79,7 +81,7 @@ module Services
     end
 
     def update_status(dev_site, site_params)
-      dev_site.statuses << Status.create(status: site_params['status'],
+      dev_site.statuses << Status.create(status: DEFAULT_STATUS,
                                          start_date: site_params['status_date'],
                                          end_date: site_params['status_date'] )
     end
