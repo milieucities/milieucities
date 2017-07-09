@@ -4,7 +4,13 @@ import { capitalize, replace } from 'lodash'
 import i18n from './locale'
 import CommentsSection from '../../Comments/CommentsSection'
 import Modal from '../../Utility/Modal/Modal'
-import { ShareButtons, generateShareIcon } from 'react-share';
+import { ShareButtons, generateShareIcon } from 'react-share'
+import Comments from '../../Comments/Comments'
+import { render } from 'react-dom'
+import Loader from '../../Common/Loader/Loader'
+import Sentiment from '../../Common/Sentiment/Sentiment'
+import Chart from 'chart.js'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
@@ -129,17 +135,19 @@ export default class extends Component {
 
   render() {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
-    if(!devSite) return <div></div>;
-
     const { horizontal, preview } = this.props;
     const { locale } = document.body.dataset;
+    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
     i18n.setLanguage(locale);
-
+    if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
       return(
+        <div>
+          <h3 className={css.status}>{latestStatus}</h3>
         <div className={css.verticalPreviewContainer} style={{width: this.props.width}} title={`Development Site at ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
+
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
           <div className={css.content}>
             <svg height='40' width='100%'>
@@ -165,11 +173,14 @@ export default class extends Component {
             <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }} tabIndex='-1'></div>
           </div>
         </div>
+      </div>
       )
     }
 
     if(preview && horizontal) {
       return(
+        <div>
+          <h3 className={css.status}>{latestStatus}</h3>
         <div className={css.horizontalPreviewContainer} title={`Go to ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
@@ -197,23 +208,106 @@ export default class extends Component {
             <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description }} tabIndex='-1'></div>
           </div>
         </div>
+      </div>
       )
     }
 
     return(
+      <div>
       <div className={css.container} ref='container' tabIndex='-1'>
-        <div className={css.menu}>
-          <a className={css.close} onClick={this.closeDevSite} href='#'></a>
-          <a className={css.expand} href={devSite.url}></a>
-        </div>
-        <div className={css.wrapper}>
+        <h3 className={css.status}>{latestStatus}</h3>
+          <div className='row'>
+            <div className='col m4 s4'>
+              <h3>{devSite.address}</h3>
+              {i18n.devId}: {devSite.devID} <br/>
+              {devSite.application_type_name.replace(/coa/, 'Committee of Adjustment')} <br/>
+            </div>
 
-          <div className={css.title}>{devSite.street}</div>
-          <div className={css.subtitle}>{replace(devSite.application_type, /coa/, 'Committee of Adjustment')}</div>
+            <div className='col m6 s4'>
+              <img src={devSite.image_url} className={css.image} />
+            </div>
+            </div>
+          <div className='row'>
+            <div className='col m11 s4'>
+              <div>
+                  <Tabs>
+                    <TabList>
+                      <Tab>{i18n.description}</Tab>
+                      <Tab>{i18n.attachments}</Tab>
+                      <Tab>{i18n.notices}</Tab>
+                    </TabList>
 
-          <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
+                    <TabPanel>
+                      <h3 className={css.description}>Project Description</h3>
+                      <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+                    </TabPanel>
+                    <TabPanel>
+                      <h3 className={css.description}>{i18n.attachments}</h3>
+                      {
+                        (devSite.city_files.length > 0 || devSite.files.length > 0) &&
+                        <h3 className={css.description}>{i18n.file}</h3>
+                      }
+                      {
+                        devSite.city_files.map((file, i) => {
+                          return(
+                            <div key={i}>
+                              <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
+                            </div>
+                          )
+                        })
+                      }
+                      {
+                        devSite.files.map((file, i) => {
+                          return(
+                            <div key={i}>
+                              <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
+                            </div>
+                          )
+                        })
+                      }
+                    </TabPanel>
+                    <TabPanel>
+                      <h3 className={css.description}>{i18n.notices}</h3>
+                      {
+                        devSite.statuses &&
+                        devSite.statuses.map((status, i) => {
+                          if (status.filesuploader) {
+                            return(
+                              <div key={i}>
+                                <a href={status.filesuploader.url} target='_blank' className={css.filelink}>{status.filesuploader.name}</a>
+                              </div>
+                            )
+                          }
+                        })
+                      }
+                    </TabPanel>
+                  </Tabs>
+                </div>
+             </div>
+          </div>
 
-          <div className={css.interact}>
+          <div className='row'>
+            <div className='col m10 s6'>
+              <h3 className={css.timelinehead}>Project Timeline</h3>
+              <div className={css.checkoutwrap}>
+                <ul className={css.checkoutbar}>
+
+                  <li className={css.visited}>
+                    <a href="#">Comment Period</a>
+                  </li>
+
+                  <li className={css.visited}>Public Meeting</li>
+
+                  <li className={css.active}>Revision</li>
+
+
+                  <li className="">Decision Meeting</li>
+
+                  <li className="">Decision</li>
+                </ul>
+            </div>
+            </div>
+            <div className='col m2 s2'>
             <div className={css.sharecontainer}>
               <FacebookShareButton url={devSite.url} title={devSite.address} media={devSite.image_url}>
                 <FacebookIcon size={32} round />
@@ -222,95 +316,24 @@ export default class extends Component {
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
             </div>
-            {
-              this.userAdmin() &&
-              <div className={css.featuredContainer}>
-                <i className={`fa fa-star ${devSite.featured ? css.featured : css.unfeatured}`} onClick={this.toggleFeatured}></i>
-              </div>
-            }
-            <div className={css.likecontainer}>
-              <i className={devSite.like ? css.liked : css.like} onClick={this.toggleLike}></i>
-              { devSite.likes_count }
-            </div>
           </div>
-
-          <div className={css.delimiter}>
-            <div className={css.line}></div>
-            <div className={css.circle}></div>
-            <i className={css.marker}></i>
-          </div>
-
-          <div className={css.row}>
-            <div className={css.col}>
-              <div className={css.title}>{i18n.devId}</div>
-              <div className={css.subtitle}>{devSite.devID}</div>
-            </div>
-            <div className={css.col}>
-              <div className={css.title}>{i18n.ward}</div>
-              <div className={css.subtitle}>{capitalize(devSite.ward_name)}</div>
-            </div>
-            <div className={css.col}>
-              <div className={css.title}>{i18n.status}</div>
-              <div className={css.subtitle} dangerouslySetInnerHTML={{__html: devSite.status}}></div>
-            </div>
-          </div>
-
-          <div className={css.descriptiontitle}>{i18n.description}</div>
-          <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
-
-          {
-            devSite.city_files.length > 0 &&
-            <a title='Toggle view of relevant files' href='#' className={css.filecontainer} onClick={this.toggleShowFiles}>
-              <i className={css.folder}></i>
-              {showFiles ? 'Hide ' : 'View ' } {devSite.city_files.length} attached files
-            </a>
-          }
-
-          {
-            showFiles &&
-            devSite.city_files.map(file => {
-              return(
-                <a key={file.id} href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
-              )
-            })
-          }
-
-          {
-            showFiles &&
-            devSite.files.map(file => {
-              return(
-                <a key={file.id} href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
-              )
-            })
-          }
-
-          {
-            devSite.urban_planner_email || devSite.ward_councillor_email &&
-            <div className={css.emailofficials}>
-              {
-                devSite.urban_planner_email &&
-                <a href='#' onClick={this.openEmailModal} className={css.email} title={i18n.emailUrbanPlanner}>
-                  <i className={css.mail}></i> {i18n.urbanPlanner}
-                </a>
-              }
-              {
-                devSite.ward_councillor_email &&
-                <a href='#' onClick={this.openEmailModal} className={css.email} title={i18n.emailConcillor}>
-                  <i className={css.mail}></i> {i18n.councillor}
-                </a>
-              }
-            </div>
-          }
         </div>
+      <div className='row'>
+        <div className='col s12 m6'>
+          <h3><b>{i18n.comments}</b></h3>
+
+          <Comments devSiteId={devSite.id} />
+        </div>
+      </div>
 
         <CommentsSection devSite={devSite} devSiteId={devSite.id} applicationType={devSite.application_type_name}/>
-
         {
           showModal &&
           <Modal parent={this}>
             <EmailModal contact={contact} address={devSite.address} id={devSite.id} handleEmail={this.handleEmail} />
           </Modal>
         }
+      </div>
       </div>
     );
   }
