@@ -42,16 +42,14 @@ export default class extends Component {
     if(prevProps.id !== this.props.id) this.loadDevSite();
     this.refs.container &&  this.refs.container.focus();
 
-    if (!this.state.loading) {
+    if (this.state.devSite && !this.state.loading) {
       this.loadTimeline();
     }
   }
 
   _loadTimeline() {
     const { devSite } = this.state;
-    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
-    var data = latestStatus;
-    $('.tl').timeline(data);
+    $('.tl').timeline(devSite.status);
   }
 
   _loadDevSite() {
@@ -149,14 +147,15 @@ export default class extends Component {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
     const { locale } = document.body.dataset;
-    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
     i18n.setLanguage(locale);
     if(!devSite) return <div></div>;
+
+    const currentStatus = devSite.status;
 
     if(preview && !horizontal) {
       return(
         <div>
-          <h3 className={css.status}>{latestStatus}</h3>
+          <h3 className={css.status}>{currentStatus}</h3>
         <div className={css.verticalPreviewContainer} style={{width: this.props.width}} title={`Development Site at ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
 
@@ -192,7 +191,7 @@ export default class extends Component {
     if(preview && horizontal) {
       return(
         <div>
-          <h3 className={css.status}>{latestStatus}</h3>
+          <h3 className={css.status}>{currentStatus}</h3>
         <div className={css.horizontalPreviewContainer} title={`Go to ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
@@ -227,7 +226,7 @@ export default class extends Component {
     return(
       <div>
       <div className={css.container} ref='container' tabIndex='-1'>
-        <h3 className={css.status}>{latestStatus}</h3>
+        <h3 className={css.status}>{currentStatus}</h3>
           <div className='row'>
             <div className='col m4 s4'>
               <h3>{devSite.address}</h3>
