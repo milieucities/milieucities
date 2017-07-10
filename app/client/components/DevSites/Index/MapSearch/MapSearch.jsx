@@ -82,21 +82,6 @@ export default class MapSearch extends Component {
       <div className={css.wrapper}>
         <Autocomplete callback={this.autocompleteCallback} placeholder={i18n.address} type='autocomplete' onSelect={this.handleAutocompleteSelect}/>
       </div>
-      <div className={css.divider}></div>
-      <div className='row no-marg'>
-        <div className='col s12 m3'>
-          <Select title={i18n.city} type='municipality' options={cities} defaultValue={this.props.municipality} onSelect={this.handleSelectDropdown} />
-        </div>
-        <div className='col s12 m3'>
-          <Select title={i18n.ward} type='ward' options={wards} defaultValue={this.props.ward} onSelect={this.handleSelectDropdown} />
-        </div>
-        <div className='col s12 m3'>
-          <Select title={i18n.year} type='year' options={YEARS} defaultValue={this.props.year} onSelect={this.handleSelectDropdown} />
-        </div>
-        <div className='col s12 m3'>
-          <Select title={i18n.status} type='status' options={STATUS_TYPES} defaultValue={this.props.status} onSelect={this.handleSelectDropdown} />
-        </div>
-      </div>
     </div>;
   }
 }
