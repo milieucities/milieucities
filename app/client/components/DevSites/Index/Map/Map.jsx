@@ -17,7 +17,7 @@ export default class Map extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     const { devSites, hoverdDevSiteId } = this.props;
-    return (nextProps.devSites !== devSites )
+    return (nextProps.devSites !== devSites || nextProps.hoverdDevSiteId !== hoverdDevSiteId)
   }
 
   componentDidUpdate(prevProps, prevState) {

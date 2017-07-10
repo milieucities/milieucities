@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import css from './preview.scss'
+import { render } from 'react-dom'
 import { capitalize, replace } from 'lodash'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { ShareButtons, generateShareIcon } from 'react-share'
+import Chart from 'chart.js'
+
+import css from './preview.scss'
 import i18n from './locale'
 import CommentsSection from '../../Comments/CommentsSection'
 import Modal from '../../Utility/Modal/Modal'
-import { ShareButtons, generateShareIcon } from 'react-share'
 import Comments from '../../Comments/Comments'
-import { render } from 'react-dom'
 import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
-import Chart from 'chart.js'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
@@ -249,7 +250,7 @@ export default class extends Component {
                     </TabList>
 
                     <TabPanel>
-                      <h3 className={css.description}>Project Description</h3>
+                      <h3 className={css.description}>{i18n.projectDescription}</h3>
                       <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
                     </TabPanel>
                     <TabPanel>
@@ -299,7 +300,7 @@ export default class extends Component {
 
           <div className='row'>
             <div className='col m11 s6'>
-              <h3 className={css.timelinehead}>Project Timeline</h3>
+              <h3 className={css.timelinehead}>{i18n.projectTimeline}</h3>
               <div className='tl'></div>
             </div>
             <div className='col m1 s2'>
@@ -331,7 +332,7 @@ export default class extends Component {
       <div className='row'>
         <div className='col s12 m6'>
           <h3><b>{i18n.comments}</b></h3>
-          <a name={`comments`}></a>
+          <a name='comments'></a>
 
           <Comments devSiteId={devSite.id} />
         </div>
