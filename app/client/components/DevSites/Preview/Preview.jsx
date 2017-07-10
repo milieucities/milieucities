@@ -229,18 +229,18 @@ export default class extends Component {
       <div className={css.container} ref='container' tabIndex='-1'>
         <h3 className={css.status}>{latestStatus}</h3>
           <div className='row'>
-            <div className='col m4 s4'>
+            <div className='col m4 s12'>
               <h3>{devSite.address}</h3>
               {i18n.devId}: {devSite.devID} <br/>
               {devSite.application_type_name.replace(/coa/, 'Committee of Adjustment')} <br/>
             </div>
 
-            <div className='col m8 s6'>
+            <div className='col m8 s12'>
               <img src={devSite.image_url} className={css.image} />
             </div>
             </div>
           <div className='row'>
-            <div className='col m12 s4'>
+            <div className='col m12 s12'>
               <div className={css.tabs}>
                   <Tabs>
                     <TabList>
@@ -299,7 +299,7 @@ export default class extends Component {
           </div>
 
           <div className='row'>
-            <div className='col m11 s6'>
+            <div className='col m11 s10'>
               <h3 className={css.timelinehead}>Project Timeline</h3>
                 <div className='tl'></div>
             </div>

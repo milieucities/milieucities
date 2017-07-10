@@ -15,7 +15,7 @@
     li {
       color: #9B9B9B;
       display: block;
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 600;
       padding: 10px 20px 14px 80px;
       position: relative;
@@ -24,7 +24,7 @@
         border: 1px solid #9B9B9B;
         border-radius: 50%;
         color: #fff;
-        font-size: 12px;
+        font-size: 10px;
         font-weight: 700;
         left: 20px;
         line-height: 37px;
@@ -32,7 +32,7 @@
         position: absolute;
         text-align: center;
         top: 4px;
-        width: 10px;
+        width: 8px;
         z-index: 999;
       }
       &.active {
@@ -54,13 +54,13 @@
     }
     a {
       color: #9B9B9B;
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 600;
       text-decoration: none;
     }
   }
 
-  @media all and (min-width: 900px) {
+  @media all and (min-width: 659px) {
     .checkoutbar li.active:after {
       -webkit-animation: myanimation 3s 0;
       background-size: 35px 35px;
