@@ -51,7 +51,7 @@ export default class extends Component {
     const { devSite } = this.state;
     const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
     var data = latestStatus;
-    $('.tl').empty().timeline(data);
+    $('.tl').timeline(data);
   }
 
   _loadDevSite() {
@@ -325,7 +325,7 @@ export default class extends Component {
               <a href={`mailto:${devSite.urban_planner_email}`}>
                 <img src={require('./images/messageplanner.svg')} className={css.commentimage} />
               </a>
-              </div>              
+              </div>
             </div>
           </div>
         </div>
