@@ -54,10 +54,10 @@ export default class MapWrapper extends Component {
   _params() {
     const { page, latitude, longitude, zoom, status, year, municipality, ward, activeDevSiteId } = this.state;
     return omitBy({ page, latitude, longitude, zoom, status, year, municipality, ward, activeDevSiteId }, isNil);
-  }
+  };
 
   _loadDevSites() {
-    const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
+    const scrollToTop = () => { if (this.refs.sidebar) this.refs.sidebar.scrollTop = 0 };
     $.getJSON(`/dev_sites`, this.params(), json => {
       this.setState({ devSites: (json.dev_sites || []), total: json.total, loading: false }, scrollToTop);
     });
@@ -70,7 +70,7 @@ export default class MapWrapper extends Component {
   }
 
   _search_and_sort() {
-    const scrollToTop = () => this.refs.sidebar.scrollTop = 0;
+    const scrollToTop = () => { if (this.refs.sidebar) this.refs.sidebar.scrollTop = 0 };
     this.setState({ loading: true });
 
     $.getJSON(`/dev_sites`, this.params(), json => {
@@ -85,26 +85,42 @@ export default class MapWrapper extends Component {
     return(
       <div>
         <Header />
-        <div className={css.container}>
-          <div className={css.sidebar} ref='sidebar'>
-            <MapSearch {...this.state} parent={this} />
-            {
-              false &&
-              <MapFilter parent={this} />
-            }
-            <DevSiteList {...this.state} parent={this} />
-          </div>
-          <div className={css.content}>
-            {
-              this.state.activeDevSiteId &&
-              <DevSitePreview id={this.state.activeDevSiteId} parent={this} />
-            }
-            {
-              !this.state.isMobile && !this.state.activeDevSiteId &&
-              <MapAwesome {...this.state} parent={this} />
-            }
-          </div>
-        </div>
+          {
+            !this.state.isMobile &&
+            <div className={css.container}>
+              <div className={css.sidebar} ref='sidebar'>
+                <MapSearch {...this.state} parent={this} />
+                <DevSiteList {...this.state} parent={this} />
+              </div>
+              <div className={css.content}>
+                {
+                  this.state.activeDevSiteId &&
+                  <DevSitePreview id={this.state.activeDevSiteId} parent={this} />
+                }
+                {
+                  !this.state.activeDevSiteId &&
+                  <MapAwesome {...this.state} parent={this} />
+                }
+              </div>
+            </div>
+          }
+          {
+            this.state.isMobile &&
+            <div className={css.container}>
+              <div className={css.content}>
+                <MapSearch {...this.state} parent={this} />
+                {
+                  this.state.activeDevSiteId &&
+                  <DevSitePreview id={this.state.activeDevSiteId} parent={this} />
+                }
+                {
+                  !this.state.activeDevSiteId &&
+                  <MapAwesome {...this.state} parent={this} />
+                }
+                <DevSiteList {...this.state} parent={this} />
+              </div>
+            </div>
+          }
       </div>
     );
   }
