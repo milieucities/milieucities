@@ -22,7 +22,7 @@ module Services
 
     ATTRIBUTES_TO_UPDATE = %w(title build_type short_description urban_planner_name urban_planner_email on_behalf_of applicant_first_name applicant_last_name).freeze
 
-    DEFAULT_STATUS = Status::APPLICATION_RECEIVED_STATUS
+    DEFAULT_STATUS = 'Application Received'.freeze
 
     def initialize(csv_file)
       @lines = read_csv(csv_file).delete_if(&:empty?)
