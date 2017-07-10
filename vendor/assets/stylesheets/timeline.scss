@@ -17,7 +17,7 @@
       display: block;
       font-size: 10px;
       font-weight: 600;
-      padding: 10px 20px 14px 80px;
+      padding: 2px 20px 2px 30px;
       position: relative;
       &:before {
         background: #ddd;
@@ -60,7 +60,7 @@
     }
   }
 
-  @media all and (min-width: 659px) {
+  @media all and (min-width: 658px) {
     .checkoutbar li.active:after {
       -webkit-animation: myanimation 3s 0;
       background-size: 35px 35px;
@@ -74,7 +74,7 @@
       z-index: 0;
     }
     .checkoutwrap {
-      margin: 50px 0;
+      margin: 50px 0;      
     }
     ul.checkoutbar {
       background-size: 35px 35px;
