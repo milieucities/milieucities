@@ -185,8 +185,10 @@ ActiveRecord::Schema.define(version: 20170709173035) do
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
   create_table "meetings", force: :cascade do |t|
+    t.string   "title"
     t.string   "meeting_type"
-    t.datetime "time"
+    t.string   "time"
+    t.datetime "date"
     t.string   "location"
     t.integer  "dev_site_id"
     t.datetime "created_at",   null: false
