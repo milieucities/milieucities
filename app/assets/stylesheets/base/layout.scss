@@ -1,5 +1,5 @@
 nav{
-  background-color: white;
+  background-color: $white;
   height: 50px;
   display: flex;
   justify-content: space-between;
@@ -83,7 +83,7 @@ nav{
       height: 50px;
       line-height: 50px;
       font-size: 14px;
-      color: #477393;
+      color: $primary-color;
       letter-spacing: 0.75px;
       padding: 0 20px;
     }

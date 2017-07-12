@@ -8,12 +8,12 @@
 }
 
 @mixin primary-emphasis {
-  color: #477393;
+  color: $primary-color;
   font-weight: 600;
 }
 
 @mixin secondary-emphasis {
-  color: #477393;
+  color: $primary-color;
   font-weight: 400;
 }
 
@@ -44,7 +44,7 @@
 
     p {
       font-size: 14px;
-      color: #477393;
+      color: $primary-color;
     }
   }
 }
@@ -110,7 +110,7 @@
   }
 
   .body {
-    color: #477393;
+    color: $primary-color;
     max-height: 150px;
     overflow-y: hidden;
   }
