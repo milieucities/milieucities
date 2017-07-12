@@ -22,7 +22,7 @@
 
    ```docker stop postgresDb && docker rm postgresDb```
 
-4. Set up your `config/database.yml` to configure with postgres and run `rake db:create && rake db:migrate`.
+4. Set up your `config/database.yml` to configure with postgres and run `rake db:create db:migrate db:seed` and if you just want to reset database `rake db:reset` it should run all commands above with db:drop as first.
 
 5. a(Optional) Either download and start up a redis
 
