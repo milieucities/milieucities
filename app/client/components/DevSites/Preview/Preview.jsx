@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import css from './preview.scss'
 import { capitalize, replace } from 'lodash'
 import i18n from './locale'
-import CommentsSection from '../../Comments/CommentsSection'
 import Modal from '../../Utility/Modal/Modal'
 import { ShareButtons, generateShareIcon } from 'react-share'
 import Comments from '../../Comments/Comments'
+import CommentsSection from '../../Comments/CommentsSection'
 import { render } from 'react-dom'
 import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
@@ -237,7 +237,7 @@ export default class extends Component {
             <div className='col m4 s12'>
               <h3>{devSite.address}</h3>
               {i18n.devId}: {devSite.devID} <br/>
-              {devSite.application_type_name.replace(/coa/, 'Committee of Adjustment')} <br/>
+              {devSite.application_type_name === '/coa/' ?  devSite.application_type_name.replace(/coa/, 'Committee of Adjustment') : devSite.application_type_name = '' } <br/>
             </div>
 
             <div className='col m8 s12'>

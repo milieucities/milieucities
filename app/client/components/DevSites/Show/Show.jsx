@@ -5,6 +5,7 @@ import Header from '../../Layout/Header/Header'
 import Footer from '../../Layout/Footer/Footer'
 import Modal from '../../Utility/Modal/Modal'
 import Comments from '../../Comments/Comments'
+import CommentsSection from '../../Comments/CommentsSection'
 import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
 import i18n from './locale'
@@ -90,7 +91,7 @@ export default class DevSiteShow extends Component {
                     <div className='col m4 s12'>
                       <h3>{devSite.address}</h3>
                       {i18n.devId}: {devSite.devID} <br/>
-                      {devSite.application_type_name.replace(/coa/, 'Committee of Adjustment')} <br/>
+                      {devSite.application_type_name === '/coa/' ?  devSite.application_type_name.replace(/coa/, 'Committee of Adjustment') : devSite.application_type_name = '' } <br/>
                     </div>
                     <div className='col m8 s12'>
                       <img src={devSite.image_url} className={css.image} />
@@ -156,15 +157,17 @@ export default class DevSiteShow extends Component {
                 </div>
               <div className='row'>
                 <div className='col s12 m6'>
-                  <h3><b>{i18n.comments}</b></h3>
 
                   <Comments devSiteId={devSite.id} />
                 </div>
+
+                  <CommentsSection devSiteId={devSite.id} />
               </div>
             </div>
           </div>
           }
         </div>
+
 
         {
           showModal &&
@@ -172,6 +175,7 @@ export default class DevSiteShow extends Component {
             <EmailModal contact={contact} address={devSite.address} id={devSite.id} handleEmail={this.handleEmail} />
           </Modal>
         }
+        <Footer/>
       </div>
     );
   }
