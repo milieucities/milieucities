@@ -227,6 +227,11 @@ export default class extends Component {
     return(
       <div>
       <div className={css.container} ref='container' tabIndex='-1'>
+        <div className={css.menu}>
+          <a className={css.close} onClick={this.closeDevSite} href='#'></a>
+          <a className={css.expand} href={devSite.url}></a>
+        </div>
+        <div className={css.wrapper}>
         <h3 className={css.status}>{latestStatus}</h3>
           <div className='row'>
             <div className='col m4 s12'>
@@ -305,7 +310,6 @@ export default class extends Component {
       <div className='row'>
         <div className='col s12 m6'>
           <h3><b>{i18n.comments}</b></h3>
-          <a name={`comments`}></a>
 
           <Comments devSiteId={devSite.id} />
         </div>
@@ -319,6 +323,7 @@ export default class extends Component {
             <EmailModal contact={contact} address={devSite.address} id={devSite.id} handleEmail={this.handleEmail} />
           </Modal>
         }
+      </div>
       </div>
       </div>
     );

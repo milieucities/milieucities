@@ -3,7 +3,6 @@
   box-sizing: border-box;
   font-family: 'Avenir Next','Lato',sans-serif;
   background-color: #ffffff;
-  padding: 2em 2em;
   width: 100%;
   height: calc(100vh - 50px);
   overflow-y: scroll;
@@ -17,7 +16,7 @@
   }
 
   .menu {
-    background-color: #6d9493;
+    background-color: #E7EEE9;
     height: 50px;
     width: 60%;
     position: fixed;
@@ -69,7 +68,8 @@
   }
 
   .wrapper {
-    padding: 80px 50px 30px;
+    padding: 2em 2em;
+    margin-top: 50px;
     background-color: #fff;
 
     @media #{$small-and-down} {
