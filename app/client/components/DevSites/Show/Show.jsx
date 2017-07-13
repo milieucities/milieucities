@@ -166,8 +166,6 @@ export default class DevSiteShow extends Component {
           }
         </div>
 
-        <CommentsSection devSiteId={devSite.id} />
-
         {
           showModal &&
           <Modal parent={this}>
