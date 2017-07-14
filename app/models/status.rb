@@ -10,6 +10,7 @@ class Status < ActiveRecord::Base
 
   accepts_nested_attributes_for :meeting, allow_destroy: true
 
+  APPLICATION_RECEIVED_STATUS = 'Application Received'.freeze
   APPLICATION_COMPLETE_STATUS = 'Application Complete, Comment Period Open'.freeze
   PLANNING_REVIEW_STATUS = 'Planning Review Stage'.freeze
   REVISION_STATUS = 'Revision'.freeze
@@ -33,13 +34,15 @@ class Status < ActiveRecord::Base
   GENERAL_STATUS = {
     'Active Development': [
       'Application File Pending',
-      'Application Reactivated'
+      'Application Reactivated',
+      'Application Received'
     ],
     'Comment Period': [
       'Comment Period in Progress',
       'Community \'Heads Up\' - Completed',
       'Community Information and Comment Session Held',
-      'Notice of Public Meeting Sent'
+      'Notice of Public Meeting Sent',
+      'Application Complete, Comment Period Open'
     ],
     'Comment Period Closed': [
       'Agreement Package Received from Owner',
@@ -85,11 +88,15 @@ class Status < ActiveRecord::Base
       'Request for Agreement Received',
       'Revision Request Received',
       'Unknown',
-      'Zoning By-law in Effect'
+      'Zoning By-law in Effect',
+      'Planning Review Stage',
+      'Revision',
+      'Decision'
     ]
   }.freeze
 
   GUELPH_STATUSES = [
+    APPLICATION_RECEIVED_STATUS,
     APPLICATION_COMPLETE_STATUS,
     PLANNING_REVIEW_STATUS,
     REVISION_STATUS,

@@ -23,6 +23,14 @@ class DevSite < ActiveRecord::Base
     'Additions'
   ].freeze
 
+  VALID_FILTERS = [
+    'year',
+    'municipality',
+    'ward',
+    'status',
+    'featured'
+  ].freeze
+
   belongs_to :municipality, foreign_key: 'municipality_id'
   belongs_to :ward
   has_many :comments, as: :commentable, dependent: :destroy
@@ -56,11 +64,15 @@ class DevSite < ActiveRecord::Base
   end
 
   def self.search(search_params)
-    result = DevSite.joins(:ward, :municipality).includes(:addresses, :statuses, :comments)
-    #result = result.where.not(municipalities: { name: 'Guelph' }) # remove when Guelph goes live
+    result = DevSite.joins(:ward, :municipality, :addresses).includes(:statuses, :comments)
     result = location_search(result, search_params)
-    result = query_search(result, search_params)
+    result = filter(result, search_params)
     result
+  end
+
+  def self.search_by_query(collection, value)
+    return collection unless value
+    collection.fuzzy_search(value)
   end
 
   def general_status
@@ -177,33 +189,36 @@ class DevSite < ActiveRecord::Base
       collection.find_ordered(dev_site_ids.flatten.uniq)
     end
 
-    def query_search(result, search_params)
-      search_params.except(:latitude, :longitude).map do |param, value|
-        result = send("search_by_#{param}", result, value)
+    def filter(result, search_params)
+      VALID_FILTERS.map do |filter|
+        value = search_params[:filter]
+        return result unless value
+
+        result = send("filter_by_#{filter}", result, value)
       end
       result
     end
 
-    def search_by_year(collection, value)
+    def filter_by_year(collection, value)
       collection.where('extract(year from updated) = ?', value)
     end
 
-    def search_by_municipality(collection, value)
+    def filter_by_municipality(collection, value)
       collection.where(municipalities: { name: value })
     end
 
-    def search_by_ward(collection, value)
+    def filter_by_ward(collection, value)
       collection.where(wards: { name: value })
     end
 
-    def search_by_status(collection, value)
+    def filter_by_status(collection, value)
       collection
         .where("statuses.start_date = (select max(statuses.start_date) \
                  from statuses where statuses.dev_site_id = dev_sites.id)")
         .where(statuses: { status: value })
     end
 
-    def search_by_featured(collection, value)
+    def filter_by_featured(collection, value)
       collection.where(featured: value)
     end
   end

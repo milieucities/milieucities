@@ -16,7 +16,8 @@ export default class RadioButtonsWithLabel extends Component {
   }
 
   _generateRadioButtonGroup() {
-    return this.props.options.map((option, index) => (
+    const options = this.props.options || [];
+    return options.map((option, index) => (
       <div key={index}>
         <input name={this.props.name} type='radio' value={ option } checked={ option === this.state.selectedOption } onChange={this.handleChange}/>
         <span className='radio-label'>{ i18n[option] }</span>

@@ -1,19 +1,9 @@
 .btn {
-      -moz-box-shadow: 1px 1px 2px 0px #3a7496;
-    -webkit-box-shadow: 1px 1px 2px 0px #3a7496;
     box-shadow: 1px 1px 2px 0px #3a7496;
     background-color:#e5eee9;
-    -webkit-border-top-left-radius:2px;
-    -moz-border-radius-topleft:2px;
     border-top-left-radius:2px;
-    -webkit-border-top-right-radius:2px;
-    -moz-border-radius-topright:2px;
     border-top-right-radius:2px;
-    -webkit-border-bottom-right-radius:2px;
-    -moz-border-radius-bottomright:2px;
     border-bottom-right-radius:2px;
-    -webkit-border-bottom-left-radius:2px;
-    -moz-border-radius-bottomleft:2px;
     border-bottom-left-radius:2px;
     text-indent:0;
     border:1px solid #e5eee9;
@@ -70,7 +60,7 @@
 
 
     &:hover{
-    
+
     }
   }
 
@@ -81,11 +71,5 @@
   &:hover {
     opacity: 0.8;
     color: $secondary-color;
-  }
-}
-
-button {
-  &:focus {
-    outline: -webkit-focus-ring-color auto 5px;
   }
 }
