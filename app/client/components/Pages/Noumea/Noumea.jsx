@@ -20,7 +20,13 @@ export default class Noumea extends Component {
 
     return (
       <div>
-        <h1>sheeet</h1>
+        <h1>Landing page</h1>
+        <img
+          src={require(`./images/3.svg`)}
+        />
+        <img
+            src={require(`./images/4.svg`)}
+          />
     </div>
     )
   }
