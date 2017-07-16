@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   root to: 'noumea#index'
 
   namespace :pages, path: '/', as: nil do
-    get :noumea
+    get :utilisation
+    get :participez
   end
 
   scope '(:locale)', locale: /en|fr/ do
-  
+
 
     namespace :pages, path: '/', as: nil do
       get :wakefield

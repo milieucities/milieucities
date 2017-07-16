@@ -7,8 +7,12 @@ class PagesController < ApplicationController
     @no_header = true
   end
 
-  def noumea
-    @no_header = true    
+  def utilisation
+    @no_header = true
+  end
+
+  def participez
+    @no_header = true
   end
 
   def wakefield
