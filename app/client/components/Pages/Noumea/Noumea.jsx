@@ -6,7 +6,6 @@ import Comments from '../../Comments/Comments'
 import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
 import { debounce, uniqueId } from 'lodash'
-import i18n from './locale'
 
 export default class Noumea extends Component {
   constructor() {
