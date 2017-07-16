@@ -11,6 +11,7 @@ import './components/NotificationSettings/Edit/Edit'
 
 import './components/Pages/Home/Home'
 import './components/Pages/Wakefield/Wakefield'
+import './components/Pages/Noumea/Noumea'
 
 import './components/Users/Show/Show'
 import './components/Users/Edit/Edit'

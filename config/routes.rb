@@ -1,10 +1,16 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+
+  namespace :pages, path: '/', as: nil do
+    post :noumea
+  end
+
   scope '(:locale)', locale: /en|fr/ do
     root to: 'dev_sites#index'
 
     namespace :pages, path: '/', as: nil do
       get :wakefield
+      get :noumea
       post :contact_file_lead
       post :contact_councillor
     end
