@@ -2,8 +2,6 @@ const webpack = require('webpack');
 const path = require("path");
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const express = require('express');
-const app = express();
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -86,9 +84,3 @@ module.exports = {
 
   sassResources: ['../assets/stylesheets/variables.scss']
 }
-
-app.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz';
-  res.set('Content-Encoding', 'gzip');
-  next();
-});
