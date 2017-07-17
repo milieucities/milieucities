@@ -6,6 +6,25 @@ import Comments from '../../Comments/Comments'
 import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
 import { debounce, uniqueId } from 'lodash'
+import InputRange from 'react-input-range'
+
+class Range extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { value: 5 };
+  }
+
+  render() {
+    return (
+      <InputRange
+        maxValue={20}
+        minValue={0}
+        value={this.state.value}
+        onChange={value => this.setState({ value })} />
+    );
+  }
+}
 
 export default class Participez extends Component {
   constructor() {
@@ -27,6 +46,7 @@ export default class Participez extends Component {
         <img
             src={require(`./images/5.svg`)}
         />
+      <Range/>
     </div>
     )
   }
