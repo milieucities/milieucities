@@ -2,6 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const express = require('express');
+const app = express();
 
 module.exports = {
 
@@ -20,7 +23,22 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('[name].css'),
+    // new webpack.DefinePlugin({ // <-- key to reducing React's size
+    //   'process.env': {
+    //     'NODE_ENV': JSON.stringify('production')
+    //   }
+    // }),
+    new webpack.optimize.DedupePlugin(), //dedupe similar code
+    new webpack.optimize.UglifyJsPlugin(), //minify everything
+    new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    })
   ],
 
   module: {
@@ -66,3 +84,9 @@ module.exports = {
 
   sassResources: ['../assets/stylesheets/variables.scss']
 }
+
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
