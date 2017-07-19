@@ -3,6 +3,11 @@ const path = require("path");
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const extractLess = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
+
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = {
@@ -59,6 +64,18 @@ module.exports = {
         'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]',
         'sass',
         'sass-resources']
+      },
+      { // might need to double check before goin to prod
+        test: /\.less$/,
+            use: extractLess.extract({
+                use: [{
+                    loader: 'css-loader'
+                }, {
+                    loader: 'less-loader'
+                }],
+                // use style-loader in development
+                fallback: 'style-loader'
+            })
       },
       {
         test: /\.css$/,
