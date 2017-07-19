@@ -1,36 +1,33 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import css from './noumea.scss'
-import Footer from '../../Layout/Footer/Footer'
-import Comments from '../../Comments/Comments'
-import Loader from '../../Common/Loader/Loader'
-import Sentiment from '../../Common/Sentiment/Sentiment'
-import { debounce, uniqueId } from 'lodash'
-import InputRange from 'react-input-range'
+import 'rc-slider/assets/index.css'
+import 'rc-tooltip/assets/bootstrap.css'
+import Tooltip from 'rc-tooltip'
+import Slider from 'rc-slider'
 
-class Range extends Component {
-  constructor(props) {
-    super(props);
+const createSliderWithTooltip = Slider.createSliderWithTooltip;
+const Range = createSliderWithTooltip(Slider.Range);
+const Handle = Slider.Handle;
 
-    this.state = { value: 5 };
-  }
-
-  render() {
-    return (
-      <InputRange
-        maxValue={20}
-        minValue={0}
-        value={this.state.value}
-        onChange={value => this.setState({ value })} />
-    );
-  }
-}
+const handle = (props) => {
+  const { value, dragging, index } = props;
+  return (
+    <Tooltip
+      prefixCls="rc-slider-tooltip"
+      overlay={value}
+      visible={dragging}
+      placement="top"
+      key={index}
+    >
+      <Handle value={value} />
+    </Tooltip>
+  );
+};
 
 export default class Participez extends Component {
   constructor() {
     super()
-    this.state = { loading: true };
-    this.devSiteId = document.querySelector('#participez').dataset.id;
+    this.state = { loading: true, value: 10 };
     this.surveySentiment = document.querySelector('#participez').dataset.surveySentiment;
   }
 
@@ -39,18 +36,15 @@ export default class Participez extends Component {
 
     return (
       <div>
-        <h1>Participez page</h1>
-        <img
-          src={require(`./images/2.svg`)}
-        />
-        <img
-            src={require(`./images/5.svg`)}
-        />
-      <Range/>
+        <h1>Survey</h1>
+        <div className="col-md-6">
+      <Slider min={0} max={20} defaultValue={3} handle={handle} />
+  </div>
     </div>
     )
   }
 }
+
 
 document.addEventListener('turbolinks:load', () => {
   const participez = document.querySelector('#participez');
