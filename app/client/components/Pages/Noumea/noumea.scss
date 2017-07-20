@@ -1,3 +1,11 @@
+.chapters {
+
+  @media #{$small-and-down} {
+      padding: 100px;
+    }
+
+}
+
 .root {
   background-color: $white;
   min-height: calc(100vh - 50px);
