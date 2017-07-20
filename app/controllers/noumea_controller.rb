@@ -3,7 +3,7 @@ class NoumeaController < ApplicationController
     @no_header = true
   end
 
-  def create
+  def submit_survey
 	  respond_to do |format|
 	    format.html
 	    format.json

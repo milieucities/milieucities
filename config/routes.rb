@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :pages, path: '/', as: nil do
     get :utilisation
     get :participez
-    post :participez
+    post :submit_survey
   end
 
   scope '(:locale)', locale: /en|fr/ do

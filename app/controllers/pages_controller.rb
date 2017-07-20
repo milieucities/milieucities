@@ -13,13 +13,13 @@ class PagesController < ApplicationController
 
   def participez
     @no_header = true
+  end
 
-    def create
-      respond_to do |format|
-        format.html
-        format.json
-      end
-    end
+  def survey_answers
+    comments_json = params['comments'] # or however this comes in
+    file_path = Rails.root.join 'public' # generate the file path where you want to store the json
+    IO.write(file_path, comments_json)
+    render json: { data_file: file_path } # or whatever you want to return
   end
 
   def wakefield
