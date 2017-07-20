@@ -8,7 +8,7 @@ const i18n = new LocalizedStrings({
     openForComments: "Open for Comments",
     committee: "Committee of Adjustment",
     share: "Share",
-    devId: "Development Id",
+    devId: "File Number",
     ward: "Ward",
     status: "Status",
     description: "Description",
