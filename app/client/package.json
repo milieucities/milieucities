@@ -5,7 +5,12 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run build:prod || npm run start:dev",
     "build:prod": "webpack --config webpack.prod.config.js",
-    "start:dev": "webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0 --hot --inline --history-api-fallback"
+    "start:dev": "webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0 --hot --inline --history-api-fallback",
+    "clean": "rimraf dist",
+    "build:webpack": "webpack --config config.prod.js",
+    "build:dll": "webpack --config config.dll.js",
+    "build": "npm run clean && npm run build:dll && npm run build:webpack",
+    "watch": "npm run build:dll && webpack --config config.dev.js --watch --progress"
   },
   "repository": {
     "type": "git",
@@ -24,7 +29,6 @@
     "es6-promise": "^3.2.1",
     "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.8.5",
     "font-awesome": "^4.6.1",
     "font-awesome-webpack": "0.0.4",
     "if-env": "1.0.0",
@@ -46,6 +50,7 @@
     "react-share": "^1.11.0",
     "react-tabs": "^1.0.0",
     "riek": "^1.0.7",
+    "rimraf": "^2.6.1",
     "sass-loader": "^3.2.0",
     "sass-resources-loader": "^1.0.2",
     "style-loader": "^0.13.1",
