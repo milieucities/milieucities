@@ -13,6 +13,13 @@ class PagesController < ApplicationController
 
   def participez
     @no_header = true
+
+    def create
+      respond_to do |format|
+        format.html
+        format.json
+      end
+    end
   end
 
   def wakefield

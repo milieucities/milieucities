@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   namespace :pages, path: '/', as: nil do
     get :utilisation
     get :participez
+    post :participez
   end
 
   scope '(:locale)', locale: /en|fr/ do
-
 
     namespace :pages, path: '/', as: nil do
       get :wakefield
