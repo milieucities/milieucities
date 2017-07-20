@@ -4,35 +4,38 @@ import css from './noumea.scss'
 import { Slider } from 'antd'
 import 'antd/dist/antd.less'
 
-const ii = <img src={require(`./images/1.svg`)}/>;
-const ll = 'll';
+const broken = <img src={require(`./images/1.svg`)}/>;
+const sad = <img src={require(`./images/2.svg`)}/>;
+const happy = <img src={require(`./images/3.svg`)}/>;
+const love = <img src={require(`./images/4.svg`)}/>;
+const muchlove = <img src={require(`./images/5.svg`)}/>;
 const labelEmojiStyle = [ 'color': 'black'];
 
 const marks = {
   0: {
     style: { labelEmojiStyle
     },
-    label: ii,
+    label: broken,
   },
   1: {
     style: { labelEmojiStyle
     },
-    label: '!X',
+    label: sad,
   },
   2: {
     style: { labelEmojiStyle
     },
-    label: ':)',
+    label: happy,
   },
   3: {
     style: { labelEmojiStyle
     },
-    label: '<3',
+    label: love,
   },
   4: {
     style: { labelEmojiStyle
     },
-    label: ':) <3 <3',
+    label: muchlove,
   },
 
 };
