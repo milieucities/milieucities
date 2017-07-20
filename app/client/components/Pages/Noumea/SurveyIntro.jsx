@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import css from './noumea.scss'
 import { Slider } from 'antd'
 import 'antd/dist/antd.less'
+import HeaderFooter from './HeaderFooter'
 
 export default class SurveyIntro extends Component {
   constructor() {
@@ -26,9 +27,10 @@ export default class SurveyIntro extends Component {
     const { loading } = this.state;
 
     return (
-      <div className="row">
         <div className="container">
-          <h1>Thématique 1 - Usage temporaire</h1>
+          <div className="row">
+            <h1>Thématique 1 - Usage temporaire</h1>
+          </div>
           <div className="row">
             <div className="intro">
               <p>De part sa position privilégié en plein centre ville et sa dimension patrimoniale,
@@ -56,8 +58,9 @@ export default class SurveyIntro extends Component {
               Start
             </button>
           </div>
+          <HeaderFooter />
       </div>
-    </div>
+
     )
   }
 }
