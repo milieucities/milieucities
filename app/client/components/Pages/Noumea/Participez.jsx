@@ -21,7 +21,7 @@ export default class SurveyForm extends Component {
       };
 
       $.ajax({
-        url: `/participez`,
+        url: `/submit_survey`,
         dataType: 'JSON',
         type: 'POST',
         data: data,
