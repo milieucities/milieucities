@@ -229,7 +229,6 @@ export default class extends Component {
       <div className={css.container} ref='container' tabIndex='-1'>
         <div className={css.menu}>
           <a className={css.close} onClick={this.closeDevSite} href='#'></a>
-          <a className={css.expand} href={devSite.url}></a>
         </div>
         <div className={css.wrapper}>
         <h3 className={css.status}>{latestStatus}</h3>

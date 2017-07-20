@@ -5,6 +5,7 @@ import DevSiteCard from '../../../DevSites/Card/Card'
 import SearchForm from './SearchForm'
 import css from '../../../Layout/Dashboard/dashboard.scss'
 import indexCss from './index.scss'
+import i18n from '../../locale.js'
 import Pagination from '../../../Utility/Pagination/Pagination'
 
 export default class Index extends Component {
@@ -13,6 +14,7 @@ export default class Index extends Component {
     this.state = { loading: true, page: 0 }
     this.loadDevSites = (q) => this._loadDevSites(q)
     this.handleDelete = (e) => this._handleDelete(e)
+    this.handleClick = (id) => this._handleClick(id)
     this.loadDevSites()
   }
 
@@ -47,6 +49,12 @@ export default class Index extends Component {
     });
   }
 
+  _handleClick(devSiteId) {
+    const { locale } = document.body.dataset;
+    const url = `/${locale}/dev_sites/${devSiteId}/edit`;
+    window.location.href = url;
+  }
+
   render() {
     const { devSites, loading, page, total } = this.state
     const { locale } = document.body.dataset
@@ -58,7 +66,7 @@ export default class Index extends Component {
             <h2>Manage Development Sites</h2>
             <div className={`row ${indexCss.addSites}`}>
               <div className="col s12">
-                <a href={`/${locale}/dev_sites/new`} className='btn'>Add Development Site</a>
+                <a href={`/${locale}/dev_sites/new`} className='btn'>{i18n.addDevelopmentSite}</a>
               </div>
             </div>
             <SearchForm handleSubmit={this.loadDevSites} />
@@ -66,15 +74,8 @@ export default class Index extends Component {
               {
                 devSites && devSites.map(devSite => (
                   <div className={`col s12 m6 ${indexCss.devSite}`} key={`preview-${devSite.id}`}>
-                    <a href={`/${locale}/dev_sites/${devSite.id}/edit`} className={`btn icon ${indexCss.edit}`}>
-                      <i className='fa fa-pencil'></i>
-                    </a>
-                    <a href='#' onClick={this.handleDelete} data-id={devSite.id} className={`btn icon ${indexCss.delete}`}>
-                      <i className='fa fa-trash'></i>
-                    </a>
-                    <a href={`/${locale}/dev_sites/${devSite.id}`}>
-                      <DevSiteCard id={devSite.id} devSite={devSite} />
-                    </a>
+                    <a onClick={this.handleDelete} data-id={devSite.id} className={indexCss.delete}>{i18n.delete}</a>
+                    <DevSiteCard id={devSite.id} devSite={devSite} handleClick={this.handleClick} />
                   </div>
                 ))
               }
