@@ -2,19 +2,19 @@
   <title>MILIEU - Making Cities Feel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= favicon_link_tag "favicon.ico" %>
-  <!-- <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXhT-axWl8t1uj1tQuQndjKoTKnkFzbpo&libraries=places"></script> -->
+  <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXhT-axWl8t1uj1tQuQndjKoTKnkFzbpo&libraries=places"></script>
 
   <!-- Font Styles -->
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300,500,700,900' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 
   <!-- Map Box GL Js-->
-  <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.0/mapbox-gl.js'></script> -->
-  <!-- <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.0/mapbox-gl.css' rel='stylesheet' /> -->
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.32.0/mapbox-gl.css' rel='stylesheet' />
 
   <!-- Map Box Geocoder-->
-  <!-- <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.0/mapbox-gl-geocoder.js'></script>
-  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.0/mapbox-gl-geocoder.css' type='text/css' /> -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.0/mapbox-gl-geocoder.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.0/mapbox-gl-geocoder.css' type='text/css' />
 
   <!-- CrazyEgg Analytics -->
   <script type="text/javascript">
@@ -37,8 +37,8 @@
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-   <% if Rails.env.development? %>
-    <%= javascript_include_tag 'http://0.0.0.0:8080/dist/bundle.js' %>
+  <% if Rails.env.development? %>
+    <%= javascript_include_tag 'http://0.0.0.0:8080/bundle.js' %>
   <% else %>
     <%= javascript_include_tag 'bundle' %>
   <% end %>

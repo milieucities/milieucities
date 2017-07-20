@@ -7,24 +7,22 @@ const express = require('express');
 const app = express();
 
 module.exports = {
-  cache: true,
-  devtool: 'eval',
+
   entry: {
-    bundle: path.join(__dirname, "index.js")
+    bundle: path.resolve(__dirname, 'index')
+  },
+
+  resolve: {
+    extensions: ['', '.js', '.jsx']
   },
 
   output: {
-    path: path.join(__dirname, "dist"),
-    filename: "[name].js",
+    path: path.resolve(__dirname, 'build'),
     publicPath: 'http://0.0.0.0:8080/',
-    chunkFilename: "[name].js"
+    filename: '[name].js'
   },
 
   plugins: [
-    new webpack.DllReferencePlugin({
-      context: path.join(__dirname, "client"),
-      manifest: require("./dll/vendor-manifest.json")
-    }),
     new ExtractTextPlugin('[name].css'),
     // new webpack.DefinePlugin({ // <-- key to reducing React's size
     //   'process.env': {
@@ -46,16 +44,9 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        loader: "babel",
-        include: [
-            path.join(__dirname, "client") //important for performance!
-        ],
-        query: {
-            cacheDirectory: true, //important for performance
-            plugins: ["transform-regenerator"],
-            presets: ["react", "es2015", "stage-0"]
-        }
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash'
       },
       {
         test: /\.(json|geojson)$/,
@@ -88,16 +79,11 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    extensions: ["", ".js", ".jsx"],
-    root: path.resolve(__dirname, "client"),
-    modulesDirectories: ["node_modules"]
-  },
 
   postcss: [autoprefixer],
 
   sassResources: ['../assets/stylesheets/variables.scss']
-};
+}
 
 app.get('*.js', function (req, res, next) {
   req.url = req.url + '.gz';
