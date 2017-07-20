@@ -4,7 +4,7 @@ import css from './noumea.scss'
 import { Slider } from 'antd'
 import 'antd/dist/antd.less'
 
-const ii = <img src={require(`./images/5.svg`)}/>;
+const ii = <img src={require(`./images/1.svg`)}/>;
 const ll = 'll';
 const labelEmojiStyle = [ 'color': 'black'];
 
@@ -74,5 +74,3 @@ L’intégration d’une grande diversité de programmes, ponctués d’espaces 
     )
   }
 }
-
-
