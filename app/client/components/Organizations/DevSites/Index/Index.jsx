@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Dashboard from '../../../Layout/Dashboard/Dashboard'
-import DevSitePreview from '../../../DevSites/Preview/Preview'
+import DevSiteCard from '../../../DevSites/Card/Card'
 import SearchForm from './SearchForm'
 import css from '../../../Layout/Dashboard/dashboard.scss'
 import indexCss from './index.scss'
@@ -65,7 +65,7 @@ export default class Index extends Component {
             <div className='row'>
               {
                 devSites && devSites.map(devSite => (
-                  <div className={`col s12 m6 l4 ${indexCss.devSite}`} key={`preview-${devSite.id}`}>
+                  <div className={`col s12 m6 ${indexCss.devSite}`} key={`preview-${devSite.id}`}>
                     <a href={`/${locale}/dev_sites/${devSite.id}/edit`} className={`btn icon ${indexCss.edit}`}>
                       <i className='fa fa-pencil'></i>
                     </a>
@@ -73,7 +73,7 @@ export default class Index extends Component {
                       <i className='fa fa-trash'></i>
                     </a>
                     <a href={`/${locale}/dev_sites/${devSite.id}`}>
-                      <DevSitePreview id={devSite.id} width={250} devSite={devSite} preview={true} />
+                      <DevSiteCard id={devSite.id} devSite={devSite} />
                     </a>
                   </div>
                 ))

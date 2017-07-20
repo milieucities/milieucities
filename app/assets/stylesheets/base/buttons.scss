@@ -1,24 +1,21 @@
 .btn {
-    box-shadow: 1px 1px 2px 0px #3a7496;
-    background-color:#e5eee9;
-    border-top-left-radius:2px;
-    border-top-right-radius:2px;
-    border-bottom-right-radius:2px;
-    border-bottom-left-radius:2px;
-    text-indent:0;
-    border:1px solid #e5eee9;
+    box-shadow: 1px 1px 2px 0px $primary-color;
+    background-color: $light-primary-color;
+    border-radius: 2px;
+    text-indent: 0;
+    border: 1px solid $light-primary-color;
     display:inline-block;
-    color:#477393;
-    font-size:15px;
-    font-weight:bold;
-    font-family: 'Avenir Next','Lato',sans-serif;
-    font-style:normal;
-    height:35px;
-    line-height:35px;
-    width:250px;
-    text-decoration:none;
-    text-align:center;
-    margin: 0.75rem 0;
+    color: $primary-color;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: $primary-font;
+    font-style: normal;
+    height: 35px;
+    line-height: 35px;
+    text-decoration: none;
+    text-align: center;
+    padding: 0 1.4em;
+    margin-right: 0.4em;
 
   &:hover {
     color: #5d9bc0;
@@ -55,12 +52,28 @@
     text-align: center;
   }
 
-  &.cancel {
-    background-color: $light-primary-color;
-
+  &.submit {
+    background-color: $primary-color;
+    border-color: $dark-primary-color;
+    box-shadow: none;
+    color: $white;
 
     &:hover{
+      color: $white;
+      background-color: $dark-primary-color;
+    }
+  }
 
+  &.cancel {
+    background-color: $white;
+    color: $dark-primary-color;
+    border-color: $dark-primary-color;
+    box-shadow: none;
+    font-weight: normal;
+
+    &:hover{
+      background-color: $pale-gray;
+      color: $dark-primary-color;
     }
   }
 

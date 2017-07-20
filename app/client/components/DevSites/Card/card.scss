@@ -1,0 +1,19 @@
+.cardContainer {
+  border-radius: 3px;
+  border: 1px solid $dark-primary-color;
+
+  .cardContent {
+    .header {
+      font-weight: bold;
+    }
+
+    .image {
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+
