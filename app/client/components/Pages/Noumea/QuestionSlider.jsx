@@ -9,32 +9,21 @@ const sad = <img src={require(`./images/2.svg`)}/>;
 const happy = <img src={require(`./images/3.svg`)}/>;
 const love = <img src={require(`./images/4.svg`)}/>;
 const muchlove = <img src={require(`./images/5.svg`)}/>;
-const labelEmojiStyle = [ 'color': 'black'];
 
 const marks = {
   0: {
-    style: { labelEmojiStyle
-    },
     label: broken,
   },
   1: {
-    style: { labelEmojiStyle
-    },
     label: sad,
   },
   2: {
-    style: { labelEmojiStyle
-    },
     label: happy,
   },
   3: {
-    style: { labelEmojiStyle
-    },
     label: love,
   },
   4: {
-    style: { labelEmojiStyle
-    },
     label: muchlove,
   },
 
@@ -69,7 +58,7 @@ L’intégration d’une grande diversité de programmes, ponctués d’espaces 
           </div>
           <div className="row">
             <div className="col-xs-6">
-              <Slider marks={marks} defaultValue={2} max={4} tipFormatter={false} onChange={this.handleGetEmotion}/>
+              <Slider marks={marks} defaultValue={2} max={4} tipFormatter={false} onChange={this.handleGetEmotion} included={false}/>
             </div>
           </div>
       </div>
