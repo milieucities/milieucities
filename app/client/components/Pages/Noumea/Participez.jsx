@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import css from './css/noumea.scss'
-import QuestionSlider from './QuestionSlider'
 import SurveyIntro from './SurveyIntro'
 import _ from 'lodash'
 import { RIETextArea } from 'riek'
@@ -72,29 +71,7 @@ class AnswerForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <SurveyIntro />
-         <form 
-         className="AnswerForm"
-         onSubmit={this.handleSubmit}>
-           <h2>Rating</h2>
-         
-           {/* This Radios component is specialized to include two fields in one */}
-           <h4>How do you feel about bike paths in Noumea?</h4>
-           
-           <QuestionSlider />
-
-           <input 
-           type="text" 
-           value={this.state.amount} 
-           onChange={this.handleChange} />
-           <br /><br />
-           
-           <input 
-           type="submit" 
-           value="Submit"/>
-         </form>
-      </div>
+       <SurveyIntro />
     );
   }
 }
