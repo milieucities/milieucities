@@ -1,26 +1,112 @@
-.chapters {
 
-  @media #{$small-and-down} {
-      padding: 100px;
+
+  h1 {
+    text-align: center;
+    font-size: 3em;
+
+    @media #{$medium-and-down} {
+      font-size: 2.5em;
     }
 
+    @media #{$small-and-down}{
+      font-size: 2em;
+    }
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 2.5em;
+  }
+
+  p {
+    font-size:1em;
+  }
+
+.container {
+  padding-bottom: 0 !important;
+
+  @media #{$medium-and-down} {
+    padding: 20px 50px;
+  }
+
+  @media #{$small-and-down} {
+    padding: 20px;
+  }
+}
+
+
+.logoContainer{
+margin-top: 3vh;
+margin: 0 auto;
+align-items: center;
+align-content: center;
+
+p {
+  text-align: center;
+}
+img {
+  padding: 1%;
+  display: inline-block;
+  float: left;
+  width: 120px;
+  margin: 0 auto;
+  }
+
+@media #{$small-and-down} {
+  img {
+    width: 30%;
+    }
+}
+}
+
+
+.titleContainer {
+border-top: 1px;
+border-color: grey;
+margin:5vh auto;
+display: inline-block;
+float:left;
+max-width: 340px;
+
+}
+
+.videoContainer {
+margin:0 auto;
+display: inline-block;
+width: 100%;
+padding: 0;
+
+iframe {
+  border: 1px;
+  border-color: white;
+}
+
+@media #{$medium-and-down} {
+  padding: 0;
+}
+
+@media #{$small-and-down} {
+  padding: 0;
+}
+}
+
+.partnersContainer{
+  margin: 50px 0;
+  border-top: 1px solid $light-gray;
+
+  img {
+    padding: 1%;
+    display: inline-block;
+    float: left;
+    width: 100px;
+    margin: 0 auto;
+  }
 }
 
 .root {
   background-color: $white;
   min-height: calc(100vh - 50px);
 
-  .container {
-    padding-bottom: 0 !important;
-
-    @media #{$medium-and-down} {
-      padding: 20px 50px;
-    }
-
-    @media #{$small-and-down} {
-      padding: 20px;
-    }
-  }
 
   .share {
     position: fixed;
@@ -43,16 +129,6 @@
       z-index: 10;
     }
 
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    padding-bottom: 25px;
-  }
-
-  h2 {
-    display: block;
   }
 
   .content {
@@ -208,30 +284,6 @@
   &:hover {
     opacity: 1;
   }
-}
-
-.partners {
-  padding: 30px 20px;
-  margin: 50px 0;
-  border-top: 1px solid $light-gray;
-
-  h2 {
-    margin-top: 0;
-  }
-
-  h4 {
-    margin: 0 auto;
-    display: block;
-    max-width: 450px;
-  }
-
-  .logo {
-    height: 150px;
-    width: 25%;
-    margin: 0 4%;
-    object-fit: contain;
-  }
-
 }
 
 .carouselNextItem {

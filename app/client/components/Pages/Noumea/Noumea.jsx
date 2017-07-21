@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import css from './css/noumea.scss'
-import Footer from '../../Layout/Footer/Footer'
-import Comments from '../../Comments/Comments'
-import Loader from '../../Common/Loader/Loader'
-import Sentiment from '../../Common/Sentiment/Sentiment'
 import { debounce, uniqueId } from 'lodash'
 
 export default class Noumea extends Component {
@@ -24,35 +20,31 @@ export default class Noumea extends Component {
     const { loading } = this.state;
 
     return (
-      <div className="container">
+      <div className={css.container}>
 
-        <div>
-          <img
-            src={require(`./images/logo-noumea-m.jpg`)}
-          />
-          <img
-            src={require(`./images/logo-provincesud.jpg`)}
-          />
-          <img
-            src={require(`./images/logo-nc.png`)}
-          />
+        <div className= {css.logoContainer}>
+            <img
+              src={require(`./images/logo-noumea-m.jpg`)}
+            />
+            <img
+              src={require(`./images/logo-provincesud.jpg`)}
+            />
+            <img
+              src={require(`./images/logo-nc.png`)}
+            />
       </div>
 
-      <div className="title-container">
+      <div className={css.titleContainer}>
         <h1>Entrée Nord</h1>
 <p>Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa</p>
       </div>
 
-        <img
-          src={require(`./images/3.svg`)}
-        />
-      <p>video here</p>
-        <img
-            src={require(`./images/4.svg`)}
-          />
+      <div className={css.videoContainer}>
 
+<iframe width="100%" height="100%" src="https://www.youtube.com/embed/cBkWhkAZ9ds?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+ </div>
 
-        <div className="vision-container">
+      <div className="vision-container">
       <h2>VISION POUR L'ENTRÉE NORD</h2>
       <h3>Proposition de scénario d'aménagement</h3>
       <p>
@@ -96,16 +88,20 @@ Nous proposons de developper une vision partagée pour l’entrée nord en tant 
   </p>
 </div>
 
-<div className="partners-container">
+
+<div className={css.partnersContainer} >
+
   <h2>les partenaires</h2>
     <img
       src={require(`./images/logo-acp.svg`)}
     />
     <img
       src={require(`./images/logo-scet.png`)}
+
     />
     <img
       src={require(`./images/logo-milieu.png`)}
+
     />
 </div>
 
