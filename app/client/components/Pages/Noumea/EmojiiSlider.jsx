@@ -48,6 +48,22 @@ export default class EmojiiSlider extends Component {
     return (
       <div className="container">
         <div className="row">
+          <div className="col-xs-3">
+            icons
+          </div>
+          <div className="col-sm-4">
+            <div className="row">
+              <h1>Thèmatique 1 - Usage Immèdiat</h1>
+            </div>
+            <div className="row">
+              <h2>1.1 Usage</h2>
+            </div>
+            <div className="row">
+              map
+            </div>
+          </div>
+        </div>
+        <div className="row">
           <div className="col-sm-6">
             <Slider marks={marks} defaultValue={2} max={4} tipFormatter={false} onChange={this.handleGetEmotion} included={false}/>
           </div>
