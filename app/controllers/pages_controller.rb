@@ -21,7 +21,8 @@ class PagesController < ApplicationController
     File.open("public/comment.json","w") do |f|
       f.puts JSON.pretty_generate(JSON.parse(comments_json) << comment)
     end
-  end
+    render json: {}
+  end 
 
   def wakefield
     typeform_id = 'HHlHgX'
