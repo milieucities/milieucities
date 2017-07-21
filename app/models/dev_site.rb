@@ -40,6 +40,7 @@ class DevSite < ActiveRecord::Base
   has_many :city_files, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :meetings, dependent: :destroy
+  has_many :application_files, dependent: :destroy
   has_and_belongs_to_many :application_types
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
