@@ -1,0 +1,14 @@
+a {
+  padding: 0 20px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 15px;
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  vertical-align: middle;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

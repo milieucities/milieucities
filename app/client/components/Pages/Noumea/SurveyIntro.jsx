@@ -1,18 +1,25 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import css from './noumea.scss'
+import css from './css/noumea.scss'
 import { Slider } from 'antd'
 import 'antd/dist/antd.less'
-import HeaderFooter from './HeaderFooter'
+import MobileFooter from './MobileFooter'
+import Header from './Header'
+import { debounce } from 'lodash'
 
 export default class SurveyIntro extends Component {
   constructor() {
     super()
-    this.state = { loading: true };
+    this.state = { loading: true, isMobile: (window.innerWidth < 600) };
     this.devSiteId = document.querySelector('#participez').dataset.id;
     this.surveySentiment = document.querySelector('#participez').dataset.surveySentiment;
     this.handleGetEmotion = this.handleGetEmotion.bind(this);
     this.handleShowSurvey = this.handleShowSurvey.bind(this);
+    window.addEventListener('resize',
+      debounce(() => {
+        this.setState({ isMobile: (window.innerWidth < 992) })
+      }, 100)
+    );
   }
 
   handleGetEmotion() {
@@ -24,10 +31,13 @@ export default class SurveyIntro extends Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, isMobile } = this.state;
 
     return (
         <div className="container">
+          { !isMobile &&
+            <Header />
+          }
           <div className="row">
             <h1>Thématique 1 - Usage temporaire</h1>
           </div>
@@ -54,13 +64,14 @@ export default class SurveyIntro extends Component {
             </div>
           </div>
           <div className="row">
-            <button onClick={this.handleShowSurvey} className='btn' >
+            <a href="/participez/survey" className='btn' >
               Start
-            </button>
+            </a>
           </div>
-          <HeaderFooter />
+          { isMobile &&
+            <MobileFooter />
+          }
       </div>
-
     )
   }
 }
