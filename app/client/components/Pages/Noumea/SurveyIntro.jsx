@@ -54,15 +54,6 @@ export default class SurveyIntro extends Component {
               </div>
             </div>
           </div>
-          <div className="chapters">
-            <div className="row">
-              <h2>1.1. Usage temporaire de l'ancien complexe Gaston-Bourret</h2>
-            </div>
-            <br />
-            <div className="row">
-              <h2>1.2 Usage temporaire du parking et du terrain vague adjacent</h2>
-            </div>
-          </div>
           <div className="row">
             <a href="/participez/survey" className='btn' >
               Start

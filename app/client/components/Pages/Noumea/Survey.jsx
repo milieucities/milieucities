@@ -4,6 +4,7 @@ import css from './css/noumea.scss'
 import _ from 'lodash'
 import { RIETextArea } from 'riek'
 import EmojiiSlider from './EmojiiSlider'
+import { debounce } from 'lodash'
 
 export default class Survey extends Component {
 
@@ -11,9 +12,15 @@ export default class Survey extends Component {
     super(props);
     this.state = {
     	participantId: '',
-    	questionSet: []
+    	questionSet: [],
+      isMobile: (window.innerWidth < 600)
     };
     this.handleSubmit = () => this.handleSubmit();
+    window.addEventListener('resize',
+      debounce(() => {
+        this.setState({ isMobile: (window.innerWidth < 992) })
+      }, 100)
+    );
   }
 
   handleSubmit() {
@@ -64,8 +71,25 @@ export default class Survey extends Component {
   //         },
 
   render() {
+    const { isMobile } = this.state;
     return (
-      <div>
+      <div className="container">
+        <div className="row">
+          <h2>1.1. Usage temporaire de l'ancien complexe Gaston-Bourret</h2>
+        </div>
+        <div className="row">
+          <div className="col-xs-3">
+            icons
+          </div>
+          <div className="col-sm-4">
+            <div className="row">
+              { isMobile &&
+                <img src={require(`./images/theme1-1.png`)}/>
+              }
+              map
+            </div>
+          </div>
+        </div>
         <EmojiiSlider />
         <form className="answerForm" onSubmit={this.handleSubmit}>
           <h4>How do you feel about bike paths in Noumea?</h4>
