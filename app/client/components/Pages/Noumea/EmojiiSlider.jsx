@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import css from './noumea.scss'
+import css from './css/noumea.scss'
 import { Slider } from 'antd'
 import 'antd/dist/antd.less'
 
@@ -29,12 +29,9 @@ const marks = {
 
 };
 
-class SurveyIntro extends Component {
+export default class EmojiiSlider extends Component {
   constructor() {
     super()
-    this.state = { loading: true };
-    this.devSiteId = document.querySelector('#participez').dataset.id;
-    this.surveySentiment = document.querySelector('#participez').dataset.surveySentiment;
     this.handleGetEmotion = this.handleGetEmotion.bind(this);
     this.handleShowSurvey = this.handleShowSurvey.bind(this);
   }
@@ -48,12 +45,12 @@ class SurveyIntro extends Component {
   }
 
   render() {
-    const { loading } = this.state;
-
-    return(
-      <div className="row">
-        <div className="col-sm-6">
-          <Slider marks={marks} defaultValue={2} max={4} tipFormatter={false} onChange={this.handleGetEmotion} included={false}/>
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-6">
+            <Slider marks={marks} defaultValue={2} max={4} tipFormatter={false} onChange={this.handleGetEmotion} included={false}/>
+          </div>
         </div>
       </div>
     )

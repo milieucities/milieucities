@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import css from './css/noumea.scss'
 import _ from 'lodash'
 import { RIETextArea } from 'riek'
+import EmojiiSlider from './EmojiiSlider'
 
 export default class Survey extends Component {
 
@@ -64,12 +65,15 @@ export default class Survey extends Component {
 
   render() {
     return (
-      <form className="answerForm" onSubmit={this.handleSubmit}>
-        <h4>How do you feel about bike paths in Noumea?</h4>
-        <br /><br />
+      <div>
+        <EmojiiSlider />
+        <form className="answerForm" onSubmit={this.handleSubmit}>
+          <h4>How do you feel about bike paths in Noumea?</h4>
+          <br /><br />
 
-        <input type="submit" value="Submit" />
-      </form>
+          <input type="submit" value="Submit" />
+        </form>
+    </div>
     );
   }
 }
