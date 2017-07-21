@@ -16,10 +16,11 @@ class PagesController < ApplicationController
   end
 
   def submit_survey
-    comments_json = params['comments'] # or however this comes in
-    file_path = Rails.root.join 'public' # generate the file path where you want to store the json
-    IO.write(file_path, comments_json)
-    render json: { data_file: file_path } # or whatever you want to return
+    comments_json = params['comment'] # or however this comes in
+    respond_to do |format|
+      format.json { render :json => comments_json }
+      format.html {}
+    end
   end
 
   def wakefield

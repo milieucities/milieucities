@@ -24,7 +24,8 @@ export default class SurveyForm extends Component {
         url: `/submit_survey`,
         dataType: 'JSON',
         type: 'POST',
-        data: data,
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
         success: (comment) => {
           console.log("You saved data", data)
           resolve(comment)
