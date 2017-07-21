@@ -30,7 +30,7 @@ export default class SurveyForm extends Component {
           resolve(comment)
         },
         error: (error) => {
-          console.log(error)
+          console.log("There was an error: ", error)
           reject(error)
         }
       })

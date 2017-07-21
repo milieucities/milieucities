@@ -15,7 +15,7 @@ class PagesController < ApplicationController
     @no_header = true
   end
 
-  def survey_survey
+  def submit_survey
     comments_json = params['comments'] # or however this comes in
     file_path = Rails.root.join 'public' # generate the file path where you want to store the json
     IO.write(file_path, comments_json)
