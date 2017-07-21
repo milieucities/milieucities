@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import css from './css/noumea.scss'
+import css from './css/survey.scss'
 import _ from 'lodash'
 import { RIETextArea } from 'riek'
 import EmojiiSlider from './EmojiiSlider'
@@ -18,7 +18,7 @@ export default class Survey extends Component {
     this.handleSubmit = () => this.handleSubmit();
     window.addEventListener('resize',
       debounce(() => {
-        this.setState({ isMobile: (window.innerWidth < 992) })
+        this.setState({ isMobile: (window.innerWidth < 600) })
       }, 100)
     );
   }
@@ -75,29 +75,123 @@ export default class Survey extends Component {
     return (
       <div className="container">
         <div className="row">
+          <div className="col-xs-3 col-md-4 icons">
+            { isMobile &&
+              <img
+                src={require(`./images/theme-immediat.svg`)}
+                width="35px"
+                height="35px"
+             />
+            }
+          </div>
+        </div>
+        <div className="row">
           <h2>1.1. Usage temporaire de l'ancien complexe Gaston-Bourret</h2>
         </div>
         <div className="row">
-          <div className="col-xs-3">
-            icons
-          </div>
-          <div className="col-sm-4">
-            <div className="row">
+          <p className={css.description}>L’ancien site de l’hôpital Gaston-Bourret est composé de 26 bâtiments,
+             dont trois sont voués à la démolition, et un, en préfabriqué, au démantèlement.
+             Nous proposons que les bâtiments à haute valeur patrimoniale ne soit pas utilisés durant la phase temporaire, durant laquelle ils subiront une expertise à des fins de restauration.
+             A l’opposé, les autres bâtiments recevront  selon leur état des programmes adéquats .
+          </p>
+        </div>
+          <div className="row">
+            <div className={css.map}>
               { isMobile &&
-                <img src={require(`./images/theme1-1.png`)}/>
+                <img
+                  src={require(`./images/theme1-1.png`)}
+                  width="100%"
+               />
               }
-              map
             </div>
+        </div>
+        <div className="row">
+          <h3>Notez les differents programmes que nous proposons!</h3>
+        </div>
+      {/*  start of first survey  */}
+        <div className="row">
+          <div className={css.forms}>
+          <div className={css.question}>
+            RDC espace public ouvert polyvalent (murs et cloisons retirés)
+            Étages: espaces educatifs
+            <EmojiiSlider />
+          </div>
+        <div className="row">
+          <div className={css.question}>
+            Bureaux co-working
+            <EmojiiSlider />
           </div>
         </div>
-        <EmojiiSlider />
-        <form className="answerForm" onSubmit={this.handleSubmit}>
-          <h4>How do you feel about bike paths in Noumea?</h4>
-          <br /><br />
+        <div className="row">
+          <div className={css.question}>
+            Commerces
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espace à usage pluriel
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Friche artistique-studios
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espace recherche scientifique
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Café
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Bureaux
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espaces verts et jardins potagers
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Bâtiments fermés au public pour réhabilitation
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Maison du projet (accueil/ exposition)
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <textarea rows="4" cols="50" placeholder="your comments">
+          </textarea>
+          <input className="button" value="submit" />
+        </div>
+      </div>
 
-          <input type="submit" value="Submit" />
-        </form>
+
+      {/*  <form className="answerForm" onSubmit={this.handleSubmit}>
+        //   <h4>How do you feel about bike paths in Noumea?</h4>
+        //   <br /><br />
+        //
+        //   <input type="submit" value="Submit" />
+          </form>*/}
     </div>
+  </div>
     );
   }
 }
