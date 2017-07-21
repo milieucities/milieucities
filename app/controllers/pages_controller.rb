@@ -16,10 +16,10 @@ class PagesController < ApplicationController
   end
 
   def submit_survey
-    comments_json = params['comment'] # or however this comes in
-    respond_to do |format|
-      format.json { render :json => comments_json }
-      format.html {}
+    comment = params['comment']
+    comments_json = File.read('public/comment.json')
+    File.open("public/comment.json","w") do |f|
+      f.puts JSON.pretty_generate(JSON.parse(comments_json) << comment)
     end
   end
 
