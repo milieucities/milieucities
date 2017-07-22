@@ -15,6 +15,10 @@ class PagesController < ApplicationController
     @no_header = true
   end
 
+  def survey
+    @no_header = true
+  end
+
   def submit_survey
     comment = params['comment']
     comments_json = File.read('public/comment.json')
