@@ -6,6 +6,10 @@ import { RIETextArea } from 'riek'
 import EmojiiSlider from './EmojiiSlider'
 import { debounce } from 'lodash'
 
+function getSliderValue(value) {
+  console.log(value);
+}
+
 export default class Survey extends Component {
 
   constructor(props) {
@@ -15,6 +19,10 @@ export default class Survey extends Component {
       isMobile: (window.innerWidth < 600)
     };
     this.saveSurvey = () => this.saveSurvey();
+    this.handleSubmit = () => this.handleSubmit();
+    this.scrollSecond = () => this.scrollSecond();
+    this.getSliderValue = () => this.getSliderValue();
+
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
@@ -48,6 +56,10 @@ export default class Survey extends Component {
     })
   }
 
+  scrollSecond() {
+    console.log('scroll');
+  }
+
   handleSubmit(e) {
     this.props.saveSurvey({comment: comment});
     this.setState({
@@ -72,6 +84,222 @@ export default class Survey extends Component {
                 height="35px"
              />
             }
+          </div>
+        </div>
+
+        <SurveyTitleMap
+          description={firstDescription}
+          map={firstMap}
+          title={firstTitle}
+          notes={firstNote}
+        />
+
+      {/* 1 First Survey */}
+
+        <div className={css.forms}>
+          <div className={css.question}>
+            RDC espace public ouvert polyvalent (murs et cloisons retirés)
+            Étages: espaces educatifs
+            <EmojiiSlider getValue={getSliderValue} />
+          </div>
+        <div className="row">
+          <div className={css.question}>
+            Bureaux co-working
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Commerces
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espace à usage pluriel
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Friche artistique-studios
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espace recherche scientifique
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Café
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Bureaux
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espaces verts et jardins potagers
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Bâtiments fermés au public pour réhabilitation
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Maison du projet (accueil/ exposition)
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.comments}>
+            <textarea rows="4" cols="50" placeholder="your comments" />
+              <center>
+                <button name='submit' type='submit' className='btn' onSubmit={this.scrollSecond}>la prochaine question</button>
+              </center>
+          </div>
+        </div>
+      </div>
+      {/*  <form className="answerForm" onSubmit={this.handleSubmit}>
+        //   <h4>How do you feel about bike paths in Noumea?</h4>
+        //   <br /><br />
+        //
+        //   <input type="submit" value="Submit" />
+          </form>*/}
+
+
+      <SurveyTitleMap
+        description={secondDescription}
+        map={secondMap}
+        title={secondTitle}
+        notes={secondNote}
+      />
+
+      {/* 2 Survey */}
+      <div className={css.forms}>
+          <div className={css.question}>
+            RDC espace public ouvert polyvalent (murs et cloisons retirés)
+            Étages: espaces educatifs
+            <EmojiiSlider />
+          </div>
+        <div className="row">
+          <div className={css.question}>
+            Bureaux co-working
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Commerces
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espace à usage pluriel
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Friche artistique-studios
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espace recherche scientifique
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Café
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Bureaux
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espaces verts et jardins potagers
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Bâtiments fermés au public pour réhabilitation
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Maison du projet (accueil/ exposition)
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.comments}>
+            <textarea rows="4" cols="50" placeholder="your comments" />
+              <center>
+                <button name='submit' type='submit' className='btn'>la prochaine question</button>
+              </center>
+          </div>
+        </div>
+      </div>
+
+      <SurveyTitleMap
+        description={thirdDescription}
+        map={thirdMap}
+        title={thirdTitle}
+        notes={thirdNote}
+      />
+
+      {/* 3 Survey */}
+
+      <div className={css.forms}>
+          <div className={css.question}>
+            RDC espace public ouvert polyvalent (murs et cloisons retirés)
+            Étages: espaces educatifs
+            <EmojiiSlider />
+          </div>
+        <div className="row">
+          <div className={css.question}>
+            Bureaux co-working
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Commerces
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Espace à usage pluriel
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Friche artistique-studios
+            <EmojiiSlider />
           </div>
         </div>
         <div className="row">
