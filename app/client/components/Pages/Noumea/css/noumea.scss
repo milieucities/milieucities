@@ -2,98 +2,69 @@
 .container {
   padding-bottom: 0 !important;
   font-family: AvenirNext, lato, sans-serif;
-}
 
-  h1 {
-    color: #6390B1;
-    font-weight: 700;
-    font-family: AvenirNext-bold, lato, sans-serif;
-    font-size: 3em;
 
-    @media #{$medium-and-down} {
-      font-size: 2.5em;
+    h1 {
+      color: $dark-primary-color;
+      font-weight: 800;
+      font-family: AvenirNext-bold, lato, sans-serif;
+      font-size: 3em;
+
+      @media #{$medium-and-down} {
+        font-size: 2.5em;
+      }
+
+      @media #{$small-and-down}{
+        font-size: 2em;
+      }
     }
 
-    @media #{$small-and-down}{
-      font-size: 2em;
-    }
-  }
+    h2 {
+      font-size: 2.25em;
+      font-weight: 700;
+      font-family: AvenirNext-bold, lato, sans-serif;
+      color: $dark-primary-color;
+      margin-top: 1em;
 
-  h2 {
-    font-size: 2.25em;
-    font-weight: 700;
-    font-family: AvenirNext-bold, lato, sans-serif;
-    color: #6390B1;
-    margin-top: 1em;
+      @media #{$medium-and-down} {
+        font-size: 2em;
+      }
 
-    @media #{$medium-and-down} {
-      font-size: 2em;
-    }
-
-    @media #{$small-and-down}{
-      font-size: 1.62em;
-    }
-  }
-
-  h3 {
-    font-size: 1.75em;
-    font-weight: 700;
-    color: #6390B1;
-    margin-top: 1em;
-
-    @media #{$medium-and-down} {
-      font-size: 1.5em;
+      @media #{$small-and-down}{
+        font-size: 1.62em;
+      }
     }
 
-    @media #{$small-and-down}{
-      font-size: 1.375em;
+    h3 {
+      font-size: 1.75em;
+      font-weight: 500;
+      color: $dark-primary-color;
+      margin-top: 1em;
+
+      @media #{$medium-and-down} {
+        font-size: 1.5em;
+      }
+
+      @media #{$small-and-down}{
+        font-size: 1.375em;
+      }
     }
-  }
 
-  p {
-    font-size:1em;
-    font-weight: 300;
-    margin-top: 1em;
-  }
-
-.logoContainer{
-margin-top: 3vh;
-align-content: center;
-text-align: center;
-
-p {
-  color: #6390B1;
-
-}
-img {
-  padding: 1%;
-  display: table;
-  float: left;
-  height:120px;
-  margin: 0 2%;
-  }
-
-@media #{$medium-and-down} {
-    padding: 20px 50px;
-
-  }
-@media #{$small-and-down} {
-  padding: 20px;
-
-  img {
-  height:90px;
+    p {
+      font-size:1em;
+      font-weight: 300;
+      margin-top: 1em;
     }
 }
 
-}
 
-.titleContainer{
-  border-top: 1px;
-  border-color: $light-gray;
-  margin:2vh auto;
-  display: inline-block;
-  float:left;
-  max-width: 400px;
+.introContainer{
+  border-top: 1px solid $light-gray;
+  margin:0.5vh auto;
+  display: block;
+  max-width: 1080px;
+  align-self: center;
+
 h1 {
   text-align: center;
 }
@@ -101,6 +72,18 @@ p {
   margin-top: 1em;
 }
   .description {
+margin: 0 auto;
+
+ @media #{$medium-and-up} {
+   margin: 0 15vw;
+   h1 {
+     margin-top: 1.25em;
+   }
+
+   p {
+     padding: 5%;
+   }
+ }
 
   @media #{$medium-and-down} {
       padding: 20px 50px;
@@ -116,6 +99,10 @@ p {
     padding-bottom: 56.25%; /* 16:9 */
     padding-top: 0;
     height: 0;
+
+    @media #{$medium-and-up} {
+      margin-top: 1.25em;
+    }
   }
 
   .videoContainer iframe {
@@ -131,6 +118,7 @@ p {
 }
 
 .visionContainer {
+  margin: 0 auto;
   display:block;
 
 h2{
@@ -142,6 +130,14 @@ h3 {
 p {
       margin-top: 1em;
 }
+
+  @media #{$medium-and-up} {
+    p {
+      max-width: 720px;
+      display: block;
+      margin: 0 auto;
+    }
+  }
   @media #{$medium-and-down} {
       padding: 20px 60px;
 
@@ -157,12 +153,26 @@ p {
 
 .timelineContainer {
   text-align: center;
-  p {
+  p .bubble {
     text-align: left;
     border: 1px solid #000;
     padding: 1em;
     margin: 1em;
+    width: 180px;
   }
+  p .bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 6px 6px 0;
+    border-color: #000;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -10px;
+    left: 0px;
+  }
+
   img {
     align-items: center;
     margin-top: 1em;
@@ -173,18 +183,31 @@ p {
   }
 }
 
+.aboutContainer {
+  display: inline-block;
+  float:left;
+
+  @media #{$medium-and-down} {
+      padding: 20px 50px;
+
+    }
+  @media #{$small-and-down} {
+    padding: 20px;
+  }
+}
+
 .partnersContainer {
-  margin: 50px 0;
+  margin: 3em auto;
+  display: inline-block;
+  float: left;
+  text-align: center;
   border-top: 1px solid $light-gray;
-  align-content: space-between;
 
   img {
     padding: 1%;
-    display: inline-block;
-    float: left;
+    display: flex;
     height: 90px;
-    margin: 0 auto;
-    align: bottom;
+    margin: 1em auto;
   }
 
   @media #{$medium-and-down} {
@@ -196,6 +219,31 @@ p {
 
     img {
     height:45px;
+      }
+  }
+}
+
+.logoContainer {
+  margin: 1.25em auto 0.5em auto;
+  display: flex;
+  max-width: 500px;
+
+  img {
+    padding: 0.25em;
+    float: left;
+    height: 140px;
+    margin: 0 auto;
+  }
+
+  @media #{$medium-and-down} {
+      padding: 20px 50px;
+
+    }
+  @media #{$small-and-down} {
+    padding: 20px;
+
+    img {
+    height:90px;
       }
   }
 }
