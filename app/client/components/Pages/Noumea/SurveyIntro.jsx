@@ -13,21 +13,11 @@ export default class SurveyIntro extends Component {
     this.state = { loading: true, isMobile: (window.innerWidth < 600) };
     this.devSiteId = document.querySelector('#participez').dataset.id;
     this.surveySentiment = document.querySelector('#participez').dataset.surveySentiment;
-    this.handleGetEmotion = this.handleGetEmotion.bind(this);
-    this.handleShowSurvey = this.handleShowSurvey.bind(this);
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 992) })
       }, 100)
     );
-  }
-
-  handleGetEmotion() {
-    console.log(this.props.value);
-  }
-
-  handleShowSurvey() {
-    console.log('redirect');
   }
 
   render() {
