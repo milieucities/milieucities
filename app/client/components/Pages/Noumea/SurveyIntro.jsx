@@ -31,7 +31,7 @@ export default class SurveyIntro extends Component {
   }
 
   render() {
-    const { loading, isMobile } = this.state;
+    const {  isMobile } = this.state;
 
     return (
         <div className="container">

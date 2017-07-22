@@ -247,67 +247,66 @@ export default class Survey extends Component {
       {/* 2 Survey */}
       <div className={css.forms}>
           <div className={css.question}>
-            RDC espace public ouvert polyvalent (murs et cloisons retirés)
-            Étages: espaces educatifs
+            Jardinières mobiles
             <EmojiiSlider />
           </div>
         <div className="row">
           <div className={css.question}>
-            Bureaux co-working
-            <EmojiiSlider />
-          </div>
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            Commerces
+            Stands restauration rapide / stand glacier
             <EmojiiSlider />
           </div>
         </div>
         <div className="row">
           <div className={css.question}>
-            Espace à usage pluriel
+            Espace camionnettes restauration - Food truck
             <EmojiiSlider />
           </div>
         </div>
         <div className="row">
           <div className={css.question}>
-            Friche artistique-studios
+            Aire de jeux enfants
             <EmojiiSlider />
           </div>
         </div>
         <div className="row">
           <div className={css.question}>
-            Espace recherche scientifique
+            Parasols géants
             <EmojiiSlider />
           </div>
         </div>
         <div className="row">
           <div className={css.question}>
-            Café
+            Espace skateboard
             <EmojiiSlider />
           </div>
         </div>
         <div className="row">
           <div className={css.question}>
-            Bureaux
+            Mur végétal anti-bruit
             <EmojiiSlider />
           </div>
         </div>
         <div className="row">
           <div className={css.question}>
-            Espaces verts et jardins potagers
+            Surfaces peintes toiles géantes pour artistes
             <EmojiiSlider />
           </div>
         </div>
         <div className="row">
           <div className={css.question}>
-            Bâtiments fermés au public pour réhabilitation
+            Jardins potagers dans jardinières mobiles
             <EmojiiSlider />
           </div>
         </div>
         <div className="row">
           <div className={css.question}>
-            Maison du projet (accueil/ exposition)
+            Trellis avec hamacs
+            <EmojiiSlider />
+          </div>
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            Mobilier urbain reconfigurable
             <EmojiiSlider />
           </div>
         </div>
@@ -400,7 +399,7 @@ export default class Survey extends Component {
           <div className={css.comments}>
             <textarea rows="4" cols="50" placeholder="your comments" />
               <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
+                <button name='submit' type='submit' className='btn' onSubmit={this.saveAnswers}>la prochaine question</button>
               </center>
           </div>
         </div>
