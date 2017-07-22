@@ -31,13 +31,13 @@ const marks = {
 
 export default class EmojiiSlider extends Component {
   constructor() {
-    super()
+    super();
     this.handleGetEmotion = this.handleGetEmotion.bind(this);
     this.handleShowSurvey = this.handleShowSurvey.bind(this);
   }
 
-  handleGetEmotion() {
-    console.log(this.props.value);
+  handleGetEmotion(value) {
+    console.log(value);
   }
 
   handleShowSurvey() {
