@@ -5,7 +5,6 @@
 }
 
   h1 {
-    text-align: center;
     color: #6390B1;
     font-weight: 700;
     font-family: AvenirNext-bold, lato, sans-serif;
@@ -21,7 +20,6 @@
   }
 
   h2 {
-    text-align: center;
     font-size: 2.25em;
     font-weight: 700;
     font-family: AvenirNext-bold, lato, sans-serif;
@@ -38,7 +36,6 @@
   }
 
   h3 {
-    text-align: center;
     font-size: 1.75em;
     font-weight: 700;
     color: #6390B1;
@@ -62,10 +59,11 @@
 .logoContainer{
 margin-top: 3vh;
 align-content: center;
+text-align: center;
 
 p {
-  text-align: center;
   color: #6390B1;
+
 }
 img {
   padding: 1%;
@@ -96,7 +94,9 @@ img {
   display: inline-block;
   float:left;
   max-width: 400px;
-
+h1 {
+  text-align: center;
+}
 p {
   margin-top: 1em;
 }
@@ -131,7 +131,14 @@ p {
 }
 
 .visionContainer {
-display:block;  
+  display:block;
+
+h2{
+  text-align: center;
+}
+h3 {
+  text-align: center;
+}
 p {
       margin-top: 1em;
 }
@@ -148,7 +155,24 @@ p {
   background-color: blue;
 }
 
-.partnersContainer{
+.timelineContainer {
+  text-align: left;
+  p {
+    border: 1px solid #000;
+    padding: 1em;
+    margin: 1em;
+  }
+  img {
+    align-items: center;
+    margin-top: 1em;
+    @media #{$small-and-down} {
+      width: 80%;
+
+    }
+  }
+}
+
+.partnersContainer {
   margin: 50px 0;
   border-top: 1px solid $light-gray;
   align-content: space-between;

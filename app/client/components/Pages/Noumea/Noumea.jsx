@@ -69,7 +69,7 @@ export default class Noumea extends Component {
 
 </div>
 
-<div className="timeline-container">
+<div className={css.timelineContainer}>
   <h1>À propos du projet de concertation citoyenne</h1>
     <img
       src={require(`./images/timeline.svg`)}
