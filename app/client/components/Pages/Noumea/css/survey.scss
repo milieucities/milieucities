@@ -7,9 +7,9 @@
   float: left;
 }
 .question{
-  margin-top: 30px;
-  margin-bottom: 30px;
+  text-align: left;
   margin: 0 auto;
+  padding-top: 30px;
 }
 .forms{
   margin-top: 30px;
@@ -28,4 +28,13 @@
 .comments{
   margin-top: 30px;
   margin-bottom: 30px;
+}
+.colorCircle{
+  margin-left: 0px;
+}
+.circle {
+  float: left;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }

@@ -6,6 +6,8 @@ import { RIETextArea } from 'riek'
 import EmojiiSlider from './EmojiiSlider'
 import { debounce } from 'lodash'
 import SurveyTitleMap from './SurveyTitleMap'
+import MobileFooter from './MobileFooter'
+import Header from './Header'
 
 export default class Survey extends Component {
 
@@ -40,6 +42,7 @@ export default class Survey extends Component {
       }
     });
   }
+
   // render: function() {   I put this to comment you may want to reuse it
   //           return (   I was not sure why was this used
   //             <div className="submitBox">      if you want to render just something mall do it like
@@ -134,6 +137,9 @@ export default class Survey extends Component {
 
     return (
       <div className="container">
+        { !isMobile &&
+          <Header />
+        }
         <div className="row">
           <div className="col-xs-3 col-md-4 icons">
             { isMobile &&
@@ -155,13 +161,24 @@ export default class Survey extends Component {
       {/* 1 First Survey */}
 
         <div className={css.forms}>
-          <div className={css.question}>
-            RDC espace public ouvert polyvalent (murs et cloisons retirés)
-            Étages: espaces educatifs
-            <EmojiiSlider />
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+              RDC espace public ouvert polyvalent (murs et cloisons retirés)
+              Étages: espaces educatifs
+            </div>
+            <EmojiiSlider/>
           </div>
+
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+            </div>
             Bureaux co-working
             <EmojiiSlider />
           </div>
@@ -169,56 +186,97 @@ export default class Survey extends Component {
         <div className="row">
           <div className={css.question}>
             Commerces
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+            </div>
             Espace à usage pluriel
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Friche artistique-studios
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Espace recherche scientifique
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Café
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Bureaux
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Espaces verts et jardins potagers
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Bâtiments fermés au public pour réhabilitation
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Maison du projet (accueil/ exposition)
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.comments}>
@@ -245,70 +303,125 @@ export default class Survey extends Component {
       />
 
       {/* 2 Survey */}
-      <div className={css.forms}>
+      <div className={css.forms} ref="second">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Jardinières mobiles
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Stands restauration rapide / stand glacier
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Espace camionnettes restauration - Food truck
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Aire de jeux enfants
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Parasols géants
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Espace skateboard
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Mur végétal anti-bruit
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Surfaces peintes toiles géantes pour artistes
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Jardins potagers dans jardinières mobiles
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Trellis avec hamacs
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
             Mobilier urbain reconfigurable
-            <EmojiiSlider />
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.comments}>
@@ -331,75 +444,129 @@ export default class Survey extends Component {
 
       <div className={css.forms}>
           <div className={css.question}>
-            RDC espace public ouvert polyvalent (murs et cloisons retirés)
-            Étages: espaces educatifs
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Jardinières mobiles
+
           </div>
+          <EmojiiSlider />
         <div className="row">
           <div className={css.question}>
-            Bureaux co-working
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Stands restauration rapide / stand glacier
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Commerces
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Espace camionnettes restauration - Food truck
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Espace à usage pluriel
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Aire de jeux enfants
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Friche artistique-studios
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Parasols géants
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Espace recherche scientifique
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Espace skateboard
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Café
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Mur végétal anti-bruit
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Bureaux
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Surfaces peintes toiles géantes pour artistes
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Espaces verts et jardins potagers
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Jardins potagers dans jardinières mobiles
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Bâtiments fermés au public pour réhabilitation
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Trellis avec hamacs
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Maison du projet (accueil/ exposition)
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Mobilier urbain reconfigurable
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.comments}>
             <textarea rows="4" cols="50" placeholder="your comments" />
               <center>
-                <button name='submit' type='submit' className='btn' onSubmit={this.saveAnswers}>la prochaine question</button>
+                <button name='submit' type='submit' className='btn'>la prochaine question</button>
               </center>
           </div>
         </div>
@@ -417,69 +584,123 @@ export default class Survey extends Component {
 
       <div className={css.forms}>
           <div className={css.question}>
-            RDC espace public ouvert polyvalent (murs et cloisons retirés)
-            Étages: espaces educatifs
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Jardinières mobiles
+
           </div>
+          <EmojiiSlider />
         <div className="row">
           <div className={css.question}>
-            Bureaux co-working
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Stands restauration rapide / stand glacier
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Commerces
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Espace camionnettes restauration - Food truck
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Espace à usage pluriel
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Aire de jeux enfants
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Friche artistique-studios
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Parasols géants
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Espace recherche scientifique
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Espace skateboard
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Café
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Mur végétal anti-bruit
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Bureaux
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Surfaces peintes toiles géantes pour artistes
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Espaces verts et jardins potagers
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Jardins potagers dans jardinières mobiles
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Bâtiments fermés au public pour réhabilitation
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Trellis avec hamacs
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Maison du projet (accueil/ exposition)
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Mobilier urbain reconfigurable
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.comments}>
@@ -500,71 +721,125 @@ export default class Survey extends Component {
 
     {/* 5 Survey */}
 
-      <div className={css.forms}>
+    <div className={css.forms}>
           <div className={css.question}>
-            RDC espace public ouvert polyvalent (murs et cloisons retirés)
-            Étages: espaces educatifs
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Jardinières mobiles
+
           </div>
+          <EmojiiSlider />
         <div className="row">
           <div className={css.question}>
-            Bureaux co-working
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Stands restauration rapide / stand glacier
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Commerces
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Espace camionnettes restauration - Food truck
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Espace à usage pluriel
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Aire de jeux enfants
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Friche artistique-studios
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Parasols géants
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Espace recherche scientifique
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Espace skateboard
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Café
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Mur végétal anti-bruit
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Bureaux
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Surfaces peintes toiles géantes pour artistes
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Espaces verts et jardins potagers
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Jardins potagers dans jardinières mobiles
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Bâtiments fermés au public pour réhabilitation
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Trellis avec hamacs
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.question}>
-            Maison du projet (accueil/ exposition)
-            <EmojiiSlider />
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            Mobilier urbain reconfigurable
+
           </div>
+          <EmojiiSlider />
         </div>
         <div className="row">
           <div className={css.comments}>
@@ -575,6 +850,9 @@ export default class Survey extends Component {
           </div>
         </div>
       </div>
+      { isMobile &&
+        <MobileFooter  />
+      }
   </div>
     );
   }
