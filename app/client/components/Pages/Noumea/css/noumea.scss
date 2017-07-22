@@ -1,10 +1,15 @@
 
+.container {
+  padding-bottom: 0 !important;
+  font-family: AvenirNext, lato, sans-serif;
+}
+
   h1 {
     text-align: center;
-    color: $dark-secondary-color;
-    font-weight: bold;
+    color: #6390B1;
+    font-weight: 700;
+    font-family: AvenirNext-bold, lato, sans-serif;
     font-size: 3em;
-    line-height: normal;
 
     @media #{$medium-and-down} {
       font-size: 2.5em;
@@ -15,12 +20,13 @@
     }
   }
 
-
   h2 {
     text-align: center;
     font-size: 2.25em;
-    font-weight: bold;
-    color: $dark-secondary-color;
+    font-weight: 700;
+    font-family: AvenirNext-bold, lato, sans-serif;
+    color: #6390B1;
+    margin-top: 1em;
 
     @media #{$medium-and-down} {
       font-size: 2em;
@@ -34,8 +40,9 @@
   h3 {
     text-align: center;
     font-size: 1.75em;
-    font-weight: bold;
-    color: $dark-secondary-color;
+    font-weight: 700;
+    color: #6390B1;
+    margin-top: 1em;
 
     @media #{$medium-and-down} {
       font-size: 1.5em;
@@ -48,12 +55,9 @@
 
   p {
     font-size:1em;
+    font-weight: 300;
+    margin-top: 1em;
   }
-
-.container {
-  padding-bottom: 0 !important;
-}
-
 
 .logoContainer{
 margin-top: 3vh;
@@ -61,6 +65,7 @@ align-content: center;
 
 p {
   text-align: center;
+  color: #6390B1;
 }
 img {
   padding: 1%;
@@ -84,15 +89,17 @@ img {
 
 }
 
-
 .titleContainer{
   border-top: 1px;
-  border-color: $dark-gray;
+  border-color: $light-gray;
   margin:2vh auto;
   display: inline-block;
   float:left;
   max-width: 400px;
 
+p {
+  margin-top: 1em;
+}
   .description {
 
   @media #{$medium-and-down} {
@@ -123,19 +130,24 @@ img {
 
 }
 
-
-
 .visionContainer {
-
+display:block;  
+p {
+      margin-top: 1em;
+}
   @media #{$medium-and-down} {
-      padding: 20px 50px;
+      padding: 20px 60px;
 
     }
   @media #{$small-and-down} {
-    padding: 20px;
-
+    padding: 20px 40px;
   }
 }
+
+.themeContainer {
+  background-color: blue;
+}
+
 .partnersContainer{
   margin: 50px 0;
   border-top: 1px solid $light-gray;

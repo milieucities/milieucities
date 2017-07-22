@@ -36,7 +36,7 @@ export default class Noumea extends Component {
 
       <div className={css.titleContainer}>
         <div className={css.description}>
-            <h1>Entrée Nord</h1>
+            <h1>ENTRÉE NORD</h1>
   <p>Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa</p>
         </div>
 
@@ -44,8 +44,6 @@ export default class Noumea extends Component {
     <iframe src="https://www.youtube.com/embed/cBkWhkAZ9ds?rel=0&amp;showinfo=0" allowfullscreen></iframe>
   </div>
       </div>
-
-
 
 
       <div className={css.visionContainer}>
@@ -57,17 +55,15 @@ export default class Noumea extends Component {
       <p>
         Et si cela changeait? Quel serait l'impact sur l'entrée nord et ses environs immédiats? Sur Nouméa et ses habitants? Enfin, sur  la Nouvelle-Calédonie?
       </p>
-
-<p>
-Nous proposons de developper une vision partagée pour l’entrée nord en tant que passerelle autant physique que symbolique: reliant le coeur de ville à la mer, les croisiéristes et touristes à la culture néo-calédonienne, et les populations nouméennes entre elles.
-</p>
-
-<p>
-  Ces efforts seront menés par l’architecte urbaniste Aziza Chaouni, accompagnée de la SCET et de toutes les parties prenantes concernées par le projet.
-</p>
+      <p>
+      Nous proposons de developper une vision partagée pour l’entrée nord en tant que passerelle autant physique que symbolique: reliant le coeur de ville à la mer, les croisiéristes et touristes à la culture néo-calédonienne, et les populations nouméennes entre elles.
+      </p>
+      <p>
+        Ces efforts seront menés par l’architecte urbaniste Aziza Chaouni, accompagnée de la SCET et de toutes les parties prenantes concernées par le projet.
+      </p>
     </div>
 
-<div className="theme-container">
+<div className={css.themeContainer}>
 
   <p>4 thematiques</p>
 
