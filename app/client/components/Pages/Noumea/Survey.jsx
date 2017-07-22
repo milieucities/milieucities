@@ -91,7 +91,8 @@ export default class Survey extends Component {
         <div className="row">
           <p className={css.description}>L’ancien site de l’hôpital Gaston-Bourret est composé de 26 bâtiments,
              dont trois sont voués à la démolition, et un, en préfabriqué, au démantèlement.
-             Nous proposons que les bâtiments à haute valeur patrimoniale ne soit pas utilisés durant la phase temporaire, durant laquelle ils subiront une expertise à des fins de restauration.
+             Nous proposons que les bâtiments à haute valeur patrimoniale ne soit pas utilisés durant la phase temporaire,
+             durant laquelle ils subiront une expertise à des fins de restauration.
              A l’opposé, les autres bâtiments recevront  selon leur état des programmes adéquats .
           </p>
         </div>
@@ -101,16 +102,18 @@ export default class Survey extends Component {
                 <img
                   src={require(`./images/theme1-1.png`)}
                   width="100%"
+                  height="240px"
                />
               }
             </div>
         </div>
         <div className="row">
-          <h3>Notez les differents programmes que nous proposons!</h3>
+          <div className={css.notes}>
+            <h4>Notez les differents programmes que nous proposons!</h4>
+          </div>
         </div>
       {/*  start of first survey  */}
-        <div className="row">
-          <div className={css.forms}>
+        <div className={css.forms}>
           <div className={css.question}>
             RDC espace public ouvert polyvalent (murs et cloisons retirés)
             Étages: espaces educatifs
@@ -177,20 +180,20 @@ export default class Survey extends Component {
           </div>
         </div>
         <div className="row">
-          <textarea rows="4" cols="50" placeholder="your comments">
-          </textarea>
-          <input className="button" value="submit" />
+          <div className={css.comments}>
+            <textarea rows="4" cols="50" placeholder="your comments" />
+              <center>
+                <button name='submit' type='submit' className='btn'>la prochaine question</button>
+              </center>
+          </div>
         </div>
       </div>
-
-
       {/*  <form className="answerForm" onSubmit={this.handleSubmit}>
         //   <h4>How do you feel about bike paths in Noumea?</h4>
         //   <br /><br />
         //
         //   <input type="submit" value="Submit" />
           </form>*/}
-    </div>
   </div>
     );
   }

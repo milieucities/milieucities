@@ -1,6 +1,6 @@
 .map{
   height: 200px;
-  position: absolute;
+  margin-bottom: 30px;
 }
 .icons{
   inline: block;
@@ -12,10 +12,20 @@
   margin: 0 auto;
 }
 .forms{
-  height: 50px;
-  position: relative;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 250px;
+  overflow-y: scroll;
 }
 .description{
   padding-top: 20px;
   text-align: left;
+}
+.notes{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.comments{
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
