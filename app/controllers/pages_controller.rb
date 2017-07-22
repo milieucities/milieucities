@@ -15,15 +15,13 @@ class PagesController < ApplicationController
     @no_header = true
   end
 
-  def survey
-    @no_header = true
-  end
-
-  def survey_survey
-    comments_json = params['comments'] # or however this comes in
-    file_path = Rails.root.join 'public' # generate the file path where you want to store the json
-    IO.write(file_path, comments_json)
-    render json: { data_file: file_path } # or whatever you want to return
+  def submit_survey
+    comment = params['comment']
+    comments_json = File.read('public/comment.json')
+    File.open("public/comment.json","w") do |f|
+      f.puts JSON.pretty_generate(JSON.parse(comments_json) << comment)
+    end
+    render json: {}
   end
 
   # def wakefield
