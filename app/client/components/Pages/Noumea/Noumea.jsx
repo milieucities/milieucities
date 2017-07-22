@@ -73,6 +73,11 @@ export default class Noumea extends Component {
       <div className={css.themeContainer}>
 
         <p>4 thematiques</p>
+<div classID={css.theme1}>
+  <img src={require('./images/theme-immediat.svg')}
+    />
+
+</div>
 
       </div>
 
@@ -83,33 +88,37 @@ export default class Noumea extends Component {
             <img
               src={require(`./images/timeline.svg`)}
             />
-                <p ClassName={css.bubble}>
+                <p>
                   Votre participation peut influencer les futurs aménagements de votre ville, et en l'occurence la vision urbaine de l'entrée nord. La période de concertation grâce à ce site web se déroulera du 24 Juillet à fin Octobre.
                 </p>
-                <p ClassName={css.bubble}>
+                <p>
                   L'engagement civique est crucial. Vous pouvez donner votre avis sur l'avenir de votre ville durant des consultations publiques ou bien en utilisant ce site web initié par la municipalité de Nouméa.
                 </p>
-                <p ClassName={css.bubble}>
+                <p>
                   Le calendrier de l'exposition sera bientôt affiché. Vous pourrez y laisser votre avis, qui sera immédiatement transmis au site web.
                 </p>
 
     </div>
       </div>
+
     </div>
           </div>
           <div className="row">
-            <div className={css.partnersContainer} >
-              <h2>les partenaires</h2>
-                <img
-                  src={require(`./images/logo-acp.svg`)}
-                />
-                <img
-                  src={require(`./images/logo-scet.png`)}
-                />
-                <img
-                  src={require(`./images/logo-milieu.png`)}
-                />
+            <div className={css.partnersContainer}>
+            <h2>les partenaires</h2>
             </div>
+              <div className={css.partnersLogoContainer} >
+                <img
+                    src={require(`./images/logo-acp.svg`)}
+                  />
+                  <img
+                    src={require(`./images/logo-scet.png`)}
+                  />
+                  <img
+                    src={require(`./images/logo-milieu.png`)}
+                  />
+              </div>
+
           </div>
 
   </div>
