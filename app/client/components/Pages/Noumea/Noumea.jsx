@@ -11,7 +11,7 @@ export default class Noumea extends Component {
     this.surveySentiment = document.querySelector('#noumea').dataset.surveySentiment;
     window.addEventListener('resize',
       debounce(() => {
-        this.setState({ isMobile: (window.innerWidth < 992) })
+        this.setState({ isMobile: (window.innerWidth < 600) })
       }, 100)
     );
   }
@@ -35,16 +35,20 @@ export default class Noumea extends Component {
       </div>
 
       <div className={css.titleContainer}>
-        <h1>Entrée Nord</h1>
-<p>Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa</p>
+        <div className={css.description}>
+            <h1>Entrée Nord</h1>
+  <p>Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa</p>
+        </div>
+
+  <div className={css.videoContainer}>
+    <iframe src="https://www.youtube.com/embed/cBkWhkAZ9ds?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+  </div>
       </div>
 
-      <div className={css.videoContainer}>
 
-<iframe width="100%" height="100%" src="https://www.youtube.com/embed/cBkWhkAZ9ds?rel=0&amp;showinfo=0" allowfullscreen></iframe>
- </div>
 
-      <div className="vision-container">
+
+      <div className={css.visionContainer}>
       <h2>VISION POUR L'ENTRÉE NORD</h2>
       <h3>Proposition de scénario d'aménagement</h3>
       <p>
