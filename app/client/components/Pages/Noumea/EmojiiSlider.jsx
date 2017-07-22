@@ -37,7 +37,7 @@ export default class EmojiiSlider extends Component {
   }
 
   handleGetEmotion(value) {
-    console.log(value);
+    return this.props.getValue(value);
   }
 
   handleShowSurvey() {

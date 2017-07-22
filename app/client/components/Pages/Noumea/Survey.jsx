@@ -7,6 +7,10 @@ import EmojiiSlider from './EmojiiSlider'
 import { debounce } from 'lodash'
 import SurveyTitleMap from './SurveyTitleMap'
 
+function getSliderValue(value) {
+  console.log(value);
+}
+
 export default class Survey extends Component {
 
   constructor(props) {
@@ -17,6 +21,8 @@ export default class Survey extends Component {
       isMobile: (window.innerWidth < 600)
     };
     this.handleSubmit = () => this.handleSubmit();
+    this.scrollSecond = () => this.scrollSecond();
+    this.getSliderValue = () => this.getSliderValue();
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
@@ -39,6 +45,10 @@ export default class Survey extends Component {
         console.log(error);
       }
     });
+  }
+
+  scrollSecond() {
+    console.log('scroll');
   }
   // render: function() {   I put this to comment you may want to reuse it
   //           return (   I was not sure why was this used
@@ -158,7 +168,7 @@ export default class Survey extends Component {
           <div className={css.question}>
             RDC espace public ouvert polyvalent (murs et cloisons retirés)
             Étages: espaces educatifs
-            <EmojiiSlider />
+            <EmojiiSlider getValue={getSliderValue} />
           </div>
         <div className="row">
           <div className={css.question}>
@@ -224,7 +234,7 @@ export default class Survey extends Component {
           <div className={css.comments}>
             <textarea rows="4" cols="50" placeholder="your comments" />
               <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
+                <button name='submit' type='submit' className='btn' onSubmit={this.scrollSecond}>la prochaine question</button>
               </center>
           </div>
         </div>
