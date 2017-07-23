@@ -40,14 +40,13 @@ export default class Noumea extends Component {
                   src={require(`./images/logo-nc.png`)}
                 />
           </div>
-
+          <div className={css.description}>
+                <h1>ENTRÉE NORD</h1>
+                <h3>Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa</h3>
+            </div>
           </div>
 
       <div className={css.introContainer}>
-        <div className={css.description}>
-              <h1>ENTRÉE NORD</h1>
-              <p>Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa</p>
-          </div>
       <div className={css.videoContainer}>
         <iframe src="https://www.youtube.com/embed/cBkWhkAZ9ds?rel=0&amp;showinfo=0" allowfullscreen></iframe>
       </div>
@@ -70,10 +69,10 @@ export default class Noumea extends Component {
     </div>
 
     <div className={css.aboutContainer}>
-
       <div className={css.themeContainer}>
-        <h2>Thématiques</h2>
           <div className={css.theme}>
+            <h2>Thématiques</h2>
+
             <img src={require('./images/theme-immediat-m.svg')} alt="Usage immédiat du CHT Gaston-Bourret et de son parking: Prenez part à la première étape de la transformation de l’entrée nord !"
               />
             <img src={require('./images/theme-circulations-m.svg')} alt="Circulations: Donnez votre avis sur notre proposition de reorganisation des flux véhicules, piétons, bicyclettes, bus, néobus et petit train autour de l’entrée nord ! "
@@ -84,35 +83,26 @@ export default class Noumea extends Component {
               />
           </div>
       </div>
-
-
-      <div className="row">
         <div className={css.timelineContainer}>
           <h2>À propos du projet de concertation citoyenne</h2>
             <div>
                 <p>
-                  Votre participation peut influencer les futurs aménagements de votre ville, et en l'occurence la vision urbaine de l'entrée nord. La période de concertation grâce à ce site web se déroulera du 24 Juillet à fin Octobre.
+                  Votre participation peut influencer les futurs aménagements de votre ville, et en l'occurence la vision urbaine de l'entrée nord. La période de concertation grâce à ce site web se déroulera du 31 Juillet à fin Octobre.
                 </p>
             </div>
             <img
-              src={require(`./images/timeline.svg`)}
+              src={require(`./images/timeline.svg`)} alt="L'engagement civique est crucial. Vous pouvez donner votre avis sur l'avenir de votre ville durant des consultations publiques ou bien en utilisant ce site web initié par la municipalité de Nouméa."
             />
-                <p>
-                  L'engagement civique est crucial. Vous pouvez donner votre avis sur l'avenir de votre ville durant des consultations publiques ou bien en utilisant ce site web initié par la municipalité de Nouméa.
-                </p>
                 <p>
                   Le calendrier de l'exposition sera bientôt affiché. Vous pourrez y laisser votre avis, qui sera immédiatement transmis au site web.
                 </p>
 
     </div>
       </div>
-      
-    </div>
-
           </div>
-          <div className="row">
+
             <div className={css.partnersContainer}>
-            <h2>les partenaires</h2>
+            <h1>les partenaires</h1>
             </div>
               <div className={css.partnersLogoContainer} >
                 <img
@@ -125,9 +115,6 @@ export default class Noumea extends Component {
                     src={require(`./images/logo-milieu.png`)}
                   />
               </div>
-
-          </div>
-
   </div>
     )
   }
