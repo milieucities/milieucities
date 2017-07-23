@@ -2,13 +2,15 @@
 .container {
   padding-bottom: 0 !important;
   font-family: AvenirNext, lato, sans-serif;
-
+  max-width: 1024px;
+  margin: 0 auto;
 
     h1 {
       color: $dark-primary-color;
       font-weight: 800;
       font-family: AvenirNext-bold, lato, sans-serif;
       font-size: 3em;
+      text-align: center;
 
       @media #{$medium-and-down} {
         font-size: 2.5em;
@@ -25,6 +27,7 @@
       font-family: AvenirNext-bold, lato, sans-serif;
       color: $dark-primary-color;
       margin-top: 1em;
+      text-align: center;
 
       @media #{$medium-and-down} {
         font-size: 2em;
@@ -40,6 +43,7 @@
       font-weight: 500;
       color: $dark-primary-color;
       margin-top: 1em;
+      text-align: center;
 
       @media #{$medium-and-down} {
         font-size: 1.5em;
@@ -62,29 +66,23 @@
   border-top: 1px solid $light-gray;
   margin:0.5vh auto;
   display: block;
-  max-width: 1080px;
   align-self: center;
 
-h1 {
-  text-align: center;
-}
-p {
-  margin-top: 1em;
-}
   .description {
-margin: 0 auto;
+    margin: 0 auto;
 
  @media #{$medium-and-up} {
-   margin: 0 15vw;
+   margin: 0 5vw;
+   display: block;
+   float: left;
+
    h1 {
      margin-top: 1.25em;
    }
-
    p {
      padding: 5%;
    }
  }
-
   @media #{$medium-and-down} {
       padding: 20px 50px;
 
@@ -132,8 +130,10 @@ p {
 }
 
   @media #{$medium-and-up} {
+    float: left;
+
     p {
-      max-width: 720px;
+      max-width: 700px;
       display: block;
       margin: 0 auto;
     }
@@ -146,33 +146,58 @@ p {
     padding: 20px 40px;
   }
 }
-.themeContainer {
-  background: $dark-primary-color; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* Standard syntax */
-  display: block;
 
+.themeContainer {
+  margin: 1em auto;
+
+  @media #{$large-and-up} {
+    max-width: 500px;
+    display: inline-block;
+    }
+  @media #{$medium-and-up} {
+    max-width: 420px;
+    display: inline-block;
+  }
+  @media #{$medium-and-down} {
+    }
   h2 {
-     margin-top: 1em;
+     margin: 1em auto;
      text-align: center;
      color: white;
    }
-
   .theme {
-    height: auto;
-    display:block;
+    background: $dark-primary-color; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* Standard syntax */
+    @media #{$medium-and-down} {
     margin: 1em auto;
     float:left;
-
+  }
+    @media #{$medium-and-up} {
+    margin: 1.5em auto;
+    float:left;
+  }
     img {
+      display: block;
+      margin: 0 0 2em 0;
+      padding: 0 1em;
+      float: left;
+      box-sizing:inherit;
+
+      @media #{$large-and-up} {
+        width: 420px;
+        margin: 1em auto;
+        }
+      @media #{$medium-and-up} {
+        width: 420px;
+        margin: 1em auto;
+        }
       @media #{$medium-and-down} {
-        padding: 0 1em;
-        width: 100vw;
+        width: 320px;
         }
       @media #{$small-and-down} {
-        padding: 0 1em;
         width: 100vw;
       }
     }
@@ -181,22 +206,23 @@ p {
 .aboutContainer {
   display: inline-block;
   float:left;
+  max-width: 340px;
 
   .timelineContainer {
     h2 {
-      margin-top: 2em;
+      margin: 2em auto;
       text-align: center;
     }
     p {
       border: 1px solid $dark-primary-color;
-      border-radius: 3;
+      border-radius: 3px;
       padding:0.5em;
     }
       img {
       align-items: center;
       margin-top: 1em;
       @media #{$small-and-down} {
-        width: 90%;
+        width: 100%
       }
     }
     @media #{$medium-and-down} {
@@ -209,13 +235,16 @@ p {
   }
 }
 
-
-
 .partnersContainer {
-  text-align: center;
+  border-top: 1 solid $light-gray;
   margin: 0.25em auto;
-}
 
+  .partnersContainer h2{
+    display: block;
+    margin-top: 2em;
+    text-align: center;
+  }
+}
 .partnersLogoContainer {
   margin: 1.25em auto 0.5em auto;
   display: inline-block;
@@ -233,12 +262,12 @@ p {
     }
   @media #{$small-and-down} {
     padding: 20px;
-
     img {
     height:45px;
       }
   }
 }
+
 
 .logoContainer {
   margin: 1.25em auto 0.5em auto;
@@ -263,4 +292,4 @@ p {
     height:90px;
       }
   }
-}
+    }
