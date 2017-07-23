@@ -9,7 +9,12 @@
   "scripts": {
     "start": "(cd app/client && npm start)",
     "postinstall": "cd app/client && npm install",
-    "lint": "eslint --ext .jsx app/client; exit 0"
+    "lint": "eslint --ext .jsx app/client; exit 0",
+    "clean": "rimraf dist",
+    "build:webpack": "webpack --config config.prod.js",
+    "build:dll": "webpack --config config.dll.js",
+    "build": "npm run clean && npm run build:dll && npm run build:webpack",
+    "watch": "npm run build:dll && webpack --config config.dev.js --watch --progress"
   },
   "config": {
     "unsafe-perm": true

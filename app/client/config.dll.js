@@ -14,7 +14,7 @@ module.exports = {
         new webpack.DllPlugin({
             path: path.join(__dirname, "dll", "[name]-manifest.json"),
             name: "[name]",
-            context: path.resolve(__dirname, "client")
+            context: path.resolve(__dirname)
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin()

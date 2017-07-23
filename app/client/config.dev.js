@@ -16,13 +16,12 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "[name].js",
-    publicPath: 'http://0.0.0.0:8080/',
     chunkFilename: "[name].js"
   },
 
   plugins: [
     new webpack.DllReferencePlugin({
-      context: path.join(__dirname, "client"),
+      context: path.join(__dirname),
       manifest: require("./dll/vendor-manifest.json")
     }),
     new ExtractTextPlugin('[name].css'),
