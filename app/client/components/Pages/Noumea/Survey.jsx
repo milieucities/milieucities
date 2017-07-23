@@ -8,6 +8,11 @@ import { debounce } from 'lodash'
 import SurveyTitleMap from './SurveyTitleMap'
 import MobileFooter from './MobileFooter'
 import Header from './Header'
+import { ShareButtons, generateShareIcon } from 'react-share';
+
+const { FacebookShareButton, TwitterShareButton } = ShareButtons;
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
 
 export default class Survey extends Component {
 
@@ -133,7 +138,7 @@ export default class Survey extends Component {
     const secondNote = "Notez les differents programmes que nous proposons! Donnez nous votre avis sur chacun!";
     const thirdNote = "Notez les differents modes de circulations que nous proposons + donnez nous votre avis sur chacun!";
     const fourthnote = "3.1 Que pensez vous du placement et des identités de chaque espace vert/espace publique que nous proposons?";
-    const fifthNote = " Que pensez vous de la programmation des espaces bâtits que nous proposons?";
+    const fifthNote = "Que pensez vous de la programmation des espaces bâtits que nous proposons?";
 
     return (
       <div className="container">
@@ -145,10 +150,31 @@ export default class Survey extends Component {
             { isMobile &&
               <img
                 src={require(`./images/theme-immediat.svg`)}
-                width="35px"
-                height="35px"
+                width="45px"
+                height="45px"
              />
             }
+            {
+              !isMobile &&
+              <img
+                src={require(`./images/theme-immediat.svg`)}
+                width="85px"
+                height="85px"
+             />
+            }
+            <FacebookShareButton
+              url="/participez"
+              title="Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa"
+              media={require(`./images/theme-immediat.svg`)}
+            >
+              <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <TwitterShareButton
+                url="/participez"
+                title="Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa"
+                media={require(`./images/theme-immediat.svg`)}>
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
           </div>
         </div>
         <SurveyTitleMap

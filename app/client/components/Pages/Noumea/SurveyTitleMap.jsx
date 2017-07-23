@@ -41,6 +41,13 @@ export default class SurveyTitleMap extends Component {
                   height="240px"
                />
               }
+              { !isMobile &&
+                <img
+                  src={require(`${map}`)}
+                  width="420px"
+                  height="650px"
+               />
+              }
             </div>
         </div>
         <div className="row">
