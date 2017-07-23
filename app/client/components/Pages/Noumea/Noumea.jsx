@@ -70,19 +70,23 @@ export default class Noumea extends Component {
     </div>
 
     <div className={css.aboutContainer}>
+
       <div className={css.themeContainer}>
-
-        <p>4 thematiques</p>
-<div classID={css.theme1}>
-  <img src={require('./images/theme-immediat.svg')}
-    />
-
-</div>
-
+        <h1>Thématiques</h1>
+          <div className={css.theme}>
+            <img src={require('./images/theme-immediat-m.svg')} alt="Usage immédiat du CHT Gaston-Bourret et de son parking: Prenez part à la première étape de la transformation de l’entrée nord !"
+              />
+            <img src={require('./images/theme-circulations-m.svg')} alt="Circulations: Donnez votre avis sur notre proposition de reorganisation des flux véhicules, piétons, bicyclettes, bus, néobus et petit train autour de l’entrée nord ! "
+              />
+            <img src={require('./images/theme-public-m.svg')} alt="Espaces publics et espaces verts: Proposez des espaces publics et espaces verts qui auront la capacité d’améliorer votre qualité de vie !"
+              />
+            <img src={require('./images/theme-bati-m.svg')} alt="Bâti: Partagez vos opinions au sujet des bâtiments neufs ou à rénover que nous suggérons pour l’entrée nord ! "
+              />
+          </div>
       </div>
 
-      <div>
 
+      <div className="row">
         <div className={css.timelineContainer}>
           <h1>À propos du projet de concertation citoyenne</h1>
             <img
@@ -100,8 +104,8 @@ export default class Noumea extends Component {
 
     </div>
       </div>
-
     </div>
+
           </div>
           <div className="row">
             <div className={css.partnersContainer}>
