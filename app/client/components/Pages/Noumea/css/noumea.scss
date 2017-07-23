@@ -146,10 +146,19 @@ p {
     padding: 20px 40px;
   }
 }
-
 .themeContainer {
-  background-color: $dark-primary-color;
-  float:left;
+  background: $dark-primary-color; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* Standard syntax */
+  display: block;
+
+  h2 {
+     margin-top: 1em;
+     text-align: center;
+     color: white;
+   }
 
   .theme {
     height: auto;
@@ -160,42 +169,47 @@ p {
     img {
       @media #{$medium-and-down} {
         padding: 0 1em;
-        width:100vw;
+        width: 100vw;
         }
       @media #{$small-and-down} {
         padding: 0 1em;
-        width:100vw;
-
-
+        width: 100vw;
       }
     }
   }
 }
-
-.timelineContainer {
-  text-align: center;
-  @media #{$medium-and-down} {
-      padding: 20px 50px;
-
-    }
-  @media #{$small-and-down} {
-    padding: 20px;
-  }
-
-  img {
-    align-items: center;
-    margin-top: 1em;
-    @media #{$small-and-down} {
-      width: 80%;
-
-    }
-  }
-}
-
 .aboutContainer {
   display: inline-block;
   float:left;
+
+  .timelineContainer {
+    h2 {
+      margin-top: 2em;
+      text-align: center;
+    }
+    p {
+      border: 1px solid $dark-primary-color;
+      border-radius: 3;
+      padding:0.5em;
+    }
+      img {
+      align-items: center;
+      margin-top: 1em;
+      @media #{$small-and-down} {
+        width: 90%;
+      }
+    }
+    @media #{$medium-and-down} {
+        padding: 2em 50px;
+      }
+    @media #{$small-and-down} {
+      padding: 0 1em;
+
+    }
+  }
 }
+
+
 
 .partnersContainer {
   text-align: center;
