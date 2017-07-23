@@ -69,7 +69,7 @@
   align-self: center;
 
   .description {
-    margin: 1em auto 0 auto;
+    margin: 3em auto;
 
  @media #{$medium-and-up} {
    margin: 0 5vw;
@@ -77,10 +77,10 @@
    float: left;
 
    h1 {
-     margin-top: 1.25em;
+     margin-top: 3em;
    }
    p {
-     padding: 5%;
+     max-width: 420px;
    }
  }
   @media #{$medium-and-down} {
@@ -116,125 +116,153 @@
 }
 
 .visionContainer {
-  margin: 0 auto;
-  display:block;
+  max-width: 1024px;
 
-h2{
-  text-align: center;
-}
-h3 {
-  text-align: center;
-}
-p {
-      margin-top: 1em;
-}
-
-  @media #{$medium-and-up} {
-
+  .introText {
+  h2{
+    text-align: center;
+  }
+  h3 {
+    text-align: center;
+  }
+  p {
+        margin-top: 1em;
+  }
+    @media #{$large-and-up} {
+    display:block;
+    max-width: 400px;
     p {
-      max-width: 700px;
       display: block;
       margin: 1em auto;
     }
-  }
-  @media #{$medium-and-down} {
-      padding: 20px 60px;
-
     }
-  @media #{$small-and-down} {
-    padding: 20px 40px;
-  }
-}
-
-.themeContainer {
-  margin: 1em auto;
-
-  @media #{$large-and-up} {
-    max-width: 500px;
-    display: inline-block;
-    }
-  @media #{$medium-and-up} {
-    max-width: 420px;
-    display: inline-block;
-  }
-  @media #{$medium-and-down} {
-    }
-  h2 {
-     margin: 1em auto;
-     text-align: center;
-     color: white;
-   }
-  .theme {
-    background: $dark-primary-color; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* Standard syntax */
-    @media #{$medium-and-down} {
-    margin: 1em auto;
-    float:left;
-  }
     @media #{$medium-and-up} {
-    margin: 1.5em auto;
-    float:left;
-  }
-    img {
       display: block;
-      margin: 0 0 2em 0;
-      padding: 0 1em;
-      float: left;
-      box-sizing:inherit;
+      max-width: 400px;
+
+      p {
+        display: block;
+        margin: 1em auto;
+      }
+    }
+    @media #{$medium-and-down} {
+        margin: 0 auto;
+        padding: 1em 4em;
+        float:left;
+        max-width: 400px;
+      }
+    @media #{$small-and-down} {
+      padding: 20px 40px;
+      margin: 0 auto;
+    }
+  }
+  .themeContainer {
+    margin: 1em auto;
+
+    @media #{$large-and-up} {
+      max-width: 480px;
+      display: block;
+      }
+    @media #{$medium-and-up} {
+      max-width: 400px;
+      display: block;
+    }
+    @media #{$medium-and-down} {
+      display: inline-block;
+      }
+    h2 {
+       margin: 1em auto;
+       text-align: center;
+       color: white;
+     }
+    .theme {
+      background: $dark-primary-color; /* For browsers that do not support gradients */
+      background: -webkit-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Safari 5.1 to 6.0 */
+      background: -o-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Opera 11.1 to 12.0 */
+      background: -moz-linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* For Firefox 3.6 to 15 */
+      background: linear-gradient(45deg, #A8C0B2 0%, #477393 100%, #477393 100%); /* Standard syntax */
 
       @media #{$large-and-up} {
-        width: 420px;
-        margin: 1em auto;
-        }
-      @media #{$medium-and-up} {
-        width: 420px;
-        margin: 1em auto;
-        }
+      margin: 2em auto;
+      float:left;
+      max-width: 420px;
+      display: block;
+    }
       @media #{$medium-and-down} {
-        width: 320px;
+      margin: 1em auto;
+      float:left;
+    }
+
+      @media #{$medium-and-up} {
+      margin: 1.5em auto;
+      float:left;
+      max-width: 320px;
+      display: block;
+    }
+      img {
+        display: block;
+        margin: 0 0 2em 0;
+        padding: 0 1em;
+        float: left;
+        box-sizing:inherit;
+
+        @media #{$medium-and-up} {
+          width: 420px;
+          margin: 1em auto;
+          }
+        @media #{$medium-and-down} {
+          width: 320px;
+          }
+        @media #{$small-and-down} {
+          width: 100vw;
         }
-      @media #{$small-and-down} {
-        width: 100vw;
       }
     }
   }
-}
-.aboutContainer {
-  display: inline-block;
-  max-width: 340px;
+  }
 
+.aboutContainer {
+  display: block;
+  float: left;
+  width: 100%;
+
+  h2 {
+    margin: 2em auto;
+    text-align: center;
+  }
+  p {
+    border: 1px solid $dark-primary-color;
+    border-radius: 3px;
+    padding:0.5em;
+    max-width: 320px;
+  }
+
+  @media #{$medium-and-down} {
+    padding: 2em 50px;
+    }
+  @media #{$small-and-down} {
+    padding: 0 1em;
+
+  }
   .timelineContainer {
-    h2 {
-      margin: 2em auto;
-      text-align: center;
-    }
-    p {
-      border: 1px solid $dark-primary-color;
-      border-radius: 3px;
-      padding:0.5em;
-    }
       img {
       align-items: center;
       margin-top: 1em;
-      @media #{$small-and-down} {
-        width: 100%
-      }
-    }
-    @media #{$medium-and-down} {
-        padding: 2em 50px;
-      }
-    @media #{$small-and-down} {
-      padding: 0 1em;
 
+      @media #{$medium-and-up} {
+        width: 100%;
+      }
+      @media #{$medium-and-down} {
+        width: 420px;
+
+      }
+      @media #{$small-and-down} {
+        width: 300px;
+      }
     }
   }
 }
-
 .partnersContainer {
-  border-top: 1 solid $light-gray;
   margin: 0.25em auto;
 
   h2{
@@ -244,34 +272,45 @@ p {
     @media #{$medium-and-up} {
       position:inherit;
       height: auto;
-      width: 720px;
-      overflow: hidden;
     }
   }
-}
-.partnersLogoContainer {
-  margin: 1.25em auto 0.5em auto;
-  display: inline-block;
 
-  img {
-    padding: 0.25em;
-    float: left;
-    height: 90px;
-    margin: 0 auto;
+  .partnersLogoContainer {
+  border-top: 2 solid $dark-primary-color;
+  margin: 2em auto;
+  display: flex;
+
+  a {
+    padding: 0.5em;
   }
-
+  a img:hover {
+    height: 60px;
+  }
+  a img {
+    height: 55px;
+    margin: 0 auto;
+    border: 0;
+  }
+  @media #{$large-and-up} {
+    max-width: 480px;
+    }
+  @media #{$medium-and-up} {
+    max-width: 400px;
+    }
   @media #{$medium-and-down} {
-      padding: 20px 50px;
-
+    max-width: 320px;
+    a img {
+    height:50px;
+      }
     }
   @media #{$small-and-down} {
-    padding: 20px;
-    img {
-    height:45px;
+
+    a img {
+    height:40px;
       }
   }
+  }
 }
-
 
 .logoContainer {
   margin: 2em auto;
