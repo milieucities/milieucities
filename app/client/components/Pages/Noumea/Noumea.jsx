@@ -30,15 +30,21 @@ export default class Noumea extends Component {
 
           <div className="row">
             <div className= {css.logoContainer}>
-                <img
+                <a href="https://www.noumea.nc">
+                  <img
                   src={require(`./images/logo-noumea.jpg`)}
-                />
+                /></a>
+              <a href="http://www.province-sud.nc/">
                 <img
                   src={require(`./images/logo-provincesud.png`)}
                 />
+              </a>
+              <a href="https://gouv.nc/">
                 <img
-                  src={require(`./images/logo-nc.png`)}
-                />
+                src={require(`./images/logo-nc.png`)}
+              />
+                </a>
+
           </div>
           <div className={css.description}>
                 <h1>ENTRÉE NORD</h1>
@@ -102,18 +108,23 @@ export default class Noumea extends Component {
           </div>
 
             <div className={css.partnersContainer}>
-            <h1>les partenaires</h1>
-            </div>
+            <h2>les partenaires</h2>
               <div className={css.partnersLogoContainer} >
-                <img
-                    src={require(`./images/logo-acp.svg`)}
-                  />
+                <a href="http://www.azizachaouniprojects.com/">
                   <img
+                    src={require(`./images/logo-acp.svg`)}
+                  /></a>
+
+                <a href="https://www.noumea.nc">
+              <img
                     src={require(`./images/logo-scet.png`)}
                   />
+              </a>
                   <img
                     src={require(`./images/logo-milieu.png`)}
                   />
+            </div>
+
               </div>
   </div>
     )
