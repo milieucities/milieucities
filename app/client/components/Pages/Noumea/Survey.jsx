@@ -175,6 +175,9 @@ export default class Survey extends Component {
                 media={require(`./images/theme-immediat.svg`)}>
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
+              <a href="mailto:webmaster@example.com">
+                <i className="fa fa-envelope-o fa-2x" aria-hidden="true"></i>
+              </a>
           </div>
         </div>
         <SurveyTitleMap
@@ -308,7 +311,7 @@ export default class Survey extends Component {
           <div className={css.comments}>
             <textarea rows="4" cols="50" placeholder="your comments" />
               <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
+                <a href="#second" name='submit' className='btn'>la prochaine question</a>
               </center>
           </div>
         </div>
@@ -329,7 +332,7 @@ export default class Survey extends Component {
       />
 
       {/* 2 Survey */}
-      <div className={css.forms} ref="second">
+      <div className={css.forms} name="second" ref="second">
           <div className={css.question}>
             <div className={css.colorCircle}>
                 <div className={css.circle} style={{ background: 'orange' }} >

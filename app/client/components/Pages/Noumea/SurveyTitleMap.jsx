@@ -23,7 +23,7 @@ export default class SurveyTitleMap extends Component {
     const { isMobile }  = this.state;
     const { description , map , title, notes } = this.props;
     return (
-      <div>
+      <div className={css.mapWrapper}>
         <div className="row">
           <h2>{title}</h2>
         </div>
@@ -43,9 +43,10 @@ export default class SurveyTitleMap extends Component {
               }
               { !isMobile &&
                 <img
+                  className={css.mapPc}
                   src={require(`${map}`)}
-                  width="420px"
-                  height="650px"
+                  width= '100%'
+
                />
               }
             </div>

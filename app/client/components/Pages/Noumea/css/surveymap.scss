@@ -30,3 +30,15 @@
   margin-top: 30px;
   margin-bottom: 30px;
 }
+.mapWrapper{
+  @media #{$medium-and-up}{
+  margin-top: 120px;
+  margin-bottom: 120px;
+  float: right;  
+  }
+  @media #{$medium-and-down} {
+    margin-top: 60px;
+    margin-bottom: 60px;
+
+  }
+}
