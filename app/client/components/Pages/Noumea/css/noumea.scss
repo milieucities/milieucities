@@ -69,7 +69,7 @@
   align-self: center;
 
   .description {
-    margin: 0 auto;
+    margin: 1em auto 0 auto;
 
  @media #{$medium-and-up} {
    margin: 0 5vw;
@@ -130,12 +130,11 @@ p {
 }
 
   @media #{$medium-and-up} {
-    float: left;
 
     p {
       max-width: 700px;
       display: block;
-      margin: 0 auto;
+      margin: 1em auto;
     }
   }
   @media #{$medium-and-down} {
@@ -205,7 +204,6 @@ p {
 }
 .aboutContainer {
   display: inline-block;
-  float:left;
   max-width: 340px;
 
   .timelineContainer {
@@ -239,10 +237,16 @@ p {
   border-top: 1 solid $light-gray;
   margin: 0.25em auto;
 
-  .partnersContainer h2{
+  h2{
     display: block;
     margin-top: 2em;
     text-align: center;
+    @media #{$medium-and-up} {
+      position:inherit;
+      height: auto;
+      width: 720px;
+      overflow: hidden;
+    }
   }
 }
 .partnersLogoContainer {
@@ -270,26 +274,35 @@ p {
 
 
 .logoContainer {
-  margin: 1.25em auto 0.5em auto;
+  margin: 2em auto;
   display: flex;
-  max-width: 500px;
+  box-sizing: inherit;
 
-  img {
-    padding: 0.25em;
-    float: left;
-    height: 140px;
-    margin: 0 auto;
+  a img:hover {
+    height: 110px;
+    border-bottom: 2 solid $dark-primary-color;
   }
-
+  a img {
+    height: 100px;
+    margin: 0 auto;
+    border: 0;
+  }
+  @media #{$large-and-up} {
+    max-width: 480px;
+    }
+  @media #{$medium-and-up} {
+    max-width: 400px;
+    }
   @media #{$medium-and-down} {
-      padding: 20px 50px;
-
+    max-width: 320px;
+    a img {
+    height:90px;
+      }
     }
   @media #{$small-and-down} {
-    padding: 20px;
 
-    img {
-    height:90px;
+    a img {
+    height:75px;
       }
   }
     }
