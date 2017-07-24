@@ -48,10 +48,41 @@ export default class Survey extends Component {
     });
   }
 
+  // render: function() {   I put this to comment you may want to reuse it
+  //           return (   I was not sure why was this used
+  //             <div className="submitBox">      if you want to render just something mall do it like
+  //               <AnswerForm onAnswerSubmit={this.onSubmit} /> outside of the component function AnswerForm() { return <aligator/>; }
+  //             </div>
+  //           );
+  //         }
+  //       });
+  //
+  //       const AnswerForm = React.createClass({
+  //         getInitialState: function() {
+  //           return {
+  //             participant: ""
+  //           };
+  //         },
+  //
+  //         handleSubmit: function(e) {
+  //
+  //           this.props.onAnswerSubmit({participant: participant, amount: amount});
+  //           this.setState({
+  //             participant: "",
+  //             amount: undefined
+  //           })
+  //         },
+  //
+  //         setParticipant: function(e) {
+  //           this.setState({
+  //             participant: Math.random()
+  //           })
+  //         },
+
   render() {
     const { isMobile } = this.state;
 
-    const firstTitle = "1.1 Usage temporaire de l'ancien complexe Gaston-Bourret";
+    const firstTitle = "1.1. Usage temporaire de l'ancien complexe Gaston-Bourret";
     const secondTitle= "1.2 Usage temporaire du parking et du terrain vague adjacent";
     const thirdTitle= "Circulations";
     const fourthTitle = "Espaces publiques/ espaces verts";
@@ -97,11 +128,11 @@ export default class Survey extends Component {
       Ainsi, nous avons proposé des bâtiments nouveaux ainsi que des bâtiments réhabilités.";
 
 
-    const firstMap = './images/survey_map-immediat-1.png';
-    const secondMap = './images/survey_map-n=immediat-2.png';
-    const thirdMap = './images/survey_map-circulations.png';
-    const fourthMap = './images/survey_map-public.png';
-    const fifthMap = './images/survey_map-bati.png';
+      const firstMap = './images/survey-map-immediat-1.png';
+      const secondMap = './images/survey-map-immediat-2.png';
+      const thirdMap = './images/survey-map-circulations.png';
+      const fourthMap = './images/survey-map-public.png';
+      const fifthMap = './images/survey-map-bati.png';
 
     const firstNote = "Notez les differents programmes que nous proposons!";
     const secondNote = "Notez les differents programmes que nous proposons! Donnez nous votre avis sur chacun!";
@@ -118,7 +149,7 @@ export default class Survey extends Component {
           <div className="col-xs-3 col-md-4 icons">
             { isMobile &&
               <img
-                src={require(`./images/icon-temporary.svg`)}
+                src={require(`./images/theme-immediat.svg`)}
                 width="45px"
                 height="45px"
              />
@@ -126,7 +157,7 @@ export default class Survey extends Component {
             {
               !isMobile &&
               <img
-                src={require(`./images/icon-temporary.svg`)}
+                src={require(`./images/theme-immediat.svg`)}
                 width="85px"
                 height="85px"
              />
@@ -162,11 +193,11 @@ export default class Survey extends Component {
           <div className="row">
             <div className={css.question}>
               <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: '#a07ea8' }} >
+                <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-              <p>RDC espace public ouvert polyvalent (murs et cloisons retirés)
-              Étages: espaces educatifs</p>
+              RDC espace public ouvert polyvalent (murs et cloisons retirés)
+              Étages: espaces educatifs
             </div>
             <EmojiiSlider/>
           </div>
@@ -285,6 +316,12 @@ export default class Survey extends Component {
           </div>
         </div>
       </div>
+      {/*  <form className="answerForm" onSubmit={this.handleSubmit}>
+        //   <h4>How do you feel about bike paths in Noumea?</h4>
+        //   <br /><br />
+        //
+        //   <input type="submit" value="Submit" />
+          </form>*/}
 
 
       <SurveyTitleMap
