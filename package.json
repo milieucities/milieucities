@@ -37,7 +37,10 @@
     "react-simple-range": "^1.5.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.1.1",
+    "babel-plugin-import": "^1.2.1",
+    "babel-preset-react": "^6.24.1",
     "compression-webpack-plugin": "^1.0.0",
     "eslint": "3.2.2",
     "eslint-config-airbnb-base": "5.0.1",
