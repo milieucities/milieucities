@@ -78,6 +78,7 @@ end
 
 group :production, :staging do
   gem 'unicorn', '5.1.0'
+  gem 'puma'
 end
 
 ruby '2.3.0'
