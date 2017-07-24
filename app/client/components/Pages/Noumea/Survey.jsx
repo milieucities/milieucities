@@ -51,7 +51,7 @@ export default class Survey extends Component {
   render() {
     const { isMobile } = this.state;
 
-    const firstTitle = "1.1. Usage temporaire de l'ancien complexe Gaston-Bourret";
+    const firstTitle = "1.1 Usage temporaire de l'ancien complexe Gaston-Bourret";
     const secondTitle= "1.2 Usage temporaire du parking et du terrain vague adjacent";
     const thirdTitle= "Circulations";
     const fourthTitle = "Espaces publiques/ espaces verts";
@@ -97,11 +97,11 @@ export default class Survey extends Component {
       Ainsi, nous avons proposé des bâtiments nouveaux ainsi que des bâtiments réhabilités.";
 
 
-    const firstMap = './images/theme1-1.png';
-    const secondMap = './images/theme1-1@2x.png';
-    const thirdMap = './images/theme1-2.png';
-    const fourthMap = './images/theme1-2@2x.png';
-    const fifthMap = './images/theme1-2@3x.png';
+    const firstMap = './images/survey_map-immediat-1.png';
+    const secondMap = './images/survey_map-n=immediat-2.png';
+    const thirdMap = './images/survey_map-circulations.png';
+    const fourthMap = './images/survey_map-public.png';
+    const fifthMap = './images/survey_map-bati.png';
 
     const firstNote = "Notez les differents programmes que nous proposons!";
     const secondNote = "Notez les differents programmes que nous proposons! Donnez nous votre avis sur chacun!";
@@ -118,7 +118,7 @@ export default class Survey extends Component {
           <div className="col-xs-3 col-md-4 icons">
             { isMobile &&
               <img
-                src={require(`./images/theme-immediat.svg`)}
+                src={require(`./images/icon-temporary.svg`)}
                 width="45px"
                 height="45px"
              />
@@ -126,7 +126,7 @@ export default class Survey extends Component {
             {
               !isMobile &&
               <img
-                src={require(`./images/theme-immediat.svg`)}
+                src={require(`./images/icon-temporary.svg`)}
                 width="85px"
                 height="85px"
              />
@@ -162,11 +162,11 @@ export default class Survey extends Component {
           <div className="row">
             <div className={css.question}>
               <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
+                <div className={css.circle} style={{ background: '#a07ea8' }} >
                 </div>
               </div>
-              RDC espace public ouvert polyvalent (murs et cloisons retirés)
-              Étages: espaces educatifs
+              <p>RDC espace public ouvert polyvalent (murs et cloisons retirés)
+              Étages: espaces educatifs</p>
             </div>
             <EmojiiSlider/>
           </div>
