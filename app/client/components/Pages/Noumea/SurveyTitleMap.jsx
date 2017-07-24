@@ -32,6 +32,7 @@ export default class SurveyTitleMap extends Component {
             {description}
           </p>
         </div>
+          <div className="column">
           <div className="row">
             <div className={css.map}>
               { isMobile &&
@@ -50,10 +51,11 @@ export default class SurveyTitleMap extends Component {
                />
               }
             </div>
+          </div>
         </div>
         <div className="row">
           <div className={css.notes}>
-            <h4>{notes}</h4>
+            <h4>here{notes}</h4>
           </div>
         </div>
       </div>

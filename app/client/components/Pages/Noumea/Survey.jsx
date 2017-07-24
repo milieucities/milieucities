@@ -128,11 +128,11 @@ export default class Survey extends Component {
       Ainsi, nous avons proposé des bâtiments nouveaux ainsi que des bâtiments réhabilités.";
 
 
-    const firstMap = './images/theme1-1.png';
-    const secondMap = './images/theme1-1@2x.png';
-    const thirdMap = './images/theme1-2.png';
-    const fourthMap = './images/theme1-2@2x.png';
-    const fifthMap = './images/theme1-2@3x.png';
+      const firstMap = './images/survey-map-immediat-1.png';
+      const secondMap = './images/survey-map-immediat-2.png';
+      const thirdMap = './images/survey-map-circulations.png';
+      const fourthMap = './images/survey-map-public.png';
+      const fifthMap = './images/survey-map-bati.png';
 
     const firstNote = "Notez les differents programmes que nous proposons!";
     const secondNote = "Notez les differents programmes que nous proposons! Donnez nous votre avis sur chacun!";
