@@ -10,7 +10,6 @@ export default class MobileFooter extends Component {
         <a href='/' title='info'>à propos</a>
         <a href='/utilisation' title='d’utilisation'>guide</a>
         <a href='/participez' title='participez'>participez</a>
-        <a href='/participez' title='participez'>follow us</a>
       </div>
     )
   }
