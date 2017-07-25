@@ -31,6 +31,7 @@ export default class AnswerForm extends Component {
 
   render() {
     return (
+       <div className="row">
          <div className={css.comments}>
           <form onSubmit={this.handleSubmit}>
             <input 
@@ -45,6 +46,7 @@ export default class AnswerForm extends Component {
              </center>
           </form>
          </div>
+       </div>
     );
   }
 }
