@@ -17,8 +17,8 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname),
-    publicPath: '/',
+    path: path.resolve(__dirname, '../assets/javascripts'),
+    publicPath: '/assets',
     filename: 'bundle.js'
   },
 
@@ -35,13 +35,13 @@ module.exports = {
       }
     }),
     new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks
-    new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8
-    })
+    // new CompressionPlugin({
+    //   asset: "[path].gz[query]",
+    //   algorithm: "gzip",
+    //   test: /\.js$|\.css$|\.html$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8
+    // })
   ],
 
   module: {
