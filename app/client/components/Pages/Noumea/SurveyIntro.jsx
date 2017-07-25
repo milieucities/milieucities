@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import css from './css/noumea.scss'
 import { Slider } from 'antd'
 import 'antd/dist/antd.less'
+import css from './css/surveyIntro.scss'
 import MobileFooter from './MobileFooter'
 import Header from './Header'
 import { debounce } from 'lodash'
@@ -24,7 +24,7 @@ export default class SurveyIntro extends Component {
     const {  isMobile } = this.state;
 
     return (
-        <div className="container">
+        <div className={css.surveyIntro}>
           { !isMobile &&
             <Header />
           }
@@ -45,8 +45,8 @@ export default class SurveyIntro extends Component {
             </div>
           </div>
           <div className="row">
-            <a href="/participez/survey" className='btn' >
-              Start
+            <a href="/participez/survey" className='btn' value="start">
+              <center>><button className="btn">Start</button></center>
             </a>
           </div>
           { isMobile &&

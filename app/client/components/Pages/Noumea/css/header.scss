@@ -4,6 +4,7 @@
 }
 
 a {
+
   display: inline-flex !important;
   padding: 0 100px !important;
   height: 50px;
@@ -18,6 +19,9 @@ a {
   background-size: 0% 4px !important;
   transition: 0.25s !important;
   border-bottom: 200px;
+  @media #{$large-and-up} {
+    margin-left: 300px;
+  }
 
   &:hover {
     background-size: 50% 4px !important;

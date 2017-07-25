@@ -43,8 +43,7 @@ export default class Noumea extends Component {
                 <img
                 src={require(`./images/logo-nc.png`)}
               />
-                </a>
-
+              </a>
           </div>
           <div className={css.description}>
                 <h1>ENTRÉE NORD</h1>
@@ -126,11 +125,12 @@ export default class Noumea extends Component {
               <a href="https://milieu.io/"><img
                 src={require(`./images/logo-milieu.png`)}
               /></a>
-
             </div>
-
-              </div>
-  </div>
+          </div>
+          { isMobile &&
+            <MobileFooter />
+            }
+        </div>
     )
   }
 }

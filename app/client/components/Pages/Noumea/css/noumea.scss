@@ -2,7 +2,7 @@
 .container {
   padding-bottom: 0 !important;
   font-family: AvenirNext, lato, sans-serif;
-  max-width: 1024px;
+  max-width: 1400px;
   margin: 0 auto;
 
     h1 {
@@ -127,13 +127,20 @@
   }
   p {
         margin-top: 1em;
+        font-size: 17px;
   }
     @media #{$large-and-up} {
     display:block;
-    max-width: 400px;
+    max-width: 900px;
+    top: 50%;
+    left: 50%;
+    margin-top: 100px;
+    margin-left: 550px;
+
     p {
       display: block;
       margin: 1em auto;
+      font-size: 16px;
     }
     }
     @media #{$medium-and-up} {
@@ -154,6 +161,9 @@
     @media #{$small-and-down} {
       padding: 20px 40px;
       margin: 0 auto;
+      p {
+        font-size: 15px;
+      }
     }
   }
   .themeContainer {
@@ -277,11 +287,11 @@
 
   .partnersLogoContainer {
   border-top: 2 solid $dark-primary-color;
-  margin: 2em auto;
+  margin: 20px;
   display: flex;
 
   a {
-    padding: 0.5em;
+    padding: 10px;
   }
   a img:hover {
     height: 60px;
@@ -299,12 +309,30 @@
     }
   @media #{$medium-and-down} {
     max-width: 320px;
+    top: 50%;
+    margin-top: 10px;
+    margin-left: 10px;
+    a {
+      padding: 10px;
+    }
+    img{
+      padding-left: 10px;
+      margin-left: 5px;
+    }
     a img {
     height:50px;
       }
     }
   @media #{$small-and-down} {
-
+    a {
+        padding: 10px;
+        top: 50%;
+        left: 50%;
+      }
+      img{
+        padding-left: 10px;
+        margin-left: 5px;
+      }
     a img {
     height:40px;
       }
@@ -316,10 +344,13 @@
   margin: 2em auto;
   display: flex;
   box-sizing: inherit;
+  top: 50%;
+  left: 50%;
+  margin-top: 100px;
+  margin-left: 300px;
 
   a img:hover {
     height: 110px;
-    border-bottom: 2 solid $dark-primary-color;
   }
   a img {
     height: 100px;
@@ -328,9 +359,15 @@
   }
   @media #{$large-and-up} {
     max-width: 480px;
+    top: 50%;
+    left: 50%;
+    margin-top: 100px;
+    margin-left: 300px;
     }
   @media #{$medium-and-up} {
-    max-width: 400px;
+    top: 30%;
+    margin-top: 100px;
+    margin-left: 20px;
     }
   @media #{$medium-and-down} {
     max-width: 320px;
@@ -339,9 +376,15 @@
       }
     }
   @media #{$small-and-down} {
-
+    max-width: 200px;
+    top: 50%;
+    margin-top: 10px;
+    margin-left: 10px;
     a img {
     height:75px;
+    width: 75px;
+    padding: 0;
+    margin: 0;
       }
   }
-    }
+}
