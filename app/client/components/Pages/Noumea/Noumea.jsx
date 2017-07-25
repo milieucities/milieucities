@@ -54,7 +54,7 @@ export default class Noumea extends Component {
 
       <div className={css.introContainer}>
       <div className={css.videoContainer}>
-        <iframe src="https://www.youtube.com/embed/z9GS_SvGIKk?rel=0&amp;showinfo=0" allowFullScreen></iframe>
+        <iframe src="https://youtu.be/dlma_EbeWCs?rel=0&amp;showinfo=0" allowFullScreen></iframe>
       </div>
 
       <div className={css.visionContainer}>

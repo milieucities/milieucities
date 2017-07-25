@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Footer from '../../Layout/Footer/Footer'
-import Comments from '../../Comments/Comments'
-import Loader from '../../Common/Loader/Loader'
-import Sentiment from '../../Common/Sentiment/Sentiment'
+import css from './css/utilisation.scss'
 import { debounce, uniqueId } from 'lodash'
 
 export default class Utilisation extends Component {
@@ -18,15 +16,11 @@ export default class Utilisation extends Component {
     const { loading } = this.state;
 
     return (
-      <div>
-        <h1>Utilisation page</h1>
-          <img
-            src={require(`./images/5.svg`)}
-          />
-          <img
-            src={require(`./images/4.svg`)}
-          />
-    </div>
+      <div className={css.container}>
+        <div className={css.utilisationContainer}>
+          <h1>Guide d'utilisation</h1>
+          </div>
+        </div>
     )
   }
 }
