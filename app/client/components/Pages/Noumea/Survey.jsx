@@ -8,6 +8,7 @@ import { debounce } from 'lodash'
 import SurveyTitleMap from './SurveyTitleMap'
 import MobileFooter from './MobileFooter'
 import Header from './Header'
+import AnswerForm from './AnswerForm'
 import { ShareButtons, generateShareIcon } from 'react-share';
 
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
@@ -19,11 +20,10 @@ export default class Survey extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    	participantId: '',
-    	questionSet: [],
+    	comment: '',
       isMobile: (window.innerWidth < 600)
     };
-    this.handleSubmit = () => this.handleSubmit();
+    this.saveAnswers = () => this.saveAnswers();
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
@@ -31,53 +31,29 @@ export default class Survey extends Component {
     );
   }
 
-  handleSubmit() {
-    preventDefault(e);
-    $.ajax({
-      url: this.props.url,
-      dataType: 'JSON',
-      type: 'POST',
-      data: answers,
-      success: function(data) {
-        this.setState({data: data});
-        console.log("Added data", data)
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
-  }
+  saveAnswers(answers) {
+    return new Promise((resolve, reject) => {
+      const data = {
+        comment: {answers}
+      };
 
-  // render: function() {   I put this to comment you may want to reuse it
-  //           return (   I was not sure why was this used
-  //             <div className="submitBox">      if you want to render just something mall do it like
-  //               <AnswerForm onAnswerSubmit={this.onSubmit} /> outside of the component function AnswerForm() { return <aligator/>; }
-  //             </div>
-  //           );
-  //         }
-  //       });
-  //
-  //       const AnswerForm = React.createClass({
-  //         getInitialState: function() {
-  //           return {
-  //             participant: ""
-  //           };
-  //         },
-  //
-  //         handleSubmit: function(e) {
-  //
-  //           this.props.onAnswerSubmit({participant: participant, amount: amount});
-  //           this.setState({
-  //             participant: "",
-  //             amount: undefined
-  //           })
-  //         },
-  //
-  //         setParticipant: function(e) {
-  //           this.setState({
-  //             participant: Math.random()
-  //           })
-  //         },
+      $.ajax({
+        url: `/submit_survey`,
+        dataType: 'JSON',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        success: (comment) => {
+          console.log("You saved data", data)
+          resolve(comment)
+        },
+        error: (error) => {
+          console.log("There was an error: ", error)
+          reject(error)
+        }
+      })
+    })
+  }
 
   render() {
     const { isMobile } = this.state;
@@ -306,24 +282,14 @@ export default class Survey extends Component {
 
           </div>
           <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <a href="#second" name='submit' className='btn'>la prochaine question</a>
-              </center>
+          <div className="row">
+            <div className={css.comments}>
+            <AnswerForm saveAnswers={this.saveAnswers.bind(this)} />
+            </div>
           </div>
         </div>
+
       </div>
-      {/*  <form className="answerForm" onSubmit={this.handleSubmit}>
-        //   <h4>How do you feel about bike paths in Noumea?</h4>
-        //   <br /><br />
-        //
-        //   <input type="submit" value="Submit" />
-          </form>*/}
-
-
       <SurveyTitleMap
         description={secondDescription}
         map={secondMap}
@@ -454,10 +420,7 @@ export default class Survey extends Component {
         </div>
         <div className="row">
           <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
-              </center>
+          <AnswerForm saveAnswers={this.saveAnswers.bind(this)} />
           </div>
         </div>
       </div>
@@ -600,7 +563,6 @@ export default class Survey extends Component {
           </div>
         </div>
       </div>
-
 
       <SurveyTitleMap
         description={fourthDescription}
@@ -886,7 +848,6 @@ export default class Survey extends Component {
     );
   }
 }
-
 
 document.addEventListener('turbolinks:load', () => {
   const survey = document.querySelector('#survey');
