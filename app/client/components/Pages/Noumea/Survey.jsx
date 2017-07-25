@@ -82,7 +82,7 @@ export default class Survey extends Component {
   render() {
     const { isMobile } = this.state;
 
-    const firstTitle = "1.1. Usage temporaire de l'ancien complexe Gaston-Bourret";
+    const firstTitle = "1.1 Usage temporaire de l'ancien complexe Gaston-Bourret";
     const secondTitle= "1.2 Usage temporaire du parking et du terrain vague adjacent";
     const thirdTitle= "Circulations";
     const fourthTitle = "Espaces publiques/ espaces verts";
@@ -192,9 +192,9 @@ export default class Survey extends Component {
         <div className={css.forms}>
           <div className="row">
             <div className={css.question}>
-              <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
+                <img
+                  src={require(`./images/q1-1-1.svg`)}
+                  />
               </div>
               RDC espace public ouvert polyvalent (murs et cloisons retirés)
               Étages: espaces educatifs
