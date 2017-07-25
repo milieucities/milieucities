@@ -18,7 +18,8 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, "app"),
-    filename: "[name].js"
+    filename: "[name].js",
+    publicPath: '/public/'    
   },
 
   plugins: [
