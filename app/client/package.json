@@ -64,6 +64,7 @@
     "webpack": "^1.15.0"
   },
   "devDependencies": {
+    "express": "^4.15.3",
     "http-server": "^0.8.5",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",

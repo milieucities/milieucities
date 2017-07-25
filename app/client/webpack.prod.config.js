@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require("path");
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const express = require('express');
+const app = express();
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -17,9 +19,9 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    path: __dirname,
+    publicPath: '/',
+    filename: 'bundle.js'
   },
 
   plugins: [
@@ -93,3 +95,7 @@ module.exports = {
 
   sassResources: ['../assets/stylesheets/variables.scss']
 }
+
+app.use(express.static(__dirname + '/'));
+
+app.listen(process.env.PORT || 8080);
