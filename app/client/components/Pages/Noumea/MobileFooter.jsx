@@ -6,7 +6,7 @@ export default class MobileFooter extends Component {
 
   render() {
     return (
-      <div className={css.container}>
+      <div className={css.footer}>
         <ul>
           <li><a href='/' title='info'>à propos</a></li>
           <li><a href='/utilisation' title='d’utilisation'>guide</a></li>

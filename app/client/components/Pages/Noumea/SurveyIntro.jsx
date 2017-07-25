@@ -24,7 +24,7 @@ export default class SurveyIntro extends Component {
     const {  isMobile } = this.state;
 
     return (
-        <div className={css.surveyIntro}>
+        <div className="container">
           { !isMobile &&
             <Header />
           }
@@ -44,10 +44,12 @@ export default class SurveyIntro extends Component {
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className={css.button}>
+            <center>
             <a href="/participez/survey" className='btn' value="start">
-              <center>><button className="btn">Start</button></center>
+              <button className="btn">Start</button>
             </a>
+            </center>
           </div>
           { isMobile &&
             <MobileFooter />

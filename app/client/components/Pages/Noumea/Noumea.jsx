@@ -26,14 +26,13 @@ export default class Noumea extends Component {
         { !isMobile &&
           <Header />
         }
-
-
           <div className="row">
             <div className= {css.logoContainer}>
-                <a href="https://www.noumea.nc">
-                  <img
-                  src={require(`./images/logo-noumea.jpg`)}
-                /></a>
+              <a href="https://www.noumea.nc">
+                <img
+                src={require(`./images/logo-noumea.jpg`)}
+                />
+              </a>
               <a href="http://www.province-sud.nc/">
                 <img
                   src={require(`./images/logo-provincesud.png`)}

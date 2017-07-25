@@ -4,7 +4,7 @@
   font-family: AvenirNext, lato, sans-serif;
   max-width: 1400px;
   margin: 0 auto;
-
+  background-color: white; // we should set this color everywhere because we inherit some styles from the base of m-server
     h1 {
       color: $dark-primary-color;
       font-weight: 800;
