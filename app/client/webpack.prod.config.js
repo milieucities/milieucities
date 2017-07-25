@@ -3,14 +3,11 @@ const path = require("path");
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const extractLess = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css",
-    disable: process.env.NODE_ENV === "development"
-});
-
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = {
+  cache: true,
+  devtool: "eval",
   entry: {
     bundle: path.resolve(__dirname, 'index')
   },
@@ -20,7 +17,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, "../assets/webpack"),
+    path: path.resolve(__dirname, "app"),
     filename: "[name].js"
   },
 
@@ -65,17 +62,11 @@ module.exports = {
         'sass',
         'sass-resources']
       },
-      { // might need to double check before goin to prod
+      {
         test: /\.less$/,
-            use: extractLess.extract({
-                use: [{
-                    loader: 'css-loader'
-                }, {
-                    loader: 'less-loader'
-                }],
-                // use style-loader in development
-                fallback: 'style-loader'
-            })
+        loaders: ['style-loader',
+        'css-loader',
+        'less-loader']
       },
       {
         test: /\.css$/,
