@@ -19,8 +19,8 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, '/app/assets/javascript'),
-    publicPath: '/assets/javascript',
+    path: path.resolve(__dirname),
+    publicPath: 'public',
     filename: 'bundle.js'
   },
 
@@ -96,6 +96,5 @@ module.exports = {
   sassResources: ['../assets/stylesheets/variables.scss']
 }
 
-app.use(express.static(__dirname + '/'));
-
-app.listen(process.env.PORT || 8080);
+app.use(express.static('public'));
+app.use('/static', express.static(path.join(__dirname, 'public')));
