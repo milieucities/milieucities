@@ -26,14 +26,13 @@ export default class Noumea extends Component {
         { !isMobile &&
           <Header />
         }
-
-
           <div className="row">
             <div className= {css.logoContainer}>
-                <a href="https://www.noumea.nc">
-                  <img
-                  src={require(`./images/logo-noumea.jpg`)}
-                /></a>
+              <a href="https://www.noumea.nc">
+                <img
+                src={require(`./images/logo-noumea.jpg`)}
+                />
+              </a>
               <a href="http://www.province-sud.nc/">
                 <img
                   src={require(`./images/logo-provincesud.png`)}
@@ -43,8 +42,7 @@ export default class Noumea extends Component {
                 <img
                 src={require(`./images/logo-nc.png`)}
               />
-                </a>
-
+              </a>
           </div>
           <div className={css.description}>
                 <h1>ENTRÉE NORD</h1>
@@ -126,11 +124,12 @@ export default class Noumea extends Component {
               <a href="https://milieu.io/"><img
                 src={require(`./images/logo-milieu.png`)}
               /></a>
-
             </div>
-
-              </div>
-  </div>
+          </div>
+          { isMobile &&
+            <MobileFooter />
+            }
+        </div>
     )
   }
 }

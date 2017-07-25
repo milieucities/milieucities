@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import css from './css/noumea.scss'
 import { Slider } from 'antd'
 import 'antd/dist/antd.less'
+import css from './css/surveyIntro.scss'
 import MobileFooter from './MobileFooter'
 import Header from './Header'
 import { debounce } from 'lodash'
@@ -44,10 +44,12 @@ export default class SurveyIntro extends Component {
               </div>
             </div>
           </div>
-          <div className="row">
-            <a href="/participez/survey" className='btn' >
-              Start
+          <div className={css.button}>
+            <center>
+            <a href="/participez/survey" className='btn' value="start">
+              <button className="btn">Start</button>
             </a>
+            </center>
           </div>
           { isMobile &&
             <MobileFooter />

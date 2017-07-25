@@ -3,28 +3,32 @@ const path = require("path");
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const extractLess = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css",
-    disable: process.env.NODE_ENV === "development"
-});
-
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = {
+  cache: true,
+  devtool: "eval",
   entry: {
     bundle: path.resolve(__dirname, 'index')
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ["", ".js", ".jsx"],
+    root: path.resolve(__dirname, "client"),
+    modulesDirectories: ["node_modules"]
   },
 
   output: {
-    path: path.resolve(__dirname, "../assets/webpack"),
-    filename: "[name].js"
+    path: path.join(__dirname, 'app', 'assets', 'javascripts'),
+    filename: 'bundle.js',
+    publicPath: '/assets'
   },
 
   plugins: [
+    new webpack.DllReferencePlugin({
+      context: path.join(__dirname, "client"),
+      manifest: require("./dll/vendor-manifest.json")
+    }),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -37,21 +41,28 @@ module.exports = {
       }
     }),
     new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks
-    new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8
-    })
+    // new CompressionPlugin({
+    //   asset: "[path].gz[query]",
+    //   algorithm: "gzip",
+    //   test: /\.js$|\.css$|\.html$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8
+    // })
   ],
 
   module: {
     loaders: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash'
+        test: /\.jsx?$/,
+        loader: "babel",
+        include: [
+            path.join(__dirname, "client") //important for performance!
+        ],
+        query: {
+            cacheDirectory: true, //important for performance
+            plugins: ["transform-regenerator"],
+            presets: ["react", "es2015", "stage-0"]
+        }
       },
       {
         test: /\.(json|geojson)$/,
@@ -65,17 +76,11 @@ module.exports = {
         'sass',
         'sass-resources']
       },
-      { // might need to double check before goin to prod
+      {
         test: /\.less$/,
-            use: extractLess.extract({
-                use: [{
-                    loader: 'css-loader'
-                }, {
-                    loader: 'less-loader'
-                }],
-                // use style-loader in development
-                fallback: 'style-loader'
-            })
+        loaders: ['style-loader',
+        'css-loader',
+        'less-loader']
       },
       {
         test: /\.css$/,
