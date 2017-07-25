@@ -31,22 +31,18 @@ export default class AnswerForm extends Component {
 
   render() {
     return (
-       <div className="row">
-         <div className={css.comments}>
-          <form onSubmit={this.handleSubmit}>
-            <input 
-            type="text" 
-            value={this.state.amount} 
-            onChange={this.handleChange} />
-             <center>
-               <input 
-                className='btn'
-                value='la prochaine question'
-                type='submit' />
-             </center>
-          </form>
-         </div>
-       </div>
+        <form onSubmit={this.handleSubmit}>
+          <input 
+          type="text" 
+          value={this.state.amount} 
+          onChange={this.handleChange} />
+           <center>
+             <input 
+              className='btn'
+              value='la prochaine question'
+              type='submit' />
+           </center>
+        </form>
     );
   }
 }

@@ -11,7 +11,6 @@ export default class SurveyTitleMap extends Component {
     this.state = {
       isMobile: (window.innerWidth < 600)
     };
-    this.handleSubmit = () => this.handleSubmit();
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
@@ -55,7 +54,7 @@ export default class SurveyTitleMap extends Component {
         </div>
         <div className="row">
           <div className={css.notes}>
-            <h4>here{notes}</h4>
+            <h4>{notes}</h4>
           </div>
         </div>
       </div>
