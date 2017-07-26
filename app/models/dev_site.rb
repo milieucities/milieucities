@@ -64,7 +64,7 @@ class DevSite < ActiveRecord::Base
   end
 
   def self.search(search_params)
-    result = DevSite.joins(:ward, :municipality, :addresses).includes(:statuses, :comments)
+    result = DevSite.joins(:ward, :municipality).includes(:statuses, :comments, :addresses)
     result = location_search(result, search_params)
     result = filter(result, search_params)
     result
