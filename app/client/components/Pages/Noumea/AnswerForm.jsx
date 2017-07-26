@@ -31,6 +31,7 @@ export default class AnswerForm extends Component {
 
   render() {
     return (
+      <div className="container">
        <div className="row">
          <div className={css.comments}>
           <form onSubmit={this.handleSubmit}>
@@ -39,11 +40,15 @@ export default class AnswerForm extends Component {
             value={this.state.amount} 
             onChange={this.handleChange} />
              <center>
-               <a href="#second" name='submit' className='btn'>la prochaine question</a>
+               <input 
+               type="submit" 
+               value="la prochaine question"
+               />
              </center>
           </form>
          </div>
        </div>
+      </div>
     );
   }
 }

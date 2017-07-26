@@ -138,22 +138,7 @@ export default class Survey extends Component {
                 height="85px"
              />
             }
-            <FacebookShareButton
-              url="/participez"
-              title="Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa"
-              media={require(`./images/theme-immediat.svg`)}
-            >
-              <FacebookIcon size={32} round />
-              </FacebookShareButton>
-              <TwitterShareButton
-                url="/participez"
-                title="Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa"
-                media={require(`./images/theme-immediat.svg`)}>
-                <TwitterIcon size={32} round />
-              </TwitterShareButton>
-              <a href="mailto:webmaster@example.com">
-                <i className="fa fa-envelope-o fa-2x" aria-hidden="true"></i>
-              </a>
+            
           </div>
         </div>
         <SurveyTitleMap
@@ -282,13 +267,8 @@ export default class Survey extends Component {
 
           </div>
           <EmojiiSlider />
-          <div className="row">
-            <div className={css.comments}>
-            <AnswerForm saveAnswers={this.saveAnswers.bind(this)} />
-            </div>
-          </div>
         </div>
-
+        <AnswerForm saveAnswers={this.saveAnswers.bind(this)} />
       </div>
       <SurveyTitleMap
         description={secondDescription}
@@ -418,11 +398,7 @@ export default class Survey extends Component {
           </div>
           <EmojiiSlider />
         </div>
-        <div className="row">
-          <div className={css.comments}>
-          <AnswerForm saveAnswers={this.saveAnswers.bind(this)} />
-          </div>
-        </div>
+        <AnswerForm saveAnswers={this.saveAnswers.bind(this)} />
       </div>
 
       <SurveyTitleMap
@@ -554,14 +530,7 @@ export default class Survey extends Component {
           </div>
           <EmojiiSlider />
         </div>
-        <div className="row">
-          <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
-              </center>
-          </div>
-        </div>
+        <AnswerForm saveAnswers={this.saveAnswers.bind(this)} />
       </div>
 
       <SurveyTitleMap
@@ -693,14 +662,7 @@ export default class Survey extends Component {
           </div>
           <EmojiiSlider />
         </div>
-        <div className="row">
-          <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
-              </center>
-          </div>
-        </div>
+        <AnswerForm saveAnswers={this.saveAnswers.bind(this)} />
       </div>
 
       <SurveyTitleMap
@@ -832,15 +794,7 @@ export default class Survey extends Component {
           </div>
           <EmojiiSlider />
         </div>
-        <div className="row">
-          <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
-              </center>
-          </div>
-        </div>
-      </div>
+        <AnswerForm saveAnswers={this.saveAnswers.bind(this)} />
       { isMobile &&
         <MobileFooter  />
       }
