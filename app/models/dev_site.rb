@@ -92,11 +92,16 @@ class DevSite < ActiveRecord::Base
   end
 
   def valid_statuses
-    return Status::GUELPH_STATUSES unless municipality
+    return Status::DEFAULT_STATUSES unless municipality
 
-    city = municipality.name
-    status_set = "#{city.upcase}_STATUSES"
+    city_name = municipality.name
+    no_accents = I18n.transliterate(city_name)
+    city_constant = no_accents.upcase.split(' ').join('_')
+    status_set = "#{city_constant}_STATUSES"
     Status.const_get(status_set)
+
+  rescue NameError
+    Status::DEFAULT_STATUSES
   end
 
   def street
