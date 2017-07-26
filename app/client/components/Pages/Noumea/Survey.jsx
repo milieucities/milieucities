@@ -7,6 +7,7 @@ import EmojiiSlider from './EmojiiSlider'
 import { debounce } from 'lodash'
 import SurveyTitleMap from './SurveyTitleMap'
 import MobileFooter from './MobileFooter'
+import AnswerForm from './AnswerForm'
 import Header from './Header'
 import { ShareButtons, generateShareIcon } from 'react-share';
 
@@ -47,37 +48,6 @@ export default class Survey extends Component {
       }
     });
   }
-
-  // render: function() {   I put this to comment you may want to reuse it
-  //           return (   I was not sure why was this used
-  //             <div className="submitBox">      if you want to render just something mall do it like
-  //               <AnswerForm onAnswerSubmit={this.onSubmit} /> outside of the component function AnswerForm() { return <aligator/>; }
-  //             </div>
-  //           );
-  //         }
-  //       });
-  //
-  //       const AnswerForm = React.createClass({
-  //         getInitialState: function() {
-  //           return {
-  //             participant: ""
-  //           };
-  //         },
-  //
-  //         handleSubmit: function(e) {
-  //
-  //           this.props.onAnswerSubmit({participant: participant, amount: amount});
-  //           this.setState({
-  //             participant: "",
-  //             amount: undefined
-  //           })
-  //         },
-  //
-  //         setParticipant: function(e) {
-  //           this.setState({
-  //             participant: Math.random()
-  //           })
-  //         },
 
   render() {
     const { isMobile } = this.state;
@@ -309,20 +279,10 @@ export default class Survey extends Component {
         </div>
         <div className="row">
           <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <a href="#second" name='submit' className='btn'>la prochaine question</a>
-              </center>
-          </div>
+            <AnswerForm />
+          </div>  
         </div>
-      </div>
-      {/*  <form className="answerForm" onSubmit={this.handleSubmit}>
-        //   <h4>How do you feel about bike paths in Noumea?</h4>
-        //   <br /><br />
-        //
-        //   <input type="submit" value="Submit" />
-          </form>*/}
-
+        </div>
 
       <SurveyTitleMap
         description={secondDescription}
@@ -454,13 +414,10 @@ export default class Survey extends Component {
         </div>
         <div className="row">
           <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
-              </center>
-          </div>
+            <AnswerForm />
+          </div>  
         </div>
-      </div>
+        </div>
 
       <SurveyTitleMap
         description={thirdDescription}
@@ -593,13 +550,10 @@ export default class Survey extends Component {
         </div>
         <div className="row">
           <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
-              </center>
-          </div>
+            <AnswerForm />
+          </div>  
         </div>
-      </div>
+        </div>
 
 
       <SurveyTitleMap
@@ -733,13 +687,10 @@ export default class Survey extends Component {
         </div>
         <div className="row">
           <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
-              </center>
-          </div>
+            <AnswerForm />
+          </div>  
         </div>
-      </div>
+        </div>
 
       <SurveyTitleMap
         description={fifthDescription}
@@ -872,13 +823,10 @@ export default class Survey extends Component {
         </div>
         <div className="row">
           <div className={css.comments}>
-            <textarea rows="4" cols="50" placeholder="your comments" />
-              <center>
-                <button name='submit' type='submit' className='btn'>la prochaine question</button>
-              </center>
-          </div>
+            <AnswerForm />
+          </div>  
         </div>
-      </div>
+        </div>
       { isMobile &&
         <MobileFooter  />
       }
