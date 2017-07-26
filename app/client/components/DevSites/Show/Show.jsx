@@ -161,7 +161,7 @@ export default class DevSiteShow extends Component {
                   <Comments devSiteId={devSite.id} />
                 </div>
 
-                  <CommentsSection devSiteId={devSite.id} />
+                  <CommentsSection devSiteId={devSite.id} devSite={devSite} applicationType={devSite.application_type_name}/>
               </div>
             </div>
           </div>
