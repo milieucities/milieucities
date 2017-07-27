@@ -13,7 +13,9 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ["", ".js", ".jsx"],
+    root: path.resolve(__dirname, "client"),
+    modulesDirectories: ["node_modules"]
   },
 
   output: {
@@ -23,6 +25,10 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DllReferencePlugin({
+      context: path.join(__dirname, "client"),
+      manifest: require("./dll/vendor-manifest.json")
+    }),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
@@ -47,9 +53,16 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash'
+        test: /\.jsx?$/,
+        loader: "babel",
+        include: [
+            path.join(__dirname, "client") //important for performance!
+        ],
+        query: {
+            cacheDirectory: true, //important for performance
+            plugins: ["transform-regenerator"],
+            presets: ["react", "es2015", "stage-0"]
+        }
       },
       {
         test: /\.(json|geojson)$/,
