@@ -20,8 +20,8 @@ export default class Survey extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    	participantId: '',
-    	questionSet: [],
+      participantId: '',
+      questionSet: [],
       isMobile: (window.innerWidth < 600)
     };
     this.handleSubmit = () => this.handleSubmit();
@@ -111,6 +111,41 @@ export default class Survey extends Component {
     const fifthNote = "Que pensez vous de la programmation des espaces bâtits que nous proposons?";
 
     const survey1q1 = "RDC espace public ouvert polyvalent (murs et cloisons retirés) Étages: espaces educatifs";
+    const survey1q2 = "Bureaux co-working";
+    const survey1q3 = "Commerces";
+    const survey1q4 = "Espace à usage pluriel";
+    const survey1q5 = "Friche artistique-studios";
+    const survey1q6 = "Espace recherche scientifique";
+    const survey1q7 = "Café";
+    const survey1q8 = "Bureaux";
+    const survey1q9 = "Espaces verts et jardins potagers";
+    const survey1q10 = "Bâtiments fermés au public pour réhabilitation";
+    const survey1q11 = "Maison du projet (accueil/ exposition)";
+
+    const survey2q1 = "Jardinières mobiles";
+    const survey2q2 = "Stands restauration rapide / stand glacier";
+    const survey2q3 = "Espace camionnettes restauration - Food truck";
+    const survey2q4 = "Aire de jeux enfants";
+    const survey2q5 = "Parasols géants"; 
+    const survey2q6 = "Espace skateboard";
+    const survey2q7 = "Mur végétal anti-bruit";
+    const survey2q8 = "Surfaces peintes toiles géantes pour artistes";
+    const survey2q9 = "Zones vertes créées par percement de l’asphalte et zones pique-nique";
+    const survey2q10 = "Espace marchés éphémères (parvis + tables)";
+    const survey2q11 = "Jardins potagers dans jardinières mobiles";
+    const survey2q12 = "Trellis avec hamacs";
+    const survey2q13 = "Mobilier urbain reconfigurable";
+
+    const survey3q1 = "Voie express #1 déplacée";
+    const survey3q2 = "Voie Néobus retracée et réaménagée + stations";
+    const survey3q3 = "Voie Karai bus + stations";
+    const survey3q4 = "Voie bus + station SMTI";
+    const survey3q5 = "Voie tchou-tchou train";
+    const survey3q6 = "Voie cyclable + Vélib";
+    const survey3q7 = "Voie piétonne";
+    const survey3q8 = "Connections piétonne";
+    const survey3q9 = "Passerelle végétalisée principale";
+    const survey3q10 = "Parking verticaux vertes (P.V.V.)";
 
     return (
       <div className="container">
@@ -169,7 +204,6 @@ export default class Survey extends Component {
                   />
               </div>
               {survey1q1}
-            </div>
             <EmojiiSlider/>
           </div>
 
@@ -179,13 +213,13 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
             </div>
-            Bureaux co-working
+            {survey1q2}
             <EmojiiSlider />
           </div>
         </div>
         <div className="row">
           <div className={css.question}>
-            Commerces
+            {survey1q3}
 
           </div>
           <EmojiiSlider />
@@ -196,7 +230,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
             </div>
-            Espace à usage pluriel
+            {survey1q4}
 
           </div>
           <EmojiiSlider />
@@ -207,7 +241,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Friche artistique-studios
+            {survey1q5}
 
           </div>
           <EmojiiSlider />
@@ -218,7 +252,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Espace recherche scientifique
+            {survey1q6}
 
           </div>
           <EmojiiSlider />
@@ -229,7 +263,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Café
+            {survey1q7}
 
           </div>
           <EmojiiSlider />
@@ -240,7 +274,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Bureaux
+            {survey1q8}
 
           </div>
           <EmojiiSlider />
@@ -251,7 +285,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Espaces verts et jardins potagers
+            {survey1q9}
 
           </div>
           <EmojiiSlider />
@@ -262,7 +296,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Bâtiments fermés au public pour réhabilitation
+            {survey1q10}
 
           </div>
           <EmojiiSlider />
@@ -273,7 +307,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Maison du projet (accueil/ exposition)
+            {survey1q11}
 
           </div>
           <EmojiiSlider />
@@ -283,7 +317,7 @@ export default class Survey extends Component {
             <AnswerForm />
           </div>
         </div>
-        </div>
+      </div>
 
       <SurveyTitleMap
         description={secondDescription}
@@ -299,7 +333,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Jardinières mobiles
+            {survey2q1}
 
           </div>
           <EmojiiSlider />
@@ -309,18 +343,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Stands restauration rapide / stand glacier
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            Espace camionnettes restauration - Food truck
+            {survey2q2}
 
           </div>
           <EmojiiSlider />
@@ -331,7 +354,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Aire de jeux enfants
+            {survey2q3}
 
           </div>
           <EmojiiSlider />
@@ -342,7 +365,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Parasols géants
+            {survey2q4}
 
           </div>
           <EmojiiSlider />
@@ -353,7 +376,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Espace skateboard
+            {survey2q5}
 
           </div>
           <EmojiiSlider />
@@ -364,7 +387,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Mur végétal anti-bruit
+            {survey2q6}
 
           </div>
           <EmojiiSlider />
@@ -375,7 +398,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Surfaces peintes toiles géantes pour artistes
+            {survey2q7}
 
           </div>
           <EmojiiSlider />
@@ -386,7 +409,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Jardins potagers dans jardinières mobiles
+            {survey2q8}
 
           </div>
           <EmojiiSlider />
@@ -397,7 +420,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Trellis avec hamacs
+            {survey2q9}
 
           </div>
           <EmojiiSlider />
@@ -408,8 +431,41 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Mobilier urbain reconfigurable
+            {survey2q10}
 
+          </div>
+          <EmojiiSlider />
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            {survey2q11}
+
+          </div>
+          <EmojiiSlider />
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            {survey2q12}
+
+          </div>
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
+                </div>
+              {survey2q13}
+
+            </div>
+            <EmojiiSlider />
           </div>
           <EmojiiSlider />
         </div>
@@ -418,7 +474,7 @@ export default class Survey extends Component {
             <AnswerForm />
           </div>
         </div>
-        </div>
+      </div>
 
       <SurveyTitleMap
         description={thirdDescription}
@@ -435,7 +491,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Jardinières mobiles
+            {survey3q1}
 
           </div>
           <EmojiiSlider />
@@ -445,18 +501,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Stands restauration rapide / stand glacier
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            Espace camionnettes restauration - Food truck
+            {survey3q2}
 
           </div>
           <EmojiiSlider />
@@ -467,7 +512,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Aire de jeux enfants
+            {survey3q3}
 
           </div>
           <EmojiiSlider />
@@ -478,7 +523,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Parasols géants
+            {survey3q4}
 
           </div>
           <EmojiiSlider />
@@ -489,7 +534,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Espace skateboard
+            {survey3q5}
 
           </div>
           <EmojiiSlider />
@@ -500,7 +545,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Mur végétal anti-bruit
+            {survey3q6}
 
           </div>
           <EmojiiSlider />
@@ -511,7 +556,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Surfaces peintes toiles géantes pour artistes
+            {survey3q7}
 
           </div>
           <EmojiiSlider />
@@ -522,7 +567,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Jardins potagers dans jardinières mobiles
+            {survey3q8}
 
           </div>
           <EmojiiSlider />
@@ -533,7 +578,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Trellis avec hamacs
+            {survey3q9}
 
           </div>
           <EmojiiSlider />
@@ -544,7 +589,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Mobilier urbain reconfigurable
+            {survey3q10}
 
           </div>
           <EmojiiSlider />
@@ -554,7 +599,7 @@ export default class Survey extends Component {
             <AnswerForm />
           </div>
         </div>
-        </div>
+      </div>
 
 
       <SurveyTitleMap
@@ -572,7 +617,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Jardinières mobiles
+            {survey4q1}
 
           </div>
           <EmojiiSlider />
@@ -582,18 +627,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Stands restauration rapide / stand glacier
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            Espace camionnettes restauration - Food truck
+            {survey4q2}
 
           </div>
           <EmojiiSlider />
@@ -604,7 +638,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Aire de jeux enfants
+            {survey4q3}
 
           </div>
           <EmojiiSlider />
@@ -615,7 +649,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Parasols géants
+            {survey4q4}
 
           </div>
           <EmojiiSlider />
@@ -626,7 +660,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Espace skateboard
+            {survey4q5}
 
           </div>
           <EmojiiSlider />
@@ -637,7 +671,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Mur végétal anti-bruit
+            {survey4q6}
 
           </div>
           <EmojiiSlider />
@@ -648,7 +682,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Surfaces peintes toiles géantes pour artistes
+            {survey4q7}
 
           </div>
           <EmojiiSlider />
@@ -659,7 +693,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Jardins potagers dans jardinières mobiles
+            {survey4q8}
 
           </div>
           <EmojiiSlider />
@@ -670,7 +704,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Trellis avec hamacs
+            {survey4q9}
 
           </div>
           <EmojiiSlider />
@@ -681,7 +715,29 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Mobilier urbain reconfigurable
+            {survey4q10}
+
+          </div>
+          <EmojiiSlider />
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            {survey4q11}
+
+          </div>
+          <EmojiiSlider />
+        </div>
+        <div className="row">
+          <div className={css.question}>
+            <div className={css.colorCircle}>
+                <div className={css.circle} style={{ background: 'orange' }} >
+                </div>
+              </div>
+            {survey4q12}
 
           </div>
           <EmojiiSlider />
@@ -691,8 +747,7 @@ export default class Survey extends Component {
             <AnswerForm />
           </div>
         </div>
-        </div>
-
+      </div>
       <SurveyTitleMap
         description={fifthDescription}
         map={fifthMap}
@@ -703,22 +758,13 @@ export default class Survey extends Component {
     {/* 5 Survey */}
 
     <div className={css.forms}>
+      <div className={row}>
           <div className={css.question}>
             <div className={css.colorCircle}>
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Jardinières mobiles
-
-          </div>
-          <EmojiiSlider />
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            Stands restauration rapide / stand glacier
+            {survey5q1}
 
           </div>
           <EmojiiSlider />
@@ -729,7 +775,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Espace camionnettes restauration - Food truck
+            {survey5q2}
 
           </div>
           <EmojiiSlider />
@@ -740,7 +786,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Aire de jeux enfants
+            {survey5q3}
 
           </div>
           <EmojiiSlider />
@@ -751,7 +797,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Parasols géants
+            {survey5q4}
 
           </div>
           <EmojiiSlider />
@@ -762,7 +808,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Espace skateboard
+            {survey5q5}
 
           </div>
           <EmojiiSlider />
@@ -773,7 +819,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Mur végétal anti-bruit
+            {survey5q6}
 
           </div>
           <EmojiiSlider />
@@ -784,40 +830,7 @@ export default class Survey extends Component {
                 <div className={css.circle} style={{ background: 'orange' }} >
                 </div>
               </div>
-            Surfaces peintes toiles géantes pour artistes
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            Jardins potagers dans jardinières mobiles
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            Trellis avec hamacs
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            Mobilier urbain reconfigurable
+            {survey5q7}
 
           </div>
           <EmojiiSlider />
@@ -827,7 +840,7 @@ export default class Survey extends Component {
             <AnswerForm />
           </div>
         </div>
-        </div>
+      </div>
       { isMobile &&
         <MobileFooter  />
       }
