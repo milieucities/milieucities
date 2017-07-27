@@ -11,21 +11,22 @@
 
 3. Download and start up a postgressql db
 
-   Ask for `.env` files ask for `database.yml` file
+  Ask for `.env` files ask for `database.yml` file
 
-   `.env` goes to the root folder
+  `.env` goes to the root folder
 
-   `database.yml` goes to `/config`   
+  `database.yml` goes to `/config`   
 
-   Accordingly to database.yml you'll need to create user mainly postgres
+  Accordingly to database.yml you'll need to create user mainly postgres
 
-   `psql`
+  `psql`
 
-   `CREATE USER postgres;`
+  `CREATE USER postgres;`
 
-   `ALTER USER postgres with SUPERUSER`;
+  `ALTER USER postgres with SUPERUSER`;
 
-4. Set up your `config/database.yml` to configure with postgres and run `rake db:create db:migrate db:seed` and if you just want to reset database `rake db:reset` it should run all commands above with db:drop as first.
+4. Set up your `config/database.yml`
+  to configure with postgres and run `rake db:create db:migrate db:seed` and if you just want to reset database `rake db:reset` it should run all commands above with db:drop as first.
 
   if you have any problems with database that doesn't exist, you should be able to see error in terminal of rails saying what DB name is missing
 
@@ -47,8 +48,8 @@
   `foreman start` or `heroku local`
 
 # on this point you should say Hooray, open the browser with whatever port your rails terminal say
-Typically `localhost:3000`
-and you good man or lady !
+  Typically `localhost:3000`
+  and you good man or lady !
 
 #. SYNCING AND SEEDING DEV_SITES if you need to ->
 Run the `rake sync_devsites` to get some devsites. Whenever you feel the devsites are enough,
@@ -56,9 +57,8 @@ run Ctrl+C(even more times)to stop the process.  Now you're ready to start devel
 for more syncing options run `rake -T`
 
 ### CSS and SCSS stylesheets
-Application's stylesheets are located in`/app/assets/stylesheets`
-if you open `application.scss` you'll see what's being imported to the whole app
-in `base` folder you see base styles being used
+  Application's stylesheets are located in`/app/assets/stylesheets`
+  if you open `application.scss` you'll see what's being imported to the whole app  in `base` folder you see base styles being used
 
 ### Start dev env with docker compose (Temporarily doesn't work)
 
