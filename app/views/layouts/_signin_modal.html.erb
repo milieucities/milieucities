@@ -14,7 +14,9 @@
         <%= f.label :password, t('layouts._signin_modal.password') %>
         <%= f.password_field :password, autocomplete: 'off' %>
       </div>
-      <%= f.submit t('layouts._signin_modal.signin'), class: 'btn' %>
+      <div class="input-field">
+        <%= f.submit t('layouts._signin_modal.signin'), class: 'btn' %>
+      </div>
     <% end %>
 
     <div class="row">
