@@ -126,7 +126,7 @@ export default class Survey extends Component {
     const survey2q2 = "Stands restauration rapide / stand glacier";
     const survey2q3 = "Espace camionnettes restauration - Food truck";
     const survey2q4 = "Aire de jeux enfants";
-    const survey2q5 = "Parasols géants"; 
+    const survey2q5 = "Parasols géants";
     const survey2q6 = "Espace skateboard";
     const survey2q7 = "Mur végétal anti-bruit";
     const survey2q8 = "Surfaces peintes toiles géantes pour artistes";
@@ -146,6 +146,14 @@ export default class Survey extends Component {
     const survey3q8 = "Connections piétonne";
     const survey3q9 = "Passerelle végétalisée principale";
     const survey3q10 = "Parking verticaux vertes (P.V.V.)";
+
+    const survey4q1 = "Bâtiment multifonctionnel (École de danse, bureaux, hôtel, ...)";
+    const survey4q2 = "Résidentiel avec commerce au RDC";
+    const survey4q3 = "Parking verticaux vertes (avec commerce, sports ou culture)";
+    const survey4q4 = "Bureaux";
+    const survey4q5 = "Espaces à usage collectif";
+    const survey4q6 = "Terminal croisiéristes";
+    const survey4q7 = "Musée Maritime de Nouvelle-Calédonie avec son pavillon flottant";
 
     return (
       <div className="container">
