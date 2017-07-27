@@ -10,20 +10,13 @@
 2. Bundle the gemfile `bundle install`. Note you may have to install bundler `gem install bundler`.
 
 3. Download and start up a postgressql db
-
 Ask for `.env` files ask for `database.yml` file
-
 `.env` goes to the root folder
-
-`database.yml` goes to `/config`   
-
+`database.yml` goes to `/config`
 Accordingly to database.yml you'll need to create user mainly postgres
-
 `psql`
-
 `CREATE USER postgres;`
-
-`ALTER USER postgres with SUPERUSER`;.
+`ALTER USER postgres with SUPERUSER`;
 
 4. Set up your `config/database.yml`
 to configure with postgres and run `rake db:create db:migrate db:seed` and if you just want to reset database `rake db:reset` it should run all commands above with db:drop as first.
