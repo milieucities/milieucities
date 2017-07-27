@@ -13,7 +13,7 @@
     "build:webpack": "webpack --config config.prod.js",
     "build:dll": "webpack --config config.dll.js",
     "build": "npm run clean && npm run build:dll && npm run build:webpack",
-    "start:dev": "npm run build:dll && webpack --config config.dev.js --watch --progress",
+    "start:dev": "webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0 --hot --inline --history-api-fallback",
     "start:prod": "npm run build:dll && webpack --config webpack.prod.config.js"
 
   },
