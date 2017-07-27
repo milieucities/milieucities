@@ -23,7 +23,7 @@ Accordingly to database.yml you'll need to create user mainly postgres
 
 `CREATE USER postgres;`
 
-`ALTER USER postgres with SUPERUSER`;
+`ALTER USER postgres with SUPERUSER`;.
 
 4. Set up your `config/database.yml`
 to configure with postgres and run `rake db:create db:migrate db:seed` and if you just want to reset database `rake db:reset` it should run all commands above with db:drop as first.
