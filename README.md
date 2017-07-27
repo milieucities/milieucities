@@ -24,7 +24,7 @@ if you have any problems with database that doesn't exist, you should be able to
 based on that create one by running: `CREATE DATABASE missingName`
 
 5. (good to have) Download and start up a redis
-with this being said -> sooon moving to Docker is must have   
+with this being said -> sooon moving to Docker is must have
 
 5. Install node packages `npm install`.
 
@@ -61,16 +61,28 @@ if you open `application.scss` you'll see what's being imported to the whole app
 
 6. Open another terminal to run `docker-compose run web rake db:create` & `docker-compose run web rake db:migrate` & `docker-compose run web rake db:seed`
 
-### Deployment steps
+### Deployment Steps
 
-to deploy
+#### To deploy to staging
 
-Merge master into production: `git push origin master:production`
-SSH into production server: `ssh rails@milieu.io`
-Log in as the root user: `su -`
-Go the to m-server directory: `cd /home/rails/m-server`
-Pull the production code: `git pull origin production`
-Migrate: `rake db:migrate`
-Compile the node code: `npm start`
-Compile all the assets: `rake assets:precompile`
-Restart unicorn: `service unicorn restart`
+- Merge master into staging: `git push origin master:staging`
+- Deploy with capistrano: `cap staging deploy`
+
+#### To deploy to production
+
+- Merge master into production: `git push origin master:production`
+- SSH into production server: `ssh rails@cities.milieu.io`
+- Log in as the root user: `su -`
+- Go the to m-server directory: `cd /home/rails/m-server`
+- Pull the production code: `git pull origin production`
+- Migrate: `rake db:migrate`
+- Compile the node code: `npm start`
+- Compile all the assets: `rake assets:precompile`
+- Restart unicorn: `service unicorn restart`
+
+### Post Deployment Steps
+
+#### Sync dev sites from CSV file
+- SSH into remote server
+- Run rake task to sync dev sites from CSV file: `rake sync_devsites_from_csv['example_filename.csv']`
+- The file should be the most recent CSV file, in the `lib/fixtures` directory
