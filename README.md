@@ -9,39 +9,58 @@
 
 2. Bundle the gemfile `bundle install`. Note you may have to install bundler `gem install bundler`.
 
-3. a(Optional) Either download and start up a postgre db
+3. Download and start up a postgressql db
 
-   b(Optional) Or start up a docker postgres db with command if you familiar with docker
+   Ask for `.env` files ask for `database.yml` file
 
-   ```docker run --name postgresDb -p 5432:5432 -e POSTGRES_PASSWORD=somepassword -d postgres````
+   `.env` goes to the root folder
 
-   where `somepassword` is the password you use for postgres and set in the `config/database.yml` file
-   in Step 4
+   `database.yml` goes to `/config`   
 
-   When ever you want to nuke the postgres db, run
+   Accordingly to database.yml you'll need to create user mainly postgres
 
-   ```docker stop postgresDb && docker rm postgresDb```
+   `psql`
+
+   `CREATE USER postgres;`
+
+   `ALTER USER postgres with SUPERUSER`;
 
 4. Set up your `config/database.yml` to configure with postgres and run `rake db:create db:migrate db:seed` and if you just want to reset database `rake db:reset` it should run all commands above with db:drop as first.
 
-5. a(Optional) Either download and start up a redis
+  if you have any problems with database that doesn't exist, you should be able to see error in terminal of rails saying what DB name is missing
 
-   b(Optional) Or start up a docker redis with command if you familiar with docker
+  based on that create one by running: `CREATE DATABASE missingName`
 
-   ```docker run --name redis -p 6379:6379 -d redis````
+5. (good to have) Download and start up a redis
 
-   When ever you want to nuke the postgres db, run
-
-   ```docker stop redis && docker rm redis```
+  with this being said -> sooon moving to Docker is must have   
 
 5. Install node packages `npm install`.
 
-6. You're done! Run `foreman start` or `heroku local`
+6. You're done! You have 2 options to run you development environment
 
-7. Run the `rake sync_devsites` to get some devsites. Whenever you feel the devsites are enough,
-run Ctrl+C to stop the process.  Now you're ready to start developing!
+  1: is more encouraged to use to see what's going on
 
-### Start dev env with docker compose (Temporarily not work)
+  `npm start` in one tab of terminal, `rails s` in another one
+
+  2: these 2 commands below bundles everything from point above in  1 command
+  `foreman start` or `heroku local`
+
+# on this point you should say Hooray, open the browser with whatever port your rails terminal say
+Typically `localhost:3000`
+and you good man or lady !
+
+#. SYNCING AND SEEDING DEV_SITES if you need to ->
+Run the `rake sync_devsites` to get some devsites. Whenever you feel the devsites are enough,
+run Ctrl+C(even more times)to stop the process.  Now you're ready to start developing!
+for more syncing options run `rake -T`
+
+### CSS and SCSS stylesheets
+Application's stylesheets are located in`/app/assets/stylesheets`
+if you open `application.scss` you'll see what's being imported to the whole app
+in `base` folder you see base styles being used
+
+### Start dev env with docker compose (Temporarily doesn't work)
 
 1. Install Docker on Mac, Linux or Windows 10 (Windows 7, 8 installation is pretty complex)
 
