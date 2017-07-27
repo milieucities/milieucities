@@ -110,6 +110,8 @@ export default class Survey extends Component {
     const fourthnote = "3.1 Que pensez vous du placement et des identités de chaque espace vert/espace publique que nous proposons?";
     const fifthNote = "Que pensez vous de la programmation des espaces bâtits que nous proposons?";
 
+    const survey1q1 = "RDC espace public ouvert polyvalent (murs et cloisons retirés) Étages: espaces educatifs";
+
     return (
       <div className="container">
         { !isMobile &&
@@ -166,8 +168,7 @@ export default class Survey extends Component {
                   src={require(`./images/q1-1-1.svg`)}
                   />
               </div>
-              RDC espace public ouvert polyvalent (murs et cloisons retirés)
-              Étages: espaces educatifs
+              {survey1q1}
             </div>
             <EmojiiSlider/>
           </div>
@@ -280,7 +281,7 @@ export default class Survey extends Component {
         <div className="row">
           <div className={css.comments}>
             <AnswerForm />
-          </div>  
+          </div>
         </div>
         </div>
 
@@ -415,7 +416,7 @@ export default class Survey extends Component {
         <div className="row">
           <div className={css.comments}>
             <AnswerForm />
-          </div>  
+          </div>
         </div>
         </div>
 
@@ -551,7 +552,7 @@ export default class Survey extends Component {
         <div className="row">
           <div className={css.comments}>
             <AnswerForm />
-          </div>  
+          </div>
         </div>
         </div>
 
@@ -688,7 +689,7 @@ export default class Survey extends Component {
         <div className="row">
           <div className={css.comments}>
             <AnswerForm />
-          </div>  
+          </div>
         </div>
         </div>
 
@@ -824,7 +825,7 @@ export default class Survey extends Component {
         <div className="row">
           <div className={css.comments}>
             <AnswerForm />
-          </div>  
+          </div>
         </div>
         </div>
       { isMobile &&
