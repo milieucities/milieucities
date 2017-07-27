@@ -20,29 +20,23 @@ Accordingly to database.yml you'll need to create user mainly postgres
 
 4. Set up your `config/database.yml`
 to configure with postgres and run `rake db:create db:migrate db:seed` and if you just want to reset database `rake db:reset` it should run all commands above with db:drop as first.
-
 if you have any problems with database that doesn't exist, you should be able to see error in terminal of rails saying what DB name is missing
-
 based on that create one by running: `CREATE DATABASE missingName`
 
 5. (good to have) Download and start up a redis
-
 with this being said -> sooon moving to Docker is must have   
 
 5. Install node packages `npm install`.
 
 6. You're done! You have 2 options to run you development environment
-
 1: is more encouraged to use to see what's going on
-
 `npm start` in one tab of terminal, `rails s` in another one
-
 2: these 2 commands below bundles everything from point above in  1 command
 `foreman start` or `heroku local`
 
-# on this point you should say Hooray, open the browser with whatever port your rails terminal say
+# on this point you should say Hooray, open the browser with whatever port your rails terminal says
 Typically `localhost:3000`
-and you good man or lady !
+and you good, man or lady !
 
 #. SYNCING AND SEEDING DEV_SITES if you need to ->
 Run the `rake sync_devsites` to get some devsites. Whenever you feel the devsites are enough,
