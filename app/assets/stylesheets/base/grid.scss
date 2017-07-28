@@ -5,8 +5,13 @@
   box-sizing: border-box;
 
   @media #{$large-and-up} {
-    width: 100%;
+    max-width: 100%;
   }
+
+  @media #{$small-and-down}{
+    padding: 20px;
+  }
+
 }
 
 .flex {
