@@ -12,7 +12,8 @@ export const surveys = [
     "questions": [
       {
         "id": 1,
-        "text": "RDC espace public ouvert polyvalent (murs et cloisons retirés) Étages: espaces educatifs"
+        "text": "RDC espace public ouvert polyvalent (murs et cloisons retirés) Étages: espaces educatifs",
+        "image": "./images/q1-1-1.svg"
       },{
         "id": 2,
         "text": "Bureaux co-working"
