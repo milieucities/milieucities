@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import css from './css/header.scss'
 
-export default class MobileFooter extends Component {
+
+export default class Header extends Component {
 
   render() {
     return (
