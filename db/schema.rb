@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709173035) do
+ActiveRecord::Schema.define(version: 20170728185601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,10 +185,8 @@ ActiveRecord::Schema.define(version: 20170709173035) do
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
   create_table "meetings", force: :cascade do |t|
-    t.string   "title"
     t.string   "meeting_type"
-    t.string   "time"
-    t.datetime "date"
+    t.datetime "time"
     t.string   "location"
     t.integer  "dev_site_id"
     t.datetime "created_at",   null: false
@@ -247,6 +245,12 @@ ActiveRecord::Schema.define(version: 20170709173035) do
   end
 
   add_index "notifications", ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id", using: :btree
+
+  create_table "noumea_responses", force: :cascade do |t|
+    t.jsonb    "response_body"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
