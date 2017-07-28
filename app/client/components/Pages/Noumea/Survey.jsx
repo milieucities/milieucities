@@ -64,7 +64,7 @@ export default class Survey extends Component {
        durant laquelle ils subiront une expertise à des fins de restauration.\
        A l’opposé, les autres bâtiments recevront  selon leur état des programmes adéquats .";
 
-   const secondDescription = "Coincé entre le mur de soutènement de l’ancien hôpital et la voie express 1, le parking Gaston-Bourret est peu utilisé.\
+    const secondDescription = "Coincé entre le mur de soutènement de l’ancien hôpital et la voie express 1, le parking Gaston-Bourret est peu utilisé.\
       Son manque d’ombrage et de verdure ainsi que sa surface en asphalte qui capte la chaleur, le rendent peu hospitalier. Cependant, grâce à divers mobiliers urbains, à des auvents, \
       à l’introduction de végétation et à l’impulse d’événements culturels ponctuels, le parking peut devenir très rapidement non seulement un espace publique à l’excellent\
       confort thermique, mais aussi un lieu dynamique où diverses cultures urbaines peuvent de rencontrer et s’exprimer.  Nous proposons de placer, de manière provisoire, \

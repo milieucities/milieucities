@@ -5,12 +5,8 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run build:prod || npm run start:dev",
     "build:prod": "webpack --config webpack.prod.config.js",
-<<<<<<< HEAD
-    "start:dev": "webpack-dev-server --config webpack.dev.config.js --compress --host 0.0.0.0 --hot --inline --history-api-fallback"
-=======
     "start:dev": "webpack-dev-server --config webpack.dev.config.js --host 0.0.0.0 --hot --inline --history-api-fallback",
     "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
->>>>>>> 979ad5b4863ccf3dcb4ba53a34c4bf431d951e2d
   },
   "repository": {
     "type": "git",
