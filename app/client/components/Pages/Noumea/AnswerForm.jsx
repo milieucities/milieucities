@@ -26,7 +26,11 @@ export default class AnswerForm extends Component {
     e.preventDefault()
     console.log("You submitted data", amount)
     this.setState({amount: amount})
-    this.props.saveAnswers({amount: amount});
+    this.props.onSubmit({comment: {
+      answers: {
+        amount: amount
+      }
+    }});
   }
 
   render() {
@@ -35,14 +39,14 @@ export default class AnswerForm extends Component {
        <div className="row">
          <div className={css.comments}>
           <form onSubmit={this.handleSubmit}>
-            <input 
-            type="text" 
-            value={this.state.amount} 
+            <input
+            type="text"
+            value={this.state.amount}
             onChange={this.handleChange} />
              <center>
-               <input 
-               type="submit" 
-               value="la prochaine question" 
+               <input
+               type="submit"
+               value="la prochaine question"
                />
              </center>
           </form>

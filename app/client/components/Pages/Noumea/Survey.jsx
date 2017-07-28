@@ -24,7 +24,7 @@ export default class Survey extends Component {
       questionSet: [],
       isMobile: (window.innerWidth < 600)
     };
-    this.handleSubmit = () => this.handleSubmit();
+    this.handleSubmit = this.handleSubmit.bind(this);
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
@@ -32,14 +32,13 @@ export default class Survey extends Component {
     );
   }
 
-  handleSubmit() {
-    preventDefault(e);
+  handleSubmit(answers) {
     $.ajax({
-      url: this.props.url,
+      url: "/participez/submit_survey",
       dataType: 'JSON',
       type: 'POST',
       data: answers,
-      success: function(data) {
+      success: (data) => {
         this.setState({data: data});
         console.log("Added data", data)
       },
@@ -322,7 +321,7 @@ export default class Survey extends Component {
         </div>
         <div className="row">
           <div className={css.comments}>
-            <AnswerForm />
+            <AnswerForm onSubmit={this.handleSubmit} />
           </div>
         </div>
       </div>
@@ -709,9 +708,9 @@ export default class Survey extends Component {
       />
 
     {/* 5 Survey */}
-
+    {/*
     <div className={css.forms}>
-      <div className={row}>
+      <div className="row">
           <div className={css.question}>
             <div className={css.colorCircle}>
                 <div className={css.circle} style={{ background: 'orange' }} >
@@ -794,6 +793,7 @@ export default class Survey extends Component {
           </div>
         </div>
       </div>
+      */}
       { isMobile &&
         <MobileFooter  />
       }
