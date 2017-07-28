@@ -120,16 +120,16 @@ export default class Survey extends Component {
             { isMobile &&
               <img
                 src={require(`./images/theme-immediat.svg`)}
-                width="45px"
-                height="45px"
+                width="300px"
+                height="145px"
              />
             }
             {
               !isMobile &&
               <img
                 src={require(`./images/theme-immediat.svg`)}
-                width="85px"
-                height="85px"
+                width="500px"
+                height="200px"
              />
             }
             <FacebookShareButton
