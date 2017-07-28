@@ -87,7 +87,6 @@ export default class Survey extends Component {
 
   render() {
     const { isMobile } = this.state;
-    console.log("surveys", surveys)
     return (
       <div className="container">
         { !isMobile &&
