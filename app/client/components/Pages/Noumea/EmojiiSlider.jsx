@@ -15,6 +15,7 @@ export default class EmojiiSlider extends Component {
 
   handleGetEmotion(value) {
     this.setState({ currentEmoji: value });
+    this.props.emojiiClick(value, this.props.surveyId, this.props.questionId)
   }
 
   render() {
