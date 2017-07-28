@@ -52,7 +52,7 @@ export default class Survey extends Component {
   render() {
     const { isMobile } = this.state;
     
-    const firstTitle = "1.1. Usage temporaire de l'ancien complexe Gaston-Bourret";
+    const firstTitle = "1.1 Usage temporaire de l'ancien complexe Gaston-Bourret";
     const secondTitle= "1.2 Usage temporaire du parking et du terrain vague adjacent";
     const thirdTitle= "Circulations";
     const fourthTitle = "Espaces publiques/ espaces verts";
@@ -151,6 +151,7 @@ export default class Survey extends Component {
             </a>
           </div>
         </div>
+        
         <SurveyTitleMap
           description={firstDescription}
           map={firstMap}
