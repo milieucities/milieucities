@@ -5,8 +5,7 @@ const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 
-const NoumeaShareButtons = (props) => {
-    const {isMobile} = props;
+const NoumeaShareButtons = ({isMobile}) => {
 
     return (
         <div className="row">
