@@ -696,61 +696,6 @@ export default class Survey extends Component {
           <EmojiiSlider />
         </div>
         <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            {survey4q8}
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            {survey4q9}
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            {survey4q10}
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            {survey4q11}
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
-              </div>
-            {survey4q12}
-
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
           <div className={css.comments}>
             <AnswerForm />
           </div>
