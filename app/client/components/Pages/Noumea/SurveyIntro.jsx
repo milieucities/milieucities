@@ -6,6 +6,7 @@ import css from './css/surveyIntro.scss'
 import MobileFooter from './MobileFooter'
 import Header from './Header'
 import { debounce } from 'lodash'
+import NoumeaShareButtons from './NoumeaShareButtons';
 
 export default class SurveyIntro extends Component {
   constructor() {
@@ -28,6 +29,7 @@ export default class SurveyIntro extends Component {
           { !isMobile &&
             <Header />
           }
+          <NoumeaShareButtons isMobile={isMobile}/>
           <div className="row">
             <h1>Thématique 1 - Usage temporaire</h1>
           </div>
