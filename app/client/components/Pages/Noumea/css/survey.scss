@@ -3,8 +3,11 @@
   margin-bottom: 30px;
 }
 .icons{
-  display: inline-block;
-  float: left;
+  position: fixed;
+  z-index: 1000000;
+  left: 20px;
+  top: 30px;
+  padding-bottom: 100px;
 }
 .question{
   text-align: left;
@@ -17,6 +20,7 @@
   margin-bottom: 50px;
   height: 250px;
   overflow-y: scroll;
+  background-color: whitesmoke;
   @media #{$medium-and-up}{
     margin-top: 30px;
     margin-bottom: 30px;
@@ -43,7 +47,7 @@
   float: left;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: 5%;
 }
 .mapPc{
   webkit-transition: margin-top .5s ease-out;  /* Saf3.2+, Chrome */

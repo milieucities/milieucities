@@ -51,7 +51,7 @@ export default class Survey extends Component {
 
   render() {
     const { isMobile } = this.state;
-
+    
     const firstTitle = "1.1. Usage temporaire de l'ancien complexe Gaston-Bourret";
     const secondTitle= "1.2 Usage temporaire du parking et du terrain vague adjacent";
     const thirdTitle= "Circulations";
@@ -64,7 +64,7 @@ export default class Survey extends Component {
        durant laquelle ils subiront une expertise à des fins de restauration.\
        A l’opposé, les autres bâtiments recevront  selon leur état des programmes adéquats .";
 
-   const secondDescription = "Coincé entre le mur de soutènement de l’ancien hôpital et la voie express 1, le parking Gaston-Bourret est peu utilisé.\
+    const secondDescription = "Coincé entre le mur de soutènement de l’ancien hôpital et la voie express 1, le parking Gaston-Bourret est peu utilisé.\
       Son manque d’ombrage et de verdure ainsi que sa surface en asphalte qui capte la chaleur, le rendent peu hospitalier. Cependant, grâce à divers mobiliers urbains, à des auvents, \
       à l’introduction de végétation et à l’impulse d’événements culturels ponctuels, le parking peut devenir très rapidement non seulement un espace publique à l’excellent\
       confort thermique, mais aussi un lieu dynamique où diverses cultures urbaines peuvent de rencontrer et s’exprimer.  Nous proposons de placer, de manière provisoire, \
@@ -104,7 +104,8 @@ export default class Survey extends Component {
       const fourthMap = './images/survey-map-public.png';
       const fifthMap = './images/survey-map-bati.png';
 
-    const firstNote = "Notez les differents programmes que nous proposons!";
+    
+      const firstNote = "Notez les differents programmes que nous proposons!";
     const secondNote = "Notez les differents programmes que nous proposons! Donnez nous votre avis sur chacun!";
     const thirdNote = "Notez les differents modes de circulations que nous proposons + donnez nous votre avis sur chacun!";
     const fourthnote = "3.1 Que pensez vous du placement et des identités de chaque espace vert/espace publique que nous proposons?";
@@ -116,20 +117,20 @@ export default class Survey extends Component {
           <Header />
         }
         <div className="row">
-          <div className="col-xs-3 col-md-4 icons">
+          <div className="col-xs-3 col-md-4" className={css.icons}>
             { isMobile &&
               <img
                 src={require(`./images/theme-immediat.svg`)}
-                width="45px"
-                height="45px"
+                width="300px"
+                height="90px"
              />
             }
             {
               !isMobile &&
               <img
                 src={require(`./images/theme-immediat.svg`)}
-                width="85px"
-                height="85px"
+                width="400px"
+                height="100px"
              />
             }
             <FacebookShareButton
@@ -137,17 +138,17 @@ export default class Survey extends Component {
               title="Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa"
               media={require(`./images/theme-immediat.svg`)}
             >
-              <FacebookIcon size={32} round />
-              </FacebookShareButton>
-              <TwitterShareButton
-                url="/participez"
-                title="Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa"
-                media={require(`./images/theme-immediat.svg`)}>
-                <TwitterIcon size={32} round />
-              </TwitterShareButton>
-              <a href="mailto:webmaster@example.com">
-                <i className="fa fa-envelope-o fa-2x" aria-hidden="true"></i>
-              </a>
+            <FacebookIcon size={32} round />
+            </FacebookShareButton>
+            <TwitterShareButton
+              url="/participez"
+              title="Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa"
+              media={require(`./images/theme-immediat.svg`)}>
+              <TwitterIcon size={32} round />
+            </TwitterShareButton>
+            <a href="mailto:webmaster@example.com">
+              <i className="fa fa-envelope-o fa-2x" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
         <SurveyTitleMap
@@ -171,125 +172,124 @@ export default class Survey extends Component {
             </div>
             <EmojiiSlider/>
           </div>
-
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
+              </div>
+              Bureaux co-working
+              <EmojiiSlider />
             </div>
-            Bureaux co-working
+          </div>
+          <div className="row">
+            <div className={css.question}>
+              Commerces
+
+            </div>
             <EmojiiSlider />
           </div>
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            Commerces
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
+              </div>
+              Espace à usage pluriel
 
-          </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
-                </div>
             </div>
-            Espace à usage pluriel
-
+            <EmojiiSlider />
           </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
                 </div>
-              </div>
-            Friche artistique-studios
+              Friche artistique-studios
 
+            </div>
+            <EmojiiSlider />
           </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
                 </div>
-              </div>
-            Espace recherche scientifique
+              Espace recherche scientifique
 
+            </div>
+            <EmojiiSlider />
           </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
                 </div>
-              </div>
-            Café
+              Café
 
+            </div>
+            <EmojiiSlider />
           </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
                 </div>
-              </div>
-            Bureaux
+              Bureaux
 
+            </div>
+            <EmojiiSlider />
           </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
                 </div>
-              </div>
-            Espaces verts et jardins potagers
+              Espaces verts et jardins potagers
 
+            </div>
+            <EmojiiSlider />
           </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
                 </div>
-              </div>
-            Bâtiments fermés au public pour réhabilitation
+              Bâtiments fermés au public pour réhabilitation
 
+            </div>
+            <EmojiiSlider />
           </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.question}>
-            <div className={css.colorCircle}>
-                <div className={css.circle} style={{ background: 'orange' }} >
+          <div className="row">
+            <div className={css.question}>
+              <div className={css.colorCircle}>
+                  <div className={css.circle} style={{ background: 'orange' }} >
+                  </div>
                 </div>
-              </div>
-            Maison du projet (accueil/ exposition)
+              Maison du projet (accueil/ exposition)
 
+            </div>
+            <EmojiiSlider />
           </div>
-          <EmojiiSlider />
-        </div>
-        <div className="row">
-          <div className={css.comments}>
-            <AnswerForm />
-          </div>  
-        </div>
+          <div className="row">
+            <div className={css.comments}>
+              <AnswerForm />
+            </div>  
+          </div>
         </div>
 
-      <SurveyTitleMap
-        description={secondDescription}
-        map={secondMap}
-        title={secondTitle}
-        notes={secondNote}
-      />
+        <SurveyTitleMap
+          description={secondDescription}
+          map={secondMap}
+          title={secondTitle}
+          notes={secondNote}
+        />
 
       {/* 2 Survey */}
       <div className={css.forms} name="second" ref="second">
