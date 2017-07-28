@@ -35,7 +35,7 @@ with this being said -> sooon moving to Docker is must have
 `foreman start` or `heroku local`
 
 # on this point you should say Hooray, open the browser with whatever port your rails terminal says
-Typically `localhost:3000`
+Typically `localhost:3000` or if nothing works try `http://127.0.0.1:3000/`
 and you good, man or lady !
 
 #. SYNCING AND SEEDING DEV_SITES if you need to ->
