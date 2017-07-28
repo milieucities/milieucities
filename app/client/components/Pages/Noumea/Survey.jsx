@@ -128,7 +128,6 @@ export default class Survey extends Component {
               </a>
           </div>
         </div>
-        <pre>{JSON.stringify(this.state.answers)}</pre>
         {
           surveys.map((survey, index) => {
             return (
@@ -143,10 +142,10 @@ export default class Survey extends Component {
 
                   {survey.questions.map((question, index) => {
                     let image
-                    if (question.image) {
+                    if (true) { // or use question.image from ./surveys.js
                       image = (
                         <img
-                          src={image}
+                          src={require(`./images/q${survey.id}-${question.id}.svg`)}
                           />
                       )
                     } else {
