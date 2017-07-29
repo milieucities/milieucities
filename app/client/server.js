@@ -1,44 +1,14 @@
-var express= require('express');
-var compression = require('compression');
-var path = require('path');
-var cors = require('cors');
+// in server.js
+const express = require('express');
+const app = express();
+const path = require('path');
 
-var app = express();
 
-var static_path = path.join(__dirname, './build');
+// Since the root/src dir contains our index.html
+app.use(express.static(path.join(__dirname, 'build')));
 
-app.enable('trust proxy');
-
-app.use(compression());
-
-app.options('/api/currentTime', cors());
-app.get('/api/currentTime', cors(), function(req, res) {
-  res.send({ time: new Date() });
-});
-
-app.route('/').get(function(req, res) {
-    res.header('Cache-Control', "max-age=60, must-revalidate, private");
-    res.sendFile('index.html', {
-        root: static_path
-    });
-});
-
-function nocache(req, res, next) {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
-  next();
-}
-
-app.use('/', express.static(static_path, {
-    maxage: 31557600
-}));
-
-var server = app.listen(process.env.PORT || 5000, function () {
-
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Example app listening at http://%s:%s', host, port);
-
-});
+// Heroku bydefault set an ENV variable called PORT=443
+//  so that you can access your site with https default port.
+// Falback port will be 8080; basically for pre-production test in localhost
+// You will use $ npm run prod for this
+app.listen(8080);
