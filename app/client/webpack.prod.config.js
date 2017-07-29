@@ -17,9 +17,8 @@ module.exports = {
   },
 
   output: {
-    path: path.join(__dirname, 'app', 'assets', 'javascripts'),
-    filename: 'bundle.js',
-    publicPath: '/assets'
+    path: path.resolve(__dirname, "../assets/webpack"),
+    filename: "[name].js"
   },
 
   plugins: [
