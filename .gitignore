@@ -27,6 +27,7 @@ app/client/npm-debug.log*
 Gemfile.lock
 Makefile
 *.DS_Store
+.vscode/
 
 # Ignore application configuration
 /config/application.yml
