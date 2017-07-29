@@ -7,7 +7,7 @@
     "npm": "3.10.3"
   },
   "scripts": {
-    "start": "(cd app/client && npm start)",
+    "start": "(cd app/client && npm start; node server.js)",
     "postinstall": "cd app/client && npm install",
     "lint": "eslint --ext .jsx app/client; exit 0"
   },
