@@ -22,15 +22,11 @@ export default class AnswerForm extends Component {
   }
 
   handleSubmit(e) {
-    let amount = this.state.amount
+    let amount = this.state.amount // amount is the answer
     e.preventDefault()
     console.log("You submitted data", amount)
     this.setState({amount: amount})
-    this.props.onSubmit({comment: {
-      answers: {
-        amount: amount
-      }
-    }});
+    this.props.onSubmit(amount, this.props.surveyId)
   }
 
   render() {

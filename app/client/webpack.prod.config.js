@@ -7,19 +7,19 @@ const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = {
   cache: true,
-  devtool: "eval",
   entry: {
     bundle: path.resolve(__dirname, 'index')
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    root: path.resolve(__dirname, "client"),
+    modulesDirectories: ["node_modules"]
   },
 
   output: {
-    path: path.join(__dirname, 'app', 'assets', 'javascripts'),
-    filename: 'bundle.js',
-    publicPath: '/assets'
+    path: './build',
+    filename: "[name].js"
   },
 
   plugins: [

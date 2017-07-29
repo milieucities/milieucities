@@ -1,6 +1,7 @@
 require 'data_analysis'
 
 class PagesController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: :submit_survey
   include Services::DataAnalysis
 
   def home
@@ -20,12 +21,12 @@ class PagesController < ApplicationController
   end
 
   def submit_survey
-    comment = params['comment']
-    comments_json = File.read('public/comment.json')
-    File.open("public/comment.json","w") do |f|
-      f.puts JSON.pretty_generate(JSON.parse(comments_json) << comment)
+    noumea_response = NoumeaResponse.create(response_body: params[:noumea_response])
+    if noumea_response.save!
+      render json: {}, status: 200
+    else
+      render json: {}, status: 500
     end
-    render json: {}
   end
 
   # def wakefield
