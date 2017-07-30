@@ -30,7 +30,16 @@ class PagesController < ApplicationController
   end
 
   def submit_participant
+    noumea_participant = NoumeaParticipant.create(submit_participant_params)
+    if noumea_participant.save!
+      render json: {}, status: 200
+    else
+      render json: {}, status: 500
+    end
+  end
 
+  def submit_participant_params
+    params.require(:noumea_participant).permit(:age, :noumeaCitizen, :email, :area, :howLong)
   end
 
   # def wakefield
