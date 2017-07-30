@@ -34,9 +34,20 @@ export default class Utilisation extends Component {
           <p>l'aménagement de l'entrée nord. L'exposition a été conçue pour être interactive, vous</p>
           <p>pourrez y donner votre avis en dessinant directement sur une carte.</p>
         </center>
+        { !isMobile &&
           <img
-            src={require(`./images/utilisation.svg`)}
+            src={require(`./images/utilisation-desktop.svg`)}
           />
+        }
+        <div className="row">
+          { isMobile &&
+          <img
+            width="420px"
+            src={require(`./images/utilisation-mobile.svg`)}
+          />
+        }
+
+        </div>
           { isMobile &&
             <MobileFooter />
           }

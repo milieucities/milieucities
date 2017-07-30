@@ -251,7 +251,7 @@ export default class Survey extends Component {
               <input
                  type="submit"
                  value="soumetrre"
-                 className={"btn" + btnNoumeaCitizen}
+                 className="btn"
                  onClick={this.handleSubmitCitizen}
                  />
             </center>
