@@ -43,7 +43,7 @@ export default class Noumea extends Component {
                 src={require(`./images/logo-nc.png`)}
               />
               </a>
-          </div>
+            </div>
           <div className={css.description}>
                 <h1>ENTRÉE NORD</h1>
                 <h3>Un projet collaboratif de concertation citoyenne pour la nouvelle entrée nord du centre-ville de Nouméa</h3>
@@ -98,9 +98,20 @@ export default class Noumea extends Component {
             </p>
         <div className={css.timelineContainer}>
             </div>
-            <img
-              src={require(`./images/timeline.svg`)} alt="L'engagement civique est crucial. Vous pouvez donner votre avis sur l'avenir de votre ville durant des consultations publiques ou bien en utilisant ce site web initié par la municipalité de Nouméa."
-            />
+            { !isMobile &&
+              <img
+                src={require(`./images/timeline-desktop.svg`)} alt="L'engagement civique est crucial. Vous pouvez donner votre avis sur l'avenir de votre ville durant des consultations publiques ou bien en utilisant ce site web initié par la municipalité de Nouméa."
+              />
+            }
+            { isMobile &&
+
+              <img
+                src={require(`./images/timeline-mobile.svg`)} alt="L'engagement civique est crucial. Vous pouvez donner votre avis sur l'avenir de votre ville durant des consultations publiques ou bien en utilisant ce site web initié par la municipalité de Nouméa."
+              />
+
+            }
+
+
     </div>
             <p>
               Le calendrier de l'exposition sera bientôt affiché. Vous pourrez y laisser votre avis, qui sera immédiatement transmis au site web.

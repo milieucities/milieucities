@@ -341,13 +341,16 @@
 }
 
 .logoContainer {
-  margin: 2em auto;
   display: flex;
   box-sizing: inherit;
   top: 50%;
   left: 50%;
   margin-top: 100px;
   margin-left: 300px;
+  @media #{$small-and-down} {
+      margin-top: 10px;
+      margin-left: 30px !important;}
+
 
   a img:hover {
     height: 110px;
@@ -357,34 +360,33 @@
     margin: 0 auto;
     border: 0;
   }
-  @media #{$large-and-up} {
-    max-width: 480px;
-    top: 50%;
-    left: 50%;
-    margin-top: 100px;
-    margin-left: 300px;
-    }
-  @media #{$medium-and-up} {
-    top: 30%;
-    margin-top: 100px;
-    margin-left: 20px;
-    }
-  @media #{$medium-and-down} {
-    max-width: 320px;
-    a img {
-    height:90px;
+  img {
+    @media #{$large-and-up} {
+      margin-top: 100px;
+      margin-left: 100px !important;
+      padding-left: 10px !important;
+      }
+    @media #{$medium-and-up} {
+      top: 30%;
+      margin-top: 100px;
+      margin-left: 300px;
+      }
+    @media #{$medium-and-down} {
+      max-width: 320px;
+      margin-left: 300px ;
+      a img {
+      height:90px;
+        }
+      }
+    @media #{$small-and-down} {
+      margin-top: 10px;
+      margin-left: 30px !important;
+      a img {
+        height:65px;
+        width: 65px;
+        padding: 0;
+        margin: 0;
       }
     }
-  @media #{$small-and-down} {
-    max-width: 200px;
-    top: 50%;
-    margin-top: 10px;
-    margin-left: 10px;
-    a img {
-    height:75px;
-    width: 75px;
-    padding: 0;
-    margin: 0;
-      }
   }
 }
