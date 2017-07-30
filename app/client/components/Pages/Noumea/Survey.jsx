@@ -9,6 +9,7 @@ import SurveyTitleMap from './SurveyTitleMap'
 import MobileFooter from './MobileFooter'
 import AnswerForm from './AnswerForm'
 import Header from './Header'
+import { surveys } from './surveys'
 
 import NoumeaShareButtons from './NoumeaShareButtons'
 
@@ -89,7 +90,7 @@ export default class Survey extends Component {
           <Header />
         }
         <NoumeaShareButtons isMobile={isMobile} />
-      
+
         {
           surveys.map((survey, index) => {
             return (
