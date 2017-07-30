@@ -6,11 +6,14 @@ import css from './css/header.scss'
 export default class Header extends Component {
 
   render() {
+    const propos = 'à propos';
     return (
       <div className={css.container}>
-        <a href='/' title='info'>à propos</a>
-        <a href='/utilisation' title='d’utilisation'>guide</a>
-        <a href='/participez' title='participez'>participez</a>
+        <ul>
+          <li><a href='/' title='info'>{propos}</a></li>
+          <li><a href='/utilisation' title='d’utilisation'>guide</a></li>
+          <li><a href='/participez' title='participez'>participez</a></li>
+        </ul>
       </div>
     )
   }
