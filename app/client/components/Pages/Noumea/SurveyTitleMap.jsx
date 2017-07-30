@@ -55,7 +55,7 @@ export default class SurveyTitleMap extends Component {
         </div>
         <div className="row">
           <div className={css.notes}>
-            <h4>here{notes}</h4>
+            <h4>{notes}</h4>
           </div>
         </div>
       </div>

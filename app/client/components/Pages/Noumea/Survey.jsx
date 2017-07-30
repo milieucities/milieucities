@@ -199,7 +199,7 @@ export default class Survey extends Component {
                       <div className="row">
                         <div className={css.question}>
                           {image}
-                          {question.text}
+                          <p>{question.text}</p>
                           <EmojiiSlider emojiiClick={this.handleEmojiiClick} questionId={question.id} surveyId={survey.id} />
                         </div>
                       </div>
@@ -251,7 +251,7 @@ export default class Survey extends Component {
               <input
                  type="submit"
                  value="soumetrre"
-                 className="btn"
+                 className={"btn" + btnNoumeaCitizen}
                  onClick={this.handleSubmitCitizen}
                  />
             </center>
