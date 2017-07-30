@@ -1,7 +1,7 @@
 require 'data_analysis'
 
 class PagesController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: :submit_survey
+  skip_before_filter :verify_authenticity_token, :only => [:submit_survey, :submit_participant]
   include Services::DataAnalysis
 
   def home
@@ -27,6 +27,10 @@ class PagesController < ApplicationController
     else
       render json: {}, status: 500
     end
+  end
+
+  def submit_participant
+
   end
 
   # def wakefield
