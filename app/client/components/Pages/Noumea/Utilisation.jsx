@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import Footer from '../../Layout/Footer/Footer'
+import MobileFooter from './MobileFooter'
+import Header from './Header'
 import Comments from '../../Comments/Comments'
 import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
@@ -12,20 +13,33 @@ export default class Utilisation extends Component {
     this.state = { loading: true };
     this.devSiteId = document.querySelector('#utilisation').dataset.id;
     this.surveySentiment = document.querySelector('#utilisation').dataset.surveySentiment;
+    window.addEventListener('resize',
+      debounce(() => {
+        this.setState({ isMobile: (window.innerWidth < 600) })
+      }, 100)
+    );
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, isMobile } = this.state;
 
     return (
-      <div>
-        <h1>Utilisation page</h1>
+      <div className="container">
+        { !isMobile &&
+          <Header />
+        }
+        <center><h1>Guide d’utilisation</h1></center><br/>
+        <center>
+          <p>Participez à la municipalité ou dans votre maison de quartier à l'exposition sur</p>
+          <p>l'aménagement de l'entrée nord. L'exposition a été conçue pour être interactive, vous</p>
+          <p>pourrez y donner votre avis en dessinant directement sur une carte.</p>
+        </center>
           <img
-            src={require(`./images/5.svg`)}
+            src={require(`./images/utilisation.svg`)}
           />
-          <img
-            src={require(`./images/4.svg`)}
-          />
+          { isMobile &&
+            <MobileFooter />
+          }
     </div>
     )
   }
