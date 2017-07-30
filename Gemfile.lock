@@ -43,11 +43,16 @@ GEM
     ansi (1.5.0)
     arel (6.0.3)
     ast (2.3.0)
+    autoprefixer-rails (7.1.2.3)
+      execjs
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     cancancan (1.15.0)
     capistrano (3.7.1)
@@ -478,6 +483,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.11)
   better_errors
+  bootstrap-sass (~> 3.3.6)
   cancancan (~> 1.15.0)
   capistrano (= 3.7.1)
   capistrano-bundler (~> 1.2.0)
@@ -538,4 +544,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.15.1
+   1.15.3

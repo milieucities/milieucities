@@ -85,15 +85,22 @@ export default class Survey extends Component {
     const { isMobile } = this.state;
     return (
       <div className="container">
-        { !isMobile &&
-          <Header />
-        }
-        <NoumeaShareButtons isMobile={isMobile} />
+        <div className="row">
+          <div className="col-md-4"></div>
+          <div className="col-md-4">
+            { !isMobile &&
+              <Header />
+            }
+            <NoumeaShareButtons isMobile={isMobile} />
+          </div>
+          <div className="col-md-4"></div>
+          
+        </div>
       
         {
           surveys.map((survey, index) => {
             return (
-              <div>
+              <div className="row">
                 <SurveyTitleMap
                   description={survey.description}
                   map={survey.map}
@@ -104,9 +111,9 @@ export default class Survey extends Component {
 
                   {survey.questions.map((question, index) => {
                     let image
-                    if (true) { // or use question.image from ./surveys.js
+                    if (question.image) { // or use question.image from ./surveys.js
                       image = (
-                        <img
+                        <img className=""
                           src={require(`./images/q${survey.id}-${question.id}.svg`)}
                           />
                       )

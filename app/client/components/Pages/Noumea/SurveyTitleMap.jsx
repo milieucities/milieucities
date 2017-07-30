@@ -32,30 +32,30 @@ export default class SurveyTitleMap extends Component {
             {description}
           </p>
         </div>
-          <div className="column">
-          <div className="row">
+        <div className="row">
+          <div className="col-md-6"></div>
+          <div className="col-md-6">
             <div className={css.map}>
               { isMobile &&
                 <img
                   src={require(`${map}`)}
                   width="100%"
                   height="240px"
-               />
+                />
               }
               { !isMobile &&
                 <img
                   className={css.mapPc}
                   src={require(`${map}`)}
                   width= '100%'
-
-               />
+                />
               }
             </div>
           </div>
-        </div>
+        </div> 
         <div className="row">
           <div className={css.notes}>
-            <h4>here{notes}</h4>
+            <h4>{notes}</h4>
           </div>
         </div>
       </div>

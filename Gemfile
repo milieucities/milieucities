@@ -37,6 +37,7 @@ gem 'font-awesome-rails', '~> 4.7.0.0'
 gem 'momentjs-rails', '~> 2.11.0'
 gem 'rabl', '~> 0.12.0'
 gem 'cocoon'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 # database gems
 gem 'pg', '~> 0.18.4'
