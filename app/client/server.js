@@ -5,7 +5,7 @@ const path = require('path');
 
 
 // Since the root/src dir contains our index.html
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../assets, javascripts')));
 
 // Heroku bydefault set an ENV variable called PORT=443
 //  so that you can access your site with https default port.
