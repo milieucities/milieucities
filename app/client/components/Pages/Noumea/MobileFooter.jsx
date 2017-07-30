@@ -8,9 +8,9 @@ export default class MobileFooter extends Component {
     return (
       <div className={css.footer}>
         <ul>
-          <li><a href='/' title='info'>à propos</a></li>
-          <li><a href='/utilisation' title='d’utilisation'>guide</a></li>
-          <li><a href='/participez' title='participez'>participez</a></li>
+          <li><a href='/' title='info'>Info</a></li>
+          <li><a href='/utilisation' title='d’utilisation'>Guide</a></li>
+          <li><a href='/participez' title='participez'>Participez</a></li>
         </ul>
       </div>
     )
