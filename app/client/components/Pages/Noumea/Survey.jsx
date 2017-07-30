@@ -35,6 +35,8 @@ export default class Survey extends Component {
     this.handleAge = this.handleAge.bind(this);
     this.handleArea = this.handleArea.bind(this);
     this.handleHowLong = this.handleHowLong.bind(this);
+    this.handleEmail = this.handleEmail.bind(this)
+    this.handleSubmitCitizen = this.handleSubmitCitizen.bind(this);
 
     window.addEventListener('resize',
       debounce(() => {
@@ -92,6 +94,7 @@ export default class Survey extends Component {
   }
 
   handleSubmitCitizen() {
+    const { age, noumeaCitizen, email, area, howLong } = this.state
     const citizenData = {
       age: age,
       noumeaCitizen: noumeaCitizen,
@@ -99,11 +102,12 @@ export default class Survey extends Component {
       area: area,
       howLong: howLong
     };
+    console.log("citizenData", citizenData)
     $.ajax({
       url: "/participez/submit_participant",
       contentType: "application/json",
       type: 'POST',
-      data: JSON.stringify(citizenData),
+      data: JSON.stringify({noumea_participant: citizenData}), // rails format
       success: (citizenData) => {
         this.setState({ data: citizenData});
       },
@@ -131,6 +135,13 @@ export default class Survey extends Component {
     let howLong = e.target.value;
     this.setState({
       howLong: howLong
+    })
+  }
+
+  handleEmail(e) {
+    let email = e.target.value;
+    this.setState({
+      email: email
     })
   }
 
@@ -233,7 +244,7 @@ export default class Survey extends Component {
           }
           <div className="row">
             <label htmlFor="email">Votre Email</label>
-            <input id="email" placeholder="example@gmail.com" type="text" />
+            <input id="email" placeholder="example@gmail.com" type="text" onChange={this.handleEmail} />
           </div>
           <div className="row">
             <center>
@@ -241,7 +252,7 @@ export default class Survey extends Component {
                  type="submit"
                  value="soumetrre"
                  className="btn"
-                 onSubmit={this.handleSubmitCitizen}
+                 onClick={this.handleSubmitCitizen}
                  />
             </center>
           </div>
