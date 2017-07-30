@@ -21,10 +21,23 @@ export default class Survey extends Component {
       participantId: '',
       questionSet: [],
       isMobile: (window.innerWidth < 600),
-      answers: []
+      answers: [],
+      noumeaCitizen: false,
+      howLong: '',
+      email: '',
+      age: 0,
+      area: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmojiiClick = this.handleEmojiiClick.bind(this);
+    this.handleCitizen = this.handleCitizen.bind(this);
+    this.handleHideCitizen = this.handleHideCitizen.bind(this);
+    this.handleAge = this.handleAge.bind(this);
+    this.handleArea = this.handleArea.bind(this);
+    this.handleHowLong = this.handleHowLong.bind(this);
+    this.handleEmail = this.handleEmail.bind(this)
+    this.handleSubmitCitizen = this.handleSubmitCitizen.bind(this);
+
     window.addEventListener('resize',
       debounce(() => {
         this.setState({ isMobile: (window.innerWidth < 600) })
@@ -66,15 +79,13 @@ export default class Survey extends Component {
         answers: answers
       }
     }
-    console.log("handleSubmit data", data)
     $.ajax({
       url: "/participez/submit_survey",
       contentType: "application/json",
       type: 'POST',
       data: JSON.stringify(data),
       success: (data) => {
-        this.setState({data: data});
-        console.log("Added data", data)
+        this.setState({ data: data });
       },
       error: (error) => {
         console.log(error);
@@ -82,8 +93,72 @@ export default class Survey extends Component {
     });
   }
 
+  handleSubmitCitizen() {
+    const { age, noumeaCitizen, email, area, howLong } = this.state
+    const citizenData = {
+      age: age,
+      noumeaCitizen: noumeaCitizen,
+      email: email,
+      area: area,
+      howLong: howLong
+    };
+    console.log("citizenData", citizenData)
+    $.ajax({
+      url: "/participez/submit_participant",
+      contentType: "application/json",
+      type: 'POST',
+      data: JSON.stringify({noumea_participant: citizenData}), // rails format
+      success: (citizenData) => {
+        this.setState({ data: citizenData});
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
+  handleAge(e) {
+    let ageVar = e.target.value;
+    this.setState({
+      age: ageVar
+    });
+  }
+
+  handleArea(e) {
+    let area = e.target.value;
+    this.setState({
+      area: 'area'
+    })
+  }
+
+  handleHowLong(e) {
+    let howLong = e.target.value;
+    this.setState({
+      howLong: howLong
+    })
+  }
+
+  handleEmail(e) {
+    let email = e.target.value;
+    this.setState({
+      email: email
+    })
+  }
+
+  handleCitizen() {
+    this.setState({
+      noumeaCitizen: true
+    })
+  }
+
+  handleHideCitizen() {
+    this.setState({
+      noumeaCitizen: false
+    })
+  }
+
   render() {
-    const { isMobile } = this.state;
+    const { isMobile, noumeaCitizen } = this.state;
     return (
       <div className="container">
         { !isMobile &&
@@ -140,6 +215,49 @@ export default class Survey extends Component {
             )
           })
         }
+        <div className="row">
+          <center><h2>Information dèmographique</h2></center>
+          <div className="row">
+            <label htmlFor="age">Age</label>
+            <input id="age" placeholder="0" type="text" onChange={this.handleAge}/>
+          </div>
+          <div className="row">
+            <center><h3>Vivez vous à Noumeà</h3></center><br/>
+            <center>
+              <input type="button" name="noumeaCitizen" value="yes" className="btn" onClick={this.handleCitizen} />
+              <input type="button" name="noumeaCitizen" value="no" className="btn" onClick={this.handleHideCitizen} />
+            </center>
+          </div>
+          { noumeaCitizen &&
+            <div className="row">
+              <div className="ifyes">
+                <label htmlFor="area">Votre Quartier</label>
+                <input id="area" type="text" onChange={this.handleArea}/>
+                <div className="row">
+                  <label htmlFor="howlong">
+                    Cela fait combien de temps que vous vivez dans votre quartier?
+                  </label>
+                  <input id="howlong" type="text" onChange={this.handleHowLong}/>
+                </div>
+              </div>
+            </div>
+          }
+          <div className="row">
+            <label htmlFor="email">Votre Email</label>
+            <input id="email" placeholder="example@gmail.com" type="text" onChange={this.handleEmail} />
+          </div>
+          <div className="row">
+            <center>
+              <input
+                 type="submit"
+                 value="soumetrre"
+                 className="btn"
+                 onClick={this.handleSubmitCitizen}
+                 />
+            </center>
+          </div>
+        </div>
+
         { isMobile &&
           <MobileFooter  />
         }

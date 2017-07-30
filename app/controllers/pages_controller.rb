@@ -1,7 +1,7 @@
 require 'data_analysis'
 
 class PagesController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: :submit_survey
+  skip_before_filter :verify_authenticity_token, :only => [:submit_survey, :submit_participant]
   include Services::DataAnalysis
 
   def home
@@ -27,6 +27,19 @@ class PagesController < ApplicationController
     else
       render json: {}, status: 500
     end
+  end
+
+  def submit_participant
+    noumea_participant = NoumeaParticipant.create(submit_participant_params)
+    if noumea_participant.save!
+      render json: {}, status: 200
+    else
+      render json: {}, status: 500
+    end
+  end
+
+  def submit_participant_params
+    params.require(:noumea_participant).permit(:age, :noumeaCitizen, :email, :area, :howLong)
   end
 
   # def wakefield

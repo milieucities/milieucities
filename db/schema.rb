@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170728185601) do
+ActiveRecord::Schema.define(version: 20170730142653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,6 +244,16 @@ ActiveRecord::Schema.define(version: 20170728185601) do
   end
 
   add_index "notifications", ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id", using: :btree
+
+  create_table "noumea_participants", force: :cascade do |t|
+    t.integer  "age"
+    t.boolean  "noumeaCitizen"
+    t.string   "email"
+    t.string   "area"
+    t.string   "howLong"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "noumea_responses", force: :cascade do |t|
     t.jsonb    "response_body"
