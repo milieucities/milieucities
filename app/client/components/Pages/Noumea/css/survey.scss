@@ -14,12 +14,19 @@
   text-align: left;
   margin: 0 auto;
   padding-top: 30px;
+  img {
+    height: 2em;
+    margin-right: 1em;
+  }
+  p {
+    color: #4c85a5;
+    font-weight: bold;
+  }
 }
 .forms{
   position: relative;
   margin-top: 50px;
   margin-bottom: 50px;
-  height: 250px;
   overflow-y: scroll;
   @media #{$medium-and-up}{
     margin-top: 30px;
@@ -35,6 +42,8 @@
 .notes{
   margin-top: 20px;
   margin-bottom: 20px;
+  color: #6ba0bf;
+  font-weight: bold;
 }
 .comments{
   margin-top: 30px;
@@ -55,4 +64,8 @@
   -ms-transition: margin-top .5s ease-out;  /* IE10? */
   -o-transition: margin-top .5s ease-out;  /* Opera 10.5+ */
   transition: margin-top .5s ease-out;
+}
+.btnNoumeaCitizen {
+  background-color: #588fb2;
+  border: 1px solid #a6c3d6;
 }
