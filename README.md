@@ -9,7 +9,7 @@
 
 2. Bundle the gemfile `bundle install`. Note you may have to install bundler `gem install bundler`.
 
-3. Download and start up a postgressql db
+3. Download and start up a postgressql. Best way to install it `brew install postgresql`
 Ask for `.env` files ask for `database.yml` file
 `.env` goes to the root folder
 `database.yml` goes to `/config`
