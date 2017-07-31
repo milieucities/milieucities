@@ -11,4 +11,4 @@ app.use(express.static(path.join(__dirname, '../assets, javascripts')));
 //  so that you can access your site with https default port.
 // Falback port will be 8080; basically for pre-production test in localhost
 // You will use $ npm run prod for this
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8090);
