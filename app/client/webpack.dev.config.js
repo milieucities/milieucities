@@ -11,23 +11,17 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    root: path.resolve(__dirname, "client"),
-    modulesDirectories: ["node_modules"]
+    extensions: ['', '.js', '.jsx']
   },
 
   output: {
-    path: path.resolve(__dirname, '../assets', 'javascripts'),
+    path: path.resolve(__dirname, 'build'),
     publicPath: '/',
     filename: "bundle.js"
   },
 
   plugins: [
     new ExtractTextPlugin('[name].css'),
-    new webpack.DllReferencePlugin({
-            context: path.join(__dirname, '../assets', 'javascripts'),
-            manifest: require("./dll/vendor-manifest.json")
-        }),
     new webpack.optimize.DedupePlugin(), //dedupe similar code
     new webpack.optimize.UglifyJsPlugin(), //minify everything
     new webpack.optimize.AggressiveMergingPlugin() //Merge chunks
@@ -38,15 +32,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash',
-        include: [
-            path.join(__dirname, "client") //important for performance!
-        ],
-        query: {
-            cacheDirectory: true, //important for performance
-            plugins: ["transform-regenerator"],
-            presets: ["react", "es2015", "stage-0"]
-        }
+        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash'
       },
       {
         test: /\.(json|geojson)$/,
