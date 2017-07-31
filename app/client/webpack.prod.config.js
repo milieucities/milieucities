@@ -50,7 +50,15 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash'
+        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash',
+        include: [
+            path.join(__dirname, "client") //important for performance!
+        ],
+        query: {
+            cacheDirectory: true, //important for performance
+            plugins: ["transform-regenerator"],
+            presets: ["react", "es2015", "stage-0"]
+        }
       },
       {
         test: /\.(json|geojson)$/,
