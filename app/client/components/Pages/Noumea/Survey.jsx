@@ -110,6 +110,7 @@ export default class Survey extends Component {
       data: JSON.stringify({noumea_participant: citizenData}), // rails format
       success: (citizenData) => {
         this.setState({ data: citizenData});
+        window.location = "http://www.entreenord.com/";
       },
       error: (error) => {
         console.log(error);
