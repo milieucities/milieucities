@@ -11,12 +11,14 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    root: path.resolve(__dirname, "client"),
+    modulesDirectories: ["node_modules"]
   },
 
   output: {
-    path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
+    path: path.resolve(__dirname, '../assets', 'javascripts'),
+    publicPath: 'http://0.0.0.0:8080/',
     filename: "bundle.js"
   },
 
