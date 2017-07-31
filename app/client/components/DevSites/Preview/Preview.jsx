@@ -303,6 +303,38 @@ export default class extends Component {
           </div>
 
           <div className='row'>
+            <div className='col m11 s10'>
+              <h3 className={css.timelinehead}>Project Timeline</h3>
+                <div className='tl'></div>
+            </div>
+            <div className='col m1 s1'>
+            <div className={css.sharecontainer}>
+              share on<br/>
+              <div className={css.share}>
+              <FacebookShareButton url={devSite.url} title={devSite.address} media={devSite}>
+                <FacebookIcon size={38} round />
+              </FacebookShareButton>
+              </div>
+              <div className={css.share}>
+              <TwitterShareButton url={devSite.url} title={devSite.address} media={devSite.image_url}>
+                <TwitterIcon size={38} round />
+              </TwitterShareButton>
+              </div>
+              <br/>
+              <div className={css.message}>
+              message<br/>
+              planner<br/>
+              </div>
+              <div className={css.share}>
+              <a href={`mailto:${devSite.urban_planner_email}`}>
+                <img src={require('./images/messageplanner.svg')} className={css.commentimage} />
+              </a>
+              </div>              
+            </div>  
+          </div>
+        </div>
+
+          <div className='row'>
             <div className='col m1 s2'>
           </div>
         </div>
