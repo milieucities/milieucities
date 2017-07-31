@@ -6,31 +6,40 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = {
+  cache: true,
   entry: {
     bundle: path.resolve(__dirname, 'index')
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
   },
 
   output: {
-    path: path.resolve(__dirname, "../assets/webpack"),
-    filename: "[name].js"
+    path: path.resolve(__dirname, '../assets', 'javascripts'),
+    publicPath: '/',
+    filename: "bundle.js"
   },
 
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin('[name].[hash].css'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
         ENV: JSON.stringify(ENV)
       }
-    })
+    }),
+    new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks
+    // new CompressionPlugin({
+    //   asset: "[path].gz[query]",
+    //   algorithm: "gzip",
+    //   test: /\.js$|\.css$|\.html$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8
+    // })
   ],
 
   module: {
@@ -38,7 +47,15 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash'
+        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash',
+        include: [
+            path.join(__dirname, "client") //important for performance!
+        ],
+        query: {
+            cacheDirectory: true, //important for performance
+            plugins: ["transform-regenerator"],
+            presets: ["react", "es2015", "stage-0"]
+        }
       },
       {
         test: /\.(json|geojson)$/,
@@ -51,6 +68,12 @@ module.exports = {
         'css?modules&importLoaders=3&localIdentName=[name]-[local]-[hash:base64:5]',
         'sass',
         'sass-resources']
+      },
+      {
+        test: /\.less$/,
+        loaders: ['style-loader',
+        'css-loader',
+        'less-loader']
       },
       {
         test: /\.css$/,
