@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170721045046) do
+ActiveRecord::Schema.define(version: 20170802185343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,17 @@ ActiveRecord::Schema.define(version: 20170721045046) do
     t.integer  "vote_count"
     t.string   "flagged_as_offensive", default: "UNFLAGGED"
     t.integer  "parent_id"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email_address"
+    t.string   "on_behalf_of"
+    t.string   "contact_type"
+    t.integer  "dev_site_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "conversations", force: :cascade do |t|
