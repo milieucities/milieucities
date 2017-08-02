@@ -32,14 +32,11 @@ module.exports = {
         ENV: JSON.stringify(ENV)
       }
     }),
-    new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks
-    // new CompressionPlugin({
-    //   asset: "[path].gz[query]",
-    //   algorithm: "gzip",
-    //   test: /\.js$|\.css$|\.html$/,
-    //   threshold: 10240,
-    //   minRatio: 0.8
-    // })
+    new webpack.optimize.AggressiveMergingPlugin(),
+    // new webpack.DllReferencePlugin({
+    //         context: path.join(__dirname, '../assets', 'javascripts', 'dll'),
+    //         manifest: require("vendor-manifest.json")
+    // }), this guy never got to work even when path and everything is good teest 1000x times
   ],
 
   module: {
@@ -47,14 +44,14 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader?presets[]=es2015&presets[]=react&plugins[]=lodash',
+        loader: 'babel-loader',
         include: [
-            path.join(__dirname, "client") //important for performance!
+            path.join(__dirname, "../client") //important for performance!
         ],
         query: {
             cacheDirectory: true, //important for performance
-            plugins: ["transform-regenerator"],
-            presets: ["react", "es2015", "stage-0"]
+            plugins: ["transform-regenerator", "lodash"], //try adding and removing lodash here and check how much time it adds
+            presets: ["react", "es2015"]
         }
       },
       {

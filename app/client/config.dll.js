@@ -14,13 +14,13 @@ module.exports = {
         new webpack.DllPlugin({
             path: path.join(__dirname, '../assets', 'javascripts', "dll", "[name]-manifest.json"),
             name: "[name]",
-            context: path.resolve(__dirname, '../assets', 'javascripts')
+            context: path.resolve(__dirname, '../assets', 'javascripts', 'dll')
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin()
     ],
     resolve: {
-        root: path.resolve(__dirname, '../assets', 'javascripts'),
+        root: path.resolve(__dirname, '../client'),
         modulesDirectories: ["node_modules"]
     }
 };
