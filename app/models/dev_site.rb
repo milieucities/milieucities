@@ -23,13 +23,7 @@ class DevSite < ActiveRecord::Base
     'Additions'
   ].freeze
 
-  VALID_FILTERS = [
-    'year',
-    'municipality',
-    'ward',
-    'status',
-    'featured'
-  ].freeze
+  VALID_FILTERS = %w(year municipality ward status featured).freeze
 
   belongs_to :municipality, foreign_key: 'municipality_id'
   belongs_to :ward
@@ -41,6 +35,7 @@ class DevSite < ActiveRecord::Base
   has_many :likes, dependent: :destroy
   has_many :meetings, dependent: :destroy
   has_many :application_files, dependent: :destroy
+  has_many :contacts, dependent: :destroy
   has_and_belongs_to_many :application_types
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
@@ -48,6 +43,7 @@ class DevSite < ActiveRecord::Base
   accepts_nested_attributes_for :likes, allow_destroy: true
   accepts_nested_attributes_for :application_types, allow_destroy: true
   accepts_nested_attributes_for :meetings, allow_destroy: true
+  accepts_nested_attributes_for :contacts, allow_destroy: true
 
   validates :devID,
             uniqueness: { message: 'Development Id must be unique' },

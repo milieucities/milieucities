@@ -1,5 +1,5 @@
-desc "create application files for dev sites"
-task create_application_files_and_destroy_redundant_dev_sites: :environment do |t, args|
+desc "create application files for dev sites, delete redundant dev sites, and set primary address"
+task migrate_data_to_new_model: :environment do |t, args|
   DevSite.includes(:application_types, :addresses).each do |property|
     begin
       property = property.reload
@@ -27,5 +27,12 @@ task create_application_files_and_destroy_redundant_dev_sites: :environment do |
       site.destroy
       puts "Deleted DevSite #{site.devID}"
     end
+
+  end
+
+  DevSite.includes(:addresses).each do |dev_site|
+    next if dev_site.addresses.empty?
+    dev_site.addresses.first.update_attributes(primary_address: true)
+    puts "Set primary address for DevSite #{dev_site.devID}"
   end
 end
