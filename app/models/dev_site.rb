@@ -45,9 +45,7 @@ class DevSite < ActiveRecord::Base
   accepts_nested_attributes_for :meetings, allow_destroy: true
   accepts_nested_attributes_for :contacts, allow_destroy: true
 
-  validates :devID,
-            uniqueness: { message: 'Development Id must be unique' },
-            presence: { message: 'Development Id is required' }
+  validates :title, presence: { message: 'Title is required' }
   validates :description, presence: { message: 'Description is required' }
   validates :municipality_id, presence: { message: 'Municipality is required' }
   validates :ward_id, presence: { message: 'Ward is required' }

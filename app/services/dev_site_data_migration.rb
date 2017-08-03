@@ -6,7 +6,7 @@ module Services
                                           .where(addresses: { street: @primary_address.street })
 
       @site_plan_dev_sites = @dev_sites_at_this_address.select do |site|
-        ['Site Plan Approval', 'Site Plan Control'].include? site.application_type_name
+        ApplicationFile.SITE_PLAN_APPLICATION_TYPES.include? site.application_type_name
       end
 
       @remaining_dev_sites = @dev_sites_at_this_address.reject do |site|
