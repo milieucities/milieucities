@@ -101,22 +101,26 @@ class DevSite < ActiveRecord::Base
 
   def street
     return if addresses.empty?
-    addresses.first.street
+    primary_address.street
+  end
+
+  def primary_address
+    addresses.find_by(primary_address: true)
   end
 
   def address
     return if addresses.empty?
-    addresses.first.full_address(with_country: false)
+    primary_address.full_address(with_country: false)
   end
 
   def latitude
     return if addresses.empty?
-    addresses.first.lat
+    primary_address.lat
   end
 
   def longitude
     return if addresses.empty?
-    addresses.first.lon
+    primary_address.lon
   end
 
   def ward_name
@@ -150,8 +154,8 @@ class DevSite < ActiveRecord::Base
     where(id: ids).order(order_clause)
   end
 
-  def application_type_name
-    application_types.last.name if application_types.any?
+  def application_files_by_type
+    application_files.map(&:application_type)
   end
 
   private

@@ -109,11 +109,6 @@ class DevSitesController < ApplicationController
         :received_date,
         :active_at,
         :url_full_notice,
-        application_types_attributes: [
-          :id,
-          :name,
-          :_destroy
-        ],
         meetings_attributes:
         [
           :id,
@@ -137,6 +132,14 @@ class DevSitesController < ApplicationController
           :city,
           :province_state,
           :country,
+          :_destroy
+        ],
+        contacts_attributes: [
+          :id,
+          :contact_type,
+          :first_name,
+          :last_name,
+          :email_address,
           :_destroy
         ],
         images: [],

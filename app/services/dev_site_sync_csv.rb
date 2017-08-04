@@ -10,14 +10,13 @@ module Services
       'SUBDESC' => 'build_type',
       'STATUSDESC' => 'status',
       'FOLDERDE_1' => 'short_description',
-      'FOLDERDE_1' => 'description',
       'USERNAME' => 'urban_planner_name',
       'EMAILADDRE' => 'urban_planner_email',
       'ORGANIZATI' => 'on_behalf_of',
       'WARD' => 'ward',
       'MUNICIPALITY' => 'municipality',
       'NAMEFIRST' => 'applicant_first_name',
-      'NAMELAST' => 'applicant_last_name',
+      'NAMELAST' => 'applicant_last_name'
     }.freeze
 
     ASSOCIATIONS_TO_UPDATE = %w(statuses addresses contacts).freeze
@@ -100,6 +99,7 @@ module Services
 
       dev_site_attributes[:municipality_id] = guelph.id
       dev_site_attributes[:ward_id] = ward.id
+      dev_site_attributes[:description] = entry_data['short_description']
 
       if dev_site.update_attributes(dev_site_attributes)
         return { dev_site: dev_site }
