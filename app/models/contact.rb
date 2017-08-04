@@ -3,7 +3,7 @@ class Contact < ActiveRecord::Base
   PLANNER = 'planner'.freeze
   APPLICANT = 'applicant'.freeze
 
-  VALID_CONTACT_TYPES = %w(WARD_COUNCILLOR PLANNER APPLICANT).freeze
+  VALID_CONTACT_TYPES = [WARD_COUNCILLOR, PLANNER, APPLICANT].freeze
 
   validates :contact_type, inclusion: { in: VALID_CONTACT_TYPES,
                                         message: "Please provide a valid contact type." }
