@@ -39,11 +39,7 @@ class DevSite < ActiveRecord::Base
   has_and_belongs_to_many :application_types
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
-  accepts_nested_attributes_for :statuses, allow_destroy: true
   accepts_nested_attributes_for :likes, allow_destroy: true
-  accepts_nested_attributes_for :application_types, allow_destroy: true
-  accepts_nested_attributes_for :meetings, allow_destroy: true
-  accepts_nested_attributes_for :contacts, allow_destroy: true
 
   validates :title, presence: { message: 'Title is required' }
   validates :description, presence: { message: 'Description is required' }
@@ -131,6 +127,12 @@ class DevSite < ActiveRecord::Base
     return images.first.web.url if images.present?
     return streetview_image unless addresses.empty?
     ActionController::Base.helpers.image_path('mainbg.jpg')
+  end
+
+  def contact_email(contact_type)
+    return if contacts.empty?
+    contact = contacts.find_by(contact_type: contact_type)
+    contact.email_address if contact
   end
 
   def update_sentiment

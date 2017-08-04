@@ -95,7 +95,7 @@ module Services
       dev_site_attributes = entry_data.slice(*ATTRIBUTES_FOR_CREATE)
 
       guelph = Municipality.find_by(name: CITY)
-      ward = Ward.find_or_create_by(name: entry_data['ward'])
+      ward = guelph.wards.find_by(name: "Ward #{entry_data['ward']}")
 
       dev_site_attributes[:municipality_id] = guelph.id
       dev_site_attributes[:ward_id] = ward.id

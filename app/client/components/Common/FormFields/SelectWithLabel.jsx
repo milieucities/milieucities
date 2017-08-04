@@ -23,6 +23,7 @@ export default class SelectWithLabel extends Component {
           defaultValue={this.props.defaultValue}
           name={this.props.name}
           form={this.props.form}
+          disabled={this.props.disabled}
         >
           {
             this.props.options.map((option, i) => {

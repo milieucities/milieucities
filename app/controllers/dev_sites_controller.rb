@@ -25,6 +25,7 @@ class DevSitesController < ApplicationController
     @application_types = ApplicationType::VALID_APPLICATION_TYPES
     @statuses = @dev_site.valid_statuses
     @notification_options = Notification::STATUS_TO_NOTIFICATION_TYPES_MAP.to_json
+    @contact_options = Contact::VALID_CONTACT_TYPES
     @no_header = true
   end
 
@@ -32,6 +33,7 @@ class DevSitesController < ApplicationController
     @application_types = ApplicationType::VALID_APPLICATION_TYPES
     @statuses = @dev_site.valid_statuses
     @notification_options = Notification::STATUS_TO_NOTIFICATION_TYPES_MAP.to_json
+    @contact_options = Contact::VALID_CONTACT_TYPES
     @no_header = true
   end
 
@@ -98,48 +100,17 @@ class DevSitesController < ApplicationController
         :build_type,
         :description,
         :short_description,
-        :urban_planner_name,
-        :urban_planner_email,
-        :ward_councillor_email,
-        :applicant_first_name,
-        :applicant_last_name,
-        :on_behalf_of,
         :ward_id,
         :municipality_id,
         :received_date,
         :active_at,
         :url_full_notice,
-        meetings_attributes:
-        [
-          :id,
-          :meeting_type,
-          :title,
-          :time,
-          :date,
-          :location,
-          :_destroy
-        ],
-        statuses_attributes: [
-          :id,
-          :status,
-          :start_date,
-          :end_date,
-          :_destroy
-        ],
         addresses_attributes: [
           :id,
           :street,
           :city,
           :province_state,
           :country,
-          :_destroy
-        ],
-        contacts_attributes: [
-          :id,
-          :contact_type,
-          :first_name,
-          :last_name,
-          :email_address,
           :_destroy
         ],
         images: [],

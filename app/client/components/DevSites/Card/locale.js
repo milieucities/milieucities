@@ -3,11 +3,11 @@ import LocalizedStrings from 'react-localization';
 const i18n = new LocalizedStrings({
   en: {
     lastEdited: 'Last Edited:',
-    fileNumber: 'File Number:'
+    propertyNumber: 'Property Number:'
   },
   fr: {
     lastEdited: 'Last Edited:',
-    fileNumber: 'File Number:'
+    propertyNumber: 'Property Number:'
   }
 })
 

@@ -7,7 +7,7 @@ const i18n = new LocalizedStrings({
     title: 'Title',
     municipality: 'Municipality',
     ward: 'Ward',
-    developmentId: 'File number',
+    propertyNumber: 'Property Number',
     buildingType: 'Building Type',
     applicationType: 'Application Type',
     shortDescription: 'Short description',
@@ -58,7 +58,8 @@ const i18n = new LocalizedStrings({
     linkToFullNotice: 'Link to full notice',
     files: 'Files',
     images: 'Images',
-    save: 'Save'
+    save: 'Save',
+    contacts: 'Contacts'
   },
   fr: {
     developmentSite: 'Site de développement',
@@ -66,7 +67,7 @@ const i18n = new LocalizedStrings({
     title: 'Titre',
     municipality: 'Municipalité',
     ward: 'Quartier',
-    developmentId: 'Numéro de fichier',
+    propertyNumber: 'Numéro de fichier',
     buildingType: 'Type d\'immeuble',
     applicationType: 'Type d\'application',
     shortDescription: 'Description en bref',
@@ -116,7 +117,8 @@ const i18n = new LocalizedStrings({
     linkToFullNotice: 'Lien au préavis complet',
     files: 'Ficher',
     images: 'Images',
-    save: 'Sauvegarder'
+    save: 'Sauvegarder',
+    contacts: 'Contacts'
   }
 });
 

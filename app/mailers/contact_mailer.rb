@@ -13,7 +13,7 @@ class ContactMailer < ApplicationMailer
 
   def contact_file_lead(message)
     @name, @email, @message, @dev_site_id = message.values
-    email_to = DevSite.find(@dev_site_id).urban_planner_email
+    email_to = DevSite.find(@dev_site_id).contact_email(Contact::PLANNER)
     subject = 'Message for File Lead from Milieu.io'
 
     mail(to: [email_to], subject: subject)
@@ -21,7 +21,7 @@ class ContactMailer < ApplicationMailer
 
   def contact_councillor(message)
     @name, @email, @message, @dev_site_id = message.values
-    email_to = DevSite.find(@dev_site_id).ward_councillor_email
+    email_to = DevSite.find(@dev_site_id).contact_email(Contact::WARD_COUNCILLOR)
     subject = 'Message for Councillor from Milieu.io'
 
     mail(to: [email_to], subject: subject)

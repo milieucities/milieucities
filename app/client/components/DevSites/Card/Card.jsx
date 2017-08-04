@@ -9,6 +9,7 @@ export default class Card extends Component {
     super(props)
     this.handleClick = () => this._handleClick();
     this.formatDate = (date) => this._formatDate(date);
+    this.formatApplicationFiles = () => this._formatApplicationFiles();
   }
 
   _handleClick() {
@@ -21,6 +22,11 @@ export default class Card extends Component {
     return momentDate;
   }
 
+  _formatApplicationFiles() {
+    const applications = this.props.devSite.application_files.map((file) => file.application_type);
+    return applications.join(', ');
+  }
+
   render() {
     const lastEdited = this.formatDate(this.props.devSite.updated_at);
 
@@ -29,10 +35,10 @@ export default class Card extends Component {
         <div className={css.cardContent}>
           <div className="col s8">
             <div className={css.header}>
-              <p className={css.appType}>{this.props.devSite.application_type_name}</p>
+              <p className={css.appType}>{this.formatApplicationFiles()}</p>
               <p className={css.address}>{this.props.devSite.address}</p>
             </div>
-            <p>{`${i18n.fileNumber} ${this.props.devSite.devID}`}</p>
+            <p>{`${i18n.propertyNumber} ${this.props.devSite.devID}`}</p>
             <p>{`${i18n.lastEdited} ${lastEdited}`}</p>
           </div>
           <div className={`col s4 ${css.image}`}>
