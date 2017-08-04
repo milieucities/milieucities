@@ -45,6 +45,7 @@ Rails.application.routes.draw do
         resources :meetings, only: [:create, :update, :destroy]
         resources :notifications, only: [:create, :update, :destroy], module: :statuses
       end
+      resources :contacts, only: [:create, :update, :destroy]
     end
 
     resources :organizations, only: [:index, :show, :update, :create, :destroy] do

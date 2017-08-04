@@ -62,7 +62,6 @@ export default class extends Component {
 
   _openEmailModal(e) {
     e.preventDefault();
-    const { urban_planner_email, ward_councillor_email } = this.state.devSite;
     const contact = e.currentTarget.innerText;
     this.setState({ showModal: true, contact });
   }
@@ -235,8 +234,12 @@ export default class extends Component {
           <div className='row'>
             <div className='col m4 s12'>
               <h3>{devSite.address}</h3>
-              {i18n.devId}: {devSite.devID} <br/>
-              {devSite.application_type_name === '/coa/' ?  devSite.application_type_name.replace(/coa/, 'Committee of Adjustment') : devSite.application_type_name = '' } <br/>
+              <p>Application files:</p>
+              {
+                devSite.application_files.map((file, index) => (
+                  <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
+                ))
+              }
             </div>
 
             <div className='col m8 s12'>

@@ -23,13 +23,7 @@ class DevSite < ActiveRecord::Base
     'Additions'
   ].freeze
 
-  VALID_FILTERS = [
-    'year',
-    'municipality',
-    'ward',
-    'status',
-    'featured'
-  ].freeze
+  VALID_FILTERS = %w(year municipality ward status featured).freeze
 
   belongs_to :municipality, foreign_key: 'municipality_id'
   belongs_to :ward
@@ -40,17 +34,14 @@ class DevSite < ActiveRecord::Base
   has_many :city_files, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :meetings, dependent: :destroy
+  has_many :application_files, dependent: :destroy
+  has_many :contacts, dependent: :destroy
   has_and_belongs_to_many :application_types
 
   accepts_nested_attributes_for :addresses, allow_destroy: true
-  accepts_nested_attributes_for :statuses, allow_destroy: true
   accepts_nested_attributes_for :likes, allow_destroy: true
-  accepts_nested_attributes_for :application_types, allow_destroy: true
-  accepts_nested_attributes_for :meetings, allow_destroy: true
 
-  validates :devID,
-            uniqueness: { message: 'Development Id must be unique' },
-            presence: { message: 'Development Id is required' }
+  validates :title, presence: { message: 'Title is required' }
   validates :description, presence: { message: 'Description is required' }
   validates :municipality_id, presence: { message: 'Municipality is required' }
   validates :ward_id, presence: { message: 'Ward is required' }
@@ -106,22 +97,26 @@ class DevSite < ActiveRecord::Base
 
   def street
     return if addresses.empty?
-    addresses.first.street
+    primary_address.street
+  end
+
+  def primary_address
+    addresses.find_by(primary_address: true)
   end
 
   def address
     return if addresses.empty?
-    addresses.first.full_address(with_country: false)
+    primary_address.full_address(with_country: false)
   end
 
   def latitude
     return if addresses.empty?
-    addresses.first.lat
+    primary_address.lat
   end
 
   def longitude
     return if addresses.empty?
-    addresses.first.lon
+    primary_address.lon
   end
 
   def ward_name
@@ -132,6 +127,12 @@ class DevSite < ActiveRecord::Base
     return images.first.web.url if images.present?
     return streetview_image unless addresses.empty?
     ActionController::Base.helpers.image_path('mainbg.jpg')
+  end
+
+  def contact_email(contact_type)
+    return if contacts.empty?
+    contact = contacts.find_by(contact_type: contact_type)
+    contact.email_address if contact
   end
 
   def update_sentiment
@@ -155,8 +156,8 @@ class DevSite < ActiveRecord::Base
     where(id: ids).order(order_clause)
   end
 
-  def application_type_name
-    application_types.last.name if application_types.any?
+  def application_files_by_type
+    application_files.map(&:application_type)
   end
 
   private

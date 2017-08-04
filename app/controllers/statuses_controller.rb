@@ -3,7 +3,6 @@ class StatusesController < ApplicationController
   load_and_authorize_resource :status, through: :dev_site
 
   def create
-    Rails.logger.info "PARAMS => #{params}"
     respond_to do |format|
       if @status.save
         format.json { render json: @status, status: :created }
@@ -14,7 +13,6 @@ class StatusesController < ApplicationController
   end
 
   def update
-    Rails.logger.info "PARAMS => #{params}"
     respond_to do |format|
       if @status.update(status_params)
         format.json { render json: @status, status: :created }

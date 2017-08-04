@@ -35,6 +35,7 @@ export default class TextInputWithLabel extends Component {
           form={this.props.form}
           onBlur={this.validate}
           onChange={this.props.onInputChange}
+          disabled={this.props.disabled}
         />
         {
           (this.props.error || this.props.required && !this.state.valid) &&

@@ -67,7 +67,6 @@ export default class DevSiteShow extends Component {
 
   _openEmailModal(e) {
     e.preventDefault();
-    const { urban_planner_email, ward_councillor_email } = this.state.devSite;
     const contact = e.currentTarget.innerText;
     this.setState({ showModal: true, contact });
   }
