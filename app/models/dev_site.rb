@@ -160,6 +160,10 @@ class DevSite < ActiveRecord::Base
     application_files.map(&:application_type)
   end
 
+  def application_type_name
+    application_types.first.name if applicaiton_types.any?
+  end
+
   private
 
   def add_total_suffix(totals)
