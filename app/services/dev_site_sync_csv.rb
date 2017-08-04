@@ -176,11 +176,13 @@ module Services
     def update_planner(dev_site, entry_data)
       planner_email = entry_data['urban_planner_email']
       planner_name = entry_data['urban_planner_name']
+
+      return unless planner_email.present? || planner_name.present?
       existing_planner = dev_site.contacts.where(contact_type: Contact::PLANNER,
                                                  email_address: planner_email,
                                                  first_name: planner_name)
 
-      unless existing_planner
+      unless existing_planner.any?
         dev_site.contacts << Contact.create(contact_type: Contact::PLANNER,
                                             email_address: planner_email,
                                             first_name: planner_name)
@@ -190,11 +192,14 @@ module Services
     def update_applicant(dev_site, entry_data)
       applicant_first_name = entry_data['applicant_first_name']
       applicant_last_name = entry_data['applicant_last_name']
+
+      return unless applicant_first_name.present? || applicant_last_name.present?
+
       existing_applicant = dev_site.contacts.where(contact_type: Contact::APPLICANT,
                                                    first_name: applicant_first_name,
                                                    last_name: applicant_last_name)
 
-      unless existing_applicant
+      unless existing_applicant.any?
         dev_site.contacts << Contact.create(contact_type: Contact::APPLICANT,
                                             first_name: applicant_first_name,
                                             last_name: applicant_last_name)

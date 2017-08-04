@@ -161,7 +161,7 @@ class DevSite < ActiveRecord::Base
   end
 
   def application_type_name
-    application_types.first.name if applicaiton_types.any?
+    application_types.first.name if application_types.any?
   end
 
   private
