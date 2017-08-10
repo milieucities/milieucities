@@ -7,7 +7,6 @@ class GenericNotification
 
   MERGE_VARS = [:recipient_name, :recipient_email]
 
-  FROM_EMAIL = 'notifications@milieu.io'
   FROM_NAME = 'Milieu Cities on behalf of the City of Guelph'
   SUBJECT = 'Milieu Cities | New Status Update from City of Guelph, Ontario'
 
@@ -19,6 +18,7 @@ class GenericNotification
 
   def call
     recipients = find_recipients
+    Rails.logger.info "RECIPIENTS COUNT => #{recipients.count}"
 
     return nil if recipients.empty?
 
@@ -28,7 +28,7 @@ class GenericNotification
     merge_vars = convert_users_to_mandrill_merge_fields(recipients)
     send_at = @notification.send_at || DateTime.current
 
-    {
+    message_object = {
       template_name: template,
       template_content: [],
       message: {
@@ -36,8 +36,8 @@ class GenericNotification
         global_merge_vars: global_merge_vars,
         merge_vars: merge_vars,
         merge: true,
-        merge_language: 'mailchimp',
-        from_email: FROM_EMAIL,
+        merge_language: 'handlebars',
+        from_email: Notification::FROM_EMAIL,
         from_name: FROM_NAME,
         subject: SUBJECT
       },
@@ -45,6 +45,9 @@ class GenericNotification
       ip_pool: nil,
       send_at: send_at
     }
+
+    Rails.logger.info "MESSAGE OBJECT => #{message_object}"
+    message_object
   end
 
   protected
@@ -68,7 +71,7 @@ class GenericNotification
       user_ids = find_users_nearby(address)
     end
 
-    planner = User.find_by(email: @dev_site.urban_planner_email.downcase)
+    planner = User.find_by(email: @dev_site.urban_planner_email.try(:downcase))
     milieu = User.find_by(email: 'info@milieu.io')
 
     recipients = User.find(user_ids.flatten)

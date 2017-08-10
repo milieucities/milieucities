@@ -2,7 +2,10 @@ class GenerateNotificationForMandrill
 
   def generate(notification)
     command = notification_factory[notification.notification_type]
-    result = command.call(notification)
+    Rails.logger.info "=============================== GENERATE NOTIFICATION ===================================="
+    Rails.logger.info "COMMAND => #{command.inspect}"
+
+    result = command ? command.call(notification) : GenericNotificiation.call(notification)
     result.result
   end
 

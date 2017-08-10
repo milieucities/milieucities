@@ -51,6 +51,9 @@ class Notification < ActiveRecord::Base
     notification_generator = GenerateNotificationForMandrill.new
     mandrill_email_object = notification_generator.generate(self)
 
+    Rails.logger.info "MANDRILL_EMAIL_OBJECT => #{mandrill_email_object}"
+
     Resque.enqueue(SendNotificationJob, mandrill_email_object) unless Rails.env.test?
+    Rails.logger.info "SENT TO RESQUE"
   end
 end
