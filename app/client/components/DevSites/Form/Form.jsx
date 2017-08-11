@@ -53,8 +53,9 @@ export default class DevSiteForm extends Component {
     }
 
     $.getJSON(`/dev_sites/${this.state.devSiteId}`, devSite => {
-      let startDate = devSite.statuses.length > 0 ? moment(devSite.statuses[0].status_date) : null
-      this.setState({ devSite, loadingDevSite: false, startDate })
+      const startDate = devSite.statuses.length > 0 ? moment(devSite.statuses[0].status_date) : null;
+      const activeMunicipalityIndex = this.state.municipalities.findIndex((mun) => mun.id === devSite.municipality_id);
+      this.setState({ devSite, startDate, activeMunicipalityIndex, loadingDevSite: false })
     });
   }
 
