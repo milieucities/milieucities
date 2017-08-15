@@ -1,18 +1,27 @@
       $.fn.timeline = function( data ) {
       return this.each(function() {
-      
+
         $el = $(this);
         $el.addClass('tl');
-        if (data == 'Open' || 'Application Received') {
-          var eventTmpl = $('<div class="checkoutwrap"><ul class="checkoutbar"><li class=""><a href="#">Comment Period</a></li><li class="">Public Meeting</li><li class="">Revision</li><li class="">Decision Meeting</li><li class="">Decision</li></ul>').appendTo($el);
-        } else if (data == 'Application Complete, Comment Period Open') {
-          var eventTmpl = $('<div class="checkoutwrap"><ul class="checkoutbar"><li class="active"><a href="#">Comment Period</a></li><li class="active">Public Meeting</li><li class="">Revision</li><li class="">Decision Meeting</li><li class="">Decision</li></ul>').appendTo($el);
-        } else if (data == 'Review' || 'Planning Review Stage') {
-          var eventTmpl = $('<div class="checkoutwrap"><ul class="checkoutbar"><li class="visited"><a href="#">Comment Period</a></li><li class="active">Public Meeting</li><li class="">Revision</li><li class="">Decision Meeting</li><li class="">Decision</li></ul>').appendTo($el);
-        } else if (data == 'Revision') {
-          var eventTmpl = $('<div class="checkoutwrap"><ul class="checkoutbar"><li class="visited"><a href="#">Comment Period</a></li><li class="visited">Public Meeting</li><li class="active">Revision</li><li class="">Decision Meeting</li><li class="">Decision</li></ul>').appendTo($el);
-        } else if (data == 'Decision') {
-          var eventTmpl = $('<div class="checkoutwrap"><ul class="checkoutbar"><li class="visited"><a href="#">Comment Period</a></li><li class="visited">Public Meeting</li><li class="visited">Revision</li><li class="active">Decision Meeting</li><li class="">Decision</li></ul>').appendTo($el);
-        };
+
+        var statuses = {
+          'Application Received': { position: 0},
+          'Open': { position: 0},
+          'Application Complete, Comment Period Open': { position: 1},
+          'Review': { position: 2},
+          'Planning Review Stage': { position: 2},
+          'Revision': { position: 3},
+          'Decision': { position: 4},
+        }
+
+        var $eventTmpl = $('<div class="checkoutwrap"><ul class="checkoutbar"><li><span><a href="#">Comment Period</a></span></li><li><span>Public Meeting</span></li><li><span>Revision Changes</span></li><li><span>Decision Meeting</span></li><li><span>Decision Made</span></li></ul></div>')
+
+        var status = statuses[data];
+        var statusPosition = status ? status.position : 0;
+
+        $eventTmpl.find('li:nth-of-type(' + statusPosition + ')').addClass('active');
+        $eventTmpl.find('li:nth-of-type(' + statusPosition + ')').prevAll().addClass('visited');
+
+        $el.html($eventTmpl);
       });
     };
