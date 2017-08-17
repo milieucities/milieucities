@@ -1,5 +1,4 @@
 require 'spec_helper'
-require "#{Rails.root}/app/services/url_verifier.rb"
 
 module Services
   describe UrlVerifier do

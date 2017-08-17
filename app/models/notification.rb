@@ -47,13 +47,13 @@ class Notification < ActiveRecord::Base
     Status::DECISION_STATUS => [PASSING, REJECTED]
   }.freeze
 
+  validates :send_at, presence: true
+  validates :notification_type, presence: true, inclusion: { in: GUELPH_NOTIFICATION_TYPES }
+
   def send_notification
-    notification_generator = GenerateNotificationForMandrill.new
-    mandrill_email_object = notification_generator.generate(self)
+    notification_factory = MandrillNotificationFactory.new
+    mandrill_email_object = notification_factory.generate(self)
 
-    Rails.logger.info "MANDRILL_EMAIL_OBJECT => #{mandrill_email_object}"
-
-    Resque.enqueue(SendNotificationJob, mandrill_email_object) unless Rails.env.test?
-    Rails.logger.info "SENT TO RESQUE"
+    Resque.enqueue(SendNotificationJob, mandrill_email_object) if mandrill_email_object
   end
 end
