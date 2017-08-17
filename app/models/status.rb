@@ -1,5 +1,6 @@
 class Status < ActiveRecord::Base
   scope :current, -> { order(start_date: :desc).first }
+  default_scope { order(start_date: :asc) }
   belongs_to :dev_site, foreign_key: 'dev_site_id'
   belongs_to :municipality, foreign_key: 'municipality_id'
   has_one :meeting, dependent: :destroy

@@ -1,9 +1,10 @@
 class GenericNotification
   prepend SimpleCommand
+  include ApplicationHelper
 
   class NotificationError < StandardError; end
 
-  GLOBAL_MERGE_VARS = [:file_number, :date_sent, :application_type, :application_address, :dev_url]
+  GLOBAL_MERGE_VARS = [:file_numbers, :application_types, :date_sent, :application_address, :dev_site_url]
 
   MERGE_VARS = [:recipient_name, :recipient_email]
 
@@ -14,6 +15,7 @@ class GenericNotification
     @notification = notification
     @status = Status.find(notification.notifiable_id)
     @dev_site = @status.dev_site
+    @global_merge_vars = GLOBAL_MERGE_VARS
   end
 
   def call
@@ -96,7 +98,7 @@ class GenericNotification
   end
 
   def generate_global_merge_vars
-    GLOBAL_MERGE_VARS.collect do |var|
+    @global_merge_vars.collect do |var|
       {
         name: var.to_s,
         content: self.send(var)
@@ -104,24 +106,34 @@ class GenericNotification
     end
   end
 
-  def file_number
-    @dev_site.devID
+  def file_numbers
+    output = @dev_site.application_files.collect(&:file_number).to_sentence
+    Rails.logger.info "FILE NUMBERS => #{output}"
+    output
   end
 
   def date_sent
-    @notification.send_at
+    format_date(@notification.send_at)
   end
 
-  def application_type
-    @dev_site.application_type_name
+  def application_types
+    output = @dev_site.application_files.collect(&:application_type).to_sentence
+    Rails.logger.info "APPLICATION TYPES => #{output}"
+    output
   end
 
   def application_address
     @dev_site.address
   end
 
-  def dev_url
+  def link_to_full_notice
     @dev_site.url_full_notice
+  end
+
+  def dev_site_url
+    url = Services::UrlGenerator.generate_dev_site_url(@dev_site.id)
+    Rails.logger.info "DEV SITE URL => #{url}"
+    url
   end
 
   def recipient_name(user)
@@ -130,5 +142,12 @@ class GenericNotification
 
   def recipient_email(user)
     user.email
+  end
+
+  def date_active
+    active_status = @dev_site.statuses.find_by(status: Status::APPLICATION_COMPLETE_STATUS)
+    return unless active_status
+
+    format_date(active_status.start_date)
   end
 end

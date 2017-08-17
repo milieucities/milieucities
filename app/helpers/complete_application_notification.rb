@@ -1,10 +1,8 @@
 class CompleteApplicationNotification < GenericNotification
-  GLOBAL_MERGE_VARS = [:file_number, :date_sent, :application_type, :application_address, :link_to_full_notice, :date_active]
+  GLOBAL_MERGE_VARS = [:file_numbers, :date_sent, :application_types, :application_address, :dev_site_url, :date_active]
 
-  def date_active
-    active_status = @dev_site.statuses.find_by(status: Status::APPLICATION_COMPLETE_STATUS)
-    return unless active_status
-
-    active_status.start_date
+  def initialize(notification)
+    super
+    @global_merge_vars = GLOBAL_MERGE_VARS
   end
 end

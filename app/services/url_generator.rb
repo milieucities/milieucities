@@ -1,10 +1,10 @@
 module Services
   class UrlGenerator
     HOST_MAP = {
-      'development' => 'http://localhost:3000',
-      'test' => 'http://localhost:3000',
-      'production' => 'https://cities.milieu.io',
-      'staging' => 'http://test.milieu.io'
+      'development' => 'localhost:3000',
+      'test' => 'localhost:3000',
+      'production' => 'cities.milieu.io',
+      'staging' => 'test.milieu.io'
     }.freeze
 
     def self.generate_approve_comment_url(opts)
@@ -31,6 +31,11 @@ module Services
       }.to_query
 
       "#{root_url}?#{query}"
+    end
+
+    def self.generate_dev_site_url(dev_site_id)
+      host = HOST_MAP[Rails.env]
+      Rails.application.routes.url_helpers.dev_site_url(id: dev_site_id, host: host)
     end
   end
 end

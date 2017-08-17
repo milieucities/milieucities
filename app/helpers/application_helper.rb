@@ -10,4 +10,8 @@ module ApplicationHelper
       image_tag user.profile.avatar.web.thumb, class: options[:html_class].to_s
     end
   end
+
+  def format_date(datetime)
+    datetime.strftime('%B %-d, %Y')
+  end
 end
