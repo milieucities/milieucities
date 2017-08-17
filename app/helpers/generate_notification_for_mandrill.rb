@@ -2,24 +2,21 @@ class GenerateNotificationForMandrill
 
   def generate(notification)
     command = notification_factory[notification.notification_type]
-    Rails.logger.info "=============================== GENERATE NOTIFICATION ===================================="
-    Rails.logger.info "COMMAND => #{command.inspect}"
-
-    result = command ? command.call(notification) : GenericNotificiation.call(notification)
+    result = command ? command.call(notification) : Notifications::GenericNotificiation.call(notification)
     result.result
   end
 
   def notification_factory
     {
-      Notification::COMPLETE_APPLICATION => CompleteApplicationNotification,
-      Notification::PUBLIC_MEETING => PublicMeetingNotification,
-      Notification::COMPLETE_APPLICATION_AND_PUBLIC_MEETING => CompleteApplicationAndPublicMeetingNotification,
-      Notification::REVISED_APPLICATION => RevisedApplicationNotification,
-      Notification::REVISED_APPLICATION_AND_PUBLIC_MEETING => RevisedApplicationAndPublicMeetingNotification,
-      Notification::DECISION_MEETING => DecisionMeetingNotification,
-      Notification::COMMENTS_CLOSED => CommentsClosedNotification,
-      Notification::PASSING => PassingNotification,
-      Notification::REJECTED => RejectedNotification,
+      Notification::COMPLETE_APPLICATION => Notifications::StatusNotification,
+      Notification::PUBLIC_MEETING => Notifications::PublicMeetingNotification,
+      Notification::COMPLETE_APPLICATION_AND_PUBLIC_MEETING => Notifications::StatusAndPublicMeetingNotification,
+      Notification::REVISED_APPLICATION => Notifications::StatusNotification,
+      Notification::REVISED_APPLICATION_AND_PUBLIC_MEETING => Notifications::StatusAndPublicMeetingNotification,
+      Notification::DECISION_MEETING => Notifications::DecisionMeetingNotification,
+      Notification::COMMENTS_CLOSED => Notifications::GenericNotificiation,
+      Notification::PASSING => Notifications::GenericNotificiation,
+      Notification::REJECTED => Notifications::GenericNotificiation,
     }
   end
 end
