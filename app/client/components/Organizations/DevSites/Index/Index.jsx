@@ -63,7 +63,7 @@ export default class Index extends Component {
         {
           !loading &&
           <div className={css.content}>
-            <h2>Manage Development Sites</h2>
+            <h2>{i18n.manageDevelopmentSites}</h2>
             <div className={`row ${indexCss.addSites}`}>
               <div className="col s12">
                 <a href={`/${locale}/dev_sites/new`} className='btn'>{i18n.addDevelopmentSite}</a>

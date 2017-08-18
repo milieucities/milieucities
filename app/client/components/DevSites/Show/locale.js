@@ -24,7 +24,9 @@ const i18n = new LocalizedStrings({
     message: "Message",
     notices: 'Notices',
     attachments: 'Attachments',
-
+    projectDescription: 'Project Description',
+    applicationFiles: 'Application files:',
+    linkToPlanningPage: 'Link to Planning Page',
   },
   fr: {
     messageSent: "Message envoyé avec succès!",
@@ -46,7 +48,12 @@ const i18n = new LocalizedStrings({
     councillor: "Conseiller",
     name: "Prénom",
     email: "Courriel",
-    message: "Message"
+    message: "Message",
+    notices: 'Notices',
+    attachments: 'Attachments',
+    projectDescription: 'Project Description',
+    applicationFiles: 'Application files:',
+    linkToPlanningPage: 'Link to Planning Page',
   }
 });
 
