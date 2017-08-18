@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import css from './dev-site-list.scss'
 import { replace, ceil } from 'lodash'
 import i18n from './locale'
+import { MAX_RESULTS_PER_PAGE } from '../../../Common/constants.js';
 
 export default class DevSiteList extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ export default class DevSiteList extends Component {
   }
   _handleForwardClick(e) {
     e.preventDefault();
-    if((this.props.page + 1) === ceil(this.props.total / 20)) return;
+    if((this.props.page + 1) === ceil(this.props.total / MAX_RESULTS_PER_PAGE)) return;
     this.parent.setState({ page: (this.props.page + 1) }, () => this.parent.loadDevSites());
   }
   _saveCityRequest(e) {
@@ -78,8 +79,8 @@ export default class DevSiteList extends Component {
           <div>
             <div className={css.pagination}>
               <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
-              {this.props.page + 1} / {ceil(this.props.total / 20)}
-              <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
+              {this.props.page + 1} / {ceil(this.props.total / MAX_RESULTS_PER_PAGE)}
+              <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / MAX_RESULTS_PER_PAGE) ? css.disablerightarrow : css.rightarrow}></a>
             </div>
             {
               this.props.devSites.map((devSite, index) => {
@@ -110,8 +111,8 @@ export default class DevSiteList extends Component {
             }
             <div className={css.pagination}>
               <a href="#" onClick={this.handlePreviousClick} className={this.props.page === 0 ? css.disableleftarrow : css.leftarrow}></a>
-              {this.props.page + 1} / {ceil(this.props.total / 20)}
-              <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / 20) ? css.disablerightarrow : css.rightarrow}></a>
+              {this.props.page + 1} / {ceil(this.props.total / MAX_RESULTS_PER_PAGE)}
+              <a href="#" onClick={this.handleForwardClick} className={(this.props.page+1) === ceil(this.props.total / MAX_RESULTS_PER_PAGE) ? css.disablerightarrow : css.rightarrow}></a>
             </div>
           </div>
         }

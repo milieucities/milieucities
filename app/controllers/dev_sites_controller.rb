@@ -1,5 +1,5 @@
 class DevSitesController < ApplicationController
-  DEFAULT_SITES_LIMIT = 80
+  DEFAULT_SITES_LIMIT = 50
   load_and_authorize_resource
   after_action :allow_iframe, only: [:index]
 
@@ -7,6 +7,7 @@ class DevSitesController < ApplicationController
     @no_header = true
     @dev_sites = DevSite.search(search_params)
     @total = @dev_sites.count
+    Rails.logger.info "DEV_SITES => #{@dev_sites}"
     paginate
 
     respond_to do |format|
