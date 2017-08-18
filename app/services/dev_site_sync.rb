@@ -116,7 +116,7 @@ module Services
           @counter += 1
         else
           puts "Did not save - #{dev_site['devid']}"
-          puts "Did not save - #{new_dev_site.errors.messages}"
+          puts "Did not save - #{current_dev_site.errors.messages}"
         end
       rescue Exception => msg
         puts msg.inspect
@@ -142,7 +142,8 @@ module Services
         devID: dev_site['devid'],
         received_date: dev_site['receiveddate'],
         updated: dev_site['updated'],
-        application_type: dev_site['apptype']
+        application_type: dev_site['apptype'],
+        title: dev_site['address'][0]['addr']
       }
     end
 
@@ -179,6 +180,8 @@ module Services
         address_attrs = parse_address(address)
         app_site.addresses.build(address_attrs)
       end if dev_site['address'].present?
+
+      app_site.addresses.first.update(primary_address: true) if app_site.addresses.any?
 
       dev_site['statuses'].each do |status|
         status_attrs = parse_status(status)

@@ -24,7 +24,8 @@ const i18n = new LocalizedStrings({
     attachments: 'Attachments',
     contact: "Contact",
     emailCouncillor: "Email the Councillor",
-    emailUrbanPlanner: "Email the Urban Planner"
+    emailUrbanPlanner: "Email the Urban Planner",
+    linkToPlanningPage: 'Link to municipal planning page'
   },
   fr: {
     messageSent: "Message envoyé avec succès!",
@@ -47,7 +48,8 @@ const i18n = new LocalizedStrings({
     message: "Message",
     contact: "Contacter",
     emailCouncillor: "Contacter le(la) Conseiller(ère)",
-    emailUrbanPlanner: "Contacter l'Urbaniste"
+    emailUrbanPlanner: "Contacter l'Urbaniste",
+    linkToPlanningPage: 'Link to municipal planning page'
   }
 });
 

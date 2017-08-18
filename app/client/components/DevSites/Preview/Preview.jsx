@@ -259,13 +259,14 @@ export default class extends Component {
                     <TabPanel>
                       <h3 className={css.description}>Project Description</h3>
                       <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+                      { devSite.url_full_notice &&
+                        <div>
+                          <p><a href={devSite.url_full_notice} target='_blank'>{i18n.linkToPlanningPage}</a></p>
+                        </div>
+                      }
                     </TabPanel>
                     <TabPanel>
                       <h3 className={css.description}>{i18n.attachments}</h3>
-                      {
-                        (devSite.city_files.length > 0 || devSite.files.length > 0) &&
-                        <h3 className={css.description}>{i18n.file}</h3>
-                      }
                       {
                         devSite.city_files.map((file, i) => {
                           return(
@@ -290,10 +291,10 @@ export default class extends Component {
                       {
                         devSite.statuses &&
                         devSite.statuses.map((status, i) => {
-                          if (status.filesuploader) {
+                          if (status.notification && status.notification.filesuploader) {
                             return(
                               <div key={i}>
-                                <a href={status.filesuploader.url} target='_blank' className={css.filelink}>{status.filesuploader.name}</a>
+                                <a href={status.notification.filesuploader.url} target='_blank' className={css.filelink}>{status.notification.filesuploader.name}</a>
                               </div>
                             )
                           }
@@ -317,7 +318,7 @@ export default class extends Component {
         </div>
       </div>
 
-        <CommentsSection devSite={devSite} devSiteId={devSite.id} applicationType={devSite.application_type_name}/>
+        <CommentsSection devSite={devSite} devSiteId={devSite.id} />
 
         {
           showModal &&

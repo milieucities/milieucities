@@ -26,6 +26,7 @@ export default class CommentsSection extends Component {
     this.destroyVote = (a,b,c,d) => this._destroyVote(a,b,c,d);
     this.handleVoteRootComment = (c,d) => this._handleVoteRootComment(c,d);
     this.handleChangePrivacyPolicy = (e) => this._handleChangePrivacyPolicy(e);
+    this.checkForSitePlanApplicationType = () => this._checkForSitePlanApplicationType();
 
     this.fetchComments();
   }
@@ -233,11 +234,17 @@ export default class CommentsSection extends Component {
     this.setState({ acceptedPrivacyPolicy: e.currentTarget.checked })
   }
 
+  _checkForSitePlanApplicationType() {
+    return this.props.devSite.application_files.some((file) => (
+      /Site Plan/.test(file.application_type)
+    ));
+  }
+
   render() {
     const totalComments = this.state.comments ? this.state.comments.length : 0;
     const comments = this.state.comments;
     const { locale } = document.body.dataset;
-    const showSitePlanText = /Site Plan/.test(this.props.applicationType);
+    const showSitePlanText = this.checkForSitePlanApplicationType();
     i18n.setLanguage(locale);
 
     if (showSitePlanText) {

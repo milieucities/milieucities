@@ -96,8 +96,11 @@ export default class DevSiteList extends Component {
                     <img src={devSite.image_url} className={css.previewImage} />
                     <div className={css.infoContainer}>
                       <h3 className={css.address}>{devSite.street}</h3>
-                      <div className={css.info}>{devSite.devID}</div>
-                      <div className={css.info}>{devSite.application_type_name === '/coa/' ?  devSite.application_type_name.replace(/coa/, 'Committee of Adjustment') : devSite.application_type_name = '' }</div>
+                      { devSite.application_files &&
+                        devSite.application_files.map((file, index) => (
+                          <div key={index} className={css.info}>{file.application_type} ({file.file_number})</div>
+                        ))
+                      }
                       <div className={css.info} dangerouslySetInnerHTML={{__html: devSite.status}}></div>
                       <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
                     </div>

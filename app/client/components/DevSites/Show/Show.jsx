@@ -113,10 +113,6 @@ export default class DevSiteShow extends Component {
                             <TabPanel>
                               <h3 className={css.description}>{i18n.attachments}</h3>
                               {
-                                (devSite.city_files.length > 0 || devSite.files.length > 0) &&
-                                <h3 className={css.description}>{i18n.file}</h3>
-                              }
-                              {
                                 devSite.city_files.map((file, i) => {
                                   return(
                                     <div key={i}>
