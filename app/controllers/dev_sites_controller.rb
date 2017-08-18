@@ -7,7 +7,6 @@ class DevSitesController < ApplicationController
     @no_header = true
     @dev_sites = DevSite.search(search_params)
     @total = @dev_sites.count
-    Rails.logger.info "DEV_SITES => #{@dev_sites}"
     paginate
 
     respond_to do |format|
