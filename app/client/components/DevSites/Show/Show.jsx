@@ -10,8 +10,8 @@ import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
 import i18n from './locale'
 import Chart from 'chart.js'
+import Tabs from '../Show/Tabs'
 import { ShareButtons, generateShareIcon } from 'react-share';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
@@ -89,81 +89,29 @@ export default class DevSiteShow extends Component {
                   <div className='row'>
                     <div className='col m4 s12'>
                       <h3>{devSite.address}</h3>
-                      {i18n.devId}: {devSite.devID} <br/>
-                      {devSite.application_type_name === '/coa/' ?  devSite.application_type_name.replace(/coa/, 'Committee of Adjustment') : devSite.application_type_name = '' } <br/>
+                      <p>Application files:</p>
+                        {
+                          devSite.application_files.map((file, index) => (
+                            <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
+                          ))
+                        }
                     </div>
                     <div className='col m8 s12'>
                       <img src={devSite.image_url} className={css.image} />
                     </div>
                   </div>
-                  <div className='row'>
-                    <div className='col m12 s12'>
-                      <div className={css.tabs}>
-                          <Tabs>
-                            <TabList>
-                              <Tab>{i18n.description}</Tab>
-                              <Tab>{i18n.attachments}</Tab>
-                              <Tab>{i18n.notices}</Tab>
-                            </TabList>
 
-                            <TabPanel>
-                              <h3 className={css.description}>Project Description</h3>
-                              <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
-                            </TabPanel>
-                            <TabPanel>
-                              <h3 className={css.description}>{i18n.attachments}</h3>
-                              {
-                                (devSite.city_files.length > 0 || devSite.files.length > 0) &&
-                                <h3 className={css.description}>{i18n.file}</h3>
-                              }
-                              {
-                                devSite.city_files.map((file, i) => {
-                                  return(
-                                    <div key={i}>
-                                      <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
-                                    </div>
-                                  )
-                                })
-                              }
-                              {
-                                devSite.files.map((file, i) => {
-                                  return(
-                                    <div key={i}>
-                                      <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
-                                    </div>
-                                  )
-                                })
-                              }
-                            </TabPanel>
-                            <TabPanel>
-                              <h3 className={css.description}>{i18n.notices}</h3>
-                              {
-                                devSite.statuses &&
-                                devSite.statuses.map((status, i) => {
-                                  if (status.filesuploader) {
-                                    return(
-                                      <div key={i}>
-                                        <a href={status.filesuploader.url} target='_blank' className={css.filelink}>{status.filesuploader.name}</a>
-                                      </div>
-                                    )
-                                  }
-                                })
-                              }
-                            </TabPanel>
-                          </Tabs>
-                     </div>
-                  </div>
-                </div>
+                  <Tabs devSite={devSite} />
+
+              </div>
               <div className='row'>
                 <div className='col s12 m6'>
-
                   <Comments devSiteId={devSite.id} />
                 </div>
 
                   <CommentsSection devSiteId={devSite.id} devSite={devSite} applicationType={devSite.application_type_name}/>
               </div>
             </div>
-          </div>
           }
         </div>
 

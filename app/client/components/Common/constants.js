@@ -71,3 +71,5 @@ exports.BUILDING_TYPES = [
 
 exports.DEFAULT_STATUS = 'Application Received'
 
+exports.MAX_RESULTS_PER_PAGE = 50
+

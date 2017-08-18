@@ -57,7 +57,7 @@ export default class Edit extends Component {
   }
 
   render() {
-    const options = this.props.notificationOptions[this.props.selectedStatus];
+    const options = this.props.notificationOptions[this.props.selectedStatus] || [];
     if (options.length < 1) { return <div></div> };
 
     return(

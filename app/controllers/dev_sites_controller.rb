@@ -1,5 +1,5 @@
 class DevSitesController < ApplicationController
-  DEFAULT_SITES_LIMIT = 80
+  DEFAULT_SITES_LIMIT = 50
   load_and_authorize_resource
   after_action :allow_iframe, only: [:index]
 

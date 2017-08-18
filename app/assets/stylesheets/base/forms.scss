@@ -62,6 +62,12 @@ select {
 .input-field {
   margin-bottom: 20px;
   position: relative;
+
+  &.disabled {
+    input, select {
+      color: $gray;
+    }
+  }
 }
 
 label {

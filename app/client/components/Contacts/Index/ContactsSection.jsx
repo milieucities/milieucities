@@ -15,7 +15,6 @@ export default class ContactsSection extends Component {
   }
 
   _handleSave(data, contactId) {
-
     const { locale } = document.body.dataset;
     let [url, type] = [`/dev_sites/${this.props.devSite.id}/contacts`, 'POST'];
 

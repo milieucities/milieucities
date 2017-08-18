@@ -10,7 +10,7 @@ import { render } from 'react-dom'
 import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
 import Chart from 'chart.js'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Tabs from '../Show/Tabs'
 
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
@@ -234,7 +234,7 @@ export default class extends Component {
           <div className='row'>
             <div className='col m4 s12'>
               <h3>{devSite.address}</h3>
-              <p>Application files:</p>
+              <p>{i18n.applicationFiles}</p>
               {
                 devSite.application_files.map((file, index) => (
                   <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
@@ -245,65 +245,9 @@ export default class extends Component {
             <div className='col m8 s12'>
               <img src={devSite.image_url} className={css.image} />
             </div>
-            </div>
-          <div className='row'>
-            <div className='col m12 s12'>
-              <div className={css.tabs}>
-                  <Tabs>
-                    <TabList>
-                      <Tab>{i18n.description}</Tab>
-                      <Tab>{i18n.attachments}</Tab>
-                      <Tab>{i18n.notices}</Tab>
-                    </TabList>
-
-                    <TabPanel>
-                      <h3 className={css.description}>Project Description</h3>
-                      <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
-                    </TabPanel>
-                    <TabPanel>
-                      <h3 className={css.description}>{i18n.attachments}</h3>
-                      {
-                        (devSite.city_files.length > 0 || devSite.files.length > 0) &&
-                        <h3 className={css.description}>{i18n.file}</h3>
-                      }
-                      {
-                        devSite.city_files.map((file, i) => {
-                          return(
-                            <div key={i}>
-                              <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
-                            </div>
-                          )
-                        })
-                      }
-                      {
-                        devSite.files.map((file, i) => {
-                          return(
-                            <div key={i}>
-                              <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
-                            </div>
-                          )
-                        })
-                      }
-                    </TabPanel>
-                    <TabPanel>
-                      <h3 className={css.description}>{i18n.notices}</h3>
-                      {
-                        devSite.statuses &&
-                        devSite.statuses.map((status, i) => {
-                          if (status.filesuploader) {
-                            return(
-                              <div key={i}>
-                                <a href={status.filesuploader.url} target='_blank' className={css.filelink}>{status.filesuploader.name}</a>
-                              </div>
-                            )
-                          }
-                        })
-                      }
-                    </TabPanel>
-                  </Tabs>
-                </div>
-             </div>
           </div>
+
+          <Tabs devSite={devSite} />
 
           <div className='row'>
             <div className='col m1 s2'>
@@ -317,7 +261,7 @@ export default class extends Component {
         </div>
       </div>
 
-        <CommentsSection devSite={devSite} devSiteId={devSite.id} applicationType={devSite.application_type_name}/>
+        <CommentsSection devSite={devSite} devSiteId={devSite.id} />
 
         {
           showModal &&

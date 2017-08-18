@@ -115,7 +115,7 @@ export default class DevSiteForm extends Component {
         {
           !loadingMunicipalities && !loadingDevSite &&
           <div className={css.content}>
-            {
+            { devSite.application_files &&
               <div>
                 <h2>Application files for this property</h2>
                 <ul>
@@ -155,7 +155,7 @@ export default class DevSiteForm extends Component {
                 <div className={css.data}>
                   <div className='row'>
                     <TextInputWithLabel
-                      classes='col s12'
+                      classes='col s12 disabled'
                       id='dev_site_title'
                       name='dev_site[title]'
                       defaultValue={devSite.title}
@@ -166,7 +166,7 @@ export default class DevSiteForm extends Component {
 
                   <div className='row'>
                     <TextInputWithLabel
-                      classes='col s12 m12 l6'
+                      classes='col s12 m12 l6 disabled'
                       id='dev_site_devID'
                       name='dev_site[devID]'
                       defaultValue={devSite.devID}
@@ -175,7 +175,7 @@ export default class DevSiteForm extends Component {
                       />
 
                     <SelectWithLabel
-                      classes='col s12 m12 l6'
+                      classes='col s12 m12 l6 disabled'
                       id='dev_site_build_type'
                       name='dev_site[build_type]'
                       label={i18n.buildingType}
@@ -251,7 +251,7 @@ export default class DevSiteForm extends Component {
 
                   <div className="row">
                     <SelectWithLabel
-                      classes='col s12 m12 l6'
+                      classes='col s12 m12 l6 disabled'
                       id='dev_site_municipality'
                       name='dev_site[municipality_id]'
                       label={i18n.municipality}
@@ -262,7 +262,7 @@ export default class DevSiteForm extends Component {
                       />
 
                     <SelectWithLabel
-                      classes='col s12 m12 l6'
+                      classes='col s12 m12 l6 disabled'
                       id='dev_site_ward_id'
                       name='dev_site[ward_id]'
                       label={i18n.ward}
