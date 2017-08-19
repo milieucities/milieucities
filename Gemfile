@@ -57,7 +57,7 @@ group :development do
   gem 'capistrano-bundler', '~> 1.2.0', require: false
   gem 'capistrano-resque', '~> 0.2.2', require: false
   gem 'pry-rails'
-  # gem 'spring'
+  gem 'spring'
   gem 'letter_opener'
   gem 'dotenv-rails', '~> 2.1.1'
   gem 'puma'

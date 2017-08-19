@@ -8,7 +8,7 @@ module Notifications
       :application_types,
       :date_sent,
       :application_address,
-      :link_to_full_notice,
+      :notice_url,
       :dev_site_url
     ]
 
@@ -130,7 +130,7 @@ module Notifications
       @dev_site.address
     end
 
-    def link_to_full_notice
+    def notice_url
       return @notification.notice.url if @notification.notice.present?
       @dev_site.url_full_notice
     end

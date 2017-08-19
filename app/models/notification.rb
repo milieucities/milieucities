@@ -28,15 +28,15 @@ class Notification < ActiveRecord::Base
   ]
 
   NOTIFICATION_TYPE_TO_TEMPLATE_MAP = {
-    COMPLETE_APPLICATION_AND_PUBLIC_MEETING => 'NOTICE OF COMPLETE APPLICATION AND PUBLIC MEETING',
-    COMPLETE_APPLICATION => 'NOTICE OF COMPLETE APPLICATION',
-    PUBLIC_MEETING => 'NOTICE OF PUBLIC MEETING',
-    DECISION_MEETING => 'DECISION MEETING NOTICE',
-    REVISED_APPLICATION_AND_PUBLIC_MEETING => 'NOTICE OF REVISED APPLICATION AND MEETING',
-    REVISED_APPLICATION => 'NOTICE OF REVISED APPLICATION',
-    PASSING => 'Notice of Passing',
-    REJECTED => 'Notice of Decision - rejection',
-    COMMENTS_CLOSED => 'Generic Comment Period Closed'
+    COMPLETE_APPLICATION_AND_PUBLIC_MEETING => 'notice-of-complete-application-and-public-meeting',
+    COMPLETE_APPLICATION => 'notice-of-complete-application',
+    PUBLIC_MEETING => 'notice-of-public-meeting',
+    DECISION_MEETING => 'decision-meeting-notice',
+    REVISED_APPLICATION_AND_PUBLIC_MEETING => 'notice-of-revised-application-and-meeting',
+    REVISED_APPLICATION => 'notice-of-revised-application',
+    PASSING => 'notice-of-passing',
+    REJECTED => 'notice-of-decision-rejection',
+    COMMENTS_CLOSED => 'comment-period-closed-generic'
   }.freeze
 
   STATUS_TO_NOTIFICATION_TYPES_MAP = {
