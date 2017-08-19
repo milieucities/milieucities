@@ -81,6 +81,8 @@ export default class Edit extends Component {
   _submitForm(e) {
     const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
+    let form = new FormData(document.querySelector('#user-form'));
+    form.append('user[address_attributes][primary_address]', true);
 
     $.ajax({
       url: `/users/${userSlug}`,
@@ -88,7 +90,7 @@ export default class Edit extends Component {
       type: 'PATCH',
       contentType: false,
       processData: false,
-      data: new FormData(document.querySelector('#user-form')),
+      data: form,
       success: user => {
         this.setState({ user, error: {} });
         window.flash('notice', i18n.profileUploadS);

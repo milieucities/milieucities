@@ -61,7 +61,8 @@ class UsersController < ApplicationController
       address_attributes: [
         :id,
         :street,
-        :city
+        :city,
+        :primary_address
       ],
       profile_attributes: [
         :id,
