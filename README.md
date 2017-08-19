@@ -1,6 +1,6 @@
 # Milieu
 
-[![Codeship Status for Milieucitiesrepo/m-server](https://codeship.com/projects/35ebcc50-1fd6-0134-d851-7a39504521c1/status?branch=master)](https://codeship.com/projects/160460)
+Current [stage site](http://test.milieu.io/?page=0&latitude=43.544476130796994&longitude=-80.25039908384068&zoom=11.5) and [production site](https://cities.milieu.io)
 
 ### Installation & Usage
 #### Start dev env without docker compose
