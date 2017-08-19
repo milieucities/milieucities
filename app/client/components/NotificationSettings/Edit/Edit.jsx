@@ -3,21 +3,45 @@ import { render } from 'react-dom'
 import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
+import { TextInputWithLabel } from '../../Common/FormFields/Form'
+
 
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, error: {} };
+    this.state = { loading: true, error: {}, secondary_address: false };
 
     this.loadNotification = () => this._loadNotification();
     this.submitForm = (e) => this._submitForm(e);
     this.loadNotification();
+    this.handleSecondaryAddress = (e) => this._handleSecondaryAddress(e);
+    this.loadUser = () => this._loadUser();
   }
 
   _loadNotification() {
     $.getJSON(`/users/${document.body.dataset.userSlug}/notification_setting`,
       notification_setting => this.setState({ notification_setting, loading: false })
     );
+  }
+
+  _loadUser() {
+    $.getJSON(`/users/${document.body.dataset.userSlug}`,
+      user => this.setState({ user, loading: false })
+    );
+  }
+
+  _handleSecondaryAddress(e) {
+    const secondary = e.target.value;
+    if (secondary === 'on') {
+      this.setState({
+        secondary_address: true
+      });
+    }
+    if (e.target.checked !== true) {
+      this.setState({
+        secondary_address: false
+      });
+    }
   }
 
   _submitForm(e) {
@@ -44,9 +68,10 @@ export default class Edit extends Component {
   }
 
   render() {
-    const { notification_setting, loading, error } = this.state;
+    const { user, notification_setting, loading, error, secondary_address } = this.state;
     console.log(notification_setting)
     i18n.setLanguage(document.body.dataset.locale);
+    if (user && !user.address) user.address = {};
 
     return(
       <Dashboard loading={loading} activeComponent='notification_setting'>
@@ -106,7 +131,6 @@ export default class Edit extends Component {
                       />
                       <label htmlFor='notification_newsletter'>{i18n.emailQ1S2}</label>
                     </div>
-
                 </div>
               </div>
             </div>
@@ -167,6 +191,46 @@ export default class Edit extends Component {
                       <label htmlFor='notification_municipality_scope'>{i18n.municipalityScope}</label>
                     </div>
 
+                    <div className='input-field col s12'>
+                      <input
+                        type='hidden'
+                        name='notification_setting[secondary_address]'
+                        value={false}
+                      />
+                      <input
+                        type='checkbox'
+                        defaultChecked={notification_setting.secondary_address}
+                        id='notification_secondary_address'
+                        name='notification_setting[secondary_address]'
+                        onChange={this.handleSecondaryAddress}
+                      />
+                      <label htmlFor='notification_municipality_scope'>{i18n.secondaryAddress}</label>
+                    </div>
+                    {
+                      (secondary_address) &&
+                        <div className={css.data}>
+                          <input type='hidden' name={'user[address_attributes][id]'} />
+                          <div className='row'>
+                            <TextInputWithLabel
+                              classes='col s12 m12 l6'
+                              id='address_street'
+                              name='user[address_attributes][street]'
+                              label={i18n.street}
+                              error={error['address.street']}
+                              form='user-form'
+                            />
+                          </div>
+                          <div className='row'>
+                            <TextInputWithLabel
+                              classes='col s12 m12 l6'
+                              id='address_city'
+                              name='user[address_attributes][city]'
+                              label={i18n.city}
+                              form='user-form'
+                            />
+                          </div>
+                        </div>
+                   }
                   </div>
                 </div>
               </div>
