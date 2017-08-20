@@ -235,12 +235,15 @@ export default class extends Component {
             <div className='col m6 s12'>
               <h3>{i18n.status}:</h3>
               <p>{latestStatus}</p>
-
               <h3>{i18n.applicationFiles}:</h3>
               {
                 devSite.application_files.map((file, index) => (
                   <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
                 ))
+              }
+
+              { devSite.url_full_notice &&
+                <div><a href={devSite.url_full_notice} target='_top' className={css.button}> {i18n.linkToPlanningPage} </a></div>
               }
             </div>
 
