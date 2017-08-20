@@ -12,7 +12,7 @@ const i18n = new LocalizedStrings({
     ward: "Ward",
     status: "Application Status",
     buildtype: "Building Type",
-    applicationFiles:"Application Files for this Property",
+    applicationFiles:"Development Applications for this Property",
     description: "Description",
     view: "View ",
     hide: "Hide ",
@@ -40,7 +40,7 @@ const i18n = new LocalizedStrings({
     devId: "Demande no",
     ward: "Quartier",
     status: "État d’avancement",
-    applicationFiles:"Type d'application",
+    applicationFiles:"Type d'application pour cet projet",
     description: "Description",
     view: "Afficher ", //TODO: Double check!
     hide: "Masquer ",
