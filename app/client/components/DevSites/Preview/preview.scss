@@ -100,6 +100,11 @@
     padding: 0.8em 0;
   }
 
+  p.description {
+    font-weight: bold;
+    margin-top: 1.75rem;
+  }
+
   .title {
     font-size: 30px;
     font-weight: 700;
@@ -441,6 +446,11 @@
   border-right: none;
   margin-bottom: 10px;
 
+  p.description {
+    font-weight: bold;
+    margin-top: 1.75rem;
+  }
+
   @media #{$small-and-down} {
     width: 100%;
   }
@@ -515,6 +525,3 @@
     }
   }
 }
-
-
-
