@@ -27,6 +27,7 @@ const i18n = new LocalizedStrings({
     projectDescription: 'Project Description',
     applicationFiles: 'Application files:',
     linkToPlanningPage: 'Link to Planning Page',
+    fileContact: "Contact",
   },
   fr: {
     messageSent: "Message envoyé avec succès!",

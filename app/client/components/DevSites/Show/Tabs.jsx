@@ -15,8 +15,23 @@ const DevSiteTabs = ({ devSite }) => (
             </TabList>
 
             <TabPanel>
-              <h3 className={css.description}>{i18n.projectDescription}</h3>
-              <div dangerouslySetInnerHTML={{__html: devSite.description }}></div>
+              <div>
+                <h3 className={css.description}>{i18n.projectDescription}</h3>
+                <p>{devSite.description}</p>
+              </div>
+              <div>
+                {
+                  devSite.contacts.map((contacts,i) => {
+                    return(
+                      <div key={i}>
+                        <h3 className={css.description}>{i18n.fileContact} {contacts.contact_type}:</h3>
+                        <p>{i18n.name}: {contacts.first_name} {contacts.last_name}</p>
+                        <p>{i18n.email}: <a href={"mailto:" + contacts.email_address + "?subject=" + devSite.address} target="_top">{contacts.email_address}</a></p>
+                        </div>
+                    )
+                  })
+                }</div>
+
               { devSite.url_full_notice &&
                 <div>
                   <p><a href={devSite.url_full_notice} target='_blank'>{i18n.linkToPlanningPage}</a></p>

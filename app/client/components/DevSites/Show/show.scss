@@ -17,7 +17,7 @@
   }
 
   h3 {
-    margin: 0.25rem 0;
+    margin: 0.25rem;
     font-weight: bold;
   }
 
@@ -32,6 +32,11 @@
 
   h3.timelinehead {
     color: #5790b4;
+  }
+
+  p.description {
+    font-weight: bold;
+    margin-top: 1.75rem;
   }
 
   .image {
