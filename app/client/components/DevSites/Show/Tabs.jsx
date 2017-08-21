@@ -15,6 +15,7 @@ const DevSiteTabs = ({ devSite }) => (
             </TabList>
 
             <TabPanel>
+
               <div>
                 <h3 className={css.description}>{i18n.projectDescription}</h3>
                 <p>{devSite.description}</p>
@@ -32,11 +33,6 @@ const DevSiteTabs = ({ devSite }) => (
                   })
                 }</div>
 
-              { devSite.url_full_notice &&
-                <div>
-                  <p><a href={devSite.url_full_notice} target='_blank'>{i18n.linkToPlanningPage}</a></p>
-                </div>
-              }
             </TabPanel>
             <TabPanel>
               <h3 className={css.description}>{i18n.attachments}</h3>

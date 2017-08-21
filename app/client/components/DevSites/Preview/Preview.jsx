@@ -230,19 +230,24 @@ export default class extends Component {
           <a className={css.close} onClick={this.closeDevSite} href='#'></a>
         </div>
         <div className={css.wrapper}>
-        <h3 className={css.status}>{latestStatus}</h3>
           <div className='row'>
-            <div className='col m4 s12'>
-              <h3>{devSite.address}</h3>
-              <p>{i18n.applicationFiles}</p>
+            <h1 className={css.devTitle}>{devSite.address}</h1>
+            <div className='col m6 s12'>
+              <h3>{i18n.status}:</h3>
+              <p>{latestStatus}</p>
+              <h3>{i18n.applicationFiles}:</h3>
               {
                 devSite.application_files.map((file, index) => (
                   <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
                 ))
               }
+
+              { devSite.url_full_notice &&
+                <div><a href={devSite.url_full_notice} target='_top' className={css.button}> {i18n.linkToPlanningPage} </a></div>
+              }
             </div>
 
-            <div className='col m8 s12'>
+            <div className='col m6 s12'>
               <img src={devSite.image_url} className={css.image} />
             </div>
           </div>
