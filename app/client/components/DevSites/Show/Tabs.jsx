@@ -40,7 +40,9 @@ const DevSiteTabs = ({ devSite }) => (
                 devSite.city_files.map((file, i) => {
                   return(
                     <div key={i}>
-                      <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
+                      <li>
+                        <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
+                        </li>
                     </div>
                   )
                 })
@@ -49,7 +51,9 @@ const DevSiteTabs = ({ devSite }) => (
                 devSite.files.map((file, i) => {
                   return(
                     <div key={i}>
-                      <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
+                      <li>
+                        <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
+                        </li>
                     </div>
                   )
                 })
@@ -63,7 +67,9 @@ const DevSiteTabs = ({ devSite }) => (
                   if (status.notification && status.notification.filesuploader) {
                     return(
                       <div key={i}>
+                        <li>
                         <a href={status.notification.filesuploader.url} target='_blank' className={css.filelink}>{status.notification.filesuploader.name}</a>
+                        </li>
                       </div>
                     )
                   }
