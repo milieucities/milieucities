@@ -49,9 +49,9 @@ export default class extends Component {
 
   _loadTimeline() {
     const { devSite } = this.state;
-    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
-    var data = latestStatus;
-    $('.tl').empty().timeline(data);
+    const currentStatus = devSite ? devSite.status : '';
+
+    $('.tl').timeline(currentStatus);
   }
 
   _loadDevSite() {
@@ -225,52 +225,54 @@ export default class extends Component {
 
     return(
       <div>
-      <div className={css.container} ref='container' tabIndex='-1'>
-        <div className={css.menu}>
-          <a className={css.close} onClick={this.closeDevSite} href='#'></a>
-        </div>
-        <div className={css.wrapper}>
-        <h3 className={css.status}>{latestStatus}</h3>
-          <div className='row'>
-            <div className='col m4 s12'>
-              <h3>{devSite.address}</h3>
-              <p>{i18n.applicationFiles}</p>
-              {
-                devSite.application_files.map((file, index) => (
-                  <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
-                ))
-              }
+        <div className={css.container} ref='container' tabIndex='-1'>
+          <div className={css.menu}>
+            <a className={css.close} onClick={this.closeDevSite} href='#'></a>
+          </div>
+          <div className={css.wrapper}>
+            <h3 className={css.status}>{latestStatus}</h3>
+            <div className='row'>
+              <div className='col m4 s12'>
+                <h3>{devSite.address}</h3>
+                <p>{i18n.applicationFiles}</p>
+                {
+                  devSite.application_files.map((file, index) => (
+                    <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
+                  ))
+                }
+              </div>
+
+              <div className='col m8 s12'>
+                <img src={devSite.image_url} className={css.image} />
+              </div>
             </div>
 
-            <div className='col m8 s12'>
-              <img src={devSite.image_url} className={css.image} />
+            <div className='row'>
+              <div className='col s12'>
+                <div className='tl'></div>
+              </div>
             </div>
-          </div>
 
-          <Tabs devSite={devSite} />
+            <Tabs devSite={devSite} />
 
-          <div className='row'>
-            <div className='col m1 s2'>
+            <div className='row'>
+              <div className='col s12 m6'>
+                <h3><b>{i18n.comments}</b></h3>
+
+                <Comments devSiteId={devSite.id} />
+              </div>
+            </div>
+
+            <CommentsSection devSite={devSite} devSiteId={devSite.id} />
+
+            {
+              showModal &&
+              <Modal parent={this}>
+                <EmailModal contact={contact} address={devSite.address} id={devSite.id} handleEmail={this.handleEmail} />
+              </Modal>
+            }
           </div>
         </div>
-      <div className='row'>
-        <div className='col s12 m6'>
-          <h3><b>{i18n.comments}</b></h3>
-
-          <Comments devSiteId={devSite.id} />
-        </div>
-      </div>
-
-        <CommentsSection devSite={devSite} devSiteId={devSite.id} />
-
-        {
-          showModal &&
-          <Modal parent={this}>
-            <EmailModal contact={contact} address={devSite.address} id={devSite.id} handleEmail={this.handleEmail} />
-          </Modal>
-        }
-      </div>
-      </div>
       </div>
     );
   }

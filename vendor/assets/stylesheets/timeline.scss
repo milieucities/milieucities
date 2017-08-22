@@ -2,7 +2,7 @@
   .checkoutwrap {
     color: #444;
     font-family: 'Avenir Next','Lato', sans-serif;
-    margin: 40px auto;
+    margin: 20px auto;
     max-width: 700px;
     position: relative;
     border: 1px solid transparent;
@@ -10,18 +10,19 @@
   }
 
   ul.checkoutbar {
-    margin: 0 20px;
-    border: 1px solid #9CC6C5;
+    margin: 0 10px;
     li {
-      span {
-        display: flex;
-      }
       color: #9B9B9B;
       display: block;
       font-size: 10px;
       font-weight: 600;
       padding: 2px 20px 2px 30px;
       position: relative;
+
+      span {
+        display: flex;
+      }
+
       &:before {
         background: #ddd;
         border: 1px solid #9B9B9B;
@@ -63,7 +64,7 @@
     }
   }
 
-  @media all and (min-width: 658px) {
+  @media all and (min-width: 300px) {
     .checkoutbar li.active:after {
       -webkit-animation: myanimation 3s 0;
       background-size: 35px 35px;
@@ -80,6 +81,7 @@
       margin: 50px 0;
     }
     ul.checkoutbar {
+      border: 1px solid #9CC6C5;
       background-size: 35px 35px;
       background-color: #ffffff;
       border-radius: 15px;
