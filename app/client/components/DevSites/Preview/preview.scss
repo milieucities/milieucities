@@ -18,7 +18,7 @@
   .menu {
     background-color: #E7EEE9;
     height: 50px;
-    width: 60%;
+    width: 65%;
     position: fixed;
     z-index: 1;
 
@@ -29,6 +29,8 @@
 
   .tabs {
     padding: 20px 0;
+    &:focus {
+      border: 2px solid $accessibility;}
   }
 
   .expand {
@@ -70,15 +72,19 @@
   .wrapper {
     padding: 2em 2em;
     margin-top: 50px;
+    margin-left: 4%;
+    margin-right: 4%;
     background-color: #fff;
 
     @media #{$small-and-down} {
       padding: 60px 20px 20px;
+      margin: 0;
     }
   }
 
   h1 {
     padding: 0 0.75rem;
+    font-weight: bold;
   }
 
   h3 {
@@ -86,7 +92,7 @@
     font-weight: bold;
   }
 
-  h3.status {
+  h1.devTitle {
     color: #5790b4;
     padding: 0 0.75rem;
   }
@@ -122,11 +128,52 @@
     text-align: center;
     color: #aaa;
   }
+  .button {
+    background-color:#fff;
+    -webkit-border-top-left-radius:2px;
+    -moz-border-radius-topleft:2px;
+    border-top-left-radius:2px;
+    -webkit-border-top-right-radius:2px;
+    -moz-border-radius-topright:2px;
+    border-top-right-radius:2px;
+    -webkit-border-bottom-right-radius:2px;
+    -moz-border-radius-bottomright:2px;
+    border-bottom-right-radius:2px;
+    -webkit-border-bottom-left-radius:2px;
+    -moz-border-radius-bottomleft:2px;
+    border-bottom-left-radius:2px;
+    text-indent:0;
+    padding: 0 0.75rem;
+    border:1px solid #5790b4;
+    display:inline-block;
+    color:#5790b4;
+    font-size:1rem;
+    font-style:normal;
+    height:35px;
+    line-height:35px;
+    text-decoration:none;
+    text-align:center;
+    margin: 1.75rem 0;
+  }
+  .button:hover {
+    -moz-box-shadow: 1px 1px 2px 0px #3a7496;
+    -webkit-box-shadow: 1px 1px 2px 0px #3a7496;
+    box-shadow: 1px 1px 2px 0px #3a7496;
+    color: #5d9bc0;
+  }
+  .button:active {
+    -moz-box-shadow: 1px 1px 2px 0px #3a7496;
+    -webkit-box-shadow: 1px 1px 2px 0px #3a7496;
+    box-shadow: 1px 1px 2px 0px #3a7496;
+    position:relative;
+    top:1px;
+  }
 
   .image {
-    height: 200px;
     width: 100%;
-    max-height: 40vh;
+    height:100%;
+    max-height: 60vh;
+    margin-bottom: 5%;
     border-radius: 3px;
     object-fit: cover;
     position: relative;

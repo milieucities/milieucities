@@ -71,7 +71,7 @@ const i18n = new LocalizedStrings({
     paragraph_23: "All comments, questions, concerns or complaints regarding your Personal Information, this Privacy Statement or our privacy practices, should be forwarded to our Privacy Officer as follows.",
     paragraph_24: "E-mail: info@milieu.io",
     address_1: "Privacy Officer",
-    address_2: "29 Melgund Ave., Apt 1",
+    address_2: "610-285 Loretta Ave. S.",
     address_3: "Ottawa, Ontario",
     address_4: "Canada"
   },
@@ -145,7 +145,7 @@ const i18n = new LocalizedStrings({
     paragraph_24: "Tous commentaires, et toutes questions, inquiétudes ou plaintes concernant votre Information personnelle, la présente Politique de confidentialité ou nos pratiques en matière de vie privée, doivent être acheminées à notre Officier de la vie privée, de la manière suivante.",
     paragraph_25: "Courriel: info@milieu.io",
     address_1: "Officier de la vie privée",
-    address_2: "29 Melgund Ave., Apt 1",
+    address_2: "610-285 Loretta Ave. S.",
     address_3: "Ottawa, Ontario",
     address_4: "Canada"
   }
