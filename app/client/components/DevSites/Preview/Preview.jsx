@@ -250,30 +250,32 @@ export default class extends Component {
               <div className='col m6 s12'>
                 <img src={devSite.image_url} className={css.image} />
               </div>
+            </div>
 
-              <div className='row'>
+            <div className='row'>
+              <div className='col s12'>
                 <div className='tl'></div>
               </div>
-
-              <Tabs devSite={devSite} />
-
-              <div className='row'>
-                <div className='col s12 m6'>
-                  <h3><b>{i18n.comments}</b></h3>
-
-                  <Comments devSiteId={devSite.id} />
-                </div>
-              </div>
-
-              <CommentsSection devSite={devSite} devSiteId={devSite.id} />
-
-              {
-                showModal &&
-                <Modal parent={this}>
-                  <EmailModal contact={contact} address={devSite.address} id={devSite.id} handleEmail={this.handleEmail} />
-                </Modal>
-              }
             </div>
+
+            <Tabs devSite={devSite} />
+
+            <div className='row'>
+              <div className='col s12 m6'>
+                <h3><b>{i18n.comments}</b></h3>
+
+                <Comments devSiteId={devSite.id} />
+              </div>
+            </div>
+
+            <CommentsSection devSite={devSite} devSiteId={devSite.id} />
+
+            {
+              showModal &&
+              <Modal parent={this}>
+                <EmailModal contact={contact} address={devSite.address} id={devSite.id} handleEmail={this.handleEmail} />
+              </Modal>
+            }
           </div>
         </div>
       </div>
