@@ -15,6 +15,7 @@ const DevSiteTabs = ({ devSite }) => (
             </TabList>
 
             <TabPanel>
+
               <div>
                 <h3 className={css.description}>{i18n.projectDescription}</h3>
                 <p>{devSite.description}</p>
@@ -32,11 +33,6 @@ const DevSiteTabs = ({ devSite }) => (
                   })
                 }</div>
 
-              { devSite.url_full_notice &&
-                <div>
-                  <p><a href={devSite.url_full_notice} target='_blank'>{i18n.linkToPlanningPage}</a></p>
-                </div>
-              }
             </TabPanel>
             <TabPanel>
               <h3 className={css.description}>{i18n.attachments}</h3>
@@ -44,7 +40,9 @@ const DevSiteTabs = ({ devSite }) => (
                 devSite.city_files.map((file, i) => {
                   return(
                     <div key={i}>
-                      <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
+                      <li>
+                        <a href={file.link} target='_blank' className={css.filelink}>{file.name}</a>
+                        </li>
                     </div>
                   )
                 })
@@ -53,7 +51,9 @@ const DevSiteTabs = ({ devSite }) => (
                 devSite.files.map((file, i) => {
                   return(
                     <div key={i}>
-                      <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
+                      <li>
+                        <a href={file.url} target='_blank' className={css.filelink}>{file.name}</a>
+                        </li>
                     </div>
                   )
                 })
@@ -67,7 +67,9 @@ const DevSiteTabs = ({ devSite }) => (
                   if (status.notification && status.notification.filesuploader) {
                     return(
                       <div key={i}>
+                        <li>
                         <a href={status.notification.filesuploader.url} target='_blank' className={css.filelink}>{status.notification.filesuploader.name}</a>
+                        </li>
                       </div>
                     )
                   }

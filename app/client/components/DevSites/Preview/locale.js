@@ -10,7 +10,9 @@ const i18n = new LocalizedStrings({
     share: "Share",
     devId: "File Number",
     ward: "Ward",
-    status: "Status",
+    status: "Application Status",
+    buildtype: "Building Type",
+    applicationFiles:"Development Applications for this Property",
     description: "Description",
     view: "View ",
     hide: "Hide ",
@@ -25,6 +27,7 @@ const i18n = new LocalizedStrings({
     contact: "Contact",
     emailCouncillor: "Email the Councillor",
     emailUrbanPlanner: "Email the Urban Planner",
+    linkToPlanningPage: "View on Municipal Planning Page",
   },
   fr: {
     messageSent: "Message envoyé avec succès!",
@@ -33,9 +36,11 @@ const i18n = new LocalizedStrings({
     openForComments: "Ouvert(e) à commentaires",
     committee: "Committee of Adjustment",
     share: "Partager",
+    buildtype: "Type de batiment",
     devId: "Demande no",
     ward: "Quartier",
     status: "État d’avancement",
+    applicationFiles:"Type d'application pour cet projet",
     description: "Description",
     view: "Afficher ", //TODO: Double check!
     hide: "Masquer ",
@@ -45,9 +50,12 @@ const i18n = new LocalizedStrings({
     name: "Prénom",
     email: "Courriel",
     message: "Message",
+    notices: 'Notices',
+    attachments: 'Attachments',
     contact: "Contacter",
     emailCouncillor: "Contacter le(la) Conseiller(ère)",
     emailUrbanPlanner: "Contacter l'Urbaniste",
+    linkToPlanningPage: "View on Municipal Planning Page",
   }
 });
 
