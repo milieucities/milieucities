@@ -20,8 +20,8 @@ export default class Edit extends Component {
 
   _onSave(e) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    this.props.handleSave(data, this.props.contact.id);
+    const form = e.currentTarget;
+    this.props.handleSave(form, this.props.contact.id);
   }
 
   render() {

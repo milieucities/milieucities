@@ -18,8 +18,9 @@ export default class StatusSection extends Component {
     this.toggleStatusForm = () => this._toggleStatusForm();
   }
 
-  _handleSaveStatus(data, statusId) {
+  _handleSaveStatus(form, statusId) {
     const { locale } = document.body.dataset;
+    const data = new FormData(form);
     let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses`, 'POST'];
 
     if(statusId) {
@@ -35,7 +36,9 @@ export default class StatusSection extends Component {
       processData: false,
       success: meeting => {
         window.flash('notice', 'Successfully saved!')
-        window.location.reload(true)
+        this.props.loadDevSite();
+        this.setState({ openStatusForm: false })
+        form.reset();
       },
       error: error => {
         window.flash('alert', 'Failed to save!')
@@ -55,7 +58,7 @@ export default class StatusSection extends Component {
       dataType: 'JSON',
       success: status => {
         window.flash('notice', 'Successfully deleted!')
-        window.location.reload(true)
+        this.props.loadDevSite();
       },
       error: error => {
         window.flash('alert', 'Failed to delete!')
@@ -66,7 +69,6 @@ export default class StatusSection extends Component {
 
 
   _handleSaveMeeting(data, statusId, meetingId) {
-
     const { locale } = document.body.dataset;
     let [url, type] = [`/dev_sites/${this.props.devSite.id}/statuses/${statusId}/meetings`, 'POST'];
 
@@ -81,8 +83,9 @@ export default class StatusSection extends Component {
       dataType: 'JSON',
       contentType: false,
       processData: false,
-      success: meeting => {
+      success: status => {
         window.flash('notice', 'Successfully saved!')
+        this.props.loadDevSite();
       },
       error: error => {
         window.flash('alert', 'Failed to save!')
@@ -102,6 +105,7 @@ export default class StatusSection extends Component {
       dataType: 'JSON',
       success: meeting => {
         window.flash('notice', 'Successfully deleted!')
+        this.props.loadDevSite();
       },
       error: error => {
         window.flash('alert', 'Failed to delete!')
@@ -128,6 +132,7 @@ export default class StatusSection extends Component {
       processData: false,
       success: notification => {
         window.flash('notice', 'Successfully saved!')
+        this.props.loadDevSite();
       },
       error: error => {
         window.flash('alert', 'Failed to save!')
@@ -147,6 +152,7 @@ export default class StatusSection extends Component {
       dataType: 'JSON',
       success: notification => {
         window.flash('notice', 'Successfully deleted!')
+        this.props.loadDevSite();
       },
       error: error => {
         window.flash('alert', 'Failed to delete!')

@@ -14,11 +14,12 @@ export default class ContactsSection extends Component {
     this.toggleContactForm = () => this._toggleContactForm();
   }
 
-  _handleSave(data, contactId) {
+  _handleSave(form, contactId) {
     const { locale } = document.body.dataset;
+    const data = new FormData(form);
     let [url, type] = [`/dev_sites/${this.props.devSite.id}/contacts`, 'POST'];
 
-    if(contactId) {
+    if (contactId) {
       [url, type] = [`/dev_sites/${this.props.devSite.id}/contacts/${contactId}`, 'PATCH']
     }
 
@@ -31,7 +32,9 @@ export default class ContactsSection extends Component {
       processData: false,
       success: contact => {
         window.flash('notice', 'Successfully saved!')
-        Turbolinks.visit(`/${locale}/dev_sites/${this.props.devSite.id}`);
+        this.props.loadDevSite();
+        this.setState({ openContactForm: false })
+        form.reset();
       },
       error: error => {
         window.flash('alert', 'Failed to save!')
@@ -51,7 +54,7 @@ export default class ContactsSection extends Component {
       dataType: 'JSON',
       success: contact => {
         window.flash('notice', 'Successfully deleted!')
-        Turbolinks.visit(`/${locale}/dev_sites/${this.props.devSite.id}`);
+        this.props.loadDevSite();
       },
       error: error => {
         window.flash('alert', 'Failed to delete!')
