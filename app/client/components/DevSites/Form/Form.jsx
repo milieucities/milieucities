@@ -95,7 +95,6 @@ export default class DevSiteForm extends Component {
       data: new FormData(e.currentTarget),
       success: devSite => {
         window.flash('notice', 'Successfully saved!')
-        Turbolinks.visit(redirectUrl);
       },
       error: error => {
         window.flash('alert', 'Failed to save!')
@@ -136,12 +135,14 @@ export default class DevSiteForm extends Component {
                   devSite={ devSite }
                   statusOptions={ this.props.statusOptions }
                   notificationOptions={ this.props.notificationOptions }
+                  loadDevSite={ this.loadDevSite }
                 />
 
                 <h2>{i18n.contacts}</h2>
                 <ContactsSection
                   devSite={ devSite }
                   contactOptions={ this.props.contactOptions }
+                  loadDevSite={ this.loadDevSite }
                 />
               </div>
             }

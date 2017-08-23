@@ -55,8 +55,9 @@ export default class Edit extends Component {
 
   _onSave(e) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    this.props.handleSaveStatus(data, this.props.status.id);
+    const form = e.currentTarget;
+    this.props.handleSaveStatus(form, this.props.status.id);
+    this.setState({ startDate: null, endDate: null })
   }
 
   render() {
