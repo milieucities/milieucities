@@ -16,7 +16,7 @@ module Statuses
 
     def update
       respond_to do |format|
-        if @notification.update(meeting_params)
+        if @notification.update(notification_params)
           format.json { render json: @notification, status: :created }
         else
           format.json { render json: @notification.errors, status: :unprocessable_entity }

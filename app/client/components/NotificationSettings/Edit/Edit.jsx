@@ -9,7 +9,7 @@ import { TextInputWithLabel } from '../../Common/FormFields/Form'
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, error: {}, secondary_address: false };
+    this.state = { loading: true, error: {}, secondaryAddress: false };
 
     this.loadNotification = () => this._loadNotification();
     this.submitForm = (e) => this._submitForm(e);
@@ -20,7 +20,7 @@ export default class Edit extends Component {
 
   _loadNotification() {
     $.getJSON(`/users/${document.body.dataset.userSlug}/notification_setting`,
-      notification_setting => this.setState({ notification_setting, loading: false })
+      notification_setting => this.setState({ notification_setting, loading: false, secondaryAddress: notification_setting.secondary_address })
     );
   }
 
@@ -31,17 +31,8 @@ export default class Edit extends Component {
   }
 
   _handleSecondaryAddress(e) {
-    const secondary = e.target.value;
-    if (secondary === 'on') {
-      this.setState({
-        secondary_address: true
-      });
-    }
-    if (e.target.checked !== true) {
-      this.setState({
-        secondary_address: false
-      });
-    }
+    const secondaryAddress = e.target.checked;
+    this.setState({ secondaryAddress });
   }
 
   _submitForm(e) {
@@ -68,7 +59,7 @@ export default class Edit extends Component {
   }
 
   render() {
-    const { user, notification_setting, loading, error, secondary_address } = this.state;
+    const { user, notification_setting, loading, error, secondaryAddress } = this.state;
     console.log(notification_setting)
     i18n.setLanguage(document.body.dataset.locale);
     if (user && !user.address) user.address = {};
@@ -204,29 +195,31 @@ export default class Edit extends Component {
                         name='notification_setting[secondary_address]'
                         onChange={this.handleSecondaryAddress}
                       />
-                      <label htmlFor='notification_municipality_scope'>{i18n.secondaryAddress}</label>
+                      <label htmlFor='notification_secondary_address'>{i18n.secondaryAddress}</label>
                     </div>
                     {
-                      (secondary_address) &&
+                      (secondaryAddress) &&
                         <div className={css.data}>
-                          <input type='hidden' name={'user[address_attributes][id]'} />
+                          <input type='hidden' name={'user[addresses_attributes][0][id]'} />
                           <div className='row'>
                             <TextInputWithLabel
                               classes='col s12 m12 l6'
                               id='address_street'
-                              name='user[address_attributes][street]'
+                              name='user[addresses_attributes][0][street]'
                               label={i18n.street}
+                              defaultValue={notification_setting.address.street}
                               error={error['address.street']}
-                              form='user-form'
+                              form='notification-setting-form'
                             />
                           </div>
                           <div className='row'>
                             <TextInputWithLabel
                               classes='col s12 m12 l6'
                               id='address_city'
-                              name='user[address_attributes][city]'
+                              name='user[addresses_attributes][0][city]'
+                              defaultValue={notification_setting.address.city}
                               label={i18n.city}
-                              form='user-form'
+                              form='notification-setting-form'
                             />
                           </div>
                         </div>

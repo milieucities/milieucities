@@ -10,6 +10,10 @@ module Users
     end
 
     def update
+      if params[:user]
+        current_user.update(user_address_params)
+      end
+
       if @notification_setting.update(notification_setting_params)
         render :show, status: :ok
       else
@@ -20,7 +24,18 @@ module Users
     private
 
     def notification_setting_params
-      params.require(:notification_setting).permit(:newsletter, :immediate_vicinity_scope, :ward_scope, :municipality_scope, :project_comments, :comment_replies)
+      params.require(:notification_setting)
+        .permit(:newsletter,
+                :immediate_vicinity_scope,
+                :ward_scope,
+                :municipality_scope,
+                :secondary_address,
+                :project_comments,
+                :comment_replies)
+    end
+
+    def user_address_params
+      params.require(:user).permit(addresses_attributes: [:id, :street, :city])
     end
   end
 end
