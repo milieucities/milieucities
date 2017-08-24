@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import css from './map-search.scss'
 import i18n from './locale'
+import SearchForm from '../../../Common/FormFields/SearchForm'
 import Autocomplete from '../../../Utility/Autocomplete/Autocomplete'
 import Select from '../../../Utility/Select/Select'
 import { flatten } from 'lodash'
@@ -16,6 +17,11 @@ export default class MapSearch extends Component {
     this.geocodeAddress = (address) => this._geocodeAddress(address);
     this.wardNames = () => this._wardNames();
     this.municipalityNames = () => this._municipalityNames();
+    this.handleSearchSubmit = (query) => this._handleSearchSubmit(query);
+  }
+
+  _handleSearchSubmit(query) {
+    this.props.updateSearchParams({ query }, this.props.search)
   }
 
   _autocompleteCallback(address, autocomplete) {
@@ -80,11 +86,7 @@ export default class MapSearch extends Component {
 
     return <div className={css.container}>
       <div className={css.wrapper}>
-        <Autocomplete
-          callback={this.autocompleteCallback}
-          placeholder={i18n.address}
-          type='autocomplete'
-          onSelect={this.handleAutocompleteSelect}/>
+        <SearchForm handleSubmit={this.handleSearchSubmit} />
       </div>
       <div className={css.divider}></div>
       <div className='row no-marg'>

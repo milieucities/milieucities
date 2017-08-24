@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import css from './map-wrapper.scss'
 import MapSearch from '../MapSearch/MapSearch'
-import MapFilter from '../MapFilter/MapFilter'
 import DevSiteList from '../DevSiteList/DevSiteList'
 import DevSitePreview from '../../Preview/Preview'
 import MapAwesome from '../Map/Map'
@@ -31,9 +30,10 @@ export default class MapWrapper extends Component {
                    isMobile: (window.innerWidth < 992)
                  };
 
-    this.search_and_sort = () => this._search_and_sort();
+    this.search = () => this._search();
     this.loadDevSites = () => this._loadDevSites();
     this.loadMunicipalities = () => this._loadMunicipalities();
+    this.updateSearchParams = (params) => this._updateSearchParams(params);
     this.params = () => this._params();
     this.loadDevSites();
     this.loadMunicipalities();
@@ -52,8 +52,8 @@ export default class MapWrapper extends Component {
   }
 
   _params() {
-    const { page, latitude, longitude, zoom, status, year, municipality, ward, activeDevSiteId } = this.state;
-    return omitBy({ page, latitude, longitude, zoom, status, year, municipality, ward, activeDevSiteId }, isNil);
+    const { query, page, latitude, longitude, zoom, status, year, municipality, ward, activeDevSiteId } = this.state;
+    return omitBy({ query, page, latitude, longitude, zoom, status, year, municipality, ward, activeDevSiteId }, isNil);
   };
 
   _loadDevSites() {
@@ -69,7 +69,7 @@ export default class MapWrapper extends Component {
     });
   }
 
-  _search_and_sort() {
+  _search() {
     const scrollToTop = () => { if (this.refs.sidebar) this.refs.sidebar.scrollTop = 0 };
     this.setState({ loading: true });
 
@@ -81,6 +81,10 @@ export default class MapWrapper extends Component {
     });
   }
 
+  _updateSearchParams(params) {
+    this.setState(params)
+  }
+
   render() {
     return(
       <div>
@@ -89,7 +93,11 @@ export default class MapWrapper extends Component {
             !this.state.isMobile &&
             <div className={css.container}>
               <div className={css.sidebar} ref='sidebar'>
-                <MapSearch {...this.state} parent={this} />
+                <MapSearch
+                  {...this.state}
+                  updateSearchParams={this.updateSearchParams}
+                  search={this.search}
+                />
                 <DevSiteList {...this.state} parent={this} />
               </div>
               <div className={css.content}>
