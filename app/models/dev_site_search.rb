@@ -1,10 +1,10 @@
 class DevSiteSearch < ActiveRecord::Base
   self.primary_key = "dev_site_id"
 
-  FILTER_PARAMS = %w(municipality ward status year featured).freeze
+  FILTER_PARAMS = %w(municipality ward status year featured organization).freeze
 
   def initialize(search_params)
-    @search_params = search_params
+    @search_params = search_params.with_indifferent_access
     @search_results = DevSiteSearch.all
   end
 
@@ -73,5 +73,9 @@ class DevSiteSearch < ActiveRecord::Base
 
   def filter_by_featured(collection, value)
     collection.where(featured: value)
+  end
+
+  def filter_by_organization(collection, value)
+    collection.where(organizations: { id: value })
   end
 end

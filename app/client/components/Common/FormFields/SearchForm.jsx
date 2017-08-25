@@ -31,20 +31,23 @@ export default class SearchForm extends Component {
 
   render() {
     return(
-      <form className={`row ${css.searchForm}`} onSubmit={this.handleSubmit}>
-        <div className='input-field col s12'>
-          <label htmlFor='search-input'>Search sites</label>
-          <input
-            type="text"
-            id='search-input'
-            value={this.state.query}
-            placeholder="File number, address, title, or description"
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className='col s12 m12 l6'>
-          <input type="submit" value='Search' className="btn submit" />
-          <button className="btn cancel" onClick={this.clearSearch}>Clear search</button>
+      <form className={`row ${css.devSiteSearch}`} onSubmit={this.handleSubmit}>
+        <div className={`col s12 ${css.searchForm}`}>
+          <div className={`input-field ${css.searchInput}`}>
+            <input
+              type="text"
+              id='search-input'
+              value={this.state.query}
+              placeholder="Search development sites"
+              onChange={this.handleChange}
+            />
+          </div>
+          <button type="submit" value='Search' className="btn submit">
+            <i className={`fa fa-search`}></i>
+          </button>
+          <button className="btn cancel" onClick={this.clearSearch}>
+            <i className={`fa fa-remove`}></i>
+          </button>
         </div>
       </form>
     )
