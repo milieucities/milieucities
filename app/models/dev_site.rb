@@ -54,18 +54,6 @@ class DevSite < ActiveRecord::Base
     Resque.enqueue(PruneDeadLinksJob, id) unless Rails.env.test?
   end
 
-  def self.search(search_params)
-    result = DevSite.joins(:ward, :municipality).includes(:statuses, :comments, :addresses)
-    result = location_search(result, search_params)
-    result = filter(result, search_params)
-    result
-  end
-
-  def self.search_by_query(collection, value)
-    return collection unless value
-    collection.fuzzy_search(value)
-  end
-
   def general_status
     return if statuses.empty?
     statuses.current.general_status
@@ -77,22 +65,14 @@ class DevSite < ActiveRecord::Base
   end
 
   def status_date
-    return if statuses.empty?
-    return nil unless statuses.current.start_date
-    statuses.current.start_date.strftime('%B %e, %Y')
+    return nil unless status && status.try(:start_date)
+    status.start_date.strftime('%B %e, %Y')
   end
 
   def valid_statuses
     return Status::DEFAULT_STATUSES unless municipality
 
-    city_name = municipality.name
-    no_accents = I18n.transliterate(city_name)
-    city_constant = no_accents.upcase.split(' ').join('_')
-    status_set = "#{city_constant}_STATUSES"
-    Status.const_get(status_set)
-
-  rescue NameError
-    Status::DEFAULT_STATUSES
+    municipality.valid_statuses
   end
 
   def street
@@ -146,16 +126,6 @@ class DevSite < ActiveRecord::Base
     sentiment.update(results[:averages])
   end
 
-  def self.find_ordered(ids)
-    return where(id: ids) if ids.empty?
-    order_clause = 'CASE dev_sites.id '
-    ids.each_with_index do |id, index|
-      order_clause << "WHEN #{id} THEN #{index} "
-    end
-    order_clause << "ELSE #{ids.length} END"
-    where(id: ids).order(order_clause)
-  end
-
   def application_files_by_type
     application_files.map(&:application_type)
   end
@@ -181,55 +151,5 @@ class DevSite < ActiveRecord::Base
     api_key = 'AIzaSyAwocEz4rtf47zDkpOvmYTM0gmFT9USPAw'
 
     "#{root_url}?size=#{image_size}&location=#{address}&key=#{api_key}"
-  end
-
-  class << self
-    def location_search(collection, search_params)
-      lat = search_params[:latitude]
-      lon = search_params[:longitude]
-
-      return collection unless lat && lon
-
-      dev_site_ids = []
-      dev_site_ids
-        .push(Address.within(5, origin: [lat, lon])
-        .closest(origin: [lat, lon])
-        .limit(150)
-        .pluck(:addressable_id))
-      collection.find_ordered(dev_site_ids.flatten.uniq)
-    end
-
-    def filter(result, search_params)
-      VALID_FILTERS.map do |filter|
-        value = search_params[:filter]
-        return result unless value
-
-        result = send("filter_by_#{filter}", result, value)
-      end
-      result
-    end
-
-    def filter_by_year(collection, value)
-      collection.where('extract(year from updated) = ?', value)
-    end
-
-    def filter_by_municipality(collection, value)
-      collection.where(municipalities: { name: value })
-    end
-
-    def filter_by_ward(collection, value)
-      collection.where(wards: { name: value })
-    end
-
-    def filter_by_status(collection, value)
-      collection
-        .where("statuses.start_date = (select max(statuses.start_date) \
-                 from statuses where statuses.dev_site_id = dev_sites.id)")
-        .where(statuses: { status: value })
-    end
-
-    def filter_by_featured(collection, value)
-      collection.where(featured: value)
-    end
   end
 end

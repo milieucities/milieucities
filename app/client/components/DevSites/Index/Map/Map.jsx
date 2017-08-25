@@ -244,7 +244,7 @@ export default class Map extends Component {
     map.on('dragend', e => {
       const [latitude, longitude] = [map.getCenter().lat, map.getCenter().lng];
       this.parent.setState({ latitude, longitude },
-        () => this.parent.search_and_sort()
+        () => this.parent.search()
       );
     });
 

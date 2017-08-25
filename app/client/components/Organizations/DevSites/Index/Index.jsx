@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Dashboard from '../../../Layout/Dashboard/Dashboard'
 import DevSiteCard from '../../../DevSites/Card/Card'
-import SearchForm from './SearchForm'
+import SearchForm from '../../../Common/FormFields/SearchForm'
 import css from '../../../Layout/Dashboard/dashboard.scss'
 import indexCss from './index.scss'
 import i18n from '../../locale.js'
@@ -65,9 +65,7 @@ export default class Index extends Component {
           <div className={css.content}>
             <h2>Manage Development Sites</h2>
             <div className={`row ${indexCss.addSites}`}>
-              <div className="col s12">
-                <a href={`/${locale}/dev_sites/new`} className='btn'>{i18n.addDevelopmentSite}</a>
-              </div>
+              <a href={`/${locale}/dev_sites/new`} className='btn'>{i18n.addDevelopmentSite}</a>
             </div>
             <SearchForm handleSubmit={this.loadDevSites} />
             <div className='row'>
