@@ -7,5 +7,5 @@ child :wards do
 end
 
 node :statuses do |mun|
-  DevSite.where(municipality_id: mun.id).map(&:status).uniq
+  mun.valid_statuses
 end

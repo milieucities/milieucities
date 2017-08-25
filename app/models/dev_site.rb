@@ -65,22 +65,14 @@ class DevSite < ActiveRecord::Base
   end
 
   def status_date
-    return if statuses.empty?
-    return nil unless statuses.current.start_date
-    statuses.current.start_date.strftime('%B %e, %Y')
+    return nil unless status && status.try(:start_date)
+    status.start_date.strftime('%B %e, %Y')
   end
 
   def valid_statuses
     return Status::DEFAULT_STATUSES unless municipality
 
-    city_name = municipality.name
-    no_accents = I18n.transliterate(city_name)
-    city_constant = no_accents.upcase.split(' ').join('_')
-    status_set = "#{city_constant}_STATUSES"
-    Status.const_get(status_set)
-
-  rescue NameError
-    Status::DEFAULT_STATUSES
+    municipality.valid_statuses
   end
 
   def street

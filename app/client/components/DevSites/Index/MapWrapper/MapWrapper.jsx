@@ -65,14 +65,12 @@ export default class MapWrapper extends Component {
 
   _loadMunicipalities() {
     $.getJSON(`/municipalities`, municipalities => {
-      console.log('municipalities', municipalities);
       this.setState({ municipalities });
     });
   }
 
   _search() {
     const scrollToTop = () => { if (this.refs.sidebar) this.refs.sidebar.scrollTop = 0 };
-    console.log('SEARCHING', this.params())
     this.setState({ loading: true });
 
     $.getJSON(`/dev_sites`, this.params(), json => {

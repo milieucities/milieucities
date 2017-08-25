@@ -1,5 +1,5 @@
 class DevSiteSearch < ActiveRecord::Base
-  self.primary_key = "dev_site_id"
+  self.primary_key = 'dev_site_id'
 
   FILTER_PARAMS = %w(organization municipality ward year status featured).freeze
 
@@ -14,7 +14,13 @@ class DevSiteSearch < ActiveRecord::Base
     apply_filters
 
     dev_site_ids = @search_results.map(&:dev_site_id).uniq
-    DevSite.joins(:ward, :municipality).includes(:statuses, :comments, :addresses).where(id: dev_site_ids)
+    DevSite.includes(:statuses,
+                     :comments,
+                     :addresses,
+                     :application_files,
+                     :meetings,
+                     :contacts)
+           .where(id: dev_site_ids)
   end
 
   def search_by_query
@@ -64,7 +70,10 @@ class DevSiteSearch < ActiveRecord::Base
   end
 
   def filter_by_status(collection, value)
-    collection.where(status: value).where('status_start <= ? AND (status_end IS NULL OR status_end > ?)', DateTime.current, DateTime.current)
+    collection
+      .where(status: value)
+      .where('status_start <= ? AND (status_end IS NULL OR status_end > ?)',
+             DateTime.current, DateTime.current)
   end
 
   def filter_by_featured(collection, value)
