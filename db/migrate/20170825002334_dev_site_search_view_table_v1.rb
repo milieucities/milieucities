@@ -13,12 +13,8 @@ class DevSiteSearchViewTableV1 < ActiveRecord::Migration
         application_files.application_type,
         application_files.file_number
       FROM dev_sites
-      JOIN addresses ON dev_sites.id = addresses.addressable_id AND addresses.addressable_type = 'DevSite'
-      JOIN municipalities ON dev_sites.municipality_id = municipalities.id
-      JOIN wards ON dev_sites.ward_id = wards.id
-      JOIN application_files ON dev_sites.id = application_files.dev_site_id
-      JOIN statuses ON dev_sites.id = statuses.dev_site_id
-      JOIN comments ON dev_sites.id = comments.commentable_id AND comments.commentable_type = 'DevSite';
+      LEFT JOIN addresses ON dev_sites.id = addresses.addressable_id AND addresses.addressable_type = 'DevSite'
+      JOIN application_files ON dev_sites.id = application_files.dev_site_id;
 
       CREATE INDEX index_dev_sites_on_title ON dev_sites USING gin(to_tsvector('english', title));
       CREATE INDEX index_dev_sites_on_short_description ON dev_sites USING gin(to_tsvector('english', short_description));
@@ -31,6 +27,15 @@ class DevSiteSearchViewTableV1 < ActiveRecord::Migration
   end
 
   def down
-    execute "DROP VIEW dev_site_searches"
+    execute <<-SQL
+      DROP VIEW dev_site_searches;
+      DROP INDEX index_dev_sites_on_title;
+      DROP INDEX index_dev_sites_on_short_description;
+      DROP INDEX index_dev_sites_on_description;
+      DROP INDEX index_addresses_on_street;
+      DROP INDEX index_addresses_on_city;
+      DROP INDEX index_application_files_on_application_type;
+      DROP INDEX index_application_files_on_file_number;
+    SQL
   end
 end

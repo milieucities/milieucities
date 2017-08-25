@@ -17,11 +17,12 @@ export default class MapSearch extends Component {
     this.geocodeAddress = (address) => this._geocodeAddress(address);
     this.wardNames = () => this._wardNames();
     this.municipalityNames = () => this._municipalityNames();
-    this.handleSearchSubmit = (query) => this._handleSearchSubmit(query);
+    this.handleSearchSubmit = (query, callback) => this._handleSearchSubmit(query, callback);
   }
 
   _handleSearchSubmit(query) {
-    this.props.updateSearchParams({ query }, this.props.search)
+    console.log('query', query)
+    this.props.updateSearchParams({ query }, this.props.search);
   }
 
   _autocompleteCallback(address, autocomplete) {
@@ -54,9 +55,7 @@ export default class MapSearch extends Component {
       newState = Object.assign(newState, { latitude: null, longitude: null })
     }
 
-    this.parent.setState(newState,
-      () => this.parent.search_and_sort()
-    );
+    this.props.updateSearchParams(newState, this.props.search);
   }
 
   _wardNames() {

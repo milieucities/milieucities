@@ -33,7 +33,7 @@ export default class MapWrapper extends Component {
     this.search = () => this._search();
     this.loadDevSites = () => this._loadDevSites();
     this.loadMunicipalities = () => this._loadMunicipalities();
-    this.updateSearchParams = (params) => this._updateSearchParams(params);
+    this.updateSearchParams = (params, callback) => this._updateSearchParams(params, callback);
     this.params = () => this._params();
     this.loadDevSites();
     this.loadMunicipalities();
@@ -71,6 +71,7 @@ export default class MapWrapper extends Component {
 
   _search() {
     const scrollToTop = () => { if (this.refs.sidebar) this.refs.sidebar.scrollTop = 0 };
+    console.log('SEARCHING', this.params())
     this.setState({ loading: true });
 
     $.getJSON(`/dev_sites`, this.params(), json => {
@@ -81,8 +82,9 @@ export default class MapWrapper extends Component {
     });
   }
 
-  _updateSearchParams(params) {
-    this.setState(params)
+  _updateSearchParams(params, callback) {
+    console.log('UPDATE PARAMS', params)
+    this.setState(params, callback)
   }
 
   render() {
