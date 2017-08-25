@@ -5,7 +5,7 @@ import SearchForm from '../../../Common/FormFields/SearchForm'
 import Autocomplete from '../../../Utility/Autocomplete/Autocomplete'
 import Select from '../../../Utility/Select/Select'
 import { flatten } from 'lodash'
-import { YEARS, STATUS_TYPES } from '../../../Common/constants'
+import { YEARS } from '../../../Common/constants'
 
 export default class MapSearch extends Component {
   constructor(props) {
@@ -16,32 +16,13 @@ export default class MapSearch extends Component {
     this.handleSelectDropdown = (type, value) => this._handleSelectDropdown(type, value);
     this.geocodeAddress = (address) => this._geocodeAddress(address);
     this.wardNames = () => this._wardNames();
+    this.statusOptions = () => this._statusOptions();
     this.municipalityNames = () => this._municipalityNames();
     this.handleSearchSubmit = (query, callback) => this._handleSearchSubmit(query, callback);
   }
 
   _handleSearchSubmit(query) {
-    console.log('query', query)
     this.props.updateSearchParams({ query }, this.props.search);
-  }
-
-  _autocompleteCallback(address, autocomplete) {
-    const googleLocationAutocomplete = new google.maps.places.AutocompleteService();
-    const request = { input: address, types: ['address'], componentRestrictions: {country: 'ca'} };
-    googleLocationAutocomplete.getPlacePredictions(request, (predictions) => {
-      const suggestions = predictions ? predictions.map(function(prediction){ return prediction.description; }) : [];
-      autocomplete.setState({ suggestions: suggestions });
-    })
-  }
-
-  _handleAutocompleteSelect(address) {
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': address}, (result) => {
-      const [latitude, longitude] = [result[0].geometry.location.lat(), result[0].geometry.location.lng()];
-      this.parent.setState({ latitude, longitude },
-        () => this.parent.search_and_sort()
-      );
-    });
   }
 
   _handleSelectDropdown(type, value) {
@@ -51,7 +32,11 @@ export default class MapSearch extends Component {
       newState = { [type]: null }
     }
 
-    if (type === 'ward' || type === 'municipality') {
+    if (type === 'municipality') {
+      newState = Object.assign(newState, { ward: null, status: null, latitude: null, longitude: null })
+    }
+
+    if (type === 'ward') {
       newState = Object.assign(newState, { latitude: null, longitude: null })
     }
 
@@ -77,11 +62,27 @@ export default class MapSearch extends Component {
     return this.props.municipalities.map((municipality) => municipality.name)
   }
 
+  _statusOptions() {
+    if (this.props.municipality) {
+      const selectedMunicipality = this.props.municipality;
+      const municipality = this.props.municipalities.find((municipality) => municipality.name == selectedMunicipality);
+      const statuses = municipality && municipality.statuses;
+      return statuses || [];
+    } else {
+      const municipalities = this.props.municipalities || [];
+      const statuses = municipalities.map((municipality) => {
+        return municipality.statuses
+      });
+      return flatten(statuses);
+    }
+  }
+
   render() {
     const { locale } = document.body.dataset;
     i18n.setLanguage(locale);
     const cities = this.municipalityNames();
     const wards = this.wardNames();
+    const statuses = this.statusOptions();
 
     return <div className={css.container}>
       <div className={css.wrapper}>
@@ -120,7 +121,7 @@ export default class MapSearch extends Component {
           <Select
             title={i18n.status}
             type='status'
-            options={STATUS_TYPES}
+            options={statuses}
             defaultValue={this.props.status}
             onSelect={this.handleSelectDropdown}
           />

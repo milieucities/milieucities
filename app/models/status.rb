@@ -1,7 +1,6 @@
 class Status < ActiveRecord::Base
   scope :current, -> { order(start_date: :desc).first }
   belongs_to :dev_site, foreign_key: 'dev_site_id'
-  belongs_to :municipality, foreign_key: 'municipality_id'
   has_one :meeting, dependent: :destroy
   has_one :notification, as: :notifiable, dependent: :destroy
 

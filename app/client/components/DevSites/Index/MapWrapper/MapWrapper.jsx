@@ -65,6 +65,7 @@ export default class MapWrapper extends Component {
 
   _loadMunicipalities() {
     $.getJSON(`/municipalities`, municipalities => {
+      console.log('municipalities', municipalities);
       this.setState({ municipalities });
     });
   }
@@ -83,7 +84,6 @@ export default class MapWrapper extends Component {
   }
 
   _updateSearchParams(params, callback) {
-    console.log('UPDATE PARAMS', params)
     this.setState(params, callback)
   }
 

@@ -7,7 +7,7 @@ module Organizations
       search_params = { organization: @organization.id }
       search_params[:query] = params[:query] if params[:query]
       @dev_sites = DevSiteSearch.new(search_params).results
-      @total = @dev_sites.count
+      @total = @dev_sites.count(:all)
       paginate
 
       respond_to do |format|

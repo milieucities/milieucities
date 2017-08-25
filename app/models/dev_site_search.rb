@@ -1,7 +1,7 @@
 class DevSiteSearch < ActiveRecord::Base
   self.primary_key = "dev_site_id"
 
-  FILTER_PARAMS = %w(municipality ward status year featured organization).freeze
+  FILTER_PARAMS = %w(organization municipality ward year status featured).freeze
 
   def initialize(search_params)
     @search_params = search_params.with_indifferent_access
@@ -11,11 +11,10 @@ class DevSiteSearch < ActiveRecord::Base
   def results
     search_by_query
     search_by_location
+    apply_filters
 
     dev_site_ids = @search_results.map(&:dev_site_id).uniq
-    dev_sites = DevSite.joins(:ward, :municipality).includes(:statuses, :comments, :addresses).where(id: dev_site_ids)
-
-    apply_filters(dev_sites)
+    DevSite.joins(:ward, :municipality).includes(:statuses, :comments, :addresses).where(id: dev_site_ids)
   end
 
   def search_by_query
@@ -40,35 +39,32 @@ class DevSiteSearch < ActiveRecord::Base
     @search_results = @search_results.where(dev_site_id: dev_site_ids.flatten.uniq)
   end
 
-  def apply_filters(collection)
+  def apply_filters
     FILTER_PARAMS.each do |param|
       value = @search_params[param]
-      return collection unless value
+      next unless value
 
-      collection = send("filter_by_#{param}", collection, value)
+      @search_results = send("filter_by_#{param}", @search_results, value)
     end
 
-    collection
+    @search_results
   end
 
   def filter_by_year(collection, value)
-    collection.where('extract(year from updated) = ?', value)
+    # in the view table we extract the year from a DateTime object and it returns a float
+    collection.where(year: value.to_f)
   end
 
   def filter_by_municipality(collection, value)
-    Rails.logger.info("filtering by municipality => #{value}")
-    collection.where(municipalities: { name: value })
+    collection.where(municipality: value)
   end
 
   def filter_by_ward(collection, value)
-    collection.where(wards: { name: value })
+    collection.where(ward: value)
   end
 
   def filter_by_status(collection, value)
-    collection
-      .where("statuses.start_date = (select max(statuses.start_date) \
-               from statuses where statuses.dev_site_id = dev_sites.id)")
-      .where(statuses: { status: value })
+    collection.where(status: value).where('status_start <= ? AND (status_end IS NULL OR status_end > ?)', DateTime.current, DateTime.current)
   end
 
   def filter_by_featured(collection, value)
@@ -76,6 +72,8 @@ class DevSiteSearch < ActiveRecord::Base
   end
 
   def filter_by_organization(collection, value)
-    collection.where(organizations: { id: value })
+    organization = Organization.find(value)
+    municipalities = organization.municipalities.pluck(:name).uniq
+    collection.where(municipality: municipalities)
   end
 end
