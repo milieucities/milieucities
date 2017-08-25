@@ -5,7 +5,7 @@ class DevSitesController < ApplicationController
 
   def index
     @no_header = true
-    @dev_sites = DevSite.search(search_params)
+    @dev_sites = DevSiteSearch.new(search_params).results
     @total = @dev_sites.count
     paginate
 
@@ -86,7 +86,7 @@ class DevSitesController < ApplicationController
   end
 
   def search_params
-    params.permit(:latitude, :longitude, :year, :ward, :status, :municipality, :featured)
+    params.permit(:query, :latitude, :longitude, :year, :ward, :status, :municipality, :featured)
   end
 
   # rubocop:disable Metrics/MethodLength

@@ -1,0 +1,32 @@
+.devSiteSearch {
+  .searchForm {
+    display: flex;
+    padding-right: 0;
+    padding-left: 0;
+
+    .searchInput {
+      flex-grow: 1;
+      margin: 0;
+      margin-right: 0.4em;
+
+      input {
+        border-radius: 3px;
+        font-family: $primary-font;
+
+        &::placeholder {
+          font-style: italic;
+          color: $gray;
+        }
+      }
+    }
+
+    button {
+      font-size: 14px;
+      box-sizing: border-box;
+      padding: 0 1em;
+      height: inherit;
+      line-height: inherit;
+      border-radius: 3px;
+    }
+  }
+}

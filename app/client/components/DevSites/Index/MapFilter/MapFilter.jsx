@@ -15,7 +15,7 @@ export default class MapFilter extends Component {
     this.setState({ activeText: text });
 
     this.parent.setState({ sort: toLower(text) },
-      () => this.parent.search_and_sort()
+      () => this.parent.search()
     );
 
   }
