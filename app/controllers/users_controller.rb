@@ -58,7 +58,7 @@ class UsersController < ApplicationController
       :email,
       :password,
       :password_confirmation,
-      address_attributes: [
+      addresses_attributes: [
         :id,
         :street,
         :city,

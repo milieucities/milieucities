@@ -18,6 +18,7 @@ module Users
         render :show, status: :ok
       else
         render json: @notification_setting.errors, status: :unprocessable_entity
+        render json: @user.errors, status: :unprocessable_entity
       end
     end
 

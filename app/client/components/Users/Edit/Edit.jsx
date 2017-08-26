@@ -82,7 +82,7 @@ export default class Edit extends Component {
     const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
     let form = new FormData(document.querySelector('#user-form'));
-    form.append('user[address_attributes][primary_address]', true);
+    form.append('user[addresses_attributes][primary_address]', true);
 
     $.ajax({
       url: `/users/${userSlug}`,
@@ -250,12 +250,12 @@ export default class Edit extends Component {
                 {i18n.location}
               </div>
               <div className={css.data}>
-                <input type='hidden' name={'user[address_attributes][id]'} value={user.address.id}/>
+                <input type='hidden' name={'user[addresses_attributes][id]'} value={user.address.id}/>
                 <div className='row'>
                   <TextInputWithLabel
                     classes='col s12 m12 l6'
                     id='address_street'
-                    name='user[address_attributes][street]'
+                    name='user[addresses_attributes][street]'
                     label={i18n.street}
                     error={error['address.street']}
                     defaultValue={user.address.street}
@@ -266,7 +266,7 @@ export default class Edit extends Component {
                   <TextInputWithLabel
                     classes='col s12 m12 l6'
                     id='address_city'
-                    name='user[address_attributes][city]'
+                    name='user[addresses_attributes][city]'
                     label={i18n.city}
                     defaultValue={user.address.city}
                     form='user-form'

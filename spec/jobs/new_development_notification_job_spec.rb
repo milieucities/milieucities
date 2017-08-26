@@ -3,7 +3,7 @@ require 'mandrill'
 
 describe NewDevelopmentNotificationJob do
   describe '#perform' do
-    let(:address_attributes) { attributes_for :address }
+    let(:addresses_attributes) { attributes_for :addresses }
     let(:dev_site) { create :dev_site }
     let(:user) { create :user }
     let(:expected_body) do
@@ -13,8 +13,8 @@ describe NewDevelopmentNotificationJob do
 
     context 'user lives within 150m of new dev site' do
       before :each do
-        user.create_address(address_attributes)
-        dev_site.addresses << create(:address, address_attributes)
+        user.create_address(addresses_attributes)
+        dev_site.addresses << create(:addresses, addresses_attributes)
 
         @expected_message_object = {
           from_name: 'Milieu',
@@ -25,7 +25,7 @@ describe NewDevelopmentNotificationJob do
           merge_vars: [{ rcpt: user.email, vars: [{ name: 'name', content: user.name }] }],
           preserve_recipients: false,
           global_merge_vars: [
-            { name: 'address', content: user.address.full_address },
+            { name: 'address', content: user.addresses.full_address },
             { name: 'dev_site_url', content: "https://milieu.io/dev_sites/#{dev_site.id}" }
           ]
         }
@@ -43,9 +43,9 @@ describe NewDevelopmentNotificationJob do
 
     context 'user lives further than 150m of new dev site' do
       before :each do
-        dev_site.addresses << create(:address, address_attributes)
-        address_attributes[:lat] = 49.418032
-        user.create_address(address_attributes)
+        dev_site.addresses << create(:addresses, addresses_attributes)
+        addresses_attributes[:lat] = 49.418032
+        user.create_address(addresses_attributes)
       end
 
       it 'should not send the user a notification' do
