@@ -14,7 +14,7 @@ describe NewDevelopmentNotificationJob do
     context 'user lives within 150m of new dev site' do
       before :each do
         user.create_address(addresses_attributes)
-        dev_site.addresses << create(:addresses, addresses_attributes)
+        dev_site.address << create(:address, address_attributes)
 
         @expected_message_object = {
           from_name: 'Milieu',
@@ -43,7 +43,7 @@ describe NewDevelopmentNotificationJob do
 
     context 'user lives further than 150m of new dev site' do
       before :each do
-        dev_site.addresses << create(:addresses, addresses_attributes)
+        dev_site.address << create(:address, address_attributes)
         addresses_attributes[:lat] = 49.418032
         user.create_address(addresses_attributes)
       end

@@ -207,7 +207,6 @@ export default class Edit extends Component {
                               id='address_street'
                               name='user[addresses_attributes][0][street]'
                               label={i18n.street}
-                              defaultValue={notification_setting.address.street}
                               error={error['address.street']}
                               form='notification-setting-form'
                             />
@@ -217,7 +216,6 @@ export default class Edit extends Component {
                               classes='col s12 m12 l6'
                               id='address_city'
                               name='user[addresses_attributes][0][city]'
-                              defaultValue={notification_setting.address.city}
                               label={i18n.city}
                               form='notification-setting-form'
                             />

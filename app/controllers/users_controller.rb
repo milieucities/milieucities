@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource :user
-  before_action :load_user, only: [:show, :edit, :destroy, :update]
+  before_action :load_user, only: [:show, :edit, :destroy, :update]  
 
   def index
     @users = User.includes(:profile, :notification)
@@ -62,7 +62,8 @@ class UsersController < ApplicationController
         :id,
         :street,
         :city,
-        :primary_address
+        :primary_address,
+        :secondary_address
       ],
       profile_attributes: [
         :id,
