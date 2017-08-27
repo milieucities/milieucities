@@ -240,7 +240,7 @@ export default class Edit extends Component {
                       <label htmlFor='user_password_confirmation'>{i18n.newPasswordConfirmation}</label>
                       <input id='user_password_confirmation' type='password' name='user[password_confirmation]' form='user-form'/>
                       {error.password_confirmation && <div className='error-message'>{error.password_confirmation}</div>}
-                  </div>
+                    </div>
                   </div>
                 </div>
               </div>
