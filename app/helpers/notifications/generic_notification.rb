@@ -3,6 +3,8 @@ module Notifications
     prepend SimpleCommand
     include ApplicationHelper
 
+    class NotificationError < StandardError; end
+
     DEFAULT_MERGE_VARS = [
       :file_numbers,
       :application_types,
@@ -24,7 +26,7 @@ module Notifications
     end
 
     def call
-      recipients = find_recipients
+      recipients = select_recipients
 
       return nil if recipients.empty?
 
@@ -74,27 +76,13 @@ module Notifications
       end
     end
 
-    def find_recipients
-      addresses = @dev_site.addresses
-      user_ids = addresses.collect do |address|
-        next if address.lat.blank? || address.lon.blank?
-        user_ids = find_users_nearby(address)
-      end
+    def select_recipients
+      command = SelectUsersForNotifications.new(@dev_site).call
 
-      planner = User.find_by(email: @dev_site.urban_planner_email.try(:downcase))
-      milieu = User.find_by(email: 'info@milieu.io')
+      return command.result if command.success?
 
-      recipients = User.find(user_ids.flatten)
-      recipients << milieu if milieu.present?
-      recipients << planner if planner.present?
-      recipients
-    end
-
-    def find_users_nearby(address)
-      Address
-        .within(0.15, origin: [address.lat, address.lon])
-        .where(addressable_type: 'User')
-        .pluck(:addressable_id)
+      errors.add(:notification, "Unable to select recipients: #{command.errors[:recipients]}")
+      return nil
     end
 
     def template_name
