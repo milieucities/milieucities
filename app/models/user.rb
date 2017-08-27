@@ -27,7 +27,10 @@ class User < ActiveRecord::Base
             length: { in: 6..20, message: I18n.t('validates.alert.passwordLimitation') },
             allow_blank: true,
             unless: 'provider.present?'
-  validates :addresses_attributes, :id, :street, :city, :primary_address, presence:  { message: 'Primary Address is required' }
+
+  # check docs for validating the address association
+  # https://apidock.com/rails/ActiveRecord/Validations/ClassMethods/validates_associated
+
   delegate :name, :bio, :web_presence, :anonymous_comments, to: :profile, allow_nil: true
   friendly_id :slug_candidates, use: :slugged
 
