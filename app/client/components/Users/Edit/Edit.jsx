@@ -258,7 +258,7 @@ export default class Edit extends Component {
                     name='user[addresses_attributes][0][street]'
                     label={i18n.street}
                     error={error['address.street']}
-                    defaultValue={user.primary_address.street}
+                    defaultValue={user.primary_address && user.primary_address.street}
                     form='user-form'
                   />
                 </div>
@@ -268,7 +268,7 @@ export default class Edit extends Component {
                     id='address_city'
                     name='user[addresses_attributes][0][city]'
                     label={i18n.city}
-                    defaultValue={user.primary_address.city}
+                    defaultValue={user.primary_address && user.primary_address.city}
                     form='user-form'
                   />
                 </div>

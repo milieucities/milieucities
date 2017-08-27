@@ -209,7 +209,7 @@ export default class Edit extends Component {
                               label={i18n.street}
                               error={error['address.street']}
                               form='notification-setting-form'
-                              defaultValue={notification_setting.address.street}
+                              defaultValue={notification_setting.address && notification_setting.address.street}
                             />
                           </div>
                           <div className='row'>
@@ -219,7 +219,7 @@ export default class Edit extends Component {
                               name='user[addresses_attributes][0][city]'
                               label={i18n.city}
                               form='notification-setting-form'
-                              defaultValue={notification_setting.address.city}
+                              defaultValue={notification_setting.address && notification_setting.address.city}
                             />
                           </div>
                         </div>
