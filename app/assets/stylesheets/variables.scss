@@ -40,3 +40,28 @@ $black: #333;
 $white: #fff;
 
 $primary-font: 'Avenir Next', 'Lato', sans-serif;
+
+/*z-index list*/
+
+$select-caret-z: 1;
+$select-dropdown-z: 2;
+$autocomplete-dropdown-z: 2;
+$wakefiled-share-z: 2;
+$article-z: 1;
+$search-z: 2;
+$tooltip-z: 1;
+$button-icon-z: 1;
+$dev-site-card-edit-z: 1;
+$header-z: 3;
+$header-mobile-z: 4;
+$header-close-z: 5;
+$modal-overlay-z: 8;
+$modal-body-z: 9;
+$timeline-mobile-li-z: 6;
+$timeline-li-z: 6;
+$timeline-li-active: 7;
+$dev-site-preview-menu-z: 8;
+$dev-site-preview-mobile-z: 9;
+$flash-message-z: 10;
+$cookies-notification-z: 10;
+

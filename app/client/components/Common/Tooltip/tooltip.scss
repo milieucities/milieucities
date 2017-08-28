@@ -1,6 +1,6 @@
 .tooltip {
   padding: 0 6px;
-  z-index: 1;
+  z-index: $tooltip-z;
 }
 
 .tooltip:hover::before {
@@ -9,7 +9,7 @@
   color: $dark-gray;
   padding: 10px;
   border-radius: 4px;
-  z-index: 1;
+  z-index: $tooltip-z;
   font-size: small;
   position: absolute;
   max-width: 250px;

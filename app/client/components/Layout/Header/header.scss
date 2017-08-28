@@ -8,7 +8,7 @@
   padding: 0 20px;
   border-bottom: 1px solid #979797;
   box-sizing: border-box;
-  z-index: 100;
+  z-index: $header-z;
   color: #9B9B9B;
 
   .fullPage {
@@ -24,14 +24,14 @@
 
     .closeMenu {
       position: fixed;
-      z-index: 1002;
+      z-index: $header-close-z;
       top: 20px;
       right: 20px;
     }
 
     .mobileMenu {
       position: fixed;
-      z-index: 1001;
+      z-index: $header-mobile-z;
       top: 0;
       left: 0;
       height: 100vh;

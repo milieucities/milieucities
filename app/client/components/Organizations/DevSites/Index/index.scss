@@ -11,7 +11,7 @@
 
   .edit {
     top: 10px;
-    z-index: 1;
+    z-index: $dev-site-card-edit-z;
     left: 175px;
     position: absolute;
     opacity: 0;

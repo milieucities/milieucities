@@ -6,7 +6,7 @@
   padding: 10px 20px;
   background-color: $tertiary-color;
   color: white;
-  z-index: 10000;
+  z-index: $cookies-notification-z;
 
   p {
     margin: 0;

@@ -37,19 +37,19 @@
         text-align: center;
         top: 4px;
         width: 8px;
-        z-index: 999;
+        z-index: $timeline-li-z;
       }
       &.active {
         color: #9CC6C5;
         font-weight: bold;
         &:before {
-          z-index: 99999;
+          z-index: $timeline-li-active;
         }
       }
       &.visited {
-        z-index: 99999;
+        z-index: $timeline-li-active;
         &:before {
-          z-index: 99999;
+          z-index: $timeline-li-active;
         }
       }
       &:nth-child(1):before, &:nth-child(2):before, &:nth-child(3):before, &:nth-child(4):before, &:nth-child(5):before, &:nth-child(6):before {
@@ -113,7 +113,7 @@
           position: absolute;
           top: -50px;
           width: 8px;
-          z-index: 99;
+          z-index: $timeline-mobile-li-z;
         }
         &.visited {
           background: none;
@@ -126,7 +126,7 @@
             position: absolute;
             top: -50px;
             width: 100%;
-            z-index: 99;
+            z-index: $timeline-mobile-li-z;
           }
         }
       }
