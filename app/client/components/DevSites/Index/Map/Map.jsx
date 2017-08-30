@@ -60,6 +60,7 @@ export default class Map extends Component {
     map.touchZoomRotate.disableRotation();
     map.scrollZoom.disable();
     map.addControl(new mapboxgl.NavigationControl({ position: 'top-left' }));
+    map.scrollZoom.enable();
     map.on('load', this.loadMap);
   }
 
