@@ -167,27 +167,6 @@ export default class DevSiteForm extends Component {
 
                   <div className='row'>
                     <TextInputWithLabel
-                      classes='col s12 m12 l6 disabled'
-                      id='dev_site_devID'
-                      name='dev_site[devID]'
-                      defaultValue={devSite.devID}
-                      label={i18n.propertyNumber}
-                      disabled={true}
-                      />
-
-                    <SelectWithLabel
-                      classes='col s12 m12 l6 disabled'
-                      id='dev_site_build_type'
-                      name='dev_site[build_type]'
-                      label={i18n.buildingType}
-                      defaultValue={devSite.build_type}
-                      options={BUILDING_TYPES.map(a => [a,a])}
-                      disabled={true}
-                      />
-                  </div>
-
-                  <div className='row'>
-                    <TextInputWithLabel
                       classes='col s12'
                       id='dev_site_short_description'
                       name='dev_site[short_description]'
