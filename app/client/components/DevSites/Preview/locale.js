@@ -12,7 +12,7 @@ const i18n = new LocalizedStrings({
     ward: "Ward",
     status: "Application Status",
     buildtype: "Building Type",
-    applicationFiles:"Development Applications for this Property",
+    applicationFiles:"Application(s)",
     description: "Description",
     view: "View ",
     hide: "Hide ",
@@ -27,7 +27,7 @@ const i18n = new LocalizedStrings({
     contact: "Contact",
     emailCouncillor: "Email the Councillor",
     emailUrbanPlanner: "Email the Urban Planner",
-    linkToPlanningPage: "View on Municipal Planning Page",
+    linkToPlanningPage: "View on City Web Page for More Information",
   },
   fr: {
     messageSent: "Message envoyé avec succès!",
