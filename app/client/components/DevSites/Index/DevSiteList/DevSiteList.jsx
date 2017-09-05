@@ -4,11 +4,11 @@ import { replace, ceil } from 'lodash'
 import i18n from './locale'
 import { MAX_RESULTS_PER_PAGE } from '../../../Common/constants.js';
 
-const commentPeriod = <img src={require('./icons/in comment period.svg')} title='comment period' />;
-const archived = <img src={require('./icons/archived.svg')} title='archived' />;
-const review = <img src={require('./icons/review.svg')} title='review' />;
-const siteplan = <img src={require('./icons/siteplan.svg')} title="site plan " />;
-const applicationRecieved = <img src={require('./icons/apprecieved.svg')} title="application recieved " />;
+const commentPeriod = <img src={require('../../../../icons/in comment period.svg')} title='comment period' />;
+const archived = <img src={require('../../../../icons/archived.svg')} title='archived' />;
+const review = <img src={require('../../../../icons/review.svg')} title='review' />;
+const siteplan = <img src={require('../../../../icons/siteplan.svg')} title="site plan " />;
+const applicationRecieved = <img src={require('../../../../icons/apprecieved.svg')} title="application recieved " />;
 
 export default class DevSiteList extends Component {
   constructor(props) {
@@ -115,14 +115,15 @@ export default class DevSiteList extends Component {
                   break;
                 }
                 return(
-                  <a href="#" onClick={this.handleDevSiteClick}
-                              onFocus={this.handleDevSiteMouseEnter}
-                              onBlur={this.handleDevSiteMouseLeave}
-                              onMouseEnter={this.handleDevSiteMouseEnter}
-                              onMouseLeave={this.handleDevSiteMouseLeave}
-                              data-id={devSite.id}
-                              className={this.props.activeDevSiteId == devSite.id ? css.activeitem : css.item}
-                              key={index}
+                  <a href="#"
+                      onClick={this.handleDevSiteClick}
+                      onFocus={this.handleDevSiteMouseEnter}
+                      onBlur={this.handleDevSiteMouseLeave}
+                      onMouseEnter={this.handleDevSiteMouseEnter}
+                      onMouseLeave={this.handleDevSiteMouseLeave}
+                      data-id={devSite.id}
+                      className={this.props.activeDevSiteId == devSite.id ? css.activeitem : css.item}
+                      key={index}
                   >
                     <img src={devSite.image_url} className={css.previewImage} />
                     <div className={css.infoContainer}>
