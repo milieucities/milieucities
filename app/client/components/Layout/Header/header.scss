@@ -17,6 +17,17 @@
     justify-content: space-between;
   }
 
+  .hamburger {
+    margin-right:0;
+    margin-left:auto;
+    .search{
+      float: left;
+      margin-right: 5px;
+      margin-top: 2px;
+      color: grey;
+    }
+  }
+
   .mobile {
     display: flex;
     align-items: center;

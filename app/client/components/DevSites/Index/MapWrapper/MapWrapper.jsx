@@ -27,7 +27,8 @@ export default class MapWrapper extends Component {
                    year: getParameterByName('year'),
                    municipality: getParameterByName('municipality'),
                    activeDevSiteId: getParameterByName('activeDevSiteId'),
-                   isMobile: (window.innerWidth < 992)
+                   isMobile: (window.innerWidth < 992),
+                   mobileSearch: false
                  };
 
     this.search = () => this._search();
@@ -35,6 +36,7 @@ export default class MapWrapper extends Component {
     this.loadMunicipalities = () => this._loadMunicipalities();
     this.updateSearchParams = (params, callback) => this._updateSearchParams(params, callback);
     this.params = () => this._params();
+    this.handleOpenSearch = () => this._handleOpenSearch();
     this.loadDevSites();
     this.loadMunicipalities();
 
@@ -69,6 +71,18 @@ export default class MapWrapper extends Component {
     });
   }
 
+  _handleOpenSearch() {
+    if (this.state.mobileSearch) {
+      this.setState({
+        mobileSearch: false
+      })
+    } else {
+      this.setState({
+        mobileSearch: true
+      })
+    }
+  }
+
   _search() {
     const scrollToTop = () => { if (this.refs.sidebar) this.refs.sidebar.scrollTop = 0 };
     this.setState({ loading: true });
@@ -86,11 +100,12 @@ export default class MapWrapper extends Component {
   }
 
   render() {
+    const { mobileSearch, isMobile, activeDevSiteId } = this.state;
     return(
       <div>
-        <MapHeader {...this.state} parent={this} />
+        <MapHeader mobileSearch={this.handleOpenSearch} activeDevSiteId={activeDevSiteId}/>
           {
-            !this.state.isMobile &&
+            !isMobile &&
             <div className={css.container}>
               <div className={css.sidebar} ref='sidebar'>
                 <MapSearch
@@ -102,26 +117,31 @@ export default class MapWrapper extends Component {
               </div>
               <div className={css.content}>
                 {
-                  this.state.activeDevSiteId &&
+                  activeDevSiteId &&
                   <DevSitePreview id={this.state.activeDevSiteId} parent={this} />
                 }
                 {
-                  !this.state.activeDevSiteId &&
+                  !activeDevSiteId &&
                   <MapAwesome {...this.state} parent={this} />
                 }
               </div>
             </div>
           }
           {
-            this.state.isMobile &&
+            isMobile &&
             <div className={css.container}>
               <div className={css.content}>
                 {
-                  this.state.activeDevSiteId &&
-                  <DevSitePreview id={this.state.activeDevSiteId} parent={this} />
+                  mobileSearch &&
+                    <MapSearch {...this.state} parent={this} />
+                }
+
+                {
+                  activeDevSiteId &&
+                  <DevSitePreview id={this.state.activeDevSiteId} parent={this} notmobileSearch/>
                 }
                 {
-                  !this.state.activeDevSiteId &&
+                  !activeDevSiteId &&
                   <MapAwesome {...this.state} parent={this} />
                 }
                 <DevSiteList {...this.state} parent={this} />
