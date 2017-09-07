@@ -7,7 +7,7 @@ import DevSitePreview from '../../Preview/Preview'
 import MapAwesome from '../Map/Map'
 import { Map } from 'immutable'
 import { debounce, omitBy, isNil } from 'lodash'
-import Header from '../../../Layout/Header/Header'
+import MapHeader from '../../../Layout/Header/MapHeader'
 
 export default class MapWrapper extends Component {
   constructor(props) {
@@ -88,7 +88,7 @@ export default class MapWrapper extends Component {
   render() {
     return(
       <div>
-        <Header />
+        <MapHeader {...this.state} parent={this} />
           {
             !this.state.isMobile &&
             <div className={css.container}>
@@ -116,7 +116,6 @@ export default class MapWrapper extends Component {
             this.state.isMobile &&
             <div className={css.container}>
               <div className={css.content}>
-                <MapSearch {...this.state} parent={this} />
                 {
                   this.state.activeDevSiteId &&
                   <DevSitePreview id={this.state.activeDevSiteId} parent={this} />

@@ -11,6 +11,7 @@ export default class MapSearch extends Component {
   constructor(props) {
     super(props);
     this.parent = this.props.parent;
+    this.state = { isMobile: (window.innerWidth < 600) };
     this.autocompleteCallback = (address, autocomplete) => this._autocompleteCallback(address, autocomplete);
     this.handleAutocompleteSelect = (address) => this._handleAutocompleteSelect(address);
     this.handleSelectDropdown = (type, value) => this._handleSelectDropdown(type, value);
@@ -84,49 +85,57 @@ export default class MapSearch extends Component {
     const wards = this.wardNames();
     const statuses = this.statusOptions();
 
-    return <div className={css.container}>
-      <div className={css.wrapper}>
-        <SearchForm handleSubmit={this.handleSearchSubmit} />
-      </div>
-      <div className={css.divider}></div>
-      <div className='row no-marg'>
-        <div className={`col s3 m3 ${css.filter}`}>
-          <Select
-            title={i18n.city}
-            type='municipality'
-            options={cities}
-            defaultValue={this.props.municipality}
-            onSelect={this.handleSelectDropdown}
-          />
+    if (this.state.isMobile) {
+      return <div className={css.container}>
+        <div className={css.wrapper}>
+          <SearchForm handleSubmit={this.handleSearchSubmit} />
         </div>
-        <div className={`col s3 m3 ${css.filter}`}>
-          <Select
-            title={i18n.ward}
-            type='ward'
-            options={wards}
-            defaultValue={this.props.ward}
-            onSelect={this.handleSelectDropdown}
-          />
+      </div>;
+    } else {
+      return <div className={css.container}>
+        <div className={css.wrapper}>
+          <SearchForm handleSubmit={this.handleSearchSubmit} />
         </div>
-        <div className={`col s3 m3 ${css.filter}`}>
-          <Select
-            title={i18n.year}
-            type='year'
-            options={YEARS}
-            defaultValue={this.props.year}
-            onSelect={this.handleSelectDropdown}
-          />
+        <div className={css.divider}></div>
+        <div className='row no-marg'>
+          <div className={`col s3 m3 ${css.filter}`}>
+            <Select
+              title={i18n.city}
+              type='municipality'
+              options={cities}
+              defaultValue={this.props.municipality}
+              onSelect={this.handleSelectDropdown}
+            />
+          </div>
+          <div className={`col s3 m3 ${css.filter}`}>
+            <Select
+              title={i18n.ward}
+              type='ward'
+              options={wards}
+              defaultValue={this.props.ward}
+              onSelect={this.handleSelectDropdown}
+            />
+          </div>
+          <div className={`col s3 m3 ${css.filter}`}>
+            <Select
+              title={i18n.year}
+              type='year'
+              options={YEARS}
+              defaultValue={this.props.year}
+              onSelect={this.handleSelectDropdown}
+            />
+          </div>
+          <div className={`col s3 m3 ${css.filter}`}>
+            <Select
+              title={i18n.status}
+              type='status'
+              options={statuses}
+              defaultValue={this.props.status}
+              onSelect={this.handleSelectDropdown}
+            />
+          </div>
         </div>
-        <div className={`col s3 m3 ${css.filter}`}>
-          <Select
-            title={i18n.status}
-            type='status'
-            options={statuses}
-            defaultValue={this.props.status}
-            onSelect={this.handleSelectDropdown}
-          />
-        </div>
-      </div>
-    </div>;
+      </div>;
+    }
   }
 }
