@@ -133,7 +133,7 @@ export default class MapWrapper extends Component {
               <div className={css.content}>
                 {
                   mobileSearch &&
-                    <MapSearch {...this.state} parent={this} />
+                    <MapSearch {...this.state} search={this.search} updateSearchParams={this.updateSearchParams}/>
                 }
 
                 {
