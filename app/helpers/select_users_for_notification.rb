@@ -1,7 +1,7 @@
 class SelectUsersForNotification
   prepend SimpleCommand
 
-  AVAILABLE_SCOPES = %w(immediate_proximity ward municipality secondary_address).freeze
+  AVAILABLE_SCOPES = %w(immediate_proximity municipality secondary_address).freeze
 
   def initialize(dev_site)
     @dev_site = dev_site
@@ -40,9 +40,8 @@ class SelectUsersForNotification
     recipients << User.find(user_ids.flatten).to_a
 
   rescue StandardError => e
-    # this is how you catch and report errors with the SimpleCommand gem
-    # check the docs for more info
     errors.add(:recipients, "Error selecting recipients by immediate proximity: #{e.class} - #{e.message}")
+    nil
   end
 
   def select_by_ward(address, recipients)
@@ -61,9 +60,8 @@ class SelectUsersForNotification
     recipients << by_municipality
 
   rescue StandardError => e
-    # this is how you catch and report errors with the SimpleCommand gem
-    # check the docs for more info
     errors.add(:recipients, "Error selecting recipients by municipality: #{e.class} - #{e.message}")
+    nil
   end
 
   def select_by_secondary_address(address, recipients)

@@ -77,7 +77,7 @@ module Notifications
     end
 
     def select_recipients
-      command = SelectUsersForNotifications.new(@dev_site).call
+      command = SelectUsersForNotification.new(@dev_site).call
 
       return command.result if command.success?
 

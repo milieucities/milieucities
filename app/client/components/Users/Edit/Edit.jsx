@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { TextInputWithLabel, TextAreaWithLabel } from '../../Common/FormFields/Form'
+import { TextInputWithLabel, TextAreaWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
 import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
@@ -8,7 +8,7 @@ import i18n from './locale'
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, error: {} };
+    this.state = { loading: true, error: {}, municipalities: [] };
 
     this.uploadAvatar = (e) => this._uploadAvatar(e);
     this.deleteAvatar = (e) => this._deleteAvatar(e);
@@ -16,10 +16,12 @@ export default class Edit extends Component {
     this.deleteAccount = (e) => this._deleteAccount(e);
     this.setError = (error) => this._setError(error);
     this.loadUser = () => this._loadUser();
+    this.loadMunicipalities = () => this._loadMunicipalities();
     EventSystem.subscribe('reloadUser', this.loadUser);
     EventSystem.subscribe('setError', this.setError);
 
     this.loadUser();
+    this.loadMunicipalities();
   }
 
   _setError(error) {
@@ -29,6 +31,12 @@ export default class Edit extends Component {
   _loadUser() {
     $.getJSON(`/users/${document.body.dataset.userSlug}`,
       user => this.setState({ user, loading: false })
+    );
+  }
+
+  _loadMunicipalities() {
+    $.getJSON('/municipalities',
+      municipalities => this.setState({ municipalities })
     );
   }
 
@@ -126,6 +134,7 @@ export default class Edit extends Component {
   render() {
     const { user, avatarUploading, loading, error } = this.state;
     const { userSlug, userAvatar, userName, locale } = document.body.dataset;
+    console.log('this.state.municipalities', this.state.municipalities)
     i18n.setLanguage(locale);
     if(user && !user.address) user.address = {}
     return(
@@ -263,12 +272,13 @@ export default class Edit extends Component {
                   />
                 </div>
                 <div className='row'>
-                  <TextInputWithLabel
+                  <SelectWithLabel
                     classes='col s12 m12 l6'
                     id='address_city'
                     name='user[addresses_attributes][0][city]'
                     label={i18n.city}
                     defaultValue={user.primary_address && user.primary_address.city}
+                    options={ this.state.municipalities.map(m => [m.name, m.name]) }
                     form='user-form'
                   />
                 </div>
