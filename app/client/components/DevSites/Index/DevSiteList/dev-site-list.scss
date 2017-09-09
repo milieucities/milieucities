@@ -30,6 +30,13 @@
     }
   }
 
+  .icons{
+    height: 30px;
+    width: 30px;
+    padding-top: 5px;
+    margin-left: 5px;
+  }
+
   .activeitem{
     padding: 10px;
     background-color: $quaternary-color;
@@ -90,7 +97,7 @@
     font-weight: 500;
     color: #555;
     font-size: 16px;
-    padding-top: 20px;
+    padding-top: 5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
