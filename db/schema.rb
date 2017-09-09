@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20170825002334) do
     t.datetime "active_at"
     t.string   "on_behalf_of"
     t.string   "urban_planner_name"
+    t.string   "url_full_notice"
     t.string   "short_description"
     t.string   "applicant_first_name"
     t.string   "applicant_last_name"
@@ -242,14 +243,13 @@ ActiveRecord::Schema.define(version: 20170825002334) do
   create_table "notification_settings", force: :cascade do |t|
     t.integer  "user_id"
     t.boolean  "newsletter",               default: true
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.boolean  "immediate_vicinity_scope"
     t.boolean  "ward_scope"
     t.boolean  "municipality_scope"
     t.boolean  "project_comments"
     t.boolean  "comment_replies"
-    t.boolean  "secondary_address",        default: false
   end
 
   add_index "notification_settings", ["user_id"], name: "index_notification_settings_on_user_id", using: :btree

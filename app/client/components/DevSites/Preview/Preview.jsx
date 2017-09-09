@@ -16,6 +16,12 @@ const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 
+const commentPeriod = <img src={require('../../../icons/in comment period.svg')} title='comment period' />;
+const archived = <img src={require('../../../icons/archived.svg')} title='archived' />;
+const review = <img src={require('../../../icons/review.svg')} title='review' />;
+const siteplan = <img src={require('../../../icons/siteplan.svg')} title="site plan " />;
+const applicationRecieved = <img src={require('../../../icons/apprecieved.svg')} title="application recieved " />;
+
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -150,6 +156,25 @@ export default class extends Component {
     const { locale } = document.body.dataset;
     const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
     i18n.setLanguage(locale);
+    let smallIcon
+
+    switch(latestStatus) {
+      case 'Application Received':
+      smallIcon = applicationRecieved;
+      break;
+      case 'Application Complete, Comment Period Open':
+      smallIcon = commentPeriod;
+      break;
+      case 'Planning Review Stage':
+      smallIcon = siteplan;
+      break;
+      case 'Revision':
+      smallIcon = review;
+      break;
+      case 'Decision':
+      smallIcon = archived
+      break;
+    }
     if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
@@ -235,12 +260,21 @@ export default class extends Component {
               <div className='col m6 s12'>
                 <h3>{i18n.status}:</h3>
                 <p>{latestStatus}</p>
+                <div className={css.icons}>{smallIcon}</div>
                 <h3>{i18n.applicationFiles}:</h3>
                 {
                   devSite.application_files.map((file, index) => (
-                    <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
+                    <div className={css.description} key={index}>
+                      <strong>{`${file.application_type}`}</strong>
+                      <p>{i18n.devId}: {file.file_number}</p>
+                      </div>
                   ))
                 }
+
+                <h3>{i18n.status}:</h3>
+                <div className={css.description}>
+                  <strong>{latestStatus}</strong>
+                </div>
 
                 { devSite.url_full_notice &&
                   <div><a href={devSite.url_full_notice} target='_top' className={css.button}> {i18n.linkToPlanningPage} </a></div>
