@@ -1,5 +1,6 @@
 class DevSiteSearch < ActiveRecord::Base
   self.primary_key = 'dev_site_id'
+  SIMILARITY_THRESHOLD = 0.5
 
   FILTER_PARAMS = %w(organization municipality ward year status featured).freeze
 
@@ -25,6 +26,7 @@ class DevSiteSearch < ActiveRecord::Base
 
   def search_by_query
     return unless @search_params['query']
+    set_similarity_threshold
     @search_results = @search_results.fuzzy_search(@search_params['query'])
   end
 
@@ -84,5 +86,9 @@ class DevSiteSearch < ActiveRecord::Base
     organization = Organization.find(value)
     municipalities = organization.municipalities.pluck(:name).uniq
     collection.where(municipality: municipalities)
+  end
+
+  def set_similarity_threshold
+    ActiveRecord::Base.connection.execute("SELECT set_limit(#{SIMILARITY_THRESHOLD});")
   end
 end

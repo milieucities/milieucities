@@ -258,7 +258,6 @@ export default class CommentsSection extends Component {
     const comments = this.state.comments;
     const { locale } = document.body.dataset;
     const showSitePlanText = this.checkForSitePlanApplicationType();
-    console.log('this.state.unsavedComment', this.state.unsavedComment)
 
     i18n.setLanguage(locale);
 
