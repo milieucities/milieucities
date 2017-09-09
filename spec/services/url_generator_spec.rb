@@ -1,5 +1,4 @@
 require 'spec_helper'
-require "#{Rails.root}/app/services/url_generator.rb"
 
 module Services
   describe UrlGenerator do

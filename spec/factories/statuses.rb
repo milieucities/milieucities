@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :status do
-    status_date { DateTime.current }
-    status 'Application File Pending'
+    start_date { DateTime.current }
+    status Status::APPLICATION_COMPLETE_STATUS
     created { DateTime.current }
   end
 end

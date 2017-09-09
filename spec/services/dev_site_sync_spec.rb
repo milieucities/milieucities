@@ -1,5 +1,4 @@
 require 'spec_helper'
-require "#{Rails.root}/app/services/dev_site_sync.rb"
 
 module Services
   class DevSiteSync

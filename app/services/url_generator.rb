@@ -32,5 +32,15 @@ module Services
 
       "#{root_url}?#{query}"
     end
+
+    def self.generate_dev_site_url(dev_site_id)
+      host = HOST_MAP[Rails.env]
+      Rails.application.routes.url_helpers.dev_site_url(id: dev_site_id, host: host)
+    end
+
+    def self.generate_notice_url(notification)
+      host = HOST_MAP[Rails.env]
+      "#{host}#{notification.notice.current_path}"
+    end
   end
 end
