@@ -1,7 +1,4 @@
 class Status < ActiveRecord::Base
-  # scope :current, -> { where('start_date <= ? AND (end_date IS NULL OR end_date > ?)',
-  #            DateTime.current, DateTime.current).last }
-  scope :current, -> { order(start_date: :desc).first }
   default_scope { order(start_date: :asc) }
   belongs_to :dev_site, foreign_key: 'dev_site_id'
   has_one :meeting, dependent: :destroy

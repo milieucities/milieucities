@@ -74,7 +74,7 @@ export default class DevSiteShow extends Component {
   render() {
     const { devSite, loading, showModal, contact } = this.state;
     const { locale } = document.body.dataset;
-    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
+    const currentStatus = devSite ? devSite.current_status : '';
     i18n.setLanguage(locale);
     return(
       <div className={css.root}>

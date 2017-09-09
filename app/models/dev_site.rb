@@ -55,13 +55,25 @@ class DevSite < ActiveRecord::Base
   end
 
   def general_status
-    return if statuses.empty?
-    statuses.current.general_status
+    return unless status
+    status.general_status
   end
 
   def status
     return if statuses.empty?
-    statuses.current.status
+
+    current_status = statuses.where('start_date <= ? AND end_date > ?', DateTime.current, DateTime.current).order(start_date: :desc).first
+
+    return current_status if current_status.present?
+
+    latest_status = statuses.where('start_date <= ? AND end_date IS NULL', DateTime.current).order(start_date: :desc).first
+
+    return latest_status if latest_status.present?
+  end
+
+  def current_status
+    return status.status if status
+    'No current status'
   end
 
   def status_date

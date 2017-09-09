@@ -55,7 +55,7 @@ export default class extends Component {
 
   _loadTimeline() {
     const { devSite } = this.state;
-    const currentStatus = devSite ? devSite.status : '';
+    const currentStatus = devSite ? devSite.current_status : '';
 
     $('.tl').timeline(currentStatus);
   }
@@ -154,7 +154,8 @@ export default class extends Component {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
     const { locale } = document.body.dataset;
-    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
+    console.log('devSite', devSite)
+    const currentStatus = devSite ? devSite.current_status : '';
     i18n.setLanguage(locale);
     let smallIcon
 
@@ -180,7 +181,7 @@ export default class extends Component {
     if(preview && !horizontal) {
       return(
         <div>
-          <h3 className={css.status}>{latestStatus}</h3>
+          <h3 className={css.status}>{currentStatus}</h3>
         <div className={css.verticalPreviewContainer} style={{width: this.props.width}} title={`Development Site at ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
 
@@ -216,7 +217,7 @@ export default class extends Component {
     if(preview && horizontal) {
       return(
         <div>
-          <h3 className={css.status}>{latestStatus}</h3>
+          <h3 className={css.status}>{currentStatus}</h3>
         <div className={css.horizontalPreviewContainer} title={`Go to ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
@@ -259,7 +260,7 @@ export default class extends Component {
               <h1 className={css.devTitle}>{devSite.address}</h1>
               <div className='col m6 s12'>
                 <h3>{i18n.status}:</h3>
-                <p>{latestStatus}</p>
+                <p>{currentStatus}</p>
                 <div className={css.icons}>{smallIcon}</div>
                 <h3>{i18n.applicationFiles}:</h3>
                 {
