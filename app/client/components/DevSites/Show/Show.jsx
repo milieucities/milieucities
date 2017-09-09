@@ -88,15 +88,14 @@ export default class DevSiteShow extends Component {
                   <div className='row'>
                     <h1 className='devTitle'>{devSite.address}</h1>
                     <div className='col m6 s12'>
-                      <h3>{i18n.status}:</h3>
-                      <p>{latestStatus}</p>
-
-                      <h3>Application files:</h3>
+                      <h3>Application(s):</h3>
                         {
                           devSite.application_files.map((file, index) => (
                             <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
                           ))
                         }
+                        <h3>{i18n.status}:</h3>
+                        <p>{latestStatus}</p>
                     </div>
                     <div className='col m6 s12'>
                       <img src={devSite.image_url} className={css.image} />

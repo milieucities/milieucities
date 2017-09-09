@@ -264,9 +264,17 @@ export default class extends Component {
                 <h3>{i18n.applicationFiles}:</h3>
                 {
                   devSite.application_files.map((file, index) => (
-                    <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
+                    <div className={css.description} key={index}>
+                      <strong>{`${file.application_type}`}</strong>
+                      <p>{i18n.devId}: {file.file_number}</p>
+                      </div>
                   ))
                 }
+
+                <h3>{i18n.status}:</h3>
+                <div className={css.description}>
+                  <strong>{latestStatus}</strong>
+                </div>
 
                 { devSite.url_full_notice &&
                   <div><a href={devSite.url_full_notice} target='_top' className={css.button}> {i18n.linkToPlanningPage} </a></div>

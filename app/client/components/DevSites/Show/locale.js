@@ -26,7 +26,7 @@ const i18n = new LocalizedStrings({
     attachments: 'Attachments',
     projectDescription: 'Project Description',
     applicationFiles: 'Application files:',
-    linkToPlanningPage: 'Link to Municipal Planning Page',
+    linkToPlanningPage: 'View More info, See City Web Page',
     fileContact: "Contact",
   },
   fr: {
