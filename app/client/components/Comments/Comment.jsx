@@ -73,6 +73,13 @@ export default class Comment extends Component {
   }
 
   _handleSave(body, parentId) {
+    if (!this.currentUserId) {
+      const unsavedCommentJson = { body, parentId, devSiteId: this.props.devSiteId }
+      localStorage.setItem('unsavedComment', JSON.stringify(unsavedCommentJson))
+      $('#sign-in-modal').openModal();
+      return false
+    }
+
     this.props.saveComment(body, parentId).then((comment) => {
       if (comment.flagged_as_offensive === 'FLAGGED') {
         window.flash('alert', i18n.flaggedNotification);
@@ -80,6 +87,7 @@ export default class Comment extends Component {
         window.flash('notice', i18n.commentSavedSuccess)
         this.state.children.unshift(comment);
         this.setState({ children: this.state.children, showChildren: true });
+        localStorage.removeItem('unsavedComment');
       }
     }).catch((error) => {
       window.flash('alert', i18n.commentSavedFailed)
