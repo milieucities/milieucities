@@ -11,6 +11,7 @@ import Loader from '../../Common/Loader/Loader'
 import Sentiment from '../../Common/Sentiment/Sentiment'
 import Chart from 'chart.js'
 import Tabs from '../Show/Tabs'
+import Timeline from '../Timeline/Timeline'
 
 const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
@@ -254,7 +255,9 @@ export default class extends Component {
 
             <div className='row'>
               <div className='col s12'>
-                <div className='tl'></div>
+                <Timeline
+                  devSite={devSite}
+                />
               </div>
             </div>
 
