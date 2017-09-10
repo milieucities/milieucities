@@ -60,7 +60,6 @@ export default class Edit extends Component {
 
   render() {
     const { user, notification_setting, loading, error, secondaryAddress } = this.state;
-    console.log(notification_setting)
     i18n.setLanguage(document.body.dataset.locale);
     if (user && !user.address) user.address = {};
 

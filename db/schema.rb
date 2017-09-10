@@ -12,7 +12,8 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20170825002334) do
-g  # These are extensions that must be enabled in order to support this database
+
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
   enable_extension "pg_trgm"

@@ -134,7 +134,6 @@ export default class Edit extends Component {
   render() {
     const { user, avatarUploading, loading, error } = this.state;
     const { userSlug, userAvatar, userName, locale } = document.body.dataset;
-    console.log('this.state.municipalities', this.state.municipalities)
     i18n.setLanguage(locale);
     if(user && !user.address) user.address = {}
     return(
