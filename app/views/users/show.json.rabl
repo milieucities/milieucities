@@ -18,7 +18,7 @@ child :organizations do
   attributes :id, :name
 end
 
-child :address do
+child @user.primary_address => :primary_address do
   attributes :id, :street, :city
 end
 

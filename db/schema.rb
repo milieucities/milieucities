@@ -243,13 +243,14 @@ ActiveRecord::Schema.define(version: 20170825002334) do
   create_table "notification_settings", force: :cascade do |t|
     t.integer  "user_id"
     t.boolean  "newsletter",               default: true
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.boolean  "immediate_vicinity_scope"
     t.boolean  "ward_scope"
     t.boolean  "municipality_scope"
     t.boolean  "project_comments"
     t.boolean  "comment_replies"
+    t.boolean  "secondary_address",        default: false
   end
 
   add_index "notification_settings", ["user_id"], name: "index_notification_settings_on_user_id", using: :btree
@@ -265,6 +266,16 @@ ActiveRecord::Schema.define(version: 20170825002334) do
   end
 
   add_index "notifications", ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id", using: :btree
+
+  create_table "noumea_participants", force: :cascade do |t|
+    t.integer  "age"
+    t.boolean  "noumeaCitizen"
+    t.string   "email"
+    t.string   "area"
+    t.string   "howLong"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "noumea_responses", force: :cascade do |t|
     t.jsonb    "response_body"
