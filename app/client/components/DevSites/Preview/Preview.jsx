@@ -31,7 +31,6 @@ export default class extends Component {
     this.toggleLike = () => this._toggleLike();
     this.toggleFeatured = () => this._toggleFeatured();
     this.userAdmin = () => this._userAdmin();
-    this.loadTimeline = () => this._loadTimeline();
 
     if(!props.devSite) {
       this.loadDevSite();
@@ -42,17 +41,6 @@ export default class extends Component {
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.id !== this.props.id) this.loadDevSite();
     this.refs.container &&  this.refs.container.focus();
-
-    if (!this.state.loading) {
-      this.loadTimeline();
-    }
-  }
-
-  _loadTimeline() {
-    const { devSite } = this.state;
-    const currentStatus = devSite ? devSite.status : '';
-
-    $('.tl').timeline(currentStatus);
   }
 
   _loadDevSite() {

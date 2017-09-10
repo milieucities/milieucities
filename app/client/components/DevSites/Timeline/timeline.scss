@@ -38,7 +38,7 @@
         width: 8px;
         z-index: $timeline-li-z;
       }
-      
+
       &.visited {
         z-index: $timeline-li-active;
         &:before {

@@ -6,6 +6,10 @@ export default class Timeline extends Component {
     super(props);
   }
 
+  componentDidMount(){
+    $('#lol').tooltip('toggle')
+  }
+
   render() {
     const statuses = {
       'Application Received': { position: 0},
@@ -16,12 +20,16 @@ export default class Timeline extends Component {
       'Revision': { position: 3},
       'Decision': { position: 4},
     }
-    console.log(this.props.devSite)
+    const status = statuses[this.props.devSite.status];
+    const statusPosition = status ? status.position : 0;
+
+    const lol = 2>=1 ? css.active : '';
+
     return (
       <div className={css.checkoutwrap}>
         <ul className={css.checkoutbar}>
-          <li>
-            <span>
+          <li id="lol" className={lol} data-toggle="tooltip" title="Some tooltip text!">
+            <span data-toggle="tooltip" title="Some tooltip text!">
               Comment Period
               </span>
           </li>
