@@ -2,15 +2,6 @@ import React, { Component } from 'react'
 import css from './timeline.scss'
 import ReactTooltip from 'react-tooltip'
 
-export class decision extends Component {
-  render() {
-    const lol = 'meeeee';
-    return (
-      <span>{lol}</span>
-    )
-  }
-}
-
 export default class Timeline extends Component {
   constructor(props) {
     super(props);
