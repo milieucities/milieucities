@@ -8,6 +8,13 @@
     padding-bottom: 45px;
   }
 
+  .tooltip {
+     background-color: white !important;
+     z-index: 10 !important;
+     border: 1px solid gray !important;
+     border-top-style: solid !important;
+  }
+
   ul.checkoutbar {
     margin: 0 10px;
     li {

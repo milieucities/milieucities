@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import css from './timeline.scss'
+import ReactTooltip from 'react-tooltip'
 
 export default class Timeline extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount(){
-    $('#lol').tooltip('toggle')
   }
 
   render() {
@@ -25,11 +22,14 @@ export default class Timeline extends Component {
 
     const lol = 2>=1 ? css.active : '';
 
+    const commentHover = "Comment Period";
+
     return (
       <div className={css.checkoutwrap}>
         <ul className={css.checkoutbar}>
-          <li id="lol" className={lol} data-toggle="tooltip" title="Some tooltip text!">
-            <span data-toggle="tooltip" title="Some tooltip text!">
+          <li className={lol} data-tip={commentHover}>
+            <span>
+              <ReactTooltip className={css.tooltip} place="top" type="light" effect="float"/>
               Comment Period
               </span>
           </li>
