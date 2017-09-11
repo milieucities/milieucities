@@ -35,7 +35,6 @@ export default class extends Component {
     if(!props.devSite) {
       this.loadDevSite();
     }
-
   }
 
   componentDidUpdate(prevProps, prevState) {
