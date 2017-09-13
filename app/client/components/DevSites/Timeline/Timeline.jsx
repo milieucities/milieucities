@@ -8,15 +8,15 @@ export default class Timeline extends Component {
   }
 
   render() {
-    const statuses = {
-      'Application Received': { position: 0},
-      'Open': { position: 0},
-      'Application Complete, Comment Period Open': { position: 1},
-      'Review': { position: 2},
-      'Planning Review Stage': { position: 2},
-      'Revision': { position: 3},
-      'Decision': { position: 4},
-    }
+    // const statuses = {
+    //   'Application Received': { position: 0},
+    //   'Open': { position: 0},
+    //   'Application Complete, Comment Period Open': { position: 1},
+    //   'Review': { position: 2},
+    //   'Planning Review Stage': { position: 2},
+    //   'Revision': { position: 3},
+    //   'Decision': { position: 4},
+    // }
 
     const devSiteStatus = this.props.devSite.status;
 
