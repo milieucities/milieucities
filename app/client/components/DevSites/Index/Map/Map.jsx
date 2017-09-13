@@ -35,7 +35,7 @@ export default class Map extends Component {
 
     if(hoverdDevSiteId) {
       const features = map.querySourceFeatures('devSites', { filter: ['==', 'id', hoverdDevSiteId] });
-      if(!features.length) {
+      if(!features.length && !!popup) {
         popup.remove();
         return;
       }

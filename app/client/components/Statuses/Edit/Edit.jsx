@@ -8,12 +8,7 @@ import moment from 'moment'
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    const startDate = this.props.status ? this.props.status.start_date : null;
-    const endDate = this.props.status ? this.props.status.end_date : null;
-
-
-    this.state = { startDate, endDate };
-
+    this.state = {};
     this.handleStartDate = (d) => this._handleStartDate(d)
     this.handleEndDate = (d) => this._handleEndDate(d)
     this.handleSaveMeeting = (d,m) => this._handleSaveMeeting(d,m)
@@ -22,6 +17,18 @@ export default class Edit extends Component {
     this.handleStatusUpdate = (v) => this._handleStatusUpdate(v);
     this.onDelete = (d) => this._onDelete(d)
     this.onSave = (d) => this._onSave(d)
+  }
+
+  componentDidMount() {
+    const startDate = this.props.status ? this.props.status.start_date : null;
+    const endDate = this.props.status ? this.props.status.end_date : null;
+    this.setState({ startDate, endDate })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const startDate = nextProps.status ? nextProps.status.start_date : null;
+    const endDate = nextProps.status ? nextProps.status.end_date : null;
+    this.setState({ startDate, endDate })
   }
 
   _handleStartDate(date) {

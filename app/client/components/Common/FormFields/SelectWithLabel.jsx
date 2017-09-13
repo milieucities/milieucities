@@ -18,9 +18,9 @@ export default class SelectWithLabel extends Component {
         </label>
         <select
           id={this.props.id}
-          value={this.props.value}
           onChange={this.handleChange}
           defaultValue={this.props.defaultValue}
+          value={this.props.value}
           name={this.props.name}
           form={this.props.form}
           disabled={this.props.disabled}

@@ -154,12 +154,11 @@ export default class extends Component {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
     const { locale } = document.body.dataset;
-    console.log('devSite', devSite)
     const currentStatus = devSite ? devSite.current_status : '';
     i18n.setLanguage(locale);
-    let smallIcon
+    let smallIcon;
 
-    switch(latestStatus) {
+    switch(currentStatus) {
       case 'Application Received':
       smallIcon = applicationRecieved;
       break;
@@ -176,6 +175,7 @@ export default class extends Component {
       smallIcon = archived
       break;
     }
+
     if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
@@ -271,12 +271,6 @@ export default class extends Component {
                       </div>
                   ))
                 }
-
-                <h3>{i18n.status}:</h3>
-                <div className={css.description}>
-                  <strong>{latestStatus}</strong>
-                </div>
-
                 { devSite.url_full_notice &&
                   <div><a href={devSite.url_full_notice} target='_top' className={css.button}> {i18n.linkToPlanningPage} </a></div>
                 }
