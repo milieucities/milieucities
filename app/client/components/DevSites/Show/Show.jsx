@@ -95,7 +95,7 @@ export default class DevSiteShow extends Component {
                           ))
                         }
                         <h3>{i18n.status}:</h3>
-                        <p>{latestStatus}</p>
+                        <p>{currentStatus}</p>
                     </div>
                     <div className='col m6 s12'>
                       <img src={devSite.image_url} className={css.image} />
