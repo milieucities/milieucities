@@ -1,6 +1,6 @@
 object @dev_site
 
-attributes :id, :devID, :featured, :title, :status, :status_date, :street, :address, :images, :description, :short_description, :ward_name, :ward_num, :image_url, :updated_at, :latitude, :longitude, :municipality_id, :ward_id, :updated, :general_status, :url_full_notice
+attributes :id, :devID, :featured, :title, :current_status, :status_date, :street, :address, :images, :description, :short_description, :ward_name, :ward_num, :image_url, :updated_at, :latitude, :longitude, :municipality_id, :ward_id, :updated, :general_status, :url_full_notice
 
 node(:likes_count) { |dev_site| dev_site.likes.count  }
 

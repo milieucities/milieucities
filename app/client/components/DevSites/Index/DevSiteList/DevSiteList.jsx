@@ -133,7 +133,7 @@ export default class DevSiteList extends Component {
                           <div key={index} className={css.info}>{file.application_type} ({file.file_number})</div>
                         ))
                       }
-                      <div className={css.info} dangerouslySetInnerHTML={{__html: devSite.status}}></div>
+                      <div className={css.info}>{devSite.current_status}</div>
                       <div className={css.icons}>{smallIcon}</div>
                       <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
                     </div>

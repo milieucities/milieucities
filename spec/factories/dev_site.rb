@@ -1,9 +1,11 @@
 FactoryGirl.define do
   factory :dev_site do
     devID { FFaker::Identification.drivers_license }
-    title { FFaker::AddressCA.street_address }
     application_type 'Site Plan Control'
     description { FFaker::DizzleIpsum.sentence }
+    title { FFaker::AddressCA.street_address }
+    municipality_id 1
+    ward_id 1
     ward
     municipality
 
