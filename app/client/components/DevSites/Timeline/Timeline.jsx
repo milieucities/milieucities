@@ -17,10 +17,42 @@ export default class Timeline extends Component {
       'Revision': { position: 3},
       'Decision': { position: 4},
     }
-    const status = statuses[this.props.devSite.status];
-    const statusPosition = status ? status.position : 0;
 
-    const lol = 2>=1 ? css.active : '';
+    const devSiteStatus = this.props.devSite.status;
+
+    let firstPoint = '';
+    let secondPoint = '';
+    let thirdPoint = '';
+    let fourthPoint = '';
+    let fifthPoint = '';
+
+
+    switch (devSiteStatus) {
+      case 'Open':
+        firstPoint = css.active;
+        break;
+      case 'Application Complete, Comment Period Open':
+        firstPoint = css.visited;
+        secondPoint = css.active;
+        break;
+      case 'Review':
+        firstPoint = css.visited;
+        secondPoint = css.visited;
+        thirdPoint = css.active;
+        break;
+      case 'Planning Review Stage':
+        firstPoint = css.visited;
+        secondPoint = css.visited;
+        thirdPoint = css.visited;
+        fourthPoint = css.active;
+        break;
+      case 'Revision':
+        firstPoint = css.visited;
+        secondPoint = css.visited;
+        thirdPoint = css.visited;
+        fourthPoint = css.visited;
+        fifthPoint = css.active;
+    }
 
     const commentHover = "Comment Period";
     const pubChanges = "Revision Changes";
@@ -30,14 +62,14 @@ export default class Timeline extends Component {
     return (
       <div className={css.checkoutwrap}>
         <ul className={css.checkoutbar}>
-          <li className={lol} data-tip={commentHover}>
+          <li className={firstPoint} data-tip={commentHover}>
             <span>
               <ReactTooltip className={css.tooltip} place="top" type="light" effect="float" />
               Comment Period
               </span>
               <decision />
           </li>
-          <li data-tip data-for="meeting" >
+          <li className={secondPoint} data-tip data-for="meeting" >
             <span>
               <ReactTooltip
                 className={css.tooltip}
@@ -65,19 +97,19 @@ export default class Timeline extends Component {
               Public Meeting
             </span>
           </li >
-          <li data-tip={pubChanges}>
+          <li className={thirdPoint} data-tip={pubChanges}>
             <span>
               <ReactTooltip className={css.tooltip} place="top" type="light" effect="float" />
               Revision Changes
             </span>
           </li>
-          <li data-tip={pubMeeting}>
+          <li className={fourthPoint} data-tip={pubMeeting}>
             <span>
               <ReactTooltip className={css.tooltip} place="top" type="light" effect="float"/>
               Decision Meeting
             </span>
             </li>
-            <li data-tip={decision}>
+            <li className={fifthPoint} data-tip={decision}>
               <span>
                 <ReactTooltip className={css.tooltip} place="top" type="light" effect="float"/>
                 Decision Made
