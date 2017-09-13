@@ -27,16 +27,19 @@ export default class CommentsSection extends Component {
     this.handleVoteRootComment = (c,d) => this._handleVoteRootComment(c,d);
     this.handleChangePrivacyPolicy = (e) => this._handleChangePrivacyPolicy(e);
     this.checkForSitePlanApplicationType = () => this._checkForSitePlanApplicationType();
+    this.checkForUnsavedComment = () => this._checkForUnsavedComment();
 
     this.fetchComments();
   }
 
   componentDidMount() {
     $('.modal-trigger').leanModal();
+    this.checkForUnsavedComment();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if(prevProps.devSiteId !== this.props.devSiteId) {
+      this.checkForUnsavedComment();
       this.setState({ page: 0, limit: 5, comments: []},
         () => this.fetchComments()
       )
@@ -62,6 +65,13 @@ export default class CommentsSection extends Component {
         this.setState({ comments: comments })
       }
     );
+  }
+
+  _checkForUnsavedComment() {
+    const unsavedComment = JSON.parse(localStorage.getItem('unsavedComment'));
+    if (unsavedComment && unsavedComment['devSiteId'] === this.props.devSiteId) {
+      this.setState({ unsavedComment })
+    }
   }
 
   _deleteComment(comment) {
@@ -128,6 +138,8 @@ export default class CommentsSection extends Component {
 
   _handleSave(body, parentId) {
     if (!this.currentUserId) {
+      const unsavedCommentJson = { body, parentId, devSiteId: this.props.devSiteId }
+      localStorage.setItem('unsavedComment', JSON.stringify(unsavedCommentJson))
       $('#sign-in-modal').openModal();
       return false
     }
@@ -138,7 +150,8 @@ export default class CommentsSection extends Component {
       } else {
         window.flash('notice', i18n.commentSavedSuccess)
         this.state.comments.unshift(comment);
-        this.setState({ comments: this.state.comments });
+        this.setState({ comments: this.state.comments, unsavedComment: null });
+        localStorage.removeItem('unsavedComment');
       }
     }).catch((error) => {
       window.flash('alert', i18n.commentSavedFailed)
@@ -245,6 +258,7 @@ export default class CommentsSection extends Component {
     const comments = this.state.comments;
     const { locale } = document.body.dataset;
     const showSitePlanText = this.checkForSitePlanApplicationType();
+
     i18n.setLanguage(locale);
 
     if (showSitePlanText) {
@@ -267,6 +281,7 @@ export default class CommentsSection extends Component {
               acceptedPrivacyPolicy={this.state.acceptedPrivacyPolicy}
               handleChangePrivacyPolicy={this.handleChangePrivacyPolicy}
               currentUser={this.currentUserId}
+              unsavedComment={this.state.unsavedComment}
             />
           </div>
 
@@ -288,6 +303,7 @@ export default class CommentsSection extends Component {
               acceptedPrivacyPolicy={this.state.acceptedPrivacyPolicy}
               handleChangePrivacyPolicy={this.handleChangePrivacyPolicy}
               currentUser={this.currentUserId}
+              unsavedComment={this.state.unsavedComment}
             />
           }
         </div>

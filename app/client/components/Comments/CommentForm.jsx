@@ -9,6 +9,21 @@ export default class CommentForm extends Component {
     this.state = {};
     this.handleChange = (e) => this.setState({ body: e.target.value });
     this.submitForm = (e) => this._submitForm(e);
+    this.checkForUnsavedComment = (comment) => this._checkForUnsavedComment(comment);
+  }
+
+  componentDidMount() {
+    this.checkForUnsavedComment(this.props.unsavedComment)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.checkForUnsavedComment(nextProps.unsavedComment)
+  }
+
+  _checkForUnsavedComment(unsavedComment) {
+    if (unsavedComment && unsavedComment.parentId === this.props.parentId) {
+      this.setState({ body: unsavedComment.body })
+    }
   }
 
   _submitForm(e) {
