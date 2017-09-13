@@ -258,9 +258,11 @@ export default class extends Component {
           <div className={css.wrapper}>
             <div className='row'>
               <h1 className={css.devTitle}>{devSite.address}</h1>
+                { devSite.url_full_notice &&
+                  <div><a href={devSite.url_full_notice} target='_top' className={css.button}> {i18n.linkToPlanningPage} </a></div>
+                }
               <div className='col m6 s12'>
-                <h3>{i18n.status}:</h3>
-                <p>{currentStatus}</p>
+
                 <div className={css.icons}>{smallIcon}</div>
                 <h3>{i18n.applicationFiles}:</h3>
                 {
@@ -271,9 +273,12 @@ export default class extends Component {
                       </div>
                   ))
                 }
-                { devSite.url_full_notice &&
-                  <div><a href={devSite.url_full_notice} target='_top' className={css.button}> {i18n.linkToPlanningPage} </a></div>
-                }
+                <h3>{i18n.status}:</h3>
+                <div className={css.description}>
+                  <strong>{currentStatus}</strong>
+                </div>
+
+
               </div>
 
               <div className='col m6 s12'>
