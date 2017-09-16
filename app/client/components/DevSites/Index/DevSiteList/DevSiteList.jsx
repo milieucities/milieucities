@@ -4,6 +4,12 @@ import { replace, ceil } from 'lodash'
 import i18n from './locale'
 import { MAX_RESULTS_PER_PAGE } from '../../../Common/constants.js';
 
+const commentPeriod = <img src={require('../../../../icons/in comment period.svg')} title='comment period' />;
+const archived = <img src={require('../../../../icons/archived.svg')} title='archived' />;
+const review = <img src={require('../../../../icons/review.svg')} title='review' />;
+const siteplan = <img src={require('../../../../icons/siteplan.svg')} title="site plan " />;
+const applicationRecieved = <img src={require('../../../../icons/apprecieved.svg')} title="application recieved " />;
+
 export default class DevSiteList extends Component {
   constructor(props) {
     super(props);
@@ -58,7 +64,14 @@ export default class DevSiteList extends Component {
       }
     })
   }
+
   render() {
+    const keys = {
+      'Active Development': 'activedev',
+      'Comment Period': 'commentopen',
+      'Comment Period Closed': 'inactivedev'
+    }
+    let smallIcon;
     return(
       <div className={css.container}>
         {
@@ -84,15 +97,33 @@ export default class DevSiteList extends Component {
             </div>
             {
               this.props.devSites.map((devSite, index) => {
+                switch(devSite.status){
+                  case 'Application Received':
+                  smallIcon = applicationRecieved;
+                  break;
+                  case 'Application Complete, Comment Period Open':
+                  smallIcon = commentPeriod;
+                  break;
+                  case 'Planning Review Stage':
+                  smallIcon = siteplan;
+                  break;
+                  case 'Revision':
+                  smallIcon = review;
+                  break;
+                  case 'Decision':
+                  smallIcon = archived
+                  break;
+                }
                 return(
-                  <a href="#" onClick={this.handleDevSiteClick}
-                              onFocus={this.handleDevSiteMouseEnter}
-                              onBlur={this.handleDevSiteMouseLeave}
-                              onMouseEnter={this.handleDevSiteMouseEnter}
-                              onMouseLeave={this.handleDevSiteMouseLeave}
-                              data-id={devSite.id}
-                              className={this.props.activeDevSiteId == devSite.id ? css.activeitem : css.item}
-                              key={index}
+                  <a href="#"
+                      onClick={this.handleDevSiteClick}
+                      onFocus={this.handleDevSiteMouseEnter}
+                      onBlur={this.handleDevSiteMouseLeave}
+                      onMouseEnter={this.handleDevSiteMouseEnter}
+                      onMouseLeave={this.handleDevSiteMouseLeave}
+                      data-id={devSite.id}
+                      className={this.props.activeDevSiteId == devSite.id ? css.activeitem : css.item}
+                      key={index}
                   >
                     <img src={devSite.image_url} className={css.previewImage} />
                     <div className={css.infoContainer}>
@@ -102,7 +133,8 @@ export default class DevSiteList extends Component {
                           <div key={index} className={css.info}>{file.application_type} ({file.file_number})</div>
                         ))
                       }
-                      <div className={css.info} dangerouslySetInnerHTML={{__html: devSite.status}}></div>
+                      <div className={css.info}>{devSite.current_status}</div>
+                      <div className={css.icons}>{smallIcon}</div>
                       <div className={css.description} dangerouslySetInnerHTML={{__html: devSite.description}}></div>
                     </div>
                   </a>

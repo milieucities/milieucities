@@ -35,7 +35,7 @@ export default class Map extends Component {
 
     if(hoverdDevSiteId) {
       const features = map.querySourceFeatures('devSites', { filter: ['==', 'id', hoverdDevSiteId] });
-      if(!features.length) {
+      if(!features.length && !!popup) {
         popup.remove();
         return;
       }
@@ -70,13 +70,23 @@ export default class Map extends Component {
       'Comment Period': 'commentopen',
       'Comment Period Closed': 'inactivedev'
     }
+    let files
+    let fileNumber
+
     return {
       type: 'geojson',
       cluster: true,
       clusterMaxZoom: 13,
       data: {
         type: 'FeatureCollection',
-        features: this.props.devSites.map(devSite => {
+        features: this.props.devSites.map((devSite, index) => {
+          if (devSite.application_files) {
+            devSite.application_files.map((file, index) => (
+              files = file.application_type,
+              fileNumber = file.file_number
+            ))
+          }
+
           return {
             type: 'Feature',
             geometry: {
@@ -89,7 +99,9 @@ export default class Map extends Component {
               address: devSite.address,
               'marker-symbol': keys[devSite.general_status],
               description: `<b>${devSite.street}</b>
-                            <br/>${devSite.general_status}`
+                            <br/>${devSite.general_status}
+                            <br/>${files}
+                            <br/>${fileNumber}`
             }
           }
         })

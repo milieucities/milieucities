@@ -18,13 +18,13 @@
 
     a {
       color: white;
-
+      
       &:first-child {
         text-decoration: underline;
       }
 
       &:hover, &:visited {
-        color: white;
+
       }
     }
   }
@@ -33,5 +33,7 @@
     background-color: #5d9bc0;
     padding: 4px 14px;
     margin-left: 20px;
+    text-align: center;
+    padding-top: 0px !important;
   }
 }

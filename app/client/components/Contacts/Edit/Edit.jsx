@@ -7,10 +7,11 @@ import i18n from '../locale.js'
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { contactType: this.props.contact.contact_type };
 
     this.onDelete = (d) => this._onDelete(d)
     this.onSave = (d) => this._onSave(d)
+    this.onChangeContactType = (contactType) => this._onChangeContactType(contactType)
   }
 
   _onDelete(e) {
@@ -22,6 +23,11 @@ export default class Edit extends Component {
     e.preventDefault();
     const form = e.currentTarget;
     this.props.handleSave(form, this.props.contact.id);
+  }
+
+  _onChangeContactType(contactType) {
+    console.log('contactType', contactType)
+    this.setState({ contactType })
   }
 
   render() {
@@ -39,9 +45,9 @@ export default class Edit extends Component {
                 id='contact_type'
                 name='contact[contact_type]'
                 label={i18n.contactType}
-                defaultValue={this.props.contact.contact_type}
+                value={this.state.contactType}
                 options={this.props.contactOptions.map(contact => [contact,contact])}
-                onChange={this.handleChangeContactType}
+                onChange={this.onChangeContactType}
               />
             </div>
 

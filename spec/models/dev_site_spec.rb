@@ -87,7 +87,7 @@ describe DevSite do
       @dev_site1.addresses << create(:address)
       @dev_site4.statuses << create(:status)
       @dev_site4.statuses << create(:status,
-                                    status_date: DateTime.current - 1.day,
+                                    start_date: DateTime.current - 1.day,
                                     status: 'Comment Period in Progress')
       @dev_site6.addresses << create(:address)
       @dev_site6.statuses << create(:status, status: 'Comment Period in Progress')
@@ -192,20 +192,6 @@ describe DevSite do
     end
   end
 
-  describe '#status' do
-    let(:dev_site) { create(:dev_site) }
-    let(:test_status) { create(:status) }
-
-    it 'should return nil if dev site has no status' do
-      expect(dev_site.status).to be_nil
-    end
-
-    it 'should return the status if dev site has one' do
-      dev_site.statuses << test_status
-      expect(dev_site.status).to eq(test_status.status)
-    end
-  end
-
   describe '#status_date' do
     let(:dev_site) { create(:dev_site) }
     let(:test_status_with_date) { create(:status) }
@@ -275,6 +261,130 @@ describe DevSite do
       expect(result[0]).to eq(dev_site2)
       expect(result[1]).to eq(dev_site3)
       expect(result[2]).to eq(dev_site1)
+    end
+  end
+
+  describe '#status' do
+    context 'dev site has no statuses' do
+      it 'should return nil' do
+        dev_site = create(:dev_site)
+
+        current = dev_site.status
+
+        expect(current).to be_nil
+      end
+    end
+    context 'all statuses are in the past' do
+      it 'should return nil' do
+        dev_site = create(:dev_site)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current - 3.days,
+                                    end_date: DateTime.current - 2.days,
+                                    status: Status::APPLICATION_COMPLETE_STATUS)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current - 4.days,
+                                    end_date: DateTime.current - 3.days,
+                                    status: Status::APPLICATION_RECEIVED_STATUS)
+
+        current = dev_site.status
+
+        expect(current).to be_nil
+      end
+    end
+
+    context 'all statuses are in the future' do
+      it 'should return nil' do
+        dev_site = create(:dev_site)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current + 3.days,
+                                    end_date: DateTime.current + 2.days,
+                                    status: Status::APPLICATION_RECEIVED_STATUS)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current + 4.days,
+                                    end_date: DateTime.current + 3.days,
+                                    status: Status::APPLICATION_COMPLETE_STATUS)
+
+        current = dev_site.status
+
+        expect(current).to be_nil
+      end
+    end
+
+    context 'has current and non-current statuses' do
+      it 'should return the status active on current date' do
+        dev_site = create(:dev_site)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current - 3.days,
+                                    end_date: DateTime.current - 2.days,
+                                    status: Status::APPLICATION_RECEIVED_STATUS)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current + 4.days,
+                                    end_date: DateTime.current + 3.days,
+                                    status: Status::APPLICATION_COMPLETE_STATUS)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current - 2.days,
+                                    end_date: DateTime.current + 3.days,
+                                    status: Status::PLANNING_REVIEW_STATUS)
+
+        current = dev_site.status
+
+        expect(current.status).to eq(Status::PLANNING_REVIEW_STATUS)
+      end
+    end
+
+    context 'has several statuses with no end dates' do
+      it 'should return the status with the start date closest to but before today' do
+        dev_site = create(:dev_site)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current - 3.days,
+                                    status: Status::APPLICATION_RECEIVED_STATUS)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current + 4.days,
+                                    status: Status::APPLICATION_COMPLETE_STATUS)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current - 2.days,
+                                    status: Status::PLANNING_REVIEW_STATUS)
+
+        current = dev_site.status
+
+        expect(current.status).to eq(Status::PLANNING_REVIEW_STATUS)
+      end
+    end
+
+    context 'has more than one current status' do
+      it 'should return the current status with the latest start date' do
+        dev_site = create(:dev_site)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current - 3.days,
+                                    end_date: DateTime.current + 2.days,
+                                    status: Status::APPLICATION_RECEIVED_STATUS)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current - 4.days,
+                                    end_date: DateTime.current + 3.days,
+                                    status: Status::APPLICATION_COMPLETE_STATUS)
+
+        current = dev_site.status
+
+        expect(current.status).to eq(Status::APPLICATION_RECEIVED_STATUS)
+      end
+    end
+
+    context 'has past and future statuses but no current status' do
+      it 'should return nil' do
+        dev_site = create(:dev_site)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current - 3.days,
+                                    end_date: DateTime.current - 2.days,
+                                    status: Status::APPLICATION_RECEIVED_STATUS)
+        dev_site.statuses << create(:status,
+                                    start_date: DateTime.current + 2.days,
+                                    end_date: DateTime.current + 3.days,
+                                    status: Status::APPLICATION_COMPLETE_STATUS)
+
+        current = dev_site.status
+
+        expect(current).to be_nil
+      end
     end
   end
 end

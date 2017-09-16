@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { TextInputWithLabel, TextAreaWithLabel } from '../../Common/FormFields/Form'
+import { TextInputWithLabel, TextAreaWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
 import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
@@ -8,7 +8,7 @@ import i18n from './locale'
 export default class Edit extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, error: {} };
+    this.state = { loading: true, error: {}, municipalities: [] };
 
     this.uploadAvatar = (e) => this._uploadAvatar(e);
     this.deleteAvatar = (e) => this._deleteAvatar(e);
@@ -16,10 +16,12 @@ export default class Edit extends Component {
     this.deleteAccount = (e) => this._deleteAccount(e);
     this.setError = (error) => this._setError(error);
     this.loadUser = () => this._loadUser();
+    this.loadMunicipalities = () => this._loadMunicipalities();
     EventSystem.subscribe('reloadUser', this.loadUser);
     EventSystem.subscribe('setError', this.setError);
 
     this.loadUser();
+    this.loadMunicipalities();
   }
 
   _setError(error) {
@@ -29,6 +31,12 @@ export default class Edit extends Component {
   _loadUser() {
     $.getJSON(`/users/${document.body.dataset.userSlug}`,
       user => this.setState({ user, loading: false })
+    );
+  }
+
+  _loadMunicipalities() {
+    $.getJSON('/municipalities',
+      municipalities => this.setState({ municipalities })
     );
   }
 
@@ -81,6 +89,8 @@ export default class Edit extends Component {
   _submitForm(e) {
     const { locale, userSlug } = document.body.dataset;
     i18n.setLanguage(locale);
+    let form = new FormData(document.querySelector('#user-form'));
+    form.append('user[addresses_attributes][0][primary_address]', true);
 
     $.ajax({
       url: `/users/${userSlug}`,
@@ -88,7 +98,7 @@ export default class Edit extends Component {
       type: 'PATCH',
       contentType: false,
       processData: false,
-      data: new FormData(document.querySelector('#user-form')),
+      data: form,
       success: user => {
         this.setState({ user, error: {} });
         window.flash('notice', i18n.profileUploadS);
@@ -238,7 +248,7 @@ export default class Edit extends Component {
                       <label htmlFor='user_password_confirmation'>{i18n.newPasswordConfirmation}</label>
                       <input id='user_password_confirmation' type='password' name='user[password_confirmation]' form='user-form'/>
                       {error.password_confirmation && <div className='error-message'>{error.password_confirmation}</div>}
-                  </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -248,25 +258,26 @@ export default class Edit extends Component {
                 {i18n.location}
               </div>
               <div className={css.data}>
-                <input type='hidden' name={'user[address_attributes][id]'} value={user.address.id}/>
+                <input type='hidden' name={'user[addresses_attributes][0][id]'} value={user.address.id}/>
                 <div className='row'>
                   <TextInputWithLabel
                     classes='col s12 m12 l6'
                     id='address_street'
-                    name='user[address_attributes][street]'
+                    name='user[addresses_attributes][0][street]'
                     label={i18n.street}
                     error={error['address.street']}
-                    defaultValue={user.address.street}
+                    defaultValue={user.primary_address && user.primary_address.street}
                     form='user-form'
                   />
                 </div>
                 <div className='row'>
-                  <TextInputWithLabel
+                  <SelectWithLabel
                     classes='col s12 m12 l6'
                     id='address_city'
-                    name='user[address_attributes][city]'
+                    name='user[addresses_attributes][0][city]'
                     label={i18n.city}
-                    defaultValue={user.address.city}
+                    defaultValue={user.primary_address && user.primary_address.city}
+                    options={ this.state.municipalities.map(m => [m.name, m.name]) }
                     form='user-form'
                   />
                 </div>

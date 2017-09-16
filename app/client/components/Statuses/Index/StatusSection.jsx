@@ -34,11 +34,11 @@ export default class StatusSection extends Component {
       dataType: 'JSON',
       contentType: false,
       processData: false,
-      success: meeting => {
+      success: status => {
         window.flash('notice', 'Successfully saved!')
         this.props.loadDevSite();
         this.setState({ openStatusForm: false })
-        form.reset();
+        if (!statusId) { form.reset() };
       },
       error: error => {
         window.flash('alert', 'Failed to save!')

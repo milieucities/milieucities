@@ -10,12 +10,12 @@ class User < ActiveRecord::Base
   has_many :authentication_tokens, dependent: :destroy
   has_one :notification_setting, dependent: :destroy
   has_one :profile, dependent: :destroy
-  has_one :address, as: :addressable, dependent: :destroy
+  has_many :addresses, as: :addressable, dependent: :destroy
   has_many :comments
   has_many :memberships
   has_many :organizations, through: :memberships
+  accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :profile
-  accepts_nested_attributes_for :address
 
   validates :email,
             presence: { message: I18n.t('validates.alert.emailIsRequired') },
@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
             length: { in: 6..20, message: I18n.t('validates.alert.passwordLimitation') },
             allow_blank: true,
             unless: 'provider.present?'
+
+  # check docs for validating the address association
+  # https://apidock.com/rails/ActiveRecord/Validations/ClassMethods/validates_associated
+
   delegate :name, :bio, :web_presence, :anonymous_comments, to: :profile, allow_nil: true
   friendly_id :slug_candidates, use: :slugged
 
@@ -60,5 +64,13 @@ class User < ActiveRecord::Base
   def generate_auth_token
     token = SecureRandom.uuid
     authentication_tokens.create(token: token)
+  end
+
+  def primary_address
+    addresses.where(primary_address: true).try(:first)
+  end
+
+  def secondary_address
+    addresses.where(primary_address: false).try(:first)
   end
 end

@@ -17,6 +17,12 @@ const { FacebookShareButton, TwitterShareButton } = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 
+const commentPeriod = <img src={require('../../../icons/in comment period.svg')} title='comment period' />;
+const archived = <img src={require('../../../icons/archived.svg')} title='archived' />;
+const review = <img src={require('../../../icons/review.svg')} title='review' />;
+const siteplan = <img src={require('../../../icons/siteplan.svg')} title="site plan " />;
+const applicationRecieved = <img src={require('../../../icons/apprecieved.svg')} title="application recieved " />;
+
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -136,14 +142,34 @@ export default class extends Component {
     const { devSite, showFiles, showModal, showReadMore, readMoreClicked, contact } = this.state;
     const { horizontal, preview } = this.props;
     const { locale } = document.body.dataset;
-    const latestStatus = devSite ? devSite.statuses.slice(-1).pop().status : ''
+    const currentStatus = devSite ? devSite.current_status : '';
     i18n.setLanguage(locale);
+    let smallIcon;
+
+    switch(currentStatus) {
+      case 'Application Received':
+      smallIcon = applicationRecieved;
+      break;
+      case 'Application Complete, Comment Period Open':
+      smallIcon = commentPeriod;
+      break;
+      case 'Planning Review Stage':
+      smallIcon = siteplan;
+      break;
+      case 'Revision':
+      smallIcon = review;
+      break;
+      case 'Decision':
+      smallIcon = archived
+      break;
+    }
+
     if(!devSite) return <div></div>;
 
     if(preview && !horizontal) {
       return(
         <div>
-          <h3 className={css.status}>{latestStatus}</h3>
+          <h3 className={css.status}>{currentStatus}</h3>
         <div className={css.verticalPreviewContainer} style={{width: this.props.width}} title={`Development Site at ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
 
@@ -179,7 +205,7 @@ export default class extends Component {
     if(preview && horizontal) {
       return(
         <div>
-          <h3 className={css.status}>{latestStatus}</h3>
+          <h3 className={css.status}>{currentStatus}</h3>
         <div className={css.horizontalPreviewContainer} title={`Go to ${devSite.address}`}>
           {false && <div className={css.status}>{i18n.openForComments}</div>}
           <img src={devSite.image_url} alt={`Image of ${devSite.address}`} className={css.image} />
@@ -220,19 +246,27 @@ export default class extends Component {
           <div className={css.wrapper}>
             <div className='row'>
               <h1 className={css.devTitle}>{devSite.address}</h1>
-              <div className='col m6 s12'>
-                <h3>{i18n.status}:</h3>
-                <p>{latestStatus}</p>
-                <h3>{i18n.applicationFiles}:</h3>
-                {
-                  devSite.application_files.map((file, index) => (
-                    <p key={index}>{`${file.application_type} (${file.file_number})`}</p>
-                  ))
-                }
-
                 { devSite.url_full_notice &&
                   <div><a href={devSite.url_full_notice} target='_top' className={css.button}> {i18n.linkToPlanningPage} </a></div>
                 }
+              <div className='col m6 s12'>
+
+                <div className={css.icons}>{smallIcon}</div>
+                <h3>{i18n.applicationFiles}:</h3>
+                {
+                  devSite.application_files.map((file, index) => (
+                    <div className={css.description} key={index}>
+                      <strong>{`${file.application_type}`}</strong>
+                      <p>{i18n.devId}: {file.file_number}</p>
+                      </div>
+                  ))
+                }
+                <h3>{i18n.status}:</h3>
+                <div className={css.description}>
+                  <strong>{currentStatus}</strong>
+                </div>
+
+
               </div>
 
               <div className='col m6 s12'>

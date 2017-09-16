@@ -54,14 +54,20 @@ export default class Header extends Component {
         {
           isMobile &&
           <div className={css.mobile}>
-            <a href='#' title='Menu' onClick={this.openMenu}>
-              <svg width='40' height='36'>
-                <line x1='5' y1='10' x2='35' y2='10' strokeWidth='2' stroke='#777' strokeLinecap='round' />
-                <line x1='5' y1='18' x2='35' y2='18' strokeWidth='2' stroke='#777' strokeLinecap='round' />
-                <line x1='5' y1='26' x2='35' y2='26' strokeWidth='2' stroke='#777' strokeLinecap='round' />
-              </svg>
-            </a>
 
+            <a href={`/${locale}`} className={css.logo}>
+              <img src={require('./images/logo.png')} title={'Milieu\'s Logo'} />
+            </a>
+            <div className={css.hamburger}>
+
+              <a href='#' title='Menu' onClick={this.openMenu}>
+                <svg width='40' height='36'>
+                  <line x1='5' y1='10' x2='35' y2='10' strokeWidth='2' stroke='#777' strokeLinecap='round' />
+                  <line x1='5' y1='18' x2='35' y2='18' strokeWidth='2' stroke='#777' strokeLinecap='round' />
+                  <line x1='5' y1='26' x2='35' y2='26' strokeWidth='2' stroke='#777' strokeLinecap='round' />
+                </svg>
+              </a>
+            </div>
             {
               showMenu &&
               <div ref='menu' className={css.mobileMenu}>

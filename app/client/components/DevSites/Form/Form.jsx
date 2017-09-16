@@ -156,12 +156,12 @@ export default class DevSiteForm extends Component {
                 <div className={css.data}>
                   <div className='row'>
                     <TextInputWithLabel
-                      classes='col s12 disabled'
+                      classes={`col s12 ${!!devSite.title && 'disabled'}`}
                       id='dev_site_title'
                       name='dev_site[title]'
                       defaultValue={devSite.title}
                       label='Project title'
-                      disabled={true}
+                      disabled={!!devSite.title}
                     />
                   </div>
 

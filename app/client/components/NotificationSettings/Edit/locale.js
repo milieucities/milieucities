@@ -15,7 +15,10 @@ const i18n = new LocalizedStrings({
     projectComments: 'Email me if a project I commented on is updated',
     commentReplies: 'Email me if my comment has a reply',
     notiUpdateS: 'Notification updated successfully',
-    notiUpdateF: 'Failed to save notification changes'
+    notiUpdateF: 'Failed to save notification changes',
+    secondaryAddress: 'Notify me of projects near an additional address:',
+    street: 'Street',
+    city: 'City'
   },
   fr: {
     role: 'membre du communauté',
@@ -31,7 +34,10 @@ const i18n = new LocalizedStrings({
     wardScope: 'Notify me when there is a new project in the ward I live in',
     municipalityScope: 'Notify me when there is a new project in the city I live in',
     notiUpdateS: 'Notifications mises à jour',
-    notiUpdateF: 'Changements de notifications échoués'
+    notiUpdateF: 'Changements de notifications échoués',
+    secondaryAddress: 'Notify me of projects near an additional address:',
+    street: 'Adresse',
+    city: 'Ville'
   }
 });
 
