@@ -88,10 +88,26 @@ export default class Header extends Component {
                 <a href={`/${locale}`}>
                   <img src={require('./images/dark-logo.svg')} title={'Milieu\'s Logo'} />
                 </a>
-                <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
-                <a href={`/${locale}/users/${userSlug}`} title='Go to your Dashboard'>Dashboard</a>
-                <a href='http://www.milieu.io/' title={i18n.about}>{i18n.about}</a>
-                <a title={i18n.logOut} rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userId}`}>{i18n.logOut}</a>
+                {
+                  !userId &&
+                  <div>
+                    <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
+                    <a href='http://www.milieu.io/' title={i18n.about}>{i18n.about}</a>
+                    <a href='#sign-in-modal' className='modal-trigger' onClick={this.openModal} title={i18n.logIn}>{i18n.logIn}</a>
+                  </div>
+                }
+                {
+                  userId &&
+                  <div>
+                    <a href={`/${locale}/dev_sites`} title={i18n.map}>{i18n.map}</a>
+                    <a href='http://www.milieu.io/' title={i18n.about}>{i18n.about}</a>
+                    <a href={`/${locale}/users/${userSlug}`} title='Go to your Dashboard'>
+                      <img className={css.profileImage} src={ userAvatar || require('./images/default-avatar.png')} />
+                    </a>
+                    <a title={i18n.logOut} rel='nofollow' data-method='delete' href={`/${locale}/sessions/${userId}`}>{i18n.logOut}</a>
+                  </div>
+                }
+
                 <div className={css.mobileLocale}>
                   <a title='Change language to English' href={this.handleChangeLocalization('en')}>EN</a> | <a title='Change language to French' href={this.handleChangeLocalization('fr')}>FR</a>
                 </div>
