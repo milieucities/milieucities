@@ -5,6 +5,9 @@ import ReactTooltip from 'react-tooltip'
 export default class Timeline extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isMobile: (window.innerWidth < 992)
+    }
   }
 
   render() {
@@ -58,13 +61,13 @@ export default class Timeline extends Component {
     const pubChanges = "Revision Changes";
     const pubMeeting = "Decision Meeting";
     const decision = "Decision Made";
+    const hoverDelay = this.state.isMobile ? 0 : 2000;
 
     return (
       <div className={css.checkoutwrap}>
         <ul className={css.checkoutbar}>
-          <li className={firstPoint} data-tip={commentHover}>
+          <li className={firstPoint} >
             <span>
-              <ReactTooltip className={css.tooltip} place="top" type="light" effect="float" />
               Comment Period
               </span>
               <decision />
@@ -77,7 +80,7 @@ export default class Timeline extends Component {
                 type="light"
                 effect="float"
                 id="meeting"
-                delayHide={2000}>
+                delayHide={hoverDelay}>
                   <div className={css.scheduled}>
                     Scheduled Public Meeting
                   </div>
@@ -91,27 +94,24 @@ export default class Timeline extends Component {
                     Location:
                   </div>
                   <div className={css.link}>
-                    <a href="https://www.w3schools.com">Visit W3Schools</a>
+                    <a href="#" onClick={this.read}>Read official notice</a>
                   </div>
               </ReactTooltip>
               Public Meeting
             </span>
           </li >
-          <li className={thirdPoint} data-tip={pubChanges}>
+          <li className={thirdPoint} >
             <span>
-              <ReactTooltip className={css.tooltip} place="top" type="light" effect="float" />
               Revision Changes
             </span>
           </li>
-          <li className={fourthPoint} data-tip={pubMeeting}>
+          <li className={fourthPoint} >
             <span>
-              <ReactTooltip className={css.tooltip} place="top" type="light" effect="float"/>
               Decision Meeting
             </span>
             </li>
-            <li className={fifthPoint} data-tip={decision}>
+            <li className={fifthPoint} >
               <span>
-                <ReactTooltip className={css.tooltip} place="top" type="light" effect="float"/>
                 Decision Made
               </span>
             </li>
