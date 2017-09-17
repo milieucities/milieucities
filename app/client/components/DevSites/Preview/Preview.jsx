@@ -12,9 +12,10 @@ import Sentiment from '../../Common/Sentiment/Sentiment'
 import Chart from 'chart.js'
 import Tabs from '../Show/Tabs'
 
-const { FacebookShareButton, TwitterShareButton } = ShareButtons;
+const { FacebookShareButton, TwitterShareButton} = ShareButtons;
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
+
 
 const commentPeriod = <img src={require('../../../icons/in comment period.svg')} title='comment period' />;
 const archived = <img src={require('../../../icons/archived.svg')} title='archived' />;
@@ -277,7 +278,27 @@ export default class extends Component {
                 <div className={css.description}>
                   <strong>{currentStatus}</strong>
                 </div>
+                <div className={css.share} >
 
+                <FacebookShareButton
+                  url={devSite.url}
+                  picture={devSite.image_url}
+                  title="Check out this development on milieu"
+                  >
+                  <FacebookIcon
+                    size={32}
+                    round />
+                </FacebookShareButton>
+
+                <TwitterShareButton
+                  url={devSite.url}
+                  title="Check out this development on milieu">
+                  <TwitterIcon
+                    size={32}
+                    round />
+                </TwitterShareButton>
+
+                </div>
 
               </div>
 
