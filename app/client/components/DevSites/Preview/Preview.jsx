@@ -249,6 +249,11 @@ export default class extends Component {
                 { devSite.url_full_notice &&
                   <div><a href={devSite.url_full_notice} target='_top' className={css.button}> {i18n.linkToPlanningPage} </a></div>
                 }
+                {false &&
+                  <div >
+                    <a href="#" >Read official notice</a>
+                  </div>
+                }
               <div className='col m6 s12'>
 
                 <div className={css.icons}>{smallIcon}</div>

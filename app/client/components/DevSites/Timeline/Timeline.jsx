@@ -93,9 +93,6 @@ export default class Timeline extends Component {
                   <div className="row">
                     Location:
                   </div>
-                  <div className={css.link}>
-                    <a href="#" onClick={this.read}>Read official notice</a>
-                  </div>
               </ReactTooltip>
               Public Meeting
             </span>
