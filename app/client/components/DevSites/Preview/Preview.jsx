@@ -38,6 +38,7 @@ export default class extends Component {
     this.toggleFeatured = () => this._toggleFeatured();
     this.userAdmin = () => this._userAdmin();
     this.loadTimeline = () => this._loadTimeline();
+    this.checkForSitePlanApplicationType = () => this._checkForSitePlanApplicationType();
 
     if(!props.devSite) {
       this.loadDevSite();
@@ -96,6 +97,14 @@ export default class extends Component {
         this.setState({ showModal: false });
       }
     });
+  }
+
+  _checkForSitePlanApplicationType() {
+    if (this.state.devSite) {
+      return this.state.devSite.application_files.some((file) => (
+        /Site Plan/.test(file.application_type)
+      ));
+    }
   }
 
   _toggleLike() {
@@ -158,6 +167,8 @@ export default class extends Component {
     const currentStatus = devSite ? devSite.current_status : '';
     i18n.setLanguage(locale);
     let smallIcon;
+    const showSitePlanText = this.checkForSitePlanApplicationType();
+
 
     switch(currentStatus) {
       case 'Application Received':
@@ -274,10 +285,14 @@ export default class extends Component {
                       </div>
                   ))
                 }
-                <h3>{i18n.status}:</h3>
-                <div className={css.description}>
-                  <strong>{currentStatus}</strong>
-                </div>
+                { showSitePlanText &&
+                  <div>
+                    <h3>{i18n.status}:</h3>
+                    <div className={css.description}>
+                      <strong>{currentStatus}</strong>
+                    </div>
+                  </div>
+                }
                 <div className={css.share} >
 
                 <FacebookShareButton
@@ -323,7 +338,7 @@ export default class extends Component {
               </div>
             </div>
 
-            <CommentsSection devSite={devSite} devSiteId={devSite.id} />
+            <CommentsSection devSite={devSite} devSiteId={devSite.id} checkForSitePlanApplicationType={this.checkForSitePlanApplicationType} />
 
             {
               showModal &&
