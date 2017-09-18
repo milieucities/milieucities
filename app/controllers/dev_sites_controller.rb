@@ -51,7 +51,10 @@ class DevSitesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @dev_site.update(dev_site_params)
+      @dev_site.update(dev_site_params.except(:files))
+      add_new_files
+      remove_deleted_files
+      if @dev_site.save
         format.html { redirect_to @dev_site, notice: 'Development successfully updated.' }
         format.json { render :show, status: :accepted, location: @dev_site }
       else
@@ -83,6 +86,36 @@ class DevSitesController < ApplicationController
 
   def page_number
     params[:page].present? ? params[:page].to_i : 0
+  end
+
+  def add_new_files
+    new_files = dev_site_params[:files]
+    return unless new_files && new_files.any?
+
+    dev_site_files = @dev_site.files
+    dev_site_files += new_files
+    @dev_site.files = dev_site_files
+  end
+
+  def remove_deleted_files
+    files_to_delete = JSON.parse(params[:files_to_delete]) if params[:files_to_delete]
+    return unless files_to_delete
+
+    dev_site_files = @dev_site.files
+
+    files_to_delete.each do |file_to_delete|
+      deleted_file = dev_site_files.select {|uploader| uploader.file.filename == file_to_delete['name'] }.first
+      deleted_file.try(:remove!)
+      dev_site_files.delete(deleted_file)
+      @dev_site.files = dev_site_files
+
+      if @dev_site.files.empty? && @dev_site.read_attribute(:files).size == 1
+        @dev_site.remove_files = true
+      end
+
+      @dev_site.save
+    end
+
   end
 
   def search_params
