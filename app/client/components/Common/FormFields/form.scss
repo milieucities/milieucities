@@ -30,3 +30,24 @@
     }
   }
 }
+
+.fileAttachment {
+  margin-bottom: 4px;
+
+  .wrapper {
+    display: inline-flex;
+    align-items: center;
+
+    a:hover, a:focus {
+      text-decoration: underline;
+    }
+
+    i {
+      margin-left: 8px;
+
+      &.action {
+        cursor: pointer;
+      }
+    }
+  }
+}

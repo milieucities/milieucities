@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import Dashboard from '../../Layout/Dashboard/Dashboard'
 import css from '../../Layout/Dashboard/dashboard.scss'
 import i18n from './locale'
-import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel } from '../../Common/FormFields/Form'
+import { TextAreaWithLabel, TextInputWithLabel, SelectWithLabel, FileAttachmentsWithLabel } from '../../Common/FormFields/Form'
 import StatusSection from '../../Statuses/Index/StatusSection'
 import ContactsSection from '../../Contacts/Index/ContactsSection'
 import moment from 'moment'
@@ -21,7 +21,8 @@ export default class DevSiteForm extends Component {
       statusDate: null,
       devSiteId: document.querySelector('#dev-site-form').dataset.id,
       devSite: {},
-      error: {}
+      error: {},
+      filesToDelete: []
     };
 
     this.loadMunicipalities = () => this._loadMunicipalities();
@@ -31,6 +32,7 @@ export default class DevSiteForm extends Component {
     this.handleEndDate = (date) => this._handleEndDate(date);
     this.handleMeetingDate = (date) => this._handleMeetingDate(date);
     this.handleSubmit = (e) => this._handleSubmit(e);
+    this.handleDeleteFile = (file) => this._handleDeleteFile(file);
   }
 
   componentDidMount() {
@@ -75,6 +77,10 @@ export default class DevSiteForm extends Component {
     this.setState({ meetingDate: date });
   }
 
+  _handleDeleteFile(filesToDelete) {
+    this.setState({ filesToDelete })
+  }
+
   _handleSubmit(e) {
     e.preventDefault();
     const { locale, userPrimaryOrganizationId } = document.body.dataset;
@@ -86,15 +92,22 @@ export default class DevSiteForm extends Component {
       [url, type] = [`/dev_sites/${this.state.devSiteId}`, 'PATCH']
     }
 
+    const data = new FormData(e.currentTarget)
+
+    if (this.state.filesToDelete.length > 0) {
+      data.append('files_to_delete', JSON.stringify(this.state.filesToDelete))
+    }
+
     $.ajax({
       url,
       type,
+      data,
       dataType: 'JSON',
       contentType: false,
       processData: false,
-      data: new FormData(e.currentTarget),
       success: devSite => {
         window.flash('notice', 'Successfully saved!')
+        this.loadDevSite();
       },
       error: error => {
         window.flash('alert', 'Failed to save!')
@@ -260,16 +273,19 @@ export default class DevSiteForm extends Component {
                 </div>
                 <div className={css.data}>
                   <div className='row'>
-                    <div className='file-field input-field col s12'>
-                      <label htmlFor='dev_site_files'>{i18n.files}</label>
-                      <input multiple='multiple' type='file' name='dev_site[files][]' id='dev_site_files' />
-                    </div>
+                    <FileAttachmentsWithLabel
+                      label={i18n.files}
+                      classes='col s12'
+                      files={devSite.files}
+                      filesToDelete={this.state.filesToDelete}
+                      handleDelete={this.handleDeleteFile}
+                    />
                   </div>
 
                   <div className='row'>
                     <div className='file-field input-field col s12'>
                       <label htmlFor='dev_site_images'>{i18n.images}</label>
-                      <input multiple='multiple' type='file' name='dev_site[images][]' id='dev_site_images' />
+                      <input multiple='multiple' type='file' name='dev_site[images][]' id='dev_site_images' accept="image/*" />
                     </div>
                   </div>
                 </div>

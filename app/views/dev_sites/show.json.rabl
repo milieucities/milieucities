@@ -12,13 +12,12 @@ child(files: :files) do
   attributes :url
 
   node :name do |f|
-    f.file.filename.split('.').first
+    f.file.filename
   end
 
   node :extension do |f|
     f.file.extension
   end
-
 end
 
 child(:addresses) { attributes :id, :street, :city, :province_state, :country }
