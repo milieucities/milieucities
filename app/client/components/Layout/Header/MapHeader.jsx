@@ -4,13 +4,14 @@ import { debounce } from 'lodash'
 import i18n from './locale'
 import CookiesNotification from '../../NotificationSettings/Cookies/CookiesNotification'
 import MapSearch from '../../DevSites/Index/MapSearch/MapSearch'
+import SignInMobile from './SignInMobile'
 
 export default class Header extends Component {
   constructor() {
     super()
-    this.state = { isMobile: (window.innerWidth < 600) };
+    this.state = { isMobile: (window.innerWidth < 600), mobileSign: false };
 
-    this.openModal = () => this._openModal();
+    this.openModal = this.openModal.bind(this);
     this.openMenu = (e) => this._openMenu(e);
     this.closeMenu = (e) => this._closeMenu(e);
 
@@ -23,8 +24,14 @@ export default class Header extends Component {
   componentDidMount() {
     $('.modal-trigger').leanModal();
   }
-  _openModal() {
-    document.querySelector('#sign-in-modal .modal-content').focus();
+  openModal() {
+    if (this.state.isMobile) {
+      this.setState({
+        mobileSign: true
+      })
+    } else {
+      document.querySelector('#sign-in-modal .modal-content').focus();
+    }
   }
   _openMenu(e) {
     e.preventDefault();
@@ -47,12 +54,16 @@ export default class Header extends Component {
     }
   }
   render() {
-    const { profile, isMobile, showMenu } = this.state;
+    const { profile, isMobile, showMenu, mobileSign } = this.state;
     const { userId, userSlug, userAvatar, userName, locale } = document.body.dataset;
     i18n.setLanguage(locale);
+    console.log(mobileSign)
 
     return (
       <div className={css.container}>
+        {mobileSign &&
+          <SignInMobile />
+        }
         {
           isMobile &&
           <div className={css.mobile}>
