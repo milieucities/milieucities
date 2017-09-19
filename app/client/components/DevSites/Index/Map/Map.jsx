@@ -267,10 +267,33 @@ export default class Map extends Component {
 
     map.on('click', e => {
       const features = map.queryRenderedFeatures(e.point, { layers: ['unclustered-points'] });
+      const currentZoom = map.getZoom();
+      const centerPointLat = e.lngLat.lat;
+      const centerPointLong = e.lngLat.lng;
+      const zoomer = currentZoom + 2;
 
-      if(features.length) {
+      if (features.length) {
         const feature = features[0];
         this.parent.setState({ activeDevSiteId: feature.properties.id });
+      }
+      else {
+        map.flyTo({ center: [centerPointLong, centerPointLat], zoom: zoomer });
+      }
+    });
+
+    map.on('tap', e => {
+      const features = map.queryRenderedFeatures(e.point, { layers: ['unclustered-points'] });
+      const currentZoom = map.getZoom();
+      const centerPointLat = e.lngLat.lat;
+      const centerPointLong = e.lngLat.lng;
+      const zoomer = currentZoom + 2;
+
+      if (features.length) {
+        const feature = features[0];
+        this.parent.setState({ activeDevSiteId: feature.properties.id });
+      }
+      else {
+        map.flyTo({ center: [centerPointLong, centerPointLat], zoom: zoomer });
       }
     });
   }
