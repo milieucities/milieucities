@@ -69,8 +69,7 @@ export default class Timeline extends Component {
           <li className={firstPoint} >
             <span>
               Comment Period
-              </span>
-              <decision />
+            </span>
           </li>
           <li className={secondPoint} data-tip data-for="meeting" >
             <span>
@@ -96,7 +95,7 @@ export default class Timeline extends Component {
               </ReactTooltip>
               Public Meeting
             </span>
-          </li >
+          </li>
           <li className={thirdPoint} >
             <span>
               Revision Changes
@@ -107,12 +106,12 @@ export default class Timeline extends Component {
               Decision Meeting
             </span>
             </li>
-            <li className={fifthPoint} >
-              <span>
-                Decision Made
-              </span>
-            </li>
-          </ul>
+          <li className={fifthPoint} >
+            <span>
+              Decision Made
+            </span>
+          </li>
+        </ul>
       </div>
     );
   }
