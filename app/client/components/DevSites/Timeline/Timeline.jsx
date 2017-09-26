@@ -89,10 +89,7 @@ export default class Timeline extends Component {
       <div className={css.checkoutwrap}>
         <ul className={css.checkoutbar}>
           <li className={firstPoint} >
-            <span>
-              {i18n.commentPeriod}
-              </span>
-              <decision />
+            <span>{i18n.commentPeriod}</span>
           </li>
           {meetingTooltip}
           <li className={thirdPoint} >
