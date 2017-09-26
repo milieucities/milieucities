@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import css from './timeline.scss'
 import ReactTooltip from 'react-tooltip'
+import i18n from './locale'
 
 export default class Timeline extends Component {
   constructor(props) {
@@ -11,24 +12,51 @@ export default class Timeline extends Component {
   }
 
   render() {
-    // const statuses = {
-    //   'Application Received': { position: 0},
-    //   'Open': { position: 0},
-    //   'Application Complete, Comment Period Open': { position: 1},
-    //   'Review': { position: 2},
-    //   'Planning Review Stage': { position: 2},
-    //   'Revision': { position: 3},
-    //   'Decision': { position: 4},
-    // }
-
-    const devSiteStatus = this.props.devSite.status;
+    const { devSite } = this.props;
+    const devSiteStatus = devSite.status;
 
     let firstPoint = '';
     let secondPoint = '';
     let thirdPoint = '';
     let fourthPoint = '';
     let fifthPoint = '';
+    let meetingTooltip = '';
+    const hoverDelay = this.state.isMobile ? 0 : 2000;
 
+
+    if (devSite.meeting) {
+      meetingTooltip =
+        <li className={secondPoint} data-tip data-for="meeting" >
+            <span>
+              <ReactTooltip
+                className={css.tooltip}
+                place="top"
+                type="light"
+                effect="solid"
+                id="meeting"
+                delayHide={hoverDelay}>
+                  <div className={css.scheduled}>
+                    {i18n.scheduled}
+                  </div>
+                  <div className="row">
+                    {i18n.date}: {devSite.meeting.date}
+                  </div>
+                  <div className="row">
+                    {i18n.time}: {devSite.meeting.time}
+                  </div>
+                  <div className="row">
+                    {i18n.location}: {devSite.meeting.location}
+                  </div>
+              </ReactTooltip>
+              {i18n.meeting}
+            </span>
+        </li >;
+    } else {
+      meetingTooltip =
+        <li className={secondPoint}>
+          <span>{i18n.meeting}</span>
+        </li>;
+    }
 
     switch (devSiteStatus) {
       case 'Open':
@@ -57,59 +85,29 @@ export default class Timeline extends Component {
         fifthPoint = css.active;
     }
 
-    const commentHover = "Comment Period";
-    const pubChanges = "Revision Changes";
-    const pubMeeting = "Decision Meeting";
-    const decision = "Decision Made";
-    const hoverDelay = this.state.isMobile ? 0 : 2000;
-
     return (
       <div className={css.checkoutwrap}>
         <ul className={css.checkoutbar}>
           <li className={firstPoint} >
             <span>
-              Comment Period
+              {i18n.commentPeriod}
               </span>
               <decision />
           </li>
-          <li className={secondPoint} data-tip data-for="meeting" >
-            <span>
-              <ReactTooltip
-                className={css.tooltip}
-                place="top"
-                type="light"
-                effect="float"
-                id="meeting"
-                delayHide={hoverDelay}>
-                  <div className={css.scheduled}>
-                    Scheduled Public Meeting
-                  </div>
-                  <div className="row">
-                    Date:
-                  </div>
-                  <div className="row">
-                    Time:
-                  </div>
-                  <div className="row">
-                    Location:
-                  </div>
-              </ReactTooltip>
-              Public Meeting
-            </span>
-          </li >
+          {meetingTooltip}
           <li className={thirdPoint} >
             <span>
-              Revision Changes
+              {i18n.revisionChanges}
             </span>
           </li>
           <li className={fourthPoint} >
             <span>
-              Decision Meeting
+              {i18n.decisionMeeting}
             </span>
             </li>
             <li className={fifthPoint} >
               <span>
-                Decision Made
+                {i18n.decisionMade}
               </span>
             </li>
           </ul>
